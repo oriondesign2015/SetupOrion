@@ -109,43 +109,43 @@ echo -e "\e[93m=================================================================
 echo ""
 echo ""
 echo ""
-read -p "\e[93mPasso \e[33m1/13\e[0m"
+echo -e "\e[93mPasso \e[33m1/13\e[0m"
 read -p "Digite a versão que deseja instalar (ex: latest | main | 2.16.0): " version
 echo ""
-read -p "\e[93mPasso \e[33m2/13\e[0m"
+echo -e "\e[93mPasso \e[33m2/13\e[0m"
 read -p "Link do Builder (ex: typebot.seudominio.com): " builder
 echo ""
-read -p "\e[93mPasso \e[33m3/13\e[0m"
+echo -e "\e[93mPasso \e[33m3/13\e[0m"
 read -p "Porta do Builder (padrão: 3001): " portabuilder
 echo ""
-read -p "\e[93mPasso \e[33m4/13\e[0m"
+echo -e "\e[93mPasso \e[33m4/13\e[0m"
 read -p "Link do Viewer (ex: bot.seudominio.com): " viewer
 echo ""
-read -p "\e[93mPasso \e[33m5/13\e[0m"
+echo -e "\e[93mPasso \e[33m5/13\e[0m"
 read -p "Porta do Viewer (padrão: 3002): " portaviewer
 echo ""
-read -p "\e[93mPasso \e[33m6/13\e[0m"
+echo -e "\e[93mPasso \e[33m6/13\e[0m"
 read -p "Link do Storage (ex: storage.seudominio.com): " storage
 echo ""
-read -p "\e[93mPasso \e[33m7/13\e[0m"
+echo -e "\e[93mPasso \e[33m7/13\e[0m"
 read -p "Porta do Storage (padrão: 9000): " portastorage
 echo ""
-read -p "\e[93mPasso \e[33m8/13\e[0m"
+echo -e "\e[93mPasso \e[33m8/13\e[0m"
 read -p "Seu Email (ex: contato@dominio.com): " email
 echo ""
-read -p "\e[93mPasso \e[33m9/13\e[0m"
+echo -e "\e[93mPasso \e[33m9/13\e[0m"
 read -p "Senha do seu Email (se for gmail, precisa ser a senha de aplicativo): " senha
 echo ""
-read -p "\e[93mPasso \e[33m10/13\e[0m"
+echo -e "\e[93mPasso \e[33m10/13\e[0m"
 read -p "SMTP do seu email (ex: smtp.hostinger.com): " smtp
 echo ""
-read -p "\e[93mPasso \e[33m11/13\e[0m"
+echo -e "\e[93mPasso \e[33m11/13\e[0m"
 read -p "Porta SMTP (ex: 465): " portasmtp
 echo ""
-read -p "\e[93mPasso \e[33m12/13\e[0m"
+echo -e "\e[93mPasso \e[33m12/13\e[0m"
 read -p "SMTP_SECURE (Se a porta SMTP for 465, digite true, caso contrario,digite false): " SECURE
 echo ""
-read -p "\e[93mPasso \e[33m13/13\e[0m"
+echo -e "\e[93mPasso \e[33m13/13\e[0m"
 echo "crie sua ApiKey no link: https://codebeautify.org/generate-random-hexadecimal-numbers"
 read -p "Chave secreta de 32 caracteres: (ex: c56f3775313440c3edce57529a0f02b4): " key
 

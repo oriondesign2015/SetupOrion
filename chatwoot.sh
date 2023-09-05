@@ -108,25 +108,25 @@ echo -e "\e[93m=================================================================
 echo ""
 echo ""
 echo ""
-read -p "\e[93mPasso \e[33m1/7\e[0m"
+echo -e "\e[93mPasso \e[33m1/7\e[0m"
 read -p "Digite o dominio para acessar o Chatwoot (ex: app.dominio.com): " dominiochat
 echo ""
-read -p "\e[93mPasso \e[33m2/7\e[0m"
+echo -e "\e[93mPasso \e[33m2/7\e[0m"
 read -p "Digite o nome da sua empresa (ex: OrionDesign): " empresachatwoot
 echo ""
-read -p "\e[93mPasso \e[33m3/7\e[0m"
+echo -e "\e[93mPasso \e[33m3/7\e[0m"
 read -p "Digite seu email de admin (ex: contato@dominio.com): " emailchat
 echo ""
-read -p "\e[93mPasso \e[33m4/7\e[0m"
+echo -e "\e[93mPasso \e[33m4/7\e[0m"
 read -p "Digite o Dominio do seu SMTP (ex: oriondesign.art.br | ex: gmail.com): " dominiosmtpchatwoot
 echo ""
-read -p "\e[93mPasso \e[33m5/7\e[0m"
+echo -e "\e[93mPasso \e[33m5/7\e[0m"
 read -p "Digite o Host SMTP (ex: smtp.hostinger.com): " smtpchatwoot
 echo ""
-read -p "\e[93mPasso \e[33m6/7\e[0m"
+echo -e "\e[93mPasso \e[33m6/7\e[0m"
 read -p "Digite a Porta SMTP (ex: 465): " portachatwoot
 echo ""
-read -p "\e[93mPasso \e[33m7/7\e[0m"
+echo -e "\e[93mPasso \e[33m7/7\e[0m"
 read -p "Senha do seu Email (se for Gmail precisa ser senha de aplicativo): " senhaemailchatwoot
 echo ""
 

@@ -109,16 +109,16 @@ echo -e "\e[93m=================================================================
 echo ""
 echo ""
 echo ""
-read -p "\e[93mPasso \e[33m1/4\e[0m"
+echo -e "\e[93mPasso \e[33m1/4\e[0m"
 read -p "Digite a versão que deseja instalar (ex. e recomendado: 0.230.3): " versionnn
 echo ""
-read -p "\e[93mPasso \e[33m2/4\e[0m"
+echo -e "\e[93mPasso \e[33m2/4\e[0m"
 read -p "Digite o dominio para acessar o N8N (ex: n8n.dominio.com): " dominionn
 echo ""
-read -p "\e[93mPasso \e[33m3/4\e[0m"
+echo -e "\e[93mPasso \e[33m3/4\e[0m"
 read -p "Digite a porta para o N8N (padrão: 5678): " portann
 echo ""
-read -p "\e[93mPasso \e[33m4/4\e[0m"
+echo -e "\e[93mPasso \e[33m4/4\e[0m"
 read -p "Digite seu email para o proxy reverso (ex: contato@dominio.com): " emailnn
 echo ""
 

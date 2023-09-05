@@ -109,13 +109,13 @@ echo -e "\e[93m=================================================================
 echo ""
 echo ""
 echo ""
-read -p "\e[93mPasso \e[33m1/3\e[0m"
+echo -e "\e[93mPasso \e[33m1/3\e[0m"
 read -p "Digite seu dominio para acessar o appsmith (ex: painel.dominio.com): " linkappsmith
 echo ""
-read -p "\e[93mPasso \e[33m2/3\e[0m"
+echo -e "\e[93mPasso \e[33m2/3\e[0m"
 read -p "Digite a porta para o appsmith (padrão: 8181): " portaappsmith
 echo ""
-read -p "\e[93mPasso \e[33m3/3\e[0m"
+echo -e "\e[93mPasso \e[33m3/3\e[0m"
 read -p "Digite um email para o proxy reverso (ex: contato@dominio.com): " emailappsmith
 echo ""
 #

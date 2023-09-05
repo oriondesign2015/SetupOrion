@@ -108,20 +108,20 @@ echo -e "\e[93m=================================================================
 echo ""
 echo ""
 echo ""
-read -p "\e[93mPasso \e[33m1/5\e[0m"
+echo -e "\e[93mPasso \e[33m1/5\e[0m"
 read -p "Digite seu dominio para acessar a api (ex: api.dominio.com): " dominio
 echo ""
-read -p "\e[93mPasso \e[33m2/5\e[0m"
+echo -e "\e[93mPasso \e[33m2/5\e[0m"
 read -p "Digite a porta da api (padrão: 8080): " porta
 echo ""
-read -p "\e[93mPasso \e[33m3/5\e[0m"
+echo -e "\e[93mPasso \e[33m3/5\e[0m"
 read -p "Digite o nome da sua empresa (ex: OrionDesign): " client
 echo ""
-read -p "\e[93mPasso \e[33m4/5\e[0m"
+echo -e "\e[93mPasso \e[33m4/5\e[0m"
 echo "crie sua ApiKey no link: https://codebeautify.org/generate-random-hexadecimal-numbers"
 read -p "Digite sua Api Global Key (ex: 1169f6f7306fe524e54f79e45ba012cf): " key
 echo ""
-read -p "\e[93mPasso \e[33m5/5\e[0m"
+echo -e "\e[93mPasso \e[33m5/5\e[0m"
 read -p "Digite seu email (ex: contato@dominio.com | sera usado no proxy reverso): " mail
 echo ""
 
