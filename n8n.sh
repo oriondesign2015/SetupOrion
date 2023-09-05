@@ -133,10 +133,10 @@ echo ""
 clear
 
 echo ""
-echo "Versão do N8N: $versionnn"
-echo "Link do N8N: $dominionn"
-echo "Porta: $portann"
-echo "Email: $emailnn"
+echo -e "Versão do N8N: \e[33m$versionnn\e[0m"
+echo -e "Link do N8N: \e[33m$dominionn\e[0m"
+echo -e "Porta: \e[33m$portann\e[0m"
+echo -e "Email: \e[33m$emailnn\e[0m"
 echo ""
 echo ""
 read -p "As informações estão certas? (y/n): " confirma2

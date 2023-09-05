@@ -129,9 +129,9 @@ echo ""
 clear
 
 echo ""
-echo "Dominio do Appsmith: $linkappsmith"
-echo "Porta do Appsmith: $portaappsmith"
-echo "Seu eEail: $emailappsmith"
+echo -e "Dominio do Appsmith: \e[33m$linkappsmith\e[0m"
+echo -e "Porta do Appsmith: \e[33m$portaappsmith\e[0m"
+echo -e "Seu eEail: \e[33m$emailappsmith\e[0m"
 echo ""
 echo ""
 read -p "As informações estão certas? (y/n): " confirma2

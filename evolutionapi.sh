@@ -136,11 +136,11 @@ echo ""
 clear
 
 echo ""
-echo "Dominio: $dominio"
-echo "Porta: $porta"
-echo "Nome da Empresa: $client"
-echo "Api Global Key: $key"
-echo "Seu Email: $mail"
+echo -e "Dominio: \e[33m$dominio\e[0m"
+echo -e "Porta: \e[33m$porta\e[0m"
+echo -e "Nome da Empresa: \e[33m$client\e[0m"
+echo -e "Api Global Key: \e[33m$key\e[0m"
+echo -e "Seu Email: \e[33m$mail\e[0m"
 echo ""
 echo ""
 read -p "As informações estão certas? (y/n): " confirma2
