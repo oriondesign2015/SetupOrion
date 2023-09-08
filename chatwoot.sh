@@ -139,7 +139,13 @@ echo ""
 #
 
 clear
-
+echo ""
+echo -e "\e[93m==============================================================================\e[0m"
+echo -e "\e[93m=                                                                            =\e[0m"
+echo -e "\e[93m=                 \e[33mVerifique se os dados abaixos estao certos\e[93m                 =\e[0m"
+echo -e "\e[93m=                                                                            =\e[0m"
+echo -e "\e[93m==============================================================================\e[0m"
+echo ""
 echo ""
 echo -e "Link do chatwoot: \e[33m$dominiochat\e[0m"
 echo -e "Nome da empresa: \e[33m$empresachatwoot\e[0m"
