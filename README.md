@@ -1,10 +1,8 @@
-<center>
-  <img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/Capa.png">
-</center>
+<img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/Capa.png">
 
-<center>
+<p align="center">
   Esta é uma solução gratuita de Auto Instaladores, com o intuido de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing. Desenvolvido por OrionDesign.
-</center>
+</p>
 
 ## Features
 
