@@ -5,6 +5,13 @@
   Esta é uma solução gratuita de Auto Instaladores, com o intuido de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing. Desenvolvido por <b>OrionDesign</b>. Ao utilizar o mesmo, de os créditos!
 </p>
 
+<p align="center">
+    <a href="https://www.behance.net/oriondesign_oficial"><img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/behance.png" width="20%" style="margin-right: 150px;"></a>
+    <a href="https://wa.me/+5511973052593"><img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/whatsapp.png" width="20%" style="margin-right: 150px;"></a>
+    <a href="https://www.youtube.com/oriondesign_oficial"><img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/youtube.png" width="20%"></a>
+</p>
+<br>
+
 ## ✨ Ferramentas
 
 Com essa solução, você consegue instalar as seguintes ferramentas:
