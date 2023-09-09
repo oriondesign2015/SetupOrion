@@ -2,7 +2,9 @@
 
 <br>
 <p align="center">
-  Esta é uma solução gratuita de Auto Instaladores, com o intuido de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing. Desenvolvido por <b>OrionDesign</b>. Ao utilizar o mesmo, de os créditos!
+  Esta é uma solução gratuita de Auto Instaladores, com o intuido de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing.
+  <b>Você não precisa instalar todos, você poderá escolher qual das ferramentas você quer instalar.</b>
+  Desenvolvido por <b>OrionDesign</b>. Ao utilizar o mesmo, de os créditos!
 </p>
 
 <p align="center">
