@@ -25,7 +25,7 @@ Com essa solução, você consegue instalar as seguintes ferramentas:
 
 ## 📌 Observação
 
-- Recomendamos que use a VPS da <b>Contabo</b> ou <b>Hetnerz</b> com o sistema <b>Ubunto 20.04 LST 64x</b>! Foi realizado teste de instalação das ferramentas multiplas vezes usando uma VPS da Contabo com 8Gb Ram + 4vCores + Ubunto 20.04 LST 64x.
+- Recomendamos que use a VPS da <b>Contabo</b> ou <b>Hetnerz</b> com o sistema <b>Ubuntu 20.04 LST 64x</b>! Foi realizado teste de instalação das ferramentas multiplas vezes usando uma VPS da Contabo com 8Gb Ram + 4vCores + Ubuntu 20.04 LST 64x.
 - Caso for utilizar outra VPS, verifique se as portas escolhidas na instalação estão abertas.
 - Se tiver qualquer ferramenta na sua VPS em produção, realize Snapshot da sua VPS antes, para evitar eventuais problemas.
 - Os dados preenchidos no instalação não são enviados para nenhum lugar!
