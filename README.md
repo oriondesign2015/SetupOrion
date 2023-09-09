@@ -52,7 +52,7 @@ Simples, se inscreva no meu canal [clicando aqui](https://www.youtube.com/oriond
 Agradoço especialmente o <a href="https://github.com/DeividMs">Deivid Santos</a> por ter me ensinado e incentivado a usar o GitHub, alem de me ensinar muitas outras coisas do universo da programação.
 Tambem meus agradecimentos para o pessoal da comunidade <a href="https://github.com/cwmkt">CWMKT</a> e <a href="https://evolution-api.com/opensource-whatsapp-api/">Evolution APi</a>.
 <br><br><br>
-Agora fique com Deus e um beijão do top Wick<br><br>
+Agora fique com Deus e um beijão do tio Wick<br><br>
 <img src="https://media3.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif?cid=ecf05e47bfvw8j6yjz5fjhzu9xfs67iew0pa6t1icg3014xv&ep=v1_gifs_trending&rid=giphy.gif&ct=g">
 
 Todo conhecimento deve ser compartilhado!
