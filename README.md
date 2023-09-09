@@ -2,9 +2,11 @@
   <img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/Capa.png">
 </center>
 
-# SetupOrion
-Setup de Autos Instaladores desenvolvido pela OrionDesign
+<center>
+  Esta é uma solução gratuita de Auto Instaladores, com o intuido de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing. Desenvolvido por OrionDesign.
+</center>
 
+## Features
 
 Copia e cola isso no terminal
 ```
