@@ -36,7 +36,9 @@ sudo apt upgrade -y && sudo apt update-y && sudo apt install -y git && git clone
 
 <p><b>2-</b> Aguarde</p>
 Ao pressionar <b>Enter</b>, o Auto Instalador começara a executar e instalar tudo que é necessario na sua maquina.
-Após isso basta digitar o <b>NUMERO</b> da opção desejada e pressionar <b>Enter</b> para confirmar.
+
+<p><b>3-</b> Escolha a/as ferramenta(s)</p>
+Agora chegou a parte mais legal basta digitar o <b>NUMERO</b> da opção desejada, pressionar <b>Enter</b> para confirmar e deixar nosso instalador fazer o resto por você.
 
 ## 💡 Dicas/Soluções/Videos
 
