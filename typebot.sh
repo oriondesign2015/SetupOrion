@@ -296,6 +296,7 @@ services:
       - DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot
       - NEXT_PUBLIC_VIEWER_URL=https://$viewer
       - ENCRYPTION_SECRET=$key
+      - NEXTAUTH_URL=https://$builder
 
       - S3_ACCESS_KEY=minio
       - S3_SECRET_KEY=minio123
