@@ -1,3 +1,4 @@
+
 <!--<img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/Capa.png">-->
 <img src="https://github.com/oriondesign2015/SetupOrion/assets/139019565/42d53230-53fd-44c2-ac58-8bfcdcd14722">
 
@@ -173,3 +174,7 @@ Agora fique com Deus e um beijão do tio Wick<br><br>
 Todo conhecimento deve ser compartilhado!
 
 > Entre em contato comigo através do WhatsApp [clicando aqui](http://wa.me/+5511973052593).
+
+## ❤️ Colaboradores
+Segue a lista (das melhores) pessoas a colaborar com nosso Git, seja com soluções, avisos de correções ou ajuda monetaria:
+-  <b>Ricardo Santis</b>
