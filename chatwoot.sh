@@ -242,17 +242,33 @@ cd /home/chatwoot/chatwoot
 
 postgres_password=$(grep -oP '(?<=POSTGRES_PASSWORD=).+' /home/chatwoot/chatwoot/.env)
 
-sed -i "s/# DEFAULT_LOCALE=en/DEFAULT_LOCALE=pt_BR/g" /home/chatwoot/chatwoot/.env
-sed -i "s/ENABLE_ACCOUNT_SIGNUP=false/ENABLE_ACCOUNT_SIGNUP=true/g" /home/chatwoot/chatwoot/.env
-sed -i "s/^MAILER_SENDER_EMAIL=.*/MAILER_SENDER_EMAIL='$empresachatwoot <$emailchat>'/" /home/chatwoot/chatwoot/.env
-sed -i "s/^FRONTEND_URL=.*/FRONTEND_URL=https://$dominiochat/" /home/chatwoot/chatwoot/.env
-sed -i "s/^SMTP_DOMAIN=.*/SMTP_DOMAIN=$dominiosmtpchatwoot/" /home/chatwoot/chatwoot/.env
-sed -i "s/^SMTP_ADDRESS=.*/SMTP_ADDRESS=$smtpchatwoot/" /home/chatwoot/chatwoot/.env
-sed -i "s/^SMTP_PORT=.*/SMTP_PORT=$portachatwoot/" /home/chatwoot/chatwoot/.env
-sed -i "s/^SMTP_USERNAME=.*/SMTP_USERNAME=$emailchat/" /home/chatwoot/chatwoot/.env
-sed -i "s/^SMTPOR_PASSWD=.*/SMTP_PASSWORD=$senhaemailchatwoot/" /home/chatwoot/chatwoot/.env
-sed -i "s/^SMTP_AUTHENTICATION=.*/SMTP_AUTHENTICATION=login/" /home/chatwoot/chatwoot/.env
-sed -i "s/^FORCE_SSL=.*/FORCE_SSL=true/" /home/chatwoot/chatwoot/.env
+## Antigos ##
+#sed -i "s/# DEFAULT_LOCALE=en/DEFAULT_LOCALE=pt_BR/g" /home/chatwoot/chatwoot/.env
+#sed -i "s/ENABLE_ACCOUNT_SIGNUP=false/ENABLE_ACCOUNT_SIGNUP=true/g" /home/chatwoot/chatwoot/.env
+#sed -i "s/^MAILER_SENDER_EMAIL=.*/MAILER_SENDER_EMAIL='$empresachatwoot <$emailchat>'/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^FRONTEND_URL=.*/FRONTEND_URL=https://$dominiochat/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^SMTP_DOMAIN=.*/SMTP_DOMAIN=$dominiosmtpchatwoot/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^SMTP_ADDRESS=.*/SMTP_ADDRESS=$smtpchatwoot/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^SMTP_PORT=.*/SMTP_PORT=$portachatwoot/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^SMTP_USERNAME=.*/SMTP_USERNAME=$emailchat/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^SMTPOR_PASSWD=.*/SMTP_PASSWORD=$senhaemailchatwoot/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^SMTP_AUTHENTICATION=.*/SMTP_AUTHENTICATION=login/" /home/chatwoot/chatwoot/.env
+#sed -i "s/^FORCE_SSL=.*/FORCE_SSL=true/" /home/chatwoot/chatwoot/.env
+##
+
+## Novos ##
+sed -i "s#^DEFAULT_LOCALE=en#DEFAULT_LOCALE=pt_BR#g" /home/chatwoot/chatwoot/.env
+sed -i "s#ENABLE_ACCOUNT_SIGNUP=false#ENABLE_ACCOUNT_SIGNUP=true#g" /home/chatwoot/chatwoot/.env
+sed -i "s#^MAILER_SENDER_EMAIL=.*#MAILER_SENDER_EMAIL='$empresachatwoot <$emailchat>'#" /home/chatwoot/chatwoot/.env
+sed -i "s#^FRONTEND_URL=.*#FRONTEND_URL=https://$dominiochat/#" /home/chatwoot/chatwoot/.env
+sed -i "s#^SMTP_DOMAIN=.*#SMTP_DOMAIN=$dominiosmtpchatwoot#" /home/chatwoot/chatwoot/.env
+sed -i "s#^SMTP_ADDRESS=.*#SMTP_ADDRESS=$smtpchatwoot#" /home/chatwoot/chatwoot/.env
+sed -i "s#^SMTP_PORT=.*#SMTP_PORT=$portachatwoot#" /home/chatwoot/chatwoot/.env
+sed -i "s#^SMTP_USERNAME=.*#SMTP_USERNAME=$emailchat#" /home/chatwoot/chatwoot/.env
+sed -i "s#^SMTPOR_PASSWD=.*#SMTP_PASSWORD=$senhaemailchatwoot#" /home/chatwoot/chatwoot/.env
+sed -i "s#^SMTP_AUTHENTICATION=.*#SMTP_AUTHENTICATION=login#" /home/chatwoot/chatwoot/.env
+sed -i "s#^FORCE_SSL=.*#FORCE_SSL=true#" /home/chatwoot/chatwoot/.env
+##
 
 systemctl daemon-reload && systemctl restart chatwoot.target
 
