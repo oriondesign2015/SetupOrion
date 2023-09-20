@@ -2,7 +2,7 @@
 <!--<img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/Capa.png">-->
 <img src="https://github.com/oriondesign2015/SetupOrion/assets/139019565/42d53230-53fd-44c2-ac58-8bfcdcd14722">
 
-<br><br>EM MANUTENÇÃO<br>
+<!--<br><br>EM MANUTENÇÃO<br>-->
 <br>
 <p align="center">
   Esta é uma solução gratuita de Auto Instaladores, com o intuido de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing.
