@@ -178,4 +178,4 @@ Todo conhecimento deve ser compartilhado!
 
 ## ❤️ Colaboradores
 Segue a lista (das melhores) pessoas a colaborar com nosso Git, seja com soluções, avisos de correções ou ajuda monetaria:
--  <b>Ricardo Santis</b>
+- <b>NESTOR DAVALOS</b>
