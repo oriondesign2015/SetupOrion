@@ -268,6 +268,7 @@ sed -i "s#^SMTP_USERNAME=.*#SMTP_USERNAME=$emailchat#" /home/chatwoot/chatwoot/.
 sed -i "s#^SMTP_PASSWORD=.*#SMTP_PASSWORD=$senhaemailchatwoot#" /home/chatwoot/chatwoot/.env
 sed -i "s#^SMTP_AUTHENTICATION=.*#SMTP_AUTHENTICATION=login#" /home/chatwoot/chatwoot/.env
 sed -i "s#^FORCE_SSL=.*#FORCE_SSL=true#" /home/chatwoot/chatwoot/.env
+sed -i 's/^# SMTP_TLS=/SMTP_TLS=true/' /home/chatwoot/chatwoot/.env
 ##
 
 ##DICA DO NESTOR DAVALOS
