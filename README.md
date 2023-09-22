@@ -68,12 +68,12 @@ Ainda em Desenvolvimento.
   <h2>Sobre o guia</h2><br>
   Para não poluir muito esse Git, eu estou deixando abaixo nossa Playlist exclusiva para Dicas e Soluções do Chatwoot, para que você consiga usar 100% do que essa incrivel ferramenta de multiatendimento tem a oferecer.<br><br>
   Link da Playlist:<br>
-  👉 https://www.youtube.com/watch?v=XQXiIHgPF0I&list=PLRu7JPSKqaqDprqdCkhrFs0-HjxWVfiT<br>
+  👉 https://www.youtube.com/watch?v=mSDa8rVBoTU&list=PLRu7JPSKqaqDprqdCkhrFs0-HjxWVfiT_<br>
 <br>
 
   <h2>Conteudos da Playlist:</h2>
   ✅ Como executar o SetupOrion;<br>
-  ✅ Instalando Chatwoot com SetupOrion; <a href="https://www.youtube.com/watch?v=XQXiIHgPF0I&list=PLRu7JPSKqaqDprqdCkhrFs0-HjxWVfiT_" target="_blank">(ver)</a><br>
+  ✅ Instalando Chatwoot com SetupOrion; <a href="https://youtu.be/mSDa8rVBoTU" target="_blank">(ver)</a><br>
   ❌ Personalizando Chatwoot | pt.1/2;<br>
   ❌ Personalizando Chatwoot | pt.2/2;<br>
   ❌ Conectando Whatsapp com Evolution API;<br>
