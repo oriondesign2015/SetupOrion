@@ -83,6 +83,32 @@ Ainda em Desenvolvimento.
   ❌ Criando novas Empresas;<br>
   ❌ Criando Bots Avançados com Chatwoot + N8N + Evolution API;<br>
   ❌ Criando Bots com Typebot + Evolution + Chatwoot;<br>
+  <br>
+
+  <h2>Extras</h2>
+  <details>
+    <summary>📌 Personalização Chatwoot 1/2</summary>
+    <img src="https://github.com/oriondesign2015/SetupOrion/assets/139019565/a3e8fcfb-41a2-452c-8300-4fe6d944a65d">
+    <br>
+    <b>Imagitipo:</b> (5120 x 1067px):<br>
+    • LOGO<br>
+    • LOGO_DARK<br>
+    <br>
+    <b>Isotipo:</b> (2133 x 2133px):<br>
+    • LOGO_THUMBNAIL<br>
+    <br>
+    <b>Nome da empresa:</b><br>
+    • INSTALLATION_NAME<br>
+    • BRAND_NAME<br>
+    <br>
+    <b>Termos e politicas de privacidade:</b><br>
+    • TERMS_URL<br>
+    • PRIVACY_URL<br>
+    <br>
+    <b>Link do seu site:</b><br>
+    • BRAND_URL<br>
+    • WIDGET_BRAND_URL<br>
+  </details>
   <hr/>
 </details>
 
