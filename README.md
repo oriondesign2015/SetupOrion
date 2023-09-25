@@ -44,7 +44,7 @@ Não são muitos passos para utilizar essa solução, mas é importante prestar 
 <p><b>1-</b> Copie e cole esse código no seu terminal</p>
 
 ```
-sudo apt upgrade -y && sudo apt update && sudo apt install -y git && git clone https://github.com/oriondesign2015/SetupOrion.git && cd SetupOrion && chmod +x install.sh && ./install.sh
+sudo apt upgrade -y && sudo apt update && sudo apt install -y git && git clone https://github.com/oriondesign2015/SetupOrion.git && cd SetupOrion && sudo chmod +x install.sh && ./install.sh
 ```
 
 <p><b>2-</b> Aguarde</p>
