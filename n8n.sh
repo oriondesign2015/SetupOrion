@@ -109,8 +109,6 @@ echo -e "\e[93m=================================================================
 echo ""
 echo ""
 echo ""
-echo -e "\e[93mPasso \e[33m1/4\e[0m"
-read -p "Digite a versão que deseja instalar (ex. e recomendado: 0.230.3): " versionnn
 echo ""
 echo -e "\e[93mPasso \e[33m2/4\e[0m"
 read -p "Digite o dominio para acessar o N8N (ex: n8n.dominio.com): " dominionn
@@ -133,7 +131,6 @@ echo ""
 clear
 
 echo ""
-echo -e "Versão do N8N: \e[33m$versionnn\e[0m"
 echo -e "Link do N8N: \e[33m$dominionn\e[0m"
 echo -e "Porta: \e[33m$portann\e[0m"
 echo -e "Email: \e[33m$emailnn\e[0m"
@@ -223,9 +220,11 @@ sudo apt install ./google-chrome-stable_current_amd64.deb -y
 
 cd
 
-sudo npm install -g n8n@versionnn
+sudo npm install -g n8n
 
 npm install pm2 -g
+
+sudo pm2 startup ubuntu -u root && sudo pm2 startup ubuntu -u root --hp /root && sudo pm2 save
 
 #
 # FIM DE EXECUTANDO O N8N
@@ -283,6 +282,14 @@ systemctl reload nginx
 pm2 start n8n --cron-restart="0 0 * * *" -- start
 
 sudo pm2 startup ubuntu -u root && sudo pm2 startup ubuntu -u root --hp /root && sudo pm2 save
+
+cd
+cd /root/.n8n
+export N8N_EDITOR_BASE_URL=https://$dominionn
+export WEBHOOK_URL=https://$dominionn
+pm2 restart n8n --update-env
+
+pm2 restart all
 
 #
 # FIM DE INICIANDO PM2
