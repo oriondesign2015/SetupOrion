@@ -271,6 +271,12 @@ services:
       - NEXTAUTH_URL=https://$builder
       - NEXT_PUBLIC_VIEWER_URL=https://$viewer
 
+      - DISABLE_SIGNUP=false
+
+      #Google
+      #- GOOGLE_CLIENT_ID=
+      #- GOOGLE_CLIENT_SECRET=
+      
       - ENCRYPTION_SECRET=$key
 
       - ADMIN_EMAIL=$email
@@ -297,6 +303,10 @@ services:
       - NEXT_PUBLIC_VIEWER_URL=https://$viewer
       - ENCRYPTION_SECRET=$key
       - NEXTAUTH_URL=https://$builder
+
+      #Google
+      #- GOOGLE_CLIENT_ID=
+      #- GOOGLE_CLIENT_SECRET=
 
       - S3_ACCESS_KEY=minio
       - S3_SECRET_KEY=minio123
