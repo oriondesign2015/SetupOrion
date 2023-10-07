@@ -118,8 +118,9 @@ echo -e "\e[93mPasso \e[33m3/5\e[0m"
 read -p "Digite o nome da sua empresa (ex: OrionDesign): " client
 echo ""
 echo -e "\e[93mPasso \e[33m4/5\e[0m"
-echo "crie sua ApiKey no link: https://codebeautify.org/generate-random-hexadecimal-numbers"
-read -p "Digite sua Api Global Key (ex: 1169f6f7306fe524e54f79e45ba012cf): " key
+#echo "crie sua ApiKey no link: https://codebeautify.org/generate-random-hexadecimal-numbers"
+chave_hexadecimal=$(openssl rand -hex 16)
+read -p "Digite a Api Global Key (sugestão gerada aleatóriamente: $chave_hexadecimal): " key
 echo ""
 echo -e "\e[93mPasso \e[33m5/5\e[0m"
 read -p "Digite seu email (ex: contato@dominio.com | sera usado no proxy reverso): " mail
