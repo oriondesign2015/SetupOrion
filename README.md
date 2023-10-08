@@ -74,8 +74,8 @@ Ainda em Desenvolvimento.
   <h2>Conteudos da Playlist:</h2>
   <br>
   ✅ Instalando Chatwoot em sua VPS; <a href="https://youtu.be/mSDa8rVBoTU" target="_blank">(ver)</a><br>
-  ❌ Personalizando Chatwoot | pt.1/2;<br>
-  ❌ Personalizando Chatwoot | pt.2/2;<br>
+  ✅ Personalizando Chatwoot | pt.1/2;<br>
+  ✅ Personalizando Chatwoot | pt.2/2;<br>
   ❌ Conectando Whatsapp com Evolution API;<br>
   ❌ Conectando Email;<br>
   ❌ Conectando Site;<br>
@@ -127,7 +127,7 @@ Ainda em Desenvolvimento.
 
   <h2>Conteudos da Playlist:</h2>
   ✅ Como executar o SetupOrion;<br>
-  ❌ Instalando Evolution API;<br>
+  ✅ Instalando Evolution API;<br>
   ❌ Conectando-se ao Manager;<br>
   ❌ Criando Instancias com Manager;<br>
   ❌ Configurando Instancias com Manager;<br>
