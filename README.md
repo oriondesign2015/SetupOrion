@@ -109,6 +109,30 @@ Ainda em Desenvolvimento.
     • BRAND_URL<br>
     • WIDGET_BRAND_URL<br>
   </details>
+
+  <details>
+    <summary>📌 Personalização Chatwoot 2/2</summary>
+    <img src="https://github.com/oriondesign2015/SetupOrion/assets/139019565/feb3b3eb-6b5a-4dd2-a833-38cdfeb2b2e1">
+    <br>
+    Comando para inciar a troca de logos:
+    
+    cd && cd SetupOrion && git pull && cd extra && chmod +x trocar_logos.sh && ./trocar_logos.sh
+    
+  Diretório dos SVG:
+  
+    /home/chatwoot/chatwoot/public/brand-assets/
+
+  Reninciar Chatwoot:
+  
+    systemctl daemon-reload && systemctl restart chatwoot.target 
+
+  Ferramenta para Converter em SVG Gratuito - Vectorizer:<br>
+  • https://vectorizer.com/pt/
+
+  Ferramenta para Converter em SVG Pago - Vector Magic:<br>
+  • https://pt.vectormagic.com
+    <br>
+  </details>
   <hr/>
 </details>
 
