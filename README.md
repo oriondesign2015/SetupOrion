@@ -41,10 +41,16 @@ Com essa solução, você consegue instalar as seguintes ferramentas:
 
 Não são muitos passos para utilizar essa solução, mas é importante prestar atenção em cada detalhe para evitar ter dor de cabeça por eventuais problemas.
 
-<p><b>1-</b> Copie e cole esse código no seu terminal</p>
+<p><b>1a-</b> Não tenho o <b>SetupOrion</b> na minha VPS:</p>
 
 ```
 sudo apt upgrade -y && sudo apt update && sudo apt install -y git && git clone https://github.com/oriondesign2015/SetupOrion.git && cd SetupOrion && sudo chmod +x install.sh && ./install.sh
+```
+
+<p><b>1b-</b> Já tenho <b>SetupOrion</b> na minha VPS (para quem quer instalar outra aplicação):</p>
+
+```
+sudo apt upgrade -y && sudo apt update && cd SetupOrion && git pull && ./install.sh
 ```
 
 <p><b>2-</b> Aguarde</p>
