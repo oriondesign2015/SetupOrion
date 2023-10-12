@@ -74,14 +74,14 @@ Ainda em Desenvolvimento.
   <h2>Sobre o guia</h2><br>
   Para não poluir muito esse Git, eu estou deixando abaixo nossa Playlist exclusiva para Dicas e Soluções do Chatwoot, para que você consiga usar 100% do que essa incrivel ferramenta de multiatendimento tem a oferecer.<br><br>
   Link da Playlist:<br>
-  👉 https://www.youtube.com/watch?v=mSDa8rVBoTU&list=PLRu7JPSKqaqDprqdCkhrFs0-HjxWVfiT_<br>
+  👉 <a href="https://www.youtube.com/watch?v=mSDa8rVBoTU&list=PLRu7JPSKqaqDprqdCkhrFs0-HjxWVfiT_" target="_blank">https://www.youtube.com/watch?v=mSDa8rVBoTU&list=PLRu7JPSKqaqDprqdCkhrFs0-HjxWVfiT_</a>
 <br>
 
   <h2>Conteudos da Playlist:</h2>
   <br>
-  ✅ Instalando Chatwoot em sua VPS; <a href="https://youtu.be/mSDa8rVBoTU" target="_blank">(ver)</a><br>
-  ✅ Personalizando Chatwoot | pt.1/2;<br>
-  ✅ Personalizando Chatwoot | pt.2/2;<br>
+  ✅ Instalando Chatwoot em sua VPS; <a href="https://youtu.be/mSDa8rVBoTU?si=spX0nBFIgP8H_A6r" target="_blank">(ver)</a><br>
+  ✅ Personalizando Chatwoot | pt.1/2; <a href="https://youtu.be/_C6R-RQDAQI?si=otCflKJKze9ugtHi" target="_blank">(ver)</a><br>
+  ✅ Personalizando Chatwoot | pt.2/2; <a href="https://youtu.be/r0F-bltPb2I?si=ZfKMLGs8LGkqt4Yo" target="_blank">(ver)</a><br>
   ❌ Conectando Whatsapp com Evolution API;<br>
   ❌ Conectando Email;<br>
   ❌ Conectando Site;<br>
