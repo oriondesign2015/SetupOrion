@@ -22,7 +22,7 @@
 
 Com essa solução, você consegue instalar as seguintes ferramentas:
 - ⚡ <b>Chatwoot</b> -------> v3.1.1
-- ⚡ <b>Evolution API</b> ---> 1.5.1
+- ⚡ <b>Evolution API</b> ---> 1.5.4
 - ⚡ <b>Typebot</b> ---------> New: Escolha a versão
 - ⚡ <b>N8N</b> -------------> New: Escolha a versão
 - ⚡ <b>Appsmith</b> -------> Latest
