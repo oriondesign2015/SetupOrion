@@ -37,6 +37,10 @@ loading1() {
     clear
 }
 
+amarelo="\e[33m"   # Amarelo
+branco="\e[97m"    # Branco
+reset="\e[0m"      # Reseta
+
 #
 # FIM DE LOADING
 #
@@ -458,6 +462,12 @@ echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
 echo -e "\e[32m _                             _              _        \e[0m"
 echo -e "\e[32m| |                _          | |            | |       \e[0m"
 echo -e "\e[32m| | ____    ___  _| |_  _____ | |  _____   __| |  ___  \e[0m"
@@ -467,17 +477,23 @@ echo -e "\e[32m|_||_| |_|(___/    \__)\_____| \_)\_____| \____| \___/ \e[0m"
 echo -e "\e[32m                                                       \e[0m"              
 echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
-echo -e "\e[32mSua API URL: https://$dominio\e[0m"
+echo -e "${amarelo}Api Url:${reset}: ${branco}https://$dominio${reset}"
 echo -e "\e[32m\e[0m"
-echo -e "\e[32mSua GLOBAL API KEY: $key\e[0m"
+echo -e "${amarelo}Global Api Key${reset}: ${branco}https://$key${reset}"
 echo -e "\e[32m\e[0m"
-echo -e "\e[32mLink do Manager: https://$dominio/manager\e[0m"
+echo -e "${amarelo}Manager${reset}: ${branco}https://$dominio/manager${reset}"
 echo -e "\e[32m\e[0m"
-echo -e "\e[32mLink do Docs: https://$dominio/docs\e[0m"
+echo -e "${amarelo}Docs${reset}: ${branco}https://$dominio/docs${reset}"
 echo -e "\e[32m\e[0m"
-echo -e "\e[32mInscreva-se no meu Canal: https://youtube.com/oriondesign_oficial\e[0m"
+echo -e "${amarelo}Inscreva-se no meu Canal${reset}: ${branco}https://youtube.com/oriondesign_oficial${reset}"
 echo -e "\e[32m\e[0m"
-echo -e "\e[32mSugestões ou duvidas: https://wa.me/+5511973052593\e[0m"
+echo -e "${amarelo}Sugestões ou duvidas${reset}: ${branco}https://wa.me/+5511973052593${reset}"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
