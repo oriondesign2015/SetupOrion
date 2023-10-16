@@ -437,6 +437,16 @@ sudo certbot --nginx --email $mail --redirect --agree-tos -d $dominio
 #
 #######################################################
 #
+# ARRUMANDO MANAGER
+#
+
+sed -i 's|https://manager.evolution-api.com|https://app.appsmith.com/app/novo-manager/home-65259b67441fc2031cd34918|' evolution-api/views/manager.hbs
+
+#
+# FIM DE ARRUMANDO MANAGER
+#
+#######################################################
+#
 # MENSAGEM DE INSTLADO + DADOS
 #
 
@@ -459,11 +469,11 @@ echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32mSua API URL: https://$dominio\e[0m"
 echo -e "\e[32m\e[0m"
-echo -e "\e[32mLink do Manager: https://app.appsmith.com/app/novo-manager/home-65259b67441fc2031cd34918\e[0m"
+echo -e "\e[32mSua GLOBAL API KEY: $key\e[0m"
+echo -e "\e[32m\e[0m"
+echo -e "\e[32mLink do Manager: https://$dominio/manager\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32mLink do Docs: https://$dominio/docs\e[0m"
-echo -e "\e[32m\e[0m"
-echo -e "\e[32mSua GLOBAL API KEY: $key\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32mInscreva-se no meu Canal: https://youtube.com/oriondesign_oficial\e[0m"
 echo -e "\e[32m\e[0m"
