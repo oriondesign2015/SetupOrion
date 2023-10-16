@@ -50,7 +50,7 @@ sudo apt upgrade -y && sudo apt update && sudo apt install -y git && git clone h
 <p><b>1b-</b> Já tenho <b>SetupOrion</b> na minha VPS (para quem quer instalar outra aplicação):</p>
 
 ```
-sudo apt upgrade -y && sudo apt update && cd SetupOrion && git stash && git pull && ./install.sh
+sudo apt upgrade -y && sudo apt update && cd SetupOrion && git stash && git pull && chmod +x install.sh && ./install.sh
 ```
 
 <p><b>2-</b> Aguarde</p>
