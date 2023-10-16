@@ -291,6 +291,15 @@ sed -i "s/^# SMTP_TLS=/SMTP_TLS=true/" /home/chatwoot/chatwoot/.env
 sed -i 's/locale: '\''en'\''/locale: '\''pt_BR'\''/' /home/chatwoot/chatwoot/app/javascript/packs/v3app.js
 ##
 
+##RECOMPILANDO
+sudo -i -u chatwoot <<EOF
+cd chatwoot
+rake assets:precompile RAILS_ENV=production
+exit
+EOF
+
+cwctl -r
+##
 
 systemctl daemon-reload && systemctl restart chatwoot.target
 
