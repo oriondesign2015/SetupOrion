@@ -37,6 +37,10 @@ loading1() {
     clear
 }
 
+amarelo="\e[33m"   # Amarelo
+branco="\e[97m"    # Branco
+reset="\e[0m"      # Reseta
+
 #
 # FIM DE LOADING
 #
@@ -346,6 +350,7 @@ echo -e "\e[32m                                                       \e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32mAcesse seu Chatwoot: https://$dominiochat\e[0m"
+echo -e "${amarelo}Acesse seu Chatwoot${reset}: ${branco}https://$dominiochat${reset}"
 echo -e "\e[32m\e[0m"
 echo -e "\e[32mSenha postgres: $postgres_password\e[0m"
 echo -e "\e[32m\e[0m"
