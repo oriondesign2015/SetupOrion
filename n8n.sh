@@ -110,13 +110,13 @@ echo ""
 echo ""
 echo ""
 echo ""
-echo -e "\e[93mPasso \e[33m2/4\e[0m"
+echo -e "\e[93mPasso \e[33m1/2\e[0m"
 read -p "Digite o dominio para acessar o N8N (ex: n8n.dominio.com): " dominionn
 echo ""
-echo -e "\e[93mPasso \e[33m3/4\e[0m"
+echo -e "\e[93mPasso \e[33m2/3\e[0m"
 read -p "Digite a porta para o N8N (padrão: 5678): " portann
 echo ""
-echo -e "\e[93mPasso \e[33m4/4\e[0m"
+echo -e "\e[93mPasso \e[33m3/3\e[0m"
 read -p "Digite seu email para o proxy reverso (ex: contato@dominio.com): " emailnn
 echo ""
 
