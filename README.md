@@ -1,6 +1,7 @@
 
+
 <!--<img src="https://github.com/oriondesign2015/SetupOrion/blob/main/src/Capa.png">-->
-<img src="https://github.com/oriondesign2015/SetupOrion/assets/139019565/42d53230-53fd-44c2-ac58-8bfcdcd14722">
+<img src="https://github.com/oriondesign2015/SetupOrion/assets/139019565/d0f2636b-ec0f-49ad-b0c4-233098f31c6b">
 
 <!--<br><br>EM MANUTENÇÃO<br>-->
 <br>
