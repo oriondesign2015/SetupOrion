@@ -1,11 +1,16 @@
 #!/bin/bash
 
+versao() {
+echo -e "\e[32m                                                                                     Versão v.2.1.1\e[0m"
+}
+
 #########################################################
 #
 # DEFININDO VARIAVIES
 #
 
 amarelo="\e[33m"
+verde="\e[32m"
 branco="\e[97m"
 bege="\e[93m"
 vermelho="\e[91m"
@@ -38,11 +43,12 @@ nome_instalador() {
     echo -e "$branco                                         ╚████╔╝██╗███████╗                                 \e[0m"
     echo -e "$branco                                          ╚═══╝ ╚═╝╚══════╝                                 \e[0m"
     echo ""
-    echo ""
 
 }
 nome_menu() {
     clear
+    echo ""
+    echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
     echo -e "$branco                    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ██████╗ ███████╗                \e[0m"
     echo -e "$branco                    ████╗ ████║██╔════╝████╗  ██║██║   ██║    ██╔══██╗██╔════╝                \e[0m"
@@ -58,10 +64,9 @@ nome_menu() {
     echo -e "$branco  ██║     ███████╗██║  ██║██║  ██║██║  ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║   ██║  ██║███████║\e[0m"
     echo -e "$branco  ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚══════╝\e[0m"
     echo ""
+    echo -e "$amarelo===================================================================================================\e[0m"
+    versao
     echo ""
-
-
-
 }
 
 direitos_instalador() {
@@ -128,12 +133,16 @@ instalando_msg() {
 instalado_msg() {
     clear
     echo ""
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo ""
     echo -e "$branco     ██╗      ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗      █████╗ ██████╗  ██████╗       ██╗\e[0m"
     echo -e "$branco     ╚██╗     ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██╔══██╗██╔══██╗██╔═══██╗     ██╔╝\e[0m"
     echo -e "$branco      ╚██╗    ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ███████║██║  ██║██║   ██║    ██╔╝ \e[0m"
     echo -e "$branco      ██╔╝    ██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██╔══██║██║  ██║██║   ██║    ╚██╗ \e[0m"
     echo -e "$branco     ██╔╝     ██║██║ ╚████║███████║   ██║   ██║  ██║███████╗██║  ██║██████╔╝╚██████╔╝     ╚██╗\e[0m"
     echo -e "$branco     ╚═╝      ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝       ╚═╝\e[0m"
+    echo ""
+    echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
     echo ""
 }
@@ -312,6 +321,37 @@ nome_botpress() {
     echo ""                                                          
 }
 
+nome_trocar_logos() {
+    clear
+    echo ""
+    echo -e "$branco████████╗██████╗  ██████╗  ██████╗ █████╗ ██████╗     ██╗      ██████╗  ██████╗  ██████╗ ███████╗\e[0m"
+    echo -e "$branco╚══██╔══╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗██╔══██╗    ██║     ██╔═══██╗██╔════╝ ██╔═══██╗██╔════╝\e[0m"
+    echo -e "$branco   ██║   ██████╔╝██║   ██║██║     ███████║██████╔╝    ██║     ██║   ██║██║  ███╗██║   ██║███████╗\e[0m"
+    echo -e "$branco   ██║   ██╔══██╗██║   ██║██║     ██╔══██║██╔══██╗    ██║     ██║   ██║██║   ██║██║   ██║╚════██║\e[0m"
+    echo -e "$branco   ██║   ██║  ██║╚██████╔╝╚██████╗██║  ██║██║  ██║    ███████╗╚██████╔╝╚██████╔╝╚██████╔╝███████║\e[0m"
+    echo -e "$branco   ╚═╝   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝\e[0m"
+    echo -e "$branco                                                                                                 \e[0m"
+    echo -e "$branco   ██████╗  ██████╗      ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗      \e[0m"
+    echo -e "$branco   ██╔══██╗██╔═══██╗    ██╔════╝██║  ██║██╔══██╗╚══██╔══╝██║    ██║██╔═══██╗██╔═══██╗╚══██╔══╝      \e[0m"
+    echo -e "$branco   ██║  ██║██║   ██║    ██║     ███████║███████║   ██║   ██║ █╗ ██║██║   ██║██║   ██║   ██║         \e[0m"
+    echo -e "$branco   ██║  ██║██║   ██║    ██║     ██╔══██║██╔══██║   ██║   ██║███╗██║██║   ██║██║   ██║   ██║         \e[0m"
+    echo -e "$branco   ██████╔╝╚██████╔╝    ╚██████╗██║  ██║██║  ██║   ██║   ╚███╔███╔╝╚██████╔╝╚██████╔╝   ██║         \e[0m"
+    echo -e "$branco   ╚═════╝  ╚═════╝      ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚══╝╚══╝  ╚═════╝  ╚═════╝    ╚═╝         \e[0m"
+    echo ""
+    echo ""
+}
+nome_finalizado() {
+    clear
+    echo ""
+    echo -e "$branco             ███████╗██╗███╗   ██╗ █████╗ ██╗     ██╗███████╗ █████╗ ██████╗  ██████╗ \e[0m"
+    echo -e "$branco             ██╔════╝██║████╗  ██║██╔══██╗██║     ██║╚══███╔╝██╔══██╗██╔══██╗██╔═══██╗\e[0m"
+    echo -e "$branco             █████╗  ██║██╔██╗ ██║███████║██║     ██║  ███╔╝ ███████║██║  ██║██║   ██║\e[0m"
+    echo -e "$branco             ██╔══╝  ██║██║╚██╗██║██╔══██║██║     ██║ ███╔╝  ██╔══██║██║  ██║██║   ██║\e[0m"
+    echo -e "$branco             ██║     ██║██║ ╚████║██║  ██║███████╗██║███████╗██║  ██║██████╔╝╚██████╔╝\e[0m"
+    echo -e "$branco             ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ \e[0m"
+    echo ""
+    echo ""
+}
 nome_remover_stack() {
     clear
     echo ""
@@ -332,8 +372,114 @@ nome_remover_stack() {
     echo ""                                                                                             
 }
 
+nome_baserow() {
+    clear
+    echo ""
+    echo -e "$branco                      ██████╗  █████╗ ███████╗███████╗██████╗  ██████╗ ██╗    ██╗\e[0m"
+    echo -e "$branco                      ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗██╔═══██╗██║    ██║\e[0m"
+    echo -e "$branco                      ██████╔╝███████║███████╗█████╗  ██████╔╝██║   ██║██║ █╗ ██║\e[0m"
+    echo -e "$branco                      ██╔══██╗██╔══██║╚════██║██╔══╝  ██╔══██╗██║   ██║██║███╗██║\e[0m"
+    echo -e "$branco                      ██████╔╝██║  ██║███████║███████╗██║  ██║╚██████╔╝╚███╔███╔╝\e[0m"
+    echo -e "$branco                      ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ \e[0m"
+    echo ""
+    echo ""                                                          
+}
+
+nome_wordpress() {
+    clear
+    echo ""
+    echo -e "$branco           ██╗    ██╗ ██████╗ ██████╗ ██████╗ ██████╗ ██████╗ ███████╗███████╗███████╗\e[0m"
+    echo -e "$branco           ██║    ██║██╔═══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝\e[0m"
+    echo -e "$branco           ██║ █╗ ██║██║   ██║██████╔╝██║  ██║██████╔╝██████╔╝█████╗  ███████╗███████╗\e[0m"
+    echo -e "$branco           ██║███╗██║██║   ██║██╔══██╗██║  ██║██╔═══╝ ██╔══██╗██╔══╝  ╚════██║╚════██║\e[0m"
+    echo -e "$branco           ╚███╔███╔╝╚██████╔╝██║  ██║██████╔╝██║     ██║  ██║███████╗███████║███████║\e[0m"
+    echo -e "$branco            ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\e[0m"
+    echo ""
+    echo ""
+}
+
+nome_mongodb() {
+  clear
+  echo ""
+  echo -e "$branco               ███╗   ███╗ ██████╗ ███╗   ██╗ ██████╗  ██████╗     ██████╗ ██████╗ \e[0m"
+  echo -e "$branco               ████╗ ████║██╔═══██╗████╗  ██║██╔════╝ ██╔═══██╗    ██╔══██╗██╔══██╗\e[0m"
+  echo -e "$branco               ██╔████╔██║██║   ██║██╔██╗ ██║██║  ███╗██║   ██║    ██║  ██║██████╔╝\e[0m"
+  echo -e "$branco               ██║╚██╔╝██║██║   ██║██║╚██╗██║██║   ██║██║   ██║    ██║  ██║██╔══██╗\e[0m"
+  echo -e "$branco               ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║╚██████╔╝╚██████╔╝    ██████╔╝██████╔╝\e[0m"
+  echo -e "$branco               ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝  ╚═════╝     ╚═════╝ ╚═════╝ \e[0m"
+  echo ""
+  echo ""                                                               
+}
+
+nome_rabbitmq() {
+  clear
+  echo ""
+  echo -e "$branco               ██████╗  █████╗ ██████╗ ██████╗ ██╗████████╗    ███╗   ███╗ ██████╗ \e[0m"
+  echo -e "$branco               ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝    ████╗ ████║██╔═══██╗\e[0m"
+  echo -e "$branco               ██████╔╝███████║██████╔╝██████╔╝██║   ██║       ██╔████╔██║██║   ██║\e[0m"
+  echo -e "$branco               ██╔══██╗██╔══██║██╔══██╗██╔══██╗██║   ██║       ██║╚██╔╝██║██║▄▄ ██║\e[0m"
+  echo -e "$branco               ██║  ██║██║  ██║██████╔╝██████╔╝██║   ██║       ██║ ╚═╝ ██║╚██████╔╝\e[0m"
+  echo -e "$branco               ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝   ╚═╝       ╚═╝     ╚═╝ ╚══▀▀═╝ \e[0m"
+  echo ""
+  echo ""                                                                 
+}
+
+nome_uptimekuma() {
+  clear
+  echo ""
+  echo -e "$branco      ██╗   ██╗██████╗ ████████╗██╗███╗   ███╗███████╗    ██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ \e[0m"
+  echo -e "$branco      ██║   ██║██╔══██╗╚══██╔══╝██║████╗ ████║██╔════╝    ██║ ██╔╝██║   ██║████╗ ████║██╔══██╗\e[0m"
+  echo -e "$branco      ██║   ██║██████╔╝   ██║   ██║██╔████╔██║█████╗      █████╔╝ ██║   ██║██╔████╔██║███████║\e[0m"
+  echo -e "$branco      ██║   ██║██╔═══╝    ██║   ██║██║╚██╔╝██║██╔══╝      ██╔═██╗ ██║   ██║██║╚██╔╝██║██╔══██║\e[0m"
+  echo -e "$branco      ╚██████╔╝██║        ██║   ██║██║ ╚═╝ ██║███████╗    ██║  ██╗╚██████╔╝██║ ╚═╝ ██║██║  ██║\e[0m"
+  echo -e "$branco       ╚═════╝ ╚═╝        ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝\e[0m"
+  echo ""
+  echo ""
+}
+
+nome_testeemail() {
+  clear
+  echo ""
+  echo -e "$branco                     ████████╗███████╗███████╗████████╗███████╗    ██████╗ ███████╗\e[0m"
+  echo -e "$branco                     ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝\e[0m"
+  echo -e "$branco                        ██║   █████╗  ███████╗   ██║   █████╗      ██║  ██║█████╗  \e[0m"
+  echo -e "$branco                        ██║   ██╔══╝  ╚════██║   ██║   ██╔══╝      ██║  ██║██╔══╝  \e[0m"
+  echo -e "$branco                        ██║   ███████╗███████║   ██║   ███████╗    ██████╔╝███████╗\e[0m"
+  echo -e "$branco                        ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝\e[0m"
+  echo -e "$branco                                                                                   \e[0m"
+  echo -e "$branco                                 ███████╗███╗   ███╗ █████╗ ██╗██╗                 \e[0m"
+  echo -e "$branco                                 ██╔════╝████╗ ████║██╔══██╗██║██║                 \e[0m"
+  echo -e "$branco                                 █████╗  ██╔████╔██║███████║██║██║                 \e[0m"
+  echo -e "$branco                                 ██╔══╝  ██║╚██╔╝██║██╔══██║██║██║                 \e[0m"
+  echo -e "$branco                                 ███████╗██║ ╚═╝ ██║██║  ██║██║███████╗            \e[0m"
+  echo -e "$branco                                 ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝            \e[0m"
+  echo ""
+  echo ""                                                          
+}
+
+nome_testando() {
+  clear
+  echo ""
+  echo -e "$branco               ████████╗███████╗███████╗████████╗ █████╗ ███╗   ██╗██████╗  ██████╗ \e[0m"
+  echo -e "$branco               ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔══██╗████╗  ██║██╔══██╗██╔═══██╗\e[0m"
+  echo -e "$branco                  ██║   █████╗  ███████╗   ██║   ███████║██╔██╗ ██║██║  ██║██║   ██║\e[0m"
+  echo -e "$branco                  ██║   ██╔══╝  ╚════██║   ██║   ██╔══██║██║╚██╗██║██║  ██║██║   ██║\e[0m"
+  echo -e "$branco                  ██║   ███████╗███████║   ██║   ██║  ██║██║ ╚████║██████╔╝╚██████╔╝\e[0m"
+  echo -e "$branco                  ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝ \e[0m"
+  echo ""
+  echo ""
+}
+
 verificar_container_postgres() {
     if docker ps -q --filter "name=postgres" | grep -q .; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+verificar_container_mysql() {
+    if docker ps -q --filter "name=mysql" | grep -q .; then
         return 0
     else
         return 1
@@ -344,12 +490,20 @@ pegar_senha_postgres() {
     senha_postgres=$(grep "POSTGRES_PASSWORD" /root/postgres.yaml | awk -F '=' '{print $2}')
 }
 
+pegar_senha_mysql() {
+    senha_mysql_wordpress=$(grep "MYSQL_ROOT_PASSWORD" /root/mysql.yaml | awk -F '=' '{print $2}')
+}
+
 verificar_container_redis() {
     if docker ps -q --filter "name=redis" | grep -q .; then
         return 0
     else
         return 1
     fi
+}
+
+pegar_link_s3() {
+    url_s3=$(grep "MINIO_SERVER_URL" /root/minio.yaml | awk -F '=' '{print $2}' | sed 's/https:\/\///')
 }
 
 verificar_container_minio() {
@@ -402,6 +556,7 @@ wait_for_postgres() {
 
 menu_instalador(){
 
+    echo -e "${amarelo}[0]${reset} - ${branco}Testar SMTP ${verde}[novo]${reset}"
     echo -e "${amarelo}[1]${reset} - ${branco}Traefik & Portainer${reset}"
     echo -e "${amarelo}[2]${reset} - ${branco}Chatwoot${reset}"
     echo -e "${amarelo}[3]${reset} - ${branco}Evolution API${reset}"
@@ -412,12 +567,14 @@ menu_instalador(){
     echo -e "${amarelo}[8]${reset} - ${branco}PgAdmin 4${reset}"
     echo -e "${amarelo}[9]${reset} - ${branco}Nocobase${reset}"
     echo -e "${amarelo}[10]${reset} - ${branco}Botpress${reset}"
-    echo -e "${amarelo}[11]${reset} - ${branco}Woofed CRM ${vermelho}[em breve]${reset}"
-    echo -e "${amarelo}[12]${reset} - ${branco}Wordpress ${vermelho}[em breve]${reset}"
-    echo -e "${amarelo}[13]${reset} - ${branco}Baserow ${vermelho}[em breve]${reset}"
-    echo -e "${amarelo}[14]${reset} - ${branco}Jitsi Meet ${vermelho}[em breve]${reset}"
-    echo -e "${amarelo}[15]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[16]${reset} - ${branco}Sair do instalador${reset}"
+    echo -e "${amarelo}[11]${reset} - ${branco}Wordpress ${verde}[novo]${reset}"
+    echo -e "${amarelo}[12]${reset} - ${branco}Baserow ${verde}[novo]${reset}"
+    echo -e "${amarelo}[13]${reset} - ${branco}MongoDB ${verde}[novo]${reset}"
+    echo -e "${amarelo}[14]${reset} - ${branco}RabbitMQ ${verde}[novo]${reset}"
+    echo -e "${amarelo}[15]${reset} - ${branco}Uptime Kuma ${verde}[novo]${reset}"
+    echo -e "${amarelo}[16]${reset} - ${branco}Trocar Logos Chatwoot ${verde}[novo]${reset}"
+    echo -e "${amarelo}[17]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[18]${reset} - ${branco}Sair do instalador${reset}"
     echo ""
 }
 
@@ -537,10 +694,14 @@ sudo apt-get install -y apparmor-utils > /dev/null
 echo -e "\e[97m• INSTALANDO DOCKER SWARN \e[33m[3/6]\e[0m"
 echo ""
 
+#TESTE SALVA O IP
+ip=$(curl -s ifconfig.me)
+
 #INSTALANDO DOCKER SWARM
 curl -fsSL https://get.docker.com | bash > /dev/null 2>&1
 
-docker swarm init > /dev/null
+#TESTE MANDA INICIAR
+docker swarm init --advertise-addr $ip > /dev/null
 
 #MENSAGEM DE CRIANDO REDE INTERNA (PASSOS)
 echo -e "\e[97m• CRIANDO REDE INTERNA \e[33m[4/6]\e[0m"
@@ -630,7 +791,7 @@ docker stack deploy --prune --resolve-image always -c traefik.yaml traefik > /de
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço trarik está ativo
     if docker service ls --filter "name=traefik" | grep "1/1"; then
@@ -709,7 +870,7 @@ sleep 5
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço portainer está ativo
     if docker service ls --filter "name=portainer" | grep "1/1"; then
@@ -1041,7 +1202,7 @@ docker stack deploy --prune --resolve-image always -c minio.yaml minio
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço minio está ativo
     if docker service ls --filter "name=minio" | grep "1/1"; then
@@ -1079,11 +1240,62 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+ferramenta_mysql() {
+dados
+senha_mysql_wordpress=$(openssl rand -hex 16)
+
+cat > mysql.yaml <<EOL
+version: "3.7"
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=$senha_mysql_wordpress
+      - TZ=America/Sao_Paulo
+    networks:
+      - $nome_rede_interna
+    volumes:
+      - mysql_data:/var/lib/mysql
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+    command:
+      [
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_general_ci",
+        "--sql-mode=",
+        "--default-authentication-plugin=mysql_native_password",
+        "--max-allowed-packet=512MB",
+      ]
+
+volumes:
+  mysql_data:
+    external: true
+    name: mysql_data
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+
+docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
+
+sleep 15
+}
+
 ferramenta_chatwoot() {
 
     nome_chatwoot
     preencha_as_info
-
+    dados
+    
     while true; do
 
     echo -e "\e[97mPasso$amarelo 1/5\e[0m"
@@ -1209,6 +1421,7 @@ services:
       - SMTP_DOMAIN=$dominio_smtp_chatwoot
       - SMTP_ADDRESS=$smtp_email_chatwoot
       - SMTP_PORT=$porta_smtp_chatwoot
+      - SMTP_SSL=true
       - SMTP_USERNAME=$email_admin_chatwoot
       - SMTP_PASSWORD=$senha_email_chatwoot
       - SMTP_AUTHENTICATION=login
@@ -1267,6 +1480,7 @@ services:
       - SMTP_DOMAIN=$dominio_smtp_chatwoot
       - SMTP_ADDRESS=$smtp_email_chatwoot
       - SMTP_PORT=$porta_smtp_chatwoot
+      - SMTP_SSL=true
       - SMTP_USERNAME=$email_admin_chatwoot
       - SMTP_PASSWORD=$senha_email_chatwoot
       - SMTP_AUTHENTICATION=login
@@ -1309,7 +1523,7 @@ echo ""
 #MIGRANDO BANCO DE DADOS DO CHATWOOT
 container_name="chatwoot_chatwoot_app"
 
-max_wait_time=600
+max_wait_time=1200
 
 wait_interval=60
 
@@ -1347,7 +1561,7 @@ EOF
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço chatwoot está ativo
     if docker service ls --filter "name=chatwoot" | grep "1/1"; then
@@ -1529,7 +1743,7 @@ do
     if [ -f "/var/lib/docker/volumes/evolution_oriondesign_views/_data/manager.hbs" ]
     then
         
-        sed -i 's|https://manager.evolution-api.com|https://app.appsmith.com/app/novo-manager/home-65259b67441fc2031cd34918|' /var/lib/docker/volumes/evolution_oriondesign_views/_data/manager.hbs 
+        sed -i 's|https://manager.evolution-api.com|https://app.appsmith.com/app/manager-setuporion-2-0/home-655e972229a1f6089b6ee327?embed=true|' /var/lib/docker/volumes/evolution_oriondesign_views/_data/manager.hbs 
         
         #docker stack deploy --prune --resolve-image always -c evolution.yaml evolution 
         docker stack deploy --resolve-image always --prune --force -c evolution.yaml evolution > /dev/null 2>&1
@@ -1543,7 +1757,7 @@ done
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço evolution está ativo
     if docker service ls --filter "name=evolution" | grep "1/1"; then
@@ -1709,6 +1923,9 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_typebot > /dev/null 2>&1
 fi
 
+pegar_senha_minio
+pegar_link_s3
+
 echo -e "\e[97m• INSTALANDO TYPEBOT \e[33m[3/3]\e[0m"
 echo ""
 
@@ -1838,7 +2055,7 @@ docker stack deploy --prune --resolve-image always -c typebot.yaml typebot > /de
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço typebot está ativo
     if docker service ls --filter "name=typebot" | grep "1/1"; then
@@ -1922,7 +2139,7 @@ echo ""
 
 verificar_container_postgres
 if [ $? -eq 0 ]; then
-        echo ""
+        sleep 1
         criar_banco_postgres_n8n > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
@@ -1931,7 +2148,12 @@ if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_n8n > /dev/null 2>&1
 fi
-
+verificar_container_redis
+    if [ $? -eq 0 ]; then
+        sleep 1
+    else
+        ferramenta_redis > /dev/null 2>&1
+    fi
 
 echo -e "\e[97m• INSTALANDO N8N \e[33m[3/3]\e[0m"
 echo ""
@@ -2089,7 +2311,7 @@ docker stack deploy --prune --resolve-image always -c n8n.yaml n8n > /dev/null 2
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço n8n está ativo
     if docker service ls --filter "name=n8n" | grep "1/1"; then
@@ -2180,7 +2402,7 @@ echo ""
 
 verificar_container_postgres
 if [ $? -eq 0 ]; then
-        echo ""
+        sleep 1
         criar_banco_postgres_flowise > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
@@ -2251,7 +2473,7 @@ docker stack deploy --prune --resolve-image always -c flowise.yaml flowise  > /d
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço flowise está ativo
     if docker service ls --filter "name=flowise" | grep "1/1"; then
@@ -2391,7 +2613,7 @@ docker stack deploy --prune --resolve-image always -c pgadmin.yaml pgadmin  > /d
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço pgadmin está ativo
     if docker service ls --filter "name=pgadmin" | grep "1/1"; then
@@ -2492,7 +2714,7 @@ echo ""
 
 verificar_container_postgres
 if [ $? -eq 0 ]; then
-        echo ""
+        sleep 1
         criar_banco_postgres_nocobase > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
@@ -2565,7 +2787,7 @@ docker stack deploy --prune --resolve-image always -c nocobase.yaml nocobase > /
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço nocobase está ativo
     if docker service ls --filter "name=nocobase" | grep "1/1"; then
@@ -2647,7 +2869,7 @@ echo ""
 
 verificar_container_postgres
 if [ $? -eq 0 ]; then
-        echo ""
+        sleep 1
         criar_banco_postgres_botpress > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
@@ -2659,7 +2881,7 @@ fi
 
 verificar_container_redis
     if [ $? -eq 0 ]; then
-        echo ""
+        sleep 1
     else
         ferramenta_redis  > /dev/null 2>&1
     fi
@@ -2717,7 +2939,7 @@ docker stack deploy --prune --resolve-image always -c botpress.yaml botpress > /
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
 echo -e "\e[97m• VERIFICANDO SERVIÇO\e[0m"
-echo ""
+sleep 1
 while true; do
     # Verifica se o serviço botpress está ativo
     if docker service ls --filter "name=botpress" | grep "1/1"; then
@@ -2749,6 +2971,124 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
         clear
         exit 1
     fi    
+}
+
+ferramenta_trocar_logos() {
+dados
+clear
+nome_trocar_logos
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+echo -en "\e[33mDigite o link do seu Logo para o Favicon (.PNG ou .JPG): \e[0m" && read -r link_img
+echo ""
+
+#echo -e "\e[97mPasso$amarelo 2/0\e[0m"
+#echo -en "\e[33mDigite o link do seu Logo para Painel (.SVG): \e[0m" && read -r link2_img
+#echo ""
+
+clear
+nome_trocar_logos
+conferindo_as_info
+
+echo -e "\e[33mLogo para o Favicon (.PNG ou .JPG):\e[97m $link_img\e[0m"
+echo ""
+
+#echo -e "\e[33mLogo para o Painel (.SVG):\e[97m $link2_img\e[0m"
+#echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    nome_trocar_logos
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• TROCANDO FAVICONS \e[33m[1/3]\e[0m"
+echo ""
+
+sudo apt-get install imagemagick -y
+
+sudo apt update
+
+cd /var/lib/docker/volumes/chatwoot_public_orion/_data/
+
+mkdir origem
+
+cd
+
+wget -P /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/ $link_img
+
+dir="/var/lib/docker/volumes/chatwoot_public_orion/_data/origem/"
+
+filename=$(basename $dir/*)
+
+mv $dir/$filename $dir/logo_thumbnail.png
+
+cd
+
+cd /var/lib/docker/volumes/chatwoot_public_orion/_data/
+
+rm android-icon-36x36.png apple-icon-precomposed.png favicon-16x16.png apple-icon-72x72.png apple-icon-114x114.png apple-icon-144x144.png apple-icon-152x152.png apple-icon.png apple-icon-57x57.png favicon-32x32.png favicon-badge-32x32.png apple-icon-76x76.png android-icon-72x72.png favicon-512x512.png apple-icon-60x60.png favicon-96x96.png apple-icon-180x180.png android-icon-144x144.png ms-icon-310x310.png ms-icon-144x144.png android-icon-48x48.png favicon-badge-96x96.png apple-icon-120x120.png android-icon-96x96.png ms-icon-70x70.png android-icon-192x192.png ms-icon-150x150.png favicon-badge-16x16.png
+
+cd
+
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 36x36 /var/lib/docker/volumes/chatwoot_public_orion/_data/android-icon-36x36.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 192x192 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-precomposed.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 16x16 /var/lib/docker/volumes/chatwoot_public_orion/_data/favicon-16x16.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 72x72 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-72x72.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 114x114 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-114x114.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 144x144 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-144x144.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 152x152 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-152x152.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 192x192 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 57x57 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-57x57.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 32x32 /var/lib/docker/volumes/chatwoot_public_orion/_data/favicon-32x32.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 32x32 /var/lib/docker/volumes/chatwoot_public_orion/_data/favicon-badge-32x32.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 76x76 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-76x76.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 72x72 /var/lib/docker/volumes/chatwoot_public_orion/_data/android-icon-72x72.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 512x512 /var/lib/docker/volumes/chatwoot_public_orion/_data/favicon-512x512.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 60x60 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-60x60.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 96x96 /var/lib/docker/volumes/chatwoot_public_orion/_data/favicon-96x96.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 180x180 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-180x180.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 144x144 /var/lib/docker/volumes/chatwoot_public_orion/_data/android-icon-144x144.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 310x310 /var/lib/docker/volumes/chatwoot_public_orion/_data/ms-icon-310x310.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 144x144 /var/lib/docker/volumes/chatwoot_public_orion/_data/ms-icon-144x144.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 48x48 /var/lib/docker/volumes/chatwoot_public_orion/_data/android-icon-48x48.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 96x96 /var/lib/docker/volumes/chatwoot_public_orion/_data/favicon-badge-96x96.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 120x120 /var/lib/docker/volumes/chatwoot_public_orion/_data/apple-icon-120x120.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 96x96 /var/lib/docker/volumes/chatwoot_public_orion/_data/android-icon-96x96.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 70x70 /var/lib/docker/volumes/chatwoot_public_orion/_data/ms-icon-70x70.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 192x192 /var/lib/docker/volumes/chatwoot_public_orion/_data/android-icon-192x192.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 150x150 /var/lib/docker/volumes/chatwoot_public_orion/_data/ms-icon-150x150.png
+convert /var/lib/docker/volumes/chatwoot_public_orion/_data/origem/logo_thumbnail.png -resize 16x16 /var/lib/docker/volumes/chatwoot_public_orion/_data/favicon-badge-16x16.png
+
+systemctl daemon-reload && systemctl restart chatwoot.target
+
+clear
+
+nome_finalizado
+
+echo "Logos alterados com sucesso!"
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
 }
 
 ferramenta_remover_stack() {
@@ -2785,6 +3125,851 @@ while true; do
 done
 
 }
+
+ferramenta_wordpress() {
+dados
+clear
+nome_wordpress
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+echo -en "\e[33mDigite o dominio para o Wordpress: \e[0m" && read -r url_wordpress
+echo ""
+
+echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+echo -en "\e[33mDigite o nome do Site (sem espaços): \e[0m" && read -r nome_site_wordpress
+echo ""
+
+nome_da_stack_mysql="${nome_site_wordpress}_mysql.yaml"
+nome_da_stack_mysql_subir="${nome_site_wordpress}_mysql"
+
+nome_da_stack_wordpress="${nome_site_wordpress}_wordpress.yaml"
+nome_da_stack_wordpress_subir="${nome_site_wordpress}_wordpress"
+
+nome_do_servico_mysql="${nome_site_wordpress}_mysql"
+nome_da_date_mysql="${nome_site_wordpress}_mysql_data"
+
+nome_do_servico_wordpress="${nome_site_wordpress}_wordpress"
+nome_da_date_wordpress="${nome_site_wordpress}_data"
+
+clear
+nome_wordpress
+conferindo_as_info
+
+echo -e "\e[33mDominio do Wordpress:\e[97m $url_wordpress\e[0m"
+echo ""
+
+echo -e "\e[33mNome do Site:\e[97m $nome_site_wordpress\e[0m"
+echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    nome_wordpress
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO INSTALAÇÃO \e[33m[1/6]\e[0m"
+echo ""
+sleep 3
+
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[2/6]\e[0m"
+echo ""
+
+verificar_container_redis
+    if [ $? -eq 0 ]; then
+        echo ""
+    else
+        ferramenta_redis > /dev/null 2>&1
+    fi
+
+sleep 3
+
+echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[3/6]\e[0m"
+echo ""
+
+verificar_container_mysql
+    if [ $? -eq 0 ]; then
+        pegar_senha_mysql > /dev/null 2>&1
+    else
+        ferramenta_mysql > /dev/null 2>&1
+        pegar_senha_mysql > /dev/null 2>&1
+    fi
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+#  echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/6]\e[0m"
+#  echo ""
+#  while true; do
+#      # Verifica se o serviço mysql está ativo
+#      if docker service ls --filter "name=mysql" | grep "1/1"; then
+#          sleep 2
+#          break
+#      fi
+#      sleep 5
+#  done
+#######################################################################
+
+sleep 15
+dados
+tempo_maximo_espera=180
+tempo_espera=0
+intervalo_espera=5
+
+while [ $tempo_espera -le $tempo_maximo_espera ]; do
+  # Obtém o nome completo do serviço MySQL
+  nome_completo_servico_mysql=$(docker service ls --filter "name=mysql" --format "{{.Name}}" | head -n 1)
+
+  if [ "$nome_completo_servico_mysql" ]; then
+    # Verifica se o serviço MySQL está ativo
+    if docker service ls --filter "name=$nome_completo_servico_mysql" | grep "1/1" > /dev/null; then
+      # Verificar se o MySQL está pronto para aceitar conexões
+      if docker exec $(docker ps -qf "name=.*$nome_completo_servico_mysql.*") mysqladmin ping -u root -p"$senha_mysql_wordpress" > /dev/null 2>&1; then
+        echo "Serviço MySQL está pronto."
+        
+        # Criar o banco de dados
+        docker exec -it $(docker ps -qf "name=.*${nome_completo_servico_mysql}.*") mysql -u root -p"$senha_mysql_wordpress" -e "CREATE DATABASE $nome_site_wordpress;"
+        
+        break
+      else
+        echo "Aguardando serviço MySQL estar pronto. Tentando novamente em $intervalo_espera segundos..."
+        sleep $intervalo_espera
+        tempo_espera=$((tempo_espera + intervalo_espera))
+      fi
+    else
+      echo "Aguardando serviço MySQL iniciar. Tentando novamente em $intervalo_espera segundos..."
+      sleep $intervalo_espera
+      tempo_espera=$((tempo_espera + intervalo_espera))
+    fi
+  else
+    echo "Serviço MySQL não encontrado. Tentando novamente em $intervalo_espera segundos..."
+    sleep $intervalo_espera
+    tempo_espera=$((tempo_espera + intervalo_espera))
+  fi
+done
+
+if [ $tempo_espera -gt $tempo_maximo_espera ]; then
+  echo "Erro: Tempo máximo de espera atingido. Serviço MySQL não está pronto."
+fi
+
+#docker exec -it $(docker ps -qf "name=${nome_do_servico_mysql}") mysql -u root -p"${senha_mysql_wordpress}" -e "CREATE DATABASE ${nome_site_wordpress};"
+#docker exec -it $(docker ps -qf "name=.*${nome_completo_servico_mysql}.*") mysql -u root -p"$senha_mysql_wordpress" -e "CREATE DATABASE $nome_site_wordpress;"
+
+
+echo -e "\e[97m• INSTALANDO WORDPRESS \e[33m[5/6]\e[0m"
+echo ""
+
+sleep 5
+
+cat > $nome_da_stack_wordpress <<EOL
+version: "3.7"
+services:
+  $nome_do_servico_wordpress:
+    image: wordpress:latest
+    volumes:
+      - $nome_da_date_wordpress:/var/www/html
+    networks:
+      - $nome_rede_interna
+    environment:
+      - WORDPRESS_DB_NAME=$nome_site_wordpress
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_PORT=3306
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=$senha_mysql_wordpress
+      - WP_REDIS_HOST=redis
+      - WP_REDIS_DATABASE=6
+      - VIRTUAL_HOST=$url_wordpress
+      - WP_LOCALE=pt_BR
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.$nome_do_servico_wordpress.rule=Host(\`$url_wordpress\`)
+        - traefik.http.routers.$nome_do_servico_wordpress.entrypoints=websecure
+        - traefik.http.routers.$nome_do_servico_wordpress.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.$nome_do_servico_wordpress.service=$nome_do_servico_wordpress
+        - traefik.http.services.$nome_do_servico_wordpress.loadbalancer.server.port=80
+        - traefik.http.services.$nome_do_servico_wordpress.loadbalancer.passHostHeader=true
+volumes:
+  $nome_da_date_wordpress:
+    external: true
+    name: $nome_da_date_wordpress
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
+EOL
+
+docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir #> /dev/null 2>&1
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[6/6]\e[0m"
+sleep 1
+while true; do
+    # Verifica se o serviço wordpress está ativo
+    if docker service ls --filter "name=$nome_do_servico_wordpress" | grep "1/1"; then
+        sleep 2
+        break
+    fi
+    sleep 5
+done
+#######################################################################
+
+#INSTALAÇÃO FINALIZADA
+instalado_msg
+guarde_os_dados_msg
+
+echo -e "\e[32m[Wordpress]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_wordpress\e[0m"
+echo ""
+
+echo -e "\e[33mNome do Site:\e[97m $nome_site_wordpress\e[0m"
+echo ""
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi   
+
+}
+
+ferramenta_baserow() {
+dados
+clear
+nome_baserow
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+echo -en "\e[33mDigite o dominio para o Baserow: \e[0m" && read -r url_baserow
+echo ""
+
+clear
+nome_baserow
+conferindo_as_info
+
+echo -e "\e[33mDominio do Baserow:\e[97m $url_baserow\e[0m"
+echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    nome_baserow
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO INSTALAÇÃO \e[33m[1/3]\e[0m"
+echo ""
+sleep 3
+
+echo -e "\e[97m• INSTALANDO BASEROW \e[33m[2/3]\e[0m"
+echo ""
+
+cat > baserow.yaml <<EOL
+version: '3.7'
+
+services:
+  baserow:
+    image: baserow/baserow:latest
+    environment:
+      - BASEROW_PUBLIC_URL=https://$url_baserow
+      - BASEROW_CADDY_ADDRESSES=:8080
+    volumes:
+      - baserow_data:/baserow/data
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.baserow.rule=Host(\`$url_baserow\`)
+        - traefik.http.services.baserow.loadbalancer.server.port=8080
+        - traefik.http.routers.baserow.service=baserow
+        - traefik.http.routers.baserow.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.baserow.entrypoints=websecure
+        - traefik.http.routers.baserow.tls=true
+    networks:
+      - $nome_rede_interna
+
+networks:
+  $nome_rede_interna:
+    external: true
+
+volumes:
+  baserow_data:
+    external: true
+EOL
+
+docker stack deploy --prune --resolve-image always -c baserow.yaml baserow #> /dev/null 2>&1
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+sleep 1
+while true; do
+    # Verifica se o serviço baserow está ativo
+    if docker service ls --filter "name=baserow" | grep "1/1"; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+#######################################################################
+
+#INSTALAÇÃO FINALIZADA
+instalado_msg
+guarde_os_dados_msg
+
+echo -e "\e[32m[Baserow]\e[0m"
+echo ""
+echo -e "\e[33mDominio:\e[97m https://$url_baserow\e[0m"
+echo ""
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi   
+}
+
+ferramenta_mongodb() {
+clear
+dados
+nome_mongodb
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+echo -en "\e[33mDigite o nome de usuario: \e[0m" && read -r user_mongo
+echo ""
+
+echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+echo -en "\e[33mDigite a senha do usuario: \e[0m" && read -r pass_mongo
+echo ""
+
+clear
+nome_mongodb
+conferindo_as_info
+
+echo -e "\e[33mUsuario:\e[97m $user_mongo\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $pass_mongo\e[0m"
+echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    nome_mongodb  
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO INSTALAÇÃO \e[33m[1/3]\e[0m"
+echo ""
+sleep 3
+
+echo -e "\e[97m• INSTALANDO MONGODB \e[33m[2/3]\e[0m"
+echo ""
+
+cat > mongodb.yaml <<EOL
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongo:latest
+    command: mongod --port 27017
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_configdb_data:/data/configdb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$user_mongo
+      - MONGO_INITDB_ROOT_PASSWORD=$pass_mongo
+      - PUID=1000
+      - PGID=1000
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2048M
+    networks:
+      - $nome_rede_interna
+
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
+
+volumes:
+  mongodb_data:
+    external: true
+    name: mongodb_data
+  mongodb_configdb_data:
+    external: true
+    name: mongodb_configdb_data
+EOL
+
+docker stack deploy --prune --resolve-image always -c mongodb.yaml mongodb #> /dev/null 2>&1
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+sleep 1
+while true; do
+    # Verifica se o serviço mongodb está ativo
+    if docker service ls --filter "name=mongodb" | grep "1/1"; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+#######################################################################
+
+#INSTALAÇÃO FINALIZADA
+instalado_msg
+guarde_os_dados_msg
+
+echo -e "\e[32m[MongoDB]\e[0m"
+echo ""
+echo -e "\e[33mUsuario:\e[97m $user_mongo\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $pass_mongo\e[0m"
+echo ""
+
+ip_vps=$(curl -s ifconfig.me)
+
+echo -e "\e[33mUrl Database:\e[97m mongodb://$user_mongo:$pass_mongo@$ip_vps:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true\e[0m"
+echo ""
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi   
+}
+
+ferramenta_rabbitmq() {
+clear
+dados
+nome_rabbitmq
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+echo -en "\e[33mDigite o dominio para o RabbitMQ: \e[0m" && read -r url_rabbitmq
+echo ""
+
+echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+echo -en "\e[33mDigite o nome de usuario: \e[0m" && read -r user_rabbitmq
+echo ""
+
+echo -e "\e[97mPasso$amarelo 3/3\e[0m"
+echo -en "\e[33mDigite a senha do usuario: \e[0m" && read -r pass_rabbitmq
+echo ""
+
+clear
+nome_rabbitmq
+conferindo_as_info
+
+echo -e "\e[33mDominio do RabbitMQ:\e[97m $url_rabbitmq\e[0m"
+echo ""
+
+echo -e "\e[33mUsario:\e[97m $user_rabbitmq\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $pass_rabbitmq\e[0m"
+echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    nome_rabbitmq
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO INSTALAÇÃO \e[33m[1/3]\e[0m"
+echo ""
+sleep 3
+
+echo -e "\e[97m• INSTALANDO RABBITMQ \e[33m[2/3]\e[0m"
+echo ""
+
+cat > rabbitmq.yaml <<EOL
+version: '3.7'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=$user_rabbitmq
+      - RABBITMQ_DEFAULT_PASS=$pass_rabbitmq
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2048M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.rabbitmq.rule=Host(\`$url_rabbitmq\`)
+        - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
+        - traefik.http.routers.rabbitmq.service=rabbitmq
+        - traefik.http.routers.rabbitmq.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.rabbitmq.entrypoints=websecure
+        - traefik.http.routers.rabbitmq.tls=true
+    networks:
+      - $nome_rede_interna
+
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
+
+volumes:
+  rabbitmq:
+    external: true
+    name: rabbitmq
+EOL
+
+docker stack deploy --prune --resolve-image always -c rabbitmq.yaml rabbitmq #> /dev/null 2>&1
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+sleep 1
+while true; do
+    # Verifica se o serviço rabbitmq está ativo
+    if docker service ls --filter "name=rabbitmq" | grep "1/1"; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+#######################################################################
+
+#INSTALAÇÃO FINALIZADA
+instalado_msg
+guarde_os_dados_msg
+
+echo -e "\e[32m[RabbitMQ]\e[0m"
+echo ""
+echo -e "\e[33mDominio:\e[97m https://$url_rabbitmq\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario:\e[97m $user_rabbitmq\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $pass_rabbitmq\e[0m"
+echo ""
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi   
+}
+
+ferramenta_uptimekuma() {
+clear
+dados
+nome_uptimekuma
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+echo -en "\e[33mDigite o dominio para o Uptime Kuma: \e[0m" && read -r url_uptimekuma
+echo ""
+
+clear
+nome_uptimekuma
+conferindo_as_info
+
+echo -e "\e[33mDominio do RabbitMQ:\e[97m $url_uptimekuma\e[0m"
+echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    nome_uptimekuma
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO INSTALAÇÃO \e[33m[1/3]\e[0m"
+echo ""
+sleep 3
+
+echo -e "\e[97m• INSTALANDO UPTIME KUMA \e[33m[2/3]\e[0m"
+echo ""
+
+cat > uptimekuma.yaml <<EOL
+version: "3.7"
+
+services:
+  uptimekuma:
+    image: louislam/uptime-kuma:latest
+    #container_name: uptimekuma
+    volumes:
+      - uptimekuma:/app/data
+    ports:
+      - "3001:3001"
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.uptimekuma.rule=Host(\`$url_uptimekuma\`)
+        - traefik.http.routers.uptimekuma.entrypoints=websecure
+        - traefik.http.routers.uptimekuma.tls.certresolver=letsencryptresolver
+        - traefik.http.services.uptimekuma.loadBalancer.server.port=3001
+        - traefik.http.routers.uptimekuma.service=uptimekuma
+    networks:
+      - $nome_rede_interna
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+
+volumes:
+  uptimekuma:
+    external: true
+    name: uptimekuma
+
+EOL
+
+docker stack deploy --prune --resolve-image always -c uptimekuma.yaml uptimekuma #> /dev/null 2>&1
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+sleep 1
+while true; do
+    # Verifica se o serviço uptimekuma está ativo
+    if docker service ls --filter "name=uptimekuma" | grep "1/1"; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+#######################################################################
+
+#INSTALAÇÃO FINALIZADA
+instalado_msg
+guarde_os_dados_msg
+
+echo -e "\e[32m[Uptime Kuma]\e[0m"
+echo ""
+echo -e "\e[33mDominio:\e[97m https://$url_uptimekuma\e[0m"
+echo ""
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi   
+}
+
+
+
+
+ferramenta_testeemail() {
+clear
+dados
+nome_testeemail
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/4\e[0m"
+echo -en "\e[33mDigite o Email: \e[0m" && read -r email_teste
+echo ""
+
+echo -e "\e[97mPasso$amarelo 2/4\e[0m"
+echo -en "\e[33mDigite a Senha do email: \e[0m" && read -r senha_teste
+echo ""
+
+echo -e "\e[97mPasso$amarelo 3/4\e[0m"
+echo -en "\e[33mDigite o Host Smtp: \e[0m" && read -r host_teste
+echo ""
+
+echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+echo -en "\e[33mDigite a Porta Smtp: \e[0m" && read -r porta_teste
+echo ""
+
+clear
+nome_testeemail
+conferindo_as_info
+
+echo -e "\e[33mEmail:\e[97m $email_teste\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $senha_teste\e[0m"
+echo ""
+
+echo -e "\e[33mHost:\e[97m $host_teste\e[0m"
+echo ""
+
+echo -e "\e[33mPorta:\e[97m $porta_teste\e[0m"
+echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    nome_testando
+    break
+else
+    clear
+    nome_testeemail
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO VERIFICAÇÃO \e[33m[1/3]\e[0m"
+echo ""
+
+sudo apt-get update > /dev/null 2>&1
+sudo apt-get install swaks -y > /dev/null 2>&1
+
+msg="Se você está lendo isso, o seu SMTP está funcionando =D.
+By: OrionDesign"
+
+if swaks --to "$email_teste" --from "$email_teste" --server "$host_teste" --port "$porta_teste" --auth LOGIN --auth-user "$email_teste" --auth-password "$senha_teste" --tls --body "$msg"; then
+    sleep 2
+    clear
+    nome_testeemail
+    echo -e "\e[32m[Resultado do Teste SMTP]\e[0m"
+    echo ""
+    echo -e "\e[33mOs dados informados\e[92m estão funcionando corretamente\e[33m.\e[0m"
+else
+    sleep 2
+    clear
+    nome_testeemail
+    echo -e "\e[32m[Resultado do Teste SMTP]\e[0m"
+    echo ""
+    echo -e "\e[33mOs dados informados\e[91m NÃO estão funcionando corretamente.\e[33m Por favor, verifique os dados e tente novamente.\e[0m"
+fi
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi   
+}
+
+
+
+
 #########################
 #MENU
 
@@ -2796,6 +3981,10 @@ while true; do
     read -p "Digite o NÚMERO da opção desejada: " opcao
 
     case $opcao in
+
+        0)
+            ferramenta_testeemail
+            ;;
         1)
             ferramenta_traefik_e_portainer
             ;;
@@ -2827,25 +4016,31 @@ while true; do
             ferramenta_botpress
             ;;
         11)
-            
+            ferramenta_wordpress
             ;;
         12)
-            
+            ferramenta_baserow
             ;;
         13)
-            
+            ferramenta_mongodb
             ;;
         14)
-            
+            ferramenta_rabbitmq
             ;;
         15)
-            ferramenta_remover_stack
+            ferramenta_uptimekuma
             ;;
         16)
+            ferramenta_trocar_logos
+            ;;
+        17)
+            ferramenta_remover_stack
+            ;;
+        18)
             echo "Saindo..."
             break
             ;;
-
+        
         *)
 
             ;;
