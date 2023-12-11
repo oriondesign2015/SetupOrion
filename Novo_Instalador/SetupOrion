@@ -636,7 +636,9 @@ sleep 3
 #SALVANDO DADOS NA VPS
 cd
 cd
-mkdir dados_vps
+if [ ! -d "dados_vps" ]; then
+    mkdir dados_vps
+fi
 cd dados_vps
 cat > dados_vps << EOL
 [DADOS DA VPS]
@@ -707,9 +709,17 @@ docker swarm init --advertise-addr $ip > /dev/null
 echo -e "\e[97m• CRIANDO REDE INTERNA \e[33m[4/6]\e[0m"
 echo ""
 
-
 #CRIANDO REDE INTERNA
-docker network create --driver=overlay $nome_rede_interna > /dev/null
+# Verificando se Docker Swarm está ativo
+if ! docker info | grep -i 'swarm: active' -q; then
+    # Inicializando Docker Swarm
+    # Assegurando que $ip está corretamente definido ou omitido --advertise-addr se não for preciso
+    docker swarm init --advertise-addr $ip > /dev/null
+    if [ $? -ne 0 ]; then
+        echo "Falha ao inicializar Docker Swarm"
+        exit 1
+    fi
+fi
 
 #MENSAGEM DE INSTALANDO TRAEFIK (PASSOS)
 echo -e "\e[97m• INSTALANDO TRAEFIK \e[33m[5/6]\e[0m"
@@ -3021,7 +3031,9 @@ sudo apt update
 
 cd /var/lib/docker/volumes/chatwoot_public_orion/_data/
 
-mkdir origem
+if [ ! -d "origem" ]; then
+    mkdir origem
+fi
 
 cd
 
