@@ -1,0 +1,116 @@
+version: '3.7'
+
+services:
+  woofedcrm:
+    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    networks:
+      - NOME_DA_REDE ## ---> Defina o nome da rede interna  <--- ##
+    volumes:
+      - woofedcrm_data:/app
+    environment:
+      - ENABLE_USER_SIGNUP=true
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - NODE_ENV=production
+      - MOTOR_AUTH_USERNAME=USUARIO ## ---> Usuario para o motor <--- ##
+      - MOTOR_AUTH_PASSWORD=SENHA ## ---> Senha para o motor <--- ##
+      - FRONTEND_URL=https://URL_DO_WOOFED ## ---> Url para o WoofedCRM <--- ##
+      - DATABASE_URL=postgres://postgres:SENHA_POSTGRES@postgres:5432/woofedcrm ## ---> Dados do postgres <--- ##
+      - REDIS_URL=redis://redis:6379/0
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_LEVEL=debug
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.woofedcrm.rule=Host(`URL_DO_WOOFED`) ## ---> Url para o WoofedCRM <--- ##
+        - traefik.http.routers.woofedcrm.entrypoints=websecure
+        - traefik.http.routers.woofedcrm.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.woofedcrm.priority=1
+        - traefik.http.routers.woofedcrm.service=woofedcrm
+        - traefik.http.services.woofedcrm.loadbalancer.server.port=3000 
+        - traefik.http.services.woofedcrm.loadbalancer.passhostheader=true 
+        - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
+        - traefik.http.routers.woofedcrm.middlewares=sslheader@docker
+
+  sidekiq:
+    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    networks:
+      - NOME_DA_REDE ## ---> Defina o nome da rede interna  <--- ##
+    volumes:
+      - woofedcrm_data:/app
+    environment:
+      - ENABLE_USER_SIGNUP=true
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - NODE_ENV=production
+      - MOTOR_AUTH_USERNAME=USUARIO ## ---> Usuario para o motor <--- ##
+      - MOTOR_AUTH_PASSWORD=SENHA ## ---> Senha para o motor <--- ##
+      - FRONTEND_URL=https://URL_DO_WOOFED ## ---> Url para o WoofedCRM <--- ##
+      - DATABASE_URL=postgres://postgres:SENHA_POSTGRES@postgres:5432/woofedcrm ## ---> Dados do postgres <--- ##
+      - REDIS_URL=redis://redis:6379/0
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_LEVEL=debugwoofedcrm
+      - REDIS_URL=redis://redis:6379/0
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_LEVEL=debug
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+    
+  good_job:
+    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
+    command: bundle exec good_job
+    networks:
+      - NOME_DA_REDE ## ---> Defina o nome da rede interna  <--- ##
+    volumes:
+      - woofedcrm_data:/app
+    environment:
+      - ENABLE_USER_SIGNUP=true
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - NODE_ENV=production
+      - MOTOR_AUTH_USERNAME=USUARIO ## ---> Usuario para o motor <--- ##
+      - MOTOR_AUTH_PASSWORD=SENHA ## ---> Senha para o motor <--- ##
+      - FRONTEND_URL=https://URL_DO_WOOFED ## ---> Url para o WoofedCRM <--- ##
+      - DATABASE_URL=postgres://postgres:SENHA_POSTGRES@postgres:5432/woofedcrm ## ---> Dados do postgres <--- ##
+      - REDIS_URL=redis://redis:6379/0
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_LEVEL=debug
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+volumes:
+  woofedcrm_data:
+    external: true
+    name: woofedcrm_data
+
+networks:
+  NOME_DA_REDE: ## ---> Defina o nome da rede interna  <--- ##
+    external: true
+    name: NOME_DA_REDE ## ---> Defina o nome da rede interna  <--- ##
