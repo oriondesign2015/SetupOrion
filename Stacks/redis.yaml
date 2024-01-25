@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:latest
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+    volumes:
+      - redis_data:/data
+    networks:
+      - NOME_DA_REDE_INTERNA ## ---> NOME DA REDE INTERNA <--- ##
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
+
+volumes:
+  redis_data:
+    external: true
+    name: redis_data
+
+networks:
+  NOME_DA_REDE_INTERNA: ## ---> NOME DA REDE INTERNA <--- ##
+    external: true
+    name: NOME_DA_REDE_INTERNA ## ---> NOME DA REDE INTERNA <--- ##
