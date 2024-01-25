@@ -1,12 +1,14 @@
-version: '3.7'
+version: "3.7"
 
 services:
   postgres:
     image: postgres:14
     environment:
-      - POSTGRES_PASSWORD=SENHA ## ---> SENHA DO POSTGRES <--- ##
+      - POSTGRES_PASSWORD=SENHA_POSTGRES ## ---> SENHA POSTGRES <--- ##
     networks:
-      - NOME_DA_REDE ## ---> NOME DA REDE INTERNA  <--- ##
+      - NOME_DA_REDE_INTERNA ## ---> REDE INTERNA <--- ##
+    #ports: ## ---> DESCOMENTAR CASO DESEJE ACESSAR O POSTGRES EXTERNAMENTE <--- ##
+    #  - 5432:5432 ## ---> DESCOMENTAR CASO DESEJE ACESSAR O POSTGRES EXTERNAMENTE <--- ##
     volumes:
       - postgres_data:/var/lib/postgresql/data
     deploy:
@@ -20,37 +22,12 @@ services:
           cpus: "0.5"
           memory: 1024M
 
-  redis:
-    image: redis:latest
-    command: [
-        "redis-server",
-        "--appendonly",
-        "yes",
-        "--port",
-        "6379"
-      ]
-    volumes:
-      - redis_data:/data
-    networks:
-      - $nome_rede_interna
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 1024M
-
 volumes:
   postgres_data:
     external: true
     name: postgres_data
-  redis_data:
-    external: true
-    name: redis_data
 
 networks:
-  NOME_DA_REDE: ## ---> NOME DA REDE INTERNA  <--- ##
+  NOME_DA_REDE_INTERNA: ## ---> SENHA POSTGRES <--- ##
     external: true
-    name: NOME_DA_REDE ## ---> NOME DA REDE INTERNA  <--- ##
+    name: NOME_DA_REDE_INTERNA ## ---> SENHA POSTGRES <--- ##
