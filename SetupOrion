@@ -535,6 +535,18 @@ nome_appsmith(){
     echo ""
     echo ""
 }
+nome_woofedcrm(){
+    clear
+    echo ""
+    echo -e "$branco        ██╗    ██╗ ██████╗  ██████╗ ███████╗███████╗██████╗      ██████╗██████╗ ███╗   ███╗\e[0m"
+    echo -e "$branco        ██║    ██║██╔═══██╗██╔═══██╗██╔════╝██╔════╝██╔══██╗    ██╔════╝██╔══██╗████╗ ████║\e[0m"
+    echo -e "$branco        ██║ █╗ ██║██║   ██║██║   ██║█████╗  █████╗  ██║  ██║    ██║     ██████╔╝██╔████╔██║\e[0m"
+    echo -e "$branco        ██║███╗██║██║   ██║██║   ██║██╔══╝  ██╔══╝  ██║  ██║    ██║     ██╔══██╗██║╚██╔╝██║\e[0m"
+    echo -e "$branco        ╚███╔███╔╝╚██████╔╝╚██████╔╝██║     ███████╗██████╔╝    ╚██████╗██║  ██║██║ ╚═╝ ██║\e[0m"
+    echo -e "$branco         ╚══╝╚══╝  ╚═════╝  ╚═════╝ ╚═╝     ╚══════╝╚═════╝      ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝\e[0m"
+    echo ""
+    echo ""
+}
 
 verificar_container_postgres() {
     if docker ps -q --filter "name=postgres" | grep -q .; then
@@ -640,12 +652,13 @@ menu_instalador(){
     echo -e "${amarelo}[14]${reset} - ${branco}RabbitMQ${reset}"
     echo -e "${amarelo}[15]${reset} - ${branco}Uptime Kuma${reset}"
     echo -e "${amarelo}[16]${reset} - ${branco}Cal.com ${verde}[novo]${reset}"
-    echo -e "${amarelo}[17]${reset} - ${branco}Mautic ${verde}[novo]${reset}"
+    echo -e "${amarelo}[17]${reset} - ${branco}Mautic ${verde}[novo] ${amarelo}[EM TESTES]${reset}"
     echo -e "${amarelo}[18]${reset} - ${branco}Appsmith ${verde}[novo]${reset}"
     echo -e "${amarelo}[19]${reset} - ${branco}Qdrant ${verde}[novo]${reset}"
-    echo -e "${amarelo}[20]${reset} - ${branco}Trocar Logos Chatwoot${reset}"
-    echo -e "${amarelo}[21]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[22]${reset} - ${branco}Sair do instalador${reset}"
+    echo -e "${amarelo}[20]${reset} - ${branco}Woofed CRM ${verde}[novo] ${amarelo}[EM TESTES]${reset}"
+    echo -e "${amarelo}[21]${reset} - ${branco}Trocar Logos Chatwoot${reset}"
+    echo -e "${amarelo}[22]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[23]${reset} - ${branco}Sair do instalador${reset}"
     echo ""
 }
 
@@ -1128,6 +1141,17 @@ criar_banco_postgres_calcom() {
         fi
     done
 }
+criar_banco_postgres_woofedcrm() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
+            break
+        else
+            sleep 5
+        fi
+    done
+}
 
 ferramenta_redis() {
 #PEGANDO DADOS DA VPS
@@ -1496,6 +1520,7 @@ services:
     networks:
       - $nome_rede_interna
     environment:
+      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup
       - INSTALLATION_NAME=$nome_empresa_chatwoot
       - NODE_ENV=production
       - RAILS_ENV=production
@@ -1555,6 +1580,7 @@ services:
     networks:
       - $nome_rede_interna
     environment:
+      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup
       - INSTALLATION_NAME=$nome_empresa_chatwoot
       - NODE_ENV=production
       - RAILS_ENV=production
@@ -4829,8 +4855,308 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
 
 }
 
+ferramenta_woofed() {
+
+    clear
+    nome_woofedcrm
+    preencha_as_info
+    dados
+    
+    while true; do
+
+    echo -e "\e[97mPasso$amarelo 1/4\e[0m"
+    echo -en "\e[33mDigite o Dominio para o WoofedCRM (ex: crm.oriondesign.art.br): \e[0m" && read -r url_woofed
+    echo ""
+
+    echo -e "\e[97mPasso$amarelo 2/4\e[0m"
+    echo -e "\e[97mEncontre a versão em:$amarelo https://hub.docker.com/r/douglara/woofedcrm/tags\e[0m"
+    echo -en "\e[33mDigite a versão desejada: \e[0m" && read -r v_woofed
+    echo ""
+
+    echo -e "\e[97mPasso$amarelo 3/4\e[0m"
+    echo -en "\e[33mDigite o User do MOTOR (ex: oriondesign): \e[0m" && read -r email_admin_woofed
+    echo ""
+
+    echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+    echo -en "\e[33mDigite a Senha do MOTOR (ex: @Senha123_): \e[0m" && read -r senha_email_woofed
+    echo ""
+    
+    clear
+    nome_woofedcrm
+    conferindo_as_info
+
+    echo -e "\e[33mDominio:\e[97m $url_woofed\e[0m"
+    echo ""
+    echo -e "\e[33mVersão:\e[97m $v_woofed\e[0m"
+    echo ""
+    echo -e "\e[33mUser MOTOR:\e[97m $email_admin_woofed\e[0m"
+    echo ""
+    echo -e "\e[33mSenha MOTOR:\e[97m $senha_email_woofed\e[0m"
+    echo ""
+
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+        clear
+        instalando_msg
+        break
+    else
+        clear
+        nome_woofedcrm
+        preencha_as_info
+    fi
+    done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO INSTALAÇÃO \e[33m[1/6]\e[0m"
+echo ""
+sleep 2
+
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/6]\e[0m"
+echo ""
+
+    dados
+    verificar_container_postgres
+    if [ $? -eq 0 ]; then
+        echo ""
+        pegar_senha_postgres #> /dev/null 2>&1
+        criar_banco_postgres_woofedcrm #> /dev/null 2>&1
+    else
+        ferramenta_postgres #> /dev/null 2>&1
+        pegar_senha_postgres #> /dev/null 2>&1
+        criar_banco_postgres_woofedcrm #> /dev/null 2>&1
+    fi
+
+sleep 5
+
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/6]\e[0m"
+echo ""
+
+    verificar_container_redis
+    if [ $? -eq 0 ]; then
+        echo ""
+    else
+        ferramenta_redis #> /dev/null 2>&1
+    fi
+
+#MENSAGEM DE INSTALANDO CHATWOOT (PASSOS)
+echo -e "\e[97m• INSTALANDO WOOFED CRM \e[33m[4/6]\e[0m"
+echo ""
+
+encryption_key_woofed=$(openssl rand -hex 16)
+
+cat > woofedcrm.yaml <<EOL
+version: '3.7'
+
+services:
+  woofedcrm_orion:
+    image: douglara/woofedcrm:$v_woofed
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    networks:
+      - $nome_rede_interna
+    volumes:
+      - woofedcrm_data:/app
+    environment:
+      - ENABLE_USER_SIGNUP=true
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - NODE_ENV=production
+      - MOTOR_AUTH_USERNAME=$email_admin_woofed
+      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
+      - FRONTEND_URL=https://$url_woofed
+      - SECRET_KEY_BASE=$encryption_key_woofed
+      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
+      - REDIS_URL=redis://redis:6379/0
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_LEVEL=debug
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.woofedcrm.rule=Host(\`$url_woofed\`)
+        - traefik.http.routers.woofedcrm.entrypoints=websecure
+        - traefik.http.routers.woofedcrm.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.woofedcrm.priority=1
+        - traefik.http.routers.woofedcrm.service=woofedcrm
+        - traefik.http.services.woofedcrm.loadbalancer.server.port=3000 
+        - traefik.http.services.woofedcrm.loadbalancer.passhostheader=true 
+        - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
+        - traefik.http.routers.woofedcrm.middlewares=sslheader@docker
+
+  sidekiq_orion:
+    image: douglara/woofedcrm:$v_woofed
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    networks:
+      - $nome_rede_interna
+    volumes:
+      - woofedcrm_data:/app
+    environment:
+      - ENABLE_USER_SIGNUP=true
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - NODE_ENV=production
+      - MOTOR_AUTH_USERNAME=$email_admin_woofed
+      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
+      - FRONTEND_URL=https://$url_woofed
+      - SECRET_KEY_BASE=$encryption_key_woofed
+      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
+      - REDIS_URL=redis://redis:6379/0
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_LEVEL=debug
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+    
+  good_job_orion:
+    image: douglara/woofedcrm:$v_woofed
+    command: bundle exec good_job
+    networks:
+      - $nome_rede_interna
+    volumes:
+      - woofedcrm_data:/app
+    environment:
+      - ENABLE_USER_SIGNUP=true
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - NODE_ENV=production
+      - MOTOR_AUTH_USERNAME=$email_admin_woofed
+      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
+      - FRONTEND_URL=https://$url_woofed
+      - SECRET_KEY_BASE=$encryption_key_woofed
+      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
+      - REDIS_URL=redis://redis:6379/0
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_LEVEL=debug
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+volumes:
+  woofedcrm_data:
+    external: true
+    name: woofedcrm_data
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+
+#SUBINDO STACK DO WOOFED
+docker stack deploy --prune --resolve-image always -c woofedcrm.yaml woofedcrm #> /dev/null 2>&1
+
+sleep 30
+#MENSAGEM DE MIGRANDO BANCO DE DADOS (PASSOS)
+echo -e "\e[97m• CONFIGURANDO E MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
+echo ""
+
+#MIGRANDO BANCO DE DADOS DO WOOFED CRM
+container_name="  woofedcrm_woofedcrm"
+
+max_wait_time=1200
+
+wait_interval=60
+
+elapsed_time=0
+
+while [ $elapsed_time -lt $max_wait_time ]; do
+  CONTAINER_ID=$(docker ps -q --filter "name=$container_name")
+  if [ -n "$CONTAINER_ID" ]; then
+    break
+  fi
+  sleep $wait_interval
+  elapsed_time=$((elapsed_time + wait_interval))
+done
+
+if [ -z "$CONTAINER_ID" ]; then
+  echo "O contêiner não foi encontrado após $max_wait_time segundos."
+  exit 1
+fi
+
+docker exec -it "$CONTAINER_ID" bundle exec rails db:create
+docker exec -it "$CONTAINER_ID" bundle exec rails db:migrate
+#docker exec -it "$CONTAINER_ID" bundle exec rails db:seed
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[6/6]\e[0m"
+sleep 1
+while true; do
+    # Verifica se o serviço woofedcrm está ativo
+    if docker service ls --filter "name=woofedcrm_woofedcrm" | grep "1/1"; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+#######################################################################
+
+#INSTALAÇÃO FINALIZADA
+instalado_msg
+guarde_os_dados_msg
+
+echo -e "\e[32m[WOOFED CRM]\e[0m"
+echo ""
+echo -e "\e[97mDominio:\e[33m https://$url_woofed\e[0m"
+echo ""
+echo -e "\e[97mURL MOTOR:\e[33m https://$url_woofed/motor_admin\e[0m"
+echo ""
+echo -e "\e[97mUser MOTOR:\e[33m $email_admin_woofed\e[0m"
+echo ""
+echo -e "\e[97mSenha MOTOR:\e[33m $senha_email_woofed\e[0m"
+echo ""
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+
+}
+
 #########################
 
+burlar_chatwoot(){
+    while :; do
+    if docker ps -q --filter "name=postgres" | grep -q .; then
+        CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+        docker exec -i "$CONTAINER_ID" psql -U postgres -d chatwoot -c \
+        "UPDATE public.installation_configs SET serialized_value = '\"--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nvalue: enterprise\n\"' WHERE name = 'INSTALLATION_PRICING_PLAN'; \
+        UPDATE public.installation_configs SET serialized_value = '\"--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nvalue: 200\n\"' WHERE name = 'INSTALLATION_PRICING_PLAN_QUANTITY';"
+        break
+    else
+        sleep 5
+    fi
+done
+}
 verificar_docker_e_portainer_traefik() {
     # Verificar se o Docker está instalado
     if ! command -v docker &> /dev/null; then
@@ -5001,17 +5327,25 @@ while true; do
             ;;
         20)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_trocar_logos
+            ferramenta_woofed
             fi
             ;;
         21)
-            ferramenta_remover_stack
+            if verificar_docker_e_portainer_traefik; then
+            ferramenta_trocar_logos
+            fi
             ;;
         22)
+            ferramenta_remover_stack
+            ;;
+        23)
             echo "Saindo..."
             break
             ;;
-        
+        nulled)
+            burlar_chatwoot
+            ;;
+
         *)
 
             ;;
