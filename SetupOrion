@@ -1,7 +1,7 @@
 #!/bin/bash
 
 versao() {
-echo -e "\e[97mComunidade no Discord: \e[33mhttps://discord.gg/ZvtmFtMt82                                 \e[97mVersão \e[32mv.2.2.0\e[0m"
+echo -e "\e[97mComunidade no Discord: \e[33mhttps://chat.whatsapp.com/LvqP8e7lNPn9Y3QMbbnhfB                    \e[97mVersão \e[32mv.2.2.6\e[0m"
 }
 
 
@@ -175,8 +175,8 @@ creditos_msg() {
     echo -e "$amarelo=          $branco         Se precisar de ajuda/mentoria ou quiser deixar seu feedback                   $amarelo=\e[0m"
     echo -e "$amarelo=          $branco               Nossa comunidade:$amarelo https://discord.gg/ZvtmFtMt82                         $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco                               ou via WhatsApp                                         $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco              https://api.whatsapp.com/send?phone=5511973052593                        $amarelo=\e[0m"
+    echo -e "$amarelo=          $branco                    ou via WhatsApp (comunidade SetupOrion)                            $amarelo=\e[0m"
+    echo -e "$amarelo=          $amarelo               https://chat.whatsapp.com/LvqP8e7lNPn9Y3QMbbnhfB                        $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
@@ -547,7 +547,18 @@ nome_woofedcrm(){
     echo ""
     echo ""
 }
-
+nome_formbricks(){
+    clear
+    echo ""
+    echo -e "$branco          ███████╗ ██████╗ ██████╗ ███╗   ███╗██████╗ ██████╗ ██╗ ██████╗██╗  ██╗███████╗\e[0m"
+    echo -e "$branco          ██╔════╝██╔═══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║ ██╔╝██╔════╝\e[0m"
+    echo -e "$branco          █████╗  ██║   ██║██████╔╝██╔████╔██║██████╔╝██████╔╝██║██║     █████╔╝ ███████╗\e[0m"
+    echo -e "$branco          ██╔══╝  ██║   ██║██╔══██╗██║╚██╔╝██║██╔══██╗██╔══██╗██║██║     ██╔═██╗ ╚════██║\e[0m"
+    echo -e "$branco          ██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║██████╔╝██║  ██║██║╚██████╗██║  ██╗███████║\e[0m"
+    echo -e "$branco          ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝\e[0m"
+    echo ""
+    echo ""
+}                                                                              
 verificar_container_postgres() {
     if docker ps -q --filter "name=postgres" | grep -q .; then
         return 0
@@ -557,6 +568,8 @@ verificar_container_postgres() {
 }
 
 verificar_container_mysql() {
+
+
     if docker ps -q --filter "name=mysql" | grep -q .; then
         return 0
     else
@@ -565,13 +578,29 @@ verificar_container_mysql() {
 }
 
 pegar_senha_postgres() {
-    senha_postgres=$(grep "POSTGRES_PASSWORD" /root/postgres.yaml | awk -F '=' '{print $2}')
+    while :; do
+        if [ -f /root/postgres.yaml ]; then
+            senha_postgres=$(grep "POSTGRES_PASSWORD" /root/postgres.yaml | awk -F '=' '{print $2}')
+            break
+        else
+            sleep 5
+        fi
+    done
 }
 
 pegar_senha_mysql() {
-    senha_mysql_wordpress=$(grep "MYSQL_ROOT_PASSWORD" /root/mysql.yaml | awk -F '=' '{print $2}')
-    senha_mysql=$(grep "MYSQL_ROOT_PASSWORD" /root/mysql.yaml | awk -F '=' '{print $2}')
+    while :; do
+        if [ -f /root/mysql.yaml ]; then
+            senha_mysql_wordpress=$(grep "MYSQL_ROOT_PASSWORD" /root/mysql.yaml | awk -F '=' '{print $2}')
+
+            senha_mysql=$(grep "MYSQL_ROOT_PASSWORD" /root/mysql.yaml | awk -F '=' '{print $2}')
+            break
+        else
+            sleep 5
+        fi
+    done
 }
+
 
 verificar_container_redis() {
     if docker ps -q --filter "name=redis" | grep -q .; then
@@ -651,14 +680,15 @@ menu_instalador(){
     echo -e "${amarelo}[13]${reset} - ${branco}MongoDB${reset}"
     echo -e "${amarelo}[14]${reset} - ${branco}RabbitMQ${reset}"
     echo -e "${amarelo}[15]${reset} - ${branco}Uptime Kuma${reset}"
-    echo -e "${amarelo}[16]${reset} - ${branco}Cal.com ${verde}[novo]${reset}"
-    echo -e "${amarelo}[17]${reset} - ${branco}Mautic ${verde}[novo] ${amarelo}[EM TESTES]${reset}"
-    echo -e "${amarelo}[18]${reset} - ${branco}Appsmith ${verde}[novo]${reset}"
-    echo -e "${amarelo}[19]${reset} - ${branco}Qdrant ${verde}[novo]${reset}"
-    echo -e "${amarelo}[20]${reset} - ${branco}Woofed CRM ${verde}[novo] ${amarelo}[EM TESTES]${reset}"
-    echo -e "${amarelo}[21]${reset} - ${branco}Trocar Logos Chatwoot${reset}"
-    echo -e "${amarelo}[22]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[23]${reset} - ${branco}Sair do instalador${reset}"
+    echo -e "${amarelo}[16]${reset} - ${branco}Cal.com${reset}"
+    echo -e "${amarelo}[17]${reset} - ${branco}Mautic${reset}"
+    echo -e "${amarelo}[18]${reset} - ${branco}Appsmith${reset}"
+    echo -e "${amarelo}[19]${reset} - ${branco}Qdrant${reset}"
+    echo -e "${amarelo}[20]${reset} - ${branco}Woofed CRM${reset}"
+    echo -e "${amarelo}[21]${reset} - ${branco}Formbricks ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[22]${reset} - ${branco}Trocar Logos Chatwoot ${vermelho}[DEFASADO]${reset}"
+    echo -e "${amarelo}[23]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[24]${reset} - ${branco}Sair do instalador${reset}"
     echo ""
 }
 
@@ -1047,95 +1077,324 @@ sleep 10
 }
 
 criar_banco_postgres_chatwoot() {
-    
     while :; do
         if docker ps -q --filter "name=postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot;"
-            break
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados chatwoot já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS chatwoot;"
+                    echo "Banco de dados chatwoot apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot;"
+                    
+                    echo "Banco de dados chatwoot criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados chatwoot criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
         else
             sleep 5
         fi
     done
 }
 
-criar_banco_postgres_n8n() {
-    
+criar_banco_postgres_n8n_queue() {
     while :; do
         if docker ps -q --filter "name=postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_queue;"
-            sleep 2
-            break
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_queue"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados n8n_queue já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS n8n_queue;"
+                    echo "Banco de dados n8n_queue apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_queue;"
+                    
+                    echo "Banco de dados n8n_queue criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_queue;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_queue"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados n8n_queue criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
         else
             sleep 5
         fi
     done
 }
+
 
 criar_banco_postgres_typebot() {
-    
     while :; do
         if docker ps -q --filter "name=postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE typebot;"
-            break
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "typebot"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados typebot já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS typebot;"
+                    echo "Banco de dados typebot apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE typebot;"
+                    
+                    echo "Banco de dados typebot criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE typebot;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "typebot"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados typebot criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
         else
             sleep 5
         fi
     done
 }
+
 
 criar_banco_postgres_flowise() {
-    
     while :; do
         if docker ps -q --filter "name=postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE flowise;"
-            break
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "flowise"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados flowise já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS flowise;"
+                    echo "Banco de dados flowise apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE flowise;"
+                    
+                    echo "Banco de dados flowise criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE flowise;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "flowise"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados flowise criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
         else
             sleep 5
         fi
     done
 }
 
+
 criar_banco_postgres_nocobase() {
-
     while :; do
-    if docker ps -q --filter "name=postgres" | grep -q .; then
-        CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
 
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocobase"
 
-        docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nocobase;"
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados nocobase já existe."
 
-        docker exec -it "$CONTAINER_ID" psql -U postgres -d nocobase -c "GRANT ALL PRIVILEGES ON DATABASE nocobase TO postgres;"
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS nocobase;"
+                    echo "Banco de dados nocobase apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nocobase;"
+                    
+                    # Conceder privilégios ao usuário postgres
+                    docker exec "$CONTAINER_ID" psql -U postgres -d nocobase -c "GRANT ALL PRIVILEGES ON DATABASE nocobase TO postgres;"
+                    
+                    echo "Banco de dados nocobase criado com sucesso e permissões concedidas."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nocobase;"
+                
+                # Conceder privilégios ao usuário postgres
+                docker exec "$CONTAINER_ID" psql -U postgres -d nocobase -c "GRANT ALL PRIVILEGES ON DATABASE nocobase TO postgres;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocobase"
 
-        break
-    else
-        sleep 5
-    fi
-done
-
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados nocobase criado com sucesso e permissões concedidas."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
 }
 
 criar_banco_postgres_botpress() {
     while :; do
         if docker ps -q --filter "name=postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE botpress;"
-            break
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "botpress"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados botpress já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS botpress;"
+                    echo "Banco de dados botpress apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE botpress;"
+                    
+                    echo "Banco de dados botpress criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE botpress;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "botpress"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados botpress criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
         else
             sleep 5
         fi
     done
 }
 
+
 criar_banco_postgres_calcom() {
     while :; do
         if docker ps -q --filter "name=postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE calcom;"
-            break
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "calcom"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados calcom já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS calcom;"
+                    echo "Banco de dados calcom apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE calcom;"
+                    
+                    echo "Banco de dados calcom criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE calcom;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "calcom"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados calcom criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
         else
             sleep 5
         fi
@@ -1145,8 +1404,86 @@ criar_banco_postgres_woofedcrm() {
     while :; do
         if docker ps -q --filter "name=postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-            docker exec -it "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
-            break
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados woofedcrm já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS woofedcrm;"
+                    echo "Banco de dados woofedcrm apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
+                    
+                    echo "Banco de dados woofedcrm criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados woofedcrm criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
+criar_banco_postgres_formbricks() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "formbricks"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados formbricks já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS formbricks;"
+                    echo "Banco de dados formbricks apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE formbricks;"
+                    
+                    echo "Banco de dados formbricks criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE formbricks;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "formbricks"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados formbricks criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
         else
             sleep 5
         fi
@@ -1268,7 +1605,7 @@ version: "3.7"
 
 services:
   minio:
-    image: quay.io/minio/minio
+    image: quay.io/minio/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1
     command: server /data --console-address ":9001"
     networks:
       - $nome_rede_interna
@@ -1363,7 +1700,8 @@ version: "3.7"
 
 services:
   mysql:
-    image: mysql:latest
+    #image: mysql:latest
+    image: percona/percona-server:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=$senha_mysql_wordpress
       - TZ=America/Sao_Paulo
@@ -1401,8 +1739,48 @@ EOL
 
 docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
 
+  #VERIFICANDO SERVIÇO MENSAGEM
+  echo -e "\e[97m• VERIFICANDO SERVIÇO MYSQL\e[0m"
+  echo ""
+  while true; do
+      # Verifica se o serviço mysql está ativo
+      if docker service ls --filter "name=mysql" | grep "1/1"; then
+          sleep 2
+          break
+      fi
+      sleep 5
+  done
+
 sleep 15
 }
+
+criar_banco_mysql_mautic() {
+    dados
+    pegar_senha_mysql
+    while :; do
+        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+            if docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
+                echo "O banco de dados mautic já existe."
+
+                resposta="N"
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE IF EXISTS mautic;"
+                    echo "Banco de dados mautic apagado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                    break
+                fi
+            else
+                docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
+                echo "Banco de dados mautic criado com sucesso."
+                break
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
 
 ferramenta_chatwoot() {
 
@@ -1486,11 +1864,11 @@ echo ""
     if [ $? -eq 0 ]; then
         echo ""
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_chatwoot > /dev/null 2>&1
+        criar_banco_postgres_chatwoot #> /dev/null 2>&1
     else
         ferramenta_postgres > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_chatwoot > /dev/null 2>&1
+        criar_banco_postgres_chatwoot #> /dev/null 2>&1
     fi
 
     verificar_container_redis
@@ -2058,12 +2436,12 @@ echo ""
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         echo ""
-        criar_banco_postgres_typebot > /dev/null 2>&1
+        criar_banco_postgres_typebot #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
     else
         ferramenta_postgres > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_typebot > /dev/null 2>&1
+        criar_banco_postgres_typebot #> /dev/null 2>&1
 fi
 
 pegar_senha_minio
@@ -2283,13 +2661,13 @@ echo ""
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
-        criar_banco_postgres_n8n > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_n8n_queue #> /dev/null 2>&1
 
     else
         ferramenta_postgres > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_n8n > /dev/null 2>&1
+        criar_banco_postgres_n8n_queue #> /dev/null 2>&1
 fi
 verificar_container_redis
     if [ $? -eq 0 ]; then
@@ -2546,13 +2924,13 @@ echo ""
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
-        criar_banco_postgres_flowise > /dev/null 2>&1
+        criar_banco_postgres_flowise #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
     else
         ferramenta_postgres > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_flowise > /dev/null 2>&1
+        criar_banco_postgres_flowise #> /dev/null 2>&1
 fi
 
 #MENSAGEM DE INICIANDO (PASSOS)
@@ -2858,13 +3236,13 @@ echo ""
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
-        criar_banco_postgres_nocobase > /dev/null 2>&1
+        criar_banco_postgres_nocobase #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
     else
         ferramenta_postgres > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_nocobase > /dev/null 2>&1
+        criar_banco_postgres_nocobase #> /dev/null 2>&1
 fi
 
 #MENSAGEM DE INICIANDO (PASSOS)
@@ -4238,6 +4616,12 @@ services:
       - NEXT_PUBLIC_LICENSE_CONSENT=agree
       - LICENSE=agree
 
+    # Brand
+      - NEXT_PUBLIC_APP_NAME="Cal.com"
+      - NEXT_PUBLIC_SUPPORT_MAIL_ADDRESS="help@cal.com"
+      - NEXT_PUBLIC_COMPANY_NAME="Cal.com, Inc."
+      - NEXT_PUBLIC_DISABLE_SIGNUP=false
+
     # Encrypition
       - NEXTAUTH_SECRET=$secret 
       - CALENDSO_ENCRYPTION_KEY=$secret
@@ -4398,72 +4782,76 @@ sleep 2
 
 echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/3]\e[0m"
 echo ""
-
+dados
 verificar_container_mysql
     if [ $? -eq 0 ]; then
         pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_mautic
     else
         ferramenta_mysql > /dev/null 2>&1
         pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_mautic
     fi
 
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
-#  echo -e "\e[97m• VERIFICANDO SERVIÇO MYSQL \e[33m[3/6]\e[0m"
-#  echo ""
-#  while true; do
-#      # Verifica se o serviço mysql está ativo
-#      if docker service ls --filter "name=mysql" | grep "1/1"; then
-#          sleep 2
-#          break
-#      fi
-#      sleep 5
-#  done
+  echo -e "\e[97m• VERIFICANDO SERVIÇO MYSQL \e[33m[3/6]\e[0m"
+  echo ""
+  while true; do
+      # Verifica se o serviço mysql está ativo
+      if docker service ls --filter "name=mysql" | grep "1/1"; then
+          sleep 2
+          break
+      fi
+      sleep 5
+  done
 #######################################################################
 
 sleep 15
 
-dados
+#tempo_maximo_espera=180
+#tempo_espera=0
+#intervalo_espera=5
+#
+#pegar_senha_mysql
 
-tempo_maximo_espera=180
-tempo_espera=0
-intervalo_espera=5
+#while [ $tempo_espera -le $tempo_maximo_espera ]; do
+#  # Obtém o nome completo do serviço MySQL
+#  nome_completo_servico_mysql=$(docker service ls --filter "name=mysql" --format "{{.Name}}" | head -n 1)
+#
+#  if [ "$nome_completo_servico_mysql" ]; then
+#    # Verifica se o serviço MySQL está ativo
+#    if docker service ls --filter "name=$nome_completo_servico_mysql" | grep "1/1" > /dev/null; then
+#      # Verificar se o MySQL está pronto para aceitar conexões
+#      if docker exec $(docker ps -qf "name=.*$nome_completo_servico_mysql.*") mysqladmin ping -u root -p$senha_mysql > /dev/null 2>&1; then
+#        echo "Serviço MySQL está pronto."
+#        
+#        # Criar o banco de dados
+#        docker exec -it $(docker ps -qf "name=.*${nome_completo_servico_mysql}.*") mysql -u root -p$senha_mysql -e "CREATE DATABASE mautic;"
+#        
+#        break
+#      else
+#        echo "Aguardando serviço MySQL estar pronto. Tentando novamente em $intervalo_espera segundos..."
+#        sleep $intervalo_espera
+#        tempo_espera=$((tempo_espera + intervalo_espera))
+#      fi
+#    else
+#      echo "Aguardando serviço MySQL iniciar. Tentando novamente em $intervalo_espera segundos..."
+#      sleep $intervalo_espera
+#      tempo_espera=$((tempo_espera + intervalo_espera))
+#    fi
+#  else
+#    echo "Serviço MySQL não encontrado. Tentando novamente em $intervalo_espera segundos..."
+#    sleep $intervalo_espera
+#    tempo_espera=$((tempo_espera + intervalo_espera))
+#  fi
+#done
+#
+#if [ $tempo_espera -gt $tempo_maximo_espera ]; then
+#  echo "Erro: Tempo máximo de espera atingido. Serviço MySQL não está pronto."
+#fi
 
-while [ $tempo_espera -le $tempo_maximo_espera ]; do
-  # Obtém o nome completo do serviço MySQL
-  nome_completo_servico_mysql=$(docker service ls --filter "name=mysql" --format "{{.Name}}" | head -n 1)
 
-  if [ "$nome_completo_servico_mysql" ]; then
-    # Verifica se o serviço MySQL está ativo
-    if docker service ls --filter "name=$nome_completo_servico_mysql" | grep "1/1" > /dev/null; then
-      # Verificar se o MySQL está pronto para aceitar conexões
-      if docker exec $(docker ps -qf "name=.*$nome_completo_servico_mysql.*") mysqladmin ping -u root -p"$senha_mysql" > /dev/null 2>&1; then
-        echo "Serviço MySQL está pronto."
-        
-        # Criar o banco de dados
-        docker exec -it $(docker ps -qf "name=.*${nome_completo_servico_mysql}.*") mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
-        
-        break
-      else
-        echo "Aguardando serviço MySQL estar pronto. Tentando novamente em $intervalo_espera segundos..."
-        sleep $intervalo_espera
-        tempo_espera=$((tempo_espera + intervalo_espera))
-      fi
-    else
-      echo "Aguardando serviço MySQL iniciar. Tentando novamente em $intervalo_espera segundos..."
-      sleep $intervalo_espera
-      tempo_espera=$((tempo_espera + intervalo_espera))
-    fi
-  else
-    echo "Serviço MySQL não encontrado. Tentando novamente em $intervalo_espera segundos..."
-    sleep $intervalo_espera
-    tempo_espera=$((tempo_espera + intervalo_espera))
-  fi
-done
-
-if [ $tempo_espera -gt $tempo_maximo_espera ]; then
-  echo "Erro: Tempo máximo de espera atingido. Serviço MySQL não está pronto."
-fi
 
 echo -e "\e[97m• INSTALANDO MAUTIC \e[33m[3/3]\e[0m"
 echo ""
@@ -4479,7 +4867,7 @@ services:
     entrypoint: /entrypoint.sh
     command: apache2-foreground
     volumes:
-      - mautic:/var/www/html
+      - mautic_data:/var/www/html
     environment:
       - MAUTIC_DB_NAME=mautic
       - MAUTIC_DB_HOST=mysql
@@ -4490,6 +4878,7 @@ services:
       - MAUTIC_ADMIN_PASSWORD=$senha_email_mautic
       - MAUTIC_ADMIN_USERNAME=$user_mautic
       - MAUTIC_URL=https://$url_mautic
+      - MAUTIC_TRUSTED_PROXIES=["0.0.0.0/0"]
     deploy:
       mode: replicated
       replicas: 1
@@ -4512,9 +4901,9 @@ services:
       - $nome_rede_interna
 
 volumes:
-  mautic:
+  mautic_data:
     external: true
-    name: mautic
+    name: mautic_data
 
 networks:
   $nome_rede_interna:
@@ -4541,32 +4930,32 @@ while true; do
 done
 #######################################################################
 
-mautic_config="/var/lib/docker/volumes/mautic/_data/app/config/local.php"
-
-# Verifica se o arquivo de configuração existe
-if [ -e "$mautic_config" ]; then
-    # Remove a parte indesejada do arquivo de configuração
-    sed -i "/'trusted_proxies' =>/,/),/ { /'trusted_proxies' =>/ { N; N; N; d; }}" "$mautic_config"
-
-    echo "Configuração removida com sucesso."
-else
-    echo "O arquivo de configuração não foi encontrado."
-fi
-
-docker stack deploy --prune --resolve-image always -c mautic.yaml mautic > /dev/null 2>&1
+#mautic_config="/var/lib/docker/volumes/mautic_data/_data/app/config/local.php"
+#
+## Verifica se o arquivo de configuração existe
+#if [ -e "$mautic_config" ]; then
+#    # Remove a parte indesejada do arquivo de configuração
+#    sed -i "/'trusted_proxies' =>/,/),/ { /'trusted_proxies' =>/ { N; N; N; d; }}" "$mautic_config"
+#
+#    echo "Configuração removida com sucesso."
+#else
+#    echo "O arquivo de configuração não foi encontrado."
+#fi
+#
+#docker stack deploy --prune --resolve-image always -c mautic.yaml mautic > /dev/null 2>&1
 
 #######################################################################
 #VERIFICANDO SERVIÇO MENSAGEM
-sleep 1
-while true; do
-    # Verifica se o serviço typebot está ativo
-    if docker service ls --filter "name=mautic" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
+#sleep 1
+#while true; do
+#    # Verifica se o serviço typebot está ativo
+#    if docker service ls --filter "name=mautic" | grep "1/1"; then
+#        sleep 10
+#        break
+#    fi
+#
+#    sleep 5
+#done
 #######################################################################
 
 #INSTALAÇÃO FINALIZADA
@@ -4938,7 +5327,7 @@ echo ""
         ferramenta_redis #> /dev/null 2>&1
     fi
 
-#MENSAGEM DE INSTALANDO CHATWOOT (PASSOS)
+#MENSAGEM DE INSTALANDO WOOFEDCRM (PASSOS)
 echo -e "\e[97m• INSTALANDO WOOFED CRM \e[33m[4/6]\e[0m"
 echo ""
 
@@ -5126,6 +5515,245 @@ echo ""
 echo -e "\e[97mUser MOTOR:\e[33m $email_admin_woofed\e[0m"
 echo ""
 echo -e "\e[97mSenha MOTOR:\e[33m $senha_email_woofed\e[0m"
+echo ""
+
+creditos_msg
+
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+
+}
+
+ferramenta_formbricks() {
+
+dados
+clear
+nome_formbricks
+preencha_as_info
+
+while true; do
+
+echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+echo -en "\e[33mDigite o Dominio para o Formbricks (ex: formbricks.oriondesign.art.br): \e[0m" && read -r url_formbricks
+echo ""
+
+echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+echo -en "\e[33mDigite um Email para o SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_formbricks
+echo ""
+
+echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+echo -en "\e[33mDigite a Senha SMTP do email (Sem caracteres especiais: \!#$ | se estiver usando gmail use a senha de app): \e[0m" && read -r senha_formbricks
+echo ""
+
+echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+echo -en "\e[33mDigite o Host SMTP do email (ex: smtp.hostinger.com): \e[0m" && read -r host_formbricks
+echo ""
+
+echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+echo -en "\e[33mDigite a Porta SMTP do email (ex: 465): \e[0m" && read -r porta_formbricks
+echo ""
+
+if [ "$porta_formbricks" -eq 465 ] || [ "$porta_formbricks" -eq 25 ]; then
+    ssl_formbricks=1
+else
+    ssl_formbricks=0
+fi
+
+
+
+clear
+nome_formbricks
+conferindo_as_info
+
+echo -e "\e[33mDominio:\e[97m $url_formbricks\e[0m"
+echo ""
+
+echo -e "\e[33mEmail SMTP:\e[97m $email_formbricks\e[0m"
+echo ""
+
+echo -e "\e[33mSenha SMTP:\e[97m $senha_formbricks\e[0m"
+echo ""
+
+echo -e "\e[33mHost SMTP:\e[97m $host_formbricks\e[0m"
+echo ""
+
+echo -e "\e[33mPorta SMTP:\e[97m $porta_formbricks\e[0m"
+echo ""
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    nome_formbricks
+    preencha_as_info
+fi
+done
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INICIANDO INSTALAÇÃO \e[33m[1/3]\e[0m"
+echo ""
+sleep 3
+
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/4]\e[0m"
+echo ""
+
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+        sleep 1
+        criar_banco_postgres_formbricks #> /dev/null 2>&1
+        pegar_senha_postgres > /dev/null 2>&1
+
+    else
+        ferramenta_postgres > /dev/null 2>&1
+        pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_formbricks #> /dev/null 2>&1
+fi
+
+#MENSAGEM DE INICIANDO (PASSOS)
+echo -e "\e[97m• INSTALANDO FORMBRICKS \e[33m[2/3]\e[0m"
+echo ""
+
+encryption_key_form=$(openssl rand -hex 16)
+next_key_form=$(openssl rand -hex 16)
+cron_key_form=$(openssl rand -hex 16)
+
+cat > formbricks.yaml <<-EOF
+version: "3.7"
+
+services:
+  formbricks:
+    image: formbricks/formbricks:latest
+    networks:
+      - $nome_rede_interna
+    volumes:
+      - formbricks_data:/home/nextjs/apps/web/uploads/
+    environment:
+      ## Url da aplicação ##
+      - WEBAPP_URL=https://$url_formbricks
+      - NEXTAUTH_URL=https://$url_formbricks
+
+      ## Banco de dados Postgres ##
+      - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/formbricks
+
+      ## Licença Enterprise ou Self-hosting ##
+      ## Solicitar licenta Self-hosting --> https://oriondesign.art.br/formbricks_licence/ <-- ##
+      - ENTERPRISE_LICENSE_KEY=
+
+      ## Keys aleatórias 32 caracteres ##
+      - ENCRYPTION_KEY=$encryption_key_form
+      - NEXTAUTH_SECRET=$next_key_form
+      - CRON_SECRET=$cron_key_form
+
+      ## Dados do SMTP ##
+      - MAIL_FROM=$email_formbricks
+      - SMTP_HOST=$host_formbricks
+      - SMTP_PORT=$porta_formbricks
+      - SMTP_SECURE_ENABLED=$ssl_formbricks #(0= false | 1= true)
+      - SMTP_USER=$email_formbricks
+      - SMTP_PASSWORD=$senha_formbricks
+
+      ## Ativar/Desativar registros e convites (0= false | 1= true) ##
+      - SIGNUP_DISABLED=0
+      - INVITE_DISABLED=0
+      - EMAIL_VERIFICATION_DISABLED=0
+      - PASSWORD_RESET_DISABLED=0
+
+      ## Dados do Formbricks (para pesquisa) ##
+      - NEXT_PUBLIC_FORMBRICKS_API_HOST=
+      - NEXT_PUBLIC_FORMBRICKS_ENVIRONMENT_ID=
+      - NEXT_PUBLIC_FORMBRICKS_ONBOARDING_SURVEY_ID=
+
+      ## Login Google Cloud ##
+      - GOOGLE_AUTH_ENABLED=0
+      - GOOGLE_CLIENT_ID=
+      - GOOGLE_CLIENT_SECRET=
+
+      ## Google Sheets ##
+      - GOOGLE_SHEETS_CLIENT_ID=
+      - GOOGLE_SHEETS_CLIENT_SECRET=
+      - GOOGLE_SHEETS_REDIRECT_URL=
+
+      ## Login Github ##
+      - GITHUB_AUTH_ENABLED=0
+      - GITHUB_ID=
+      - GITHUB_SECRET=
+
+      ## Login Github ##
+      - NOTION_OAUTH_CLIENT_ID=
+      - NOTION_OAUTH_CLIENT_SECRET=   
+      
+      ## Login Airtable ##
+      - AIRTABLE_CLIENT_ID=
+
+      ## Termos e politica de privacidade ##
+      #- PRIVACY_URL=
+      #- TERMS_URL=
+      #- IMPRINT_URL=
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.formbricks.rule=Host(\`$url_formbricks\`)
+        - traefik.http.services.formbricks.loadbalancer.server.port=3000
+        - traefik.http.routers.formbricks.service=formbricks
+        - traefik.http.routers.formbricks.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.formbricks.entrypoints=websecure
+        - traefik.http.routers.formbricks.tls=true
+
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
+
+volumes:
+  formbricks_data:
+    external: true
+EOF
+
+docker stack deploy --prune --resolve-image always -c formbricks.yaml formbricks > /dev/null 2>&1
+
+#######################################################################
+#VERIFICANDO SERVIÇO MENSAGEM
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+echo -e "\e[97mEste passo podera demorar um pouco para terminar\e[0m"
+sleep 1
+while true; do
+    # Verifica se o serviço FORMBRICKS está ativo
+    if docker service ls --filter "name=formbricks" | grep "1/1"; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+#######################################################################
+
+#INSTALAÇÃO FINALIZADA
+instalado_msg
+guarde_os_dados_msg
+
+echo -e "\e[32m[FORMBRICKS]\e[0m"
+echo ""
+echo -e "\e[33mDominio:\e[97m http://$url_formbricks\e[0m"
 echo ""
 
 creditos_msg
@@ -5332,13 +5960,18 @@ while true; do
             ;;
         21)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_trocar_logos
+            ferramenta_formbricks
             fi
             ;;
         22)
-            ferramenta_remover_stack
+            if verificar_docker_e_portainer_traefik; then
+            ferramenta_trocar_logos
+            fi
             ;;
         23)
+            ferramenta_remover_stack
+            ;;
+        24)
             echo "Saindo..."
             break
             ;;
