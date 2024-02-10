@@ -1166,6 +1166,51 @@ criar_banco_postgres_n8n_queue() {
     done
 }
 
+criar_banco_postgres_n8n_quepasa() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_quepasa"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados n8n_quepasa já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS n8n_quepasa;"
+                    echo "Banco de dados n8n_quepasa apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_quepasa;"
+                    
+                    echo "Banco de dados n8n_quepasa criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_quepasa;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_quepasa"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados n8n_quepasa criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
 
 criar_banco_postgres_typebot() {
     while :; do
@@ -2689,6 +2734,8 @@ version: "3.7"
 services:
   n8n_editor:
     image: n8nio/n8n:latest
+    volumes:
+      - n8n_data:/home/node/.n8n/nodes
     command: start
     networks:
       - $nome_rede_interna
@@ -2736,6 +2783,8 @@ services:
 
   n8n_webhook:
     image: n8nio/n8n:latest
+    volumes:
+      - n8n_data:/home/node/.n8n/nodes
     command: webhook
     networks:
       - $nome_rede_interna
@@ -2783,6 +2832,8 @@ services:
 
   n8n_worker:
     image: n8nio/n8n:latest
+    volumes:
+      - n8n_data:/home/node/.n8n/nodes
     command: worker --concurrency=10
     networks:
       - $nome_rede_interna
@@ -2818,6 +2869,11 @@ services:
         limits:
           cpus: "0.5"
           memory: 1024M
+
+volumes:
+  n8n_data:
+    external: true
+    name: n8n_data
 
 networks:
   $nome_rede_interna:
@@ -3391,13 +3447,13 @@ echo ""
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
-        criar_banco_postgres_botpress > /dev/null 2>&1
+        criar_banco_postgres_botpress #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
     else
         ferramenta_postgres > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_botpress > /dev/null 2>&1
+        criar_banco_postgres_botpress #> /dev/null 2>&1
 fi
 
 verificar_container_redis
@@ -4588,13 +4644,13 @@ echo ""
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
-        criar_banco_postgres_calcom > /dev/null 2>&1
+        criar_banco_postgres_calcom #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
     else
         ferramenta_postgres > /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_calcom > /dev/null 2>&1
+        criar_banco_postgres_calcom #> /dev/null 2>&1
 fi
 
 #MENSAGEM DE INICIANDO (PASSOS)
@@ -5785,6 +5841,129 @@ burlar_chatwoot(){
     fi
 done
 }
+
+workflows_quepasa(){
+
+while :; do
+    if docker ps -q --filter "name=n8n" | grep -q .; then
+
+# Capturar o ID do container
+container_id=$(docker ps --filter "name=n8n_n8n_editor" --format "{{.ID}}")
+
+# Verificar se o ID do container foi capturado corretamente
+if [ -z "$container_id" ]; then
+    echo "Erro: Não foi possível encontrar o ID do contêiner."
+    exit 1
+fi
+
+
+
+clear
+dados
+preencha_as_info
+#nome da ferramenta
+while true; do
+echo -e "\e[97mPasso$amarelo 1/4\e[0m"
+echo -en "\e[33mDigite o dominio do Chatwoot (ex: app.oriondesign.art.br): \e[0m" && read -r url_chatwoot_quepasa
+echo ""
+echo -e "\e[97mPasso$amarelo 2/4\e[0m"
+echo -en "\e[33mDigite o dominio do Quepasa (ex: quepasa.oriondesign.art.br): \e[0m" && read -r url_quepasa_quepasa
+echo ""
+echo -e "\e[97mPasso$amarelo 3/4\e[0m"
+echo -en "\e[33mDigite o dominio do Webhook (ex: webhook.oriondesign.art.br): \e[0m" && read -r url_webhook_quepasa
+echo ""
+echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+echo -en "\e[33mDigite o Email do Quepasa (ex: contato@oriondesign.art.br): \e[0m" && read -r email_user_quepasa
+echo ""
+
+
+clear
+#nome da ferramenta
+conferindo_as_info
+echo -e "\e[33mDominio Chatwoot:\e[97m $url_chatwoot_quepasa\e[0m"
+echo ""
+echo -e "\e[33mDominio Quepasa:\e[97m $url_quepasa_quepasa\e[0m"
+echo ""
+echo -e "\e[33mDominio Webhook:\e[97m $url_webhook_quepasa\e[0m"
+echo ""
+echo -e "\e[33mEmail:\e[97m $email_user_quepasa\e[0m"
+echo ""
+
+
+read -p "As respostas estão corretas? (Y/N): " confirmacao
+if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+    clear
+    instalando_msg
+    break
+else
+    clear
+    #nome da ferramenta
+    preencha_as_info
+fi
+done
+
+# Executar comandos dentro do contêiner
+docker exec -it -e URL_WEBHOOK_QUEPASA="$url_webhook_quepasa" -e URL_QUEPASA="$url_quepasa_quepasa" -e URL_CHATWOOT="$url_chatwoot_quepasa" -e EMAIL_USER_QUEPASA="$email_user_quepasa" "$container_id" /bin/sh -c '
+
+#Criando diretório temporario
+temp_dir=$(mktemp -d)
+
+#Entrando no diretório temporario
+cd "$temp_dir"
+
+#Baixando workflows
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/ChatwootProfileUpdate.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/ChatwootToQuepasa.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/ChatwootToQuepasaGreetings.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/PostToChatwoot.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaAutomatic.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaChatControl.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaInboxControl.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaQrcode.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaToChatwoot.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/GetChatwootContacts.json"
+wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/PostToWebCallBack.json"
+
+#Editando arquivos - Links
+sed -i "s#http://127.0.0.1:5678#https://$URL_WEBHOOK_QUEPASA#g" QuepasaQrcode.json QuepasaAutomatic.json ChatwootToQuepasa.json
+sed -i "s#http://127.0.0.1:31000#https://$URL_QUEPASA#g" QuepasaQrcode.json PostToChatwoot.json ChatwootToQuepasa.json QuepasaChatControl.json QuepasaToChatwoot.json
+sed -i "s#http://127.0.0.1:3000#https://$URL_CHATWOOT#g" QuepasaQrcode.json PostToChatwoot.json ChatwootToQuepasa.json QuepasaChatControl.json QuepasaToChatwoot.json
+
+
+#FALTA EDITAR O EMAIL
+
+
+#Subindo workflows
+n8n import:workflow --input="$temp_dir" --separate
+
+#Verificando se os workflows foram importados com sucesso
+if [ $? -eq 0 ]; then
+    echo "Workflows importados com sucesso"
+else
+    echo "Erro ao importar workflows"
+    exit 1
+fi
+
+#Ativando os workflows
+n8n update:workflow --id 1008 --active=true && echo "Fluxo 1008 ativado" || echo "Erro ao ativar fluxo 1008"
+n8n update:workflow --id 1009 --active=true && echo "Fluxo 1009 ativado" || echo "Erro ao ativar fluxo 1009"
+n8n update:workflow --id 1010 --active=true && echo "Fluxo 1010 ativado" || echo "Erro ao ativar fluxo 1010"
+n8n update:workflow --id 1011 --active=true && echo "Fluxo 1011 ativado" || echo "Erro ao ativar fluxo 1011"
+'
+break
+    else
+        clear
+        erro_msg
+        echo ""
+        echo -e "Ops, parece que você não instalou a opção \e[32m[6] N8N${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+        echo ""
+        echo "Pressione CTRL C para sair do instalador."
+        sleep 5
+        exit
+    fi
+done
+}
 verificar_docker_e_portainer_traefik() {
     # Verificar se o Docker está instalado
     if ! command -v docker &> /dev/null; then
@@ -5977,6 +6156,9 @@ while true; do
             ;;
         nulled)
             burlar_chatwoot
+            ;;
+        quepasa)
+            workflows_quepasa
             ;;
 
         *)
