@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; text-align: center;">
+  <div style="width: 100%; margin: 0 auto; padding: 20px; box-sizing: border-box; text-align: center;">
+    <p style="font-size: 24px; font-family: Arial; font-weight: bold;">Convite para usar a plataforma <%= global_config['BRAND_NAME'] || 'Chatwoot' %></p>
+    <div style="margin: 10px 0; border-top: 1px solid #eeeeee;"></div>
+    <div style="font-size: 16px; font-family: Arial, sans-serif; text-align: center;">
+      <p>Olá, <b><%= @resource.name %></b>, tudo bem?</p>
+      <% account_user = @resource&.account_users&.first %>
+      <% if account_user&.inviter.present? %>
+        <p>Você foi convidado pelo <b><%= account_user.inviter.name %></b> da <b><%= account_user.account.name %></b> para se juntar à equipe na nova plataforma de atendimento <b><%= global_config['BRAND_NAME'] || 'Chatwoot' %></b></p>
+      <% end %>
+      <p>Você pode criar uma senha para acessar sua conta clicando no botão abaixo:</p>
+    </div>
+    <div style="text-align: center;">
+      <% if @resource.unconfirmed_email.present? %>
+        <p><a href="<%= frontend_url('auth/confirmation', confirmation_token: @token) %>" style="display: inline-block; padding: 15px 25px; font-size: 18px; font-family: Arial; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 0;">Vamos nessa!</a></p>
+      <% elsif @resource.confirmed? %>
+        <p><a href="<%= frontend_url('auth/sign_in') %>" style="display: inline-block; padding: 15px 25px; font-size: 18px; font-family: Arial; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 0;">Vamos nessa!</a></p>
+      <% elsif account_user&.inviter.present? %>
+        <p><a href="<%= frontend_url('auth/password/edit', reset_password_token: @resource.send(:set_reset_password_token)) %>" style="display: inline-block; padding: 15px 25px; font-size: 18px; font-family: Arial; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 0;">Vamos nessa!</a></p>
+      <% else %>
+        <p><a href="<%= frontend_url('auth/confirmation', confirmation_token: @token) %>" style="display: inline-block; padding: 15px 25px; font-size: 18px; font-family: Arial; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 0;">Vamos nessa!</a></p>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>
