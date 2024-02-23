@@ -1,0 +1,574 @@
+{
+  "name": "Criador de empresas Chatwoot",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados do Chatwoot').item.json[\"BASE URL - CHATWOOT\"] }}/platform/api/v1/accounts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados do Chatwoot').item.json[\"TOKEN - CHATWOOT\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"name\": \"{{ $json[\"Nome da empresa\"] }}\"\n}",
+        "options": {}
+      },
+      "id": "5bf243cc-8b68-4375-96b0-dbd40ac9798f",
+      "name": "Criando Account",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3091,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "ID da conta",
+              "stringValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "461897e2-e0a2-43dc-a6a0-9285f986fbd0",
+      "name": "Salvando ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        3271,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados do Chatwoot').item.json[\"BASE URL - CHATWOOT\"] }}/platform/api/v1/accounts/{{ $('Salvando ID').item.json[\"ID da conta\"] }}/account_users",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados do Chatwoot').item.json[\"TOKEN - CHATWOOT\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"user_id\": {{ $json[\"id\"] }},\n\"role\": \"administrator\"\n}",
+        "options": {}
+      },
+      "id": "00aca21a-1bed-48b1-b6a2-b496ca2489b1",
+      "name": "Atribuindo Agente a Account",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3631,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados do Chatwoot').item.json[\"BASE URL - CHATWOOT\"] }}/platform/api/v1/users",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados do Chatwoot').item.json[\"TOKEN - CHATWOOT\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"name\": \"{{ $('Dados do cliente').item.json['Nome do cliente'] }}\",\n\"email\": \"{{ $('Dados do cliente').item.json['Email do Admin'] }}\",\n\"password\": \"{{ $('Dados do cliente').item.json['Senha do Admin'] }}\",\n\"custom_attributes\": { }\n}",
+        "options": {}
+      },
+      "id": "d83c1234-4116-4bac-bf20-2b9883f7cfe5",
+      "name": "Criando Agente",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3451,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados da Evolution').item.json[\"API URL - EVOLUTION\"] }}/instance/create",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $('Dados da Evolution').item.json[\"GLOBAL API KEY - EVOLUTION\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"instanceName\": \"{{ $('Dados do cliente').item.json[\"Nome da empresa\"] }}\",\n    \"token\": \"\",\n    \"qrcode\": true,\n    \"chatwoot_account_id\": {{ $('Salvando ID').item.json[\"ID da conta\"] }},\n    \"chatwoot_token\": \"{{ $('Criando Agente').item.json[\"access_token\"] }}\",\n    \"chatwoot_url\": \"{{ $('Dados do Chatwoot').item.json[\"BASE URL - CHATWOOT\"] }}\",\n    \"chatwoot_sign_msg\": true,\n    \"chatwoot_reopen_conversation\": true,\n    \"chatwoot_conversation_pending\": false\n}",
+        "options": {}
+      },
+      "id": "7e3728d4-a8ff-49a8-9bd9-a0ac1858047a",
+      "name": "Criando Instancia",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        4280,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Dados de Criação\n\nPreencha os SET com os dados solicitados. ",
+        "height": 343,
+        "width": 500.19295441092686
+      },
+      "id": "b120e50e-d4c5-42f0-aae1-c9827ac184a2",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1882.62448022959,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Tratar os dados\n\nEsta parte trata os dados que veio do webhook",
+        "height": 342,
+        "width": 268.1469907460078
+      },
+      "id": "4b147114-8e1e-416c-86ed-c90c85499c8a",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2736.0657347610104,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Chatwoot\n\nAqui ele cria a empresa, Cria o Agente e Atribui o Agente a empresa ",
+        "height": 337,
+        "width": 891.5045101403455
+      },
+      "id": "53a91f4f-91c8-4654-b1a2-e848f679f19c",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3060,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Criando Instancia Evolution \nJá nessa parte ele cria a instancia já atribuído ao Chatwoot",
+        "height": 348,
+        "width": 245
+      },
+      "id": "28beee51-ed9e-4c27-994e-23d7146563bd",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4211,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Gerador de senhas\n\nAqui vai gerar uma senha aleatória para o cliente",
+        "height": 340,
+        "width": 256.375
+      },
+      "id": "12f37a0d-12c1-4dce-8477-0c672c222a25",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2433,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "httpMethod": "POST",
+        "path": "cadastrar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "43d31339-e0c7-4b4d-a81f-42b15f1041e0",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        300
+      ],
+      "webhookId": "a882d7e1-298b-4da6-9536-f001540b4595",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "2znLgK2Scl5vWnjN",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Envio de mensagem\nEnviando os dados para o usuario no whatsapp",
+        "height": 348,
+        "width": 252.5
+      },
+      "id": "08817b2a-72be-4fe5-afde-a8c37b63a292",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4531,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados da Evolution').item.json[\"API URL - EVOLUTION\"] }}/message/sendText/{{ $('Dados da Evolution').item.json[\"NOME DA INSTANCIA  - EVOLUTION\"] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $('Dados da Evolution').item.json[\"API KEY - EVOLUTION\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "number",
+              "value": "={{ $('Dados do cliente').item.json[\"Whatsapp do cliente\"] }}"
+            },
+            {
+              "name": "textMessage.text",
+              "value": "=🤖 *NOME DO SEU BOT*:\n\nBem-vindo à *NOME DA SUA EMPRESA* - Sua Plataforma de Multi Atendimento\n\nPrezado(a) {{ $('Dados do cliente').item.json[\"Nome do cliente\"] }},\n\nÉ com grande satisfação que damos as boas-vindas à *NOME DA SUA EMPRESA*. Estamos empolgados por tê-lo(a) a bordo, e queremos garantir que sua experiência conosco seja excepcional desde o início.\n\nAbaixo, fornecemos os detalhes necessários para acessar sua conta:\n\nLink da Plataforma:\n{{ $('Dados do Chatwoot').item.json[\"BASE URL - CHATWOOT\"] }}\n\nEmail de Acesso:\n{{ $('Dados do cliente').item.json[\"Email do Admin\"] }}\n\nSenha Temporária:\n{{ $('Dados do cliente').item.json[\"Senha_Gerada\"] }}\n\nInstruções de Acesso:\n\n1. Clique no link da plataforma acima para acessar o portal UnifyMe.\n2. Utilize o email fornecido como seu nome de usuário.\n3. Faça login com a senha temporária fornecida.\n4. Ao entrar, recomendamos que altere sua senha para garantir a segurança da sua conta."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e40c5f44-8e65-4a74-9908-146c15aa39e5",
+      "name": "Enviando mensagem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        4611,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "BASE URL - CHATWOOT"
+            },
+            {
+              "name": "TOKEN - CHATWOOT"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a0d59b56-c73a-48ef-9806-582e38197adc",
+      "name": "Dados do Chatwoot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        2000,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "API URL - EVOLUTION"
+            },
+            {
+              "name": "GLOBAL API KEY - EVOLUTION"
+            },
+            {
+              "name": "NOME DA INSTANCIA  - EVOLUTION"
+            },
+            {
+              "name": "API KEY - EVOLUTION"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c577a603-429c-431f-9194-97c9796dd76f",
+      "name": "Dados da Evolution",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        2180,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const caracteres = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#\";\nconst tamanhoDaSenha = 12; // Escolha o tamanho da senha (minimo 8 caracteres)\n\nlet senhaGerada = \"\";\n\nfor (let i = 0; i < tamanhoDaSenha; i++) {\n  const randomIndex = Math.floor(Math.random() * caracteres.length);\n  senhaGerada += caracteres.charAt(randomIndex);\n}\n\nreturn [{ Senha_Gerada: \"@1Or\" + senhaGerada + \"_\" }];\n"
+      },
+      "id": "678f8989-cbce-4996-93ca-f49459852728",
+      "name": "Gerador de Senhas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2513,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "Nome da empresa",
+              "stringValue": "={{ $('Webhook').item.json[\"body\"][\"Nome da empresa\"] }}"
+            },
+            {
+              "name": "Nome do cliente",
+              "stringValue": "={{ $('Webhook').item.json[\"body\"][\"Nome do Cliente\"] }}"
+            },
+            {
+              "name": "Email do Admin",
+              "stringValue": "={{ $('Webhook').item.json[\"body\"][\"Email do Cliente\"] }}"
+            },
+            {
+              "name": "Senha do Admin",
+              "stringValue": "={{ $json.Senha_Gerada }}"
+            },
+            {
+              "name": "Whatsapp do cliente",
+              "stringValue": "={{ $('Webhook').item.json[\"body\"][\"Whatsapp do cliente\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cddcca5c-6e11-4a9b-bc8c-699a6cee4991",
+      "name": "Dados do cliente",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [
+        2820,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $('Dados do Chatwoot').item.json[\"BASE URL - CHATWOOT\"] }}/platform/api/v1/accounts/{{ $('Salvando ID').item.json[\"ID da conta\"] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados do Chatwoot').item.json[\"TOKEN - CHATWOOT\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"name\": \"{{ $('Dados do cliente').item.json[\"Nome da empresa\"] }}\",\n  \"locale\": \"pt_BR\",\n  \"features\": {\n    \"inbound_emails\": true,\n    \"channel_email\": true,\n    \"channel_facebook\": true,\n    \"channel_twitter\": true,\n    \"help_center\": false,\n    \"macros\": true,\n    \"agent_management\": true,\n    \"team_management\": true,\n    \"inbox_management\": true,\n    \"labels\": true,\n    \"custom_attributes\": true,\n    \"automations\": true,\n    \"canned_responses\": true,\n    \"integrations\": true,\n    \"voice_recorder\": true,\n    \"channel_website\": true,\n    \"campaigns\": false,\n    \"reports\": true,\n    \"crm\": true,\n    \"auto_resolve_conversations\": false\n  },\n  \"limits\": {\n    \"agents\": 3,\n    \"inboxes\": 1\n  }\n}",
+        "options": {}
+      },
+      "id": "682afa59-d29c-4e50-95b2-a10a6c1e7e94",
+      "name": "Definindo plano",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3811,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "seconds"
+      },
+      "id": "5b520f61-3b24-4fa1-9fb6-f7ad76960809",
+      "name": "Espera 5 segundos",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        4031,
+        300
+      ],
+      "webhookId": "93c78d0b-535b-4f9b-a2a1-b261ab770600"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Criando Account": {
+      "main": [
+        [
+          {
+            "node": "Salvando ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salvando ID": {
+      "main": [
+        [
+          {
+            "node": "Criando Agente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criando Agente": {
+      "main": [
+        [
+          {
+            "node": "Atribuindo Agente a Account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Atribuindo Agente a Account": {
+      "main": [
+        [
+          {
+            "node": "Definindo plano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Dados do Chatwoot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Criando Instancia": {
+      "main": [
+        [
+          {
+            "node": "Enviando mensagem",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados do Chatwoot": {
+      "main": [
+        [
+          {
+            "node": "Dados da Evolution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados da Evolution": {
+      "main": [
+        [
+          {
+            "node": "Gerador de Senhas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gerador de Senhas": {
+      "main": [
+        [
+          {
+            "node": "Dados do cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados do cliente": {
+      "main": [
+        [
+          {
+            "node": "Criando Account",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Definindo plano": {
+      "main": [
+        [
+          {
+            "node": "Espera 5 segundos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Espera 5 segundos": {
+      "main": [
+        [
+          {
+            "node": "Criando Instancia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9b0c491d-b1b1-4fbd-9276-cab7bed0b6e2",
+  "id": "ji3nLvjThY8xRwXF",
+  "meta": {
+    "instanceId": "db55b8c7411f1fe07d2627391a89f7c1e18bc7b98ce2f8df9da7445020c58cbb"
+  },
+  "tags": []
+}
