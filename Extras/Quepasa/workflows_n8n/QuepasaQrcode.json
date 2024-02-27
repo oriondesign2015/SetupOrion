@@ -1,0 +1,1083 @@
+{
+  "name": "QuepasaQrcode",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "URL FORMADA",
+              "value": "={{ $node[\"Colocando Dados\"].json[\"URL N8N\"] }}/webhook/from-chatwoot?qphost={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}&identifier={{ $node[\"Informa Identifier\"].json[\"identifier\"] }}&cwhost={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}&cwpublic={{ $node[\"Colocando Dados\"].json[\"CHATWOOT URL WITH PUBLIC DOMAIN\"] }}&utoken={{ $node[\"Informa UToken\"].json[\"utoken\"] }}&atoken={{ $node[\"Garante AToken\"].json[\"atoken\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f0a3b7ee-7899-4bc0-a23c-ece874a4b1d6",
+      "name": "Formação da URL",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        900
+      ],
+      "retryOnFail": false,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}/scan",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-QUEPASA-TOKEN",
+              "value": "={{ $node[\"TokenGenerate\"].json.qptoken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0137732d-3742-4bdc-b8ce-106971f5c144",
+      "name": "Cria o QrCode",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1480,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}/api/v1/accounts/{{  $node[\"Colocando Dados\"].json[\"ID DA CONTA\"] }}/conversations/{{ $node.Webhook.json.body.messages[0].conversation_id }}/messages",
+        "allowUnauthorizedCerts": true,
+        "jsonParameters": true,
+        "options": {
+          "bodyContentType": "multipart-form-data"
+        },
+        "sendBinaryData": true,
+        "binaryPropertyName": "attachments[]:data",
+        "headerParametersJson": "={ \"api_access_token\": \"{{ $node[\"Informa UToken\"].json[\"utoken\"] }}\" }",
+        "queryParametersJson": "{ \"message_type\": \"incoming\" }"
+      },
+      "name": "Envia QRCode No Chatwoot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        1000
+      ],
+      "id": "de09a5bb-daf2-4e4e-94aa-ab2284a14291"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE \"public\".\"channel_api\" SET \"webhook_url\"='{{ $node[\"Formação da URL\"].json[\"URL FORMADA\"] }}' WHERE \"id\"='{{ $node[\"Informa Identifier\"].json[\"channel_id\"] }}';",
+        "additionalFields": {}
+      },
+      "id": "8873d282-0d1a-4d9a-bd28-dffa33decf6e",
+      "name": "Atualiza Webhook",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        3340,
+        760
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "1",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=SELECT \"public\".\"channel_api\".\"identifier\", \"public\".\"inboxes\".\"channel_id\" FROM \"public\".\"channel_api\" INNER JOIN \"public\".\"inboxes\" ON \"public\".\"channel_api\".\"id\" = \"public\".\"inboxes\".\"channel_id\" WHERE \"public\".\"channel_api\".\"account_id\"='{{ $node[\"Colocando Dados\"].json[\"ID DA CONTA\"] }}' AND \"public\".\"inboxes\".\"id\" = '{{ $node[\"Colocando Dados\"].json[\"NUMERO DO INBOX\"] }}';",
+        "additionalFields": {}
+      },
+      "id": "6a8200b0-b509-487c-8955-289bf98b80d9",
+      "name": "Informa Identifier",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        960,
+        900
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "1",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.status }}",
+              "value2": "getting without filter"
+            }
+          ]
+        }
+      },
+      "id": "208b5c27-fbf0-4d83-97b5-885c633ff802",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        3980,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}/api/v1/accounts/{{ $node.Webhook.json.body.messages[0].account_id }}/conversations/{{ $node.Webhook.json.body.messages[0].conversation_id }}/messages ",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $node[\"Informa UToken\"].json[\"utoken\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "=✅ Qrcode escaneado com sucesso!\n\n✅ Sistema Pronto para Usar\n"
+            },
+            {
+              "name": "message_type",
+              "value": "incoming"
+            },
+            {
+              "name": "private",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "22785cb8-0400-4c14-8495-d2dff8e40b68",
+      "name": "Envia Mensagem De Conectado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        4260,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}/api/v1/accounts/{{ $node.Webhook.json.body.messages[0].account_id }}/conversations/{{ $node.Webhook.json.body.messages[0].conversation_id }}/messages ",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $node[\"Informa UToken\"].json[\"utoken\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "=✅ Qrcode gerado com sucesso!\n\n✅ Digitalize este código QR nos próximos 20 segundos:"
+            },
+            {
+              "name": "message_type",
+              "value": "incoming"
+            },
+            {
+              "name": "private",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "254b989c-4df0-490a-9fa3-3a2cfbb36f79",
+      "name": "Qrcode gerado com sucesso!",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1900,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "baseUrl": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}",
+        "token": "={{ $node[\"TokenGenerate\"].json.qptoken }}",
+        "resource": "webhook"
+      },
+      "id": "018b0b64-e721-4cd1-81bb-bda2ad99f06f",
+      "name": "Verifica se Conectou",
+      "type": "n8n-nodes-quepasa.quepasa",
+      "typeVersion": 1,
+      "position": [
+        3800,
+        760
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}/api/v1/accounts/{{ $node.Webhook.json.body.messages[0].account_id }}/conversations/{{ $node.Webhook.json.body.messages[0].conversation_id }}/messages ",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $node[\"Informa UToken\"].json[\"utoken\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "=✅ Qrcode gerado com expirou, por favor \n\n✅ Iniciar novamente, uma nova Caixa de Entrada!\n"
+            },
+            {
+              "name": "message_type",
+              "value": "incoming"
+            },
+            {
+              "name": "private",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f9795657-a6a3-4de2-9fe9-1b72dce54ed6",
+      "name": "Passou tempo Tente Novamente",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        4260,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 50,
+        "unit": "seconds"
+      },
+      "id": "93c2873a-73ac-46fe-97b0-229e80dd5d12",
+      "name": "Aguarda 30 Segundos para Escanear Qrcode",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        1000
+      ],
+      "webhookId": "b8706931-81cb-4f18-93e0-0a5d5416734b"
+    },
+    {
+      "parameters": {
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}/command",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "action",
+              "value": "restart"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-QUEPASA-TOKEN",
+              "value": "={{ $node[\"TokenGenerate\"].json.qptoken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5017d23c-6d06-48a3-a43c-73c76b1c715f",
+      "name": "Restart Quepasa",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        2340,
+        1000
+      ],
+      "retryOnFail": true,
+      "maxTries": 2,
+      "waitBetweenTries": 5000,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "baseUrl": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}",
+        "token": "={{ $node[\"TokenGenerate\"].json.qptoken }}",
+        "resource": "information"
+      },
+      "id": "f7c708c4-abe9-4910-a7d2-9d72b14aa3b2",
+      "name": "Quepasa Info",
+      "type": "n8n-nodes-quepasa.quepasa",
+      "typeVersion": 1,
+      "position": [
+        2880,
+        760
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "baseUrl": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}",
+        "token": "={{ $node[\"TokenGenerate\"].json.qptoken }}",
+        "resource": "webhook",
+        "operation": "setup",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL N8N\"] }}/webhook/to-chatwoot",
+        "trackId": "chatwoot",
+        "extraAttributes": {
+          "attribute": [
+            {
+              "key": "identifier",
+              "value": "={{ $node[\"Informa Identifier\"].json[\"identifier\"] }}"
+            },
+            {
+              "key": "cwhost",
+              "value": "={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}"
+            },
+            {
+              "key": "inbox",
+              "value": "={{ $node[\"Colocando Dados\"].json[\"NUMERO DO INBOX\"] }}"
+            },
+            {
+              "key": "account",
+              "value": "={{ $node[\"Colocando Dados\"].json[\"ID DA CONTA\"] }}"
+            },
+            {
+              "key": "utoken",
+              "value": "={{ $node[\"Informa UToken\"].json[\"utoken\"] }}"
+            },
+            {
+              "key": "atoken",
+              "value": "={{ $node[\"Garante AToken\"].json[\"atoken\"] }}"
+            },
+            {
+              "key": "qphost",
+              "value": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}"
+            },
+            {
+              "key": "qptoken",
+              "value": "={{ $node[\"TokenGenerate\"].json.qptoken }}"
+            }
+          ]
+        }
+      },
+      "id": "e62600de-cd7e-4d56-a749-ace7bc8c5223",
+      "name": "Webhook Update",
+      "type": "n8n-nodes-quepasa.quepasa",
+      "typeVersion": 1,
+      "position": [
+        3560,
+        760
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.success }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "362ef182-cb62-414b-9368-57a6d973e10b",
+      "name": "Success QrCode",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        780
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}/api/v1/accounts/{{ $node.Webhook.json.body.messages[0].account_id }}/conversations/{{ $node.Webhook.json.body.messages[0].conversation_id }}/messages ",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $node[\"Informa UToken\"].json[\"utoken\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "=Informações do servidor:\nToken gerado: {{ $json.server.token }}\nWhatsapp: {{ $json.server.wid }}\n\n\n"
+            },
+            {
+              "name": "message_type",
+              "value": "incoming"
+            },
+            {
+              "name": "private",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "773a7eec-94f5-449a-bf02-66f673963947",
+      "name": "Confirmação Dos Dados",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        3100,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL CHATWOOT\"] }}/api/v1/accounts/{{ $node.Webhook.json.body.messages[0].account_id }}/conversations/{{ $node.Webhook.json.body.messages[0].conversation_id }}/messages ",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $node[\"Informa UToken\"].json[\"utoken\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "content",
+              "value": "=Tempo para escanear expirou !\nTente novamente digitando /qrcode\n\n"
+            },
+            {
+              "name": "message_type",
+              "value": "incoming"
+            },
+            {
+              "name": "private",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "03a98dc4-7c36-4f10-86c9-f3acce0edd7f",
+      "name": "Qrcode Falhou",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        2880,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Coletando Todas informações",
+        "height": 745.8570330514997,
+        "width": 987.347503496542
+      },
+      "id": "342fc30c-b51b-4782-a17b-0870de4add9c",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "##  Envia Qrcode para Chatwoot",
+        "height": 393.2052267486547,
+        "width": 1067.5941583397387
+      },
+      "id": "2b534124-6675-4a96-894c-837ec541912c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Verifica se esta tudo certo",
+        "height": 747.3699072394713,
+        "width": 2378.190762273796
+      },
+      "id": "3600221f-8331-4dcd-9f09-984d70cff360",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2540,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=SELECT \"access_tokens\".\"token\" AS \"utoken\" FROM \"account_users\" INNER JOIN \"access_tokens\" ON \"access_tokens\".\"owner_id\" = \"account_users\".\"user_id\" WHERE \"account_users\".\"account_id\" = {{ $node[\"Colocando Dados\"].json[\"ID DA CONTA\"] }} AND \"access_tokens\".\"owner_type\" = 'User' AND \"account_users\".\"role\" = 1 ORDER BY \"account_users\".\"id\" LIMIT 1;",
+        "additionalFields": {}
+      },
+      "id": "5fdbfacf-ee23-4ce7-bebc-20667f912a7b",
+      "name": "Informa UToken",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        780,
+        900
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "1",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=INSERT INTO \"public\".\"access_tokens\" (\"owner_type\", \"owner_id\", \"token\", \"created_at\", \"updated_at\")\nSELECT 'AgentBot', '{{ $json[\"id\"] }}', SUBSTRING(md5(random()::text),0,24), NOW(), NOW() \nWHERE NOT EXISTS (SELECT NULL FROM \"public\".\"access_tokens\" WHERE \"owner_type\" = 'AgentBot' AND \"owner_id\" = {{ $node[\"Garante AgentBot\"].json[\"id\"] }});\nSELECT \"token\" AS \"atoken\" FROM \"public\".\"access_tokens\" WHERE \"owner_type\" = 'AgentBot' AND \"owner_id\" = {{ $node[\"Garante AgentBot\"].json[\"id\"] }} LIMIT 1;",
+        "additionalFields": {}
+      },
+      "id": "6771540d-83e7-4e47-a934-4a97ef70a2ba",
+      "name": "Garante AToken",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        580
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "1",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=INSERT INTO \"agent_bot_inboxes\" (\"inbox_id\", \"agent_bot_id\", \"status\", \"account_id\", \"created_at\", \"updated_at\")\nSELECT {{ $node[\"Colocando Dados\"].json[\"NUMERO DO INBOX\"] }}, {{ $node[\"Garante AgentBot\"].json[\"id\"] }}, 0, {{ $node[\"Colocando Dados\"].json[\"ID DA CONTA\"] }}, NOW(), NOW() WHERE NOT EXISTS(SELECT NULL FROM \"agent_bot_inboxes\" WHERE \"inbox_id\" = {{ $node[\"Colocando Dados\"].json[\"NUMERO DO INBOX\"] }} AND \"agent_bot_id\" = {{ $node[\"Garante AgentBot\"].json[\"id\"] }} AND \"account_id\" = {{ $node[\"Colocando Dados\"].json[\"ID DA CONTA\"] }});",
+        "additionalFields": {}
+      },
+      "id": "4c96e4b7-287f-4983-8c28-e4f9036c8049",
+      "name": "Garante Vinculo AgentBot à Inbox",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        600,
+        900
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "1",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "URL N8N",
+              "value": "={{ $env[\"C8Q_OR_N8N_URL\"] }}"
+            },
+            {
+              "name": "URL DO QUEPASA",
+              "value": "={{ $env[\"C8Q_OR_QUEPASA_URL\"] }}"
+            },
+            {
+              "name": "URL CHATWOOT",
+              "value": "={{ $env[\"C8Q_OR_CHATWOOT_URL\"] }}"
+            },
+            {
+              "name": "CHATWOOT URL WITH PUBLIC DOMAIN",
+              "value": "={{ $env[\"C8Q_CW_PUBLIC_URL\"] ?? $env[\"N8N_HOST\"] }}"
+            },
+            {
+              "name": "Seu Email",
+              "value": "={{ $env[\"C8Q_QP_DEFAULT_USER\"] }}"
+            },
+            {
+              "name": "NUMERO DO INBOX",
+              "value": "={{ $json.body.contact_inbox.inbox_id }}"
+            },
+            {
+              "name": "ID DA CONTA",
+              "value": "={{ $json.body.messages[0].account_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a2783a6b-25ef-452d-9fb0-f54eb0e0f789",
+      "name": "Colocando Dados",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        780,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "quepasa",
+        "options": {}
+      },
+      "id": "d85c8283-445d-453b-ae05-08323a792174",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        580,
+        580
+      ],
+      "webhookId": "e8d38d79-8f79-4bd1-85f8-fce3d8200233"
+    },
+    {
+      "parameters": {
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}/info ",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "X-QUEPASA-TOKEN",
+              "value": "={{ $node[\"TokenGenerate\"].json.qptoken }}"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "8110a3d3-759e-4a53-82bf-aae924251965",
+      "name": "Verifica INFO",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        4480,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $node[\"Colocando Dados\"].json[\"URL DO QUEPASA\"] }}/info",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "X-QUEPASA-TOKEN",
+              "value": "={{ $node[\"TokenGenerate\"].json.qptoken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "username",
+              "value": "={{ $node[\"Colocando Dados\"].json[\"Seu Email\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0e787ee0-f7d5-4e96-a88a-6de5dcd39262",
+      "name": "Ativa no Painel Quepasa",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        4680,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "qptoken",
+              "value": "={{ $json.identifier }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b4b1de60-79a0-4121-a376-0d816510a128",
+      "name": "TokenGenerate",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        1160,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=INSERT INTO \"public\".\"agent_bots\" (\"name\", \"account_id\", \"created_at\", \"updated_at\")\nSELECT '{{ $env[\"C8Q_QP_BOTTITLE\"] ?? \"quepasabot\" }}', {{ $json[\"ID DA CONTA\"] }}, NOW(), NOW() \nWHERE NOT EXISTS (SELECT NULL FROM \"public\".\"agent_bots\" WHERE \"bot_type\" = '0' AND \"name\" LIKE '{{ $env[\"C8Q_QP_BOTTITLE\"] ?? \"quepasabot\" }}' AND \"account_id\" = {{ $json[\"ID DA CONTA\"] }});\nSELECT \"id\" FROM \"public\".\"agent_bots\" WHERE \"bot_type\" = '0' AND \"name\" LIKE '{{ $env[\"C8Q_QP_BOTTITLE\"] ?? \"quepasabot\" }}' AND \"account_id\" = {{ $json[\"ID DA CONTA\"] }} LIMIT 1;",
+        "additionalFields": {}
+      },
+      "id": "3354b6c7-8e6c-4939-adfb-aee4f501fc60",
+      "name": "Garante AgentBot",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        580
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "postgres": {
+          "id": "1",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## (1.0.0) Recommendations \n* Remember set timeout to 60 seconds ",
+        "height": 254.46482037754592,
+        "width": 505.65878958512553
+      },
+      "id": "19ff712d-3c95-45e9-afff-90b869168f8a",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        180
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Formação da URL": {
+      "main": [
+        [
+          {
+            "node": "Cria o QrCode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cria o QrCode": {
+      "main": [
+        [
+          {
+            "node": "Envia QRCode No Chatwoot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envia QRCode No Chatwoot": {
+      "main": [
+        [
+          {
+            "node": "Qrcode gerado com sucesso!",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Atualiza Webhook": {
+      "main": [
+        [
+          {
+            "node": "Webhook Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Informa Identifier": {
+      "main": [
+        [
+          {
+            "node": "TokenGenerate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Envia Mensagem De Conectado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Passou tempo Tente Novamente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qrcode gerado com sucesso!": {
+      "main": [
+        [
+          {
+            "node": "Aguarda 30 Segundos para Escanear Qrcode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica se Conectou": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aguarda 30 Segundos para Escanear Qrcode": {
+      "main": [
+        [
+          {
+            "node": "Restart Quepasa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Restart Quepasa": {
+      "main": [
+        [
+          {
+            "node": "Success QrCode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Quepasa Info": {
+      "main": [
+        [
+          {
+            "node": "Confirmação Dos Dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Update": {
+      "main": [
+        [
+          {
+            "node": "Verifica se Conectou",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Success QrCode": {
+      "main": [
+        [
+          {
+            "node": "Quepasa Info",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Qrcode Falhou",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirmação Dos Dados": {
+      "main": [
+        [
+          {
+            "node": "Atualiza Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Informa UToken": {
+      "main": [
+        [
+          {
+            "node": "Informa Identifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Garante AToken": {
+      "main": [
+        [
+          {
+            "node": "Garante Vinculo AgentBot à Inbox",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Garante Vinculo AgentBot à Inbox": {
+      "main": [
+        [
+          {
+            "node": "Informa UToken",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Colocando Dados": {
+      "main": [
+        [
+          {
+            "node": "Garante AgentBot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Colocando Dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verifica INFO": {
+      "main": [
+        [
+          {
+            "node": "Ativa no Painel Quepasa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Envia Mensagem De Conectado": {
+      "main": [
+        [
+          {
+            "node": "Verifica INFO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TokenGenerate": {
+      "main": [
+        [
+          {
+            "node": "Formação da URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Garante AgentBot": {
+      "main": [
+        [
+          {
+            "node": "Garante AToken",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 60
+  },
+  "versionId": "64444fcd-8cdc-46d8-ac0c-9b53ef2da27e",
+  "id": "1010",
+  "meta": {
+    "instanceId": "2b4ab318d4f8eba20155e50db9998481bc305e3588e42ee69176091736c9d07e"
+  },
+  "tags": []
+}
