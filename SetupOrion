@@ -3383,7 +3383,7 @@ sleep 1
 wait_chatwoot
 
 ## Mensagem de Passo
-echo -e "\e[97m• MIGRNADO BANCO DE DADOS \e[33m[5/6]\e[0m"
+echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
 echo ""
 sleep 1
 
@@ -3840,7 +3840,7 @@ sleep 1
 wait_chatwoot
 
 ## Mensagem de Passo
-echo -e "\e[97m• MIGRNADO BANCO DE DADOS \e[33m[5/6]\e[0m"
+echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
 echo ""
 sleep 1
 
