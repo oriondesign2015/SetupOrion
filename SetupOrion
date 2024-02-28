@@ -12693,7 +12693,7 @@ while true; do
             ferramenta_evolution
             fi
             ;;
-        3)
+        3.1)
             if verificar_docker_e_portainer_traefik; then
             ferramenta_evolution_arm
             fi
