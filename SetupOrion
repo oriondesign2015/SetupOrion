@@ -2797,7 +2797,7 @@ services:
     environment:
 
     ## Senha do postgres 
-      - POSTGRES_PASSWORD=$senha_postgres 
+      - POSTGRES_PASSWORD=$senha_postgres
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
