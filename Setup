@@ -1,0 +1,25 @@
+#!/bin/bash
+
+sudo apt-get install -y apt-utils
+sudo apt-get install -y dialog
+sudo apt update
+sudo apt upgrade -y
+
+
+# Baixa o script
+curl -sSL https://s3.unifyme.com.br/setup/SetupOrion -o SetupOrion
+
+# Verifica se o download foi bem-sucedido
+if [ $? -eq 0 ]; then
+    # Executa o script baixado
+    chmod +x SetupOrion
+    ./SetupOrion
+else
+    echo "Falha ao baixar o script SetupOrion"
+fi
+
+sudo apt update
+sudo apt upgrade -y
+
+clear
+rm SetupOrion
