@@ -7,7 +7,7 @@ sudo apt upgrade -y
 
 
 # Baixa o script
-curl -sSL https://s3.unifyme.com.br/setup/SetupOrion -o SetupOrion
+curl -sSL https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/SetupOrion -o SetupOrion
 
 # Verifica se o download foi bem-sucedido
 if [ $? -eq 0 ]; then
