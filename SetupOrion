@@ -4728,7 +4728,7 @@ echo ""
 echo -e "\e[33mDominio MinIO:\e[97m https://$url_minio\e[0m"
 echo ""
 
-echo -e "\e[33mDominio S3:\e[97m https://$url_minio\e[0m"
+echo -e "\e[33mDominio S3:\e[97m https://$url_s3\e[0m"
 echo ""
 
 echo -e "\e[33mUsuario:\e[97m $user_minio\e[0m"
@@ -10723,7 +10723,7 @@ sleep 1
 wait_for_postgres
 
 docker exec -i $CONTAINER_ID psql -U postgres <<EOF
-\c chatwoot;
+\c chatwoot_uno;
 update installation_configs set locked = false;
 \q
 EOF
@@ -12683,9 +12683,19 @@ while true; do
             ferramenta_chatwoot
             fi
             ;;
+        2.1)
+            if verificar_docker_e_portainer_traefik; then
+            ferramenta_chatwoot_arm
+            fi
+            ;;
         3)
             if verificar_docker_e_portainer_traefik; then
             ferramenta_evolution
+            fi
+            ;;
+        3)
+            if verificar_docker_e_portainer_traefik; then
+            ferramenta_evolution_arm
             fi
             ;;
         4)
