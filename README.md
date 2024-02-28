@@ -4,6 +4,12 @@
   <b>Você não precisa instalar todos os programas contidos no mesmo, pois você poderá escolher qual das ferramentas você quer instalar.</b>
   Desenvolvido por <b>OrionDesign</b>. Ao utilizar o mesmo, <b>de os créditos</b>!
 </p>
+
+<p align="center">
+  <a href="https://chat.whatsapp.com/Cb3Kw0YlCHIJJqS84eC6ie"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp"></a>    
+  <a href="https://youtube.com/oriondesign_oficial"><img src="https://img.shields.io/badge/Playlist_do_Setup_Orion-FF0000?style=for-the-badge&labelColor=ffffff&logo=youtube&logoColor=FF0000" alt="Inscreva-se no meu canal"></a>
+</p>
+
 <h1></h1>
 <h3>📌 Observações e Recomendações</h3>
 
