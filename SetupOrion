@@ -2,7 +2,7 @@
 ####################################################
 
 versao() {
-echo -e "\e[97mComunidade: https://chat.whatsapp.com/Cb3Kw0YlCHIJJqS84eC6ie                \e[97mVersão do Setup \e[32mv.2.3.1\e[0m"
+echo -e "\e[97mComunidade: https://chat.whatsapp.com/Cb3Kw0YlCHIJJqS84eC6ie                \e[97mVersão do Setup \e[32mv.2.3.2\e[0m"
 }
 
 ####################################################
@@ -947,7 +947,7 @@ wait_chatwoot() {
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
 while true; do
     # Verifica se o serviço chatwoot está ativo
-    if docker service ls --filter "name=chatwoot_chawoot" | grep "1/1"; then
+    if docker service ls --format '{{.Name}} {{.Replicas}}' | awk '$1 ~ /chatwoot_chatwoot/ && $2 == "1/1"'; then
         sleep 10
         break
     fi
