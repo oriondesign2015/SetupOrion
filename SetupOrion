@@ -2,7 +2,7 @@
 ####################################################
 
 versao() {
-echo -e "\e[97mVersão do Setup \e[32mv.2.3.0\e[0m"
+echo -e "\e[97mComunidade: https://chat.whatsapp.com/Cb3Kw0YlCHIJJqS84eC6ie                \e[97mVersão do Setup \e[32mv.2.3.1\e[0m"
 }
 
 ####################################################
@@ -697,6 +697,8 @@ nome_dify() {
 
 nome_remover_stack() {
     clear
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo ""
     echo ""
     echo -e "$branco                  ██████╗ ███████╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗██████╗ \e[0m"
     echo -e "$branco                  ██╔══██╗██╔════╝████╗ ████║██╔═══██╗██║   ██║██╔════╝██╔══██╗\e[0m"
@@ -712,7 +714,9 @@ nome_remover_stack() {
     echo -e "$branco                           ███████║   ██║   ██║  ██║╚██████╗██║  ██╗            \e[0m"
     echo -e "$branco                           ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝            \e[0m"
     echo ""
-    echo ""                                                                                             
+    echo ""
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo""                                                                                             
 }
 
 ####################################################
@@ -12369,6 +12373,40 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+ferramenta_remover_stack() {
+    while true; do
+        # Listar as stacks ativas no Docker Swarm com números
+        clear
+        nome_remover_stack
+        echo "Stacks ativas:"
+        echo ""
+        docker stack ls --format "table {{.Name}}" | awk 'NR>1 { if ($1 == "portainer" || $1 == "traefik") {print "[ \033[0;31m" NR-1" \033[0m] - \033[0;31m" toupper(substr($0, 1, 1)) substr($0, 2) " (CUIDADO) \033[0m" } else {print "[ " NR-1" ] - " toupper(substr($0, 1, 1)) substr($0, 2)} }'
+        echo ""
+        # Solicitar ao usuário que escolha uma stack para remover ou sair
+        read -p "Digite o número da stack que você deseja remover (ou digite '0' para voltar): " user_input
+
+        # Verificar se o usuário deseja sair
+        if [ "$user_input" == "0" ]; then
+            echo "Saindo do script."
+            break
+        fi
+
+        # Obter o nome da stack com base no número fornecido
+        stack_name=$(docker stack ls --format "{{.Name}}" | sed -n "${user_input}p")
+
+        # Verificar se a stack existe
+        if docker stack ps "$stack_name" &> /dev/null; then
+            # Remover a stack
+            docker stack rm "$stack_name"
+            echo "Removendo a stack $stack_name..."
+        else
+            echo "A stack $stack_name não foi encontrada."
+        fi
+    done
+}
+
+
+
 
 
 ####################################################
@@ -12797,7 +12835,7 @@ while true; do
             ;;
         33)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_
+            ferramenta_remover_stack
             fi
             ;;
         34)
