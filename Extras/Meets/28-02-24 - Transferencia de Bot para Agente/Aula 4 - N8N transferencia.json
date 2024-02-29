@@ -1,0 +1,1246 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ $json['url do chatwoot'] }}/api/v1/accounts/{{ $json['Account ID'] }}/conversations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $json['token do usuario'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3bc3b33d-f4db-429e-aeed-175ab816553e",
+      "name": "Puxa as conversas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1340,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "bf29513c-1b2a-44a4-bef9-82825539fb9e",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1940,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('Tratando dados do webhook').item.json.RemoteJig }}",
+              "value2": "={{ $json['tel loop'] }}"
+            }
+          ]
+        }
+      },
+      "id": "60c769e9-d996-4b2c-905f-12ef3eb7caab",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        2340,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "id da conversa",
+              "stringValue": "={{ $json['id loop'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b751b8f5-a2cb-4e9f-9d55-1461c9d5c963",
+      "name": "Guardando dados",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2540,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "RemoteJig",
+              "stringValue": "=+{{ $('Webhook').item.json[\"body\"][\"numero do whatsapp\"].split(\"@\")[0] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0cd5c297-1710-44f1-9c0f-1e9caf08ab4c",
+      "name": "Tratando dados do webhook",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        820,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "url do chatwoot"
+            },
+            {
+              "name": "token do usuario"
+            },
+            {
+              "name": "Account ID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "da88e8f6-1609-49fe-8a44-2db389ae44f2",
+      "name": "Dados Chatwoot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1080,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Dados Chatwoot\nAltere",
+        "height": 264.87203695707643,
+        "width": 257.68174488592643,
+        "color": 3
+      },
+      "id": "325d4f94-f6e8-49d4-af0f-79b4d4dcb8b0",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        800.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data.payload",
+        "options": {}
+      },
+      "id": "9cf691cf-c614-4e5d-93a1-da42961a6342",
+      "name": "Listando itens",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 3.1,
+      "position": [
+        1540,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "phone_number",
+              "stringValue": "={{ $json.meta.sender.phone_number }}"
+            },
+            {
+              "name": "id",
+              "stringValue": "={{ $json.id }}"
+            },
+            {
+              "name": "agente",
+              "stringValue": "={{ $json.meta.assignee.name }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "67d52496-60b3-47f3-90d1-adca1ac81b40",
+      "name": "Separando dados",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1740,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "id loop",
+              "stringValue": "={{ $json.id }}"
+            },
+            {
+              "name": "tel loop",
+              "stringValue": "={{ $json.meta.sender.phone_number }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b17cad18-bb07-4dd7-bf39-6549d32de949",
+      "name": "Dados para testar",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        2140,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json['id da conversa'] }}",
+        "options": {}
+      },
+      "id": "ef425817-d959-4004-8007-b3da636dcaf4",
+      "name": "Retornando dado para o typebot",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        3080,
+        800.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=não achei",
+        "options": {}
+      },
+      "id": "0f1dac68-b279-4c81-bdc6-a30da1203a90",
+      "name": "Retornando erro para o typebot",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2140,
+        680.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Fluxo para verificar ID da conversa\nUsado para verificar o ID da conversa dentro do chatwoot usando uma requisição do typebot.",
+        "height": 731.2175401889145,
+        "width": 3283.756506012779,
+        "color": 7
+      },
+      "id": "0ba0c257-ac95-48de-aea8-5aee40f12133",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "buscar-id-conversa",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "f0d51983-4f8a-4580-8686-0c4ec1dcb7f4",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        620,
+        880.1344119972381
+      ],
+      "webhookId": "3ebffc8a-20df-4500-a3f0-3085fe3541de"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transferir-1",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "558da368-c1d3-4f89-85a5-fab0c8676cd5",
+      "name": "Trasferir-1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        620,
+        1520.1344119972382
+      ],
+      "webhookId": "3ebffc8a-20df-4500-a3f0-3085fe3541de"
+    },
+    {
+      "parameters": {
+        "content": "## Transferir para o time\nTransferir para o setor de ",
+        "height": 515.1960207531664,
+        "width": 1847.3347715868017,
+        "color": 7
+      },
+      "id": "a4f711b6-e707-4688-8ef3-68480e958d69",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        1240.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "url do chatwoot"
+            },
+            {
+              "name": "token do usuario"
+            },
+            {
+              "name": "Account ID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d9594482-986c-43ef-99ec-289fe68e1d6e",
+      "name": "Dados Chatwoot1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1120,
+        1520.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "id da conversa",
+              "stringValue": "={{ $json.body.id }}"
+            },
+            {
+              "name": "protocolo",
+              "stringValue": "={{DateTime.fromMillis(1616344794000).toFormat('yyMMddHHmmss')}}-X"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "29279663-6f87-46cf-8560-b4b049d4d6d5",
+      "name": "Tratando dados do webhook1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        840,
+        1520.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados Chatwoot1').item.json[\"url do chatwoot\"] }}/api/v1/accounts/{{ $('Dados Chatwoot1').item.json[\"Account ID\"] }}/conversations/{{ $('Tratando dados do webhook1').item.json[\"id da conversa\"] }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados Chatwoot1').item.json[\"token do usuario\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"content\": \"**[DADOS DO CLIENTE]**\\n\\nNome: **{{ $('Tratando dados do webhook1').item.json[\"Nome\"] }}**\\n\\nCPF: **{{ $('Tratando dados do webhook1').item.json[\"CPF\"] }}**\\n\\nOpção escolhida: **{{ $('Tratando dados do webhook1').item.json[\"Setor\"] }}**\\n\\nProtocolo: **{{ $('Tratando dados do webhook1').item.json[\"protocolo\"] }}**\\n\\nLembre-se de se identificar antes de iniciar o atendimento.\",\n  \"message_type\": \"outgoing\",\n  \"private\": true\n}",
+        "options": {}
+      },
+      "id": "4c4255d2-7e8f-4875-a848-f2d587814909",
+      "name": "Enviando mensagem privada",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1840,
+        1520.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados Chatwoot1').item.json[\"url do chatwoot\"] }}/api/v1/accounts/{{ $('Dados Chatwoot1').item.json[\"Account ID\"] }}/conversations/{{ $('Tratando dados do webhook1').item.json[\"id da conversa\"] }}/custom_attributes\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados Chatwoot1').item.json[\"token do usuario\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"custom_attributes\":\n        {\"protocolo\":\"{{ $('Tratando dados do webhook1').item.json.protocolo }}\"}\n}",
+        "options": {}
+      },
+      "id": "296c00b7-f0c3-41f0-add7-78391b5684d7",
+      "name": "Atributo personalizado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2060,
+        1520.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados Chatwoot1').item.json[\"url do chatwoot\"] }}/api/v1/accounts/{{ $('Dados Chatwoot1').item.json[\"Account ID\"] }}/conversations/{{ $('Tratando dados do webhook1').item.json[\"id da conversa\"] }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados Chatwoot1').item.json[\"token do usuario\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"content\": \"Segue seu numero de protocolo: *{{ $('Tratando dados do webhook1').item.json.protocolo }}*. Em instantes um de nossos colaboradores irá te atender.\",\n  \"message_type\": \"outgoing\",\n  \"private\": false\n}",
+        "options": {}
+      },
+      "id": "89b18076-b76e-445d-ae35-8d58513b03b1",
+      "name": "Enviando mensagem e protocolo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1640,
+        1520.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados Chatwoot').item.json[\"url do chatwoot\"] }}/api/v1/accounts/{{ $('Dados Chatwoot').item.json[\"Account ID\"] }}/conversations/{{ $json[\"id\"] }}/labels",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados Chatwoot').item.json[\"token do usuario\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"labels\": [\n    \"bot_atendendo\"\n  ]\n}",
+        "options": {}
+      },
+      "id": "74689352-61cd-4d57-a108-5f10da8d64fc",
+      "name": "Aplica etiqueta",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3080,
+        620.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Encerrando Bot\nTransferir para o setor de ",
+        "height": 489.610009563755,
+        "width": 1210.5004477123339,
+        "color": 7
+      },
+      "id": "88a99bab-0875-45ab-9434-d458a68f7fad",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        1820.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "id da conversa",
+              "stringValue": "={{ $json.body.id }}"
+            },
+            {
+              "name": "remotejid",
+              "stringValue": "={{ $json.body.meta.sender.phone_number }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "da2b5f61-3193-4e1e-ac41-17c38553e3c4",
+      "name": "Tratando dados do webhook2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        860,
+        2020.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "encerrando",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a535e4dd-f156-4cf1-a107-646e4c0bef7f",
+      "name": "Encerrando",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        620,
+        2020.1344119972382
+      ],
+      "webhookId": "3ebffc8a-20df-4500-a3f0-3085fe3541de"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json[\"url da Evolution\"] }}/typebot/changeStatus/{{ $json[\"nome da instancia\"] }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "={{ $json[\"token da instancia\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"remoteJid\": \"{{ $json[\"remotejid\"] }}\",\n    \"status\": \"closed\"\n}",
+        "options": {}
+      },
+      "id": "4fb84d68-b8eb-4d6f-8bfe-7e6577be2c33",
+      "name": "Fechando bot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1400,
+        2020.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "{{UrlEvo}}/typebot/changeStatus/{{instancia}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "{{apikey}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"remoteJid\": \"{{ $('Trasferir-1').item.json[\"body\"][\"remoteJid\"] }}\",\n    \"status\": \"paused\"\n}",
+        "options": {}
+      },
+      "id": "46b0c4f2-bae4-4149-9ad3-2033de27f5fe",
+      "name": "Pausando Bot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2060,
+        1300.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "fields": {
+          "values": [
+            {
+              "name": "url da Evolution"
+            },
+            {
+              "name": "nome da instancia"
+            },
+            {
+              "name": "token da instancia"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bb0aae7a-5715-4b6c-ac03-ab599a9e1780",
+      "name": "Dados da Evolution",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        1160,
+        2020.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Dados Chatwoot\nAltere",
+        "height": 222.64516376869642,
+        "width": 241.17802378671115,
+        "color": 3
+      },
+      "id": "2fa7f19e-f794-4be0-9811-35211dfbf787",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1042.8945771329534,
+        1460.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Nome etiqueta\nAltere",
+        "height": 209.21590503473666,
+        "width": 245.2068014068987,
+        "color": 3
+      },
+      "id": "10645652-4d48-4f30-87ad-485b47354f50",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        1240.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Dados Evolution\nAltere",
+        "height": 215.93053440171659,
+        "width": 228.1013785398523,
+        "color": 3
+      },
+      "id": "8bc7fe0c-76d5-4996-9901-bd17de51084d",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        1240.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados Chatwoot1').item.json[\"url do chatwoot\"] }}/api/v1/accounts/{{ $('Dados Chatwoot1').item.json[\"Account ID\"] }}/conversations/{{ $('Tratando dados do webhook1').item.json[\"id da conversa\"] }}/labels",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados Chatwoot1').item.json[\"token do usuario\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"labels\": [\n    \"atendimento_humano\"\n  ]\n}",
+        "options": {}
+      },
+      "id": "b6afaee4-5604-444d-8887-1285ce47af1d",
+      "name": "Etiqueta 1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1380,
+        1300.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Nome etiqueta\nAltere",
+        "height": 228.85707920880432,
+        "width": 228.1013785398523,
+        "color": 3
+      },
+      "id": "9367d025-261e-4dbf-ad8d-be5abaf32feb",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3020,
+        540.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Dados Evolution\nAltere",
+        "height": 250.40145129019012,
+        "width": 262.57229542832584,
+        "color": 3
+      },
+      "id": "b31a8d5e-aebd-4109-ae1a-318da9cd3bed",
+      "name": "Sticky Note10",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        1940.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Enviando mensagem\nAltere",
+        "height": 222.64516376869642,
+        "width": 404.77209055811295,
+        "color": 3
+      },
+      "id": "47198d6e-3d59-4397-b46b-02f116c390c4",
+      "name": "Sticky Note12",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        1460.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Dados do Webhook\nAltere",
+        "height": 222.64516376869642,
+        "width": 261.8845883099779,
+        "color": 3
+      },
+      "id": "d807a2c7-b743-4ded-894c-aea0f4fa0994",
+      "name": "Sticky Note13",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        760,
+        1460.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c0f7bcbc-f052-46b8-8259-434ccf858f56",
+              "leftValue": "={{ $('Guardando dados').item.json[\"agente\"] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a9ae1f02-9fd1-4e60-a99d-4e0e1d91a6dd",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2760,
+        880.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "{{UrlEvo}}/typebot/changeStatus/{{instancia}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "{{apikey}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"remoteJid\": \"{{ $('Webhook').item.json[\"body\"][\"numero do whatsapp\"] }}\",\n    \"status\": \"paused\"\n}",
+        "options": {}
+      },
+      "id": "46e5f5c8-785f-4f6b-be04-8f5b2116e120",
+      "name": "Pausar bot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3320,
+        1040.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Dados Evolution\nAltere",
+        "height": 215.93053440171659,
+        "width": 230.98614464558358,
+        "color": 3
+      },
+      "id": "c84cf6ba-c127-4107-88b1-fb9eda5556c1",
+      "name": "Sticky Note14",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3257,
+        960.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Dados Chatwoot').item.json[\"url do chatwoot\"] }}/api/v1/accounts/{{ $('Dados Chatwoot').item.json[\"Account ID\"] }}/conversations/{{ $json[\"id\"] }}/labels",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $('Dados Chatwoot').item.json[\"token do usuario\"] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"labels\": [\n    \"atendimento_humano\"\n  ]\n}",
+        "options": {}
+      },
+      "id": "8a819b6b-830a-436c-b200-dbe8148538ce",
+      "name": "Aplica etiqueta1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        3080,
+        1040.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Nome etiqueta\nAltere",
+        "height": 214.43324868014795,
+        "width": 228.1013785398523,
+        "color": 3
+      },
+      "id": "dc0b6d86-68d9-456a-a85f-99c8af67b4d1",
+      "name": "Sticky Note15",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3020,
+        960.1344119972381
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Setor\nAltere",
+        "height": 220.01933000339758,
+        "width": 250.6085138912291,
+        "color": 3
+      },
+      "id": "8c3eceb9-2289-48f4-a6c6-4858870679b7",
+      "name": "Sticky Note16",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        1460.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json['url do chatwoot'] }}/api/v1/accounts/{{ $json['Account ID'] }}/conversations/{{ $json[\"id da conversa\"] }}/assignments",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "={{ $json['token do usuario'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"team_id\": 1\n}",
+        "options": {}
+      },
+      "id": "227eb27b-d7a5-4a27-89db-70fa3a9293bf",
+      "name": "Transferindo conversa 1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1380,
+        1520.1344119972382
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=PARAR",
+        "options": {}
+      },
+      "id": "72b043d0-1072-4488-be31-89f712777bf3",
+      "name": "Retornando dado para o typebot1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        3540,
+        1040
+      ]
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.oriondesign.art.br",
+            "user-agent": "got (https://github.com/sindresorhus/got)",
+            "content-length": "53",
+            "accept-encoding": "gzip, deflate, br",
+            "content-type": "application/json",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.oriondesign.art.br",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "3f816f4b04ed",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "numero do whatsapp": "5511973052593@s.whatsapp.net"
+          }
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Retornando erro para o typebot",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dados para testar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Guardando dados",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tratando dados do webhook": {
+      "main": [
+        [
+          {
+            "node": "Dados Chatwoot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados Chatwoot": {
+      "main": [
+        [
+          {
+            "node": "Puxa as conversas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listando itens": {
+      "main": [
+        [
+          {
+            "node": "Separando dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Separando dados": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Puxa as conversas": {
+      "main": [
+        [
+          {
+            "node": "Listando itens",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados para testar": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardando dados": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Tratando dados do webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trasferir-1": {
+      "main": [
+        [
+          {
+            "node": "Tratando dados do webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados Chatwoot1": {
+      "main": [
+        [
+          {
+            "node": "Etiqueta 1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Transferindo conversa 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tratando dados do webhook1": {
+      "main": [
+        [
+          {
+            "node": "Dados Chatwoot1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviando mensagem privada": {
+      "main": [
+        [
+          {
+            "node": "Atributo personalizado",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Pausando Bot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviando mensagem e protocolo": {
+      "main": [
+        [
+          {
+            "node": "Enviando mensagem privada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tratando dados do webhook2": {
+      "main": [
+        [
+          {
+            "node": "Dados da Evolution",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Encerrando": {
+      "main": [
+        [
+          {
+            "node": "Tratando dados do webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados da Evolution": {
+      "main": [
+        [
+          {
+            "node": "Fechando bot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Retornando dado para o typebot",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Aplica etiqueta",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Aplica etiqueta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aplica etiqueta1": {
+      "main": [
+        [
+          {
+            "node": "Pausar bot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transferindo conversa 1": {
+      "main": [
+        [
+          {
+            "node": "Enviando mensagem e protocolo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pausar bot": {
+      "main": [
+        [
+          {
+            "node": "Retornando dado para o typebot1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "65118113-4920-425c-8a13-47d75ded6747",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "daa4a438584ccf4bebb0397fd14280911434d33ea315bbcfc6b3168225983416"
+  },
+  "id": "FAvCuqcHVpks5NyN",
+  "tags": [
+    {
+      "name": "OrionDesign",
+      "id": "iV1P9IYcAOZtFPQN",
+      "createdAt": "2024-02-29T13:05:37.791Z",
+      "updatedAt": "2024-02-29T13:05:37.791Z"
+    }
+  ]
+}
