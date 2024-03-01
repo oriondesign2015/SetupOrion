@@ -10282,7 +10282,7 @@ cd dados_vps
 cat > dados_odoo <<EOL
 [ ODOO ]
 
-Dominio do odoo: http://$url_odoo=
+Dominio do odoo: http://$url_odoo
 
 Usuario: Precisa criar no primeiro acesso do Odoo
 
