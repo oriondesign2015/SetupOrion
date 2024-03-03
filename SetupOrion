@@ -19,8 +19,9 @@ reset="\e[0m"
 ####################################################
 
 ## Localização dos dados para proximas instalações
-
-arquivo="/root/dados_vps/dados_vps"
+home_directory="$HOME"
+#arquivo="/root/dados_vps/dados_vps"
+arquivo="${home_directory}/dados_vps/dados_vps"
 
 dados() {
     nome_servidor=$(grep "Nome do Servidor:" "$arquivo" | awk -F': ' '{print $2}')
@@ -692,6 +693,21 @@ nome_dify() {
     echo ""
     echo ""
 }
+
+## Titulo Ollama
+
+nome_ollama() {
+    clear
+    echo ""
+    echo -e "$branco                            ██████╗ ██╗     ██╗      █████╗ ███╗   ███╗ █████╗ \e[0m"
+    echo -e "$branco                           ██╔═══██╗██║     ██║     ██╔══██╗████╗ ████║██╔══██╗\e[0m"
+    echo -e "$branco                           ██║   ██║██║     ██║     ███████║██╔████╔██║███████║\e[0m"
+    echo -e "$branco                           ██║   ██║██║     ██║     ██╔══██║██║╚██╔╝██║██╔══██║\e[0m"
+    echo -e "$branco                           ╚██████╔╝███████╗███████╗██║  ██║██║ ╚═╝ ██║██║  ██║\e[0m"
+    echo -e "$branco                            ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝\e[0m"
+    echo ""
+    echo ""                                   
+}
 # ===================================================================================================
 ## Titulo Remover Stack []
 
@@ -774,9 +790,9 @@ menu_instalador(){
     echo -e "${amarelo}[ 7 ]${reset} -  ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus +cAdvisor ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 9 ]${reset} -  ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}" # ${amarelo}[ 35 ]${reset} - ${branco}Ainda Vazio${reset}"
+    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}" # ${amarelo}[ 36 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}" # ${amarelo}[ 37 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}" # ${amarelo}[ 38 ]${reset} - ${branco}Ainda Vazio${reset}"
@@ -1325,6 +1341,19 @@ wait_dify(){
     while true; do
         # Verifica se o serviço chatwoot está ativo
         if docker service ls --filter "name=dify" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_ollama(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço chatwoot está ativo
+        if docker service ls --filter "name=ollama" | grep "1/1"; then
             sleep 10
             break
         fi
@@ -12373,6 +12402,213 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+##  ██████╗ ██╗     ██╗      █████╗ ███╗   ███╗ █████╗ 
+## ██╔═══██╗██║     ██║     ██╔══██╗████╗ ████║██╔══██╗
+## ██║   ██║██║     ██║     ███████║██╔████╔██║███████║
+## ██║   ██║██║     ██║     ██╔══██║██║╚██╔╝██║██╔══██║
+## ╚██████╔╝███████╗███████╗██║  ██║██║ ╚═╝ ██║██║  ██║
+##  ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝
+
+ferramenta_ollama() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_ollama
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o dominio para o Ollama (ex: ollama.oriondesign.art.br): \e[0m" && read -r url_ollama
+    echo ""
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_ollama
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ##Informação do Dominio
+    echo -e "\e[33mDominio para o Ollama:\e[97m $url_ollama\e[0m"
+    echo ""
+    
+     ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_ollama
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OLLAMA \e[33m[1/4]\e[0m"
+echo ""
+sleep 1
+
+## NADA
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO OLLAMA \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
+
+## Criando a stack
+cat > ollama.yaml <<EOL
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    hostname: ollama
+    container_name: ollama
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ollama.rule=Host(\`$url_ollama\`)
+      - traefik.http.routers.ollama.entrypoints=websecure
+      - traefik.http.routers.ollama.tls.certresolver=letsencryptresolver
+      - traefik.http.services.ollama.loadbalancer.server.port=11434
+
+  ollama-webui:
+    image: ghcr.io/ollama-webui/ollama-webui:main
+    container_name: ollama-webui
+    volumes:
+      - ollama-webui:/app/backend/data
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_API_BASE_URL=http://ollama:11434/api
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ollama-webui.rule=Host(\`$url_ollama\`)
+      - traefik.http.routers.ollama-webui.entrypoints=websecure
+      - traefik.http.routers.ollama-webui.tls.certresolver=letsencryptresolver
+      - traefik.http.services.ollama-webui.loadbalancer.server.port=8080
+
+volumes:
+  ollama_data: {}
+  ollama-webui: {}
+
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+    echo "Não foi possivel criar a stack do Ollama"
+fi
+
+docker stack deploy --prune --resolve-image always -c ollama.yaml ollama > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+    echo "Não foi possivel Subir a stack do Ollama"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_nocodb para verificar se o serviço esta online
+wait_nocodb
+
+cd dados_vps
+
+cat > dados_ollama <<EOL
+[ OLLAMA ]
+
+Dominio do Ollama: https://$url_ollama
+
+Ollama WebUI: Precisa criar no primeiro acesso do Ollama
+
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ Ollama ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_ollama\e[0m"
+echo ""
+
+echo -e "\e[33mOllamaWebUI:\e[97m Precisa criar no primeiro acesso do Ollama\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ferramenta_remover_stack() {
     while true; do
         # Listar as stacks ativas no Docker Swarm com números
@@ -12845,12 +13081,12 @@ while true; do
             ;;
         33)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_remover_stack
+            ferramenta_ollama
             fi
             ;;
         34)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_
+            ferramenta_remover_stack
             fi
             ;;
         35)
