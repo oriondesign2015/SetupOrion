@@ -1017,7 +1017,7 @@ while true; do
 done
 }
 
-chatwoot_nestor() {
+wait_chatwoot_nestor() {
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
 while true; do
     # Verifica se o serviço chatwoot está ativo
