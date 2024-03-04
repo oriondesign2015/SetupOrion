@@ -13610,7 +13610,7 @@ while true; do
             clear
             nome_saindo
             echo ""
-            break
+            break 
             ;;
         36)
             if verificar_docker_e_portainer_traefik; then
