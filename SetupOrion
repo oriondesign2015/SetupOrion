@@ -708,6 +708,25 @@ nome_ollama() {
     echo ""
     echo ""                                   
 }
+nome_saindo() {
+    clear
+    echo ""
+    echo -e "$branco                ███████╗██╗ █████╗ ███╗   ██╗██████╗  ██████╗     ██████╗  ██████╗ \e[0m"
+    echo -e "$branco                ██╔════╝██║██╔══██╗████╗  ██║██╔══██╗██╔═══██╗    ██╔══██╗██╔═══██╗\e[0m"
+    echo -e "$branco                ███████╗██║███████║██╔██╗ ██║██║  ██║██║   ██║    ██║  ██║██║   ██║\e[0m"
+    echo -e "$branco                ╚════██║██║██╔══██║██║╚██╗██║██║  ██║██║   ██║    ██║  ██║██║   ██║\e[0m"
+    echo -e "$branco                ███████║██║██║  ██║██║ ╚████║██████╔╝╚██████╔╝    ██████╔╝╚██████╔╝\e[0m"
+    echo -e "$branco                ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝     ╚═════╝  ╚═════╝ \e[0m"
+    echo -e "$branco                                                                   \e[0m"
+    echo -e "$branco                           ███████╗███████╗████████╗██╗   ██╗██████╗                   \e[0m"
+    echo -e "$branco                           ██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔══██╗                  \e[0m"
+    echo -e "$branco                           ███████╗█████╗     ██║   ██║   ██║██████╔╝                  \e[0m"
+    echo -e "$branco                           ╚════██║██╔══╝     ██║   ██║   ██║██╔═══╝                   \e[0m"       
+    echo -e "$branco                           ███████║███████╗   ██║   ╚██████╔╝██║                       \e[0m"
+    echo -e "$branco                           ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝                       \e[0m"
+    echo ""
+    echo "" 
+}
 # ===================================================================================================
 ## Titulo Remover Stack []
 
@@ -783,7 +802,7 @@ menu_instalador(){
     echo -e "${amarelo}[ 2 ]${reset} -  ${branco}Chatwoot                                ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse ${verde}[NOVO]${reset}"
     echo -e "${branco}  '-->${amarelo}[ 2.1 ]${reset} - ${branco}Chatwoot (ARM)                   ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 3 ]${reset} -  ${branco}Evolution API                           ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo ${verde}[NOVO]${reset}"
-    echo -e "${branco}  '-->${amarelo}[ 3.1 ]${reset} - ${branco}Evolution API (ARM)              ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Clairton ${verde}[NOVO]${reset}"
+    echo -e "${branco}  '-->${amarelo}[ 3.1 ]${reset} - ${branco}Evolution API (ARM)              ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor (ft. Francis) ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 4 ]${reset} -  ${branco}MinIO                                   ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 5 ]${reset} -  ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 6 ]${reset} -  ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API ${verde}[NOVO]${reset}"
@@ -997,6 +1016,20 @@ while true; do
     sleep 5
 done
 }
+
+chatwoot_nestor() {
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+while true; do
+    # Verifica se o serviço chatwoot está ativo
+    if docker service ls --filter "name=chatwoot_nestor" | grep "1/1"; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+}
+
 
 wait_evolution() {
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
@@ -1506,6 +1539,51 @@ criar_banco_postgres_chatwoot_uno() {
 
                 if [ $? -eq 0 ]; then
                     echo "Banco de dados chatwoot_uno criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
+criar_banco_postgres_chatwoot_nestor() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_nestor"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados chatwoot_nestor já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS chatwoot_nestor;"
+                    echo "Banco de dados chatwoot_nestor apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot_nestor;"
+                    
+                    echo "Banco de dados chatwoot_nestor criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot_nestor;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_nestor"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados chatwoot_nestor criado com sucesso."
                     break
                 else
                     echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -10816,6 +10894,445 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
+## ██╔════╝██║  ██║██╔══██╗╚══██╔══╝██║    ██║██╔═══██╗██╔═══██╗╚══██╔══╝
+## ██║     ███████║███████║   ██║   ██║ █╗ ██║██║   ██║██║   ██║   ██║   
+## ██║     ██╔══██║██╔══██║   ██║   ██║███╗██║██║   ██║██║   ██║   ██║   
+## ╚██████╗██║  ██║██║  ██║   ██║   ╚███╔███╔╝╚██████╔╝╚██████╔╝   ██║   
+##  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚══╝╚══╝  ╚═════╝  ╚═════╝    ╚═╝   
+##
+##         ███╗   ██╗███████╗███████╗████████╗ ██████╗ ██████╗ 
+##         ████╗  ██║██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
+##         ██╔██╗ ██║█████╗  ███████╗   ██║   ██║   ██║██████╔╝
+##         ██║╚██╗██║██╔══╝  ╚════██║   ██║   ██║   ██║██╔══██╗
+##         ██║ ╚████║███████╗███████║   ██║   ╚██████╔╝██║  ██║
+##         ╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+                                                    
+                                                               
+ferramenta_chatwoot_nestor() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_chatwoot
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -en "\e[33mDigite o Dominio para o Chatwoot (ex: chatwoot.oriondesign.art.br): \e[0m" && read -r url_chatwoot
+    echo ""
+    
+    ## Pega o nome do dominio para ser o nome da empresa
+    nome_empresa_chatwoot="$nome_servidor"
+    
+    ## Pergunta o email SMTP
+    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_admin_chatwoot
+    echo ""
+    
+    ## Define o dominio SMTP com o dominio do email
+    dominio_smtp_chatwoot=$(echo "$email_admin_chatwoot" | cut -d "@" -f 2)
+    
+    ## Pergunta a senha do SMTP
+    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_chatwoot
+    echo ""
+    
+    ## Pergunta o Host SMTP do email
+    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_chatwoot
+    echo ""
+    
+    ## Pergunta a porta SMTP do email
+    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_chatwoot
+    
+    
+    ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
+    if [ "$porta_smtp_chatwoot" -eq 465 ]; then
+     sobre_ssl=true
+    else
+     sobre_ssl=false
+    fi
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_chatwoot
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ## Informação sobre URL
+    echo -e "\e[33mDominio do Chatwoot:\e[97m $url_chatwoot\e[0m"
+    echo ""
+
+    ## Informação sobre Nome da Empresa
+    echo -e "\e[33mNome da Empresa:\e[97m $nome_empresa_chatwoot\e[0m"
+    echo ""
+
+    ## Informação sobre Email de SMTP
+    echo -e "\e[33mEmail do SMTP:\e[97m $email_admin_chatwoot\e[0m"
+    echo ""
+
+    ## Informação sobre Senha de SMTP
+    echo -e "\e[33mSenha do SMTP:\e[97m $senha_email_chatwoot\e[0m"
+    echo ""
+
+    ## Informação sobre Host SMTP
+    echo -e "\e[33mHost SMTP:\e[97m $smtp_email_chatwoot\e[0m"
+    echo ""
+
+    ## Informação sobre Porta SMTP
+    echo -e "\e[33mPorta SMTP:\e[97m $porta_smtp_chatwoot\e[0m"
+    echo ""
+    echo ""
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_chatwoot
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO CHATWOOT NESTOR \e[33m[1/5]\e[0m"
+echo ""
+sleep 1
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES E REDIS \e[33m[2/5]\e[0m"
+echo ""
+sleep 1
+
+## Aqui vamos fazer uma verificação se já existe Postgres e redis instalado
+## Se tiver ele vai criar um banco de dados no postgres ou perguntar se deseja apagar o que já existe e criar outro
+
+## Verifica container postgres e cria banco no postgres
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+    pegar_senha_postgres > /dev/null 2>&1
+    criar_banco_postgres_chatwoot_nestor
+else
+    ferramenta_postgres > /dev/null 2>&1
+    pegar_senha_postgres > /dev/null 2>&1
+    criar_banco_postgres_chatwoot_nestor
+fi
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+fi
+
+## Verifica container redis
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    echo ""
+else
+    ferramenta_redis > /dev/null 2>&1
+fi
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO CHATWOOT NESTOR \e[33m[3/5]\e[0m"
+echo ""
+sleep 1
+
+## Neste passo vamos estar criando a Stack yaml do Chatwoot na pasta /root/
+## Isso possibilitará que o usuario consiga edita-lo posteriormente
+
+## Depois vamos instalar o Chatwoot e verificar se esta tudo certo.
+
+## Criando key aleatória
+encryption_key=$(openssl rand -hex 16)
+
+## Criando a stack
+cat > chatwoot_nestor.yaml <<EOL
+version: "3.7"
+
+services:
+  chatwoot_nestor_app:
+    image: francisbreit/chatwoot-v366-nestor:homolog ## Versão do Chatwoot NESTOR
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    entrypoint: docker/entrypoints/rails.sh
+    volumes:
+      - chatwoot_nestor_data:/app/storage ## Diretório dos arquivos de conversa
+      - chatwoot_nestor_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+    environment:
+      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
+      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
+      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
+      - DEFAULT_LOCALE=pt_BR
+      - FORCE_SSL=true
+      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
+      - POSTGRES_DATABASE=chatwoot_nestor
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
+      - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
+      - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
+      - SMTP_PORT=$porta_smtp_chatwoot ## Porta SMTP
+      - SMTP_SSL=$sobre_ssl ## Se a porta for 465 = true | Se a porta for 587 = false
+      - SMTP_USERNAME=$email_admin_chatwoot ## Email SMTP
+      - SMTP_PASSWORD=$senha_email_chatwoot ## Senha do SMTP
+      - SMTP_AUTHENTICATION=login
+      - SMTP_ENABLE_STARTTLS_AUTO=true
+      - SMTP_OPENSSL_VERIFY_MODE=peer
+      - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.chatwoot_nestor_app.rule=Host(\`$url_chatwoot\`)
+        - traefik.http.routers.chatwoot_nestor_app.entrypoints=websecure
+        - traefik.http.routers.chatwoot_nestor_app.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.chatwoot_nestor_app.priority=1
+        - traefik.http.routers.chatwoot_nestor_app.service=chatwoot_nestor_app
+        - traefik.http.services.chatwoot_nestor_app.loadbalancer.server.port=3000 
+        - traefik.http.services.chatwoot_nestor_app.loadbalancer.passhostheader=true 
+        - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
+        - traefik.http.routers.chatwoot_nestor_app.middlewares=sslheader@docker
+
+  chatwoot_nestor_sidekiq:
+    image: francisbreit/chatwoot-v366-nestor:homolog ## Versão do Chatwoot NESTOR
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - chatwoot_nestor_data:/app/storage ## Diretório dos arquivos de conversa
+      - chatwoot_nestor_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+    environment:
+      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
+      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
+      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
+      - DEFAULT_LOCALE=pt_BR
+      - FORCE_SSL=true
+      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
+      - POSTGRES_DATABASE=chatwoot_nestor
+      - ACTIVE_STORAGE_SERVICE=local
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
+      - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
+      - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
+      - SMTP_PORT=$porta_smtp_chatwoot ## Porta SMTP
+      - SMTP_SSL=$sobre_ssl ## Se a porta for 465 = true | Se a porta for 587 = false
+      - SMTP_USERNAME=$email_admin_chatwoot ## Email SMTP
+      - SMTP_PASSWORD=$senha_email_chatwoot ## Senha do SMTP
+      - SMTP_AUTHENTICATION=login
+      - SMTP_ENABLE_STARTTLS_AUTO=true
+      - SMTP_OPENSSL_VERIFY_MODE=peer
+      - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+volumes:
+  chatwoot_nestor_data:
+    external: true
+    name: chatwoot_nestor_data
+  chatwoot_nestor_public_orion:
+    external: true
+    name: chatwoot_nestor_public_orion
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+    echo "Não foi possivel criar a stack do Chatwoot"
+fi
+
+docker stack deploy --prune --resolve-image always -c chatwoot_nestor.yaml chatwoot_nestor > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+    echo "Não foi possivel subir a stack do Chatwoot"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO \e[33m[4/5]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_chatwoot_nestor para verificar se o serviço esta online
+wait_chatwoot_nestor
+
+## Mensagem de Passo
+echo -e "\e[97m• PREPARANDO BANCO DE DADOS  \e[33m[5/5]\e[0m"
+echo ""
+sleep 1
+
+## Aqui vamos estar migrando o banco de dados usando o comando "bundle exec rails db:chatwoot_prepare"
+
+## Basicamente voce poderia entrar no banco de dados do chatwoot e executar o comando por lá tambem
+
+container_name="chatwoot_nestor_chatwoot_nestor_app"
+
+max_wait_time=1200
+
+wait_interval=60
+
+elapsed_time=0
+
+while [ $elapsed_time -lt $max_wait_time ]; do
+  CONTAINER_ID=$(docker ps -q --filter "name=$container_name")
+  if [ -n "$CONTAINER_ID" ]; then
+    break
+  fi
+  sleep $wait_interval
+  elapsed_time=$((elapsed_time + wait_interval))
+done
+
+if [ -z "$CONTAINER_ID" ]; then
+  echo "O contêiner não foi encontrado após $max_wait_time segundos."
+  exit 1
+fi
+
+docker exec -it "$CONTAINER_ID" bundle exec rails db:chatwoot_prepare
+
+if [ $? -eq 0 ]; then
+    echo "1/1 - [ OK ]"
+else
+    echo "1/1 - [ OFF ]"
+    echo "Não foi possivel migrar o banco de dados"
+fi
+
+## Salvando informações da instalação dentro de /dados_vps/
+cd dados_vps
+
+cat > dados_chatwoot_nestor <<EOL
+[ CHATWOOT NESTOR ]
+
+Dominio do Chatwoot: https://$url_chatwoot
+
+Usuario: Precisa criar dentro do Chatwoot
+
+Senha: Precisa criar dentro do Chatwoot
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ CHATWOOT NESTOR ]\e[0m"
+echo ""
+
+echo -e "\e[97mDominio:\e[33m https://$url_chatwoot\e[0m"
+echo ""
+
+echo -e "\e[97mUsuario:\e[33m Precisa criar dentro do Chatwoot\e[0m"
+echo ""
+
+echo -e "\e[97mSenha:\e[33m Precisa criar dentro do Chatwoot\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ## ██╗   ██╗███╗   ██╗ ██████╗      █████╗ ██████╗ ██╗
 ## ██║   ██║████╗  ██║██╔═══██╗    ██╔══██╗██╔══██╗██║
 ## ██║   ██║██╔██╗ ██║██║   ██║    ███████║██████╔╝██║
@@ -13046,7 +13563,7 @@ while true; do
             ;;
         26)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_chatwoot_clairton
+            ferramenta_chatwoot_nestor
             fi
             ;;
         27)
@@ -13090,9 +13607,10 @@ while true; do
             fi
             ;;
         35)
-            if verificar_docker_e_portainer_traefik; then
-            ferramenta_
-            fi
+            clear
+            nome_saindo
+            echo ""
+            break
             ;;
         36)
             if verificar_docker_e_portainer_traefik; then
