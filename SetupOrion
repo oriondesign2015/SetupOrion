@@ -11358,57 +11358,57 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio da UnoApi
-    echo -e "\e[97mPasso$amarelo 1/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/11\e[0m"
     echo -en "\e[33mDigite o Dominio para a Uno API (ex: unoapi.oriondesign.art.br): \e[0m" && read -r url_unoapi
     echo ""
 
     ##Pergunta o Dominio do Chatwoot
-    echo -e "\e[97mPasso$amarelo 2/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/11\e[0m"
     echo -en "\e[33mDigite o Dominio do Chatwoot já instalado (ex: chatwoot.oriondesign.art.br): \e[0m" && read -r url_chatwoot_uno
     echo ""
 
     ##Pergunta o o token do usuario
-    echo -e "\e[97mPasso$amarelo 3/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/11\e[0m"
     echo -en "\e[33mDigite o token de usuario administrador do Chatwoot: \e[0m" && read -r token_chatwoot_uno
     echo ""
 
     ##Pergunta se quer ignorar mensagens de grupos
-    echo -e "\e[97mPasso$amarelo 4/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/11\e[0m"
     echo -en "\e[33mIgnorar mensagens de grupos (true ou false): \e[0m" && read -r op_1
     echo ""
     
     ## Pergunta se quer ignorar o stauts de transmissão
-    echo -e "\e[97mPasso$amarelo 5/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/11\e[0m"
     echo -en "\e[33mIgnorar Status de Transmissão (true ou false): \e[0m" && read -r op_2
     echo ""
 
     ## Pergunta se quer ignorar mensagens de trasmissão
-    echo -e "\e[97mPasso$amarelo 6/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/11\e[0m"
     echo -en "\e[33mIgnorar Mensagens de Trasmissão (true ou false): \e[0m" && read -r op_3
     echo ""
 
     ## Pergunta se quer ignorar mensagem de status
-    echo -e "\e[97mPasso$amarelo 7/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/11\e[0m"
     echo -en "\e[33mIgnorar Mensagem de Status (true ou false): \e[0m" && read -r op_4
     echo ""
 
     ## Pergunta se quer ignorar as próprias mensagens
-    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 8/11\e[0m"
     echo -en "\e[33mIgnorar Proprias Mensagens (true ou false): \e[0m" && read -r op_5
     echo ""
 
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 9/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 9/11\e[0m"
     echo -en "\e[33mEnviar status de conexão (true ou false): \e[0m" && read -r op_6
     echo ""
 
     ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 10/11\e[0m"
     echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
     echo ""
 
     ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 9/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 11/11\e[0m"
     echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
     echo ""
 
@@ -11470,8 +11470,10 @@ while true; do
     echo -e "\e[33mSecret Key Minio:\e[97m $S3_SECRET_KEY\e[0m"
     echo ""
 
+
     echo -e "\e[33mUser RabbitMq:\e[97m $user_rabbit_mqs\e[0m"
     echo ""
+
 
     echo -e "\e[33mSenha RabbitMq:\e[97m $senha_rabbit_mqs\e[0m"
     echo ""
