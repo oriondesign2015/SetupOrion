@@ -11095,7 +11095,7 @@ version: "3.7"
 
 services:
   chatwoot_nestor_app:
-    image: francisbreit/chatwoot-v366-nestor:homolog ## Versão do Chatwoot NESTOR
+    image: francisbreit/chatwoot-n:v3.6.7 ## Versão do Chatwoot NESTOR
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
     volumes:
@@ -11156,7 +11156,7 @@ services:
         - traefik.http.routers.chatwoot_nestor_app.middlewares=sslheader@docker
 
   chatwoot_nestor_sidekiq:
-    image: francisbreit/chatwoot-v366-nestor:homolog ## Versão do Chatwoot NESTOR
+    image: francisbreit/chatwoot-n:v3.6.7 ## Versão do Chatwoot NESTOR
     command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
       - chatwoot_nestor_data:/app/storage ## Diretório dos arquivos de conversa
