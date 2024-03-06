@@ -931,7 +931,7 @@ verificar_container_minio() {
 
 wait_for_postgres() {
     dados
-    local container_name="postgres"
+    local container_name="postgres_postgres"
 
     echo "."
     while true; do
