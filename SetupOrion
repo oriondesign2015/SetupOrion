@@ -888,7 +888,7 @@ verificar_docker_e_portainer_traefik() {
 ## Verificar Container Postgres
 
 verificar_container_postgres() {
-    if docker ps -q --filter "name=postgres" | grep -q .; then
+    if docker ps -q --filter "name=postgres_postgres" | grep -q .; then
         return 0
     else
         return 1
