@@ -7647,7 +7647,7 @@ cat > rabbitmq.yaml <<EOL
 version: '3.7'
 
 services:
-  rabbit_mq:
+  rabbitmq:
     image: rabbitmq:management
     command: rabbitmq-server
     networks:
@@ -7675,11 +7675,11 @@ services:
           memory: 512M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.rabbit_mq.rule=Host(\`$url_rabbitmq\`)
-        - traefik.http.routers.rabbit_mq.entrypoints=websecure
-        - traefik.http.routers.rabbit_mq.tls.certresolver=le
-        - traefik.http.routers.rabbit_mq.service=rabbit_mq
-        - traefik.http.services.rabbit_mq.loadbalancer.server.port=15672
+        - traefik.http.routers.rabbitmq.rule=Host(\`$url_rabbitmq\`)
+        - traefik.http.routers.rabbitmq.entrypoints=websecure
+        - traefik.http.routers.rabbitmq.tls.certresolver=le
+        - traefik.http.routers.rabbitmq.service=rabbitmq
+        - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
 volumes:
   rabbitmq_data:
     external: true
