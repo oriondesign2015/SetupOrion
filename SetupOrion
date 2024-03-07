@@ -829,7 +829,6 @@ menu_instalador(){
 
 
 ## Verifica se existe Docker, Portainer e Traefik na VPS
-
 verificar_docker_e_portainer_traefik() {
     ## Verifica se o Docker está instalado
     if ! command -v docker &> /dev/null; then
@@ -870,6 +869,147 @@ verificar_docker_e_portainer_traefik() {
         clear
         erro_msg
         echo -e "Ops, parece que você não instalou a opção \e[32m[1] Traefik e Portainer${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    return 0
+}
+
+## Verifica se existe Minio
+verificar_antes_se_tem_minio() {
+
+    ## Verifica se o Portainer está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "minio"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 4 ] - MinIO${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    return 0
+}
+
+## Verifica se existe rabbitMQ
+verificar_antes_se_tem_rabbitmq() {
+
+    ## Verifica se o Portainer está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "rabbitmq"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 14 ] - RabbitMQ${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    return 0
+}
+
+## Verifica se existe Minio RabbitMQ e Chatwoot 
+verificar_antes_se_tem_minio_e_rabbitmq_e_chatwoot() {
+    ## Verifica se o minio está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "minio"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 4 ] - MinIO${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    ## Verifica se o rabbitmq está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "rabbitmq"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 14 ] - RabbitMQ${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    ## Verificar se o chatwoot está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "chatwoot"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 2 ] - Chatwoot${reset} ou  \e[32m[ 26 ] - Chatwoot Nestor (ft. Francis) ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    return 0
+}
+
+## Verifica se existe Minio e Qdrant
+verificar_antes_se_tem_minio_e_qdrant() {
+    ## Verifica se o minio está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "minio"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 4 ] - MinIO${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    ## Verifica se o rabbitmq está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "qdrant"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 19 ] - Qdrant${reset} ${branco}do nosso instalador.${reset}"
         echo "Instale antes de tentar instalar esta aplicação."
 
         echo ""
@@ -4871,6 +5011,8 @@ ferramenta_typebot() {
 
 ## Limpa o terminal
 clear
+
+verificar_antes_se_tem_minio
 
 ## Ativa a função dados para pegar os dados da vps
 dados
@@ -11345,6 +11487,8 @@ ferramenta_unoapi() {
 ## Limpa o terminal
 clear
 
+verificar_antes_se_tem_minio_e_rabbitmq_e_chatwoot
+
 ## Ativa a função dados para pegar os dados da vps
 dados
 
@@ -12403,6 +12547,8 @@ ferramenta_dify() {
 
 ## Limpa o terminal
 clear
+
+verificar_antes_se_tem_minio_e_qdrant
 
 ## Ativa a função dados para pegar os dados da vps
 dados
