@@ -4296,6 +4296,7 @@ version: "3.7"
 services:
   evolution_oriondesign:
     image: atendai/evolution-api:latest ## Versão da Evolution API
+    hostname: evolution_oriondesign
     command: ["node", "./dist/src/main.js"]
     volumes:
     - evolution_oriondesign_instances:/evolution/instances
@@ -4304,27 +4305,49 @@ services:
     networks:
       - $nome_rede_interna ## Nome da rede interna
     environment:
+
     - SERVER_URL=https://$url_evolution ## Url da aplicação
+
     - DOCKER_ENV=true
     - LOG_LEVEL=ERROR
+
     - DEL_INSTANCE=false
-    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
-    - CONFIG_SESSION_PHONE_NAME=chrome
-    - STORE_MESSAGES=true
-    - STORE_MESSAGE_UP=true
-    - STORE_CONTACTS=true
-    - STORE_CHATS=true
-    - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
-    - CLEAN_STORE_MESSAGES=true
-    - CLEAN_STORE_MESSAGE_UP=true
-    - CLEAN_STORE_CONTACTS=true
-    - CLEAN_STORE_CHATS=true
+
+    ## Dados de Autenticação
     - AUTHENTICATION_TYPE=apikey
     - AUTHENTICATION_API_KEY=$apikeyglobal ## GLOBAL API KEY
     - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
-    - QRCODE_LIMIT=19021
+
+    ## Configurações
+    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
+    - CONFIG_SESSION_PHONE_NAME=chrome
+    - QRCODE_LIMIT=5000 #adicional que não é legal deixar
+
+    # Ativer o RabbitMQ
+    - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
+    - RABBITMQ_URI=amqp://USER:PASS@rabbit_mq:5672
+
+    # Aivar Banco de Dados MongoDB
+    - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
+    - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
+    - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution
+    - DATABASE_SAVE_DATA_INSTANCE=true
+    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+    - DATABASE_SAVE_MESSAGE_UPDATE=true
+    - DATABASE_SAVE_DATA_CONTACTS=true
+    - DATABASE_SAVE_DATA_CHATS=true
+
+    # Novas variaveis para o Typebot
+    - TYPEBOT_KEEP_OPEN=true
+    - TYPEBOT_API_VERSION=latest
+
+    # Ativar o Redis
+    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
+    - REDIS_URI=redis://redis:6379
+
+    ## Informações do Webhook
     - WEBHOOK_GLOBAL_ENABLED=false
-    - WEBHOOK_GLOBAL_URL=https://URL
+    - WEBHOOK_GLOBAL_URL=
     - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
     - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
     - WEBHOOK_EVENTS_QRCODE_UPDATED=true
@@ -4344,27 +4367,16 @@ services:
     - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
     - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
 
-    # Ativar o Redis
-    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
-    - REDIS_URI=redis://redis:6379
-
-    # Ativer o RabbitMQ
-    - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
-    - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
-
-    # Aivar Banco de Dados MongoDB
-    - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
-    - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
-    - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution
-    - DATABASE_SAVE_DATA_INSTANCE=true
-    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
-    - DATABASE_SAVE_MESSAGE_UPDATE=true
-    - DATABASE_SAVE_DATA_CONTACTS=true
-    - DATABASE_SAVE_DATA_CHATS=true
-
-    # Novas variaveis para o Typebot
-    - TYPEBOT_KEEP_OPEN=true ## Deixar em true faz com que o fluxo não finalize automaticamente ao acabar (recomendo deixar em true)
-    - TYPEBOT_API_VERSION=latest
+    # Desativados para teste
+    #- STORE_MESSAGES=true
+    #- STORE_MESSAGE_UP=true
+    #- STORE_CONTACTS=true
+    #- STORE_CHATS=true
+    #- CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
+    #- CLEAN_STORE_MESSAGES=true
+    #- CLEAN_STORE_MESSAGE_UP=true
+    #- CLEAN_STORE_CONTACTS=true
+    #- CLEAN_STORE_CHATS=true
 
     deploy:
       mode: replicated
@@ -7627,21 +7639,30 @@ echo -e "\e[97m• INSTALANDO RABBITMQ \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
+#Key aleatória cookie
+key_cookie=$(openssl rand -hex 16)
+
 ## Criando a stack
 cat > rabbitmq.yaml <<EOL
 version: '3.7'
 
 services:
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    volumes:
-      - rabbitmq:/var/lib/rabbitmq
+  rabbit_mq:
+    image: rabbitmq:management
+    command: rabbitmq-server
+    networks:
+      - $nome_rede_interna
+    hostname: rabbit
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
     environment:
-      - RABBITMQ_DEFAULT_USER=$user_rabbitmq
-      - RABBITMQ_DEFAULT_PASS=$pass_rabbitmq
+      RABBITMQ_ERLANG_COOKIE: $key_cookie
+      RABBITMQ_DEFAULT_VHOST: "/"
+      RABBITMQ_DEFAULT_USER: $user_rabbitmq
+      RABBITMQ_DEFAULT_PASS: $pass_rabbitmq
     deploy:
       mode: replicated
       replicas: 1
@@ -7650,28 +7671,22 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: '1'
-          memory: 2048M
+          cpus: "0.5"
+          memory: 512M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.rabbitmq.rule=Host(\`$url_rabbitmq\`)
-        - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
-        - traefik.http.routers.rabbitmq.service=rabbitmq
-        - traefik.http.routers.rabbitmq.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.rabbitmq.entrypoints=websecure
-        - traefik.http.routers.rabbitmq.tls=true
-    networks:
-      - $nome_rede_interna
+        - traefik.http.routers.rabbit_mq.rule=Host(\`$url_rabbitmq\`)
+        - traefik.http.routers.rabbit_mq.entrypoints=websecure
+        - traefik.http.routers.rabbit_mq.tls.certresolver=le
+        - traefik.http.routers.rabbit_mq.service=rabbit_mq
+        - traefik.http.services.rabbit_mq.loadbalancer.server.port=15672
+volumes:
+  rabbitmq_data:
+    external: true
 
 networks:
   $nome_rede_interna:
-    name: $nome_rede_interna
     external: true
-
-volumes:
-  rabbitmq:
-    external: true
-    name: rabbitmq
 EOL
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ]"
