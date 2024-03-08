@@ -4637,7 +4637,7 @@ services:
     - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
     - REDIS_URI=redis://redis:6379
 
-    # Ativer o RabbitMQ
+    # Ativar o RabbitMQ
     - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
     - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
 
