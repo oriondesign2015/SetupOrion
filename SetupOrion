@@ -1556,8 +1556,8 @@ pegar_senha_postgres() {
 pegar_user_senha_rabbitmq() {
     while :; do
         if [ -f /root/rabbitmq.yaml ]; then
-            user_rabbit_mqs=$(grep "RABBITMQ_DEFAULT_USER" /root/rabbitmq.yaml | awk -F ':' '{print $2}')
-            senha_rabbit_mqs=$(grep "RABBITMQ_DEFAULT_PASS" /root/rabbitmq.yaml | awk -F ':' '{print $2}')
+            user_rabbit_mqs=$(grep "RABBITMQ_DEFAULT_USER" /root/rabbitmq.yaml | awk -F ': ' '{print $2}')
+            senha_rabbit_mqs=$(grep "RABBITMQ_DEFAULT_PASS" /root/rabbitmq.yaml | awk -F ': ' '{print $2}')
             break
         else
             sleep 5
