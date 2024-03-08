@@ -2,7 +2,7 @@
 ####################################################
 
 versao() {
-echo -e "\e[97mComunidade: https://chat.whatsapp.com/Cb3Kw0YlCHIJJqS84eC6ie                \e[97mVersão do Setup \e[32mv.2.3.3\e[0m"
+echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.3.4\e[0m"
 }
 
 ####################################################
