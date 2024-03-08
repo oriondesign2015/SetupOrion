@@ -7677,7 +7677,7 @@ services:
         - traefik.enable=true
         - traefik.http.routers.rabbitmq.rule=Host(\`$url_rabbitmq\`)
         - traefik.http.routers.rabbitmq.entrypoints=websecure
-        - traefik.http.routers.rabbitmq.tls.certresolver=le
+        - traefik.http.routers.rabbitmq.tls.certresolver=letsencryptresolver
         - traefik.http.routers.rabbitmq.service=rabbitmq
         - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
 volumes:
