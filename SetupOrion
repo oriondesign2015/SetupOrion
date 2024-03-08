@@ -13107,8 +13107,13 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
-    echo -en "\e[33mDigite o dominio para o Ollama (ex: ollama.oriondesign.art.br): \e[0m" && read -r url_ollama
+    echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+    echo -en "\e[33mDigite o dominio para o WebUI Ollama (ex: ollama.oriondesign.art.br): \e[0m" && read -r url_ollama
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+    echo -en "\e[33mDigite o dominio para a API Ollama (ex: apiollama.oriondesign.art.br): \e[0m" && read -r url_apiollama
     echo ""
     
     ## Limpa o terminal
@@ -13121,7 +13126,11 @@ while true; do
     conferindo_as_info
     
     ##Informação do Dominio
-    echo -e "\e[33mDominio para o Ollama:\e[97m $url_ollama\e[0m"
+    echo -e "\e[33mDominio para o WebUI Ollama:\e[97m $url_ollama\e[0m"
+    echo ""
+
+    ##Informação do Dominio
+    echo -e "\e[33mDominio para o API Ollama:\e[97m $url_apiollama\e[0m"
     echo ""
     
      ## Pergunta se as respostas estão corretas
@@ -13169,57 +13178,71 @@ sleep 1
 
 ## Criando a stack
 cat > ollama.yaml <<EOL
-version: '3.8'
-
+version: "3.7"
 services:
   ollama:
     image: ollama/ollama:latest
-    networks:
-      - $nome_rede_interna ## Nome da rede interna
-    hostname: ollama
-    container_name: ollama
-    tty: true
-    restart: unless-stopped
+    #ports:
+    #  - 11434:11434
     volumes:
       - ollama_data:/root/.ollama
+    networks:
+      - $nome_rede_interna
     environment:
       - OLLAMA_HOST=0.0.0.0
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.ollama.rule=Host(\`$url_ollama\`)
-      - traefik.http.routers.ollama.entrypoints=websecure
-      - traefik.http.routers.ollama.tls.certresolver=letsencryptresolver
-      - traefik.http.services.ollama.loadbalancer.server.port=11434
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=1
+        - traefik.http.routers.ollama.rule=Host(\`$url_apiollama\`)
+        - traefik.http.routers.ollama.entrypoints=websecure
+        - traefik.http.routers.ollama.priority=1
+        - traefik.http.routers.ollama.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.ollama.service=ollama
+        - traefik.http.services.ollama.loadbalancer.server.port=11434
+        - traefik.http.services.ollama.loadbalancer.passHostHeader=1
 
-  ollama-webui:
+
+  ollamaweb:
     image: ghcr.io/ollama-webui/ollama-webui:main
-    networks:
-      - $nome_rede_interna ## Nome da rede interna
-    container_name: ollama-webui
     volumes:
-      - ollama-webui:/app/backend/data
-    depends_on:
-      - ollama
+      - ollama_web:/app/backend/data
+    networks:
+      - $nome_rede_interna
     environment:
-      - OLLAMA_API_BASE_URL=http://ollama:11434/api
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    restart: unless-stopped
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.ollama-webui.rule=Host(\`$url_ollama\`)
-      - traefik.http.routers.ollama-webui.entrypoints=websecure
-      - traefik.http.routers.ollama-webui.tls.certresolver=letsencryptresolver
-      - traefik.http.services.ollama-webui.loadbalancer.server.port=8080
+      - OLLAMA_API_BASE_URL=https://$url_apiollama/api
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.ollamaweb.rule=Host(\`$url_ollama\`)
+        - traefik.http.routers.ollamaweb.entrypoints=websecure
+        - traefik.http.routers.ollamaweb.priority=1
+        - traefik.http.routers.ollamaweb.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.ollamaweb.service=ollamaweb
+        - traefik.http.services.ollamaweb.loadbalancer.server.port=8080
+        - traefik.http.services.ollamaweb.loadbalancer.passHostHeader=true
 
 volumes:
-  ollama_data: {}
-  ollama-webui: {}
-
+  ollama_data:
+    external: true
+    name: ollama_data
+  ollama_web:
+    external: true
+    name: ollama_web
+  
 networks:
   $nome_rede_interna:
-    name: $nome_rede_interna
     external: true
+    name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ]"
@@ -13249,10 +13272,11 @@ cd dados_vps
 cat > dados_ollama <<EOL
 [ OLLAMA ]
 
-Dominio do Ollama: https://$url_ollama
+Dominio do WebUI Ollama: https://$url_ollama
+
+Dominio da API Ollama: https://$url_apiollama/api
 
 Ollama WebUI: Precisa criar no primeiro acesso do Ollama
-
 
 EOL
 
@@ -13272,10 +13296,11 @@ guarde_os_dados_msg
 echo -e "\e[32m[ Ollama ]\e[0m"
 echo ""
 
-echo -e "\e[33mDominio:\e[97m https://$url_ollama\e[0m"
+echo -e "\e[33mOllama WebUI:\e[97m https://$url_ollama\e[0m"
 echo ""
 
-echo -e "\e[33mOllamaWebUI:\e[97m Precisa criar no primeiro acesso do Ollama\e[0m"
+
+echo -e "\e[33mOllama API:\e[97m https://$url_apiollama/api\e[0m"
 echo ""
 
 ## Creditos do instalador
