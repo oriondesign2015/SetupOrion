@@ -13174,6 +13174,8 @@ version: '3.8'
 services:
   ollama:
     image: ollama/ollama:latest
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
     hostname: ollama
     container_name: ollama
     tty: true
@@ -13191,6 +13193,8 @@ services:
 
   ollama-webui:
     image: ghcr.io/ollama-webui/ollama-webui:main
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
     container_name: ollama-webui
     volumes:
       - ollama-webui:/app/backend/data
