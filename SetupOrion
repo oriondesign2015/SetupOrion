@@ -13461,7 +13461,7 @@ while true; do
 
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 3/3\e[0m"
-    echo -en "\e[33mDigite a Senha de Admin (ex: contato@oriondesign.art.br): \e[0m" && read -r senha_affine
+    echo -en "\e[33mDigite a Senha de Admin (ex: @Senha123_): \e[0m" && read -r senha_affine
     echo ""
     
     ## Limpa o terminal
