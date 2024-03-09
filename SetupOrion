@@ -2369,6 +2369,51 @@ criar_banco_postgres_dify() {
     done
 }
 
+criar_banco_postgres_affine() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "affine"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados affine já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS affine;"
+                    echo "Banco de dados affine apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE affine;"
+                    
+                    echo "Banco de dados affine criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE affine;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "affine"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados affine criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
 
 ####################################################
 
@@ -13405,17 +13450,17 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
     echo -en "\e[33mDigite o dominio para o Affine (ex: affine.oriondesign.art.br): \e[0m" && read -r url_affine
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 2/1\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/3\e[0m"
     echo -en "\e[33mDigite o Email de Admin (ex: contato@oriondesign.art.br): \e[0m" && read -r email_affine
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 2/1\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
     echo -en "\e[33mDigite a Senha de Admin (ex: contato@oriondesign.art.br): \e[0m" && read -r senha_affine
     echo ""
     
