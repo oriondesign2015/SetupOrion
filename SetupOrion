@@ -13524,7 +13524,7 @@ sleep 1
 ## Nadaaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/4]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES E REDIS \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
@@ -13540,6 +13540,13 @@ if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_affine #> /dev/null 2>&1
 fi
+
+verificar_container_redis
+    if [ $? -eq 0 ]; then
+        sleep 1
+    else
+        ferramenta_redis  > /dev/null 2>&1
+    fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO AFFINE \e[33m[3/4]\e[0m"
@@ -13572,6 +13579,7 @@ services:
       ## Dados de acesso
       - AFFINE_ADMIN_EMAIL=$email_affine
       - AFFINE_ADMIN_PASSWORD=$senha_affine
+      - AFFINE_SERVER_HOST=$url_affine
 
       ## Dados do Postgres
       - POSTGRES_USER=postgres
@@ -13583,16 +13591,18 @@ services:
       ## Outras configurações
       - NODE_OPTIONS="--import=./scripts/register.js"
       - AFFINE_CONFIG_PATH=/root/.affine/config
-      - REDIS_SERVER_HOST=redis
+      - REDIS_SERVER_HOST=redis://redis:6379
       - NODE_ENV=production
     labels:
-        - traefik.enable=true
-        - traefik.http.routers.affine.rule=Host(\`$url_affine\`)
-        - traefik.http.services.affine.loadbalancer.server.port=3010
-        - traefik.http.routers.affine.service=affine
-        - traefik.http.routers.affine.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.affine.entrypoints=websecure
-        - traefik.http.routers.affine.tls=true
+      - traefik.enable=true
+      - traefik.http.routers.affine.rule=Host(\`$url_affine\`)
+      - traefik.http.services.affine.loadbalancer.server.port=3010
+      - traefik.http.routers.affine.service=affine
+      - traefik.http.routers.affine.tls.certresolver=letsencryptresolver
+      - traefik.http.routers.affine.entrypoints=websecure
+      - traefik.http.routers.affine.tls=true
+      - traefik.frontend.headers.STSPreload=true
+      - traefik.frontend.headers.STSSeconds=31536000
         
 volumes:
   affine_config:
@@ -13600,7 +13610,7 @@ volumes:
     name: affine_config
   affine_storage:
     external: true
-    name: affine_config
+    name: affine_storage
 
 networks:
   $nome_rede_interna:
