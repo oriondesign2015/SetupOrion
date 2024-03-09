@@ -708,6 +708,20 @@ nome_ollama() {
     echo ""
     echo ""                                   
 }
+
+
+nome_affine(){
+    clear
+    echo ""
+    echo -e "$branco                         █████╗ ███████╗███████╗██╗███╗   ██╗███████╗\e[0m"
+    echo -e "$branco                        ██╔══██╗██╔════╝██╔════╝██║████╗  ██║██╔════╝\e[0m"
+    echo -e "$branco                        ███████║█████╗  █████╗  ██║██╔██╗ ██║█████╗  \e[0m"
+    echo -e "$branco                        ██╔══██║██╔══╝  ██╔══╝  ██║██║╚██╗██║██╔══╝  \e[0m"
+    echo -e "$branco                        ██║  ██║██║     ██║     ██║██║ ╚████║███████╗\e[0m"
+    echo -e "$branco                        ╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝\e[0m"
+    echo ""
+    echo ""
+}
 nome_saindo() {
     clear
     echo ""
@@ -813,9 +827,9 @@ menu_instalador(){
     echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus +cAdvisor ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 9 ]${reset} -  ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}" # ${amarelo}[ 36 ]${reset} - ${branco}Ainda Vazio${reset}"
+    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}" # ${amarelo}[ 37 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}" # ${amarelo}[ 38 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}" # ${amarelo}[ 39 ]${reset} - ${branco}Ainda Vazio${reset}"
@@ -1530,6 +1544,19 @@ wait_ollama(){
     while true; do
         # Verifica se o serviço chatwoot está ativo
         if docker service ls --filter "name=ollama" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_affine(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço chatwoot está ativo
+        if docker service ls --filter "name=affine" | grep "1/1"; then
             sleep 10
             break
         fi
@@ -3944,7 +3971,7 @@ version: "3.7"
 
 services:
   chatwoot_app:
-    image: amoxt/chatwoot-arm:latest ## Versão do Chatwoot ARM
+    image: sendingtk/chatwoot-arm:latest ## Versão do Chatwoot ARM
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
     volumes:
@@ -4005,7 +4032,7 @@ services:
         - traefik.http.routers.chatwoot_app.middlewares=sslheader@docker
 
   chatwoot_sidekiq:
-    image: amoxt/chatwoot-arm:latest
+    image: sendingtk/chatwoot-arm:latest
     command: bundle exec sidekiq -C config/sidekiq.yml
     volumes:
       - chatwoot_data:/app/storage ## Diretório dos arquivos de conversa
@@ -13353,6 +13380,264 @@ ferramenta_remover_stack() {
     done
 }
 
+##  █████╗ ███████╗███████╗██╗███╗   ██╗███████╗
+## ██╔══██╗██╔════╝██╔════╝██║████╗  ██║██╔════╝
+## ███████║█████╗  █████╗  ██║██╔██╗ ██║█████╗  
+## ██╔══██║██╔══╝  ██╔══╝  ██║██║╚██╗██║██╔══╝  
+## ██║  ██║██║     ██║     ██║██║ ╚████║███████╗
+## ╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝
+
+ferramenta_affine() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_affine
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o dominio para o Affine (ex: affine.oriondesign.art.br): \e[0m" && read -r url_affine
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 2/1\e[0m"
+    echo -en "\e[33mDigite o Email de Admin (ex: contato@oriondesign.art.br): \e[0m" && read -r email_affine
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 2/1\e[0m"
+    echo -en "\e[33mDigite a Senha de Admin (ex: contato@oriondesign.art.br): \e[0m" && read -r senha_affine
+    echo ""
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_affine
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ## Informação sobre URL do affine
+    echo -e "\e[33mDominio do Affine:\e[97m $url_affine\e[0m"
+    echo ""
+
+    ## Informação sobre URL do affine
+    echo -e "\e[33mEmail de Admin:\e[97m $email_affine\e[0m"
+    echo ""
+
+    ## Informação sobre URL do affine
+    echo -e "\e[33mSenha de Admin:\e[97m $senha_affine\e[0m"
+    echo ""
+    
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_affine
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO AFFINE \e[33m[1/4]\e[0m"
+echo ""
+sleep 1
+
+## Nadaaaaa
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+## Cansei já de explicar o que isso faz kkkk
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+        sleep 1
+        pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_affine #> /dev/null 2>&1
+
+    else
+        ferramenta_postgres > /dev/null 2>&1
+        pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_affine #> /dev/null 2>&1
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO AFFINE \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
+
+## Criando a stack
+cat > affine.yaml <<EOL
+version: '3.7'
+ 
+services:
+  affine:
+    image: ghcr.io/toeverything/affine-graphql:stable
+    networks:
+      - $nome_rede_interna
+    command:
+      ['sh', '-c', 'node ./scripts/self-host-predeploy && node ./dist/index.js']
+    #ports:
+    #  - 3010:3010
+    #  - 5555:5555
+    volumes:
+      - affine_config:/root/.affine/config:rw
+      - affine_storage:/root/.affine/storage:rw
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1000m'
+    restart: on-failure:5
+    environment:
+      ## Dados de acesso
+      - AFFINE_ADMIN_EMAIL=$email_affine
+      - AFFINE_ADMIN_PASSWORD=$senha_affine
+
+      ## Dados do Postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=$senha_postgres
+      - POSTGRES_DB=affine
+      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/affine?sslmode=disable
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+      ## Outras configurações
+      - NODE_OPTIONS="--import=./scripts/register.js"
+      - AFFINE_CONFIG_PATH=/root/.affine/config
+      - REDIS_SERVER_HOST=redis
+      - NODE_ENV=production
+    labels:
+        - traefik.enable=true
+        - traefik.http.routers.affine.rule=Host(\`$url_affine\`)
+        - traefik.http.services.affine.loadbalancer.server.port=3010
+        - traefik.http.routers.affine.service=affine
+        - traefik.http.routers.affine.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.affine.entrypoints=websecure
+        - traefik.http.routers.affine.tls=true
+        
+volumes:
+  affine_config:
+    external: true
+    name: affine_config
+  affine_storage:
+    external: true
+    name: affine_config
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+    echo "Não foi possivel criar a stack do Affine"
+fi
+
+docker stack deploy --prune --resolve-image always -c affine.yaml affine > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+    echo "Não foi possivel Subir a stack do Affine"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_affine para verificar se o serviço esta online
+wait_affine
+
+cd dados_vps
+
+cat > dados_affine <<EOL
+[ AFFINE ]
+
+Dominio do Affine: https://$url_affine
+
+Usuario: $email_affine
+
+Senha: $senha_affine
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ AFFINE ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_affine\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario:\e[97m $email_affine\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $senha_affine\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 
 
 
@@ -13798,19 +14083,20 @@ while true; do
             ;;
         34)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_remover_stack
+            ferramenta_affine
             fi
             ;;
         35)
-            clear
-            nome_saindo
-            echo ""
+            if verificar_docker_e_portainer_traefik; then
+            ferramenta_remover_stack 
+            fi
             break 
             ;;
         36)
-            if verificar_docker_e_portainer_traefik; then
-            ferramenta_
-            fi
+            clear
+            nome_saindo
+            echo ""
+
             ;;
         37)
             if verificar_docker_e_portainer_traefik; then
