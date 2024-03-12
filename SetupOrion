@@ -14383,6 +14383,7 @@ sleep 1
 
 ## Gerar Secret Key
 key_directus=$(openssl rand -hex 16)
+key_directus2=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > directus.yaml <<EOL
@@ -14421,8 +14422,8 @@ services:
       - REDIS=redis://redis:6379/4
 
       ## Secret Keys & Env
-      - KEY=$key_docuseal
-      - SECRET=$key_docuseal2
+      - KEY=$key_directus
+      - SECRET=$key_directus2
       - APP_ENV=production
 
       ## Dados Postgres
