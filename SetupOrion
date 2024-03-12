@@ -13591,18 +13591,25 @@ services:
       ## Outras configurações
       - NODE_OPTIONS="--import=./scripts/register.js"
       - AFFINE_CONFIG_PATH=/root/.affine/config
-      - REDIS_SERVER_HOST=redis://redis:6379
+      - REDIS_SERVER_HOST=redis
       - NODE_ENV=production
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.affine.rule=Host(\`$url_affine\`)
-      - traefik.http.services.affine.loadbalancer.server.port=3010
-      - traefik.http.routers.affine.service=affine
-      - traefik.http.routers.affine.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.affine.entrypoints=websecure
-      - traefik.http.routers.affine.tls=true
-      - traefik.frontend.headers.STSPreload=true
-      - traefik.frontend.headers.STSSeconds=31536000
+      
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.affine.rule=Host(\`$url_affine\`)
+        - traefik.http.services.affine.loadbalancer.server.port=3010
+        - traefik.http.routers.affine.service=affine
+        - traefik.http.routers.affine.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.affine.entrypoints=websecure
+        - traefik.http.routers.affine.tls=true
+        - traefik.frontend.headers.STSPreload=true
+        - traefik.frontend.headers.STSSeconds=31536000
         
 volumes:
   affine_config:
