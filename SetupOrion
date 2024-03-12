@@ -13956,6 +13956,8 @@ sleep 1
 ## Pegar o dominio do email
 dominio_smtp_docuseal="${email_smtp_docuseal##*@}"
 
+key_docuseal=$(openssl rand -hex 16)
+
 ## Criando a stack
 cat > docuseal.yaml <<EOL
 version: '3.7'
@@ -13974,7 +13976,7 @@ services:
       - FORCE_SSL=true
 
       ## Secret Key
-      - SECRET_KEY_BASE=
+      - SECRET_KEY_BASE=$key_docuseal
 
       ## Dados do Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/docuseal
