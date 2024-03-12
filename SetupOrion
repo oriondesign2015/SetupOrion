@@ -13983,11 +13983,11 @@ services:
 
       ## Dados SMTP
       - SMTP_USERNAME=$email_smtp_docuseal
-      - SMTP_ADDRESS=$email_smtp_docuseal
-      - SMTP_FROM=$email_smtp_docuseal
-      - SMTP_PORT=$porta_smtp_docuseal
-      - SMTP_DOMAIN=$dominio_smtp_docuseal
       - SMTP_PASSWORD=$senha_smtp_docuseal
+      - SMTP_ADDRESS=$host_smtp_docuseal
+      - SMTP_PORT=$porta_smtp_docuseal
+      - SMTP_FROM=$email_smtp_docuseal
+      - SMTP_DOMAIN=$dominio_smtp_docuseal
       - SMTP_AUTHENTICATION=login
 
       ## Dados do S3
