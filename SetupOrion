@@ -14399,8 +14399,8 @@ services:
     environment:
 
       ## Dados de acesso
-      - ADMIN_EMAIL=$email_directus
-      - ADMIN_PASSWORD=$senha_directus
+      #- ADMIN_EMAIL=$email_directus
+      #- ADMIN_PASSWORD=$senha_directus
       - PUBLIC_URL=https://$url_directus
 
       ## Dados SMTP
