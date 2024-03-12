@@ -14401,7 +14401,7 @@ services:
       ## Dados de acesso
       - ADMIN_EMAIL=$email_directus
       - ADMIN_PASSWORD=$senha_directus
-      - PUBLIC_URL=$url_directus
+      - PUBLIC_URL=https://$url_directus
 
       ## Dados SMTP
       - EMAIL_SMTP_USER=$email_smtp_directus
