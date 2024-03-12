@@ -837,12 +837,12 @@ menu_instalador(){
     echo -e "${amarelo}[ 4 ]${reset} -  ${branco}MinIO                                   ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 5 ]${reset} -  ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 6 ]${reset} -  ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 7 ]${reset} -  ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal ${vermelho}[OFF]${reset}"
+    echo -e "${amarelo}[ 7 ]${reset} -  ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus +cAdvisor ${vermelho}[OFF]${reset}"
     echo -e "${amarelo}[ 9 ]${reset} -  ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Docuseal ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}REMOVER STACK${reset}"
     echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}" # ${amarelo}[ 38 ]${reset} - ${branco}REMOVER STACK${reset}"
@@ -14514,7 +14514,7 @@ while true; do
             ;;
         30)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_
+            ferramenta_docuseal
             fi
             ;;
         31)
@@ -14540,7 +14540,7 @@ while true; do
             ;;
         35)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_docuseal
+            ferramenta_
             fi
             ;;
         36)
