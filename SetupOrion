@@ -14045,13 +14045,13 @@ wait_docuseal
 cd dados_vps
 
 cat > dados_docuseal <<EOL
-[ docuseal ]
+[ DOCUSEAL ]
 
 Dominio do docuseal: https://$url_docuseal
 
-Usuario: $email_docuseal
+Usuario: Precisa de criar ao fazer o primeiro login
 
-Senha: $senha_docuseal
+Senha: Precisa de criar ao fazer o primeiro login
 
 EOL
 
@@ -14068,16 +14068,16 @@ instalado_msg
 guarde_os_dados_msg
 
 ## Dados da Aplicação:
-echo -e "\e[32m[ docuseal ]\e[0m"
+echo -e "\e[32m[ DOCUSEAL ]\e[0m"
 echo ""
 
 echo -e "\e[33mDominio:\e[97m https://$url_docuseal\e[0m"
 echo ""
 
-echo -e "\e[33mUsuario:\e[97m $email_docuseal\e[0m"
+echo -e "\e[33mUsuario:\e[97m Precisa de criar ao fazer o primeiro login\e[0m"
 echo ""
 
-echo -e "\e[33mSenha:\e[97m $senha_docuseal\e[0m"
+echo -e "\e[33mSenha:\e[97m Precisa de criar ao fazer o primeiro login\e[0m"
 echo ""
 
 ## Creditos do instalador
