@@ -13733,7 +13733,7 @@ version: '3.7'
  
 services:
   affine:
-    image: ghcr.io/toeverything/affine-graphql:stable
+    image: ghcr.io/toeverything/affine-graphql:stable-39476d1
     networks:
       - $nome_rede_interna
     command:
