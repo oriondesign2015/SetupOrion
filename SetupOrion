@@ -12955,7 +12955,7 @@ cd
 cd
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/4]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES E REDIS \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
@@ -12972,6 +12972,14 @@ if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_dify #> /dev/null 2>&1
 fi
+
+verificar_container_redis
+    if [ $? -eq 0 ]; then
+        sleep 1
+    else
+        ferramenta_redis  > /dev/null 2>&1
+    fi
+
 
 ## Mensagem de Passo
 echo -e "\e[97m• PEGANDO DADOS MINIO \e[33m[3/4]\e[0m"
