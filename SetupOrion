@@ -2,7 +2,7 @@
 ####################################################
 
 versao() {
-echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.3.6\e[0m"
+echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.3.7\e[0m"
 }
 
 ####################################################
@@ -747,6 +747,19 @@ echo -e "$branco                   ██████╔╝██║██║  �
 echo -e "$branco                   ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝\e[0m"
 echo ""
 echo ""
+}
+
+nome_vaultwarden()
+    clear
+    echo ""
+    echo -e "$branco   ██╗   ██╗ █████╗ ██╗   ██╗██╗  ████████╗██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗\e[0m"
+    echo -e "$branco   ██║   ██║██╔══██╗██║   ██║██║  ╚══██╔══╝██║    ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║\e[0m"
+    echo -e "$branco   ██║   ██║███████║██║   ██║██║     ██║   ██║ █╗ ██║███████║██████╔╝██║  ██║█████╗  ██╔██╗ ██║\e[0m"
+    echo -e "$branco   ╚██╗ ██╔╝██╔══██║██║   ██║██║     ██║   ██║███╗██║██╔══██║██╔══██╗██║  ██║██╔══╝  ██║╚██╗██║\e[0m"
+    echo -e "$branco    ╚████╔╝ ██║  ██║╚██████╔╝███████╗██║   ╚███╔███╔╝██║  ██║██║  ██║██████╔╝███████╗██║ ╚████║\e[0m"
+    echo -e "$branco     ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝\e[0m"
+    echo ""
+    echo ""
 }
 
 nome_saindo() {
@@ -1611,6 +1624,19 @@ wait_directus(){
         # Verifica se o serviço chatwoot está ativo
         if docker service ls --filter "name=directus" | grep "1/1"; then
             sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_vaultwarden(){
+    echo "Este processo pode demorar um pouco, se passar de 10 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço chatwoot está ativo
+        if docker service ls --filter "name=vaultwarden" | grep "1/1"; then
+            sleep 30
             break
         fi
     
@@ -14533,6 +14559,274 @@ echo -e "\e[33mUsuario:\e[97m $email_directus\e[0m"
 echo ""
 
 echo -e "\e[33mSenha:\e[97m $senha_directus\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
+## ██╗   ██╗ █████╗ ██╗   ██╗██╗  ████████╗██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗
+## ██║   ██║██╔══██╗██║   ██║██║  ╚══██╔══╝██║    ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║
+## ██║   ██║███████║██║   ██║██║     ██║   ██║ █╗ ██║███████║██████╔╝██║  ██║█████╗  ██╔██╗ ██║
+## ╚██╗ ██╔╝██╔══██║██║   ██║██║     ██║   ██║███╗██║██╔══██║██╔══██╗██║  ██║██╔══╝  ██║╚██╗██║
+##  ╚████╔╝ ██║  ██║╚██████╔╝███████╗██║   ╚███╔███╔╝██║  ██║██║  ██║██████╔╝███████╗██║ ╚████║
+##   ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝                                                                                    
+
+ferramenta_vaultwarden() {
+
+# Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_vaultwarden
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ## Pergunta o Dominio da ferramenta
+    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -en "\e[33mDigite o Dominio para o VaultWarden (ex: vaultwarden.oriondesign.art.br): \e[0m" && read -r url_vaultwarden
+    echo ""
+    
+    ## Pergunta o Email SMTP
+    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -en "\e[33mDigite um Email para o SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_vaultwarden
+    echo ""
+    
+    ## Pergunta a Senha SMTP
+    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    echo -en "\e[33mDigite a Senha SMTP do email (ex: @Senha123_): \e[0m" && read -r senha_vaultwarden
+    echo ""
+    
+    ## Pergunta o Host SMTP
+    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -en "\e[33mDigite o Host SMTP do email (ex: smtp.hostinger.com): \e[0m" && read -r host_vaultwarden
+    echo ""
+    
+    ## Pergunta a Porta SMTP 
+    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -en "\e[33mDigite a Porta SMTP do email (ex: 465): \e[0m" && read -r porta_vaultwarden
+    echo ""
+    
+    if [ "$porta_vaultwarden" -eq 465 ] || [ "$porta_vaultwarden" -eq 25 ]; then
+        ssl_vaultwarden=true
+    else
+        ssl_vaultwarden=false
+    fi
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_vaultwarden
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ## Informação sobre URL
+    echo -e "\e[33mDominio:\e[97m $url_vaultwarden\e[0m"
+    echo ""
+    
+    ## Informação sobre Email
+    echo -e "\e[33mEmail SMTP:\e[97m $email_vaultwarden\e[0m"
+    echo ""
+    
+    ## Informação sobre Senha
+    echo -e "\e[33mSenha SMTP:\e[97m $senha_vaultwarden\e[0m"
+    echo ""
+    
+    ## Informação sobre Host
+    echo -e "\e[33mHost SMTP:\e[97m $host_vaultwarden\e[0m"
+    echo ""
+    
+    ## Informação sobre Porta
+    echo -e "\e[33mPorta SMTP:\e[97m $porta_vaultwarden\e[0m"
+    echo ""
+    
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_vaultwarden
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO VAULTWARDEN \e[33m[1/3]\e[0m"
+echo ""
+sleep 1
+
+## Nada nada nada.. só para aparecer a mensagem de passo.
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO VAULTWARDEN \e[33m[2/3]\e[0m"
+echo ""
+sleep 1
+
+## Criando a stack
+cat > vaultwarden.yaml <<-EOF
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  vaultwarden:
+    image: vaultwarden/server:latest
+    networks:
+      - $nome_rede_interna
+    #ports:
+    #  - 1973:80
+    volumes:
+      - vaultwarden-data:/data
+    environment:
+
+      ## Dominio do Dashboard
+      - DOMAIN:https://$url_vaultwarden
+
+      ## Permitir novos registros
+      - SIGNUPS_ALLOWED=true
+
+      ## Dados do SMTP
+      - SMTP_FROM=$email_vaultwarden
+      - SMTP_USERNAME=$email_vaultwarden
+      - SMTP_PASSWORD=$senha_vaultwarden
+      - SMTP_HOST=$host_vaultwarden
+      - SMTP_PORT=$porta_vaultwarden
+      - SMTP_SECURITY=$ssl_vaultwarden
+
+      ## Configuração do Websocket
+      - WEBSOCKET_ENABLED=true
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+        - node.role == manager
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.vaultwarden.rule=Host(\`$url_vaultwarden\`)"
+        - "traefik.http.routers.vaultwarden.service=vaultwarden"
+        - "traefik.http.routers.vaultwarden.entrypoints=websecure"
+        - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
+        - "traefik.http.routers.vaultwarden.tls=true"
+        - "traefik.http.routers.vaultwarden.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.vaultwarden.loadbalancer.passhostheader=true"
+        - "traefik.http.routers.vaultwarden.middlewares=compresstraefik"
+        - "traefik.http.middlewares.compresstraefik.compress=true"
+        - "traefik.docker.network=$nome_rede_interna"
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  vaultwarden-data:
+    external: true
+    name: vaultwarden-data
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOF
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+    echo "Não foi possivel criar a stack do vaultwarden"
+fi
+
+docker stack deploy --prune --resolve-image always -c vaultwarden.yaml vaultwarden > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+    echo "Não foi possivel subir a stack do vaultwarden"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_vaultwarden para verificar se o serviço esta online
+wait_vaultwarden
+
+cd dados_vps
+
+cat > dados_vaultwarden <<EOL
+[ VAULTWARDEN ]
+
+Dominio do vaultwarden: https://$url_vaultwarden
+
+Email: Precisa de criar dentro do vaultwarden
+
+Senha: Precisa de criar dentro do vaultwarden
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ VAULTWARDEN ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_vaultwarden\e[0m"
+echo ""
+
+echo -e "\e[33mEmail:\e[97m Precisa de criar dentro do VaultWarden\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m Precisa de criar dentro do VaultWarden\e[0m"
 echo ""
 
 ## Creditos do instalador
