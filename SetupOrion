@@ -14627,9 +14627,9 @@ while true; do
     echo ""
     
     if [ "$porta_vaultwarden" -eq 465 ] || [ "$porta_vaultwarden" -eq 25 ]; then
-        ssl_vaultwarden=true
+        ssl_vaultwarden=force_tls
     else
-        ssl_vaultwarden=false
+        ssl_vaultwarden=starttls
     fi
     
     ## Limpa o terminal
