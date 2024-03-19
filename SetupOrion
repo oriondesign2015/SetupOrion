@@ -15309,6 +15309,7 @@ while true; do
             nome_saindo
             echo ""
             break
+            ;;
         39)
             if verificar_docker_e_portainer_traefik; then
             ferramenta_
