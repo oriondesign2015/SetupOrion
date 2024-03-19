@@ -1,5 +1,5 @@
 {
-  "name": "My workflow",
+  "name": "Transferir conversa",
   "nodes": [
     {
       "parameters": {
@@ -15,26 +15,26 @@
         },
         "options": {}
       },
-      "id": "3bc3b33d-f4db-429e-aeed-175ab816553e",
+      "id": "394133fa-384a-4ee1-9abe-b7fea4f3dac5",
       "name": "Puxa as conversas",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1340,
-        880.1344119972381
+        1560,
+        580.1344119972381
       ]
     },
     {
       "parameters": {
         "options": {}
       },
-      "id": "bf29513c-1b2a-44a4-bef9-82825539fb9e",
+      "id": "ebc3b9e7-3089-4d62-bd39-41e3ce82a7fa",
       "name": "Loop Over Items",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        1940,
-        880.1344119972381
+        2160,
+        580.1344119972381
       ]
     },
     {
@@ -48,13 +48,13 @@
           ]
         }
       },
-      "id": "60c769e9-d996-4b2c-905f-12ef3eb7caab",
+      "id": "432548e7-9afe-42eb-826a-97d31b5e895e",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        2340,
-        880.1344119972381
+        2560,
+        580.1344119972381
       ]
     },
     {
@@ -69,13 +69,13 @@
         },
         "options": {}
       },
-      "id": "b751b8f5-a2cb-4e9f-9d55-1461c9d5c963",
+      "id": "c5738519-b761-4099-be1e-5d3bf4ead3eb",
       "name": "Guardando dados",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        2540,
-        880.1344119972381
+        2760,
+        580.1344119972381
       ]
     },
     {
@@ -90,13 +90,13 @@
         },
         "options": {}
       },
-      "id": "0cd5c297-1710-44f1-9c0f-1e9caf08ab4c",
+      "id": "5efb5ea5-1375-4da0-ba88-941c52b7ea54",
       "name": "Tratando dados do webhook",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        820,
-        880.1344119972381
+        1040,
+        580.1344119972381
       ]
     },
     {
@@ -116,13 +116,13 @@
         },
         "options": {}
       },
-      "id": "da88e8f6-1609-49fe-8a44-2db389ae44f2",
+      "id": "93aef5d9-be90-4e3d-be81-a301f046e645",
       "name": "Dados Chatwoot",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        1080,
-        880.1344119972381
+        1300,
+        580.1344119972381
       ]
     },
     {
@@ -132,13 +132,13 @@
         "width": 257.68174488592643,
         "color": 3
       },
-      "id": "325d4f94-f6e8-49d4-af0f-79b4d4dcb8b0",
+      "id": "ee6c1bcd-4feb-4c65-b6f3-49fc2b2afe11",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1000,
-        800.1344119972381
+        1220,
+        500.1344119972381
       ]
     },
     {
@@ -146,13 +146,13 @@
         "fieldToSplitOut": "data.payload",
         "options": {}
       },
-      "id": "9cf691cf-c614-4e5d-93a1-da42961a6342",
+      "id": "85cb23ad-3a4d-4b7a-9a43-5fed89a65626",
       "name": "Listando itens",
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 3.1,
       "position": [
-        1540,
-        880.1344119972381
+        1760,
+        580.1344119972381
       ]
     },
     {
@@ -175,13 +175,13 @@
         },
         "options": {}
       },
-      "id": "67d52496-60b3-47f3-90d1-adca1ac81b40",
+      "id": "4a3515e5-ec9e-4a99-a5e7-57de9a356399",
       "name": "Separando dados",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        1740,
-        880.1344119972381
+        1960,
+        580.1344119972381
       ]
     },
     {
@@ -200,13 +200,13 @@
         },
         "options": {}
       },
-      "id": "b17cad18-bb07-4dd7-bf39-6549d32de949",
+      "id": "a846e22b-16b8-4b96-9d9c-327190e1ac55",
       "name": "Dados para testar",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        2140,
-        880.1344119972381
+        2360,
+        580.1344119972381
       ]
     },
     {
@@ -215,13 +215,13 @@
         "responseBody": "={{ $json['id da conversa'] }}",
         "options": {}
       },
-      "id": "ef425817-d959-4004-8007-b3da636dcaf4",
+      "id": "7026e6ad-d99c-4177-a9f6-f51b918645e2",
       "name": "Retornando dado para o typebot",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        3080,
-        800.1344119972381
+        3300,
+        500.1344119972381
       ]
     },
     {
@@ -230,29 +230,29 @@
         "responseBody": "=não achei",
         "options": {}
       },
-      "id": "0f1dac68-b279-4c81-bdc6-a30da1203a90",
+      "id": "6ccf0e37-f1e4-4418-bf0b-831580ebcf07",
       "name": "Retornando erro para o typebot",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        2140,
-        680.1344119972381
+        2360,
+        380.1344119972381
       ]
     },
     {
       "parameters": {
         "content": "## Fluxo para verificar ID da conversa\nUsado para verificar o ID da conversa dentro do chatwoot usando uma requisição do typebot.",
-        "height": 731.2175401889145,
+        "height": 692.3633038882726,
         "width": 3283.756506012779,
         "color": 7
       },
-      "id": "0ba0c257-ac95-48de-aea8-5aee40f12133",
+      "id": "d7756a90-3785-4604-b6df-984dc1fe8c4a",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        460,
-        460
+        680,
+        210.99618514459235
       ]
     },
     {
@@ -262,13 +262,13 @@
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "f0d51983-4f8a-4580-8686-0c4ec1dcb7f4",
+      "id": "207617a6-2285-4c6a-80cc-efc64e32869d",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        620,
-        880.1344119972381
+        840,
+        580.1344119972381
       ],
       "webhookId": "3ebffc8a-20df-4500-a3f0-3085fe3541de"
     },
@@ -279,30 +279,30 @@
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "558da368-c1d3-4f89-85a5-fab0c8676cd5",
+      "id": "5155dce5-d4f1-43f9-8773-0d301aa90eea",
       "name": "Trasferir-1",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        620,
-        1520.1344119972382
+        840,
+        1220.1344119972382
       ],
       "webhookId": "3ebffc8a-20df-4500-a3f0-3085fe3541de"
     },
     {
       "parameters": {
         "content": "## Transferir para o time\nTransferir para o setor de ",
-        "height": 515.1960207531664,
+        "height": 527.337969597117,
         "width": 1847.3347715868017,
         "color": 7
       },
-      "id": "a4f711b6-e707-4688-8ef3-68480e958d69",
+      "id": "01f35c43-5b3b-4f38-bf37-17cb35361174",
       "name": "Sticky Note3",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        460,
-        1240.1344119972382
+        680,
+        927.9924631532876
       ]
     },
     {
@@ -322,13 +322,13 @@
         },
         "options": {}
       },
-      "id": "d9594482-986c-43ef-99ec-289fe68e1d6e",
+      "id": "c3dbe0de-8406-4219-95cc-c3f5ebe59db8",
       "name": "Dados Chatwoot1",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        1120,
-        1520.1344119972382
+        1340,
+        1220.1344119972382
       ]
     },
     {
@@ -347,13 +347,13 @@
         },
         "options": {}
       },
-      "id": "29279663-6f87-46cf-8560-b4b049d4d6d5",
+      "id": "372d4012-763b-4d74-a7a4-e6f2f55d8e90",
       "name": "Tratando dados do webhook1",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        840,
-        1520.1344119972382
+        1060,
+        1220.1344119972382
       ]
     },
     {
@@ -374,13 +374,13 @@
         "jsonBody": "={\n  \"content\": \"**[DADOS DO CLIENTE]**\\n\\nNome: **{{ $('Tratando dados do webhook1').item.json[\"Nome\"] }}**\\n\\nCPF: **{{ $('Tratando dados do webhook1').item.json[\"CPF\"] }}**\\n\\nOpção escolhida: **{{ $('Tratando dados do webhook1').item.json[\"Setor\"] }}**\\n\\nProtocolo: **{{ $('Tratando dados do webhook1').item.json[\"protocolo\"] }}**\\n\\nLembre-se de se identificar antes de iniciar o atendimento.\",\n  \"message_type\": \"outgoing\",\n  \"private\": true\n}",
         "options": {}
       },
-      "id": "4c4255d2-7e8f-4875-a848-f2d587814909",
+      "id": "6635e620-1760-4598-9fc5-467135e98ac1",
       "name": "Enviando mensagem privada",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1840,
-        1520.1344119972382
+        2060,
+        1220.1344119972382
       ]
     },
     {
@@ -401,13 +401,13 @@
         "jsonBody": "={\"custom_attributes\":\n        {\"protocolo\":\"{{ $('Tratando dados do webhook1').item.json.protocolo }}\"}\n}",
         "options": {}
       },
-      "id": "296c00b7-f0c3-41f0-add7-78391b5684d7",
+      "id": "432c9dfb-c6f9-4b87-9336-74536f295f5b",
       "name": "Atributo personalizado",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        2060,
-        1520.1344119972382
+        2280,
+        1220.1344119972382
       ]
     },
     {
@@ -428,13 +428,13 @@
         "jsonBody": "={\n  \"content\": \"Segue seu numero de protocolo: *{{ $('Tratando dados do webhook1').item.json.protocolo }}*. Em instantes um de nossos colaboradores irá te atender.\",\n  \"message_type\": \"outgoing\",\n  \"private\": false\n}",
         "options": {}
       },
-      "id": "89b18076-b76e-445d-ae35-8d58513b03b1",
+      "id": "266a1574-71e3-435f-bac9-6772ff8c044c",
       "name": "Enviando mensagem e protocolo",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1640,
-        1520.1344119972382
+        1860,
+        1220.1344119972382
       ]
     },
     {
@@ -455,13 +455,13 @@
         "jsonBody": "={\n  \"labels\": [\n    \"bot_atendendo\"\n  ]\n}",
         "options": {}
       },
-      "id": "74689352-61cd-4d57-a108-5f10da8d64fc",
+      "id": "2062fd40-2414-470e-978e-12ab4165c790",
       "name": "Aplica etiqueta",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        3080,
-        620.1344119972381
+        3300,
+        320.1344119972381
       ]
     },
     {
@@ -471,13 +471,13 @@
         "width": 1210.5004477123339,
         "color": 7
       },
-      "id": "88a99bab-0875-45ab-9434-d458a68f7fad",
+      "id": "3ffd3572-03fd-46fa-9fd5-dcda4d114ee2",
       "name": "Sticky Note4",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        460,
-        1820.1344119972382
+        680,
+        1480
       ]
     },
     {
@@ -496,13 +496,13 @@
         },
         "options": {}
       },
-      "id": "da2b5f61-3193-4e1e-ac41-17c38553e3c4",
+      "id": "e5a38701-a9c8-4c3c-b77f-374ce993ce69",
       "name": "Tratando dados do webhook2",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        860,
-        2020.1344119972382
+        1080,
+        1680
       ]
     },
     {
@@ -512,13 +512,13 @@
         "responseMode": "responseNode",
         "options": {}
       },
-      "id": "a535e4dd-f156-4cf1-a107-646e4c0bef7f",
+      "id": "60fd24c9-ba2d-4843-80d4-9f76a5c237f5",
       "name": "Encerrando",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        620,
-        2020.1344119972382
+        840,
+        1680
       ],
       "webhookId": "3ebffc8a-20df-4500-a3f0-3085fe3541de"
     },
@@ -537,16 +537,16 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"remoteJid\": \"{{ $json[\"remotejid\"] }}\",\n    \"status\": \"closed\"\n}",
+        "jsonBody": "={\n    \"remoteJid\": \"{{ $json[\"remotejid\"].split(\"+\")[1] }}@s.whatsapp.net\",\n    \"status\": \"closed\"\n}",
         "options": {}
       },
-      "id": "4fb84d68-b8eb-4d6f-8bfe-7e6577be2c33",
+      "id": "f085946f-594d-45b7-a433-73c249a80f7c",
       "name": "Fechando bot",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1400,
-        2020.1344119972382
+        1620,
+        1680
       ]
     },
     {
@@ -567,13 +567,13 @@
         "jsonBody": "={\n    \"remoteJid\": \"{{ $('Trasferir-1').item.json[\"body\"][\"remoteJid\"] }}\",\n    \"status\": \"paused\"\n}",
         "options": {}
       },
-      "id": "46b0c4f2-bae4-4149-9ad3-2033de27f5fe",
+      "id": "9d7132c9-0faf-463f-a406-3bb75fd62674",
       "name": "Pausando Bot",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        2060,
-        1300.1344119972382
+        2280,
+        1000.1344119972382
       ]
     },
     {
@@ -593,13 +593,13 @@
         },
         "options": {}
       },
-      "id": "bb0aae7a-5715-4b6c-ac03-ab599a9e1780",
+      "id": "0a7e0364-ac1d-4227-bf88-f17dcc9de1a4",
       "name": "Dados da Evolution",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.2,
       "position": [
-        1160,
-        2020.1344119972382
+        1380,
+        1680
       ]
     },
     {
@@ -609,13 +609,13 @@
         "width": 241.17802378671115,
         "color": 3
       },
-      "id": "2fa7f19e-f794-4be0-9811-35211dfbf787",
+      "id": "a98739dd-818b-4579-94fa-feb42e45d721",
       "name": "Sticky Note6",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1042.8945771329534,
-        1460.1344119972382
+        1262.8945771329534,
+        1160.1344119972382
       ]
     },
     {
@@ -625,13 +625,13 @@
         "width": 245.2068014068987,
         "color": 3
       },
-      "id": "10645652-4d48-4f30-87ad-485b47354f50",
+      "id": "05cab21f-cda4-487c-94e6-31bb8b895acf",
       "name": "Sticky Note7",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1300,
-        1240.1344119972382
+        1520,
+        940.1344119972382
       ]
     },
     {
@@ -641,13 +641,13 @@
         "width": 228.1013785398523,
         "color": 3
       },
-      "id": "8bc7fe0c-76d5-4996-9901-bd17de51084d",
+      "id": "9054ce2e-9262-4695-b32e-7ae372ccfc76",
       "name": "Sticky Note8",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2000,
-        1240.1344119972382
+        2220,
+        940.1344119972382
       ]
     },
     {
@@ -668,13 +668,13 @@
         "jsonBody": "={\n  \"labels\": [\n    \"atendimento_humano\"\n  ]\n}",
         "options": {}
       },
-      "id": "b6afaee4-5604-444d-8887-1285ce47af1d",
+      "id": "2777566a-0d16-4a68-817a-aaba62335ebe",
       "name": "Etiqueta 1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1380,
-        1300.1344119972382
+        1600,
+        1000.1344119972382
       ]
     },
     {
@@ -684,13 +684,13 @@
         "width": 228.1013785398523,
         "color": 3
       },
-      "id": "9367d025-261e-4dbf-ad8d-be5abaf32feb",
+      "id": "ae926743-3abb-4d75-9136-82e5e89cda83",
       "name": "Sticky Note9",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3020,
-        540.1344119972381
+        3240,
+        240.1344119972381
       ]
     },
     {
@@ -700,13 +700,13 @@
         "width": 262.57229542832584,
         "color": 3
       },
-      "id": "b31a8d5e-aebd-4109-ae1a-318da9cd3bed",
+      "id": "ce84f6cf-70a2-48af-a834-9d0b4b60c92c",
       "name": "Sticky Note10",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1080,
-        1940.1344119972382
+        1300,
+        1600
       ]
     },
     {
@@ -716,13 +716,13 @@
         "width": 404.77209055811295,
         "color": 3
       },
-      "id": "47198d6e-3d59-4397-b46b-02f116c390c4",
+      "id": "22592738-78ec-49f6-aece-43cd2d03a799",
       "name": "Sticky Note12",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1580,
-        1460.1344119972382
+        1800,
+        1160.1344119972382
       ]
     },
     {
@@ -732,13 +732,13 @@
         "width": 261.8845883099779,
         "color": 3
       },
-      "id": "d807a2c7-b743-4ded-894c-aea0f4fa0994",
+      "id": "deb098a0-198b-448b-be2b-02fb0cbc0095",
       "name": "Sticky Note13",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        760,
-        1460.1344119972382
+        980,
+        1160.1344119972382
       ]
     },
     {
@@ -765,13 +765,13 @@
         },
         "options": {}
       },
-      "id": "a9ae1f02-9fd1-4e60-a99d-4e0e1d91a6dd",
+      "id": "5aca17d6-43d0-47cd-a72b-974bb45e167b",
       "name": "If",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2760,
-        880.1344119972381
+        2980,
+        580.1344119972381
       ]
     },
     {
@@ -792,13 +792,13 @@
         "jsonBody": "={\n    \"remoteJid\": \"{{ $('Webhook').item.json[\"body\"][\"numero do whatsapp\"] }}\",\n    \"status\": \"paused\"\n}",
         "options": {}
       },
-      "id": "46e5f5c8-785f-4f6b-be04-8f5b2116e120",
+      "id": "146f3e35-4733-44fe-9596-8f1d4cdceec2",
       "name": "Pausar bot",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        3320,
-        1040.1344119972382
+        3540,
+        740.1344119972382
       ]
     },
     {
@@ -808,13 +808,13 @@
         "width": 230.98614464558358,
         "color": 3
       },
-      "id": "c84cf6ba-c127-4107-88b1-fb9eda5556c1",
+      "id": "6cf3e3fd-0301-4949-8d77-74a45d99426f",
       "name": "Sticky Note14",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3257,
-        960.1344119972381
+        3477,
+        660.1344119972381
       ]
     },
     {
@@ -835,13 +835,13 @@
         "jsonBody": "={\n  \"labels\": [\n    \"atendimento_humano\"\n  ]\n}",
         "options": {}
       },
-      "id": "8a819b6b-830a-436c-b200-dbe8148538ce",
+      "id": "bc44a21b-505c-4ea7-b12f-40c7de15e0f2",
       "name": "Aplica etiqueta1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        3080,
-        1040.1344119972382
+        3300,
+        740.1344119972382
       ]
     },
     {
@@ -851,13 +851,13 @@
         "width": 228.1013785398523,
         "color": 3
       },
-      "id": "dc0b6d86-68d9-456a-a85f-99c8af67b4d1",
+      "id": "7b946bad-b7c6-4dc8-b476-2414e7c3ff97",
       "name": "Sticky Note15",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3020,
-        960.1344119972381
+        3240,
+        660.1344119972381
       ]
     },
     {
@@ -867,13 +867,13 @@
         "width": 250.6085138912291,
         "color": 3
       },
-      "id": "8c3eceb9-2289-48f4-a6c6-4858870679b7",
+      "id": "5024cb9d-4418-425e-b407-57284811d24a",
       "name": "Sticky Note16",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1300,
-        1460.1344119972382
+        1520,
+        1160.1344119972382
       ]
     },
     {
@@ -894,13 +894,13 @@
         "jsonBody": "={\n\"team_id\": 1\n}",
         "options": {}
       },
-      "id": "227eb27b-d7a5-4a27-89db-70fa3a9293bf",
+      "id": "538b44c4-7a45-4079-bd8d-4855d30da717",
       "name": "Transferindo conversa 1",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        1380,
-        1520.1344119972382
+        1600,
+        1220.1344119972382
       ]
     },
     {
@@ -909,42 +909,17 @@
         "responseBody": "=PARAR",
         "options": {}
       },
-      "id": "72b043d0-1072-4488-be31-89f712777bf3",
+      "id": "c29a2879-f54a-45e9-8717-1e94500fb04a",
       "name": "Retornando dado para o typebot1",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        3540,
-        1040
+        3760,
+        740
       ]
     }
   ],
-  "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "host": "n8n.oriondesign.art.br",
-            "user-agent": "got (https://github.com/sindresorhus/got)",
-            "content-length": "53",
-            "accept-encoding": "gzip, deflate, br",
-            "content-type": "application/json",
-            "x-forwarded-for": "172.18.0.1",
-            "x-forwarded-host": "n8n.oriondesign.art.br",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "3f816f4b04ed",
-            "x-real-ip": "172.18.0.1"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "numero do whatsapp": "5511973052593@s.whatsapp.net"
-          }
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "connections": {
     "Loop Over Items": {
       "main": [
@@ -1229,18 +1204,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "65118113-4920-425c-8a13-47d75ded6747",
+  "versionId": "3d27fea7-68ea-4f06-928e-f2250b79ad2a",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "daa4a438584ccf4bebb0397fd14280911434d33ea315bbcfc6b3168225983416"
+    "instanceId": "a2a0c5489ec77e18872f6afe98f00cf272dccdfc152b3a0d85b7bcd1ec430dd2"
   },
-  "id": "FAvCuqcHVpks5NyN",
-  "tags": [
-    {
-      "name": "OrionDesign",
-      "id": "iV1P9IYcAOZtFPQN",
-      "createdAt": "2024-02-29T13:05:37.791Z",
-      "updatedAt": "2024-02-29T13:05:37.791Z"
-    }
-  ]
+  "id": "CL2o2ThcBDPfS1yU",
+  "tags": []
 }
