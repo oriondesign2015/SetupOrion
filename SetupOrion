@@ -12618,7 +12618,7 @@ version: "3.7"
 
 services:
   quepasa:
-    image: oriondesign/quepasa:latest
+    image: codeleaks/quepasa:latest
     volumes:
       - quepasa_data:/opt/quepasa
       - quepasa_migration:/opt/quepasa/migrations
@@ -12652,6 +12652,7 @@ services:
       - DEBUGREQUESTS=false
       - READRECEIPTS=false
       - SYNOPSISLENGTH=500
+      - MIGRATIONS=/builder/migrations
 
     deploy:
       mode: replicated
