@@ -749,7 +749,7 @@ echo ""
 echo ""
 }
 
-nome_vaultwarden()
+nome_vaultwarden() {
     clear
     echo ""
     echo -e "$branco   ██╗   ██╗ █████╗ ██╗   ██╗██╗  ████████╗██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗\e[0m"
