@@ -877,7 +877,7 @@ menu_instalador(){
     echo -e "${amarelo}[ 5 ]${reset} -  ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
     echo -e "${amarelo}[ 6 ]${reset} -  ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
     echo -e "${amarelo}[ 7 ]${reset} -  ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
-    echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor ${verde}[NOVO] ${amarelo}[EM TESTES]${reset}"
+    echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 9 ]${reset} -  ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
     echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
     echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
