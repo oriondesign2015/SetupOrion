@@ -15273,6 +15273,13 @@ echo ""
 echo -e "\e[97mDominio Grafana:\e[33m https://$url_grafana\e[0m"
 echo ""
 
+echo -e "\e[97mUsuario Grafana:\e[33m admin\e[0m"
+echo ""
+
+echo -e "\e[97mSenha Grafana:\e[33m admin\e[0m"
+echo -e "\e[97mDepois do primeiro login, será solicitado que você altere a senha.\e[0m"
+echo ""
+
 echo -e "\e[97mDominio Prometheus:\e[33m https://$url_prometheus\e[0m"
 echo ""
 
