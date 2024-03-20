@@ -34,15 +34,15 @@
       "targetBlank": true,
       "title": "GitHub",
       "type": "link",
-      "url": "https://github.com/rfmoz/grafana-dashboards"
+      "url": "https://github.com/OrionDesign2015/SetupOrion"
     },
     {
       "icon": "external link",
       "tags": [],
       "targetBlank": true,
-      "title": "Grafana",
+      "title": "Youtube",
       "type": "link",
-      "url": "https://grafana.com/grafana/dashboards/1860"
+      "url": "https://youtube.com/oriondesign_oficial"
     }
   ],
   "liveNow": false,
@@ -2270,6 +2270,6 @@
   "timezone": "browser",
   "title": "Monitoramento do Sistema",
   "uid": "rYdddlPWk",
-  "version": 3,
+  "version": 8,
   "weekStart": ""
 }
