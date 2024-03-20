@@ -14986,7 +14986,7 @@ sleep 1
 mkdir blablabla
 cd blablabla
 
-git clone https://github.com/oriondesign2015/SetupOrion.git
+git clone https://github.com/oriondesign2015/SetupOrion.git > /dev/null 2>&1
 
 sudo mv /root/blablabla/SetupOrion/Extras/Grafana/monitor-orion /opt
 
@@ -15084,6 +15084,7 @@ fi
 
 cd
 cd
+echo ""
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO GRAFANA + PROMETHEUS + CADVISOR \e[33m[3/3]\e[0m"
@@ -15227,6 +15228,7 @@ else
     echo "Não foi possivel subir a stack do Monitor"
 fi
 
+echo ""
 sleep 10
 
 ## Mensagem de Passo
