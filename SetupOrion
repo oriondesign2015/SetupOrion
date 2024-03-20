@@ -7453,7 +7453,7 @@ version: '3.7'
 
 services:
   baserow:
-    image: baserow/baserow:latest ## Versão do Baserow
+    image: baserow/baserow:1.22.2 ## Versão do Baserow
     volumes:
       - baserow_data:/baserow/data
 
