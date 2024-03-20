@@ -14996,7 +14996,7 @@ rm -r blablabla
 
 cd
 
-cd /opt/monitor-orion/grafana
+cd
 
 ## Criando arquivo datasource
 cat > datasource.yml <<EOL
@@ -15010,32 +15010,38 @@ datasources:
   editable: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/3 - [ OK ]"
+    echo "1/4 - [ OK ]"
 else
-    echo "1/3 - [ OFF ]"
+    echo "1/4 - [ OFF ]"
     echo "Não foi possivel criar o datasource"
 fi
 
-cd /opt/monitor-orion/grafana/provisioning/datasources
 
-## Criando arquivo datasource
-cat > datasource.yml <<EOL
-apiVersion: 1
-datasources:
-- name: Prometheus
-  type: prometheus
-  url: https://$url_prometheus
-  isDefault: true
-  access: proxy
-  editable: true
-EOL
+cp /root/datasource.yml /opt/monitor-orion/grafana/
 if [ $? -eq 0 ]; then
-    echo "2/3 - [ OK ]"
+    echo "2/6 - [ OK ]"
 else
-    echo "2/3 - [ OFF ]"
-    echo "Não foi possivel criar o datasource"
+    echo "2/6 - [ OFF ]"
+    echo "Não foi possivel copiar o datasource para o diretório opt"
 fi
 
+cp /root/datasource.yml /opt/monitor-orion/grafana/provisioning/datasources/
+if [ $? -eq 0 ]; then
+    echo "3/6 - [ OK ]"
+else
+    echo "3/6 - [ OFF ]"
+    echo "Não foi possivel copiar o datasource para o diretório opt"
+fi
+
+rm /root/datasource.yml
+if [ $? -eq 0 ]; then
+    echo "4/6 - [ OK ]"
+else
+    echo "4/6 - [ OFF ]"
+    echo "Não foi possivel deletar o datasource para o diretório opt"
+fi
+
+cd
 
 ## Criando arquivo prometheus yml
 cat > prometheus.yml <<EOL
@@ -15062,10 +15068,18 @@ scrape_configs:
 
 EOL
 if [ $? -eq 0 ]; then
-    echo "3/3 - [ OK ]"
+    echo "5/6 - [ OK ]"
 else
-    echo "3/3 - [ OFF ]"
+    echo "5/6 - [ OFF ]"
     echo "Não foi possivel criar o prometheus"
+fi
+
+mv /root/prometheus.yml /opt/monitor-orion/prometheus/
+if [ $? -eq 0 ]; then
+    echo "6/6 - [ OK ]"
+else
+    echo "6/6 - [ OFF ]"
+    echo "Não foi possivel copiar o datasource para o diretório opt"
 fi
 
 cd
