@@ -2,7 +2,7 @@
 ####################################################
 
 versao() {
-echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.3.7\e[0m"
+echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.3.8\e[0m"
 }
 
 ####################################################
@@ -762,6 +762,19 @@ nome_vaultwarden() {
     echo ""
 }
 
+nome_monitor() {
+    clear
+    echo ""
+    echo -e "$branco                     ██████╗ ██████╗  █████╗ ███████╗ █████╗ ███╗   ██╗ █████╗ \e[0m"
+    echo -e "$branco                    ██╔════╝ ██╔══██╗██╔══██╗██╔════╝██╔══██╗████╗  ██║██╔══██╗\e[0m"
+    echo -e "$branco                    ██║  ███╗██████╔╝███████║█████╗  ███████║██╔██╗ ██║███████║\e[0m"
+    echo -e "$branco                    ██║   ██║██╔══██╗██╔══██║██╔══╝  ██╔══██║██║╚██╗██║██╔══██║\e[0m"
+    echo -e "$branco                    ╚██████╔╝██║  ██║██║  ██║██║     ██║  ██║██║ ╚████║██║  ██║\e[0m"
+    echo -e "$branco                     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝\e[0m"
+    echo ""
+    echo ""
+}
+
 nome_saindo() {
     clear
     echo ""
@@ -864,7 +877,7 @@ menu_instalador(){
     echo -e "${amarelo}[ 5 ]${reset} -  ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
     echo -e "${amarelo}[ 6 ]${reset} -  ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
     echo -e "${amarelo}[ 7 ]${reset} -  ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
-    echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus +cAdvisor ${vermelho}[OFF]${reset}"
+    echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor ${verde}[NOVO] ${amarelo}[EM TESTES]${reset}"
     echo -e "${amarelo}[ 9 ]${reset} -  ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
     echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
     echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
@@ -1637,6 +1650,19 @@ wait_vaultwarden(){
         # Verifica se o serviço chatwoot está ativo
         if docker service ls --filter "name=vaultwarden" | grep "1/1"; then
             sleep 30
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_monitor(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço chatwoot está ativo
+        if docker service ls --filter "name=monitor" | grep "1/1"; then
+            sleep 10
             break
         fi
     
@@ -14844,6 +14870,417 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+##  ██████╗ ██████╗  █████╗ ███████╗ █████╗ ███╗   ██╗ █████╗ 
+## ██╔════╝ ██╔══██╗██╔══██╗██╔════╝██╔══██╗████╗  ██║██╔══██╗
+## ██║  ███╗██████╔╝███████║█████╗  ███████║██╔██╗ ██║███████║
+## ██║   ██║██╔══██╗██╔══██║██╔══╝  ██╔══██║██║╚██╗██║██╔══██║
+## ╚██████╔╝██║  ██║██║  ██║██║     ██║  ██║██║ ╚████║██║  ██║
+##  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
+
+ferramenta_monitor() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_monitor
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 1/4\e[0m"
+    echo -en "\e[33mDigite o Dominio para o Grafana (ex: grafana.oriondesign.art.br): \e[0m" && read -r url_grafana
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 2/4\e[0m"
+    echo -en "\e[33mDigite o Dominio para o Prometheus (ex: prometheus.oriondesign.art.br): \e[0m" && read -r url_prometheus
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 3/4\e[0m"
+    echo -en "\e[33mDigite o Dominio para o cAdvisor (ex: cadvisor.oriondesign.art.br): \e[0m" && read -r url_cadvisor
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+    echo -en "\e[33mDigite o Dominio para o NodeExporter (ex: node.oriondesign.art.br): \e[0m" && read -r url_nodeexporter
+    echo ""
+
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_monitor
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio do Grafana:\e[97m $url_grafana\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio do Prometheus:\e[97m $url_prometheus\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio do Cadvisor:\e[97m $url_cadvisor\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio do NodeExporter:\e[97m $url_nodeexporter\e[0m"
+    echo ""
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_monitor
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO GRAFANA + PROMETHEUS + CADVISOR \e[33m[1/3]\e[0m"
+echo ""
+sleep 1
+
+## Literalmente nada, apenas um espaço vazio caso precisar de adicionar alguma coisa antes..
+## E claro, para aparecer a mensagem do passo..
+
+## Mensagem de Passo
+echo -e "\e[97m• BAIXANDO RECURSOS \e[33m[2/3]\e[0m"
+echo ""
+sleep 1
+
+mkdir blablabla
+cd blablabla
+
+git clone https://github.com/oriondesign2015/SetupOrion.git
+
+sudo mv /root/blablabla/SetupOrion/Extras/Grafana/monitor-orion /opt
+
+cd
+
+rm -r blablabla
+
+cd
+
+cd /opt/monitor-orion/grafana
+
+## Criando arquivo datasource
+cat > datasource.yml <<EOL
+apiVersion: 1
+datasources:
+- name: Prometheus
+  type: prometheus
+  url: https://$url_prometheus
+  isDefault: true
+  access: proxy
+  editable: true
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/3 - [ OK ]"
+else
+    echo "1/3 - [ OFF ]"
+    echo "Não foi possivel criar o datasource"
+fi
+
+cd /opt/monitor-orion/grafana/provisioning/datasources
+
+## Criando arquivo datasource
+cat > datasource.yml <<EOL
+apiVersion: 1
+datasources:
+- name: Prometheus
+  type: prometheus
+  url: https://$url_prometheus
+  isDefault: true
+  access: proxy
+  editable: true
+EOL
+if [ $? -eq 0 ]; then
+    echo "2/3 - [ OK ]"
+else
+    echo "2/3 - [ OFF ]"
+    echo "Não foi possivel criar o datasource"
+fi
+
+
+## Criando arquivo prometheus yml
+cat > prometheus.yml <<EOL
+global:
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  evaluation_interval: 15s
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: []
+    scheme: http
+    timeout: 10s
+    api_version: v1
+scrape_configs:
+- job_name: prometheus
+  honor_timestamps: true
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets: ['$url_prometheus','$url_cadvisor','$url_nodeexporter']
+
+EOL
+if [ $? -eq 0 ]; then
+    echo "3/3 - [ OK ]"
+else
+    echo "3/3 - [ OFF ]"
+    echo "Não foi possivel criar o prometheus"
+fi
+
+cd
+cd
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO GRAFANA + PROMETHEUS + CADVISOR \e[33m[3/3]\e[0m"
+echo ""
+sleep 1
+
+## Aqui de fato vamos iniciar a instalação das ferramentas
+
+## Criando a stack
+cat > monitor.yaml <<EOL
+version: '3.7'
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  prometheus:
+    image: prom/prometheus:latest
+    networks:
+      - $nome_rede_interna
+    ports:
+      - "9191:9090"
+    volumes:
+      - /opt/monitor-orion/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.prometheus.rule=Host(\`$url_prometheus\`)
+        - traefik.http.services.prometheus.loadbalancer.server.port=9090
+        - traefik.http.routers.prometheus.service=prometheus
+        - traefik.http.routers.prometheus.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.prometheus.entrypoints=websecure
+        - traefik.http.routers.prometheus.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+  grafana:
+    image: grafana/grafana:latest
+    networks:
+      - $nome_rede_interna
+    ports:
+      - "3111:3000"
+    volumes:
+      - /opt/monitor-orion/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /opt/monitor-orion/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - /opt/monitor-orion/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - /opt/monitor-orion/grafana/dashboards:/etc/grafana/dashboards
+    links:
+      - prometheus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.grafana.rule=Host(\`$url_grafana\`)
+        - traefik.http.services.grafana.loadbalancer.server.port=3000
+        - traefik.http.routers.grafana.service=grafana
+        - traefik.http.routers.grafana.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.grafana.entrypoints=websecure
+        - traefik.http.routers.grafana.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    networks:
+      - $nome_rede_interna
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.node-exporter.rule=Host(\`$url_nodeexporter\`)
+        - traefik.http.services.node-exporter.loadbalancer.server.port=9100
+        - traefik.http.routers.node-exporter.service=node-exporter
+        - traefik.http.routers.node-exporter.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.node-exporter.entrypoints=websecure
+        - traefik.http.routers.node-exporter.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+  cadvisor:
+    image: google/cadvisor:latest
+    networks:
+      - $nome_rede_interna
+    ports:
+      - "8181:8080"
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.cadvisor.rule=Host(\`$url_cadvisor\`)
+        - traefik.http.services.cadvisor.loadbalancer.server.port=8080
+        - traefik.http.routers.cadvisor.service=cadvisor
+        - traefik.http.routers.cadvisor.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.cadvisor.entrypoints=websecure
+        - traefik.http.routers.cadvisor.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+    echo "Não foi possivel criar a stack do Monitor"
+fi
+
+docker stack deploy --prune --resolve-image always -c monitor.yaml monitor > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+    echo "Não foi possivel subir a stack do Monitor"
+fi
+
+sleep 10
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/3]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_monitor para verificar se o serviço esta online
+wait_monitor
+
+cd dados_vps
+
+cat > dados_monitor <<EOL
+[ MONITOR ]
+
+Dominio Grafana: https://$url_grafana
+
+Dominio Prometheus: https://$url_prometheus
+
+Dominio cAdvisor: https://$url_cadvisor
+
+Dominio NodeExporter: https://$url_nodeexporter
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ GRAFANA + PROMETHEUS + CADVISOR ]\e[0m"
+echo ""
+
+echo -e "\e[97mDominio Grafana:\e[33m https://$url_grafana\e[0m"
+echo ""
+
+echo -e "\e[97mDominio Prometheus:\e[33m https://$url_prometheus\e[0m"
+echo ""
+
+echo -e "\e[97mDominio cAdvisor:\e[33m https://$url_cadvisor\e[0m"
+echo ""
+
+echo -e "\e[97mDominio NodeExporter:\e[33m https://$url_nodeexporter\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ####################################################
 
 ## Comandos extras
@@ -15270,7 +15707,7 @@ while true; do
             ;;
         31)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_
+            ferramenta_monitor
             fi
             ;;
         32)
