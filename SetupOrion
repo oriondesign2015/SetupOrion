@@ -15529,7 +15529,7 @@ services:
     networks:
       - $nome_rede_interna
     ports:
-      - 8080:80
+      - 8282:80
     volumes:
       - nextcloud_data:/var/www/html
     environment:
