@@ -15546,7 +15546,7 @@ services:
       - POSTGRES_PASSWORD=$senha_postgres
 
       ## Dados do Redis
-      - REDIS_HOST=redis://redis:6379
+      - REDIS_HOST=redis
 
     deploy:
       mode: replicated
