@@ -775,6 +775,19 @@ nome_monitor() {
     echo ""
 }
 
+nome_nextcloud() {
+    clear
+    echo ""
+    echo -e "$branco           ███╗   ██╗███████╗██╗  ██╗████████╗ ██████╗██╗      ██████╗ ██╗   ██╗██████╗ \e[0m"
+    echo -e "$branco           ████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝██╔════╝██║     ██╔═══██╗██║   ██║██╔══██╗\e[0m"
+    echo -e "$branco           ██╔██╗ ██║█████╗   ╚███╔╝    ██║   ██║     ██║     ██║   ██║██║   ██║██║  ██║\e[0m"
+    echo -e "$branco           ██║╚██╗██║██╔══╝   ██╔██╗    ██║   ██║     ██║     ██║   ██║██║   ██║██║  ██║\e[0m"
+    echo -e "$branco           ██║ ╚████║███████╗██╔╝ ██╗   ██║   ╚██████╗███████╗╚██████╔╝╚██████╔╝██████╔╝\e[0m"
+    echo -e "$branco           ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ \e[0m"
+    echo ""
+    echo ""
+}
+
 nome_saindo() {
     clear
     echo ""
@@ -883,9 +896,9 @@ menu_instalador(){
     echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
     echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
     echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}" # ${amarelo}[ 39 ]${reset} - ${branco}Sair do instalador${reset}"
+    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}" # ${amarelo}[ 40 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}" # ${amarelo}[ 31 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}" # ${amarelo}[ 32 ]${reset} - ${branco}Ainda Vazio${reset}"
@@ -1662,6 +1675,19 @@ wait_monitor(){
     while true; do
         # Verifica se o serviço chatwoot está ativo
         if docker service ls --filter "name=monitor" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_nextcloud(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço chatwoot está ativo
+        if docker service ls --filter "name=nextcloud" | grep "1/1"; then
             sleep 10
             break
         fi
@@ -2597,6 +2623,51 @@ criar_banco_postgres_directus() {
 
                 if [ $? -eq 0 ]; then
                     echo "Banco de dados directus criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
+criar_banco_postgres_nextcloud() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nextcloud"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados nextcloud já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS nextcloud;"
+                    echo "Banco de dados nextcloud apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nextcloud;"
+                    
+                    echo "Banco de dados nextcloud criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nextcloud;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nextcloud"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados nextcloud criado com sucesso."
                     break
                 else
                     echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -7567,7 +7638,7 @@ instalado_msg
 guarde_os_dados_msg
 
 ## Dados da Aplicação:
-echo -e "\e[32m[ Baserow ]\e[0m"
+echo -e "\e[32m[ BASEROW ]\e[0m"
 echo ""
 
 echo -e "\e[33mDominio:\e[97m https://$url_baserow\e[0m"
@@ -7761,7 +7832,7 @@ ip_vps=$(curl -s ifconfig.me)
 cat > dados_mongodb <<EOL
 [ MONGODB ]
 
-Dominio do Baserow: MongoDB://$user_mongo:$pass_mongo@$ip_vps:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
+Dominio do MongoDB: MongoDB://$user_mongo:$pass_mongo@$ip_vps:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
 
 Usuario: $user_mongo
 
@@ -7985,7 +8056,7 @@ ip_vps=$(curl -s ifconfig.me)
 cat > dados_rabbitmq <<EOL
 [ RABBITMQ ]
 
-Dominio do Baserow: $url_rabbitmq
+Dominio do RabbitMq: $url_rabbitmq
 
 Usuario: $user_rabbitmq
 
@@ -15304,6 +15375,290 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+## ███╗   ██╗███████╗██╗  ██╗████████╗ ██████╗██╗      ██████╗ ██╗   ██╗██████╗ 
+## ████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝██╔════╝██║     ██╔═══██╗██║   ██║██╔══██╗
+## ██╔██╗ ██║█████╗   ╚███╔╝    ██║   ██║     ██║     ██║   ██║██║   ██║██║  ██║
+## ██║╚██╗██║██╔══╝   ██╔██╗    ██║   ██║     ██║     ██║   ██║██║   ██║██║  ██║
+## ██║ ╚████║███████╗██╔╝ ██╗   ██║   ╚██████╗███████╗╚██████╔╝╚██████╔╝██████╔╝
+## ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═════╝ 
+
+ferramenta_nextcloud() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_nextcloud
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+    echo -en "\e[33mDigite o dominio para o NextCloud (ex: nextcloud.oriondesign.art.br): \e[0m" && read -r url_nextcloud
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+    echo -en "\e[33mDigite o Usuario para o NextCloud (ex: orion): \e[0m" && read -r user_nextcloud
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
+    echo -e "$amarelo--> Minimo 8 caracteres. Use Letras MAIUSCULAS e minusculas, numero e um caractere especial @ ou _"
+    echo -en "\e[33mDigite o Senha o Usuario (ex: @Senha123_): \e[0m" && read -r pass_nextcloud
+    echo ""
+
+
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_nextcloud
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ## Informação sobre URL do nextcloud
+    echo -e "\e[33mDominio do NextCloud:\e[97m $url_nextcloud\e[0m"
+    echo ""
+
+    ## Informação sobre URL do nextcloud
+    echo -e "\e[33mUsuario do NextCloud:\e[97m $user_nextcloud\e[0m"
+    echo ""
+
+    ## Informação sobre URL do nextcloud
+    echo -e "\e[33mSenha do NextCloud:\e[97m $pass_nextcloud\e[0m"
+    echo ""
+    
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_minio
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO NEXTCLOUD \e[33m[1/4]\e[0m"
+echo ""
+sleep 1
+
+## Nadaaaaa
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES E REIDS \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+## Cansei já de explicar o que isso faz kkkk
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+        sleep 1
+        pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_nextcloud #> /dev/null 2>&1
+
+    else
+        ferramenta_postgres > /dev/null 2>&1
+        pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_nextcloud #> /dev/null 2>&1
+fi
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+fi
+
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    sleep 1
+else
+    ferramenta_redis  > /dev/null 2>&1
+fi
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+fi
+
+echo ""
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO NEXTCLOUD \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
+
+## Criando a stack
+cat > nextcloud.yaml <<EOL
+version: '3.7'
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  nextcloud:
+    image: nextcloud:latest
+    networks:
+      - $nome_rede_interna
+    ports:
+      - 8080:80
+    volumes:
+      - nextcloud_data:/var/www/html
+    environment:
+
+      ## Dados de acesso:
+      - NEXTCLOUD_ADMIN_USER=$user_nextcloud
+      - NEXTCLOUD_ADMIN_PASSWORD=$pass_nextcloud
+
+
+      ## Dados do Postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=$senha_postgres
+
+      ## Dados do Redis
+      - REDIS_HOST=redis://redis:6379
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.nextcloud.rule=Host(\`$url_nextcloud\`)
+        - traefik.http.services.nextcloud.loadbalancer.server.port=80
+        - traefik.http.routers.nextcloud.service=nextcloud
+        - traefik.http.routers.nextcloud.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.nextcloud.entrypoints=web,websecure
+        - traefik.http.routers.nextcloud.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+  cron:
+    image: nextcloud:latest
+    volumes:
+      - nextcloud:/var/www/html
+    entrypoint: /cron.sh
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  nextcloud_data:
+    external: true
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+    echo "Não foi possivel criar a stack do nextcloud"
+fi
+
+docker stack deploy --prune --resolve-image always -c nextcloud.yaml nextcloud > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+    echo "Não foi possivel Subir a stack do nextcloud"
+fi
+echo ""
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_nextcloud para verificar se o serviço esta online
+wait_nextcloud
+
+cd dados_vps
+
+cat > dados_nextcloud <<EOL
+[ NEXTCLOUD ]
+
+Dominio do NextCloud: https://$url_nextcloud
+
+Usuario: $user_nextcloud
+
+Senha: $pass_nextcloud
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ NEXTCLOUD ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_nextcloud\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario:\e[97m $user_nextcloud\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $pass_nextcloud\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ####################################################
 
 ## Comandos extras
@@ -15761,19 +16116,19 @@ while true; do
             ;;
         37)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_remover_stack
+            ferramenta_nextcloud
             fi
             ;;
         38)
+            if verificar_docker_e_portainer_traefik; then
+            ferramenta_remover_stack
+            fi
+            ;;
+        39)
             clear
             nome_saindo
             echo ""
             break
-            ;;
-        39)
-            if verificar_docker_e_portainer_traefik; then
-            ferramenta_
-            fi
             ;;
         40)
             if verificar_docker_e_portainer_traefik; then
