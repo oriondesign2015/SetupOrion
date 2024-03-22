@@ -1437,7 +1437,7 @@ done
 }
 
 wait_calcom() {
-    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    echo "Este processo pode demorar um pouco, se passar de 10 minutos cancele... por que deu ruim..."
 while true; do
     # Verifica se o serviço chatwoot está ativo
     if docker service ls --filter "name=calcom" | grep "1/1"; then
@@ -5574,7 +5574,7 @@ services:
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/typebot
 
       ## Encryption key
-      - ENCRYPTION_SECRET=2652c632beb3f7c3fa800ce3eb022ce4
+      - ENCRYPTION_SECRET=$key_typebot
 
       ## Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED
@@ -5639,7 +5639,7 @@ services:
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/typebot
 
       ## Encryption key
-      - ENCRYPTION_SECRET=2652c632beb3f7c3fa800ce3eb022ce4
+      - ENCRYPTION_SECRET=$key_typebot
 
       ## Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED
@@ -8456,7 +8456,7 @@ cat > calcom.yaml <<EOL
 version: "3.7"
 services:
   calcom:
-    image: calcom/cal.com:latest
+    image: calcom/cal.com:v3.7.11
     hostname: calcom
     networks:
       - $nome_rede_interna
