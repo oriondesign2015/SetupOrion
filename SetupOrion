@@ -8456,7 +8456,7 @@ cat > calcom.yaml <<EOL
 version: "3.7"
 services:
   calcom:
-    image: calcom/cal.com:v3.7.11
+    image: calcom/cal.com:latest
     hostname: calcom
     networks:
       - $nome_rede_interna
@@ -8579,7 +8579,7 @@ instalado_msg
 guarde_os_dados_msg
 
 ## Dados da Aplicação:
-echo -e "\e[32m[Cal.com]\e[0m"
+echo -e "\e[32m[ CAL.COM ]\e[0m"
 echo ""
 
 echo -e "\e[33mDominio:\e[97m https://$url_calcom\e[0m"
@@ -9240,7 +9240,7 @@ cd dados_vps
 cat > dados_qdrant <<EOL
 [ QDRANT ]
 
-Dominio do qdrant: https://$ip_vps:6333/dashboard
+Dominio do Qdrant: https://$ip_vps:6333/dashboard
 
 Usuario: Não Tem
 
@@ -9621,13 +9621,13 @@ cd dados_vps
 cat > dados_woofedcrm <<EOL
 [ WOOFED CRM ]
 
-Dominio do Nocobase: https://$url_woofed
+Dominio do WoofedCRM: https://$url_woofed
 
 Email: Precisa criar dentro do WoofedCRM
 
 Senha: Precisa criar dentro do WoofedCRM
 
-Dominio do Nocobase: https://$url_woofed/motor_admin
+Dominio do WoofedCRM: https://$url_woofed/motor_admin
 
 Usuario do Motor: $email_admin_woofed
 
