@@ -3434,7 +3434,7 @@ cd dados_vps
 cat > dados_postgres <<EOL
 [ POSTGRES ]
 
-Dominio do portainer: postgres://postgres:5432
+Dominio do postgres: postgres://postgres:5432
 
 Usuario: postgres
 
@@ -3519,7 +3519,7 @@ cd dados_vps
 cat > dados_redis <<EOL
 [ REDIS ]
 
-Dominio do portainer: redis://redis:6379
+Dominio do Redis: redis://redis:6379
 
 Usuario: redis
 
@@ -3615,7 +3615,7 @@ cd dados_vps
 cat > dados_mysql <<EOL
 [ MYSQL ]
 
-Dominio do portainer: mysql
+Dominio do mysql: mysql
 
 Usuario: mysql ou root
 
@@ -15922,7 +15922,6 @@ while true; do
     case $opcao in
 
         0)
-            
             ferramenta_testeemail
             ;;
         1)
@@ -16101,7 +16100,6 @@ while true; do
         34)
             if verificar_docker_e_portainer_traefik; then
             ferramenta_affine
-            
             fi
             ;;
         35)
