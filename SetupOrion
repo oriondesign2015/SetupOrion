@@ -12339,7 +12339,7 @@ version: "3.7"
 
 services:
   n8n_quepasa_editor:
-    image: oriondesign/n8n-quepasa:latest ## Versão do N8N
+    image: oriondesign/quepasa:8aca0a3031f0 ## Versão do N8N
     volumes:
       - n8n_quepasa_data:/home/node/.n8n/nodes
     command: start
