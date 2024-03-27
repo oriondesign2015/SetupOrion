@@ -2760,23 +2760,25 @@ preencha_as_info
 while true; do
 
 echo -e "\e[97mPasso$amarelo 1/5\e[0m"
-echo -en "\e[33mDigite o endereço de Email: \e[0m" && read -r email_teste
+echo -en "\e[33mDigite o endereço de Email (ex: contato@oriondesign.art.br): \e[0m" && read -r email_teste
 echo ""
 
 echo -e "\e[97mPasso$amarelo 2/5\e[0m"
-echo -en "\e[33mDigite o usuário de Email: \e[0m" && read -r user_teste
+echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+echo -en "\e[33mDigite o usuário de Email (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_teste
 echo ""
 
 echo -e "\e[97mPasso$amarelo 3/5\e[0m"
-echo -en "\e[33mDigite a Senha do email: \e[0m" && read -r senha_teste
+echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+echo -en "\e[33mDigite a Senha do email (ex: @Senha123_): \e[0m" && read -r senha_teste
 echo ""
 
 echo -e "\e[97mPasso$amarelo 4/5\e[0m"
-echo -en "\e[33mDigite o Host Smtp: \e[0m" && read -r host_teste
+echo -en "\e[33mDigite o Host Smtp (ex: smtp.hostinger.com): \e[0m" && read -r host_teste
 echo ""
 
 echo -e "\e[97mPasso$amarelo 5/5\e[0m"
-echo -en "\e[33mDigite a Porta Smtp: \e[0m" && read -r porta_teste
+echo -en "\e[33mDigite a Porta Smtp (ex: 465): \e[0m" && read -r porta_teste
 echo ""
 
 clear
@@ -5405,7 +5407,8 @@ while true; do
 
     ##Pergunta o usuário do Email SMTP
     echo -e "\e[97mPasso$amarelo 5/10\e[0m"
-    echo -en "\e[33mDigite o Usuário para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r usuario_email_typebot
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r usuario_email_typebot
     echo ""
     
     ## Pergunta a senha do SMTP
