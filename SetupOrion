@@ -6813,7 +6813,7 @@ version: "3.7"
 
 services:
   nocobase:
-    image: nocobase/nocobase:latest ## Versão do Nocobase
+    image: nocobase/nocobase:0.19.0-alpha.7 ## Versão do Nocobase
     volumes:
       - nocobase_storage:/app/nocobase/storage
     networks:
