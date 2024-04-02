@@ -2,7 +2,7 @@
 ####################################################
 
 versao() {
-echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.4.0\e[0m"
+echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.4.1\e[0m"
 }
 
 ####################################################
@@ -890,16 +890,16 @@ menu_instalador(){
     echo -e "${amarelo}[ 5 ]${reset} -  ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
     echo -e "${amarelo}[ 6 ]${reset} -  ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
     echo -e "${amarelo}[ 7 ]${reset} -  ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
-    echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor${reset}"
     echo -e "${amarelo}[ 9 ]${reset} -  ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
     echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
     echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
     echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
-    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}" # ${amarelo}[ 40 ]${reset} - ${branco}Ainda Vazio${reset}"
+    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden${reset}"
+    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
+    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi ${amarelo}[IMPLEMENTANDO]${reset}"
+    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}" # ${amarelo}[ 40 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}" # ${amarelo}[ 31 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}" # ${amarelo}[ 32 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}" # ${amarelo}[ 33 ]${reset} - ${branco}Ainda Vazio${reset}"
@@ -9213,6 +9213,8 @@ do
     cat >> qdrant.yaml <<-EOF
   $SERVICE_NAME:
     image: qdrant/qdrant:latest
+    volumes:
+      - qdrant_data:/qdrant
     command: $COMMAND
     restart: always
     environment:
@@ -9230,6 +9232,10 @@ do
           cpus: "0.3"
 
 EOF
+volumes:
+  qdrant_data:
+    external: true
+    name: qdrant_data
 done
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ]"
