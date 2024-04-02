@@ -899,7 +899,7 @@ menu_instalador(){
     echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
     echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi ${amarelo}[IMPLEMENTANDO]${reset}"
     echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}" # ${amarelo}[ 40 ]${reset} - ${branco}Sair do instalador${reset}"
+    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}" # ${amarelo}[ 31 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}" # ${amarelo}[ 32 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}" # ${amarelo}[ 33 ]${reset} - ${branco}Ainda Vazio${reset}"
@@ -16144,22 +16144,20 @@ while true; do
             ;;
         38)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_remover_stack
+            
             fi
             ;;
         39)
+            if verificar_docker_e_portainer_traefik; then
+            ferramenta_remover_stack
+            fi
+            ;;
+        40)
             clear
             nome_saindo
             echo ""
             break
             ;;
-        40)
-            if verificar_docker_e_portainer_traefik; then
-            ferramenta_
-            fi
-            ;;
-
-
 
 
         23a)
