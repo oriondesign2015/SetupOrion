@@ -16007,6 +16007,7 @@ portainer.reset() {
     fi
 
     echo ""
+    sleep 3
     clear
     nome_portainer.reset
     echo -e "\e[32m[ PORTAINER ]\e[0m"
@@ -16282,6 +16283,9 @@ while true; do
         portainer.restart)
             portainer.restart
             ;;
+        portainer.reset)
+            portainer.reset
+            ;;
         chatwoot.nulled)
             chatwoot.nulled
             ;;
@@ -16291,6 +16295,7 @@ while true; do
         chatwoot.mail)
             chatwoot.mail
             ;;
+
 
         *)
 
