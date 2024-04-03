@@ -9250,10 +9250,12 @@ do
           cpus: "0.3"
 
 EOF
+cat > qdrant.yaml <<-EOF
 volumes:
   qdrant_data:
     external: true
     name: qdrant_data
+EOF
 done
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ]"
