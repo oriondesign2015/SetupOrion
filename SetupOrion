@@ -2,7 +2,7 @@
 ####################################################
 
 versao() {
-echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.4.1\e[0m"
+echo -e "\e[97mComunidade: https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.4.2\e[0m"
 }
 
 ####################################################
@@ -788,6 +788,19 @@ nome_nextcloud() {
     echo ""
 }
 
+nome_strapi() {
+    clear
+    echo ""
+    echo -e "$branco                         ███████╗████████╗██████╗  █████╗ ██████╗ ██╗\e[0m"
+    echo -e "$branco                         ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██║\e[0m"
+    echo -e "$branco                         ███████╗   ██║   ██████╔╝███████║██████╔╝██║\e[0m"
+    echo -e "$branco                         ╚════██║   ██║   ██╔══██╗██╔══██║██╔═══╝ ██║\e[0m"
+    echo -e "$branco                         ███████║   ██║   ██║  ██║██║  ██║██║     ██║\e[0m"
+    echo -e "$branco                         ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝\e[0m"
+    echo ""
+    echo ""
+}
+
 nome_saindo() {
     clear
     echo ""
@@ -1139,8 +1152,6 @@ verificar_container_postgres() {
 ## Verificar Container Mysql
 
 verificar_container_mysql() {
-
-
     if docker ps -q --filter "name=mysql" | grep -q .; then
         return 0
     else
@@ -1706,6 +1717,19 @@ wait_nextcloud(){
     while true; do
         # Verifica se o serviço chatwoot está ativo
         if docker service ls --filter "name=nextcloud" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_strapi(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço chatwoot está ativo
+        if docker service ls --filter "name=strapi" | grep "1/1"; then
             sleep 10
             break
         fi
@@ -2749,6 +2773,33 @@ criar_banco_mysql_wordpress() {
             else
                 docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
                 echo "Banco de dados Wordpress criado com sucesso."
+                break
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
+criar_banco_mysql_strapi() {
+    dados
+    pegar_senha_mysql
+    while :; do
+        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+            if docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
+                echo "O banco de dados strapi já existe."
+
+                resposta="N"
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE IF EXISTS strapi;"
+                    echo "Banco de dados strapi apagado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                    break
+                fi
+            else
+                docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
+                echo "Banco de dados strapi criado com sucesso."
                 break
             fi
         else
@@ -15793,6 +15844,256 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+## ███████╗████████╗██████╗  █████╗ ██████╗ ██╗
+## ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██║
+## ███████╗   ██║   ██████╔╝███████║██████╔╝██║
+## ╚════██║   ██║   ██╔══██╗██╔══██║██╔═══╝ ██║
+## ███████║   ██║   ██║  ██║██║  ██║██║     ██║
+## ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝
+                                                           
+ferramenta_strapi() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_strapi
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o dominio para o Strapi (ex: strapi.oriondesign.art.br): \e[0m" && read -r url_strapi
+    echo ""
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_strapi
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ##Informação do Dominio
+    echo -e "\e[33mDominio para o strapi:\e[97m $url_strapi\e[0m"
+    echo ""
+    
+     ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_strapi
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO STRAPI \e[33m[1/4]\e[0m"
+echo ""
+sleep 1
+
+## NADA
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+verificar_container_mysql
+    if [ $? -eq 0 ]; then
+        pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_strapi
+    else
+        ferramenta_mysql > /dev/null 2>&1
+        pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_strapi
+    fi
+
+    if [ $? -eq 0 ]; then
+    echo "1/1 - [ OK ]"
+    else
+    echo "1/1 - [ OFF ]"
+    fi
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO STRAPI \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
+
+jwt_secret=$(openssl rand -hex 16)
+
+admin_jwt=$(openssl rand -hex 16)
+
+app_key=$(openssl rand -hex 16)
+
+## Criando a stack
+cat > strapi.yaml <<EOL
+version: "3.7"
+
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  strapi:
+    image: naskio/strapi:latest
+    volumes:
+      - strapi_data:/srv/app
+    networks:
+      - $nome_rede_interna
+    environment:
+
+      ## Dados MySQL
+      - DATABASE_CLIENT=mysql
+      - DATABASE_NAME=strapi
+      - DATABASE_HOST=mysql
+      - DATABASE_PORT=3306
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=$senha_mysql
+
+      ## Secret Keys
+      - JWT_SECRET=$jwt_secret
+      - ADMIN_JWT_SECRET=$admin_jwt
+      - APP_KEYS=$app_key
+
+      ## Outros dados
+      - NODE_ENV=production
+      - STRAPI_TELEMETRY_DISABLED=true
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.strapi.rule=Host(\`$url_strapi\`)
+        - traefik.http.routers.strapi.entrypoints=web,websecure
+        - traefik.http.routers.strapi.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.strapi.service=strapi
+        - traefik.http.services.strapi.loadbalancer.server.port=1337
+        - traefik.http.services.strapi.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  strapi_data:
+    name: strapi_data
+    external: true
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ]"
+else
+    echo "1/2 - [ OFF ]"
+    echo "Não foi possivel criar a stack do Strapi"
+fi
+
+docker stack deploy --prune --resolve-image always -c strapi.yaml strapi #> /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ]"
+else
+    echo "2/2 - [ OFF ]"
+    echo "Não foi possivel Subir a stack do Strapi"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_strapi para verificar se o serviço esta online
+wait_strapi
+
+cd dados_vps
+
+cat > dados_strapi <<EOL
+[ STRAPI ]
+
+Dominio do Strapi: https://$url_strapi
+
+Usuario: Precisa criar no primeiro acesso do Strapi
+
+Senha: Precisa criar no primeiro acesso do Strapi
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ STRAPI ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_strapi\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario:\e[97m Precisa criar no primeiro acesso do strapi\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m Precisa criar no primeiro acesso do strapi\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ####################################################
 
 ## Comandos extras
@@ -16345,7 +16646,7 @@ while true; do
             ;;
         38)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_
+            ferramenta_strapi
             fi
             ;;
         39)
