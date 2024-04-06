@@ -3157,6 +3157,8 @@ version: "3.7"
 
 services:
 
+## --------------------------- ORION --------------------------- ##
+
   traefik:
     image: traefik:latest
     command:
@@ -3204,8 +3206,9 @@ services:
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
-volumes:
+## --------------------------- ORION --------------------------- ##
 
+volumes:
   vol_shared:
     external: true
     name: volume_swarm_shared
@@ -3214,7 +3217,6 @@ volumes:
     name: volume_swarm_certificates
 
 networks:
-
   $nome_rede_interna: ## Nome da rede interna
     external: true
     name: $nome_rede_interna ## Nome da rede interna
@@ -3260,6 +3262,9 @@ cat > portainer.yaml <<EOL
 version: "3.7"
 
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   agent:
     image: portainer/agent:latest ## Versão do portainer
     volumes:
@@ -3271,6 +3276,8 @@ services:
       mode: global
       placement:
         constraints: [node.platform.os == linux]
+
+## --------------------------- ORION --------------------------- ##
 
   portainer:
     image: portainer/portainer-ce:latest
@@ -3293,6 +3300,8 @@ services:
         - "traefik.docker.network=$nome_rede_interna" ## Nome da rede interna
         - "traefik.http.routers.portainer.entrypoints=websecure"
         - "traefik.http.routers.portainer.priority=1"
+
+## --------------------------- ORION --------------------------- ##
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -3406,6 +3415,9 @@ cat > postgres.yaml <<EOL
 version: "3.7"
 
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   postgres:
     image: postgres:14 ## Versão do postgres
     environment:
@@ -3429,6 +3441,8 @@ services:
         limits:
           cpus: "0.5"
           memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   postgres_data:
@@ -3493,6 +3507,9 @@ cat > redis.yaml <<EOL
 version: "3.7"
 
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   redis:
     image: redis:latest  ## Versão do Redis
     command: [
@@ -3514,6 +3531,8 @@ services:
         limits:
           cpus: "0.5"
           memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   redis_data:
@@ -3580,6 +3599,9 @@ cat > mysql.yaml <<EOL
 version: "3.7"
 
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   mysql:
     image: percona/percona-server:8.0 ## Versão do Mysql
     environment:
@@ -3610,6 +3632,8 @@ services:
         "--default-authentication-plugin=mysql_native_password",
         "--max-allowed-packet=512MB",
       ]
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   mysql_data:
@@ -3850,6 +3874,9 @@ cat > chatwoot.yaml <<EOL
 version: "3.7"
 
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   chatwoot_app:
     image: chatwoot/chatwoot:latest ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
@@ -3860,24 +3887,42 @@ services:
     networks:
       - $nome_rede_interna ## Nome da rede interna
     environment:
+
+      ## URL Aleatória
       - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
+
+      ## Nome da Empresa
       - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
-      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
+
+      ## Secret key
+      - SECRET_KEY_BASE=$encryption_key
+
+      ## Url Chatwoot
       - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
-      - DEFAULT_LOCALE=pt_BR
       - FORCE_SSL=true
-      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+
+      ## Idioma padrão
+      - DEFAULT_LOCALE=pt_BR
+
+      ## Dados do Redis
       - REDIS_URL=redis://redis:6379
+
+      ## Dados do Postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_TO_STDOUT=true
-      - USE_INBOX_AVATAR_FOR_BOT=true
+
+      ## Armazenamento
+      - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
+      #- STORAGE_BUCKET_NAME=chatwoot
+      #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
+      #- STORAGE_SECRET_ACCESS_KEY=SECRET_KEY_MINIO
+      #- STORAGE_REGION=us-east
+      #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
+      #- STORAGE_FORCE_PATH_STYLE=true
+
+      ## Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -3889,6 +3934,15 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+
+      ## Outras configurações
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - ENABLE_ACCOUNT_SIGNUP=false
+
     deploy:
       mode: replicated
       replicas: 1
@@ -3911,6 +3965,8 @@ services:
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.routers.chatwoot_app.middlewares=sslheader@docker
 
+## --------------------------- ORION --------------------------- ##
+
   chatwoot_sidekiq:
     image: chatwoot/chatwoot:latest
     command: bundle exec sidekiq -C config/sidekiq.yml
@@ -3920,24 +3976,42 @@ services:
     networks:
       - $nome_rede_interna ## Nome da rede interna
     environment:
-      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup
+
+      ## URL Aleatória
+      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
+
+      ## Nome da Empresa
       - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
-      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
+
+      ## Secret key
+      - SECRET_KEY_BASE=$encryption_key
+
+      ## Url Chatwoot
       - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
-      - DEFAULT_LOCALE=pt_BR
       - FORCE_SSL=true
-      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+
+      ## Idioma padrão
+      - DEFAULT_LOCALE=pt_BR
+
+      ## Dados do Redis
       - REDIS_URL=redis://redis:6379
+
+      ## Dados do Postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_TO_STDOUT=true
-      - USE_INBOX_AVATAR_FOR_BOT=true
+
+      ## Armazenamento
+      - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
+      #- STORAGE_BUCKET_NAME=chatwoot
+      #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
+      #- STORAGE_SECRET_ACCESS_KEY=SECRET_KEY_MINIO
+      #- STORAGE_REGION=us-east
+      #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
+      #- STORAGE_FORCE_PATH_STYLE=true
+
+      ## Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -3949,6 +4023,15 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+
+      ## Outras configurações
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - ENABLE_ACCOUNT_SIGNUP=false
+
     deploy:
       mode: replicated
       replicas: 1
@@ -3959,6 +4042,8 @@ services:
         limits:
           cpus: "1"
           memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   chatwoot_data:
@@ -9009,6 +9094,8 @@ services:
       - appsmith_data:/appsmith-stacks
     environment:
       - APPSMITH_CUSTOM_DOMAIN=https://$url_appsmith
+      ## Ativar/Desativar Novas Inscrições
+      - APPSMITH_SIGNUP_DISABLED=false
     deploy:
       mode: replicated
       replicas: 1
@@ -9250,13 +9337,15 @@ do
           cpus: "0.3"
 
 EOF
-cat > qdrant.yaml <<-EOF
+done
+
+cat >> qdrant.yaml <<-EOF
 volumes:
   qdrant_data:
     external: true
     name: qdrant_data
 EOF
-done
+
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ]"
 else
