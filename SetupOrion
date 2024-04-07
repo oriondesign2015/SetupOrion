@@ -16154,13 +16154,13 @@ while true; do
 
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 4/4\e[0m"
-    echo -en "\e[33mDigite o Usuario para o PhpMyAdmin  (ex: oriondesign): \e[0m" && read -r user_phpmyadmin
+    echo -en "\e[33mDigite o Usuario MySQL  (ex: oriondesign): \e[0m" && read -r user_phpmyadmin
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 4/4\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$"
-    echo -en "\e[33mDigite a Senha do usuario do PhpMyAdmin (ex: @Senha123_): \e[0m" && read -r pass_phpmyadmin
+    echo -en "\e[33mDigite a Senha MySQL (ex: @Senha123_): \e[0m" && read -r pass_phpmyadmin
     echo ""
     
     ## Limpa o terminal
@@ -16181,11 +16181,11 @@ while true; do
     echo ""
 
     ##Informação do Dominio
-    echo -e "\e[33mUsuario do PhpMyAdmin:\e[97m $user_phpmyadmin\e[0m"
+    echo -e "\e[33mUsuario MySQL:\e[97m $user_phpmyadmin\e[0m"
     echo ""
 
     ##Informação do Dominio
-    echo -e "\e[33mSenha do usuario PhpMyAdmin:\e[97m $pass_phpmyadmin\e[0m"
+    echo -e "\e[33mSenha MYSQL:\e[97m $pass_phpmyadmin\e[0m"
     echo ""
     
      ## Pergunta se as respostas estão corretas
@@ -16930,7 +16930,7 @@ while true; do
             echo ""
             break
             ;;
-            
+
         n8n.workflows)
             n8n.workflows
             ;;
