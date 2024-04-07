@@ -16143,25 +16143,25 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/2\e[0m"
     echo -en "\e[33mDigite o dominio para o PhpMyAdmin (ex: phpmyadmin.oriondesign.art.br): \e[0m" && read -r url_phpmyadmin
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 2/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
     echo -en "\e[33mDigite o Host MySQL (ex: mysql ou 1.111.111.11:3306): \e[0m" && read -r host_phpmyadmin
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 4/4\e[0m"
-    echo -en "\e[33mDigite o Usuario MySQL  (ex: oriondesign): \e[0m" && read -r user_phpmyadmin
-    echo ""
+    #echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+    #echo -en "\e[33mDigite o Usuario MySQL  (ex: oriondesign): \e[0m" && read -r user_phpmyadmin
+    #echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 4/4\e[0m"
-    echo -e "$amarelo--> Sem caracteres especiais: \!#$"
-    echo -en "\e[33mDigite a Senha MySQL (ex: @Senha123_): \e[0m" && read -r pass_phpmyadmin
-    echo ""
+    #echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+    #echo -e "$amarelo--> Sem caracteres especiais: \!#$"
+    #echo -en "\e[33mDigite a Senha MySQL (ex: @Senha123_): \e[0m" && read -r pass_phpmyadmin
+    #echo ""
     
     ## Limpa o terminal
     clear
@@ -16180,13 +16180,13 @@ while true; do
     echo -e "\e[33mHost MySQL:\e[97m $host_phpmyadmin\e[0m"
     echo ""
 
-    ##Informação do Dominio
-    echo -e "\e[33mUsuario MySQL:\e[97m $user_phpmyadmin\e[0m"
-    echo ""
+    ###Informação do Dominio
+    #echo -e "\e[33mUsuario MySQL:\e[97m $user_phpmyadmin\e[0m"
+    #echo ""
 
-    ##Informação do Dominio
-    echo -e "\e[33mSenha MYSQL:\e[97m $pass_phpmyadmin\e[0m"
-    echo ""
+    ###Informação do Dominio
+    #echo -e "\e[33mSenha MYSQL:\e[97m $pass_phpmyadmin\e[0m"
+    #echo ""
     
      ## Pergunta se as respostas estão corretas
     read -p "As respostas estão corretas? (Y/N): " confirmacao
@@ -16251,8 +16251,8 @@ services:
       - PMA_PORT=3306
       
       ## Dado de acesso
-      - PMA_USER=$user_phpmyadmin
-      - PMA_PASSWORD=$pass_phpmyadmin
+      #- PMA_USER=
+      #- PMA_PASSWORD=
       - PMA_ABSOLUTE_URI=https://$url_phpmyadmin
       
       ## Limite de Upload
@@ -16313,9 +16313,9 @@ cat > dados_phpmyadmin <<EOL
 
 Dominio do phpmyadmin: https://$url_phpmyadmin
 
-Usuario: $user_phpmyadmin
+Usuario: Os mesmos do seu MySQL
 
-Senha: $pass_phpmyadmin
+Senha: Os mesmos do seu MySQL
 
 EOL
 
@@ -16338,10 +16338,10 @@ echo ""
 echo -e "\e[33mDominio:\e[97m https://$url_phpmyadmin\e[0m"
 echo ""
 
-echo -e "\e[33mUsuario:\e[97m $user_phpmyadmin\e[0m"
+echo -e "\e[33mUsuario:\e[97m Os mesmos do seu MySQL\e[0m"
 echo ""
 
-echo -e "\e[33mSenha:\e[97m $pass_phpmyadmin\e[0m"
+echo -e "\e[33mSenha:\e[97m Os mesmos do seu MySQL\e[0m"
 echo ""
 
 ## Creditos do instalador
