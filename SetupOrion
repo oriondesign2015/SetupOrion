@@ -16930,14 +16930,7 @@ while true; do
             echo ""
             break
             ;;
-
-        23a)
-            ferramenta_remover_stack
-            ;;
-        24a)
-            echo "Saindo..."
-            break
-            ;;
+            
         n8n.workflows)
             n8n.workflows
             ;;
