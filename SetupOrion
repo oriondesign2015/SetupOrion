@@ -942,9 +942,9 @@ menu_instalador(){
     echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}" # ${amarelo}[ 32 ]${reset} - ${branco}Ainda Vazio${reset}"
-    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}" # ${amarelo}[ 33 ]${reset} - ${branco}Ainda Vazio${reset}"
+    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Sair do instalador${reset}"
+    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}" # ${amarelo}[ 42 ]${reset} - ${branco}Ainda Vazio${reset}"
+    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}" # ${amarelo}[ 43 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo""
 }
 
