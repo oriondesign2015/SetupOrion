@@ -34,3 +34,9 @@ bash <(curl -sSL setup.oriondesign.art.br)
 <p align="center">
   🔸 Traefik 🔸 Portainer 🔸 Chatwoot 🔸 Evolution API 🔸 MinIO 🔸 Typebot 🔸 N8N 🔸 Flowise 🔸 PgAdmin 4 🔸 Nocobase 🔸 Botpress 🔸 Wordpress 🔸 Baserow 🔸 MongoDB 🔸 RabbitMQ 🔸 Uptime Kuma 🔸 Calcom 🔸 Mautic 🔸 Appsmith 🔸 Qdrant 🔸 Woofed CRM 🔸 Formbricks 🔸 NocoDB 🔸 Langfuse 🔸 Metabase 🔸 Odoo 🔸 Uno API 🔸 Quepasa API 🔸 Docuseal 🔸 Grafana 🔸 Prometheus 🔸 cAdvisor 🔸 Dify AI 🔸 Ollama 🔸 Affine 🔸 Directus 🔸 VaultWarden 🔸 NextCloud 🔸
 </p>
+
+<h1></h1>
+<h3 align="center">📌 Principais contribuidores</h3>
+<a align="center" href="https://github.com/oriondesign2015/setuporion/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=oriondesign2015/setuporion" />
+</a>
