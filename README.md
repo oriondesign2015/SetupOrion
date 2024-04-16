@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://chat.whatsapp.com/Cb3Kw0YlCHIJJqS84eC6ie"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp"></a>    
+  <a href="https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp"></a>    
   <a href="https://youtube.com/oriondesign_oficial"><img src="https://img.shields.io/badge/Playlist_do_Setup_Orion-FF0000?style=for-the-badge&labelColor=ffffff&logo=youtube&logoColor=FF0000" alt="Inscreva-se no meu canal"></a>
 </p>
 
