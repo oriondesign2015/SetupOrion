@@ -9369,33 +9369,71 @@ echo -e "\e[97m• INSTALANDO QDRANT \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
-## Criando a stack
-cat > qdrant.yaml <<-EOF
-version: "3.7"
+# ## Criando a stack
+# cat > qdrant.yaml <<-EOF
+# version: "3.7"
 
+# services:
+# EOF
+
+# for ((node=0; node<nodes_qdrant; node++))
+# do
+#     SERVICE_NAME=qdrant_node_$node
+
+#     HTTP_PORT=$((6330 + node * 10 + 3))
+#     GRPC_PORT=$((6330 + node * 10 + 4))
+
+#     if ((node == 0))
+#     then
+#         COMMAND="./qdrant --uri 'http://$SERVICE_NAME:6335'"
+#     else
+#         COMMAND="bash -c \"sleep $((10 + node / 10 + RANDOM % 10)) && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://$SERVICE_NAME:6335'\""
+#     fi
+
+#     cat >> qdrant.yaml <<-EOF
+#   $SERVICE_NAME:
+#     image: qdrant/qdrant:latest
+#     volumes:
+#       - qdrant_data:/qdrant
+#     command: $COMMAND
+#     restart: always
+#     environment:
+#       - QDRANT__SERVICE__GRPC_PORT=6334
+#       - QDRANT__CLUSTER__ENABLED=true
+#       - QDRANT__CLUSTER__P2P__PORT=6335
+#       - QDRANT__CLUSTER__CONSENSUS__MAX_MESSAGE_QUEUE_SIZE=5000
+#       - QDRANT__LOG_LEVEL=debug,raft=info
+#     ports:
+#       - "$HTTP_PORT:6333"
+#       - "$GRPC_PORT:6334"
+#     deploy:
+#       resources:
+#         limits:
+#           cpus: "0.3"
+
+# EOF
+# done
+
+# cat >> qdrant.yaml <<-EOF
+# volumes:
+#   qdrant_data:
+#     external: true
+#     name: qdrant_data
+# EOF
+
+cat << EOF > qdrant.yml
 services:
 EOF
 
-for ((node=0; node<nodes_qdrant; node++))
-do
-    SERVICE_NAME=qdrant_node_$node
+for i in $(seq 1 $num_nodes); do
+  cat << EOF >> qdrant.yml
+version: '3.7'
 
-    HTTP_PORT=$((6330 + node * 10 + 3))
-    GRPC_PORT=$((6330 + node * 10 + 4))
-
-    if ((node == 0))
-    then
-        COMMAND="./qdrant --uri 'http://$SERVICE_NAME:6335'"
-    else
-        COMMAND="bash -c \"sleep $((10 + node / 10 + RANDOM % 10)) && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://$SERVICE_NAME:6335'\""
-    fi
-
-    cat >> qdrant.yaml <<-EOF
-  $SERVICE_NAME:
+  qdrant_node_$i:
     image: qdrant/qdrant:latest
     volumes:
-      - qdrant_data:/qdrant
-    command: $COMMAND
+      - qdrant_swarm_data_$i:/qdrant
+    command: bash -c "sleep 18 && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://qdrant_node_$i:6335'"
     restart: always
     environment:
       - QDRANT__SERVICE__GRPC_PORT=6334
@@ -9404,8 +9442,8 @@ do
       - QDRANT__CLUSTER__CONSENSUS__MAX_MESSAGE_QUEUE_SIZE=5000
       - QDRANT__LOG_LEVEL=debug,raft=info
     ports:
-      - "$HTTP_PORT:6333"
-      - "$GRPC_PORT:6334"
+      - "163$(($i+33)):6333"
+      - "163$(($i+34+9)):6334"
     deploy:
       resources:
         limits:
@@ -9414,12 +9452,18 @@ do
 EOF
 done
 
-cat >> qdrant.yaml <<-EOF
+cat << EOF >> qdrant.yml
+
 volumes:
-  qdrant_data:
-    external: true
-    name: qdrant_data
 EOF
+
+for i in $(seq 1 $num_nodes); do
+  cat << EOF >> qdrant.yml
+  qdrant_swarm_data_$i:
+      external: false
+      name: qdrant_swarm_data_$i
+EOF
+done
 
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ]"
