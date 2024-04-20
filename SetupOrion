@@ -9425,7 +9425,7 @@ cat << EOF > qdrant.yml
 services:
 EOF
 
-for i in $(seq 1 $num_nodes); do
+for i in $(seq 1 $nodes_qdrant); do
   cat << EOF >> qdrant.yml
 version: '3.7'
 
@@ -9457,7 +9457,7 @@ cat << EOF >> qdrant.yml
 volumes:
 EOF
 
-for i in $(seq 1 $num_nodes); do
+for i in $(seq 1 $nodes_qdrant); do
   cat << EOF >> qdrant.yml
   qdrant_swarm_data_$i:
       external: false
