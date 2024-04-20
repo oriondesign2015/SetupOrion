@@ -9360,7 +9360,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO QDRANT - Walter Teste! \e[33m[1/3]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO QDRANT \e[33m[1/3]\e[0m"
 echo ""
 sleep 1
 
@@ -9369,71 +9369,25 @@ echo -e "\e[97m• INSTALANDO QDRANT \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
-# ## Criando a stack
-# cat > qdrant.yaml <<-EOF
-# version: "3.7"
 
-# services:
-# EOF
+## Walter 
+## Limpar arquivo qdrant.yaml
+> qdrant.yaml
 
-# for ((node=0; node<nodes_qdrant; node++))
-# do
-#     SERVICE_NAME=qdrant_node_$node
-
-#     HTTP_PORT=$((6330 + node * 10 + 3))
-#     GRPC_PORT=$((6330 + node * 10 + 4))
-
-#     if ((node == 0))
-#     then
-#         COMMAND="./qdrant --uri 'http://$SERVICE_NAME:6335'"
-#     else
-#         COMMAND="bash -c \"sleep $((10 + node / 10 + RANDOM % 10)) && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://$SERVICE_NAME:6335'\""
-#     fi
-
-#     cat >> qdrant.yaml <<-EOF
-#   $SERVICE_NAME:
-#     image: qdrant/qdrant:latest
-#     volumes:
-#       - qdrant_data:/qdrant
-#     command: $COMMAND
-#     restart: always
-#     environment:
-#       - QDRANT__SERVICE__GRPC_PORT=6334
-#       - QDRANT__CLUSTER__ENABLED=true
-#       - QDRANT__CLUSTER__P2P__PORT=6335
-#       - QDRANT__CLUSTER__CONSENSUS__MAX_MESSAGE_QUEUE_SIZE=5000
-#       - QDRANT__LOG_LEVEL=debug,raft=info
-#     ports:
-#       - "$HTTP_PORT:6333"
-#       - "$GRPC_PORT:6334"
-#     deploy:
-#       resources:
-#         limits:
-#           cpus: "0.3"
-
-# EOF
-# done
-
-# cat >> qdrant.yaml <<-EOF
-# volumes:
-#   qdrant_data:
-#     external: true
-#     name: qdrant_data
-# EOF
-
-cat << EOF > qdrant.yml
+cat <<EOL > qdrant.yaml
+version: "3.7"
 services:
-EOF
+EOL
 
-for i in $(seq 1 $nodes_qdrant); do
-  cat << EOF >> qdrant.yml
-version: '3.7'
+for ((i=0; i< $nodes_qdrant; i++)); do
+  node_name="qdrant_node_$i"
+  volume_name="qdrant_data_$i"
 
-  qdrant_node_$i:
+  cat <<EOL >> qdrant.yaml
+  $node_name:
     image: qdrant/qdrant:latest
     volumes:
-      - qdrant_swarm_data_$i:/qdrant
-    command: bash -c "sleep 18 && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://qdrant_node_$i:6335'"
+      - $volume_name:/qdrant
     restart: always
     environment:
       - QDRANT__SERVICE__GRPC_PORT=6334
@@ -9442,28 +9396,47 @@ version: '3.7'
       - QDRANT__CLUSTER__CONSENSUS__MAX_MESSAGE_QUEUE_SIZE=5000
       - QDRANT__LOG_LEVEL=debug,raft=info
     ports:
-      - "163$(($i+33)):6333"
-      - "163$(($i+34+9)):6334"
+      - "$((6333 + i * 10)):6333"
+      - "$((6334 + i * 10)):6334"
     deploy:
       resources:
         limits:
           cpus: "0.3"
+    networks:
+      - qdrant_network
+EOL
 
-EOF
+  if ((i == 0)); then
+    echo "    command: ./qdrant --uri 'http://qdrant_node_0:6335'" >> qdrant.yaml
+  else
+    echo "    command: bash -c \"sleep $((10 + i * 3)) && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://qdrant_node_$i:6335'\"" >> qdrant.yaml
+  fi
+
+  echo "" >> qdrant.yaml
 done
 
-cat << EOF >> qdrant.yml
-
+cat <<EOL >> qdrant.yaml
 volumes:
-EOF
+EOL
 
-for i in $(seq 1 $nodes_qdrant); do
-  cat << EOF >> qdrant.yml
-  qdrant_swarm_data_$i:
-      external: false
-      name: qdrant_swarm_data_$i
-EOF
+for ((i=0; i< $nodes_qdrant; i++)); do
+  volume_name="qdrant_data_$i"
+  echo "  $volume_name:" >> qdrant.yaml
 done
+
+cat <<EOL >> qdrant.yaml
+
+networks:
+  qdrant_network:
+EOL
+
+if [ $? -eq 0 ]; then
+  echo "1/2 - [ OK ]"
+else
+  echo "1/2 - [ OFF ]"
+  echo "Não foi possível criar o arquivo qdrant.yaml"
+  return 1
+fi
 
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ]"
@@ -9475,7 +9448,7 @@ fi
 docker stack deploy --prune --resolve-image always -c qdrant.yaml qdrant  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ]"
-else
+else    
     echo "2/2 - [ OFF ]"
     echo "Não foi possivel Subir a stack do Qdrant"
 fi
