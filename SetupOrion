@@ -9360,7 +9360,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO QDRANT \e[33m[1/3]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO QDRANT - Walter Teste! \e[33m[1/3]\e[0m"
 echo ""
 sleep 1
 
