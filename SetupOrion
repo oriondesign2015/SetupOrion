@@ -1,11 +1,16 @@
 #!/bin/bash
-####################################################
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 versao() {
-echo -e "\e[97mComunidade: \e[32mhttps://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                \e[97mVersão do Setup \e[32mv.2.4.4\e[0m"
+echo -e "\e[97mComunidade: \e[32mhttps://chat.whatsapp.com/EmmgJiSlpeFJd1PAFOS7xz               \e[97mVersão do Setup: \e[32mv.2.5.0\e[0m"
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Cores do Setup
 
@@ -16,11 +21,12 @@ bege="\e[93m"
 vermelho="\e[91m"
 reset="\e[0m"
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
-## Localização dos dados para proximas instalações
+
 home_directory="$HOME"
-#arquivo="/root/dados_vps/dados_vps"
 arquivo="${home_directory}/dados_vps/dados_vps"
 
 dados() {
@@ -28,9 +34,27 @@ dados() {
     nome_rede_interna=$(grep "Rede interna:" "$arquivo" | awk -F': ' '{print $2}')
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Licença do Setup
+
+## copia
+direitos_setup() {
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo -e "$amarelo=                                                                                                 =\e[0m"
+    echo -e "$amarelo=  $branco Este auto instalador foi desenvolvido para auxiliar na instalação das principais aplicações $amarelo  =\e[0m"
+    echo -e "$amarelo=  $branco  disponiveis no mercado open source. Já deixo todos os créditos as desenvolvedores de cada  $amarelo  =\e[0m"
+    echo -e "$amarelo=  $branco aplicação disponiveis aqui. Este Setup é licenciazdo sob a Licença MIT (MIT). Você pode usar,$amarelo =\e[0m"
+    echo -e "$amarelo=  $branco  copiar, modificar, integrar, publicar, distribuir e/ou vender cópias dos produtos finais,  $amarelo  =\e[0m"
+    echo -e "$amarelo=  $branco   mas deve sempre declarar que OrionDesign (contato@oriondesign.art.br) é o autor original  $amarelo  =\e[0m"
+    echo -e "$amarelo=  $branco           destes códigos e atribuir um link para https://oriondesign.art.br/setup           $amarelo  =\e[0m"
+    echo -e "$amarelo=                                                                                                 =\e[0m"
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo ""
+    echo ""
+}
 
 direitos_instalador() {
     echo -e "$amarelo===================================================================================================\e[0m"
@@ -46,15 +70,33 @@ direitos_instalador() {
     echo ""
     echo ""
     read -p "Ao digitar Y você aceita e concorda com as orientações passadas acima (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        clear
-        echo "Que pena que você não concorda, então estarei encerrando o instalador. Até mais."
-        sleep 2
-        clear
-        exit 1
-    fi
+    while true; do
+        case $choice in
+            Y|y)
+                return
+                ;;
+            N|n)
+                clear
+                nome_finalizado
+                echo "Que pena que você não concorda, então estarei encerrando o instalador. Até mais."
+                sleep 2
+                clear
+                exit 1
+                ;;
+            *)
+                clear
+                erro_msg
+                echo ""
+                echo ""
+                echo "Por favor, digite apenas Y ou N."
+                sleep 2
+                clear
+                nome_instalador
+                direitos_setup
+                ;;
+        esac
+        read -p "Ao digitar Y você aceita e concorda com as orientações passadas acima (Y/N): " choice
+    done
 }
 
 ## Credito do Setup
@@ -81,7 +123,9 @@ creditos_msg() {
 }
 
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Mensagens gerais
 
@@ -188,7 +232,9 @@ nome_testando() {
   echo ""
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Titulos
 
@@ -252,12 +298,12 @@ nome_testeemail() {
   echo -e "$branco                        ██║   ███████╗███████║   ██║   ███████╗    ██████╔╝███████╗\e[0m"
   echo -e "$branco                        ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝\e[0m"
   echo -e "$branco                                                                                   \e[0m"
-  echo -e "$branco                                 ███████╗███╗   ███╗ █████╗ ██╗██╗                 \e[0m"
-  echo -e "$branco                                 ██╔════╝████╗ ████║██╔══██╗██║██║                 \e[0m"
-  echo -e "$branco                                 █████╗  ██╔████╔██║███████║██║██║                 \e[0m"
-  echo -e "$branco                                 ██╔══╝  ██║╚██╔╝██║██╔══██║██║██║                 \e[0m"
-  echo -e "$branco                                 ███████╗██║ ╚═╝ ██║██║  ██║██║███████╗            \e[0m"
-  echo -e "$branco                                 ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝            \e[0m"
+  echo -e "$branco                                    ███████╗███╗   ███╗ █████╗ ██╗██╗                 \e[0m"
+  echo -e "$branco                                    ██╔════╝████╗ ████║██╔══██╗██║██║                 \e[0m"
+  echo -e "$branco                                    █████╗  ██╔████╔██║███████║██║██║                 \e[0m"
+  echo -e "$branco                                    ██╔══╝  ██║╚██╔╝██║██╔══██║██║██║                 \e[0m"
+  echo -e "$branco                                    ███████╗██║ ╚═╝ ██║██║  ██║██║███████╗            \e[0m"
+  echo -e "$branco                                    ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚══════╝            \e[0m"
   echo ""
   echo ""                                                          
 }
@@ -584,6 +630,8 @@ nome_formbricks() {
     echo ""
 }
 
+## Titulo NocoDB [22]
+
 nome_nocodb() {
     clear
     echo ""
@@ -596,6 +644,9 @@ nome_nocodb() {
     echo ""
     echo ""                                                 
 }
+
+## Titulo Langfuse [23]
+
 nome_langfuse() {
     clear
     echo ""
@@ -608,6 +659,8 @@ nome_langfuse() {
     echo ""
     echo ""
 }
+
+## Titulo Metabase [24]
 
 nome_metabase() {
     clear
@@ -622,6 +675,8 @@ nome_metabase() {
     echo ""
 }   
 
+## Titulo Odoo [25]
+
 nome_odoo() {
     clear
     echo ""
@@ -635,6 +690,8 @@ nome_odoo() {
     echo ""
 }
 
+## Titulo Chatwoot Nestor [26]
+
 nome_unoapi() {
     clear
     echo ""
@@ -647,6 +704,8 @@ nome_unoapi() {
     echo ""
     echo ""
 }
+
+## Titulo Uno API [27]
 
 nome_n8n_quepasa(){
     clear
@@ -668,6 +727,8 @@ nome_n8n_quepasa(){
     echo ""
 }
 
+## Titulo Quepasa API [29]
+
 nome_quepasa() {
     clear
     echo ""
@@ -681,47 +742,7 @@ nome_quepasa() {
     echo ""
 }
 
-nome_dify() {
-    clear
-    echo ""
-    echo -e "$branco                            ██████╗ ██╗███████╗██╗   ██╗ █████╗ ██╗\e[0m"
-    echo -e "$branco                            ██╔══██╗██║██╔════╝╚██╗ ██╔╝██╔══██╗██║\e[0m"
-    echo -e "$branco                            ██║  ██║██║█████╗   ╚████╔╝ ███████║██║\e[0m"
-    echo -e "$branco                            ██║  ██║██║██╔══╝    ╚██╔╝  ██╔══██║██║\e[0m"
-    echo -e "$branco                            ██████╔╝██║██║        ██║██╗██║  ██║██║\e[0m"
-    echo -e "$branco                            ╚═════╝ ╚═╝╚═╝        ╚═╝╚═╝╚═╝  ╚═╝╚═╝\e[0m"
-    echo ""
-    echo ""
-}
-
-## Titulo Ollama
-
-nome_ollama() {
-    clear
-    echo ""
-    echo -e "$branco                            ██████╗ ██╗     ██╗      █████╗ ███╗   ███╗ █████╗ \e[0m"
-    echo -e "$branco                           ██╔═══██╗██║     ██║     ██╔══██╗████╗ ████║██╔══██╗\e[0m"
-    echo -e "$branco                           ██║   ██║██║     ██║     ███████║██╔████╔██║███████║\e[0m"
-    echo -e "$branco                           ██║   ██║██║     ██║     ██╔══██║██║╚██╔╝██║██╔══██║\e[0m"
-    echo -e "$branco                           ╚██████╔╝███████╗███████╗██║  ██║██║ ╚═╝ ██║██║  ██║\e[0m"
-    echo -e "$branco                            ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝\e[0m"
-    echo ""
-    echo ""                                   
-}
-
-
-nome_affine(){
-    clear
-    echo ""
-    echo -e "$branco                         █████╗ ███████╗███████╗██╗███╗   ██╗███████╗\e[0m"
-    echo -e "$branco                        ██╔══██╗██╔════╝██╔════╝██║████╗  ██║██╔════╝\e[0m"
-    echo -e "$branco                        ███████║█████╗  █████╗  ██║██╔██╗ ██║█████╗  \e[0m"
-    echo -e "$branco                        ██╔══██║██╔══╝  ██╔══╝  ██║██║╚██╗██║██╔══╝  \e[0m"
-    echo -e "$branco                        ██║  ██║██║     ██║     ██║██║ ╚████║███████╗\e[0m"
-    echo -e "$branco                        ╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝\e[0m"
-    echo ""
-    echo ""
-}
+## Titulo Docuseal [30]
 
 nome_docuseal(){
     clear
@@ -736,31 +757,7 @@ nome_docuseal(){
     echo ""
 }
 
-nome_directus(){
-clear
-echo ""
-echo -e "$branco                   ██████╗ ██╗██████╗ ███████╗ ██████╗████████╗██╗   ██╗███████╗\e[0m"
-echo -e "$branco                   ██╔══██╗██║██╔══██╗██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔════╝\e[0m"
-echo -e "$branco                   ██║  ██║██║██████╔╝█████╗  ██║        ██║   ██║   ██║███████╗\e[0m"
-echo -e "$branco                   ██║  ██║██║██╔══██╗██╔══╝  ██║        ██║   ██║   ██║╚════██║\e[0m"
-echo -e "$branco                   ██████╔╝██║██║  ██║███████╗╚██████╗   ██║   ╚██████╔╝███████║\e[0m"
-echo -e "$branco                   ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝\e[0m"
-echo ""
-echo ""
-}
-
-nome_vaultwarden() {
-    clear
-    echo ""
-    echo -e "$branco   ██╗   ██╗ █████╗ ██╗   ██╗██╗  ████████╗██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗\e[0m"
-    echo -e "$branco   ██║   ██║██╔══██╗██║   ██║██║  ╚══██╔══╝██║    ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║\e[0m"
-    echo -e "$branco   ██║   ██║███████║██║   ██║██║     ██║   ██║ █╗ ██║███████║██████╔╝██║  ██║█████╗  ██╔██╗ ██║\e[0m"
-    echo -e "$branco   ╚██╗ ██╔╝██╔══██║██║   ██║██║     ██║   ██║███╗██║██╔══██║██╔══██╗██║  ██║██╔══╝  ██║╚██╗██║\e[0m"
-    echo -e "$branco    ╚████╔╝ ██║  ██║╚██████╔╝███████╗██║   ╚███╔███╔╝██║  ██║██║  ██║██████╔╝███████╗██║ ╚████║\e[0m"
-    echo -e "$branco     ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝\e[0m"
-    echo ""
-    echo ""
-}
+## Titulo Grafana + Prometheus + cAdvisor [31]
 
 nome_monitor() {
     clear
@@ -775,6 +772,83 @@ nome_monitor() {
     echo ""
 }
 
+## Titulo Dify AI [32]
+
+nome_dify() {
+    clear
+    echo ""
+    echo -e "$branco                            ██████╗ ██╗███████╗██╗   ██╗ █████╗ ██╗\e[0m"
+    echo -e "$branco                            ██╔══██╗██║██╔════╝╚██╗ ██╔╝██╔══██╗██║\e[0m"
+    echo -e "$branco                            ██║  ██║██║█████╗   ╚████╔╝ ███████║██║\e[0m"
+    echo -e "$branco                            ██║  ██║██║██╔══╝    ╚██╔╝  ██╔══██║██║\e[0m"
+    echo -e "$branco                            ██████╔╝██║██║        ██║██╗██║  ██║██║\e[0m"
+    echo -e "$branco                            ╚═════╝ ╚═╝╚═╝        ╚═╝╚═╝╚═╝  ╚═╝╚═╝\e[0m"
+    echo ""
+    echo ""
+}
+
+## Titulo Ollama [33]
+
+nome_ollama() {
+    clear
+    echo ""
+    echo -e "$branco                            ██████╗ ██╗     ██╗      █████╗ ███╗   ███╗ █████╗ \e[0m"
+    echo -e "$branco                           ██╔═══██╗██║     ██║     ██╔══██╗████╗ ████║██╔══██╗\e[0m"
+    echo -e "$branco                           ██║   ██║██║     ██║     ███████║██╔████╔██║███████║\e[0m"
+    echo -e "$branco                           ██║   ██║██║     ██║     ██╔══██║██║╚██╔╝██║██╔══██║\e[0m"
+    echo -e "$branco                           ╚██████╔╝███████╗███████╗██║  ██║██║ ╚═╝ ██║██║  ██║\e[0m"
+    echo -e "$branco                            ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝\e[0m"
+    echo ""
+    echo ""                                   
+}
+
+## Titulo Affine [34]
+
+nome_affine(){
+    clear
+    echo ""
+    echo -e "$branco                         █████╗ ███████╗███████╗██╗███╗   ██╗███████╗\e[0m"
+    echo -e "$branco                        ██╔══██╗██╔════╝██╔════╝██║████╗  ██║██╔════╝\e[0m"
+    echo -e "$branco                        ███████║█████╗  █████╗  ██║██╔██╗ ██║█████╗  \e[0m"
+    echo -e "$branco                        ██╔══██║██╔══╝  ██╔══╝  ██║██║╚██╗██║██╔══╝  \e[0m"
+    echo -e "$branco                        ██║  ██║██║     ██║     ██║██║ ╚████║███████╗\e[0m"
+    echo -e "$branco                        ╚═╝  ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝\e[0m"
+    echo ""
+    echo ""
+}
+
+## Titulo Directus [35]
+
+nome_directus(){
+clear
+echo ""
+echo -e "$branco                   ██████╗ ██╗██████╗ ███████╗ ██████╗████████╗██╗   ██╗███████╗\e[0m"
+echo -e "$branco                   ██╔══██╗██║██╔══██╗██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔════╝\e[0m"
+echo -e "$branco                   ██║  ██║██║██████╔╝█████╗  ██║        ██║   ██║   ██║███████╗\e[0m"
+echo -e "$branco                   ██║  ██║██║██╔══██╗██╔══╝  ██║        ██║   ██║   ██║╚════██║\e[0m"
+echo -e "$branco                   ██████╔╝██║██║  ██║███████╗╚██████╗   ██║   ╚██████╔╝███████║\e[0m"
+echo -e "$branco                   ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝\e[0m"
+echo ""
+echo ""
+}
+
+## Titulo VaultWarden [36]
+
+nome_vaultwarden() {
+    clear
+    echo ""
+    echo -e "$branco   ██╗   ██╗ █████╗ ██╗   ██╗██╗  ████████╗██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗\e[0m"
+    echo -e "$branco   ██║   ██║██╔══██╗██║   ██║██║  ╚══██╔══╝██║    ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║\e[0m"
+    echo -e "$branco   ██║   ██║███████║██║   ██║██║     ██║   ██║ █╗ ██║███████║██████╔╝██║  ██║█████╗  ██╔██╗ ██║\e[0m"
+    echo -e "$branco   ╚██╗ ██╔╝██╔══██║██║   ██║██║     ██║   ██║███╗██║██╔══██║██╔══██╗██║  ██║██╔══╝  ██║╚██╗██║\e[0m"
+    echo -e "$branco    ╚████╔╝ ██║  ██║╚██████╔╝███████╗██║   ╚███╔███╔╝██║  ██║██║  ██║██████╔╝███████╗██║ ╚████║\e[0m"
+    echo -e "$branco     ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝\e[0m"
+    echo ""
+    echo ""
+}
+
+## Titulo NextCloud [37]
+
 nome_nextcloud() {
     clear
     echo ""
@@ -788,6 +862,8 @@ nome_nextcloud() {
     echo ""
 }
 
+## Titulo Strapi [38]
+
 nome_strapi() {
     clear
     echo ""
@@ -800,6 +876,40 @@ nome_strapi() {
     echo ""
     echo ""
 }
+
+## Titulo PhpMyAdmin [39]
+
+nome_phpmyadmin(){
+    clear
+    echo "" 
+    echo -e "$branco    ██████╗ ██╗  ██╗██████╗     ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗\e[0m"
+    echo -e "$branco    ██╔══██╗██║  ██║██╔══██╗    ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║\e[0m"
+    echo -e "$branco    ██████╔╝███████║██████╔╝    ██╔████╔██║ ╚████╔╝     ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║\e[0m"
+    echo -e "$branco    ██╔═══╝ ██╔══██║██╔═══╝     ██║╚██╔╝██║  ╚██╔╝      ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║\e[0m"
+    echo -e "$branco    ██║     ██║  ██║██║         ██║ ╚═╝ ██║   ██║       ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║\e[0m"
+    echo -e "$branco    ╚═╝     ╚═╝  ╚═╝╚═╝         ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝\e[0m"
+    echo "" 
+    echo "" 
+}
+
+## Titulo Supabase [40]
+
+nome_supabase(){
+    clear
+    echo ""
+    echo -e "$branco              ███████╗██╗   ██╗██████╗  █████╗ ██████╗  █████╗ ███████╗███████╗\e[0m"
+    echo -e "$branco              ██╔════╝██║   ██║██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝\e[0m"
+    echo -e "$branco              ███████╗██║   ██║██████╔╝███████║██████╔╝███████║███████╗█████╗  \e[0m"
+    echo -e "$branco              ╚════██║██║   ██║██╔═══╝ ██╔══██║██╔══██╗██╔══██║╚════██║██╔══╝  \e[0m"
+    echo -e "$branco              ███████║╚██████╔╝██║     ██║  ██║██████╔╝██║  ██║███████║███████╗\e[0m"
+    echo -e "$branco              ╚══════╝ ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝\e[0m"
+    echo "" 
+    echo "" 
+}
+# ===================================================================================================
+
+
+## Titulo Saindo do setup
 
 nome_saindo() {
     clear
@@ -821,21 +931,7 @@ nome_saindo() {
     echo "" 
 }
 
-nome_phpmyadmin(){
-    clear
-    echo "" 
-    echo -e "$branco    ██████╗ ██╗  ██╗██████╗     ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗\e[0m"
-    echo -e "$branco    ██╔══██╗██║  ██║██╔══██╗    ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║\e[0m"
-    echo -e "$branco    ██████╔╝███████║██████╔╝    ██╔████╔██║ ╚████╔╝     ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║\e[0m"
-    echo -e "$branco    ██╔═══╝ ██╔══██║██╔═══╝     ██║╚██╔╝██║  ╚██╔╝      ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║\e[0m"
-    echo -e "$branco    ██║     ██║  ██║██║         ██║ ╚═╝ ██║   ██║       ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║\e[0m"
-    echo -e "$branco    ╚═╝     ╚═╝  ╚═╝╚═╝         ╚═╝     ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝\e[0m"
-    echo "" 
-    echo "" 
-}
-
-# ===================================================================================================
-## Titulo Remover Stack []
+## Titulo Remover Stack
 
 nome_remover_stack() {
     clear
@@ -879,7 +975,9 @@ nome_portainer.reset() {
     echo ""
     echo ""
 }
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Defasados
 
@@ -916,7 +1014,9 @@ nome_finalizado() {
     echo ""
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Menu de opções
 
@@ -927,7 +1027,7 @@ menu_instalador(){
     echo -e "${amarelo}[ 2 ]${reset} -  ${branco}Chatwoot                                ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse${reset}"
     echo -e "${branco}  '-->${amarelo}[ 2.1 ]${reset} - ${branco}Chatwoot (ARM)                   ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase${reset}"
     echo -e "${amarelo}[ 3 ]${reset} -  ${branco}Evolution API                           ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo${reset}"
-    echo -e "${branco}  '-->${amarelo}[ 3.1 ]${reset} - ${branco}Evolution API (ARM)              ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor (ft. Francis)${reset}"
+    echo -e "${branco}  '-->${amarelo}[ 3.1 ]${reset} - ${branco}Evolution API (ARM)              ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor${reset}"
     echo -e "${amarelo}[ 4 ]${reset} -  ${branco}MinIO                                   ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API${reset}"
     echo -e "${amarelo}[ 5 ]${reset} -  ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
     echo -e "${amarelo}[ 6 ]${reset} -  ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
@@ -939,16 +1039,18 @@ menu_instalador(){
     echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
     echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden${reset}"
     echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
-    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}" # ${amarelo}[ 42 ]${reset} - ${branco}Ainda Vazio${reset}"
+    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi${reset}"
+    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin${reset}"
+    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}" # ${amarelo}[ 43 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo""
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Verificadores
 
@@ -1761,7 +1863,9 @@ wait_phpmyadmin(){
         sleep 5
     done
 }
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Pegar informações
 
@@ -1820,7 +1924,9 @@ pegar_link_s3() {
     url_s3=$(grep "MINIO_SERVER_URL" /root/minio.yaml | awk -F '=' '{print $2}' | sed 's/https:\/\///')
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Criadores de banco de dados Postgres
 
@@ -2746,7 +2852,9 @@ criar_banco_postgres_nextcloud() {
 }
 
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Criadores de banco de dados Mysql
 
@@ -2833,7 +2941,9 @@ criar_banco_mysql_strapi() {
 }
 
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Instalação das Ferramentas
 
@@ -3119,39 +3229,39 @@ sleep 1
 
 sudo apt-get update > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/9 - [ OK ]"
+    echo "1/9 - [ OK ] - Update"
 else
-    echo "1/9 - [ OFF ]"
+    echo "1/9 - [ OFF ] - Update"
 fi
 sudo apt upgrade -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/9 - [ OK ]"
+    echo "2/9 - [ OK ] - Upgrade"
 else
-    echo "2/9 - [ OFF ]"
+    echo "2/9 - [ OFF ] - Upgrade"
 fi
 sudo timedatectl set-timezone America/Sao_Paulo > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "3/9 - [ OK ]"
+    echo "3/9 - [ OK ] - Timezone"
 else
-    echo "3/9 - [ OFF ]"
+    echo "3/9 - [ OFF ] - Timezone"
 fi
 sudo apt-get install -y apt-utils > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "4/9 - [ OK ]"
+    echo "4/9 - [ OK ] - Apt-Utils"
 else
-    echo "4/9 - [ OFF ]"
+    echo "4/9 - [ OFF ] - Apt-Utils"
 fi
 sudo apt-get update > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "5/9 - [ OK ]"
+    echo "5/9 - [ OK ] - Update"
 else
-    echo "5/9 - [ OFF ]"
+    echo "5/9 - [ OFF ] - Update"
 fi
 hostnamectl set-hostname $nome_servidor > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "6/9 - [ OK ]"
+    echo "6/9 - [ OK ] - Set Hostname"
 else
-    echo "6/9 - [ OFF ]"
+    echo "6/9 - [ OFF ] - Set Hostname"
 fi
 sudo sed -i "s/127.0.0.1[[:space:]]localhost/127.0.0.1 $nome_servidor/g" /etc/hosts > /dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -3161,15 +3271,15 @@ else
 fi
 sudo apt-get update > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "8/9 - [ OK ]"
+    echo "8/9 - [ OK ] - Update"
 else
-    echo "8/9 - [ OFF ]"
+    echo "8/9 - [ OFF ] - Update"
 fi
 sudo apt-get install -y apparmor-utils > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "9/9 - [ OK ]"
+    echo "9/9 - [ OK ] - Apparmor-Utils"
 else
-    echo "9/9 - [ OFF ]"
+    echo "9/9 - [ OFF ] - Apparmor-Utils"
 fi
 echo ""
 
@@ -3181,23 +3291,27 @@ sleep 1
 ## Nesse passo vamos estar instalando docker no modo swarm
 
 
-ip=$(curl -s ifconfig.me)
+#ip=$(curl -s ifconfig.me)
+read -r ip _ <<<$(hostname -I)
 if [ $? -eq 0 ]; then
-    echo "1/3 - [ OK ]"
+    echo "1/3 - [ OK ] - Pegando IP $ip"
 else
-    echo "1/3 - [ OFF ]"
+    echo "1/3 - [ OFF ] - Pegando IP $ip"
 fi
 curl -fsSL https://get.docker.com | bash > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/3 - [ OK ]"
+    echo "2/3 - [ OK ] - Baixando e Instalando Docker"
 else
-    echo "2/3 - [ OFF ]"
+    echo "2/3 - [ OFF ] - Baixando e Instalando Docker"
 fi
 docker swarm init --advertise-addr $ip > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "3/3 - [ OK ]"
+    echo "3/3 - [ OK ] - Iniciando Swarm"
 else
-    echo "3/3 - [ OFF ]"
+    echo "3/3 - [ OFF ] - Iniciando Swarm"
+    echo "Ops não foi possivel iniciar o swarm, tente novamente"
+    sleep 5
+    exit
 fi
 echo ""
 
@@ -3210,9 +3324,9 @@ sleep 1
 
 docker network create --driver=overlay $nome_rede_interna > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Rede Interna"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Rede Interna"
 fi
 echo ""
 
@@ -3229,7 +3343,6 @@ sleep 1
 ## Criando a stack
 cat > traefik.yaml << EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
@@ -3247,6 +3360,7 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.transport.respondingTimeouts.idleTimeout=3600"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
@@ -3297,17 +3411,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi possivel criar a stack do Traefik"
 fi
 
 docker stack deploy --prune --resolve-image always -c traefik.yaml traefik > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Ops, não foi possivel subir o Traefik."
 fi
 
@@ -3335,18 +3449,20 @@ sleep 1
 ## Criando a stack
 cat > portainer.yaml <<EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
   agent:
     image: portainer/agent:latest ## Versão do portainer
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     deploy:
       mode: global
       placement:
@@ -3357,10 +3473,13 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     command: -H tcp://tasks.agent:9001 --tlsskipverify
+
     volumes:
       - portainer_data:/data
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     deploy:
       mode: replicated
       replicas: 1
@@ -3390,17 +3509,17 @@ volumes:
     name: portainer_data
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi possivel criar a stack do Portainer"
 fi
 
 docker stack deploy --prune --resolve-image always -c portainer.yaml portainer > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Deploy Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Deploy Stack"
     echo "Ops, não foi possivel Subir a stack do Portainer"
 fi
 
@@ -3488,24 +3607,25 @@ senha_postgres=$(openssl rand -hex 16)
 ## Criando a stack
 cat > postgres.yaml <<EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
   postgres:
     image: postgres:14 ## Versão do postgres
-    environment:
 
-    ## Senha do postgres 
-      - POSTGRES_PASSWORD=$senha_postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
     #ports: ## Descomente essa linha e a de baixo para usar externamente
     #  - 5432:5432 ## Descomente essa linha e a de cima para usar externamente
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+
+    environment:
+    ## Senha do postgres 
+      - POSTGRES_PASSWORD=$senha_postgres
+
     deploy:
       mode: replicated
       replicas: 1
@@ -3530,17 +3650,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Postgres."
 fi
 
 docker stack deploy --prune --resolve-image always -c postgres.yaml postgres > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Ops, não foi possivel subir a stack do Postgres."
 fi
 
@@ -3580,7 +3700,6 @@ dados
 ## Criando a stack
 cat > redis.yaml <<EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
@@ -3594,10 +3713,13 @@ services:
         "--port",
         "6379"
       ]
+
     volumes:
       - redis_data:/data
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     deploy:
       placement:
         constraints:
@@ -3620,17 +3742,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Redis."
 fi
 
 docker stack deploy --prune --resolve-image always -c redis.yaml redis
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Ops, não foi possivel subir a stack do Redis."
 fi
 
@@ -3672,25 +3794,25 @@ senha_mysql=$(openssl rand -hex 16)
 ## Criando a stack
 cat > mysql.yaml <<EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
   mysql:
     image: percona/percona-server:8.0 ## Versão do Mysql
-    environment:
 
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
     ## Senha MYSQL
       - MYSQL_ROOT_PASSWORD=$senha_mysql
 
     ## TimeZone
       - TZ=America/Sao_Paulo
 
-    networks:
-      - $nome_rede_interna ## Nome da rede interna
-    volumes:
-      - mysql_data:/var/lib/mysql
     deploy:
       placement:
         constraints:
@@ -3721,17 +3843,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Mysql."
 fi
 
 docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Ops, não foi possivel subir a stack do Postgres."
 fi
 
@@ -3913,9 +4035,9 @@ else
     criar_banco_postgres_chatwoot
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
 fi
 
 ## Verifica container redis
@@ -3926,9 +4048,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
 fi
 
 ## Mensagem de Passo
@@ -3947,7 +4069,6 @@ encryption_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > chatwoot.yaml <<EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
@@ -3956,28 +4077,37 @@ services:
     image: chatwoot/chatwoot:latest ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
+
     volumes:
-      - chatwoot_data:/app/storage ## Diretório dos arquivos de conversa
-      - chatwoot_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+      - chatwoot_storage:/app/storage ## Arquivos de conversa
+      - chatwoot_public:/app/public ## Arquivos de logos
+      - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+    
     environment:
-
-      ## URL Aleatória
+      ## Qualquer Url com # no final
       - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
 
       ## Nome da Empresa
-      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
+      - INSTALLATION_NAME=$nome_empresa_chatwoot
 
       ## Secret key
       - SECRET_KEY_BASE=$encryption_key
 
       ## Url Chatwoot
-      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
+      - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
 
       ## Idioma padrão
       - DEFAULT_LOCALE=pt_BR
+
+      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+      #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
+      #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
       ## Dados do Redis
       - REDIS_URL=redis://redis:6379
@@ -4043,30 +4173,39 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_sidekiq:
-    image: chatwoot/chatwoot:latest
+    image: chatwoot/chatwoot:latest ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
+
     volumes:
-      - chatwoot_data:/app/storage ## Diretório dos arquivos de conversa
-      - chatwoot_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+      - chatwoot_storage:/app/storage ## Arquivos de conversa
+      - chatwoot_public:/app/public ## Arquivos de logos
+      - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
-      ## URL Aleatória
+    environment:
+      ## Qualquer Url com # no final
       - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
 
       ## Nome da Empresa
-      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
+      - INSTALLATION_NAME=$nome_empresa_chatwoot
 
       ## Secret key
       - SECRET_KEY_BASE=$encryption_key
 
       ## Url Chatwoot
-      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
+      - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
 
       ## Idioma padrão
       - DEFAULT_LOCALE=pt_BR
+
+      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+      #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
+      #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
       ## Dados do Redis
       - REDIS_URL=redis://redis:6379
@@ -4121,12 +4260,18 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  chatwoot_data:
+  chatwoot_storage:
     external: true
-    name: chatwoot_data
-  chatwoot_public_orion:
+    name: chatwoot_storage
+  chatwoot_public:
     external: true
-    name: chatwoot_public_orion
+    name: chatwoot_public
+  chatwoot_mailer:
+    external: true
+    name: chatwoot_mailer
+  chatwoot_mailers:
+    external: true
+    name: chatwoot_mailers
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -4134,17 +4279,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 
 docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Chatwoot"
 fi
 
@@ -4189,9 +4334,9 @@ fi
 
 docker exec -it "$CONTAINER_ID" bundle exec rails db:chatwoot_prepare
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Executando no container: bundle exec rails db:chatwoot_prepare"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Executando no container: bundle exec rails db:chatwoot_prepare"
     echo "Não foi possivel migrar o banco de dados"
 fi
 ## Mensagem de Passo
@@ -4209,9 +4354,9 @@ update installation_configs set locked = false;
 \q
 EOF
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Desbloqueando tabela installation_configs no postgres"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Desbloqueando tabela installation_configs no postgres"
     echo "Não foi possivel liberar as funções do super_admin"
 fi
 
@@ -4431,9 +4576,9 @@ else
     criar_banco_postgres_chatwoot
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
 fi
 
 ## Verifica container redis
@@ -4444,9 +4589,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Verificando/Instlando Reids"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
 fi
 
 ## Mensagem de Passo
@@ -4465,36 +4610,65 @@ encryption_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > chatwoot.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   chatwoot_app:
-    image: sendingtk/chatwoot-arm:latest ## Versão do Chatwoot ARM
+    image: amoxt/chatwoot-arm:latest ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
+
     volumes:
-      - chatwoot_data:/app/storage ## Diretório dos arquivos de conversa
-      - chatwoot_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+      - chatwoot_storage:/app/storage ## Arquivos de conversa
+      - chatwoot_public:/app/public ## Arquivos de logos
+      - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+    
     environment:
+      ## Qualquer Url com # no final
       - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
-      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
-      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
-      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
-      - DEFAULT_LOCALE=pt_BR
+
+      ## Nome da Empresa
+      - INSTALLATION_NAME=$nome_empresa_chatwoot
+
+      ## Secret key
+      - SECRET_KEY_BASE=$encryption_key
+
+      ## Url Chatwoot
+      - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
-      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+
+      ## Idioma padrão
+      - DEFAULT_LOCALE=pt_BR
+
+      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+      #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
+      #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
+
+      ## Dados do Redis
       - REDIS_URL=redis://redis:6379
+
+      ## Dados do Postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_TO_STDOUT=true
-      - USE_INBOX_AVATAR_FOR_BOT=true
+
+      ## Armazenamento
+      - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
+      #- STORAGE_BUCKET_NAME=chatwoot
+      #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
+      #- STORAGE_SECRET_ACCESS_KEY=SECRET_KEY_MINIO
+      #- STORAGE_REGION=us-east
+      #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
+      #- STORAGE_FORCE_PATH_STYLE=true
+
+      ## Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -4506,6 +4680,15 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+
+      ## Outras configurações
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - ENABLE_ACCOUNT_SIGNUP=false
+
     deploy:
       mode: replicated
       replicas: 1
@@ -4528,33 +4711,62 @@ services:
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.routers.chatwoot_app.middlewares=sslheader@docker
 
+## --------------------------- ORION --------------------------- ##
+
   chatwoot_sidekiq:
-    image: sendingtk/chatwoot-arm:latest
+    image: amoxt/chatwoot-arm:latest ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
+
     volumes:
-      - chatwoot_data:/app/storage ## Diretório dos arquivos de conversa
-      - chatwoot_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+      - chatwoot_storage:/app/storage ## Arquivos de conversa
+      - chatwoot_public:/app/public ## Arquivos de logos
+      - chatwoot_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_mailers:/app/app/views/mailers ## Arquivos de emails
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     environment:
-      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup
-      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
-      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
-      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
-      - DEFAULT_LOCALE=pt_BR
+      ## Qualquer Url com # no final
+      - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
+
+      ## Nome da Empresa
+      - INSTALLATION_NAME=$nome_empresa_chatwoot
+
+      ## Secret key
+      - SECRET_KEY_BASE=$encryption_key
+
+      ## Url Chatwoot
+      - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
-      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+
+      ## Idioma padrão
+      - DEFAULT_LOCALE=pt_BR
+
+      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+      #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
+      #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
+
+      ## Dados do Redis
       - REDIS_URL=redis://redis:6379
+
+      ## Dados do Postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_TO_STDOUT=true
-      - USE_INBOX_AVATAR_FOR_BOT=true
+
+      ## Armazenamento
+      - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
+      #- STORAGE_BUCKET_NAME=chatwoot
+      #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
+      #- STORAGE_SECRET_ACCESS_KEY=SECRET_KEY_MINIO
+      #- STORAGE_REGION=us-east
+      #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
+      #- STORAGE_FORCE_PATH_STYLE=true
+
+      ## Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -4566,6 +4778,15 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+
+      ## Outras configurações
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - ENABLE_ACCOUNT_SIGNUP=false
+
     deploy:
       mode: replicated
       replicas: 1
@@ -4577,13 +4798,21 @@ services:
           cpus: "1"
           memory: 1024M
 
+## --------------------------- ORION --------------------------- ##
+
 volumes:
-  chatwoot_data:
+  chatwoot_storage:
     external: true
-    name: chatwoot_data
-  chatwoot_public_orion:
+    name: chatwoot_storage
+  chatwoot_public:
     external: true
-    name: chatwoot_public_orion
+    name: chatwoot_public
+  chatwoot_mailer:
+    external: true
+    name: chatwoot_mailer
+  chatwoot_mailers:
+    external: true
+    name: chatwoot_mailers
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -4591,17 +4820,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 
 docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Chatwoot"
 fi
 
@@ -4646,9 +4875,9 @@ fi
 
 docker exec -it "$CONTAINER_ID" bundle exec rails db:chatwoot_prepare
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Executando no container: bundle exec rails db:chatwoot_prepare"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Executando no container: bundle exec rails db:chatwoot_prepare"
     echo "Não foi possivel migrar o banco de dados"
 fi
 ## Mensagem de Passo
@@ -4666,9 +4895,9 @@ update installation_configs set locked = false;
 \q
 EOF
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Modificando tabela installation_configs no postgres"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Modificando tabela installation_configs no postgres"
     echo "Não foi possivel liberar as funções do super_admin"
 fi
 
@@ -4821,24 +5050,24 @@ apikeyglobal=$(openssl rand -hex 16)
 cat > evolution.yaml <<EOL
 version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   evolution_oriondesign:
     image: atendai/evolution-api:latest ## Versão da Evolution API
-    hostname: evolution_oriondesign
     command: ["node", "./dist/src/main.js"]
+
     volumes:
     - evolution_oriondesign_instances:/evolution/instances
     - evolution_oriondesign_store:/evolution/store
     - evolution_oriondesign_views:/evolution/views
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     environment:
-
+    ## Url da Evolution API
     - SERVER_URL=https://$url_evolution ## Url da aplicação
-
-    - DOCKER_ENV=true
-    - LOG_LEVEL=ERROR
-
-    - DEL_INSTANCE=false
 
     ## Dados de Autenticação
     - AUTHENTICATION_TYPE=apikey
@@ -4848,7 +5077,10 @@ services:
     ## Configurações
     - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
     - CONFIG_SESSION_PHONE_NAME=chrome
-    - QRCODE_LIMIT=5000 #adicional que não é legal deixar
+
+    ## Sobre os QR-Codes
+    - QRCODE_LIMIT=1902
+    - QRCODE_COLOR=#000000
 
     # Ativer o RabbitMQ
     - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
@@ -4864,13 +5096,26 @@ services:
     - DATABASE_SAVE_DATA_CONTACTS=true
     - DATABASE_SAVE_DATA_CHATS=true
 
-    # Novas variaveis para o Typebot
+    ## Ativar o Redis
+    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
+    - REDIS_URI=redis://redis:6379
+
+    ## Ativar o Cache Redis (Em testes)
+    - CACHE_REDIS_ENABLED=false
+    - CACHE_REDIS_URI=redis://redis:6379
+    - CACHE_REDIS_PREFIX_KEY=evolution
+    - CACHE_REDIS_TTL=604800
+    - CACHE_REDIS_SAVE_INSTANCES=false
+    - CACHE_LOCAL_ENABLED=false
+    - CACHE_LOCAL_TTL=604800
+
+    ## Novas variaveis para o Typebot
     - TYPEBOT_KEEP_OPEN=true
     - TYPEBOT_API_VERSION=latest
 
-    # Ativar o Redis
-    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
-    - REDIS_URI=redis://redis:6379
+    ## Novas variaveis para o Chatwoot
+    - CHATWOOT_MESSAGE_DELETE=true
+    - CHATWOOT_MESSAGE_READ=true
 
     ## Informações do Webhook
     - WEBHOOK_GLOBAL_ENABLED=false
@@ -4894,16 +5139,22 @@ services:
     - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
     - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
 
-    # Desativados para teste
-    #- STORE_MESSAGES=true
-    #- STORE_MESSAGE_UP=true
-    #- STORE_CONTACTS=true
-    #- STORE_CHATS=true
-    #- CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
-    #- CLEAN_STORE_MESSAGES=true
-    #- CLEAN_STORE_MESSAGE_UP=true
-    #- CLEAN_STORE_CONTACTS=true
-    #- CLEAN_STORE_CHATS=true
+    ## Sobre as instancias
+    - DEL_INSTANCE=false
+    - DEL_TEMP_INSTANCES=false
+    - STORE_MESSAGES=true
+    - STORE_MESSAGE_UP=true
+    - STORE_CONTACTS=true
+    - STORE_CHATS=true
+    - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
+    - CLEAN_STORE_MESSAGES=true
+    - CLEAN_STORE_MESSAGE_UP=true
+    - CLEAN_STORE_CONTACTS=true
+    - CLEAN_STORE_CHATS=true
+
+    ## Outros dados
+    - DOCKER_ENV=true
+    - LOG_LEVEL=ERROR
 
     deploy:
       mode: replicated
@@ -4911,7 +5162,6 @@ services:
       placement:
         constraints:
         - node.role == manager
-
       labels:
       - traefik.enable=1
       - traefik.http.routers.evolution_oriondesign.rule=Host(\`$url_evolution\`) ## Url da aplicação
@@ -4921,6 +5171,8 @@ services:
       - traefik.http.routers.evolution_oriondesign.service=evolution_oriondesign
       - traefik.http.services.evolution_oriondesign.loadbalancer.server.port=8080
       - traefik.http.services.evolution_oriondesign.loadbalancer.passHostHeader=1
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   evolution_oriondesign_instances:
@@ -4938,17 +5190,17 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack da Evolution API"
 fi
 
 docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack da Evolution API"
 fi
 
@@ -5110,37 +5362,76 @@ apikeyglobal=$(openssl rand -hex 16)
 cat > evolution.yaml <<EOL
 version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   evolution_oriondesign:
     image: jquerubim/evolution-api-arm:latest ## Versão da Evolution API
     command: ["node", "./dist/src/main.js"]
+
     volumes:
     - evolution_oriondesign_instances:/evolution/instances
     - evolution_oriondesign_store:/evolution/store
     - evolution_oriondesign_views:/evolution/views
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     environment:
+    ## Url da Evolution API
     - SERVER_URL=https://$url_evolution ## Url da aplicação
-    - DOCKER_ENV=true
-    - LOG_LEVEL=ERROR
-    - DEL_INSTANCE=false
-    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
-    - CONFIG_SESSION_PHONE_NAME=chrome
-    - STORE_MESSAGES=true
-    - STORE_MESSAGE_UP=true
-    - STORE_CONTACTS=true
-    - STORE_CHATS=true
-    - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
-    - CLEAN_STORE_MESSAGES=true
-    - CLEAN_STORE_MESSAGE_UP=true
-    - CLEAN_STORE_CONTACTS=true
-    - CLEAN_STORE_CHATS=true
+
+    ## Dados de Autenticação
     - AUTHENTICATION_TYPE=apikey
     - AUTHENTICATION_API_KEY=$apikeyglobal ## GLOBAL API KEY
     - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
-    - QRCODE_LIMIT=19021
+
+    ## Configurações
+    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
+    - CONFIG_SESSION_PHONE_NAME=chrome
+
+    ## Sobre os QR-Codes
+    - QRCODE_LIMIT=1902
+    - QRCODE_COLOR=#000000
+
+    # Ativer o RabbitMQ
+    - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
+    - RABBITMQ_URI=amqp://USER:PASS@rabbit_mq:5672
+
+    # Aivar Banco de Dados MongoDB
+    - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
+    - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
+    - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution
+    - DATABASE_SAVE_DATA_INSTANCE=true
+    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+    - DATABASE_SAVE_MESSAGE_UPDATE=true
+    - DATABASE_SAVE_DATA_CONTACTS=true
+    - DATABASE_SAVE_DATA_CHATS=true
+
+    ## Ativar o Redis
+    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
+    - REDIS_URI=redis://redis:6379
+
+    ## Ativar o Cache Redis (Em testes)
+    - CACHE_REDIS_ENABLED=false
+    - CACHE_REDIS_URI=redis://redis:6379
+    - CACHE_REDIS_PREFIX_KEY=evolution
+    - CACHE_REDIS_TTL=604800
+    - CACHE_REDIS_SAVE_INSTANCES=false
+    - CACHE_LOCAL_ENABLED=false
+    - CACHE_LOCAL_TTL=604800
+
+    ## Novas variaveis para o Typebot
+    - TYPEBOT_KEEP_OPEN=true
+    - TYPEBOT_API_VERSION=latest
+
+    ## Novas variaveis para o Chatwoot
+    - CHATWOOT_MESSAGE_DELETE=true
+    - CHATWOOT_MESSAGE_READ=true
+
+    ## Informações do Webhook
     - WEBHOOK_GLOBAL_ENABLED=false
-    - WEBHOOK_GLOBAL_URL=https://URL
+    - WEBHOOK_GLOBAL_URL=
     - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
     - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
     - WEBHOOK_EVENTS_QRCODE_UPDATED=true
@@ -5160,27 +5451,22 @@ services:
     - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
     - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
 
-    # Ativar o Redis
-    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
-    - REDIS_URI=redis://redis:6379
+    ## Sobre as instancias
+    - DEL_INSTANCE=false
+    - DEL_TEMP_INSTANCES=false
+    - STORE_MESSAGES=true
+    - STORE_MESSAGE_UP=true
+    - STORE_CONTACTS=true
+    - STORE_CHATS=true
+    - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
+    - CLEAN_STORE_MESSAGES=true
+    - CLEAN_STORE_MESSAGE_UP=true
+    - CLEAN_STORE_CONTACTS=true
+    - CLEAN_STORE_CHATS=true
 
-    # Ativar o RabbitMQ
-    - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
-    - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
-
-    # Aivar Banco de Dados MongoDB
-    - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
-    - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
-    - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution
-    - DATABASE_SAVE_DATA_INSTANCE=true
-    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
-    - DATABASE_SAVE_MESSAGE_UPDATE=true
-    - DATABASE_SAVE_DATA_CONTACTS=true
-    - DATABASE_SAVE_DATA_CHATS=true
-
-    # Novas variaveis para o Typebot
-    - TYPEBOT_KEEP_OPEN=true ## Deixar em true faz com que o fluxo não finalize automaticamente ao acabar (recomendo deixar em true)
-    - TYPEBOT_API_VERSION=latest
+    ## Outros dados
+    - DOCKER_ENV=true
+    - LOG_LEVEL=ERROR
 
     deploy:
       mode: replicated
@@ -5188,7 +5474,6 @@ services:
       placement:
         constraints:
         - node.role == manager
-
       labels:
       - traefik.enable=1
       - traefik.http.routers.evolution_oriondesign.rule=Host(\`$url_evolution\`) ## Url da aplicação
@@ -5198,6 +5483,8 @@ services:
       - traefik.http.routers.evolution_oriondesign.service=evolution_oriondesign
       - traefik.http.services.evolution_oriondesign.loadbalancer.server.port=8080
       - traefik.http.services.evolution_oriondesign.loadbalancer.passHostHeader=1
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   evolution_oriondesign_instances:
@@ -5215,17 +5502,17 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack da Evolution API"
 fi
 
 docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack da Evolution API"
 fi
 
@@ -5408,17 +5695,21 @@ sleep 1
 ## Criando a stack
 cat > minio.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   minio:
     image: quay.io/minio/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1 ## Versão do Minio
     command: server /data --console-address ":9001"
-    networks:
-      - $nome_rede_interna ## Nome da rede interna
+
     volumes:
       - minio_data:/data
-    environment:
 
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
       ## Dados de acesso
       - MINIO_ROOT_USER=$user_minio
       - MINIO_ROOT_PASSWORD=$senha_minio
@@ -5447,6 +5738,9 @@ services:
         - traefik.http.services.minio_console.loadbalancer.server.port=9001
         - traefik.http.services.minio_console.loadbalancer.passHostHeader=true
         - traefik.http.routers.minio_console.service=minio_console
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   minio_data:
     external: true
@@ -5458,17 +5752,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do MinIO"
 fi
 
 docker stack deploy --prune --resolve-image always -c minio.yaml minio
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Minio"
 fi
 
@@ -5735,16 +6029,16 @@ fi
 
 pegar_senha_minio
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Pegando Senha do MinIO"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Pegando Senha do MinIO"
     echo "Não foi possivel pegar a senha do minio"
 fi
 pegar_link_s3
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Pegando URL do S3"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Pegando URL do S3"
     echo "Não foi possivel pegar o link do S3"
 fi
 
@@ -5759,14 +6053,17 @@ key_typebot=$(openssl rand -hex 16)
 ## Criando a stack
 cat > typebot.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   typebot_builder:
     image: baptistearno/typebot-builder:$versao_typebot ## Versão do Typebot
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Dados do Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/typebot
 
@@ -5797,6 +6094,7 @@ services:
       ## Dados Google Cloud
       #- GOOGLE_CLIENT_ID=
       #- GOOGLE_CLIENT_SECRET=
+      #- NEXT_PUBLIC_GOOGLE_API_KEY=
 
       ## Dados do Minio/S3
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
@@ -5824,14 +6122,15 @@ services:
         - traefik.http.services.typebot_builder.loadbalancer.passHostHeader=true
         - traefik.http.routers.typebot_builder.service=typebot_builder
 
-################################################################################
+## --------------------------- ORION --------------------------- ##
 
   typebot_viewer:
     image: baptistearno/typebot-viewer:$versao_typebot ## Versão do Typebot
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Dados do Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/typebot
 
@@ -5862,6 +6161,7 @@ services:
       ## Dados Google Cloud
       #- GOOGLE_CLIENT_ID=
       #- GOOGLE_CLIENT_SECRET=
+      #- NEXT_PUBLIC_GOOGLE_API_KEY=
 
       ## Dados do Minio/S3
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
@@ -5889,24 +6189,25 @@ services:
         - traefik.http.services.typebot_viewer.loadbalancer.passHostHeader=true
         - traefik.http.routers.typebot_viewer.service=typebot_viewer
 
+## --------------------------- ORION --------------------------- ##
+
 networks:
   $nome_rede_interna: ## Nome da rede interna
     external: true
     name: $nome_rede_interna ## Nome da rede interna
-
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Typebot"
 fi
 
 docker stack deploy --prune --resolve-image always -c typebot.yaml typebot > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Typebot"
 fi
 
@@ -6095,17 +6396,21 @@ encryption_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > n8n.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   n8n_editor:
     image: n8nio/n8n:latest ## Versão do N8N
+    command: start
+
     volumes:
       - n8n_data:/home/node/.n8n/nodes
-    command: start
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Dados do postgres
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue
@@ -6161,7 +6466,7 @@ services:
         - traefik.http.services.n8n_editor.loadbalancer.server.port=5678
         - traefik.http.services.n8n_editor.loadbalancer.passHostHeader=1
 
-################################################################################
+## --------------------------- ORION --------------------------- ##
 
   n8n_webhook:
     image: n8nio/n8n:latest ## Versão do N8N
@@ -6227,7 +6532,7 @@ services:
         - traefik.http.services.n8n_webhook.loadbalancer.server.port=5678
         - traefik.http.services.n8n_webhook.loadbalancer.passHostHeader=1
 
-################################################################################
+## --------------------------- ORION --------------------------- ##
 
   n8n_worker:
     image: n8nio/n8n:latest ## Versão do N8N
@@ -6284,6 +6589,8 @@ services:
           cpus: "0.5"
           memory: 1024M
 
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   n8n_data:
     external: true
@@ -6295,17 +6602,17 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do N8N"
 fi
 
 docker stack deploy --prune --resolve-image always -c n8n.yaml n8n > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do N8N"
 fi
 
@@ -6500,17 +6807,21 @@ encryption_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > flowise.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   flowise:
     image: flowiseai/flowise:latest ## Versão do Flowise
     command: flowise start
-    networks:
-     - $nome_rede_interna ## Nome da rede interna
+
     volumes:
      - flowise_data:/root/.flowise
-    environment:
 
+    networks:
+     - $nome_rede_interna ## Nome da rede interna
+
+    environment:
      ## Dados de acesso
      - FLOWISE_USERNAME=$user_flowise
      - FLOWISE_PASSWORD=$pass_flowise
@@ -6544,28 +6855,29 @@ services:
         - traefik.http.routers.flowise.entrypoints=websecure
         - traefik.http.routers.flowise.tls.certresolver=letsencryptresolver
 
-networks:
-  $nome_rede_interna: ## Nome da rede interna
-    external: true
-    name: $nome_rede_interna ## Nome da rede interna
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   flowise_data:
     external: true
 
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Flowise"
 fi
 
 docker stack deploy --prune --resolve-image always -c flowise.yaml flowise  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Flowise"
 fi
 
@@ -6733,7 +7045,7 @@ sleep 1
 
 ## Criando a stack
 cat > pgadmin.yaml <<EOL
-version: '3.7'
+version: "3.7"
 
 services:  
   pgadmin:
@@ -6777,17 +7089,17 @@ volumes:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do PgAdmin 4"
 fi
 
 docker stack deploy --prune --resolve-image always -c pgadmin.yaml pgadmin  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do PgAdmin 4"
 fi
 
@@ -6988,30 +7300,20 @@ nocobase_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > nocobase.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   nocobase:
     image: nocobase/nocobase:0.19.0-alpha.7 ## Versão do Nocobase
+
     volumes:
       - nocobase_storage:/app/nocobase/storage
+
     networks:
         - $nome_rede_interna ## Nome da rede interna
+
     environment:
-
-      ## Dados do Postgres
-      - DB_DIALECT=postgres
-      - DB_HOST=postgres
-      - DB_DATABASE=nocobase
-      - DB_USER=postgres
-      - DB_PASSWORD=$senha_postgres
-
-      ## Diretório de URL
-      - LOCAL_STORAGE_BASE_URL=/storage/uploads
-      - API_BASE_PATH=/api/
-
-      ## Encryption Key
-      - APP_KEY=$nocobase_key
-
       ## Url da ferramenta
       - API_BASE_URL=$url_nocobase
       - PROXY_TARGET_URL=$url_nocobase
@@ -7021,6 +7323,20 @@ services:
       - INIT_ROOT_PASSWORD=$pass_nocobase
       - INIT_ROOT_NICKNAME=$user_nocobase
       - INIT_ROOT_USERNAME=$user_nocobase
+
+      ## Dados do Postgres
+      - DB_DIALECT=postgres
+      - DB_HOST=postgres
+      - DB_DATABASE=nocobase
+      - DB_USER=postgres
+      - DB_PASSWORD=$senha_postgres
+
+      ## Paths de URL
+      - LOCAL_STORAGE_BASE_URL=/storage/uploads
+      - API_BASE_PATH=/api/
+
+      ## Encryption Key
+      - APP_KEY=$nocobase_key
 
     deploy:
       mode: replicated
@@ -7041,27 +7357,29 @@ services:
         - traefik.http.routers.nocobase.entrypoints=websecure
         - traefik.http.routers.nocobase.tls=true
 
-networks:
-  $nome_rede_interna: ## Nome da rede interna
-    name: $nome_rede_interna ## Nome da rede interna
-    external: true
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   nocobase_storage:
     external: true
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    name: $nome_rede_interna ## Nome da rede interna
+    external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Nocobase"
 fi
 
 docker stack deploy --prune --resolve-image always -c nocobase.yaml nocobase > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Nocobase"
 fi
 
@@ -7239,19 +7557,32 @@ sleep 1
 ## Criando a stack
 cat > botpress.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   botpress:
     image: botpress/server:latest
+
     volumes:
       - botpress_data:/botpress/data
+
     networks:
         - $nome_rede_interna ## Nome da rede interna
+
     environment:
+      ## Url Botpress
       - EXTERNAL_URL=https://$url_botpress
+
+      ## Modo
       - BP_PRODUCTION=true
+
+      ## Dados Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/botpress
+
+      ## Dados Redis
       - REDIS_URL=redis://redis:6379
+
     deploy:
       mode: replicated
       replicas: 1
@@ -7271,27 +7602,29 @@ services:
         - traefik.http.routers.botpress.entrypoints=websecure
         - traefik.http.routers.botpress.tls=true
 
-networks:
-  $nome_rede_interna: ## Nome da rede interna
-    name: $nome_rede_interna ## Nome da rede interna
-    external: true
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   botpress_data:
     external: true
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    name: $nome_rede_interna ## Nome da rede interna
+    external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Botpress"
 fi
 
 docker stack deploy --prune --resolve-image always -c botpress.yaml botpress > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Botpress"
 fi
 
@@ -7508,8 +7841,12 @@ sleep 1
 cat > $nome_da_stack_wordpress <<EOL
 version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   $nome_do_servico_wordpress:
     image: wordpress:latest ## Versão do Wordpress
+
     volumes:
       - $nome_da_date_wordpress:/var/www/html
       - $nome_da_date_wordpress_php:/usr/local/etc/php
@@ -7518,7 +7855,6 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-
       ## Dados do Mysql
       - WORDPRESS_DB_NAME=$nome_site_wordpress
       - WORDPRESS_DB_HOST=mysql
@@ -7535,6 +7871,7 @@ services:
 
       ## Localização
       - WP_LOCALE=pt_BR
+
     deploy:
       mode: replicated
       replicas: 1
@@ -7549,6 +7886,9 @@ services:
         - traefik.http.routers.$nome_do_servico_wordpress.service=$nome_do_servico_wordpress
         - traefik.http.services.$nome_do_servico_wordpress.loadbalancer.server.port=80
         - traefik.http.services.$nome_do_servico_wordpress.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   $nome_da_date_wordpress:
     external: true
@@ -7556,23 +7896,24 @@ volumes:
   $nome_da_date_wordpress_php:
     external: true
     name: $nome_da_date_wordpress_php
+
 networks:
   $nome_rede_interna: ## Nome da rede interna
     name: $nome_rede_interna ## Nome da rede interna
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Wordpress"
 fi
 
 docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Wordpress"
 fi
 
@@ -7743,7 +8084,7 @@ sleep 1
 
 ## Criando a stack
 cat > baserow.yaml <<EOL
-version: '3.7'
+version: "3.7"
 
 services:
   baserow:
@@ -7787,17 +8128,17 @@ volumes:
     name: baserow_data
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Baserow"
 fi
 
 docker stack deploy --prune --resolve-image always -c baserow.yaml baserow #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Baserow"
 fi
 
@@ -7957,7 +8298,7 @@ sleep 1
 
 ## Criando a stack
 cat > mongodb.yaml <<EOL
-version: '3.7'
+version: "3.7"
 
 services:
   mongodb:
@@ -8000,17 +8341,17 @@ volumes:
     name: mongodb_configdb_data
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do MongoDB"
 fi
 
 docker stack deploy --prune --resolve-image always -c mongodb.yaml mongodb > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do MongoDB"
 fi
 
@@ -8024,7 +8365,8 @@ wait_mongodb
 
 cd dados_vps
 
-ip_vps=$(curl -s ifconfig.me)
+read -r ip _ <<<$(hostname -I)
+ip_vps=$ip
 
 cat > dados_mongodb <<EOL
 [ MONGODB ]
@@ -8179,7 +8521,7 @@ key_cookie=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > rabbitmq.yaml <<EOL
-version: '3.7'
+version: "3.7"
 
 services:
   rabbitmq:
@@ -8224,17 +8566,17 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do RabbitMQ"
 fi
 
 docker stack deploy --prune --resolve-image always -c rabbitmq.yaml rabbitmq > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do RabbitMQ"
 fi
 
@@ -8389,16 +8731,21 @@ sleep 1
 
 cat > uptimekuma.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   uptimekuma:
     image: louislam/uptime-kuma:latest
-    #container_name: uptimekuma
+
     volumes:
       - uptimekuma:/app/data
+
+    networks:
+      - $nome_rede_interna
     ports:
       - "3001:3001"
-    restart: always
+
     deploy:
       mode: replicated
       replicas: 1
@@ -8416,32 +8763,31 @@ services:
         - traefik.http.routers.uptimekuma.tls.certresolver=letsencryptresolver
         - traefik.http.services.uptimekuma.loadBalancer.server.port=3001
         - traefik.http.routers.uptimekuma.service=uptimekuma
-    networks:
-      - $nome_rede_interna
 
-networks:
-  $nome_rede_interna:
-    external: true
-    name: $nome_rede_interna
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   uptimekuma:
     external: true
     name: uptimekuma
 
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Uptime Kuma"
 fi
 
 docker stack deploy --prune --resolve-image always -c uptimekuma.yaml uptimekuma #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Uptime Kuma"
 fi
 
@@ -8652,21 +8998,22 @@ secret=$(openssl rand -hex 16)
 cat > calcom.yaml <<EOL
 version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   calcom:
     image: calcom/cal.com:v3.7.11
-    hostname: calcom
+
     networks:
       - $nome_rede_interna
+
     environment:
-    # Licenças
+    ## Licenças
       - NEXT_PUBLIC_LICENSE_CONSENT=agree
       - LICENSE=agree
+      #- CALCOM_LICENSE_KEY= ## Descomente este campo caso tenha licença do mesmo
 
-    # Encrypition
-      - NEXTAUTH_SECRET=$secret 
-      - CALENDSO_ENCRYPTION_KEY=$secret
-
-    # URLs
+    ## URLs
       - NEXT_PUBLIC_WEBAPP_URL=https://$url_calcom
       - BASE_URL=https://$url_calcom
       - NEXTAUTH_URL=https://$url_calcom
@@ -8675,36 +9022,37 @@ services:
       - NEXT_PUBLIC_WEBSITE_URL=https://$url_calcom
       - WEB_APP=https://$url_calcom
 
-    # Banco de dadosPostgress
+    ## Encrypition
+      - NEXTAUTH_SECRET=$secret 
+      - CALENDSO_ENCRYPTION_KEY=$secret
+
+    ## DadosPostgress
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/calcom
 
-    # Configurações de Email e SMTP
+    ## Configurações de Email e SMTP
       - EMAIL_FROM=$email_calcom
       - EMAIL_SERVER_HOST=$smtp_email_calcom
       - EMAIL_SERVER_PORT=$porta_smtp_calcom
       - EMAIL_SERVER_USER=$email_calcom
       - EMAIL_SERVER_PASSWORD=$senha_email_calcom
 
-    # Nodes
+    ## Nodes
       - NODE_ENV=production
       - NODE_TLS_REJECT_UNAUTHORIZED=0
 
-    # Brand
+    ## Brand
       #- NEXT_PUBLIC_APP_NAME="Cal.com"
       #- NEXT_PUBLIC_SUPPORT_MAIL_ADDRESS="help@cal.com"
       #- NEXT_PUBLIC_COMPANY_NAME="Cal.com, Inc."
       #- NEXT_PUBLIC_DISABLE_SIGNUP=false
 
-    # Integração com Microsoft 365
+    ## Integração com Microsoft 365
       #- MS_GRAPH_CLIENT_ID=
       #- MS_GRAPH_CLIENT_SECRET=
 
-    # Integração com Zoom
+    ## Integração com Zoom
       #- ZOOM_CLIENT_ID=
       #- ZOOM_CLIENT_SECRET=
-
-    # Licença do Cal (se tiver)
-      #- CALCOM_LICENSE_KEY=
 
     deploy:
       mode: replicated
@@ -8721,24 +9069,26 @@ services:
       - traefik.http.routers.calcom.service=calcom
       - traefik.http.services.calcom.loadbalancer.server.port=3000
       - traefik.http.services.calcom.loadbalancer.passHostHeader=1
+
+## --------------------------- ORION --------------------------- ##
+
 networks:
   $nome_rede_interna:
     name: $nome_rede_interna
     external: true
-
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do CalCom"
 fi
 
 docker stack deploy --prune --resolve-image always -c calcom.yaml calcom  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do CalCom"
 fi
 
@@ -8937,25 +9287,38 @@ sleep 1
 ## Criando a stack
 cat > mautic.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   mautic:
     image: mautic/mautic:v4
     entrypoint: /entrypoint.sh
     command: apache2-foreground
+
     volumes:
       - mautic_data:/var/www/html
+
+    networks:
+      - $nome_rede_interna
+
     environment:
+      ## Dados de acesso
+      - MAUTIC_ADMIN_PASSWORD=$senha_email_mautic
+      - MAUTIC_ADMIN_USERNAME=$user_mautic
+      - MAUTIC_URL=https://$url_mautic
+
+      ## Dados MySQL
       - MAUTIC_DB_NAME=mautic
       - MAUTIC_DB_HOST=mysql
       - MAUTIC_DB_PORT=3306
       - MAUTIC_DB_USER=root
       - MAUTIC_DB_PASSWORD=$senha_mysql
       - MAUTIC_ADMIN_EMAIL=$email_mautic
-      - MAUTIC_ADMIN_PASSWORD=$senha_email_mautic
-      - MAUTIC_ADMIN_USERNAME=$user_mautic
-      - MAUTIC_URL=https://$url_mautic
+
+      ## Proxy
       - MAUTIC_TRUSTED_PROXIES=["0.0.0.0/0"]
+
     deploy:
       mode: replicated
       replicas: 1
@@ -8974,8 +9337,8 @@ services:
         - traefik.http.routers.mautic.tls.certresolver=letsencryptresolver
         - traefik.http.routers.mautic.service=mautic
         - traefik.http.services.mautic.loadbalancer.passHostHeader=true
-    networks:
-      - $nome_rede_interna
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   mautic_data:
@@ -8986,20 +9349,19 @@ networks:
   $nome_rede_interna:
     name: $nome_rede_interna
     external: true
-
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Mautic"
 fi
 
 docker stack deploy --prune --resolve-image always -c mautic.yaml mautic > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Mautic"
 fi
 
@@ -9159,18 +9521,26 @@ secret=$(openssl rand -hex 16)
 ## Criando a stack
 cat > appsmith.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   appsmith:
-    image: appsmith/appsmith-ce:latest
-    networks:
-      - $nome_rede_interna
+    image: appsmith/appsmith-ee:latest
+
     volumes:
       - appsmith_data:/appsmith-stacks
+
+    networks:
+      - $nome_rede_interna
+
     environment:
+      ## Url Appsmith
       - APPSMITH_CUSTOM_DOMAIN=https://$url_appsmith
+
       ## Ativar/Desativar Novas Inscrições
       - APPSMITH_SIGNUP_DISABLED=false
+
     deploy:
       mode: replicated
       replicas: 1
@@ -9190,6 +9560,8 @@ services:
         - traefik.http.services.appsmith.loadbalancer.server.port=80
         - traefik.http.services.appsmith.loadbalancer.passHostHeader=true
 
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   appsmith_data:
     external: true
@@ -9202,17 +9574,17 @@ networks:
 
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Appsmith"
 fi
 
 docker stack deploy --prune --resolve-image always -c appsmith.yaml appsmith  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Appsmith"
 fi
 
@@ -9372,8 +9744,8 @@ sleep 1
 ## Criando a stack
 cat > qdrant.yaml <<-EOF
 version: "3.7"
-
 services:
+
 EOF
 
 for ((node=0; node<nodes_qdrant; node++))
@@ -9422,17 +9794,17 @@ volumes:
 EOF
 
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Qdrant"
 fi
 
 docker stack deploy --prune --resolve-image always -c qdrant.yaml qdrant  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Qdrant"
 fi
 
@@ -9642,31 +10014,66 @@ sleep 1
 ## Criando uma Encryption Key Aleatória
 encryption_key_woofed=$(openssl rand -hex 16)
 
+# Verifica se o arquivo evolution.yaml existe
+if [ -f "/root/evolution.yaml" ]; then
+    # Extrai os valores do arquivo evolution.yaml e formata no estilo desejado
+    EVOLUTION_API_ENDPOINT="- EVOLUTION_API_ENDPOINT=$(grep -oP '(?<=- SERVER_URL=)[^#]*' /root/evolution.yaml | sed 's/ //g')"
+    EVOLUTION_API_ENDPOINT_TOKEN="- EVOLUTION_API_ENDPOINT_TOKEN=$(grep -oP '(?<=- AUTHENTICATION_API_KEY=)[^#]*' /root/evolution.yaml | sed 's/ //g')"
+else
+    # Define os valores padrão se o arquivo não existir
+    EVOLUTION_API_ENDPOINT="#- EVOLUTION_API_ENDPOINT="
+    EVOLUTION_API_ENDPOINT_TOKEN="#- EVOLUTION_API_ENDPOINT_TOKEN="
+fi
+
 ## Criando a stack
 cat > woofedcrm.yaml <<EOL
-version: '3.7'
-
+version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   woofedcrm_orion:
     image: douglara/woofedcrm:$v_woofed
     command: bundle exec rails s -p 3000 -b 0.0.0.0
+
+    ## Só descomente caso deseje alterar os arqvuivos do woofed
+    #volumes:
+    #  - woofedcrm_data:/app
+
     networks:
       - $nome_rede_interna
-    volumes:
-      - woofedcrm_data:/app
+
     environment:
+      ## Url WoofedCRM
+      - FRONTEND_URL=https://$url_woofed
+      - SECRET_KEY_BASE=$encryption_key_woofed
+
+      ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
+
+      ## Credenciais Motor
+      - MOTOR_AUTH_USERNAME=$email_admin_woofed
+      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
+
+      ## Endpoints Evolution API
+      $EVOLUTION_API_ENDPOINT ## BaseUrl
+      $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
+
+      ## Dados Postgres
+      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
+
+      ## Dados Redis
+      - REDIS_URL=redis://redis:6379/0
+
+      ## Dados Storage
+      - ACTIVE_STORAGE_SERVICE=local
+
+      ## Modo de Produção
       - RAILS_ENV=production
       - RACK_ENV=production
       - NODE_ENV=production
-      - MOTOR_AUTH_USERNAME=$email_admin_woofed
-      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
-      - FRONTEND_URL=https://$url_woofed
-      - SECRET_KEY_BASE=$encryption_key_woofed
-      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
-      - REDIS_URL=redis://redis:6379/0
-      - ACTIVE_STORAGE_SERVICE=local
       - RAILS_LOG_LEVEL=debug
+
     deploy:
       mode: replicated
       replicas: 1
@@ -9689,57 +10096,50 @@ services:
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.routers.woofedcrm.middlewares=sslheader@docker
 
+## --------------------------- ORION --------------------------- ##
+
   sidekiq_orion:
     image: douglara/woofedcrm:$v_woofed
     command: bundle exec sidekiq -C config/sidekiq.yml
+
+    ## Só descomente caso deseje alterar os arqvuivos do woofed
+    #volumes:
+    #  - woofedcrm_data:/app
+
     networks:
       - $nome_rede_interna
-    volumes:
-      - woofedcrm_data:/app
+
     environment:
+      ## Url WoofedCRM
+      - FRONTEND_URL=https://$url_woofed
+      - SECRET_KEY_BASE=$encryption_key_woofed
+
+      ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
+
+      ## Credenciais Motor
+      - MOTOR_AUTH_USERNAME=$email_admin_woofed
+      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
+
+      ## Endpoints Evolution API
+      $EVOLUTION_API_ENDPOINT ## BaseUrl
+      $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
+
+      ## Dados Postgres
+      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
+
+      ## Dados Redis
+      - REDIS_URL=redis://redis:6379/0
+
+      ## Dados Storage
+      - ACTIVE_STORAGE_SERVICE=local
+
+      ## Modo de Produção
       - RAILS_ENV=production
       - RACK_ENV=production
       - NODE_ENV=production
-      - MOTOR_AUTH_USERNAME=$email_admin_woofed
-      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
-      - FRONTEND_URL=https://$url_woofed
-      - SECRET_KEY_BASE=$encryption_key_woofed
-      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
-      - REDIS_URL=redis://redis:6379/0
-      - ACTIVE_STORAGE_SERVICE=local
       - RAILS_LOG_LEVEL=debug
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1024M
-    
-  good_job_orion:
-    image: douglara/woofedcrm:$v_woofed
-    command: bundle exec good_job
-    networks:
-      - $nome_rede_interna
-    volumes:
-      - woofedcrm_data:/app
-    environment:
-      - ENABLE_USER_SIGNUP=true
-      - RAILS_ENV=production
-      - RACK_ENV=production
-      - NODE_ENV=production
-      - MOTOR_AUTH_USERNAME=$email_admin_woofed
-      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
-      - FRONTEND_URL=https://$url_woofed
-      - SECRET_KEY_BASE=$encryption_key_woofed
-      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
-      - REDIS_URL=redis://redis:6379/0
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_LEVEL=debug
+      
     deploy:
       mode: replicated
       replicas: 1
@@ -9751,10 +10151,68 @@ services:
           cpus: "1"
           memory: 1024M
 
-volumes:
-  woofedcrm_data:
-    external: true
-    name: woofedcrm_data
+## --------------------------- ORION --------------------------- ##
+
+  good_job_orion:
+    image: douglara/woofedcrm:$v_woofed
+    command: bundle exec good_job
+
+    ## Só descomente caso deseje alterar os arqvuivos do woofed
+    #volumes:
+    #  - woofedcrm_data:/app
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      ## Url WoofedCRM
+      - FRONTEND_URL=https://$url_woofed
+      - SECRET_KEY_BASE=$encryption_key_woofed
+
+      ## Permitir/Bloquear novas Inscrições
+      - ENABLE_USER_SIGNUP=true
+
+      ## Credenciais Motor
+      - MOTOR_AUTH_USERNAME=$email_admin_woofed
+      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
+
+      ## Endpoints Evolution API
+      $EVOLUTION_API_ENDPOINT ## BaseUrl
+      $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
+
+      ## Dados Postgres
+      - DATABASE_URL=postgres://postgres:$senha_postgres@postgres:5432/woofedcrm
+
+      ## Dados Redis
+      - REDIS_URL=redis://redis:6379/0
+
+      ## Dados Storage
+      - ACTIVE_STORAGE_SERVICE=local
+
+      ## Modo de Produção
+      - RAILS_ENV=production
+      - RACK_ENV=production
+      - NODE_ENV=production
+      - RAILS_LOG_LEVEL=debug
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+## Só descomente caso deseje alterar os arqvuivos do woofed
+#volumes:
+#  woofedcrm_data:
+#    external: true
+#    name: woofedcrm_data
 
 networks:
   $nome_rede_interna:
@@ -9762,17 +10220,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do WoofedCRM"
 fi
 
 docker stack deploy --prune --resolve-image always -c woofedcrm.yaml woofedcrm #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do WoofedCRM"
 fi
 
@@ -9815,7 +10273,6 @@ fi
 
 docker exec -it "$CONTAINER_ID" bundle exec rails db:create
 docker exec -it "$CONTAINER_ID" bundle exec rails db:migrate
-#docker exec -it "$CONTAINER_ID" bundle exec rails db:seed
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[7/7]\e[0m"
@@ -10046,32 +10503,37 @@ cron_key_form=$(openssl rand -hex 16)
 ## Criando a stack
 cat > formbricks.yaml <<-EOF
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   formbricks:
     image: formbricks/formbricks:latest
-    networks:
-      - $nome_rede_interna
+
     volumes:
       - formbricks_data:/home/nextjs/apps/web/uploads/
+
+    networks:
+      - $nome_rede_interna
+
     environment:
-      ## Url da aplicação ##
+      ## Url da aplicação
       - WEBAPP_URL=https://$url_formbricks
       - NEXTAUTH_URL=https://$url_formbricks
 
-      ## Banco de dados Postgres ##
+      ## Banco de dados Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/formbricks
 
-      ## Licença Enterprise ou Self-hosting ##
+      ## Licença Enterprise ou Self-hosting
       ## Solicitar licenta Self-hosting --> https://oriondesign.art.br/formbricks_licence/ <-- ##
       - ENTERPRISE_LICENSE_KEY=
 
-      ## Keys aleatórias 32 caracteres ##
+      ## Keys aleatórias 32 caracteres
       - ENCRYPTION_KEY=$encryption_key_form
       - NEXTAUTH_SECRET=$next_key_form
       - CRON_SECRET=$cron_key_form
 
-      ## Dados do SMTP ##
+      ## Dados do SMTP
       - MAIL_FROM=$email_formbricks
       - SMTP_HOST=$host_formbricks
       - SMTP_PORT=$porta_formbricks
@@ -10079,40 +10541,40 @@ services:
       - SMTP_USER=$email_formbricks
       - SMTP_PASSWORD=$senha_formbricks
 
-      ## Ativar/Desativar registros e convites (0= false | 1= true) ##
+      ## Ativar/Desativar registros e convites (0= false | 1= true)
       - SIGNUP_DISABLED=0
       - INVITE_DISABLED=0
       - EMAIL_VERIFICATION_DISABLED=0
       - PASSWORD_RESET_DISABLED=0
 
-      ## Dados do Formbricks (para pesquisa) ##
+      ## Dados do Formbricks (para pesquisa)
       - NEXT_PUBLIC_FORMBRICKS_API_HOST=
       - NEXT_PUBLIC_FORMBRICKS_ENVIRONMENT_ID=
       - NEXT_PUBLIC_FORMBRICKS_ONBOARDING_SURVEY_ID=
 
-      ## Login Google Cloud ##
+      ## Login Google Cloud
       - GOOGLE_AUTH_ENABLED=0
       - GOOGLE_CLIENT_ID=
       - GOOGLE_CLIENT_SECRET=
 
-      ## Google Sheets ##
+      ## Google Sheets
       - GOOGLE_SHEETS_CLIENT_ID=
       - GOOGLE_SHEETS_CLIENT_SECRET=
       - GOOGLE_SHEETS_REDIRECT_URL=
 
-      ## Login Github ##
+      ## Login Github
       - GITHUB_AUTH_ENABLED=0
       - GITHUB_ID=
       - GITHUB_SECRET=
 
-      ## Login Github ##
+      ## Login Github
       - NOTION_OAUTH_CLIENT_ID=
       - NOTION_OAUTH_CLIENT_SECRET=   
       
-      ## Login Airtable ##
+      ## Login Airtable
       - AIRTABLE_CLIENT_ID=
 
-      ## Termos e politica de privacidade ##
+      ## Termos e politica de privacidade
       #- PRIVACY_URL=
       #- TERMS_URL=
       #- IMPRINT_URL=
@@ -10136,6 +10598,8 @@ services:
         - traefik.http.routers.formbricks.entrypoints=websecure
         - traefik.http.routers.formbricks.tls=true
 
+## --------------------------- ORION --------------------------- ##
+
 networks:
   $nome_rede_interna:
     name: $nome_rede_interna
@@ -10146,17 +10610,17 @@ volumes:
     external: true
 EOF
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Formbricks"
 fi
 
 docker stack deploy --prune --resolve-image always -c formbricks.yaml formbricks > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Formbricks"
 fi
 
@@ -10326,18 +10790,29 @@ sleep 1
 ## Criando a stack
 cat > nocodb.yaml <<EOL
 version: "3.7"
+services:
 
-services: 
+## --------------------------- ORION --------------------------- ##
+
   nocodb: 
     image: nocodb/nocodb:latest
+
     volumes: 
       - nocodb-data:/usr/app/data
+
     networks:
       - $nome_rede_interna
+
     environment: 
-      - NC_DB=pg://postgres:5432?u=postgres&p=$senha_postgres&d=nocodb
+      ## Url do Nocobase
       - NC_PUBLIC_URL=https://$url_nocodb
-      - NC_DISABLE_TELE=true    
+
+      ## Dados Postgres
+      - NC_DB=pg://postgres:5432?u=postgres&p=$senha_postgres&d=nocodb
+
+      ## Desativar Telemetria
+      - NC_DISABLE_TELE=true  
+
     deploy:
       mode: replicated
       replicas: 1
@@ -10356,6 +10831,9 @@ services:
         - traefik.http.routers.nocodb.service=nocodb
         - traefik.http.routers.nocodb.tls.certresolver=letsencryptresolver
         - com.centurylinklabs.watchtower.enable=true
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   nocodb-data:
     external: true
@@ -10367,17 +10845,17 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do NocoDB"
 fi
 
 docker stack deploy --prune --resolve-image always -c nocodb.yaml nocodb > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do NocoDB"
 fi
 
@@ -10553,22 +11031,40 @@ key_salt=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > langfuse.yaml <<EOL
-version: '3.7'
-
+version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   langfuse:
     image: ghcr.io/langfuse/langfuse:latest
+
     networks:
      - $nome_rede_interna
+
     environment:
-      - NODE_ENV=production
+      ## Url do Langfuse
+      - NEXTAUTH_URL=https://$url_langfuse
+
+      ## Desativar novas incrições
+      - NEXT_PUBLIC_SIGN_UP_DISABLED=false
+
+      ## Dados Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/langfuse
+
+      ## Secrets Key
       - NEXTAUTH_SECRET=$key_secret
       - SALT=$key_salt
-      - NEXTAUTH_URL=https://$url_langfuse
+
+      ## Desativar Telemetria
       - TELEMETRY_ENABLED=true
-      - NEXT_PUBLIC_SIGN_UP_DISABLED=false
+
+      ## Features experimentais
       - LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES=false
+
+      ## Node
+      - NODE_ENV=production
+
     deploy:
       mode: replicated
       replicas: 1
@@ -10587,23 +11083,26 @@ services:
         - traefik.http.routers.langfuse.service=langfuse
         - traefik.http.services.langfuse.loadbalancer.passHostHeader=true
         - traefik.http.services.langfuse.loadbalancer.server.port=3000
+
+## --------------------------- ORION --------------------------- ##
+
 networks:
   $nome_rede_interna:
     external: true
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do langfuse"
 fi
 
 docker stack deploy --prune --resolve-image always -c langfuse.yaml langfuse > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do langfuse"
 fi
 
@@ -10779,20 +11278,28 @@ key_salt=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > metabase.yaml <<EOL
-version: '3.7'
-
+version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   metabase:
     image: metabase/metabase:latest
-    networks:
-      - $nome_rede_interna
-    ports:
-      - 3005:3000
+
     volumes:
       - metabase_data:/metabase3-data
 
+    networks:
+      - $nome_rede_interna
+
     environment:
-      - MB_AUTOMIGRATE=false
+      ## Url MetaBase
+      - MB_SITE_URL=https://$url_metabase
+      - MB_REDIRECT_ALL_REQUESTS_TO_HTTPS=true
+      - MB_JETTY_PORT=3000
+      - MB_JETTY_HOST=0.0.0.0
+
+      ## Dados postgres
       - MB_DB_MIGRATION_LOCATION=none
       - MB_DB_TYPE=postgres
       - MB_DB_DBNAME=metabase
@@ -10800,10 +11307,7 @@ services:
       - MB_DB_USER=postgres
       - MB_DB_PASS=$senha_postgres
       - MB_DB_HOST=postgres
-      #- MB_REDIRECT_ALL_REQUESTS_TO_HTTPS=true
-      #- MB_SITE_URL=https://$url_metabase
-      - MB_JETTY_PORT=3000
-      #- MB_JETTY_HOST=0.0.0.0
+      - MB_AUTOMIGRATE=false
 
     deploy:
       mode: replicated
@@ -10811,15 +11315,16 @@ services:
       placement:
         constraints:
           - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.metabase.rule=Host(\`$url_metabase\`)
+        - traefik.http.services.metabase.loadbalancer.server.port=3000
+        - traefik.http.routers.metabase.service=metabase
+        - traefik.http.routers.metabase.entrypoints=websecure
+        - traefik.http.routers.metabase.tls=true
+        - traefik.http.routers.metabase.tls.certresolver=letsencryptresolver
 
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.metabase.rule=Host(\`$url_metabase\`)
-      - traefik.http.services.metabase.loadbalancer.server.port=3000
-      - traefik.http.routers.metabase.service=metabase
-      - traefik.http.routers.metabase.entrypoints=websecure
-      - traefik.http.routers.metabase.tls=true
-      - traefik.http.routers.metabase.tls.certresolver=letsencryptresolver
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   metabase_data:
@@ -10832,17 +11337,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do metabase"
 fi
 
 docker stack deploy --prune --resolve-image always -c metabase.yaml metabase > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do metabase"
 fi
 
@@ -10859,7 +11364,7 @@ cd dados_vps
 cat > dados_metabase <<EOL
 [ METABASE ]
 
-Dominio do metabase: http://$url_metabase:3005
+Dominio do metabase: https://$url_metabase
 
 Usuario: Precisa criar no primeiro acesso do metabase
 
@@ -10883,7 +11388,7 @@ guarde_os_dados_msg
 echo -e "\e[32m[ METABASE ]\e[0m"
 echo ""
 
-echo -e "\e[33mDominio:\e[97m http://$url_metabase:3005\e[0m"
+echo -e "\e[33mDominio:\e[97m https://$url_metabase\e[0m"
 echo ""
 
 echo -e "\e[33mUsuario:\e[97m Precisa criar no primeiro acesso do metabase\e[0m"
@@ -10997,23 +11502,28 @@ senha_postgres_odoo=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > odoo.yaml <<EOL
-version: '3.7'
-
+version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   odoo_app:
     image: odoo:16.0
-    networks:
-      - $nome_rede_interna
+
     volumes:
       - odoo_web_data1:/var/lib/odoo
       - odoo_web_data2:/config:/etc/odoo
       - odoo_web_data3:/addons:/mnt/extra-addons
-    depends_on:
-      - odoo_db
+
+    networks:
+      - $nome_rede_interna
+
     environment:
+      ## Dados postgres do Odoo
       - HOST=odoo_db
       - USER=odoo
       - PASSWORD=$senha_postgres_odoo
+
     deploy:
       placement:
         constraints:
@@ -11025,24 +11535,32 @@ services:
         - "traefik.http.routers.odoo.tls.certresolver=letsencryptresolver"
         - "traefik.http.services.odoo.loadbalancer.server.port=8069"
         - "traefik.http.routers.odoo.tls=true"
-      
+
+## --------------------------- ORION --------------------------- ##
+
   odoo_db:
     image: postgres:15
+
+    volumes:
+      - odoo_db_data:/var/lib/postgresql/data/pgdata
+
+    networks:
+      - $nome_rede_interna
+    ports:
+      - 5433:5432
+
     environment:
+      ## Dados Postgres
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=$senha_postgres_odoo
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
-    volumes:
-      - odoo_db_data:/var/lib/postgresql/data/pgdata
-    ports:
-      - 5433:5432
-    networks:
-      - $nome_rede_interna
     deploy:
       placement:
         constraints:
           - node.role == manager
+
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   odoo_web_data1:
@@ -11058,7 +11576,6 @@ volumes:
     external: true
     name: odoo_db_data
 
-
 networks:
   $nome_rede_interna:
     external: true
@@ -11066,17 +11583,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do odoo"
 fi
 
 docker stack deploy --prune --resolve-image always -c odoo.yaml odoo > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Odoo"
 fi
 
@@ -11304,9 +11821,9 @@ else
     criar_banco_postgres_chatwoot_uno
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
 fi
 
 ## Verifica container redis
@@ -11317,9 +11834,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
 fi
 
 ## Mensagem de Passo
@@ -11338,7 +11855,6 @@ encryption_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > chatwoot_uno.yaml <<EOL
 version: "3.7"
-
 services:
   chatwoot_uno_app:
     image: clairton/chatwoot:v3.6.1-uno ## Versão do Chatwoot CLAIRTON
@@ -11464,17 +11980,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 
 docker stack deploy --prune --resolve-image always -c chatwoot_uno.yaml chatwoot_uno > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Chatwoot"
 fi
 
@@ -11519,9 +12035,9 @@ fi
 
 docker exec -it "$CONTAINER_ID" bundle exec rails db:chatwoot_prepare
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Executando no container: bundle exec rails db:chatwoot_prepare"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Executando no container: bundle exec rails db:chatwoot_prepare"
     echo "Não foi possivel migrar o banco de dados"
 fi
 ## Mensagem de Passo
@@ -11539,9 +12055,9 @@ update installation_configs set locked = false;
 \q
 EOF
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Modificando tabela installation_configs no postgres"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Modificando tabela installation_configs no postgres"
     echo "Não foi possivel liberar as funções do super_admin"
 fi
 
@@ -11762,9 +12278,9 @@ else
     criar_banco_postgres_chatwoot_nestor
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
 fi
 
 ## Verifica container redis
@@ -11775,9 +12291,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
 fi
 
 ## Mensagem de Passo
@@ -11796,36 +12312,65 @@ encryption_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > chatwoot_nestor.yaml <<EOL
 version: "3.7"
-
 services:
-  chatwoot_nestor_app:
-    image: francisbreit/chatwoot-n:v3.6.7-v2 ## Versão do Chatwoot NESTOR
+
+## --------------------------- ORION --------------------------- ##
+
+  chatwoot_app:
+    image: sendingtk/chatwoot:latest ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
+
     volumes:
-      - chatwoot_nestor_data:/app/storage ## Diretório dos arquivos de conversa
-      - chatwoot_nestor_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+      - chatwoot_nestor_storage:/app/storage ## Arquivos de conversa
+      - chatwoot_nestor_public:/app/public ## Arquivos de logos
+      - chatwoot_nestor_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_nestor_mailers:/app/app/views/mailers ## Arquivos de emails
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+    
     environment:
+      ## Qualquer Url com # no final
       - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
-      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
-      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
-      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
-      - DEFAULT_LOCALE=pt_BR
+
+      ## Nome da Empresa
+      - INSTALLATION_NAME=$nome_empresa_chatwoot
+
+      ## Secret key
+      - SECRET_KEY_BASE=$encryption_key
+
+      ## Url Chatwoot
+      - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
-      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+
+      ## Idioma padrão
+      - DEFAULT_LOCALE=pt_BR
+
+      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+      #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
+      #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
+
+      ## Dados do Redis
       - REDIS_URL=redis://redis:6379
+
+      ## Dados do Postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot_nestor
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_TO_STDOUT=true
-      - USE_INBOX_AVATAR_FOR_BOT=true
+
+      ## Armazenamento
+      - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
+      #- STORAGE_BUCKET_NAME=chatwoot
+      #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
+      #- STORAGE_SECRET_ACCESS_KEY=SECRET_KEY_MINIO
+      #- STORAGE_REGION=us-east
+      #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
+      #- STORAGE_FORCE_PATH_STYLE=true
+
+      ## Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -11837,6 +12382,15 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+
+      ## Outras configurações
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - ENABLE_ACCOUNT_SIGNUP=false
+
     deploy:
       mode: replicated
       replicas: 1
@@ -11849,43 +12403,72 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.chatwoot_nestor_app.rule=Host(\`$url_chatwoot\`)
-        - traefik.http.routers.chatwoot_nestor_app.entrypoints=websecure
-        - traefik.http.routers.chatwoot_nestor_app.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.chatwoot_nestor_app.priority=1
-        - traefik.http.routers.chatwoot_nestor_app.service=chatwoot_nestor_app
-        - traefik.http.services.chatwoot_nestor_app.loadbalancer.server.port=3000 
-        - traefik.http.services.chatwoot_nestor_app.loadbalancer.passhostheader=true 
+        - traefik.http.routers.chatwoot_app.rule=Host(\`$url_chatwoot\`)
+        - traefik.http.routers.chatwoot_app.entrypoints=websecure
+        - traefik.http.routers.chatwoot_app.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.chatwoot_app.priority=1
+        - traefik.http.routers.chatwoot_app.service=chatwoot_app
+        - traefik.http.services.chatwoot_app.loadbalancer.server.port=3000 
+        - traefik.http.services.chatwoot_app.loadbalancer.passhostheader=true 
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
-        - traefik.http.routers.chatwoot_nestor_app.middlewares=sslheader@docker
+        - traefik.http.routers.chatwoot_app.middlewares=sslheader@docker
 
-  chatwoot_nestor_sidekiq:
-    image: francisbreit/chatwoot-n:v3.6.7-v2 ## Versão do Chatwoot NESTOR
+## --------------------------- ORION --------------------------- ##
+
+  chatwoot_sidekiq:
+    image: sendingtk/chatwoot:latest ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
+
     volumes:
-      - chatwoot_nestor_data:/app/storage ## Diretório dos arquivos de conversa
-      - chatwoot_nestor_public_orion:/app ## Diretório de todos os arquivos do chatwoot
+      - chatwoot_nestor_storage:/app/storage ## Arquivos de conversa
+      - chatwoot_nestor_public:/app/public ## Arquivos de logos
+      - chatwoot_nestor_mailer:/app/app/views/devise/mailer ## Arquivos de email
+      - chatwoot_nestor_mailers:/app/app/views/mailers ## Arquivos de emails
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     environment:
+      ## Qualquer Url com # no final
       - CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
-      - INSTALLATION_NAME=$nome_empresa_chatwoot ## Nome da empresa
-      - NODE_ENV=production
-      - RAILS_ENV=production
-      - INSTALLATION_ENV=docker
-      - SECRET_KEY_BASE=$encryption_key ## Key aleatória gerada aleatóriamente
-      - FRONTEND_URL=https://$url_chatwoot ## Url do Chatwoot
-      - DEFAULT_LOCALE=pt_BR
+
+      ## Nome da Empresa
+      - INSTALLATION_NAME=$nome_empresa_chatwoot
+
+      ## Secret key
+      - SECRET_KEY_BASE=$encryption_key
+
+      ## Url Chatwoot
+      - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
-      - ENABLE_ACCOUNT_SIGNUP=false ## false = Desativar novas inscrições no inicio | true = Ativar novas inscrições no inicio
+
+      ## Idioma padrão
+      - DEFAULT_LOCALE=pt_BR
+
+      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
+      #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
+      #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
+
+      ## Dados do Redis
       - REDIS_URL=redis://redis:6379
+
+      ## Dados do Postgres
       - POSTGRES_HOST=postgres
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot_nestor
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_TO_STDOUT=true
-      - USE_INBOX_AVATAR_FOR_BOT=true
+
+      ## Armazenamento
+      - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
+      #- STORAGE_BUCKET_NAME=chatwoot
+      #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
+      #- STORAGE_SECRET_ACCESS_KEY=SECRET_KEY_MINIO
+      #- STORAGE_REGION=us-east
+      #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
+      #- STORAGE_FORCE_PATH_STYLE=true
+
+      ## Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -11897,6 +12480,15 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+
+      ## Outras configurações
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - RAILS_LOG_TO_STDOUT=true
+      - USE_INBOX_AVATAR_FOR_BOT=true
+      - ENABLE_ACCOUNT_SIGNUP=false
+
     deploy:
       mode: replicated
       replicas: 1
@@ -11908,13 +12500,21 @@ services:
           cpus: "1"
           memory: 1024M
 
+## --------------------------- ORION --------------------------- ##
+
 volumes:
-  chatwoot_nestor_data:
+  chatwoot_nestor_storage:
     external: true
-    name: chatwoot_nestor_data
-  chatwoot_nestor_public_orion:
+    name: chatwoot_nestor_storage
+  chatwoot_nestor_public:
     external: true
-    name: chatwoot_nestor_public_orion
+    name: chatwoot_nestor_public
+  chatwoot_nestor_mailer:
+    external: true
+    name: chatwoot_nestor_mailer
+  chatwoot_nestor_mailers:
+    external: true
+    name: chatwoot_nestor_mailers
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -11922,17 +12522,17 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 
 docker stack deploy --prune --resolve-image always -c chatwoot_nestor.yaml chatwoot_nestor > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Chatwoot"
 fi
 
@@ -11978,9 +12578,9 @@ fi
 docker exec -it "$CONTAINER_ID" bundle exec rails db:chatwoot_prepare
 
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Executando no container: bundle exec rails db:chatwoot_prepare"
 else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Executando no container: bundle exec rails db:chatwoot_prepare"
     echo "Não foi possivel migrar o banco de dados"
 fi
 
@@ -12232,17 +12832,21 @@ sleep 1
 ## Criando a stack
 cat > unoapi.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   unoapi:
     image: clairton/unoapi-cloud:latest
     entrypoint: yarn cloud
+
     volumes:
       - unoapi_data:/home/u/app
+
     networks:
       - $nome_rede_interna
-    environment:
 
+    environment:
       ## Url Uno API
       - BASE_URL=https://$url_unoapi
 
@@ -12301,6 +12905,9 @@ services:
       - traefik.http.routers.unoapi.priority=1
       - traefik.http.services.unoapi.loadbalancer.passHostHeader=true
       - traefik.http.routers.unoapi.service=unoapi
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   unoapi_data:
     external: true
@@ -12310,20 +12917,19 @@ networks:
   $nome_rede_interna:
     external: true
     name: $nome_rede_interna
-
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Uno API"
 fi
 
 docker stack deploy --prune --resolve-image always -c unoapi.yaml unoapi > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Uno API"
 fi
 
@@ -12545,17 +13151,21 @@ encryption_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > n8n_quepasa.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   n8n_quepasa_editor:
     image: oriondesign/quepasa:8aca0a3031f0 ## Versão do N8N
+    command: start
+
     volumes:
       - n8n_quepasa_data:/home/node/.n8n/nodes
-    command: start
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Dados do postgres
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_quepasa
@@ -12620,17 +13230,19 @@ services:
         - traefik.http.services.n8n_quepasa_editor.loadbalancer.server.port=5678
         - traefik.http.services.n8n_quepasa_editor.loadbalancer.passHostHeader=1
 
-################################################################################
+## --------------------------- ORION --------------------------- ##
 
   n8n_quepasa_webhook:
     image: oriondesign/n8n-quepasa:latest ## Versão do N8N
+    command: webhook
+
     volumes:
       - n8n_quepasa_data:/home/node/.n8n/nodes
-    command: webhook
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Dados do postgres
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_quepasa
@@ -12695,17 +13307,19 @@ services:
         - traefik.http.services.n8n_quepasa_webhook.loadbalancer.server.port=5678
         - traefik.http.services.n8n_quepasa_webhook.loadbalancer.passHostHeader=1
 
-################################################################################
+## --------------------------- ORION --------------------------- ##
 
   n8n_quepasa_worker:
     image: oriondesign/n8n-quepasa:latest ## Versão do N8N
+    command: worker --concurrency=10
+
     volumes:
       - n8n_quepasa_data:/home/node/.n8n/nodes
-    command: worker --concurrency=10
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Dados do postgres
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_quepasa
@@ -12761,6 +13375,8 @@ services:
           cpus: "0.5"
           memory: 1024M
 
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   n8n_quepasa_data:
     external: true
@@ -12772,17 +13388,17 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do N8N Quepasa"
 fi
 
 docker stack deploy --prune --resolve-image always -c n8n_quepasa.yaml n8n_quepasa > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do N8N Quepasa"
 fi
 
@@ -12947,17 +13563,21 @@ sleep 1
 ## Criando a stack
 cat > quepasa.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   quepasa:
     image: codeleaks/quepasa:latest
+
     volumes:
       - quepasa_data:/opt/quepasa
       - quepasa_migration:/opt/quepasa/migrations
+
     networks:
         - $nome_rede_interna
+
     environment:
-      
       ## Url Quepasa e porta
       - DOMAIN=$url_quepasa
       - WEBAPIPORT=31000
@@ -12971,14 +13591,14 @@ services:
       ## TimeZone
       - TZ=America/Sao_Paulo
 
-      ## Opções
+      ## Tratar digito 9
       - REMOVEDIGIT9=true
 
       ## Sobre o Node
       - APP_ENV=production
       - NODE_ENV=production
 
-      ## Informações
+      ## Outras Informações
       - WEBSOCKETSSL=true
       - DEBUGJSONMESSAGES=false
       - DEBUGREQUESTS=false
@@ -13005,10 +13625,7 @@ services:
         - traefik.http.routers.quepasa.entrypoints=websecure
         - traefik.http.routers.quepasa.tls=true
 
-networks:
-  $nome_rede_interna:
-    name: $nome_rede_interna
-    external: true
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   quepasa_data:
@@ -13017,20 +13634,25 @@ volumes:
   quepasa_migration:
     external: true
     name: quepasa_migration
+
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Quepasa"
 
 fi
 
 docker stack deploy --prune --resolve-image always -c quepasa.yaml quepasa > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Quepasa"
 fi
 
@@ -13259,16 +13881,16 @@ cd nginx
 
 wget https://raw.githubusercontent.com/langgenius/dify/main/docker/nginx/nginx.conf > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/3 - [ OK ]"
+    echo "1/3 - [ OK ] - Baixando arquivos"
 else
-    echo "1/3 - [ OFF ]"
+    echo "1/3 - [ OFF ] - Baixando arquivos"
 fi
 
 wget https://raw.githubusercontent.com/langgenius/dify/main/docker/nginx/proxy.conf > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/3 - [ OK ]"
+    echo "2/3 - [ OK ] - Baixando arquivos"
 else
-    echo "2/3 - [ OFF ]"
+    echo "2/3 - [ OFF ] - Baixando arquivos"
 fi
 
 if [ ! -d "conf.d" ]; then
@@ -13279,9 +13901,9 @@ cd conf.d
 
 wget https://raw.githubusercontent.com/langgenius/dify/main/docker/nginx/conf.d/default.conf > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "3/3 - [ OK ]"
+    echo "3/3 - [ OK ] - Baixando arquivos"
 else
-    echo "3/3 - [ OFF ]"
+    echo "3/3 - [ OFF ] - Baixando arquivos"
 fi
 
 cd
@@ -13321,16 +13943,16 @@ sleep 1
 
 pegar_senha_minio
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Pegando senha do MinIO"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Pegando senha do MinIO"
     echo "Não foi possivel pegar a senha do minio"
 fi
 pegar_link_s3
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Pegando Url S3 do MinIO"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Pegando Url S3 do MinIO"
     echo "Não foi possivel pegar o link do S3"
 fi
 
@@ -13345,16 +13967,20 @@ secret_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > dify.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   api:
     image: langgenius/dify-api:latest ## Versão do Dify
-    networks:
-      - $nome_rede_interna
+
     volumes:
       - storage_data:/app/api/storage
-    environment:
 
+    networks:
+      - $nome_rede_interna
+
+    environment:
       ## Modo da execução
       - MODE=api
 
@@ -13364,6 +13990,7 @@ services:
       ## Secret Key
       - SECRET_KEY=$secret_key
 
+      ## Outras Url (vazio = mesmo do APP_WEB_URL)
       - CONSOLE_WEB_URL=
       - INIT_PASSWORD=
       - CONSOLE_API_URL=
@@ -13432,14 +14059,18 @@ services:
           cpus: "1"
           memory: 1024M
 
+## --------------------------- ORION --------------------------- ##
+
   worker:
     image: langgenius/dify-api:latest ## Versão do Dify
+
     volumes:
       - storage_data:/app/api/storage
+
     networks:
       - $nome_rede_interna
-    environment:
 
+    environment:
       ## Modo da execução
       - MODE=worker
 
@@ -13494,13 +14125,16 @@ services:
         limits:
           cpus: "0.5"
           memory: 1024M
-         
+
+## --------------------------- ORION --------------------------- ## 
+
   web:
     image: langgenius/dify-web:latest ## Versão do Dify
+
     networks:
       - $nome_rede_interna
-    environment:
 
+    environment:
       ## Tipo da Edição
       - EDITION=SELF_HOSTED
       - CONSOLE_API_URL=
@@ -13521,15 +14155,20 @@ services:
         limits:
           cpus: "1"
           memory: 1024M
-          
+
+## --------------------------- ORION --------------------------- ##
+
   nginx:
     image: nginx:latest
+
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/proxy.conf:/etc/nginx/proxy.conf
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - /root/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /root/nginx/proxy.conf:/etc/nginx/proxy.conf
+      - /root/nginx/conf.d:/etc/nginx/conf.d
+
     networks:
       - $nome_rede_interna
+
     deploy:
       mode: replicated
       replicas: 1
@@ -13549,6 +14188,8 @@ services:
         - traefik.http.services.nginx.loadbalancer.passHostHeader=true
         - traefik.http.routers.nginx.service=nginx
 
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   storage_data:
     external: true
@@ -13560,17 +14201,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Dify Ai"
 fi
 
 docker stack deploy --prune --resolve-image always -c dify.yaml dify > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Dify Ai"
 fi
 
@@ -13732,16 +14373,24 @@ sleep 1
 cat > ollama.yaml <<EOL
 version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   ollama:
     image: ollama/ollama:latest
-    #ports:
-    #  - 11434:11434
+
     volumes:
       - ollama_data:/root/.ollama
+
     networks:
       - $nome_rede_interna
+
+    #ports:
+    #  - 11434:11434
+
     environment:
       - OLLAMA_HOST=0.0.0.0
+
     deploy:
       mode: replicated
       replicas: 1
@@ -13758,15 +14407,23 @@ services:
         - traefik.http.services.ollama.loadbalancer.server.port=11434
         - traefik.http.services.ollama.loadbalancer.passHostHeader=1
 
+## --------------------------- ORION --------------------------- ##
 
   ollamaweb:
     image: ghcr.io/ollama-webui/ollama-webui:main
+
     volumes:
       - ollama_web:/app/backend/data
+
     networks:
       - $nome_rede_interna
+
+    #ports:
+    #  - 8085:8080
+
     environment:
       - OLLAMA_API_BASE_URL=https://$url_apiollama/api
+
     deploy:
       mode: replicated
       replicas: 1
@@ -13783,6 +14440,8 @@ services:
         - traefik.http.services.ollamaweb.loadbalancer.server.port=8080
         - traefik.http.services.ollamaweb.loadbalancer.passHostHeader=true
 
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   ollama_data:
     external: true
@@ -13797,17 +14456,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Ollama"
 fi
 
 docker stack deploy --prune --resolve-image always -c ollama.yaml ollama > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Ollama"
 fi
 
@@ -14070,26 +14729,33 @@ sleep 1
 
 ## Criando a stack
 cat > affine.yaml <<EOL
-version: '3.7'
- 
+version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   affine:
     image: ghcr.io/toeverything/affine-graphql:stable-39476d1
-    networks:
-      - $nome_rede_interna
     command:
       ['sh', '-c', 'node ./scripts/self-host-predeploy && node ./dist/index.js']
-    #ports:
-    #  - 3010:3010
-    #  - 5555:5555
+
     volumes:
       - affine_config:/root/.affine/config:rw
       - affine_storage:/root/.affine/storage:rw
+
+    networks:
+      - $nome_rede_interna
+
+    #ports:
+    #  - 3010:3010
+    #  - 5555:5555
+
     logging:
       driver: 'json-file'
       options:
         max-size: '1000m'
     restart: on-failure:5
+
     environment:
       ## Dados de acesso
       - AFFINE_ADMIN_EMAIL=$email_affine
@@ -14131,7 +14797,9 @@ services:
         - traefik.http.routers.affine.tls=true
         - traefik.frontend.headers.STSPreload=true
         - traefik.frontend.headers.STSSeconds=31536000
-        
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   affine_config:
     external: true
@@ -14146,17 +14814,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Affine"
 fi
 
 docker stack deploy --prune --resolve-image always -c affine.yaml affine > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Affine"
 fi
 
@@ -14370,17 +15038,21 @@ key_docuseal2=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > docuseal.yaml <<EOL
-version: '3.7'
-
+version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   docuseal:
     image: docuseal/docuseal:latest
+
     volumes:
       - docuseal_data:/data
+
     networks:
       - $nome_rede_interna
-    environment:
 
+    environment:
       ## Dados de Acesso
       - HOST=$url_docuseal
       - FORCE_SSL=true
@@ -14420,27 +15092,29 @@ services:
         - traefik.http.routers.docuseal.entrypoints=websecure
         - traefik.http.routers.docuseal.tls=true
 
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  docuseal_data:
+    external: true
+
 networks:
   $nome_rede_interna:
     external: true
     name: $nome_rede_interna
-    
-volumes:
-  docuseal_data:
-    external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do docuseal"
 fi
 
 docker stack deploy --prune --resolve-image always -c docuseal.yaml docuseal > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do docuseal"
 fi
 
@@ -14578,16 +15252,16 @@ while true; do
 
     pegar_senha_minio
     if [ $? -eq 0 ]; then
-        echo "1/2 - [ OK ]"
+        echo "1/2 - [ OK ] - Pegando senha do MinIO"
     else
-        echo "1/2 - [ OFF ]"
+        echo "1/2 - [ OFF ] - Pegando senha do MinIO"
         echo "Não foi possivel pegar a senha do minio"
     fi
     pegar_link_s3
     if [ $? -eq 0 ]; then
-        echo "2/2 - [ OK ]"
+        echo "2/2 - [ OK ] - Pegando Url S3 do MinIO"
     else
-        echo "2/2 - [ OFF ]"
+        echo "2/2 - [ OFF ] - Pegando Url S3 do MinIO"
         echo "Não foi possivel pegar o link do S3"
     fi
     
@@ -14699,9 +15373,9 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_directus #> /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
 fi
 
 ## Verifica container redis
@@ -14712,9 +15386,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
 fi
 
 ## Mensagem de Passo
@@ -14728,18 +15402,22 @@ key_directus2=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > directus.yaml <<EOL
-version: '3.8'
-
+version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   directus:
     image: directus/directus:latest
-    networks:
-      - $nome_rede_interna
+
     volumes:
       - directus_uploads:/directus/uploads
       - directus_data:/directus/database
-    environment:
 
+    networks:
+      - $nome_rede_interna
+
+    environment:
       ## Dados de acesso
       - ADMIN_EMAIL=$email_directus
       - ADMIN_PASSWORD=$senha_directus
@@ -14790,7 +15468,9 @@ services:
         - traefik.http.routers.directus.tls=true
         - traefik.http.services.directus.loadbalancer.server.port=8055
         - traefik.docker.network=proxy
-    
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   directus_uploads:
     external: true
@@ -14804,20 +15484,19 @@ networks:
     external: true
     attachable: true
     name: $nome_rede_interna
-
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do directus"
 fi
 
 docker stack deploy --prune --resolve-image always -c directus.yaml directus > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do directus"
 fi
 
@@ -15019,14 +15698,17 @@ services:
 
   vaultwarden:
     image: vaultwarden/server:latest
-    networks:
-      - $nome_rede_interna
-    #ports:
-    #  - 1973:80
+
     volumes:
       - vaultwarden-data:/data
-    environment:
 
+    networks:
+      - $nome_rede_interna
+
+    #ports:
+    #  - 1973:80
+
+    environment:
       ## Dominio do Dashboard
       - DOMAIN:https://$url_vaultwarden
 
@@ -15076,17 +15758,17 @@ networks:
     name: $nome_rede_interna
 EOF
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do vaultwarden"
 fi
 
 docker stack deploy --prune --resolve-image always -c vaultwarden.yaml vaultwarden > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do vaultwarden"
 fi
 
@@ -15375,19 +16057,23 @@ sleep 1
 
 ## Criando a stack
 cat > monitor.yaml <<EOL
-version: '3.7'
+version: "3.7"
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
   prometheus:
     image: prom/prometheus:latest
-    networks:
-      - $nome_rede_interna
-    ports:
-      - "9191:9090"
+
     volumes:
       - /opt/monitor-orion/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+    networks:
+      - $nome_rede_interna
+
+    ports:
+      - "9191:9090"
+
     deploy:
       mode: replicated
       replicas: 1
@@ -15407,15 +16093,19 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    networks:
-      - $nome_rede_interna
-    ports:
-      - "3111:3000"
+
     volumes:
       - /opt/monitor-orion/grafana/grafana.ini:/etc/grafana/grafana.ini
       - /opt/monitor-orion/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
       - /opt/monitor-orion/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - /opt/monitor-orion/grafana/dashboards:/etc/grafana/dashboards
+
+    networks:
+      - $nome_rede_interna
+
+    ports:
+      - "3111:3000"
+
     links:
       - prometheus
     deploy:
@@ -15437,11 +16127,14 @@ services:
 
   node-exporter:
     image: prom/node-exporter:latest
+    restart: unless-stopped
+
     networks:
       - $nome_rede_interna
+
     ports:
       - "9100:9100"
-    restart: unless-stopped
+
     deploy:
       mode: replicated
       replicas: 1
@@ -15461,16 +16154,20 @@ services:
 
   cadvisor:
     image: google/cadvisor:latest
-    networks:
-      - $nome_rede_interna
-    ports:
-      - "8181:8080"
     restart: unless-stopped
+
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+
+    networks:
+      - $nome_rede_interna
+
+    ports:
+      - "8181:8080"
+
     deploy:
       mode: replicated
       replicas: 1
@@ -15494,17 +16191,17 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Monitor"
 fi
 
 docker stack deploy --prune --resolve-image always -c monitor.yaml monitor > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel subir a stack do Monitor"
 fi
 
@@ -15703,9 +16400,9 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_nextcloud #> /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
 fi
 
 verificar_container_redis
@@ -15715,9 +16412,9 @@ else
     ferramenta_redis  > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
 fi
 
 echo ""
@@ -15728,25 +16425,27 @@ sleep 1
 
 ## Criando a stack
 cat > nextcloud.yaml <<EOL
-version: '3.7'
+version: "3.7"
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
   nextcloud:
     image: nextcloud:latest
-    networks:
-      - $nome_rede_interna
-    ports:
-      - 8282:80
+
     volumes:
       - nextcloud_data:/var/www/html
-    environment:
 
+    networks:
+      - $nome_rede_interna
+
+    ports:
+      - 8282:80
+
+    environment:
       ## Dados de acesso:
       - NEXTCLOUD_ADMIN_USER=$user_nextcloud
       - NEXTCLOUD_ADMIN_PASSWORD=$pass_nextcloud
-
 
       ## Dados do Postgres
       - POSTGRES_HOST=postgres
@@ -15792,17 +16491,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do nextcloud"
 fi
 
 docker stack deploy --prune --resolve-image always -c nextcloud.yaml nextcloud > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do nextcloud"
 fi
 echo ""
@@ -15964,9 +16663,9 @@ verificar_container_mysql
     fi
 
     if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ]"
+    echo "1/1 - [ OK ] - Verificando/Instlando MySQL"
     else
-    echo "1/1 - [ OFF ]"
+    echo "1/1 - [ OFF ] - Verificando/Instlando MySQL"
     fi
 
 ## Espera 30 segundos
@@ -15986,19 +16685,20 @@ app_key=$(openssl rand -hex 16)
 ## Criando a stack
 cat > strapi.yaml <<EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
   strapi:
     image: strapi/strapi
+
     volumes:
       - strapi_data:/srv/app
+
     networks:
       - $nome_rede_interna
-    environment:
 
+    environment:
       ## Dados MySQL
       - DATABASE_CLIENT=mysql
       - DATABASE_NAME=strapi
@@ -16015,6 +16715,7 @@ services:
       ## Outros dados
       - NODE_ENV=production
       - STRAPI_TELEMETRY_DISABLED=true
+
     deploy:
       mode: replicated
       replicas: 1
@@ -16043,17 +16744,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Strapi"
 fi
 
 docker stack deploy --prune --resolve-image always -c strapi.yaml strapi #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do Strapi"
 fi
 
@@ -16234,7 +16935,6 @@ sleep 1
 ## Criando a stack
 cat > phpmyadmin.yaml <<EOL
 version: "3.7"
-
 services:
 
 ## --------------------------- ORION --------------------------- ##
@@ -16242,10 +16942,11 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     command: ["apache2-foreground"]
+
     networks:
       - $nome_rede_interna
-    environment:
 
+    environment:
       ## Dados do MySQL
       - PMA_HOSTS=$host_phpmyadmin
       - PMA_PORT=3306
@@ -16264,6 +16965,10 @@ services:
       placement:
         constraints:
           - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M
       labels:
         - traefik.enable=true
         - traefik.http.routers.phpmyadmin.rule=Host(\`$url_phpmyadmin\`)
@@ -16271,10 +16976,6 @@ services:
         - traefik.http.routers.phpmyadmin.tls.certresolver=letsencryptresolver
         - traefik.http.services.phpmyadmin.loadbalancer.server.port=80
         - traefik.http.routers.phpmyadmin.service=phpmyadmin
-      resources:
-        limits:
-          cpus: "1"
-          memory: 2048M
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -16284,17 +16985,17 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ]"
+    echo "1/2 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ]"
+    echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do phpmyadmin"
 fi
 
 docker stack deploy --prune --resolve-image always -c phpmyadmin.yaml phpmyadmin #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ]"
+    echo "2/2 - [ OK ] - Deploy Stack"
 else
-    echo "2/2 - [ OFF ]"
+    echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Não foi possivel Subir a stack do phpmyadmin"
 fi
 
@@ -16359,7 +17060,9 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Comandos extras
 
@@ -16448,7 +17151,99 @@ chatwoot.mail() {
     echo "Aguarde enquanto trocamos os emails..."
     echo ""
 
-    cd /var/lib/docker/volumes/chatwoot_public_orion/_data/app/views/devise/mailer/
+    #cd /var/lib/docker/volumes/chatwoot_mailer/_data/app/views/devise/mailer/
+    cd /var/lib/docker/volumes/chatwoot_mailer/_data/
+
+    # Renomeia os arquivos
+    mv password_change.html.erb password_change.html.erb.old > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "1/9 - [ OK ]"
+    else
+        echo "1/9 - [ OFF ]"
+        echo "Não foi possivel mudar email."
+    fi
+    mv confirmation_instructions.html.erb confirmation_instructions.html.erb.old > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "2/9 - [ OK ]"
+    else
+        echo "2/9 - [ OFF ]"
+        echo "Não foi possivel mudar email."
+    fi
+    mv reset_password_instructions.html.erb reset_password_instructions.html.erb.old > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "3/9 - [ OK ]"
+    else
+        echo "3/9 - [ OFF ]"
+        echo "Não foi possivel mudar email."
+    fi
+    mv unlock_instructions.html.erb unlock_instructions.html.erb.old > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "4/9 - [ OK ]"
+    else
+        echo "4/9 - [ OFF ]"
+        echo "Não foi possivel mudar email."
+    fi
+    
+    # Baixa os novos arquivos
+    wget -O confirmation_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/confirmation_instructions.html.erb > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "5/9 - [ OK ]"
+    else
+        echo "5/9 - [ OFF ]"
+        echo "Não foi possivel baixar email."
+    fi
+    wget -O password_change.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/password_change.html.erb > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "6/9 - [ OK ]"
+    else
+        echo "6/9 - [ OFF ]"
+        echo "Não foi possivel baixar email."
+    fi
+    wget -O reset_password_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/reset_password_instructions.html.erb > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "7/9 - [ OK ]"
+    else
+        echo "7/9 - [ OFF ]"
+        echo "Não foi possivel baixar email."
+    fi
+    wget -O unlock_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/unlock_instructions.html.erb > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "8/9 - [ OK ]"
+    else
+        echo "8/9 - [ OFF ]"
+        echo "Não foi possivel baixar email."
+    fi
+    
+    cd
+    cd
+
+    # Deleta os containers do Chatwoot
+    docker rm -f $(docker ps -a | grep 'chatwoot' | awk '{print $1}') > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        echo "9/9 - [ OK ]"
+    else
+        echo "9/9 - [ OFF ]"
+        echo "Não foi possivel deletar containers."
+    fi
+
+    echo ""
+    echo "Esperando containers subir..."
+    wait_30_sec
+
+    echo ""
+    echo "Concluido!"
+    sleep 2
+}
+
+chatwoot.n.mail() {
+
+    echo ""
+    echo "Aguarde enquanto trocamos os emails..."
+    echo ""
+
+    #cd /var/lib/docker/volumes/chatwoot_mailer/_data/app/views/devise/mailer/
+    cd /var/lib/docker/volumes/chatwoot_nestor_mailer/_data/
 
     # Renomeia os arquivos
     mv password_change.html.erb password_change.html.erb.old > /dev/null 2>&1
@@ -16690,7 +17485,9 @@ portainer.reset() {
     fi
 }
 
-####################################################
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Iniciando instalador
 
@@ -16931,24 +17728,43 @@ while true; do
             break
             ;;
 
-        n8n.workflows)
-            n8n.workflows
-            ;;
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+
+        ## Reiniciar portainer
         portainer.restart)
             portainer.restart
             ;;
+
+        ## Redefinir senha do portainer
         portainer.reset)
             portainer.reset
             ;;
-        chatwoot.nulled)
-            chatwoot.nulled
-            ;;
-        chatwoot.uno.nulled)
-            chatwoot.uno.nulled
-            ;;
+
+        ## Traduzir emails do Chatwoot
         chatwoot.mail)
             chatwoot.mail
             ;;
+
+        ## Traduzir emails do Chatwoot N
+        chatwoot.n.mail)
+            chatwoot.n.mail
+            ;;
+
+        ## Desbloquear funções do Chatwoot
+        chatwoot.nulled)
+            chatwoot.nulled
+            ;;
+
+        ## Importar Workflows do Quepasa no N8N
+        n8n.workflows)
+            n8n.workflows
+            ;;
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 
         *)
