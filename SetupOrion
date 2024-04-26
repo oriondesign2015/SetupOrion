@@ -99,6 +99,20 @@ direitos_instalador() {
     done
 }
 
+## Credenciais Portainerv2.5.0+
+info_credenciais(){ 
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo -e "$amarelo=                                                                                                 =\e[0m"
+    echo -e "$amarelo=  $branco A partir da versão 2.5.0 deste Setup foi implementado uma função para realizar deploy dentro $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco   do proprio portainer através de uma requsição api. Para que esta nova função funcione em   $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco suas proximas instalações, você precisará informar às credenciais de acesso do seu portainer $amarelo =\e[0m"
+    echo -e "$amarelo=                                                                                                 =\e[0m"
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo ""
+    echo ""
+    
+}
+
 ## Credito do Setup
 
 creditos_msg() {
@@ -220,18 +234,37 @@ instalado_msg() {
 ## Mensagem de Testando
 
 nome_testando() {
-  clear
-  echo ""
-  echo -e "$branco               ████████╗███████╗███████╗████████╗ █████╗ ███╗   ██╗██████╗  ██████╗ \e[0m"
-  echo -e "$branco               ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔══██╗████╗  ██║██╔══██╗██╔═══██╗\e[0m"
-  echo -e "$branco                  ██║   █████╗  ███████╗   ██║   ███████║██╔██╗ ██║██║  ██║██║   ██║\e[0m"
-  echo -e "$branco                  ██║   ██╔══╝  ╚════██║   ██║   ██╔══██║██║╚██╗██║██║  ██║██║   ██║\e[0m"
-  echo -e "$branco                  ██║   ███████╗███████║   ██║   ██║  ██║██║ ╚████║██████╔╝╚██████╔╝\e[0m"
-  echo -e "$branco                  ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝ \e[0m"
-  echo ""
-  echo ""
+    clear
+    echo ""
+    echo -e "$branco               ████████╗███████╗███████╗████████╗ █████╗ ███╗   ██╗██████╗  ██████╗ \e[0m"
+    echo -e "$branco               ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔══██╗████╗  ██║██╔══██╗██╔═══██╗\e[0m"
+    echo -e "$branco                  ██║   █████╗  ███████╗   ██║   ███████║██╔██╗ ██║██║  ██║██║   ██║\e[0m"
+    echo -e "$branco                  ██║   ██╔══╝  ╚════██║   ██║   ██╔══██║██║╚██╗██║██║  ██║██║   ██║\e[0m"
+    echo -e "$branco                  ██║   ███████╗███████║   ██║   ██║  ██║██║ ╚████║██████╔╝╚██████╔╝\e[0m"
+    echo -e "$branco                  ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝ \e[0m"
+    echo ""
+    echo ""
 }
-
+nome_credenciais() {
+    clear
+    echo ""
+    echo -e "$branco          ██████╗██████╗ ███████╗██████╗ ███████╗███╗   ██╗ ██████╗██╗ █████╗ ██╗███████╗      \e[0m"
+    echo -e "$branco         ██╔════╝██╔══██╗██╔════╝██╔══██╗██╔════╝████╗  ██║██╔════╝██║██╔══██╗██║██╔════╝      \e[0m"
+    echo -e "$branco         ██║     ██████╔╝█████╗  ██║  ██║█████╗  ██╔██╗ ██║██║     ██║███████║██║███████╗      \e[0m"
+    echo -e "$branco         ██║     ██╔══██╗██╔══╝  ██║  ██║██╔══╝  ██║╚██╗██║██║     ██║██╔══██║██║╚════██║      \e[0m"
+    echo -e "$branco         ╚██████╗██║  ██║███████╗██████╔╝███████╗██║ ╚████║╚██████╗██║██║  ██║██║███████║      \e[0m"
+    echo -e "$branco          ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚═╝╚═╝  ╚═╝╚═╝╚══════╝      \e[0m"
+    echo -e "$branco                                                                                               \e[0m"
+    echo -e "$branco   ██████╗  ██████╗     ██████╗  ██████╗ ██████╗ ████████╗ █████╗ ██╗███╗   ██╗███████╗██████╗ \e[0m"
+    echo -e "$branco   ██╔══██╗██╔═══██╗    ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔══██╗██║████╗  ██║██╔════╝██╔══██╗\e[0m"
+    echo -e "$branco   ██║  ██║██║   ██║    ██████╔╝██║   ██║██████╔╝   ██║   ███████║██║██╔██╗ ██║█████╗  ██████╔╝\e[0m"
+    echo -e "$branco   ██║  ██║██║   ██║    ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══██║██║██║╚██╗██║██╔══╝  ██╔══██╗\e[0m"
+    echo -e "$branco   ██████╔╝╚██████╔╝    ██║     ╚██████╔╝██║  ██║   ██║   ██║  ██║██║██║ ╚████║███████╗██║  ██║\e[0m"
+    echo -e "$branco   ╚═════╝  ╚═════╝     ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝\e[0m"
+    echo ""
+    echo ""
+    info_credenciais
+}
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -1046,6 +1079,188 @@ menu_instalador(){
     echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}Sair do instalador${reset}"
     echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}" # ${amarelo}[ 43 ]${reset} - ${branco}Ainda Vazio${reset}"
     echo""
+}
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+
+
+stack_editavel(){
+
+    USUARIO=$(grep "Usuario: " /root/dados_vps/dados_portainer | awk -F "Usuario: " '{print $2}')
+    SENHA=$(grep "Senha: " /root/dados_vps/dados_portainer | awk -F "Senha: " '{print $2}')
+    PORTAINER_URL=$(grep "Dominio do portainer: " /root/dados_vps/dados_portainer | awk -F "Dominio do portainer: " '{print $2}')
+    TOKEN=$(grep "Token: " /root/dados_vps/dados_portainer | awk -F "Token: " '{print $2}')
+    
+    #TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d '{"username":"SandBox","password":"@Sandbox123_"}' $PORTAINER_URL/api/auth | jq -r .jwt)
+    #echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
+
+    ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" $PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
+    SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" "$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm" | jq -r .ID)
+
+    #docker stack rm $STACK_NAME
+    
+    curl -v -k -X POST \
+    -H "Authorization: Bearer $TOKEN" \
+    -F "Name=$STACK_NAME" \
+    -F "file=@$(pwd)/$STACK_NAME.yaml" \
+    -F "SwarmID=$SWARM_ID" \
+    -F "endpointId=$ENDPOINT_ID" \
+    "$PORTAINER_URL/api/stacks/create/swarm/file"
+}
+
+## Função para verificar se o arquivo de dados do Portainer existe
+verificar_arquivo() {
+    if [ ! -f "/root/dados_vps/dados_portainer" ]; then
+        nome_credenciais
+        criar_arquivo
+    else
+        verificar_campos
+    fi
+}
+
+
+## Função para criar o arquivo de dados do Portainer
+criar_arquivo() {
+    if [ -f "/root/dados_vps/dados_portainer" ]; then
+        rm "/root/dados_vps/dados_portainer"
+        echo "Arquivo existente removido."
+    fi
+
+    ## Caso não exista o arquivo ele vai pedir os dados para criar.
+    nome_credenciais
+    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+    read -p "Digite a Url do Portainer (ex: https://portainer.oriondesign.art.br): " PORTAINER_URL
+    echo ""
+
+    echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+    read -p "Digite seu Usuario (ex: admin): " USUARIO
+    echo ""
+
+    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
+    read -s -p "Digite a Senha (ex: @Senha123_): " SENHA
+    echo -e "[ PORTAINER ]\n\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA" > "/root/dados_vps/dados_portainer"
+    echo ""
+
+    verificar_token "$PORTAINER_URL" "$USUARIO" "$SENHA" true
+}
+
+
+## Função para verificar os campos do arquivo de dados do Portainer
+verificar_campos() {
+    PORTAINER_URL=$(grep -oP '(?<=Dominio do portainer: ).*' /root/dados_vps/dados_portainer)
+    USUARIO=$(grep -oP '(?<=Usuario: ).*' /root/dados_vps/dados_portainer)
+    SENHA=$(grep -oP '(?<=Senha: ).*' /root/dados_vps/dados_portainer)
+
+    ## se por acaso não tiver login nem senha lá vem para ca
+    if [ -z "$USUARIO" ] || [ -z "$SENHA" ]; then
+        
+        nome_credenciais
+        echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+        read -p "Digite seu Usuario do Portainer  (ex: admin): " USUARIO
+        echo ""
+
+        echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+        read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " SENHA
+        echo ""
+
+        ATUALIZAR="true" ## Verificar se já existe TOKEN no arquivo
+        verificar_token "$PORTAINER_URL" "$USUARIO" "$SENHA" true
+    ## Caso o usuario e senha estiver como "Precisa criar dentro do portainer" como o arquivo oficial vem para ca
+    elif [ "$USUARIO" == "Precisa criar dentro do portainer" ] || [ "$SENHA" == "Precisa criar dentro do portainer" ]; then
+        
+        nome_credenciais
+        echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+        read -p "Digite seu Usuario do Portainer  (ex: admin): " NOVO_USUARIO
+        echo ""
+
+        echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+        read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " NOVA_SENHA
+        echo ""
+        verificar_token "$PORTAINER_URL" "$NOVO_USUARIO" "$NOVA_SENHA" true
+    else
+        verificar_token "$PORTAINER_URL" "$USUARIO" "$SENHA" false
+    fi
+}
+
+## Função para verificar se o token é válido
+verificar_token() {
+    PORTAINER_URL="$1"
+    USUARIO="$2"
+    SENHA="$3"
+    ATUALIZAR="$4"
+    TENTATIVAS=0
+    MAX_TENTATIVAS=5
+
+    while [ $TENTATIVAS -lt $MAX_TENTATIVAS ]; do
+        TENTATIVAS=$((TENTATIVAS+1))
+
+        #echo -e "Dados a serem testados:"
+        #echo "Link do Portainer: $PORTAINER_URL"
+        #echo "Usuário: $USUARIO"
+        #echo "Senha: $SENHA"
+
+        RESPONSE=$(curl -s -w "\n%{http_code}" -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" "$PORTAINER_URL/api/auth")
+        TOKEN=$(echo "$RESPONSE" | sed '$d' | jq -r '.jwt')
+        HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
+
+        if [ "$HTTP_STATUS" -eq 200 ] && [ ! -z "$TOKEN" ]; then
+    
+            if [ "$ATUALIZAR" == true ]; then
+                atualizar_arquivo
+            fi
+
+            $APP_ORION
+
+            break
+        else
+            if [ $TENTATIVAS -gt 1 ]; then
+                clear
+                erro_msg
+                echo ""
+                echo ""
+                echo "              Não foi possivel autenticar suas credenciais. Por favor tente novamente"
+                echo "                                           Tentativa: $TENTATIVAS/$MAX_TENTATIVAS"
+    
+                sleep 3
+
+            else
+                clear
+                nome_credenciais
+            fi
+
+            if [ $TENTATIVAS -lt $MAX_TENTATIVAS ]; then
+                
+                nome_credenciais
+                echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+                read -p "Digite seu Usuario do Portainer  (ex: admin): " USUARIO
+                echo ""
+
+                echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+                read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " SENHA
+                echo ""
+                ATUALIZAR="true"
+            else
+                clear
+                erro_msg
+
+                echo ""
+                echo ""
+                echo "                         Você atingiu o limite maximo de tentativas ($TENTATIVAS/$MAX_TENTATIVAS)."
+                echo "                         Tente novamente quando lembrar da sua credencial!"
+                echo 5
+                clear
+                break
+            fi
+        fi
+    done
+}
+
+## Função para atualizar o arquivo de dados do Portainer com o novo usuário e senha
+atualizar_arquivo() {
+    echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
+    echo -e "\nArquivo de dados do Portainer atualizado com sucesso!"
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -2851,6 +3066,51 @@ criar_banco_postgres_nextcloud() {
     done
 }
 
+criar_banco_postgres_baserow() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "baserow"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados baserow já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS baserow;"
+                    echo "Banco de dados baserow apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE baserow;"
+                    
+                    echo "Banco de dados baserow criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE baserow;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "baserow"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados baserow criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -3265,9 +3525,9 @@ else
 fi
 sudo sed -i "s/127.0.0.1[[:space:]]localhost/127.0.0.1 $nome_servidor/g" /etc/hosts > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "7/9 - [ OK ]"
+    echo "7/9 - [ OK ] - Adicionando nome do servidor em etc/hosts"
 else
-    echo "7/9 - [ OFF ]"
+    echo "7/9 - [ OFF ] - Adicionando nome do servidor em etc/hosts"
 fi
 sudo apt-get update > /dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -3655,8 +3915,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Postgres."
 fi
-
-docker stack deploy --prune --resolve-image always -c postgres.yaml postgres > /dev/null 2>&1
+STACK_NAME="postgres"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c postgres.yaml postgres > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -3747,8 +4008,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Redis."
 fi
-
-docker stack deploy --prune --resolve-image always -c redis.yaml redis
+STACK_NAME="redis"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c redis.yaml redis
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -3848,8 +4110,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Mysql."
 fi
-
-docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
+STACK_NAME="mysql"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -4284,8 +4547,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
-
-docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
+STACK_NAME="chatwoot"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -4825,8 +5089,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
-
-docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
+STACK_NAME="chatwoot"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -5195,8 +5460,10 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack da Evolution API"
 fi
+STACK_NAME="evolution"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
 
-docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -5507,8 +5774,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack da Evolution API"
 fi
-
-docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
+STACK_NAME="evolution"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -5757,8 +6025,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do MinIO"
 fi
-
-docker stack deploy --prune --resolve-image always -c minio.yaml minio
+STACK_NAME="minio"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c minio.yaml minio
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -6171,7 +6440,7 @@ services:
 
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 5
       placement:
         constraints:
           - node.role == manager
@@ -6202,8 +6471,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Typebot"
 fi
-
-docker stack deploy --prune --resolve-image always -c typebot.yaml typebot > /dev/null 2>&1
+STACK_NAME="typebot"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c typebot.yaml typebot > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -6607,8 +6877,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do N8N"
 fi
-
-docker stack deploy --prune --resolve-image always -c n8n.yaml n8n > /dev/null 2>&1
+STACK_NAME="n8n"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c n8n.yaml n8n > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -6872,8 +7143,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Flowise"
 fi
-
-docker stack deploy --prune --resolve-image always -c flowise.yaml flowise  > /dev/null 2>&1
+STACK_NAME="flowise"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c flowise.yaml flowise  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -7046,19 +7318,23 @@ sleep 1
 ## Criando a stack
 cat > pgadmin.yaml <<EOL
 version: "3.7"
-
 services:  
+
+## --------------------------- ORION --------------------------- ##
+
   pgadmin:
     image: dpage/pgadmin4:latest ## Versão do PgAdmin 4
+
     volumes:
       - pgadmin_data:/var/lib/pgadmin
+
     networks:
         - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Dados de Acesso
-      PGADMIN_DEFAULT_EMAIL: $user_PgAdmin_4
-      PGADMIN_DEFAULT_PASSWORD: '$pass_PgAdmin_4'
+      - PGADMIN_DEFAULT_EMAIL=$user_PgAdmin_4
+      - PGADMIN_DEFAULT_PASSWORD=$pass_PgAdmin_4
 
     deploy:
       mode: replicated
@@ -7079,6 +7355,8 @@ services:
           - traefik.http.routers.pgadmin.entrypoints=websecure
           - traefik.http.routers.pgadmin.tls=true
 
+## --------------------------- ORION --------------------------- ##
+
 networks:
   $nome_rede_interna: ## Nome da rede interna
     name: $nome_rede_interna ## Nome da rede interna
@@ -7094,8 +7372,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do PgAdmin 4"
 fi
-
-docker stack deploy --prune --resolve-image always -c pgadmin.yaml pgadmin  > /dev/null 2>&1
+STACK_NAME="pgadmin"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c pgadmin.yaml pgadmin  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -7374,8 +7653,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Nocobase"
 fi
-
-docker stack deploy --prune --resolve-image always -c nocobase.yaml nocobase > /dev/null 2>&1
+STACK_NAME="nocobase"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c nocobase.yaml nocobase > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -7619,8 +7899,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Botpress"
 fi
-
-docker stack deploy --prune --resolve-image always -c botpress.yaml botpress > /dev/null 2>&1
+STACK_NAME="botpress"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c botpress.yaml botpress > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -7738,6 +8019,8 @@ while true; do
     nome_do_servico_wordpress="${nome_site_wordpress}_wordpress"
     nome_da_date_wordpress="${nome_site_wordpress}_data"
     nome_da_date_wordpress_php="${nome_site_wordpress}_php"
+
+    STACK_NAME="$nome_da_stack_wordpress_subir"
     
 
     ## Limpa o terminal
@@ -7908,8 +8191,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Wordpress"
 fi
-
-docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir #> /dev/null 2>&1
+STACK_NAME="$nome_da_stack_wordpress_subir"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -7942,9 +8226,10 @@ sed -i "s/^memory_limit =.*/memory_limit = 1024M/" "$caminho_php_ini"
 
 cd
 
-docker service update --force ${nome_do_servico_wordpress}_${nome_do_servico_wordpress}
-
-docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir
+docker service update --force ${nome_do_servico_wordpress}_${nome_do_servico_wordpress} 
+STACK_NAME="$nome_da_stack_wordpress_subir"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[7/7]\e[0m"
@@ -8022,9 +8307,47 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o dominio para o Baserow (ex: baserow.oriondesign.art.br): \e[0m" && read -r url_baserow
     echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
+    echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r mail_baserow
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_baserow
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r pass_baserow
+    echo ""
+
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
+    echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r host_baserow
+    echo ""
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
+    echo -en "\e[33mDigite a Porta SMTP do Email (ex: 465): \e[0m" && read -r porta_baserow
+    echo ""
+
+
+    ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
+    if [ "$porta_baserow" -eq 465 ]; then
+    tls_secure_baserow=false
+    ssl_secure_baserow=true
+    else
+    tls_secure_baserow=true
+    ssl_secure_baserow=false
+    fi
+
     
     ## Limpa o terminal
     clear
@@ -8037,6 +8360,26 @@ while true; do
     
     ##Informação do Dominio
     echo -e "\e[33mDominio para o Baserow:\e[97m $url_baserow\e[0m"
+    echo ""
+
+    ##Informação do Dominio
+    echo -e "\e[33mEmail do SMTP:\e[97m $mail_baserow\e[0m"
+    echo ""
+
+    ##Informação do Dominio
+    echo -e "\e[33mUsuário do SMTP:\e[97m $user_baserow\e[0m"
+    echo ""
+
+    ##Informação do Dominio
+    echo -e "\e[33mSenha do SMTP:\e[97m $pass_baserow\e[0m"
+    echo ""
+
+    ##Informação do Dominio
+    echo -e "\e[33mHost do SMTP:\e[97m $host_baserow\e[0m"
+    echo ""
+
+    ##Informação do Dominio
+    echo -e "\e[33mPorta do SMTP:\e[97m $porta_baserow\e[0m"
     echo ""
     
      ## Pergunta se as respostas estão corretas
@@ -8071,36 +8414,88 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO BASEROW \e[33m[1/3]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO BASEROW \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
 
 ## NADA
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO BASEROW \e[33m[2/3]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES E REDIS \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+    pegar_senha_postgres > /dev/null 2>&1
+    criar_banco_postgres_baserow
+else
+    ferramenta_postgres > /dev/null 2>&1
+    pegar_senha_postgres > /dev/null 2>&1
+    criar_banco_postgres_baserow
+fi
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+else
+    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+fi
+
+## Verifica container redis
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    echo ""
+else
+    ferramenta_redis > /dev/null 2>&1
+fi
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
+else
+    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO BASEROW \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
 ## Criando a stack
 cat > baserow.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   baserow:
     image: baserow/baserow:1.22.2 ## Versão do Baserow
+
     volumes:
       - baserow_data:/baserow/data
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    environment:
 
+    environment:
       ## Url do baserow
       - BASEROW_PUBLIC_URL=https://$url_baserow
 
       ## Porta do baserow
       - BASEROW_CADDY_ADDRESSES=:8080
+
+      ## Dados SMTP
+      - EMAIL_SMTP=true ## Ativar/Desativar SMTP
+      - FROM_EMAIL=$mail_baserow ## Email
+      - EMAIL_SMTP_USER=$user_baserow ## Email (ou usuario)
+      - EMAIL_SMTP_PASSWORD=$pass_baserow ## Senha do SMTP
+      - EMAIL_SMTP_HOST=$host_baserow ## Host SMTP
+      - EMAIL_SMTP_PORT=$porta_baserow ## Porta SMTP
+      - EMAIL_SMTP_USE_TLS=$tls_secure_baserow ## Deixar em true se a porta for 587 e false para 465
+      - EMAIL_SMTP_USE_SSL=$ssl_secure_baserow ## Deixar em true se a porta for 465 e false para 587
+
+      ## Dados Redis
+      - REDIS_URL=redis://redis:6379/4
+
+      ## Dados postgres:
+      - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/baserow
 
     deploy:
       mode: replicated
@@ -8116,6 +8511,8 @@ services:
         - traefik.http.routers.baserow.tls.certresolver=letsencryptresolver
         - traefik.http.routers.baserow.entrypoints=websecure
         - traefik.http.routers.baserow.tls=true
+
+## --------------------------- ORION --------------------------- ##
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -8134,7 +8531,9 @@ else
     echo "Não foi possivel criar a stack do Baserow"
 fi
 
-docker stack deploy --prune --resolve-image always -c baserow.yaml baserow #> /dev/null 2>&1
+STACK_NAME="baserow"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c baserow.yaml baserow #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -8299,21 +8698,30 @@ sleep 1
 ## Criando a stack
 cat > mongodb.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   mongodb:
     image: mongo:latest
     command: mongod --port 27017
-    ports:
-      - 27017:27017
+
     volumes:
       - mongodb_data:/data/db
       - mongodb_configdb_data:/data/configdb
+
+    networks:
+      - $nome_rede_interna
+    ports:
+      - 27017:27017
+
     environment:
+      ## Dados de acesso
       - MONGO_INITDB_ROOT_USERNAME=$user_mongo
       - MONGO_INITDB_ROOT_PASSWORD=$pass_mongo
       - PUID=1000
       - PGID=1000
+
     deploy:
       mode: replicated
       replicas: 1
@@ -8324,13 +8732,8 @@ services:
         limits:
           cpus: '1'
           memory: 2048M
-    networks:
-      - $nome_rede_interna
 
-networks:
-  $nome_rede_interna:
-    name: $nome_rede_interna
-    external: true
+## --------------------------- ORION --------------------------- ##
 
 volumes:
   mongodb_data:
@@ -8339,6 +8742,12 @@ volumes:
   mongodb_configdb_data:
     external: true
     name: mongodb_configdb_data
+
+networks:
+  $nome_rede_interna:
+    name: $nome_rede_interna
+    external: true
+
 EOL
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Criando Stack"
@@ -8346,8 +8755,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do MongoDB"
 fi
-
-docker stack deploy --prune --resolve-image always -c mongodb.yaml mongodb > /dev/null 2>&1
+STACK_NAME="mongodb"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c mongodb.yaml mongodb > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -8522,24 +8932,30 @@ key_cookie=$(openssl rand -hex 16)
 ## Criando a stack
 cat > rabbitmq.yaml <<EOL
 version: "3.7"
-
 services:
+
+## --------------------------- ORION --------------------------- ##
+
   rabbitmq:
     image: rabbitmq:management
     command: rabbitmq-server
+
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
     networks:
       - $nome_rede_interna
-    hostname: rabbit
     ports:
       - 5672:5672
       - 15672:15672
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
+
     environment:
-      RABBITMQ_ERLANG_COOKIE: $key_cookie
-      RABBITMQ_DEFAULT_VHOST: "/"
+      ## Dados de acesso
       RABBITMQ_DEFAULT_USER: $user_rabbitmq
       RABBITMQ_DEFAULT_PASS: $pass_rabbitmq
+      RABBITMQ_ERLANG_COOKIE: $key_cookie
+      RABBITMQ_DEFAULT_VHOST: "/"
+
     deploy:
       mode: replicated
       replicas: 1
@@ -8557,6 +8973,9 @@ services:
         - traefik.http.routers.rabbitmq.tls.certresolver=letsencryptresolver
         - traefik.http.routers.rabbitmq.service=rabbitmq
         - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   rabbitmq_data:
     external: true
@@ -8571,8 +8990,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do RabbitMQ"
 fi
-
-docker stack deploy --prune --resolve-image always -c rabbitmq.yaml rabbitmq > /dev/null 2>&1
+STACK_NAME="rabbitmq"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c rabbitmq.yaml rabbitmq > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -8782,8 +9202,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Uptime Kuma"
 fi
-
-docker stack deploy --prune --resolve-image always -c uptimekuma.yaml uptimekuma #> /dev/null 2>&1
+STACK_NAME="uptimekuma"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c uptimekuma.yaml uptimekuma #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -9083,8 +9504,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do CalCom"
 fi
-
-docker stack deploy --prune --resolve-image always -c calcom.yaml calcom  > /dev/null 2>&1
+STACK_NAME="calcom"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c calcom.yaml calcom  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -9356,8 +9778,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Mautic"
 fi
-
-docker stack deploy --prune --resolve-image always -c mautic.yaml mautic > /dev/null 2>&1
+STACK_NAME="mautic"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c mautic.yaml mautic > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -9579,8 +10002,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Appsmith"
 fi
-
-docker stack deploy --prune --resolve-image always -c appsmith.yaml appsmith  > /dev/null 2>&1
+STACK_NAME="appsmith"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c appsmith.yaml appsmith  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -9799,8 +10223,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Qdrant"
 fi
-
-docker stack deploy --prune --resolve-image always -c qdrant.yaml qdrant  > /dev/null 2>&1
+STACK_NAME="qdrant"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c qdrant.yaml qdrant  > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -10225,8 +10650,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do WoofedCRM"
 fi
-
-docker stack deploy --prune --resolve-image always -c woofedcrm.yaml woofedcrm #> /dev/null 2>&1
+STACK_NAME="woofedcrm"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c woofedcrm.yaml woofedcrm #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -10615,8 +11041,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Formbricks"
 fi
-
-docker stack deploy --prune --resolve-image always -c formbricks.yaml formbricks > /dev/null 2>&1
+STACK_NAME="formbricks"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c formbricks.yaml formbricks > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -10850,8 +11277,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do NocoDB"
 fi
-
-docker stack deploy --prune --resolve-image always -c nocodb.yaml nocodb > /dev/null 2>&1
+STACK_NAME="nocodb"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c nocodb.yaml nocodb > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -11097,8 +11525,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do langfuse"
 fi
-
-docker stack deploy --prune --resolve-image always -c langfuse.yaml langfuse > /dev/null 2>&1
+STACK_NAME="langfuse"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c langfuse.yaml langfuse > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -11342,8 +11771,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do metabase"
 fi
-
-docker stack deploy --prune --resolve-image always -c metabase.yaml metabase > /dev/null 2>&1
+STACK_NAME="metabase"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c metabase.yaml metabase > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -11588,8 +12018,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do odoo"
 fi
-
-docker stack deploy --prune --resolve-image always -c odoo.yaml odoo > /dev/null 2>&1
+STACK_NAME="odoo"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c odoo.yaml odoo > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -11985,8 +12416,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
-
-docker stack deploy --prune --resolve-image always -c chatwoot_uno.yaml chatwoot_uno > /dev/null 2>&1
+STACK_NAME="chatwoot_uno"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c chatwoot_uno.yaml chatwoot_uno > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -12527,8 +12959,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
-
-docker stack deploy --prune --resolve-image always -c chatwoot_nestor.yaml chatwoot_nestor > /dev/null 2>&1
+STACK_NAME="chatwoot_nestor"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c chatwoot_nestor.yaml chatwoot_nestor > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -12924,8 +13357,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Uno API"
 fi
-
-docker stack deploy --prune --resolve-image always -c unoapi.yaml unoapi > /dev/null 2>&1
+STACK_NAME="unoapi"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c unoapi.yaml unoapi > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -13393,8 +13827,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do N8N Quepasa"
 fi
-
-docker stack deploy --prune --resolve-image always -c n8n_quepasa.yaml n8n_quepasa > /dev/null 2>&1
+STACK_NAME="n8n_quepasa"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c n8n_quepasa.yaml n8n_quepasa > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -13647,8 +14082,9 @@ else
     echo "Não foi possivel criar a stack do Quepasa"
 
 fi
-
-docker stack deploy --prune --resolve-image always -c quepasa.yaml quepasa > /dev/null 2>&1
+STACK_NAME="quepasa"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c quepasa.yaml quepasa > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -14206,8 +14642,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Dify Ai"
 fi
-
-docker stack deploy --prune --resolve-image always -c dify.yaml dify > /dev/null 2>&1
+STACK_NAME="dify"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c dify.yaml dify > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -14432,7 +14869,7 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.ollamaweb.rule=Host(\`$url_ollama\`)
+        - traefik.http.routers.ollamaweb.rule=Host(\`$url_apiollama\`)
         - traefik.http.routers.ollamaweb.entrypoints=websecure
         - traefik.http.routers.ollamaweb.priority=1
         - traefik.http.routers.ollamaweb.tls.certresolver=letsencryptresolver
@@ -14461,8 +14898,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Ollama"
 fi
-
-docker stack deploy --prune --resolve-image always -c ollama.yaml ollama > /dev/null 2>&1
+STACK_NAME="ollama"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c ollama.yaml ollama > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -14819,8 +15257,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Affine"
 fi
-
-docker stack deploy --prune --resolve-image always -c affine.yaml affine > /dev/null 2>&1
+STACK_NAME="affine"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c affine.yaml affine > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -15109,8 +15548,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do docuseal"
 fi
-
-docker stack deploy --prune --resolve-image always -c docuseal.yaml docuseal > /dev/null 2>&1
+STACK_NAME="docuseal"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c docuseal.yaml docuseal > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -15491,8 +15931,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do directus"
 fi
-
-docker stack deploy --prune --resolve-image always -c directus.yaml directus > /dev/null 2>&1
+STACK_NAME="directus"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c directus.yaml directus > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -15763,8 +16204,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do vaultwarden"
 fi
-
-docker stack deploy --prune --resolve-image always -c vaultwarden.yaml vaultwarden > /dev/null 2>&1
+STACK_NAME="vaultwarden"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c vaultwarden.yaml vaultwarden > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -16196,8 +16638,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Monitor"
 fi
-
-docker stack deploy --prune --resolve-image always -c monitor.yaml monitor > /dev/null 2>&1
+STACK_NAME="monitor"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c monitor.yaml monitor > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -16496,8 +16939,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do nextcloud"
 fi
-
-docker stack deploy --prune --resolve-image always -c nextcloud.yaml nextcloud > /dev/null 2>&1
+STACK_NAME="nextcloud"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c nextcloud.yaml nextcloud > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -16749,8 +17193,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Strapi"
 fi
-
-docker stack deploy --prune --resolve-image always -c strapi.yaml strapi #> /dev/null 2>&1
+STACK_NAME="strapi"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c strapi.yaml strapi #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -16990,8 +17435,9 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do phpmyadmin"
 fi
-
-docker stack deploy --prune --resolve-image always -c phpmyadmin.yaml phpmyadmin #> /dev/null 2>&1
+STACK_NAME="phpmyadmin"
+stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c phpmyadmin.yaml phpmyadmin #> /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
@@ -17058,6 +17504,10 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
         clear
         exit 1
     fi
+}
+
+ferramenta_supabase(){
+    echo "nada ainda"
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -17425,7 +17875,8 @@ portainer.reset() {
     fi
 
     cd
-
+    #STACK_NAME="portainer"
+    #stack_editavel > /dev/null 2>&1
     docker stack deploy --prune --resolve-image always -c portainer.yaml portainer > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "4/7 - [ OK ]"
@@ -17500,7 +17951,6 @@ direitos_instalador
 ##Após apetar Y e confirmar continua..
 
 ## Menu de opções (backend)
-
 while true; do
 
     nome_menu
@@ -17518,210 +17968,783 @@ while true; do
             ;;
         2)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_chatwoot
+
+                ## INICIO TOKEN
+
+                STACK_NAME="chatwoot"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_chatwoot
+                else
+                    APP_ORION="ferramenta_chatwoot"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN 
+
             fi
             ;;
         2.1)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_chatwoot_arm
+
+                ## INICIO TOKEN
+
+                STACK_NAME="chatwoot"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_chatwoot_arm
+                else
+                    APP_ORION="ferramenta_chatwoot_arm"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN 
+
+            
             fi
             ;;
         3)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_evolution
+
+                ## INICIO TOKEN
+
+                STACK_NAME="evolution"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_evolution
+                else
+                    APP_ORION="ferramenta_evolution"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN 
+
             fi
+
             ;;
         3.1)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_evolution_arm
+
+                ## INICIO TOKEN
+
+                STACK_NAME="evolution"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_evolution_arm
+                else
+                    APP_ORION="ferramenta_evolution_arm"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN 
+            
             fi
             ;;
         4)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_minio
+
+                ## INICIO TOKEN
+
+                STACK_NAME="minio"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_minio
+                else
+                    APP_ORION="ferramenta_minio"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         5)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
-            ferramenta_typebot
+
+                ## INICIO TOKEN
+
+                STACK_NAME="typebot"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_typebot
+                else
+                    APP_ORION="ferramenta_typebot"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+            
             fi
             ;;
         6)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_n8n
+
+                ## INICIO TOKEN
+
+                STACK_NAME="n8n"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_n8n
+                else
+                    APP_ORION="ferramenta_n8n"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         7)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_flowise
+
+                ## INICIO TOKEN
+
+                STACK_NAME="flowise"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_flowise
+                else
+                    APP_ORION="ferramenta_flowise"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+            
             fi
             ;;
         8)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_pgAdmin_4
+
+                ## INICIO TOKEN
+
+                STACK_NAME="pgadmin"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_pgAdmin_4
+                else
+                    APP_ORION="ferramenta_pgAdmin_4"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         9)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_nocobase
+
+                ## INICIO TOKEN
+
+                STACK_NAME="nocobase"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_nocobase
+                else
+                    APP_ORION="ferramenta_nocobase"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         10)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_botpress
+
+                ## INICIO TOKEN
+
+                STACK_NAME="botpress"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_botpress
+                else
+                    APP_ORION="ferramenta_botpress"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         11)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_wordpress
+
+                ## INICIO TOKEN
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_wordpress
+                else
+                    APP_ORION="ferramenta_wordpress"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
             fi
             ;;
         12)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_baserow
+
+                ## INICIO TOKEN
+
+                STACK_NAME="baserow"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_baserow
+                else
+                    APP_ORION="ferramenta_baserow"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         13)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_mongodb
+
+                ## INICIO TOKEN
+
+                STACK_NAME="mongodb"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_mongodb
+                else
+                    APP_ORION="ferramenta_mongodb"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         14)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_rabbitmq
+
+                ## INICIO TOKEN
+
+                STACK_NAME="rabbitmq"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_rabbitmq
+                else
+                    APP_ORION="ferramenta_rabbitmq"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         15)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_uptimekuma
+
+                ## INICIO TOKEN
+
+                STACK_NAME="uptimekuma"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_uptimekuma
+                else
+                    APP_ORION="ferramenta_uptimekuma"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         16)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_calcom
+
+                ## INICIO TOKEN
+
+                STACK_NAME="calcom"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_calcom
+                else
+                    APP_ORION="ferramenta_calcom"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         17)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_mautic
+
+                ## INICIO TOKEN
+
+                STACK_NAME="mautic"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_mautic
+                else
+                    APP_ORION="ferramenta_mautic"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         18)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_appsmith
+
+                ## INICIO TOKEN
+
+                STACK_NAME="appsmith"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_appsmith
+                else
+                    APP_ORION="ferramenta_appsmith"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         19)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_qdrant
+
+                ## INICIO TOKEN
+
+                STACK_NAME="qdrant"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_qdrant
+                else
+                    APP_ORION="ferramenta_qdrant"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         20)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_woofed
+
+                ## INICIO TOKEN
+
+                STACK_NAME="woofedcrm"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_woofed
+                else
+                    APP_ORION="ferramenta_woofed"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         21)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_formbricks
+
+                ## INICIO TOKEN
+
+                STACK_NAME="formbricks"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_formbricks
+                else
+                    APP_ORION="ferramenta_formbricks"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         22)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_nocodb
+
+                ## INICIO TOKEN
+
+                STACK_NAME="nocodb"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_nocodb
+                else
+                    APP_ORION="ferramenta_nocodb"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         23)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_langfuse
+
+                ## INICIO TOKEN
+
+                STACK_NAME="langfuse"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_langfuse
+                else
+                    APP_ORION="ferramenta_langfuse"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         24)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_metabase
+
+                ## INICIO TOKEN
+
+                STACK_NAME="metabase"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_metabase
+                else
+                    APP_ORION="ferramenta_metabase"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         25)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_odoo
+
+                ## INICIO TOKEN
+
+                STACK_NAME="odoo"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_odoo
+                else
+                    APP_ORION="ferramenta_odoo"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         26)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_chatwoot_nestor
+
+                ## INICIO TOKEN
+
+                STACK_NAME="chatwoot_nestor"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_chatwoot_nestor
+                else
+                    APP_ORION="ferramenta_chatwoot_nestor"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         27)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio_e_rabbitmq_e_chatwoot; then
-            ferramenta_unoapi
+
+                ## INICIO TOKEN
+
+                STACK_NAME="unoapi"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_unoapi
+                else
+                    APP_ORION="ferramenta_unoapi"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         28)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_n8n_quepasa
+
+                ## INICIO TOKEN
+
+                STACK_NAME="n8n_quepasa"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_n8n_quepasa
+                else
+                    APP_ORION="ferramenta_n8n_quepasa"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         29)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_quepasa
+
+                ## INICIO TOKEN
+
+                STACK_NAME="quepasa"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_quepasa
+                else
+                    APP_ORION="ferramenta_quepasa"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         30)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_docuseal
+
+                ## INICIO TOKEN
+
+                STACK_NAME="docuseal"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_docuseal
+                else
+                    APP_ORION="ferramenta_docuseal"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         31)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_monitor
+
+                ## INICIO TOKEN
+
+                STACK_NAME="monitor"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_monitor
+                else
+                    APP_ORION="ferramenta_monitor"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         32)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio_e_qdrant; then
-            ferramenta_dify
+
+                ## INICIO TOKEN
+
+                STACK_NAME="dify"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_dify
+                else
+                    APP_ORION="ferramenta_dify"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         33)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_ollama
+
+                ## INICIO TOKEN
+
+                STACK_NAME="ollama"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_ollama
+                else
+                    APP_ORION="ferramenta_ollama"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         34)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_affine
+
+                ## INICIO TOKEN
+
+                STACK_NAME="affine"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_affine
+                else
+                    APP_ORION="ferramenta_affine"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         35)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
-            ferramenta_directus
+
+                ## INICIO TOKEN
+
+                STACK_NAME="directus"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_directus
+                else
+                    APP_ORION="ferramenta_directus"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         36)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_vaultwarden
+
+                ## INICIO TOKEN
+
+                STACK_NAME="vaultwarden"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_vaultwarden
+                else
+                    APP_ORION="ferramenta_vaultwarden"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         37)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_nextcloud
+
+                ## INICIO TOKEN
+
+                STACK_NAME="nextcloud"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_nextcloud
+                else
+                    APP_ORION="ferramenta_nextcloud"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+            
             fi
             ;;
         38)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_strapi
+
+                ## INICIO TOKEN
+
+                STACK_NAME="strapi"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_strapi
+                else
+                    APP_ORION="ferramenta_strapi"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         39)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_phpmyadmin
+
+                ## INICIO TOKEN
+
+                STACK_NAME="phpmyadmin"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_phpmyadmin
+                else
+                    APP_ORION="ferramenta_phpmyadmin"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         40)
             if verificar_docker_e_portainer_traefik; then
-            ferramenta_remover_stack
+
+                ## INICIO TOKEN
+
+                STACK_NAME="supabase"
+
+                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                    ferramenta_supabase
+                else
+                    APP_ORION="ferramenta_supabase"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            
             fi
             ;;
         41)
+            if verificar_docker_e_portainer_traefik; then
+
+                ferramenta_remover_stack
+
+            fi   
+            ;;
+        42)
             clear
             nome_saindo
             echo ""

@@ -21,6 +21,7 @@ fi
 # Resto do seu script
 sudo apt-get install -y apt-utils
 sudo apt-get install -y dialog
+sudo apt-get install -y jq 
 sudo apt update
 sudo apt upgrade -y
 
