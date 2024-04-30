@@ -32,7 +32,7 @@ bash <(curl -sSL setup.oriondesign.art.br)
 <p></p>
 <h3 align="center"><b>Ferramentas disponiveis</b></h3>
 <p align="center">
-  🔸 Traefik 🔸 Portainer 🔸 Chatwoot 🔸 Evolution API 🔸 MinIO 🔸 Typebot 🔸 N8N 🔸 Flowise 🔸 PgAdmin 4 🔸 Nocobase 🔸 Botpress 🔸 Wordpress 🔸 Baserow 🔸 MongoDB 🔸 RabbitMQ 🔸 Uptime Kuma 🔸 Calcom 🔸 Mautic 🔸 Appsmith 🔸 Qdrant 🔸 Woofed CRM 🔸 Formbricks 🔸 NocoDB 🔸 Langfuse 🔸 Metabase 🔸 Odoo 🔸 Uno API 🔸 Quepasa API 🔸 Docuseal 🔸 Grafana 🔸 Prometheus 🔸 cAdvisor 🔸 Dify AI 🔸 Ollama 🔸 Affine 🔸 Directus 🔸 VaultWarden 🔸 NextCloud 🔸
+  🔸 Traefik 🔸 Portainer 🔸 Chatwoot 🔸 Evolution API 🔸 MinIO 🔸 Typebot 🔸 N8N 🔸 Flowise 🔸 PgAdmin 4 🔸 Nocobase 🔸 Botpress 🔸 Wordpress 🔸 Baserow 🔸 MongoDB 🔸 RabbitMQ 🔸 Uptime Kuma 🔸 Calcom 🔸 Mautic 🔸 Appsmith 🔸 Qdrant 🔸 Woofed CRM 🔸 Formbricks 🔸 NocoDB 🔸 Langfuse 🔸 Metabase 🔸 Odoo 🔸 Uno API 🔸 Quepasa API 🔸 Docuseal 🔸 Grafana 🔸 Prometheus 🔸 cAdvisor 🔸 Dify AI 🔸 Ollama 🔸 Affine 🔸 Directus 🔸 VaultWarden 🔸 NextCloud 🔸Supabase
 </p>
 
 <h1></h1>
