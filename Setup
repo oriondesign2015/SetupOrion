@@ -25,6 +25,8 @@ sudo apt-get install -y dialog
 
 sudo apt-get install -y jq 
 
+sudo apt install jq -y
+
 sudo apt update
 
 sudo apt upgrade -y
