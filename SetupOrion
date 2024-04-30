@@ -3611,7 +3611,7 @@ services:
     image: traefik:v2.11.2
     command:
       - "--api.dashboard=true"
-      - "--providers.docker.swarm=true"
+      - "--providers.docker.swarmMode=true"
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=$nome_rede_interna" ## Nome da rede interna
