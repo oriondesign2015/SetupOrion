@@ -8354,11 +8354,10 @@ while true; do
 
     ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
     if [ "$porta_baserow" -eq 465 ]; then
-    tls_secure_baserow=false
-    ssl_secure_baserow=true
+    ssl_baserow_environments="- EMAIL_SMTP_USE_SSL=true"
     else
-    tls_secure_baserow=true
-    ssl_secure_baserow=false
+    ssl_baserow_environments="- EMAIL_SMTP_USE_TLS=true"
+
     fi
 
     
@@ -8501,8 +8500,7 @@ services:
       - EMAIL_SMTP_PASSWORD=$pass_baserow ## Senha do SMTP
       - EMAIL_SMTP_HOST=$host_baserow ## Host SMTP
       - EMAIL_SMTP_PORT=$porta_baserow ## Porta SMTP
-      - EMAIL_SMTP_USE_TLS=$tls_secure_baserow ## Deixar em true se a porta for 587 e false para 465
-      - EMAIL_SMTP_USE_SSL=$ssl_secure_baserow ## Deixar em true se a porta for 465 e false para 587
+      $ssl_baserow_environments
 
       ## Dados Redis
       - REDIS_URL=redis://redis:6379/4
