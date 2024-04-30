@@ -10228,6 +10228,8 @@ EOL
 done
 
 cat <<EOL >> qdrant.yaml
+## --------------------------- ORION --------------------------- ##
+
 volumes:
 EOL
 
@@ -10237,9 +10239,6 @@ for ((i=0; i< $nodes_qdrant; i++)); do
 done
 
 cat <<EOL >> qdrant.yaml
-
-## --------------------------- ORION --------------------------- ##
-
 networks:
   $nome_rede_interna:
 EOL
