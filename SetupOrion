@@ -12775,7 +12775,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_app:
-    image: sendingtk/chatwoot:latest ## Versão do Chatwoot
+    image: francisbreit/chatwoot-n:v3.8.0-pt-br ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
 
@@ -12874,7 +12874,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_sidekiq:
-    image: sendingtk/chatwoot:latest ## Versão do Chatwoot
+    image: francisbreit/chatwoot-n:v3.8.0-pt-br ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
