@@ -5984,7 +5984,7 @@ services:
 
       ## Url do minio
       - MINIO_BROWSER_REDIRECT_URL=https://$url_minio ## Url do minio
-      - MINIO_SERVER_URL=https://$url_s3 ## Url do s3
+      #- MINIO_SERVER_URL=https://$url_s3 ## Url do s3
 
     deploy:
       mode: replicated
