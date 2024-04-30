@@ -2078,6 +2078,19 @@ wait_phpmyadmin(){
         sleep 5
     done
 }
+
+wait_supabase(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço chatwoot está ativo
+        if docker service ls --filter "name=phpmyadmin" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -19589,7 +19602,7 @@ while true; do
             fi
             ;;
         40)
-            if verificar_docker_e_portainer_traefik; then
+            if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
 
                 ## INICIO TOKEN
 
