@@ -10166,56 +10166,70 @@ echo ""
 sleep 1
 
 ## Criando a stack
-cat > qdrant.yaml <<-EOF
+cat <<EOL > qdrant.yaml
 version: "3.7"
 services:
+EOL
 
-EOF
+for ((i=0; i< $nodes_qdrant; i++)); do
+  node_name="qdrant_node_$i"
+  volume_name="qdrant_data_$i"
 
-for ((node=0; node<nodes_qdrant; node++))
-do
-    SERVICE_NAME=qdrant_node_$node
+  cat <<EOL >> qdrant.yaml
 
-    HTTP_PORT=$((6330 + node * 10 + 3))
-    GRPC_PORT=$((6330 + node * 10 + 4))
+  ## --------------------------- ORION --------------------------- ##
 
-    if ((node == 0))
-    then
-        COMMAND="./qdrant --uri 'http://$SERVICE_NAME:6335'"
-    else
-        COMMAND="bash -c \"sleep $((10 + node / 10 + RANDOM % 10)) && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://$SERVICE_NAME:6335'\""
-    fi
-
-    cat >> qdrant.yaml <<-EOF
-  $SERVICE_NAME:
+  $node_name:
     image: qdrant/qdrant:latest
+
     volumes:
-      - qdrant_data:/qdrant
-    command: $COMMAND
-    restart: always
+      - $volume_name:/qdrant
+
+    networks:
+      - $nome_rede_interna
+
+    ports:
+      - "$((6333 + i * 10)):6333"
+      - "$((6334 + i * 10)):6334"
+
     environment:
       - QDRANT__SERVICE__GRPC_PORT=6334
       - QDRANT__CLUSTER__ENABLED=true
       - QDRANT__CLUSTER__P2P__PORT=6335
       - QDRANT__CLUSTER__CONSENSUS__MAX_MESSAGE_QUEUE_SIZE=5000
       - QDRANT__LOG_LEVEL=debug,raft=info
-    ports:
-      - "$HTTP_PORT:6333"
-      - "$GRPC_PORT:6334"
+
     deploy:
       resources:
         limits:
           cpus: "0.3"
+EOL
 
-EOF
+  if ((i == 0)); then
+    echo "    command: ./qdrant --uri 'http://qdrant_node_0:6335'" >> qdrant.yaml
+  else
+    echo "    command: bash -c \"sleep $((10 + i * 3)) && ./qdrant --bootstrap 'http://qdrant_node_0:6335' --uri 'http://qdrant_node_$i:6335'\"" >> qdrant.yaml
+  fi
+
+  echo "" >> qdrant.yaml
 done
 
-cat >> qdrant.yaml <<-EOF
+cat <<EOL >> qdrant.yaml
 volumes:
-  qdrant_data:
-    external: true
-    name: qdrant_data
-EOF
+EOL
+
+for ((i=0; i< $nodes_qdrant; i++)); do
+  volume_name="qdrant_data_$i"
+  echo "  $volume_name:" >> qdrant.yaml
+done
+
+cat <<EOL >> qdrant.yaml
+
+## --------------------------- ORION --------------------------- ##
+
+networks:
+  $nome_rede_interna:
+EOL
 
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Criando Stack"
