@@ -18816,6 +18816,71 @@ portainer.reset() {
     fi
 }
 
+traefik.fix() {
+
+    echo ""
+    echo ""
+    echo "Trocando a versão da Stack do traefik..."
+    ## Trocando a versão na stack
+    sed -i 's/image: traefik:latest/image: traefik:v2.11.2/' /root/traefik.yaml
+    if [ $? -eq 0 ]; then
+        echo "1/3 - [ OK ] - Alterando versão na Stack"
+    else
+        echo "1/3 - [ OFF ] - Alterando versão na Stack"
+        echo "Ops, não foi possivel alterar a versão na stack do Traefik"
+    fi
+    echo ""
+    
+    docker stack deploy --prune --resolve-image always -c traefik.yaml traefik > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "2/3 - [ OK ] - Fazendo Deploy da stack"
+    else
+        echo "2/3 - [ OFF ] - Fazendo Deploy da stack"
+        echo "Ops, não foi possivel fazer o deploy da stack do Traefik"
+    fi
+    echo ""
+    
+    echo "Verificando stack do Traefik"
+    wait_traefik
+    if [ $? -eq 0 ]; then
+        echo "3/3 - [ OK ] - Verificando Stack"
+    else
+        echo "3/3 - [ OFF ] - Verificando Stack"
+        echo "Ops, não foi possivel Verificar a stack do Traefik"
+    fi
+    echo ""
+    echo "Finalizado, já fixamos a imagem do seu traefik =D"
+    echo ""
+    sleep 5
+
+}
+
+ctop() {
+
+    echo ""
+    echo "Instalando CTOP"
+    sudo wget https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-amd64 -O /usr/local/bin/ctop
+    if [ $? -eq 0 ]; then
+        echo "1/2 - [ OK ] - Baixando CTOP"
+    else
+        echo "1/2 - [ OFF ] - Baixando CTOP"
+        echo "Ops, não foi possivel baixar o CTOP"
+    fi
+
+    sudo chmod +x /usr/local/bin/ctop
+    if [ $? -eq 0 ]; then
+        echo "2/2 - [ OK ] - Dando permissão ao CTOP"
+    else
+        echo "2/2 - [ OFF ] - Dando permissão ao CTOP"
+        echo "Ops, não foi possivel dar permissão ao CTOP"
+    fi
+    echo ""
+    echo "Instalado, digite CTOP fora do nosso Setup oara executa-lo a qualquer momento."
+    echo ""
+    sleep 5
+
+}
+
 
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -19665,6 +19730,14 @@ while true; do
         ## Importar Workflows do Quepasa no N8N
         n8n.workflows)
             n8n.workflows
+            ;;
+
+        traefik.fix)
+            traefik.fix    
+            ;;
+
+        ctop)
+            ctop
             ;;
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
