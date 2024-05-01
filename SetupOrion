@@ -1093,7 +1093,8 @@ stack_editavel(){
     PORTAINER_URL=$(grep "Dominio do portainer: " /root/dados_vps/dados_portainer | awk -F "Dominio do portainer: " '{print $2}')
     #TOKEN=$(grep "Token: " /root/dados_vps/dados_portainer | awk -F "Token: " '{print $2}')
     
-    TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d '{"username":"SandBox","password":"@Sandbox123_"}' $PORTAINER_URL/api/auth | jq -r .jwt)
+    TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" $PORTAINER_URL/api/auth | jq -r .jwt)
+
     echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
 
     ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" $PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
