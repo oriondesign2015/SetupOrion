@@ -18092,7 +18092,7 @@ services:
       - GOTRUE_SMTP_PORT=$porta_smtp_supabase ## Porta SMTP
       - GOTRUE_SMTP_USER=$usuario_email_supabase ## Usuario SMTP
       - GOTRUE_SMTP_PASS=$senha_email_supabase ## Senha SMTP
-      - GOTRUE_SMTP_SENDER_NAME=orion@oriondesign.art.br ## Email SMTP
+      - GOTRUE_SMTP_SENDER_NAME=$email_supabase ## Email SMTP
 
       ## Paths SMTP
       - GOTRUE_MAILER_URLPATHS_INVITE=/auth/v1/verify
