@@ -18201,7 +18201,7 @@ services:
       - REGION=eu-south ## Região
       - AWS_DEFAULT_REGION=eu-south ## Localização MinIO
       - GLOBAL_S3_BUCKET=supabase ## Nome da bucket do MinIO
-      - GLOBAL_S3_ENDPOINT=https://s3.unifyme.com.br
+      - GLOBAL_S3_ENDPOINT=https://$url_s3
       - GLOBAL_S3_PROTOCOL=https
       - GLOBAL_S3_FORCE_PATH_STYLE=true
       - AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY ## Access Key
