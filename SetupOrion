@@ -14978,7 +14978,7 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=1
-        - traefik.http.routers.ollama.rule=Host(\`$url_ollama\`)
+        - traefik.http.routers.ollama.rule=Host(\`$url_apiollama\`)
         - traefik.http.routers.ollama.entrypoints=websecure
         - traefik.http.routers.ollama.priority=1
         - traefik.http.routers.ollama.tls.certresolver=letsencryptresolver
@@ -15011,7 +15011,7 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.ollamaweb.rule=Host(\`$url_apiollama\`)
+        - traefik.http.routers.ollamaweb.rule=Host(\`$url_ollama\`)
         - traefik.http.routers.ollamaweb.entrypoints=websecure
         - traefik.http.routers.ollamaweb.priority=1
         - traefik.http.routers.ollamaweb.tls.certresolver=letsencryptresolver
