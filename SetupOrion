@@ -1481,8 +1481,10 @@ verificar_container_postgres() {
 
 verificar_container_mysql() {
     if docker ps -q --filter "name=mysql" | grep -q .; then
+        echo "Container MySQL está em execução."
         return 0
     else
+        echo "Container MySQL não está em execução."
         return 1
     fi
 }
@@ -9699,6 +9701,7 @@ echo ""
 sleep 1
 
 dados
+
 verificar_container_mysql
     if [ $? -eq 0 ]; then
         pegar_senha_mysql > /dev/null 2>&1
