@@ -1088,6 +1088,7 @@ menu_instalador(){
 
 stack_editavel(){
 
+    sudo apt install jq -y > /dev/null 2>&1
     USUARIO=$(grep "Usuario: " /root/dados_vps/dados_portainer | awk -F "Usuario: " '{print $2}')
     SENHA=$(grep "Senha: " /root/dados_vps/dados_portainer | awk -F "Senha: " '{print $2}')
     PORTAINER_URL=$(grep "Dominio do portainer: " /root/dados_vps/dados_portainer | awk -F "Dominio do portainer: " '{print $2}')
@@ -1113,6 +1114,7 @@ stack_editavel(){
 
 ## Função para verificar se o arquivo de dados do Portainer existe
 verificar_arquivo() {
+    sudo apt install jq -y > /dev/null 2>&1
     if [ ! -f "/root/dados_vps/dados_portainer" ]; then
         nome_credenciais
         criar_arquivo
