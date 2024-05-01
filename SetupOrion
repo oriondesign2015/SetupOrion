@@ -9746,9 +9746,9 @@ services:
       - MAUTIC_DB_PASSWORD=$senha_mysql
       
       ## Dados de acesso
-      - MAUTIC_ADMIN_EMAIL=$user_mautic
-      - MAUTIC_ADMIN_USERNAME=$senha_email_mautic
-      - MAUTIC_ADMIN_PASSWORD=SENHA-AQUI
+      - MAUTIC_ADMIN_EMAIL=$email_mautic
+      - MAUTIC_ADMIN_USERNAME=$user_mautic
+      - MAUTIC_ADMIN_PASSWORD=$senha_email_mautic
       - MAUTIC_URL=https://$url_mautic
 
       ## Configurações
@@ -9800,9 +9800,9 @@ services:
       - MAUTIC_DB_PASSWORD=$senha_mysql
       
       ## Dados de acesso
-      - MAUTIC_ADMIN_EMAIL=$user_mautic
-      - MAUTIC_ADMIN_USERNAME=$senha_email_mautic
-      - MAUTIC_ADMIN_PASSWORD=SENHA-AQUI
+      - MAUTIC_ADMIN_EMAIL=$email_mautic
+      - MAUTIC_ADMIN_USERNAME=$user_mautic
+      - MAUTIC_ADMIN_PASSWORD=$senha_email_mautic
       - MAUTIC_URL=https://$url_mautic
 
       ## Configurações
@@ -9846,9 +9846,9 @@ services:
       - MAUTIC_DB_PASSWORD=$senha_mysql
       
       ## Dados de acesso
-      - MAUTIC_ADMIN_EMAIL=$user_mautic
-      - MAUTIC_ADMIN_USERNAME=$senha_email_mautic
-      - MAUTIC_ADMIN_PASSWORD=SENHA-AQUI
+      - MAUTIC_ADMIN_EMAIL=$email_mautic
+      - MAUTIC_ADMIN_USERNAME=$user_mautic
+      - MAUTIC_ADMIN_PASSWORD=$senha_email_mautic
       - MAUTIC_URL=https://$url_mautic
 
       ## Configurações
