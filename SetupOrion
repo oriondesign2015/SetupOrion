@@ -17671,45 +17671,45 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do Builder
-    echo -e "\e[97mPasso$amarelo 1/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/13\e[0m"
     echo -en "\e[33mDigite o Dominio para o Supabase (ex: supabase.oriondesign.art.br): \e[0m" && read -r url_supabase
     echo ""
 
     ##Pergunta o Dominio do Viewer
-    echo -e "\e[97mPasso$amarelo 2/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/13\e[0m"
     echo -en "\e[33mDigite o Usuario para o Supabase (ex: OrionDesign): \e[0m" && read -r user_supabase
     echo ""
 
     ##Pergunta a versão da ferramenta
-    echo -e "\e[97mPasso$amarelo 3/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/13\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: @\!#$"
     echo -en "\e[33mDigite a Senha do usuario para o Supabase (ex: Senha123_): \e[0m" && read -r pass_supabase
     echo ""
 
     ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 4/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/13\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_supabase
     echo ""
 
     ##Pergunta o usuário do Email SMTP
-    echo -e "\e[97mPasso$amarelo 5/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/13\e[0m"
     echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
     echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r usuario_email_supabase
     echo ""
     
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 6/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/13\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_supabase
     echo ""
 
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 7/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/13\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_supabase
     echo ""
 
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 8/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 8/13\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_supabase
     echo ""
 
@@ -17720,29 +17720,31 @@ while true; do
     smtp_secure_supabase=false
     fi
 
-    JWT_Key=$(openssl rand -hex 16)
+    ## Pergunta qual é o JWT_Key
+    echo -e "\e[97mPasso$amarelo 9/13\e[0m"
+    echo -e "$amarelo--> Pegue em: https://supabase.com/docs/guides/self-hosting/docker"
+    echo -en "\e[33mDigite o JWT_Key do Supabase: \e[0m" && read -r JWT_Key
+    echo ""
 
     ## Pergunta qual é o ANON_KEY
-    echo -e "\e[97mPasso$amarelo 9/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 10/13\e[0m"
     echo -e "$amarelo--> Gere em: https://supabase.com/docs/guides/self-hosting/docker"
-    echo -e "$amarelo--> Sua JWT Secret: $JWT_Key"
     echo -en "\e[33mDigite o ANON_KEY do Supabase: \e[0m" && read -r ANON_KEY
     echo ""
 
     ## Pergunta qual é o SERVICE_KEY
-    echo -e "\e[97mPasso$amarelo 10/12\e[0m"    
+    echo -e "\e[97mPasso$amarelo 11/13\e[0m"    
     echo -e "$amarelo--> Gere em: https://supabase.com/docs/guides/self-hosting/docker"
-    echo -e "$amarelo--> Sua JWT Secret: $JWT_Key"
     echo -en "\e[33mDigite o SERVICE_KEY do Supabase: \e[0m" && read -r SERVICE_KEY
     echo ""
 
     ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 11/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 12/13\e[0m"
     echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
     echo ""
 
     ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 12/12\e[0m"
+    echo -e "\e[97mPasso$amarelo 13/13\e[0m"
     echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
     echo ""
 
@@ -17789,6 +17791,10 @@ while true; do
 
     ## Informação sobre Secure SMTP
     echo -e "\e[33mSecure SMTP do Email:\e[97m $smtp_secure_supabase\e[0m"
+    echo ""
+
+    ## Informação sobre JWT_Key
+    echo -e "\e[33mJWT_Key:\e[97m $JWT_Key\e[0m"
     echo ""
 
     ## Informação sobre ANON_KEY
