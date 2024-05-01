@@ -2086,7 +2086,7 @@ wait_supabase(){
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
     while true; do
         # Verifica se o serviço phpmyadmin está ativo
-        if docker service ls --filter "name=phpmyadmin" | grep "1/1"; then
+        if docker service ls --filter "name=supabase" | grep "1/1"; then
             sleep 10
             break
         fi
