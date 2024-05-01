@@ -4127,7 +4127,7 @@ else
 fi
 
 STACK_NAME="mysql"
-stack_editavel > /dev/null 2>&1
+stack_editavel
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
