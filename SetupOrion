@@ -18468,6 +18468,8 @@ Dominio do Supabase: https://$url_supabase
 Usuario: $user_supabase
 
 Senha: $pass_supabase
+
+Api Key: $ANON_KEY
 EOL
 
 cd
@@ -18493,6 +18495,9 @@ echo -e "\e[33mUsuario:\e[97m $user_supabase\e[0m"
 echo ""
 
 echo -e "\e[33mSenha:\e[97m $pass_supabase\e[0m"
+echo ""
+
+echo -e "\e[33mApi key:\e[97m $ANON_KEY\e[0m"
 echo ""
 
 ## Creditos do instalador
