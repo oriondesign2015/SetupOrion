@@ -9724,33 +9724,39 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  mautic:
-    image: mautic/mautic:v4
-    entrypoint: /entrypoint.sh
-    command: apache2-foreground
+  mautic_web:
+    image: mautic/mautic:5.0.4-apache ## Versão do Mautic
 
     volumes:
-      - mautic_data:/var/www/html
+      - mautic_config:/var/www/html/config
+      - mautic_docroot:/var/www/html/docroot
+      - mautic_media:/var/www/html/docroot/media
+      - mautic_logs:/var/www/html/var/logs
+      - mautic_cron:/opt/mautic/cron
 
     networks:
-      - $nome_rede_interna
+      - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Dados de acesso
-      - MAUTIC_ADMIN_PASSWORD=$senha_email_mautic
-      - MAUTIC_ADMIN_USERNAME=$user_mautic
-      - MAUTIC_URL=https://$url_mautic
-
       ## Dados MySQL
       - MAUTIC_DB_NAME=mautic
       - MAUTIC_DB_HOST=mysql
       - MAUTIC_DB_PORT=3306
       - MAUTIC_DB_USER=root
       - MAUTIC_DB_PASSWORD=$senha_mysql
-      - MAUTIC_ADMIN_EMAIL=$email_mautic
+      
+      ## Dados de acesso
+      - MAUTIC_ADMIN_EMAIL=$user_mautic
+      - MAUTIC_ADMIN_USERNAME=$senha_email_mautic
+      - MAUTIC_ADMIN_PASSWORD=SENHA-AQUI
+      - MAUTIC_URL=https://$url_mautic
 
-      ## Proxy
+      ## Configurações
       - MAUTIC_TRUSTED_PROXIES=["0.0.0.0/0"]
+      - DOCKER_MAUTIC_ROLE=mautic_web
+      - DOCKER_MAUTIC_WORKERS_CONSUME_EMAIL=2
+      - DOCKER_MAUTIC_WORKERS_CONSUME_HIT=2
+      - DOCKER_MAUTIC_WORKERS_CONSUME_FAILED=2
 
     deploy:
       mode: replicated
@@ -9760,27 +9766,131 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "1"
+          cpus: "2"
           memory: 2048M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.mautic.rule=Host(\`$url_mautic\`)
+        - traefik.http.routers.mautic.rule=Host(\`$url_mautic\`) # substitua SeuDominio.com.br pelo seu domínio
         - traefik.http.services.mautic.loadbalancer.server.port=80
         - traefik.http.routers.mautic.entrypoints=websecure
-        - traefik.http.routers.mautic.tls.certresolver=letsencryptresolver
         - traefik.http.routers.mautic.service=mautic
+        - traefik.http.routers.mautic.tls.certresolver=letsencryptresolver
         - traefik.http.services.mautic.loadbalancer.passHostHeader=true
 
 ## --------------------------- ORION --------------------------- ##
 
+  mautic_worker:
+    image: mautic/mautic:5.0.4-apache ## Versão do Mautic
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    volumes:
+      - mautic_config:/var/www/html/config
+      - mautic_docroot:/var/www/html/docroot
+      - mautic_media:/var/www/html/docroot/media
+      - mautic_logs:/var/www/html/var/logs
+      - mautic_cron:/opt/mautic/cron
+    environment:
+      ## Dados MySQL
+      - MAUTIC_DB_NAME=mautic
+      - MAUTIC_DB_HOST=mysql
+      - MAUTIC_DB_PORT=3306
+      - MAUTIC_DB_USER=root
+      - MAUTIC_DB_PASSWORD=$senha_mysql
+      
+      ## Dados de acesso
+      - MAUTIC_ADMIN_EMAIL=$user_mautic
+      - MAUTIC_ADMIN_USERNAME=$senha_email_mautic
+      - MAUTIC_ADMIN_PASSWORD=SENHA-AQUI
+      - MAUTIC_URL=https://$url_mautic
+
+      ## Configurações
+      - MAUTIC_TRUSTED_PROXIES=["0.0.0.0/0"]
+      - DOCKER_MAUTIC_ROLE=mautic_web
+      - DOCKER_MAUTIC_WORKERS_CONSUME_EMAIL=2
+      - DOCKER_MAUTIC_WORKERS_CONSUME_HIT=2
+      - DOCKER_MAUTIC_WORKERS_CONSUME_FAILED=2
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2048M
+
+## --------------------------- ORION --------------------------- ##
+
+  mautic_cron:
+    image: mautic/mautic:5.0.4-apache ## Versão do Mautic
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    volumes:
+      - mautic_config:/var/www/html/config
+      - mautic_docroot:/var/www/html/docroot
+      - mautic_media:/var/www/html/docroot/media
+      - mautic_logs:/var/www/html/var/logs
+      - mautic_cron:/opt/mautic/cron
+    environment:
+      ## Dados MySQL
+      - MAUTIC_DB_NAME=mautic
+      - MAUTIC_DB_HOST=mysql
+      - MAUTIC_DB_PORT=3306
+      - MAUTIC_DB_USER=root
+      - MAUTIC_DB_PASSWORD=$senha_mysql
+      
+      ## Dados de acesso
+      - MAUTIC_ADMIN_EMAIL=$user_mautic
+      - MAUTIC_ADMIN_USERNAME=$senha_email_mautic
+      - MAUTIC_ADMIN_PASSWORD=SENHA-AQUI
+      - MAUTIC_URL=https://$url_mautic
+
+      ## Configurações
+      - MAUTIC_TRUSTED_PROXIES=["0.0.0.0/0"]
+      - DOCKER_MAUTIC_ROLE=mautic_web
+      - DOCKER_MAUTIC_WORKERS_CONSUME_EMAIL=2
+      - DOCKER_MAUTIC_WORKERS_CONSUME_HIT=2
+      - DOCKER_MAUTIC_WORKERS_CONSUME_FAILED=2
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
-  mautic_data:
+  mautic_config:
+    name: mautic_config
     external: true
-    name: mautic_data
+  mautic_docroot:
+    name: mautic_docroom
+    external: true
+  mautic_media:
+    name: mautic_media
+    external: true
+  mautic_logs:
+    name: mautic_logs
+    external: true
+  mautic_cron:
+    name: mautic_cron
+    external: true
 
 networks:
-  $nome_rede_interna:
-    name: $nome_rede_interna
+  $nome_rede_interna: ## Nome da rede interna
+    name: $nome_rede_interna ## Nome da rede interna
     external: true
 EOL
 if [ $? -eq 0 ]; then
