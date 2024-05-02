@@ -1138,6 +1138,7 @@ criar_arquivo() {
     echo ""
 
     echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+    echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
     read -p "Digite seu Usuario (ex: admin): " USUARIO
     echo ""
 
