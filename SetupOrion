@@ -6461,7 +6461,7 @@ services:
 
     deploy:
       mode: replicated
-      replicas: 5
+      replicas: 1
       placement:
         constraints:
           - node.role == manager
