@@ -14577,7 +14577,7 @@ services:
       - FILES_URL=
 
       ## Url Dify
-      - APP_WEB_URL=$url_dify
+      - APP_WEB_URL=https://$url_dify
 
       ## Dados Postgres
       - MIGRATION_ENABLED=true
@@ -14719,7 +14719,7 @@ services:
       - CONSOLE_API_URL=
 
       ## Url Dify
-      - APP_API_URL=$url_dify
+      - APP_API_URL=https://$url_dify
 
       ## Sentry
       - SENTRY_DSN=
