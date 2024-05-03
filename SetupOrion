@@ -6164,7 +6164,7 @@ while true; do
     echo ""
 
     ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 4/109\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/10\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_typebot
     echo ""
 
