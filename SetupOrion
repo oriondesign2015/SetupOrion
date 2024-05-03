@@ -6046,6 +6046,7 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do MinIO"
 fi
+sleep 1
 STACK_NAME="minio"
 stack_editavel > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c minio.yaml minio
