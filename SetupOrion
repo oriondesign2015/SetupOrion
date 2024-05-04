@@ -9479,7 +9479,7 @@ services:
 
     ## Nodes
       - NODE_ENV=production
-      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      #- NODE_TLS_REJECT_UNAUTHORIZED=0
 
     ## Brand
       #- NEXT_PUBLIC_APP_NAME="Cal.com"
