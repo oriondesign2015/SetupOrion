@@ -10607,9 +10607,8 @@ services:
     image: douglara/woofedcrm:$v_woofed
     command: bundle exec rails s -p 3000 -b 0.0.0.0
 
-    ## Só descomente caso deseje alterar os arqvuivos do woofed
-    #volumes:
-    #  - woofedcrm_data:/app
+    volumes:
+      - woofedcrm_data:/app/public/assets
 
     networks:
       - $nome_rede_interna
@@ -10673,9 +10672,8 @@ services:
     image: douglara/woofedcrm:$v_woofed
     command: bundle exec sidekiq -C config/sidekiq.yml
 
-    ## Só descomente caso deseje alterar os arqvuivos do woofed
-    #volumes:
-    #  - woofedcrm_data:/app
+    volumes:
+      - woofedcrm_data:/app/public/assets
 
     networks:
       - $nome_rede_interna
@@ -10728,9 +10726,8 @@ services:
     image: douglara/woofedcrm:$v_woofed
     command: bundle exec good_job
 
-    ## Só descomente caso deseje alterar os arqvuivos do woofed
-    #volumes:
-    #  - woofedcrm_data:/app
+    volumes:
+      - woofedcrm_data:/app/public/assets
 
     networks:
       - $nome_rede_interna
@@ -10779,11 +10776,10 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-## Só descomente caso deseje alterar os arqvuivos do woofed
-#volumes:
-#  woofedcrm_data:
-#    external: true
-#    name: woofedcrm_data
+volumes:
+  woofedcrm_data:
+    external: true
+    name: woofedcrm_data
 
 networks:
   $nome_rede_interna:
