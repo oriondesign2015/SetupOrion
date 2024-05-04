@@ -14330,8 +14330,9 @@ while true; do
     echo ""
 
     ##Pergunta o Dominio do Qdrant
+    read -r ip _ <<<$(hostname -I)
     echo -e "\e[97mPasso$amarelo 2/9\e[0m"
-    echo -en "\e[33mDigite o dominio do Qdrant (ex: http://123.456.789.123:6333): \e[0m" && read -r url_quedrant
+    echo -en "\e[33mDigite o dominio do Qdrant (ex: http://$ip  ou http://qdrant.oriondesign.art.br): \e[0m" && read -r url_quedrant
     echo ""
 
     ##Pergunta a Api Key do Qdrant
