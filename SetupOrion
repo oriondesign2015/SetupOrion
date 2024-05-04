@@ -9467,7 +9467,7 @@ services:
       - NEXTAUTH_SECRET=$secret 
       - CALENDSO_ENCRYPTION_KEY=$secret
 
-    ## DadosPostgress
+    ## Dados Postgress
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/calcom
 
     ## Configurações de Email e SMTP
@@ -18020,7 +18020,7 @@ services:
       - DASHBOARD_PASSWORD=$pass_supabase ## Senha Kong
 
       ## JWT_SECRET
-      - JWT_SERCET=$JWT_Key 
+      - JWT_SECRET=$JWT_Key 
       
       ## Dados Kong
       - KONG_DATABASE=off
