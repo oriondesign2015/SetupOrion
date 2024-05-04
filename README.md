@@ -40,3 +40,4 @@ bash <(curl -sSL setup.oriondesign.art.br)
 <a align="center" href="https://github.com/oriondesign2015/setuporion/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=oriondesign2015/setuporion" />
 </a>
+
