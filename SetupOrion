@@ -6313,7 +6313,7 @@ if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_typebot #> /dev/null 2>&1
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_typebot #> /dev/null 2>&1
 fi
@@ -8487,7 +8487,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   baserow:
-    image: baserow/baserow:1.22.2 ## Versão do Baserow
+    image: baserow/baserow:latest ## Versão do Baserow
 
     volumes:
       - baserow_data:/baserow/data
