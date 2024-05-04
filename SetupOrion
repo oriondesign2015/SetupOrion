@@ -10229,8 +10229,9 @@ preencha_as_info
 while true; do
 
     ## Pergunta o Dominio da ferramenta
+    read -r ip _ <<<$(hostname -I)
     echo -e "\e[97mPasso$amarelo 1/2\e[0m"
-    echo -en "\e[33mDigite o ip da vps (ex: 123.45.678.99) ou dominio para Qdrant (ex: qdrant.oriondesign.art.br): \e[0m" && read -r ip_vps
+    echo -en "\e[33mDigite o ip da vps (ex: $ip) ou dominio para Qdrant (ex: qdrant.oriondesign.art.br): \e[0m" && read -r ip_vps
     echo ""
     
     ## Pergunta quandos nodes deseja
