@@ -4027,6 +4027,7 @@ else
     echo "1/2 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Redis."
 fi
+sleep 1
 STACK_NAME="redis"
 stack_editavel > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c redis.yaml redis
@@ -8500,7 +8501,7 @@ services:
       - BASEROW_PUBLIC_URL=https://$url_baserow
 
       ## Porta do baserow
-      - BASEROW_CADDY_ADDRESSES=:8080
+      - BASEROW_CADDY_ADDRESSES=:80
 
       ## Dados SMTP
       - EMAIL_SMTP=true ## Ativar/Desativar SMTP
@@ -8526,7 +8527,7 @@ services:
       labels:
         - traefik.enable=true
         - traefik.http.routers.baserow.rule=Host(\`$url_baserow\`)
-        - traefik.http.services.baserow.loadbalancer.server.port=8080
+        - traefik.http.services.baserow.loadbalancer.server.port=80
         - traefik.http.routers.baserow.service=baserow
         - traefik.http.routers.baserow.tls.certresolver=letsencryptresolver
         - traefik.http.routers.baserow.entrypoints=websecure
