@@ -14336,8 +14336,9 @@ while true; do
     echo ""
 
     ##Pergunta a Api Key do Qdrant
+    key_dify_rand=$(openssl rand -hex 16)
     echo -e "\e[97mPasso$amarelo 3/9\e[0m"
-    echo -en "\e[33mDigite a Api Key do Qdrant (ex: 1234-5678-9123-4567-8912): \e[0m" && read -r apikey_qdrant
+    echo -en "\e[33mDigite a Api Key do Qdrant (ex: $key_dify_rand): \e[0m" && read -r apikey_qdrant
     echo ""
 
     ##Pergunta o Email SMTP
