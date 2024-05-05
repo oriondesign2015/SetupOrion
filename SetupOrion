@@ -10751,6 +10751,12 @@ services:
       $EVOLUTION_API_ENDPOINT ## BaseUrl
       $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
 
+      ## Timezone
+      - DEFAULT_TIMEZONE=Brasilia
+
+      ## Dados OpenAI
+      #- OPENAI_API_KEY=
+
       ## Dados PgVector
       - DATABASE_URL=postgres://postgres:$senha_pgvector@pgvector:5432/woofedcrm
 
@@ -10816,6 +10822,12 @@ services:
       $EVOLUTION_API_ENDPOINT ## BaseUrl
       $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
 
+      ## Timezone
+      - DEFAULT_TIMEZONE=Brasilia
+
+      ## Dados OpenAI
+      #- OPENAI_API_KEY=
+
       ## Dados PgVector
       - DATABASE_URL=postgres://postgres:$senha_pgvector@pgvector:5432/woofedcrm
 
@@ -10869,6 +10881,12 @@ services:
       ## Endpoints Evolution API
       $EVOLUTION_API_ENDPOINT ## BaseUrl
       $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
+
+      ## Timezone
+      - DEFAULT_TIMEZONE=Brasilia
+
+      ## Dados OpenAI
+      #- OPENAI_API_KEY=
 
       ## Dados PgVector
       - DATABASE_URL=postgres://postgres:$senha_pgvector@pgvector:5432/woofedcrm
