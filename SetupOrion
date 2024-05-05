@@ -4059,13 +4059,13 @@ else
 fi
 STACK_NAME="pgvector"
 stack_editavel > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c pgvector.yaml pgvector > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/2 - [ OK ] - Deploy Stack"
 else
     echo "2/2 - [ OFF ] - Deploy Stack"
     echo "Ops, não foi possivel subir a stack do PgVector."
 fi
+#docker stack deploy --prune --resolve-image always -c pgvector.yaml pgvector > /dev/null 2>&1
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
