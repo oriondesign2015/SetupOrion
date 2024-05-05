@@ -2654,10 +2654,10 @@ criar_banco_postgres_calcom() {
 criar_banco_pgvector_woofedcrm() {
     while :; do
         if docker ps -q --filter "name=pgvector" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=pgvector")
+            CONTAINER_PGVECTOR_ID=$(docker ps -q --filter "name=pgvector")
 
             # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -p 5434 -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
+            docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
 
 
             if [ $? -eq 0 ]; then
@@ -2666,11 +2666,11 @@ criar_banco_pgvector_woofedcrm() {
                 read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
                 if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
                     # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -p 5434 -U postgres -c "DROP DATABASE IF EXISTS woofedcrm;"
+                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "DROP DATABASE IF EXISTS woofedcrm;"
                     echo "Banco de dados woofedcrm apagado com sucesso."
                     
                     # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -p 5434 -U postgres -c "CREATE DATABASE woofedcrm;"
+                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
                     
                     echo "Banco de dados woofedcrm criado com sucesso."
                 else
@@ -2679,10 +2679,10 @@ criar_banco_pgvector_woofedcrm() {
                 break
             else
                 # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -p 5434 -U postgres -c "CREATE DATABASE woofedcrm;"
+                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
                 
                 # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -p 5434 -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
+                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
 
                 if [ $? -eq 0 ]; then
                     echo "Banco de dados woofedcrm criado com sucesso."
@@ -4015,7 +4015,6 @@ services:
   pgvector:
     image: pgvector/pgvector:pg16
 
-    # Descomente as linhas abaixo para uso externo
     ports:
       - 5433:5432
 
