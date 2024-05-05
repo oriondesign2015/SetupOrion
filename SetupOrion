@@ -2654,7 +2654,7 @@ criar_banco_postgres_calcom() {
 criar_banco_pgvector_woofedcrm() {
     while :; do
         if docker ps -q --filter "name=pgvector" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=pgvector")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U pgvector -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
