@@ -10725,7 +10725,7 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  woofedcrm_orion:
+  woofedcrm_web_orion:
     image: douglara/woofedcrm:$v_woofed
     command: bundle exec rails s -p 3000 -b 0.0.0.0
 
@@ -10929,7 +10929,7 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/7]\e[0m"
 wait_30_sec
 echo ""
 sleep 1
-## Usa o serviço wait_woofedrm para verificar se o serviço esta online
+## Usa o serviço wait_woofedcrm para verificar se o serviço esta online
 wait_woofedcrm
 
 ## Mensagem de Passo
@@ -10938,7 +10938,7 @@ echo ""
 sleep 1
 
 #MIGRANDO BANCO DE DADOS DO WOOFED CRM
-container_name="  woofedcrm_woofedcrm"
+container_name="  woofedcrm_web_orion"
 
 max_wait_time=1200
 
@@ -10968,7 +10968,7 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[7/7]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_woofedrm para verificar se o serviço esta online
+## Usa o serviço wait_woofedcrm para verificar se o serviço esta online
 wait_woofedcrm
 
 cd dados_vps
