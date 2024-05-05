@@ -2657,7 +2657,7 @@ criar_banco_pgvector_woofedcrm() {
             CONTAINER_ID=$(docker ps -q --filter "name=pgvector")
 
             # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U pgvector -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
 
             if [ $? -eq 0 ]; then
                 echo "O banco de dados woofedcrm já existe."
@@ -2665,11 +2665,11 @@ criar_banco_pgvector_woofedcrm() {
                 read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
                 if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
                     # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U pgvector -c "DROP DATABASE IF EXISTS woofedcrm;"
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS woofedcrm;"
                     echo "Banco de dados woofedcrm apagado com sucesso."
                     
                     # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U pgvector -c "CREATE DATABASE woofedcrm;"
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
                     
                     echo "Banco de dados woofedcrm criado com sucesso."
                 else
@@ -2678,10 +2678,10 @@ criar_banco_pgvector_woofedcrm() {
                 break
             else
                 # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U pgvector -c "CREATE DATABASE woofedcrm;"
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
                 
                 # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U pgvector -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
 
                 if [ $? -eq 0 ]; then
                     echo "Banco de dados woofedcrm criado com sucesso."
