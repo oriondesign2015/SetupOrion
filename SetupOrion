@@ -10612,7 +10612,7 @@ while true; do
     clear
     
     ## Mostra o nome da aplicação
-    nome_rabbitmq
+    nome_woofedcrm
     
     ## Mostra mensagem para verificar as informações
     conferindo_as_info
