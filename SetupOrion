@@ -1166,6 +1166,7 @@ verificar_campos() {
         echo ""
 
         echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+        echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
         read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " SENHA
         echo ""
 
@@ -1180,6 +1181,7 @@ verificar_campos() {
         echo ""
 
         echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+        echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
         read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " NOVA_SENHA
         echo ""
         verificar_token "$PORTAINER_URL" "$NOVO_USUARIO" "$NOVA_SENHA" true
@@ -1242,6 +1244,7 @@ verificar_token() {
                 echo ""
 
                 echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+                echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
                 read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " SENHA
                 echo ""
                 ATUALIZAR="true"
@@ -10696,7 +10699,7 @@ echo ""
     if [ $? -eq 0 ]; then
         echo ""
     else
-        ferramenta_redis > /dev/null 2>&1
+        ferramenta_redis
     fi
 
 ## Mensagem de Passo
