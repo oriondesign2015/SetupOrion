@@ -17813,9 +17813,7 @@ nome_supabase
 preencha_as_info
 
 
-#!/bin/bash
-
-function generate_jwt_tokens() {
+generate_jwt_tokens() {
     # Verificar a disponibilidade dos comandos necessários e instalá-los se necessário
     if ! command -v openssl &> /dev/null; then
         echo "O comando 'openssl' não está disponível. Tentando instalar..."
@@ -18598,7 +18596,7 @@ services:
       test: 'pg_isready -U postgres -h localhost'
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 10 
 
     volumes:
       - /root/supabase/docker/volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
