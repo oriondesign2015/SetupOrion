@@ -5,7 +5,7 @@
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 versao() {
-echo -e "\e[97mComunidade: \e[32mhttps://chat.whatsapp.com/EmmgJiSlpeFJd1PAFOS7xz               \e[97mVersão do Setup: \e[32mv.2.5.0\e[0m"
+echo -e "\e[97mComunidade: \e[32mhttps://chat.whatsapp.com/EmmgJiSlpeFJd1PAFOS7xz               \e[97mVersão do Setup: \e[32mv.2.5.1\e[0m"
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -17865,14 +17865,15 @@ generate_jwt_tokens() {
     payload_service_key=$(echo '{
       "role": "service_role",
       "iss": "supabase",
-      "iat": 1714878000,
-      "exp": 2524608000
+      "iat": 1715050800,
+      "exp": 1872817200
     }' | jq -c .)
 
     payload_anon_key=$(echo '{
-      "sub": "1234567890",
-      "name": "supabase",
-      "iat": 2524608000
+      "role": "anon",
+      "iss": "supabase",
+      "iat": 1715050800,
+      "exp": 1872817200
     }' | jq -c .)
 
     # Gerar uma chave secreta aleatória e segura
