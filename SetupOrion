@@ -17913,11 +17913,6 @@ fi
 # Extrair os valores individuais usando o comando 'read'
 read secret token_service_key token_anon_key <<< "$result"
 
-# Imprimir os valores
-# echo "Chave secreta: $secret"
-# echo "Token JWT de service_key: $token_service_key"
-# echo "Token JWT de anon_key: $token_anon_key"
-
 
 ## Inicia um Loop até os dados estarem certos
 while true; do
@@ -17972,31 +17967,14 @@ while true; do
     smtp_secure_supabase=false
     fi
 
-    # Imprimir os valores
-# echo "Chave secreta: $secret"
-# echo "Token JWT de service_key: $token_service_key"
-# echo "Token JWT de anon_key: $token_anon_key"
-
     ## Pergunta qual é o JWT_Key
-    echo -e "\e[97mPasso$amarelo 9/13\e[0m"
-    echo -e "$amarelo--> Pegue em: https://supabase.com/docs/guides/self-hosting/docker"
-    echo -en "\e[33mDigite o JWT_Key do Supabase: \e[0m" && read -r JWT_Key
     JWT_Key="$secret"
-    echo ""
 
     ## Pergunta qual é o ANON_KEY
-    echo -e "\e[97mPasso$amarelo 10/13\e[0m"
-    echo -e "$amarelo--> Gere em: https://supabase.com/docs/guides/self-hosting/docker"
-    echo -en "\e[33mDigite o ANON_KEY do Supabase: \e[0m" && read -r ANON_KEY
     ANON_KEY="$token_anon_key"
-    echo ""
 
     ## Pergunta qual é o SERVICE_KEY
-    echo -e "\e[97mPasso$amarelo 11/13\e[0m"    
-    echo -e "$amarelo--> Gere em: https://supabase.com/docs/guides/self-hosting/docker"
-    echo -en "\e[33mDigite o SERVICE_KEY do Supabase: \e[0m" && read -r SERVICE_KEY
     SERVICE_KEY="$token_service_key"
-    echo ""
 
     ## Pergunta qual é o Access Key do minio
     echo -e "\e[97mPasso$amarelo 12/13\e[0m"
@@ -18729,7 +18707,11 @@ Usuario: $user_supabase
 
 Senha: $pass_supabase
 
-Api Key: $ANON_KEY
+Secret Key: $JWT_Key
+
+Anon Key: $ANON_KEY
+
+Service Key: $SERVICE_KEY
 EOL
 
 cd
@@ -18757,7 +18739,13 @@ echo ""
 echo -e "\e[33mSenha:\e[97m $pass_supabase\e[0m"
 echo ""
 
-echo -e "\e[33mApi key:\e[97m $ANON_KEY\e[0m"
+echo -e "\e[33mSecret Key:\e[97m $JWT_Key\e[0m"
+echo ""
+
+echo -e "\e[33mAnon key:\e[97m $ANON_KEY\e[0m"
+echo ""
+
+echo -e "\e[33mService key:\e[97m $SERVICE_KEY\e[0m"
 echo ""
 
 ## Creditos do instalador
