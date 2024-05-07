@@ -17867,21 +17867,22 @@ generate_jwt_tokens() {
       "iss": "supabase",
       "iat": 1715050800,
       "exp": 1872817200
-    }' | jq -c .)
+    }' | jq .)
 
+    
     payload_anon_key=$(echo '{
       "role": "anon",
       "iss": "supabase",
       "iat": 1715050800,
       "exp": 1872817200
-    }' | jq -c .)
+    }' | jq .)
 
     # Gerar uma chave secreta aleatória e segura
     secret=$(openssl rand -hex 20)
 
     # Codificar o header em base64url
-    header=$(echo '{"alg":"HS256","typ":"JWT"}' | openssl base64 | tr -d '=' | tr '+/' '-_' | tr -d '\n')
-
+    header=$(echo -n '{"alg":"HS256","typ":"JWT"}' | openssl base64 | tr -d '=' | tr '+/' '-_' | tr -d '\n')
+    
     # Codificar os payloads em base64url
     payload_service_key_base64=$(echo -n "$payload_service_key" | openssl base64 | tr -d '=' | tr '+/' '-_' | tr -d '\n')
     payload_anon_key_base64=$(echo -n "$payload_anon_key" | openssl base64 | tr -d '=' | tr '+/' '-_' | tr -d '\n')
