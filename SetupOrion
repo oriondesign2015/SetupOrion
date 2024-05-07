@@ -17861,8 +17861,6 @@ generate_jwt_tokens() {
         fi
     fi
 
-
-
 # Definir os payloads dos JWTs
     payload_service_key=$(echo '{
       "role": "service_role",
@@ -17878,7 +17876,7 @@ generate_jwt_tokens() {
     }' | jq -c .)
 
     # Gerar uma chave secreta aleatória e segura
-    secret=$(openssl rand -hex 32)
+    secret=$(openssl rand -hex 20)
 
     # Codificar o header em base64url
     header=$(echo '{"alg":"HS256","typ":"JWT"}' | openssl base64 | tr -d '=' | tr '+/' '-_' | tr -d '\n')
