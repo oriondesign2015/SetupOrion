@@ -4445,9 +4445,9 @@ else
     criar_banco_postgres_chatwoot
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
-    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OFF ] - Verificando/Instalando Postgres"
 fi
 
 ## Verifica container redis
@@ -4458,9 +4458,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OK ] - Verificando/Instalando Redis"
 else
-    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OFF ] - Verificando/Instalando Redis"
 fi
 
 ## Mensagem de Passo
@@ -4987,9 +4987,9 @@ else
     criar_banco_postgres_chatwoot
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
-    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OFF ] - Verificando/Instalando Postgres"
 fi
 
 ## Verifica container redis
@@ -5000,9 +5000,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Verificando/Instlando Reids"
+    echo "2/2 - [ OK ] - Verificando/Instalando Reids"
 else
-    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OFF ] - Verificando/Instalando Redis"
 fi
 
 ## Mensagem de Passo
@@ -8582,9 +8582,9 @@ else
     criar_banco_postgres_baserow
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
-    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OFF ] - Verificando/Instalando Postgres"
 fi
 
 ## Verifica container redis
@@ -8595,9 +8595,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OK ] - Verificando/Instalando Redis"
 else
-    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OFF ] - Verificando/Instalando Redis"
 fi
 
 ## Mensagem de Passo
@@ -12535,9 +12535,9 @@ else
     criar_banco_postgres_chatwoot_uno
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
-    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OFF ] - Verificando/Instalando Postgres"
 fi
 
 ## Verifica container redis
@@ -12548,9 +12548,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OK ] - Verificando/Instalando Redis"
 else
-    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OFF ] - Verificando/Instalando Redis"
 fi
 
 ## Mensagem de Passo
@@ -12993,9 +12993,9 @@ else
     criar_banco_postgres_chatwoot_nestor
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
-    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OFF ] - Verificando/Instalando Postgres"
 fi
 
 ## Verifica container redis
@@ -13006,9 +13006,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OK ] - Verificando/Instalando Redis"
 else
-    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OFF ] - Verificando/Instalando Redis"
 fi
 
 ## Mensagem de Passo
@@ -16098,9 +16098,9 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_directus #> /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
-    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OFF ] - Verificando/Instalando Postgres"
 fi
 
 ## Verifica container redis
@@ -16111,9 +16111,9 @@ else
     ferramenta_redis > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OK ] - Verificando/Instalando Redis"
 else
-    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OFF ] - Verificando/Instalando Redis"
 fi
 
 ## Mensagem de Passo
@@ -17128,9 +17128,9 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_nextcloud #> /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
-    echo "1/2 - [ OFF ] - Verificando/Instlando Postgres"
+    echo "1/2 - [ OFF ] - Verificando/Instalando Postgres"
 fi
 
 verificar_container_redis
@@ -17140,9 +17140,9 @@ else
     ferramenta_redis  > /dev/null 2>&1
 fi
 if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OK ] - Verificando/Instalando Redis"
 else
-    echo "2/2 - [ OFF ] - Verificando/Instlando Redis"
+    echo "2/2 - [ OFF ] - Verificando/Instalando Redis"
 fi
 
 echo ""
@@ -17392,9 +17392,9 @@ verificar_container_mysql
     fi
 
     if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Verificando/Instlando MySQL"
+    echo "1/1 - [ OK ] - Verificando/Instalando MySQL"
     else
-    echo "1/1 - [ OFF ] - Verificando/Instlando MySQL"
+    echo "1/1 - [ OFF ] - Verificando/Instalando MySQL"
     fi
 
 ## Espera 30 segundos
