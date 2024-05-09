@@ -41,3 +41,11 @@ bash <(curl -sSL setup.oriondesign.art.br)
   <img src="https://contrib.rocks/image?repo=oriondesign2015/setuporion" />
 </a>
 
+<a href="https://star-history.com/#oriondesign2015/SetupOrion&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date" />
+ </picture>
+</a>
+
