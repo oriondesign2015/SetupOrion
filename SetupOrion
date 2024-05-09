@@ -4289,6 +4289,112 @@ wait_30_sec
 
 }
 
+## ███╗   ███╗██╗   ██╗███████╗ ██████╗ ██╗     
+## ████╗ ████║╚██╗ ██╔╝██╔════╝██╔═══██╗██║     
+## ██╔████╔██║ ╚████╔╝ ███████╗██║   ██║██║     
+## ██║╚██╔╝██║  ╚██╔╝  ╚════██║██║▄▄ ██║██║     
+## ██║ ╚═╝ ██║   ██║   ███████║╚██████╔╝███████╗
+## ╚═╝     ╚═╝   ╚═╝   ╚══════╝ ╚══▀▀═╝ ╚══════╝
+
+ferramenta_mysql_setup() {
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Gerando uma senha aleatória para o Mysql
+senha_mysql=$(openssl rand -hex 16)
+
+## Criando a stack
+cat > mysql.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  mysql:
+    image: percona/percona-server:8.0 ## Versão do Mysql
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+    ## Senha MYSQL
+      - MYSQL_ROOT_PASSWORD=$senha_mysql
+
+    ## TimeZone
+      - TZ=America/Sao_Paulo
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+    command:
+      [
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_general_ci",
+        "--sql-mode=",
+        "--default-authentication-plugin=mysql_native_password",
+        "--max-allowed-packet=512MB",
+      ]
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  mysql_data:
+    external: true
+    name: mysql_data
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ] - Criando Stack"
+else
+    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "Ops, não foi criar a stack do Mysql."
+fi
+
+STACK_NAME="mysql"
+stack_editavel > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ] - Deploy Stack"
+else
+    echo "2/2 - [ OFF ] - Deploy Stack"
+    echo "Ops, não foi possivel subir a stack do Postgres."
+fi
+
+#docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
+
+## Salvando informações da instalação dentro de /dados_vps/
+cd dados_vps
+
+cat > dados_mysql <<EOL
+[ MYSQL ]
+
+Dominio do mysql: mysql
+
+Usuario: mysql ou root
+
+Senha: $senha_mysql
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+}
+
 ##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
 ## ██╔════╝██║  ██║██╔══██╗╚══██╔══╝██║    ██║██╔═══██╗██╔═══██╗╚══██╔══╝
 ## ██║     ███████║███████║   ██║   ██║ █╗ ██║██║   ██║██║   ██║   ██║   
@@ -14286,7 +14392,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   quepasa:
-    image: codeleaks/quepasa:latest
+    image: oriondesign/quepasa:latest
 
     volumes:
       - quepasa_data:/opt/quepasa
