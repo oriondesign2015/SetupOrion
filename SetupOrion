@@ -10695,24 +10695,18 @@ preencha_as_info
 while true; do
 
     ## Pergunta o Dominio da ferramenta
-    echo -e "\e[97mPasso$amarelo 1/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
     echo -en "\e[33mDigite o Dominio para o WoofedCRM (ex: woofedcrm.oriondesign.art.br): \e[0m" && read -r url_woofed
     echo ""
 
-    ## Pergunta a versão do WoofedCRM
-    echo -e "\e[97mPasso$amarelo 2/4\e[0m"
-    echo -e "\e[97mEncontre a versão em:$amarelo https://hub.docker.com/r/douglara/woofedcrm/tags\e[0m"
-    echo -en "\e[33mDigite a versão desejada: \e[0m" && read -r v_woofed
-    echo ""
-
     ## Pergunta o nome do Usuario do Motor
-    echo -e "\e[97mPasso$amarelo 3/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
     echo -e "$amarelo--> Evite os caracteres especiais: @\!#$ e/ou espaço"
     echo -en "\e[33mDigite o User do MOTOR (ex: oriondesign): \e[0m" && read -r email_admin_woofed
     echo ""
 
     ## Pergunta o nome do Senha do Motor
-    echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/3\e[0m"
     echo -e "$amarelo--> Evite os caracteres especiais: \!#$ e/ou espaço"
     echo -en "\e[33mDigite a Senha do MOTOR (ex: @Senha123_): \e[0m" && read -r senha_email_woofed
     echo ""
@@ -10728,10 +10722,6 @@ while true; do
 
     ## Informação sobre o dominio
     echo -e "\e[33mDominio:\e[97m $url_woofed\e[0m"
-    echo ""
-
-    ## Informação sobre a versão
-    echo -e "\e[33mVersão:\e[97m $v_woofed\e[0m"
     echo ""
 
     ## Informação sobre o usuario
@@ -10835,7 +10825,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   woofedcrm_web_orion:
-    image: douglara/woofedcrm:$v_woofed
+    image: douglara/woofedcrm:latest
     command: bundle exec rails s -p 3000 -b 0.0.0.0
 
     volumes:
@@ -10906,7 +10896,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   woofedcrm_sidekiq_orion:
-    image: douglara/woofedcrm:$v_woofed
+    image: douglara/woofedcrm:latest
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
@@ -10966,7 +10956,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   woofedcrm_job_orion:
-    image: douglara/woofedcrm:$v_woofed
+    image: douglara/woofedcrm:latest
     command: bundle exec good_job
 
     volumes:
