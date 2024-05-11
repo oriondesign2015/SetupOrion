@@ -18812,7 +18812,7 @@ Usuario: $user_supabase
 
 Senha: $pass_supabase
 
-Secret Key: $JWT_Key
+JWT Key: $JWT_Key
 
 Anon Key: $ANON_KEY
 
