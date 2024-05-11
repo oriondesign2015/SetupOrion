@@ -5,7 +5,7 @@
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 versao() {
-echo -e "\e[97mComunidade: \e[32mhttps://chat.whatsapp.com/EmmgJiSlpeFJd1PAFOS7xz               \e[97mVersão do Setup: \e[32mv.2.5.1\e[0m"
+echo -e "\e[97mComunidade: \e[32mhttps://chat.whatsapp.com/EmmgJiSlpeFJd1PAFOS7xz               \e[97mVersão do Setup: \e[32mv.2.5.2\e[0m"
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -1094,7 +1094,7 @@ stack_editavel(){
     PORTAINER_URL=$(grep "Dominio do portainer: " /root/dados_vps/dados_portainer | awk -F "Dominio do portainer: " '{print $2}')
     #TOKEN=$(grep "Token: " /root/dados_vps/dados_portainer | awk -F "Token: " '{print $2}')
     
-    TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" $PORTAINER_URL/api/auth | jq -r .jwt)
+    TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" https://$PORTAINER_URL/api/auth | jq -r .jwt)
 
     echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
 
@@ -1109,7 +1109,7 @@ stack_editavel(){
     -F "file=@$(pwd)/$STACK_NAME.yaml" \
     -F "SwarmID=$SWARM_ID" \
     -F "endpointId=$ENDPOINT_ID" \
-    "$PORTAINER_URL/api/stacks/create/swarm/file"
+    "https://$PORTAINER_URL/api/stacks/create/swarm/file"
 }
 
 ## Função para verificar se o arquivo de dados do Portainer existe
