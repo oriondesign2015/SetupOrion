@@ -1089,6 +1089,7 @@ menu_instalador(){
 stack_editavel(){
 
     sudo apt install jq -y > /dev/null 2>&1
+
     USUARIO=$(grep "Usuario: " /root/dados_vps/dados_portainer | awk -F "Usuario: " '{print $2}')
     SENHA=$(grep "Senha: " /root/dados_vps/dados_portainer | awk -F "Senha: " '{print $2}')
     PORTAINER_URL=$(grep "Dominio do portainer: " /root/dados_vps/dados_portainer | awk -F "Dominio do portainer: " '{print $2}')
@@ -1098,8 +1099,8 @@ stack_editavel(){
 
     echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
 
-    ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" $PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
-    SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" "$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm" | jq -r .ID)
+    ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" https://$PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
+    SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" "https://$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm" | jq -r .ID)
 
     #docker stack rm $STACK_NAME
     
