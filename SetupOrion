@@ -1134,6 +1134,7 @@ criar_arquivo() {
     ## Caso não exista o arquivo ele vai pedir os dados para criar.
     nome_credenciais
     echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+    #echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
     read -p "Digite a Url do Portainer (ex: https://portainer.oriondesign.art.br): " PORTAINER_URL
     echo ""
 
@@ -1142,9 +1143,8 @@ criar_arquivo() {
     echo ""
 
     echo -e "\e[97mPasso$amarelo 3/3\e[0m"
-    read -s -p "Digite a Senha (ex: @Senha123_): " SENHA
     echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
-    echo -e "[ PORTAINER ]\n\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA" > "/root/dados_vps/dados_portainer"
+    read -s -p "Digite a Senha (ex: @Senha123_): " SENHA
     echo ""
 
     verificar_token "$PORTAINER_URL" "$USUARIO" "$SENHA" true
@@ -1161,13 +1161,18 @@ verificar_campos() {
     if [ -z "$USUARIO" ] || [ -z "$SENHA" ]; then
         
         nome_credenciais
-        echo -e "\e[97mPasso$amarelo 1/2\e[0m"
-        read -p "Digite seu Usuario do Portainer  (ex: admin): " USUARIO
+        echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+        echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
+        read -p "Digite a Url do Portainer (ex: https://portainer.oriondesign.art.br): " PORTAINER_URL
         echo ""
-
-        echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+    
+        echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+        read -p "Digite seu Usuario (ex: admin): " USUARIO
+        echo ""
+    
+        echo -e "\e[97mPasso$amarelo 3/3\e[0m"
         echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
-        read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " SENHA
+        read -s -p "Digite a Senha (ex: @Senha123_): " SENHA
         echo ""
 
         ATUALIZAR="true" ## Verificar se já existe TOKEN no arquivo
@@ -1176,14 +1181,20 @@ verificar_campos() {
     elif [ "$USUARIO" == "Precisa criar dentro do portainer" ] || [ "$SENHA" == "Precisa criar dentro do portainer" ]; then
         
         nome_credenciais
-        echo -e "\e[97mPasso$amarelo 1/2\e[0m"
-        read -p "Digite seu Usuario do Portainer  (ex: admin): " NOVO_USUARIO
+        echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+        echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
+        read -p "Digite a Url do Portainer (ex: https://portainer.oriondesign.art.br): " PORTAINER_URL
+        echo ""
+    
+        echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+        read -p "Digite seu Usuario (ex: admin): " USUARIO
+        echo ""
+    
+        echo -e "\e[97mPasso$amarelo 3/3\e[0m"
+        echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
+        read -s -p "Digite a Senha (ex: @Senha123_): " NOVA_SENHA
         echo ""
 
-        echo -e "\e[97mPasso$amarelo 2/2\e[0m"
-        echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
-        read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " NOVA_SENHA
-        echo ""
         verificar_token "$PORTAINER_URL" "$NOVO_USUARIO" "$NOVA_SENHA" true
     else
         verificar_token "$PORTAINER_URL" "$USUARIO" "$SENHA" false
