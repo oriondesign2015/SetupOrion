@@ -1135,7 +1135,7 @@ criar_arquivo() {
     nome_credenciais
     echo -e "\e[97mPasso$amarelo 1/3\e[0m"
     #echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
-    read -p "Digite a Url do Portainer (ex: https://portainer.oriondesign.art.br): " PORTAINER_URL
+    read -p "Digite a Url do Portainer (ex: portainer.oriondesign.art.br): " PORTAINER_URL
     echo ""
 
     echo -e "\e[97mPasso$amarelo 2/3\e[0m"
@@ -1162,8 +1162,8 @@ verificar_campos() {
         
         nome_credenciais
         echo -e "\e[97mPasso$amarelo 1/3\e[0m"
-        echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
-        read -p "Digite a Url do Portainer (ex: https://portainer.oriondesign.art.br): " PORTAINER_URL
+        #echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
+        read -p "Digite a Url do Portainer (ex: portainer.oriondesign.art.br): " PORTAINER_URL
         echo ""
     
         echo -e "\e[97mPasso$amarelo 2/3\e[0m"
@@ -1182,8 +1182,8 @@ verificar_campos() {
         
         nome_credenciais
         echo -e "\e[97mPasso$amarelo 1/3\e[0m"
-        echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
-        read -p "Digite a Url do Portainer (ex: https://portainer.oriondesign.art.br): " PORTAINER_URL
+        #echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
+        read -p "Digite a Url do Portainer (ex: portainer.oriondesign.art.br): " PORTAINER_URL
         echo ""
     
         echo -e "\e[97mPasso$amarelo 2/3\e[0m"
@@ -1218,7 +1218,7 @@ verificar_token() {
         #echo "Usuário: $USUARIO"
         #echo "Senha: $SENHA"
 
-        RESPONSE=$(curl -s -w "\n%{http_code}" -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" "$PORTAINER_URL/api/auth")
+        RESPONSE=$(curl -s -w "\n%{http_code}" -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" "https://$PORTAINER_URL/api/auth")
         TOKEN=$(echo "$RESPONSE" | sed '$d' | jq -r '.jwt')
         HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
 
