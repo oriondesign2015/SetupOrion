@@ -1251,13 +1251,18 @@ verificar_token() {
             if [ $TENTATIVAS -lt $MAX_TENTATIVAS ]; then
                 
                 nome_credenciais
-                echo -e "\e[97mPasso$amarelo 1/2\e[0m"
-                read -p "Digite seu Usuario do Portainer  (ex: admin): " USUARIO
+                echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+                #echo -e "\e[97mObs: Coloque o https:// antes do link do portainer\e[0m"
+                read -p "Digite a Url do Portainer (ex: portainer.oriondesign.art.br): " PORTAINER_URL
                 echo ""
-
-                echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+            
+                echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+                read -p "Digite seu Usuario (ex: admin): " USUARIO
+                echo ""
+            
+                echo -e "\e[97mPasso$amarelo 3/3\e[0m"
                 echo -e "\e[97mObs: A Senha não aparecera ao digitar\e[0m"
-                read -s -p "Digite a Senha do Portainer (ex: @Senha123_): " SENHA
+                read -s -p "Digite a Senha (ex: @Senha123_): " SENHA
                 echo ""
                 ATUALIZAR="true"
             else
@@ -20208,12 +20213,18 @@ while true; do
             n8n.workflows
             ;;
 
+        ## Corrigir imagem da stack do traefik para 2.11.2
         traefik.fix)
             traefik.fix    
             ;;
 
+        ## Instalar CTOP
         ctop)
             ctop
+            ;;
+        ## Corrigir credenciais do portainer (para instalações)
+        credencial.reset)
+            criar_arquivo
             ;;
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
