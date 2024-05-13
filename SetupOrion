@@ -1090,6 +1090,13 @@ stack_editavel(){
 
     sudo apt install jq -y > /dev/null 2>&1
 
+    arquivo="/root/dados_vps/dados_portainer"
+    if [ ! -f "$arquivo" ]; then
+        echo "Arquivo não encontrado: $arquivo"
+        criar_arquivo
+    fi
+    sed -i 's/Dominio do portainer: https:\/\/\(.*\)/Dominio do portainer: \1/' "$arquivo"
+
     USUARIO=$(grep "Usuario: " /root/dados_vps/dados_portainer | awk -F "Usuario: " '{print $2}')
     SENHA=$(grep "Senha: " /root/dados_vps/dados_portainer | awk -F "Senha: " '{print $2}')
     PORTAINER_URL=$(grep "Dominio do portainer: " /root/dados_vps/dados_portainer | awk -F "Dominio do portainer: " '{print $2}')
