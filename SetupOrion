@@ -16310,6 +16310,7 @@ services:
         - traefik.enable=true
         - traefik.http.routers.directus.rule=Host(\`$url_directus\`)
         - traefik.http.routers.directus.entrypoints=web,websecure
+        - traefik.http.routers.directus.tls.certresolver=letsencryptresolve
         - traefik.http.routers.directus.tls=true
         - traefik.http.services.directus.loadbalancer.server.port=8055
         - traefik.docker.network=proxy
