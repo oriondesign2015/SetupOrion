@@ -13144,6 +13144,8 @@ sleep 1
 ## Criando key aleatória
 encryption_key=$(openssl rand -hex 16)
 
+dados
+
 ## Criando a stack
 cat > chatwoot_nestor.yaml <<EOL
 version: "3.7"
