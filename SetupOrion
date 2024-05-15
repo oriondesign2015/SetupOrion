@@ -20232,6 +20232,7 @@ while true; do
         ctop)
             ctop
             ;;
+            
         ## Corrigir credenciais do portainer (para instalações)
         credencial.reset)
             criar_arquivo
