@@ -104,7 +104,7 @@ info_credenciais(){
     echo -e "$amarelo===================================================================================================\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
     echo -e "$amarelo=  $branco A partir da versão 2.5.0 deste Setup foi implementado uma função para realizar deploy dentro $amarelo =\e[0m"
-    echo -e "$amarelo=  $branco   do proprio portainer através de uma requsição api. Para que esta nova função funcione em   $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco   do proprio portainer através de uma requisição api. Para que esta nova função funcione em  $amarelo =\e[0m"
     echo -e "$amarelo=  $branco suas proximas instalações, você precisará informar às credenciais de acesso do seu portainer $amarelo =\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
