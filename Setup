@@ -18,7 +18,8 @@ if ! grep -q 'Ubuntu 20.04' /etc/os-release; then
     sleep 3
 fi
 
-# Resto do seu script
+apt install sudo -y
+
 sudo apt-get install -y apt-utils
 
 sudo apt-get install -y dialog
