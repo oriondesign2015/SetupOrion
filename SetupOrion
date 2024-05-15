@@ -3627,6 +3627,8 @@ else
     echo "1/3 - [ OFF ] - Pegando IP $ip"
 fi
 curl -fsSL https://get.docker.com | bash > /dev/null 2>&1
+systemctl enable docker
+systemctl start docker
 if [ $? -eq 0 ]; then
     echo "2/3 - [ OK ] - Baixando e Instalando Docker"
 else
