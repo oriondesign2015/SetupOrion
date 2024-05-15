@@ -27,11 +27,11 @@ reset="\e[0m"
 
 
 home_directory="$HOME"
-arquivo="${home_directory}/dados_vps/dados_vps"
+dados_vps="${home_directory}/dados_vps/dados_vps"
 
 dados() {
-    nome_servidor=$(grep "Nome do Servidor:" "$arquivo" | awk -F': ' '{print $2}')
-    nome_rede_interna=$(grep "Rede interna:" "$arquivo" | awk -F': ' '{print $2}')
+    nome_servidor=$(grep "Nome do Servidor:" "$dados_vps" | awk -F': ' '{print $2}')
+    nome_rede_interna=$(grep "Rede interna:" "$dados_vps" | awk -F': ' '{print $2}')
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -20232,7 +20232,7 @@ while true; do
         ctop)
             ctop
             ;;
-            
+
         ## Corrigir credenciais do portainer (para instalações)
         credencial.reset)
             criar_arquivo
