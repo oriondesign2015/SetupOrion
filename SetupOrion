@@ -10726,13 +10726,13 @@ while true; do
     echo ""
 
     ## Pergunta o nome do Usuario do Motor
-    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/3\e[0m"
     echo -e "$amarelo--> Evite os caracteres especiais: @\!#$ e/ou espaço"
     echo -en "\e[33mDigite o User do MOTOR (ex: oriondesign): \e[0m" && read -r email_admin_woofed
     echo ""
 
     ## Pergunta o nome do Senha do Motor
-    echo -e "\e[97mPasso$amarelo 4/3\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
     echo -e "$amarelo--> Evite os caracteres especiais: \!#$ e/ou espaço"
     echo -en "\e[33mDigite a Senha do MOTOR (ex: @Senha123_): \e[0m" && read -r senha_email_woofed
     echo ""
