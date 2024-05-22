@@ -9743,7 +9743,7 @@ services:
       #- NEXT_PUBLIC_APP_NAME="Cal.com"
       #- NEXT_PUBLIC_SUPPORT_MAIL_ADDRESS="help@cal.com"
       #- NEXT_PUBLIC_COMPANY_NAME="Cal.com, Inc."
-      #- NEXT_PUBLIC_DISABLE_SIGNUP=false
+      #- NEXT_PUBLIC_DISABLE_SIGNUP=false ## false = novas inscrições permitidas | true = novas incrições fechadas
 
     ## Integração com Microsoft 365
       #- MS_GRAPH_CLIENT_ID=
@@ -16561,7 +16561,7 @@ services:
 
     environment:
       ## Dominio do Dashboard
-      - DOMAIN:https://$url_vaultwarden
+      - DOMAIN=https://$url_vaultwarden
 
       ## Permitir novos registros
       - SIGNUPS_ALLOWED=true
