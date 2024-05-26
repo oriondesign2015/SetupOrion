@@ -1,0 +1,11 @@
+clear
+
+cpu_vendor=$(lscpu | grep 'Vendor ID' | awk '{print $3}')
+
+if [[ "$cpu_vendor" == "GenuineIntel" || "$cpu_vendor" == "AuthenticAMD" ]]; then
+    echo "você esta usando INTEL/AMD"
+elif [[ "$cpu_vendor" == "ARM" ]]; then
+    echo "vpc}e esta usando ARM"
+else
+    echo "Tipo de processador desconhecido: $cpu_vendor"
+fi
