@@ -1,5 +1,8 @@
 clear
 
+apt-get update && apt-get install -y grep > /dev/null 2>&1
+apt-get update && apt-get install -y gawk > /dev/null 2>&1
+
 cpu_vendor=$(lscpu | grep 'Vendor ID' | awk '{print $3}')
 
 if [[ "$cpu_vendor" == "GenuineIntel" || "$cpu_vendor" == "AuthenticAMD" ]]; then
