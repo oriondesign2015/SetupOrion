@@ -5,7 +5,8 @@
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 versao() {
-echo -e "\e[97mComunidade: \e[32mhttps://chat.whatsapp.com/EmmgJiSlpeFJd1PAFOS7xz          \e[97mVersão do SetupOrion: \e[32mv.2.5.4\e[0m"
+echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.5.5\e[0m                                  "
+echo -e "\e[32moriondesign.art.br/whatsapp1      \e[97m<----- Grupos no WhatsApp ----->     \e[32moriondesign.art.br/whatsapp2\e[0m"
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -24,7 +25,6 @@ reset="\e[0m"
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
-
 
 home_directory="$HOME"
 dados_vps="${home_directory}/dados_vps/dados_vps"
@@ -120,16 +120,16 @@ creditos_msg() {
     echo ""
     echo -e "$amarelo===================================================================================================\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco  Gostaria de contribuir para continuarmos o desenvolvimento deste projeto?            $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco                    Você pode fazer uma doação via PIX:                                $amarelo=\e[0m"
+    echo -e "$amarelo=           $branco Gostaria de contribuir para continuarmos o desenvolvimento deste projeto?            $amarelo=\e[0m"
+    echo -e "$amarelo=                              $branco Você pode fazer uma doação via PIX:                               $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=                                      pix@oriondesign.art.br                                     $amarelo=\e[0m"
+    echo -e "$amarelo=                                     $amarelo pix@oriondesign.art.br                                     $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco         Se precisar de ajuda/mentoria ou quiser deixar seu feedback                   $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco               Nossa comunidade:$amarelo https://discord.gg/MD5dgNR8My                         $amarelo=\e[0m"
+    echo -e "$amarelo=                  $branco Se precisar de ajuda/mentoria ou quiser deixar seu feedback                   $amarelo=\e[0m"
+    echo -e "$amarelo=                        $branco Nossa comunidade:$amarelo https://discord.gg/MD5dgNR8My                         $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco                    ou via WhatsApp (comunidade SetupOrion)                            $amarelo=\e[0m"
-    echo -e "$amarelo=          $amarelo               https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5                        $amarelo=\e[0m"
+    echo -e "$amarelo=                            $branco ou via WhatsApp (comunidade SetupOrion)                             $amarelo=\e[0m"
+    echo -e "$amarelo=      $amarelo https://oriondesign.art.br/whatsapp1 $branco<-- ou -->$amarelo https://oriondesign.art.br/whatsapp2      $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
@@ -283,14 +283,13 @@ nome_instalador() {
     echo -e "$branco       ███████║███████╗   ██║   ╚██████╔╝██║         ╚██████╔╝██║  ██║██║╚██████╔╝██║ ╚████║\e[0m"
     echo -e "$branco       ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝          ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝\e[0m"
     echo -e "$branco                                                                                            \e[0m"
-    echo -e "$branco                                        ██╗   ██╗  ██████╗                                  \e[0m"
-    echo -e "$branco                                        ██║   ██║  ╚════██╗                                 \e[0m"
-    echo -e "$branco                              █████╗    ██║   ██║   █████╔╝    █████╗                       \e[0m"
-    echo -e "$branco                              ╚════╝    ╚██╗ ██╔╝  ██╔═══╝     ╚════╝                       \e[0m"
-    echo -e "$branco                                         ╚████╔╝██╗███████╗                                 \e[0m"
-    echo -e "$branco                                          ╚═══╝ ╚═╝╚══════╝                                 \e[0m"
-    echo ""
-
+    echo -e "$branco                                 ██████╗    ███████╗   ███████╗                             \e[0m"
+    echo -e "$branco                                 ╚════██╗   ██╔════╝   ██╔════╝                             \e[0m"
+    echo -e "$branco                       █████╗     █████╔╝   ███████╗   ███████╗    █████╗                   \e[0m"
+    echo -e "$branco                       ╚════╝    ██╔═══╝    ╚════██║   ╚════██║    ╚════╝                   \e[0m"
+    echo -e "$branco                                 ███████╗██╗███████║██╗███████║                             \e[0m"
+    echo -e "$branco                                 ╚══════╝╚═╝╚══════╝╚═╝╚══════╝                             \e[0m"
+    echo ""                                                                          
 }
 
 ## Menu de ferramentas
@@ -939,6 +938,37 @@ nome_supabase(){
     echo "" 
     echo "" 
 }
+
+## Titulo Ntfy [41]
+
+nome_ntfy(){
+    clear
+    echo ""
+    echo -e "$branco                                ███╗   ██╗████████╗███████╗██╗   ██╗\e[0m"
+    echo -e "$branco                                ████╗  ██║╚══██╔══╝██╔════╝╚██╗ ██╔╝\e[0m"
+    echo -e "$branco                                ██╔██╗ ██║   ██║   █████╗   ╚████╔╝ \e[0m"
+    echo -e "$branco                                ██║╚██╗██║   ██║   ██╔══╝    ╚██╔╝  \e[0m"
+    echo -e "$branco                                ██║ ╚████║   ██║   ██║        ██║   \e[0m"
+    echo -e "$branco                                ╚═╝  ╚═══╝   ╚═╝   ╚═╝        ╚═╝   \e[0m"
+    echo "" 
+    echo ""
+}
+
+## Titulo lowcoder [42]
+
+nome_lowcoder(){
+    clear
+    echo ""
+    echo -e "$branco               ██╗      ██████╗ ██╗    ██╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗ \e[0m"
+    echo -e "$branco               ██║     ██╔═══██╗██║    ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗\e[0m"
+    echo -e "$branco               ██║     ██║   ██║██║ █╗ ██║██║     ██║   ██║██║  ██║█████╗  ██████╔╝\e[0m"
+    echo -e "$branco               ██║     ██║   ██║██║███╗██║██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗\e[0m"
+    echo -e "$branco               ███████╗╚██████╔╝╚███╔███╔╝╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║\e[0m"
+    echo -e "$branco               ╚══════╝ ╚═════╝  ╚══╝╚══╝  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝\e[0m"
+    echo ""
+    echo ""  
+}
+
 # ===================================================================================================
 
 
@@ -1053,31 +1083,57 @@ nome_finalizado() {
 
 ## Menu de opções
 
+#menu_instalador(){
+#    echo -e "${amarelo}[ 00 ]${reset} - ${branco}Testar SMTP                             ${verde}| ${reset}  ${amarelo}[ 21 ]${reset} - ${branco}Formbricks${reset}"
+#    echo -e "${amarelo}[ 01 ]${reset} - ${branco}Traefik & Portainer                     ${verde}| ${reset}  ${amarelo}[ 22 ]${reset} - ${branco}NocoDB${reset}"
+#    echo -e "${amarelo}[ 02 ]${reset} - ${branco}Chatwoot                                ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse${reset}"
+#    echo -e "${branco}  '-->${amarelo}[ 2.1 ]${reset} - ${branco}Chatwoot (ARM)                   ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase${reset}"
+#    echo -e "${amarelo}[ 03 ]${reset} -  ${branco}Evolution API                          ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo${reset}"
+#    echo -e "${branco}  '-->${amarelo}[ 3.1 ]${reset} - ${branco}Evolution API (ARM)              ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor${reset}"
+#    echo -e "${amarelo}[ 04 ]${reset} - ${branco}MinIO                                   ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API${reset}"
+#    echo -e "${amarelo}[ 05 ]${reset} - ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa $vermelho[OFF]${reset}"
+#    echo -e "${amarelo}[ 06 ]${reset} - ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API $vermelho[OFF]${reset}"
+#    echo -e "${amarelo}[ 07 ]${reset} - ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
+#    echo -e "${amarelo}[ 08 ]${reset} - ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor${reset}"
+#    echo -e "${amarelo}[ 09 ]${reset} - ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
+#    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
+#    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
+#    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
+#    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden${reset}"
+#    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
+#    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi${reset}"
+#    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin${reset}"
+#    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase${reset}"
+#    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Ntfy ${verde}[NOVO]${reset}"
+#    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}REMOVER STACK${reset}"
+#    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}  ${amarelo}[ 43 ]${reset} - ${branco}Sair do instalador${reset}"
+#    echo""
+#}
+
 menu_instalador(){
-    echo ""
-    echo -e "${amarelo}[ 0 ]${reset} -  ${branco}Testar SMTP                             ${verde}| ${reset}  ${amarelo}[ 21 ]${reset} - ${branco}Formbricks${reset}"
-    echo -e "${amarelo}[ 1 ]${reset} -  ${branco}Traefik & Portainer                     ${verde}| ${reset}  ${amarelo}[ 22 ]${reset} - ${branco}NocoDB${reset}"
-    echo -e "${amarelo}[ 2 ]${reset} -  ${branco}Chatwoot                                ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse${reset}"
-    echo -e "${branco}  '-->${amarelo}[ 2.1 ]${reset} - ${branco}Chatwoot (ARM)                   ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase${reset}"
-    echo -e "${amarelo}[ 3 ]${reset} -  ${branco}Evolution API                           ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo${reset}"
-    echo -e "${branco}  '-->${amarelo}[ 3.1 ]${reset} - ${branco}Evolution API (ARM)              ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor${reset}"
-    echo -e "${amarelo}[ 4 ]${reset} -  ${branco}MinIO                                   ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API${reset}"
-    echo -e "${amarelo}[ 5 ]${reset} -  ${branco}Typebot                                 ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
-    echo -e "${amarelo}[ 6 ]${reset} -  ${branco}N8N                                     ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
-    echo -e "${amarelo}[ 7 ]${reset} -  ${branco}Flowise                                 ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
-    echo -e "${amarelo}[ 8 ]${reset} -  ${branco}PgAdmin 4                               ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor${reset}"
-    echo -e "${amarelo}[ 9 ]${reset} -  ${branco}Nocobase                                ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
-    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                                ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
-    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                               ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
-    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                 ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
-    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                 ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden${reset}"
-    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                                ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
-    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                             ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi${reset}"
-    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                 ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin${reset}"
-    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                  ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                                ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                  ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                              ${verde}| ${reset}" # ${amarelo}[ 43 ]${reset} - ${branco}Ainda Vazio${reset}"
+    echo -e "${amarelo}[ 00 ]${reset} - ${branco}Testar SMTP                          ${verde}| ${reset}  ${amarelo}[ 22 ]${reset} - ${branco}NocoDB${reset}"
+    echo -e "${amarelo}[ 01 ]${reset} - ${branco}Traefik & Portainer                  ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse${reset}"
+    echo -e "${amarelo}[ 02 ]${reset} - ${branco}Chatwoot                             ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase${reset}"
+    echo -e "${branco}  '-->${amarelo}[ 2.1 ]${reset} - ${branco}Chatwoot (ARM)                ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo${reset}"
+    echo -e "${amarelo}[ 03 ]${reset} -  ${branco}Evolution API                       ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor${reset}"
+    echo -e "${amarelo}[ 04 ]${reset} - ${branco}MinIO                                ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API${reset}"
+    echo -e "${amarelo}[ 05 ]${reset} - ${branco}Typebot                              ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
+    echo -e "${amarelo}[ 06 ]${reset} - ${branco}N8N                                  ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
+    echo -e "${amarelo}[ 07 ]${reset} - ${branco}Flowise                              ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
+    echo -e "${amarelo}[ 08 ]${reset} - ${branco}PgAdmin 4                            ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor${reset}"
+    echo -e "${amarelo}[ 09 ]${reset} - ${branco}Nocobase                             ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
+    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                             ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
+    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                            ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
+    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                              ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
+    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                              ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden${reset}"
+    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                             ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
+    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                          ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi${reset}"
+    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                              ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin${reset}"
+    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                               ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase${reset}"
+    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                             ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Ntfy ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                               ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}LowCoder ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                           ${verde}| ${reset}  ${amarelo}[ 43 ]${reset} - ${branco}REMOVER STACK${reset}"
+    echo -e "${amarelo}[ 21 ]${reset} - ${branco}Formbricks                           ${verde}| ${reset}  ${amarelo}[ 44 ]${reset} - ${branco}Sair do instalador${reset}"
     echo""
 }
 
@@ -1088,36 +1144,173 @@ menu_instalador(){
 
 stack_editavel(){
 
+    ## Instalar jq
     sudo apt install jq -y > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "2/10 - [ OK ] - Instalando JQ Método 1/2"
+    else
+        echo "2/10 - [ OFF ] - Erro ao instalar JQ Método 1/2"
+    fi
 
+    sudo apt-get install -y jq > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "3/10 - [ OK ] - Instalando JQ Método 2/2"
+    else
+        echo "3/10 - [ OFF ] - Erro ao instalar JQ Método 2/2"
+    fi
+
+    ## Definindo o diretório do arquivo dados_portainer
     arquivo="/root/dados_vps/dados_portainer"
+
+    ## Verifica se o arquivo existe
     if [ ! -f "$arquivo" ]; then
         echo "Arquivo não encontrado: $arquivo"
+        sleep 2
+
+        ## Cria o arquivo caso não exista
         criar_arquivo
     fi
+
+    ## Remove o https:// caso existir
     sed -i 's/Dominio do portainer: https:\/\/\(.*\)/Dominio do portainer: \1/' "$arquivo"
 
+    ## Pega o usuario do portainer
     USUARIO=$(grep "Usuario: " /root/dados_vps/dados_portainer | awk -F "Usuario: " '{print $2}')
+    if [ $? -eq 0 ]; then
+        echo -e "4/10 - [ OK ] - Pegando usuario do portainer: $bege$USUARIO$reset"
+    else
+        echo "4/10 - [ OFF ] - Erro ao pegar usuario do portainer"
+    fi
+
+    ## Pega a senha do portainer
     SENHA=$(grep "Senha: " /root/dados_vps/dados_portainer | awk -F "Senha: " '{print $2}')
+    if [ $? -eq 0 ]; then
+        echo -e "5/10 - [ OK ] - Pegando a senha do portainer: $bege$SENHA$reset"
+    else
+        echo "5/10 - [ OFF ] - Erro ao pegar senha do portainer"
+    fi
+
+    ## Pega a URL do portainer
     PORTAINER_URL=$(grep "Dominio do portainer: " /root/dados_vps/dados_portainer | awk -F "Dominio do portainer: " '{print $2}')
+    if [ $? -eq 0 ]; then
+        echo -e "6/10 - [ OK ] - Pegando dominio do Portainer: $bege$PORTAINER_URL$reset"
+    else
+        echo "6/10 - [ OFF ] - Erro ao pegar dominio do Portainer"
+    fi
+
+    ## Usa o token do portainer
     #TOKEN=$(grep "Token: " /root/dados_vps/dados_portainer | awk -F "Token: " '{print $2}')
     
-    TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" https://$PORTAINER_URL/api/auth | jq -r .jwt)
+    ## Pega um token do portainer
+    #TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" https://$PORTAINER_URL/api/auth | jq -r .jwt)
 
+    TOKEN=""
+    Tentativa_atual=0
+    Maximo_de_tentativas=6
+    
+    while [ -z "$TOKEN" ] || [ "$TOKEN" == "null" ]; do
+        TOKEN=$(curl -k -s -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" https://$PORTAINER_URL/api/auth | jq -r .jwt)
+    
+        Tentativa_atual=$((Tentativa_atual + 1))
+    
+        ## Verifica se atingiu o número máximo de tentativas
+        if [ "$Tentativa_atual" -ge "$Maximo_de_tentativas" ]; then
+            clear
+            erro_msg
+            echo "7/10 - [ OFF ] - Erro: Falha ao obter token após $Maximo_de_tentativas tentativas."
+            echo "Verifique suas credenciais do Portainer para conseguirmos realizar o deploy."
+            sleep 5
+            criar_arquivo
+            return
+            #exit 1
+        fi
+    
+        ## Se o token foi obtido com sucesso, sair do loop
+        if [ -n "$TOKEN" ] && [ "$TOKEN" != "null" ]; then
+            break
+        fi
+    
+        ## Aguarda alguns segundos antes de tentar novamente
+        echo -e "Tentando gerar token do portainer. Tentativa atual $bege$Tentativa_atual/5$reset"
+        sleep 5
+    done
+    
+    if [ $? -eq 0 ]; then
+        echo -e "7/10 - [ OK ] - Pegando token do Portainer: $bege$TOKEN$reset"
+    fi
+    
+
+    ### Verifica se o token veio vazio
+    #if [ -z "$TOKEN" ] || [ "$TOKEN" == "null" ]; then
+    #    echo "Erro: Falha ao obter token. Preencha com suas credenciais do portainer a seguir."
+    #    sleep 5
+    #    criar_arquivo
+    #    #exit 1
+    #fi
+
+    ## Salva dados no arquivo do portainer
     echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
 
+    ## Pegando o id do portainer
     ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" https://$PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
-    SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" "https://$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm" | jq -r .ID)
+    if [ $? -eq 0 ]; then
+        echo -e "8/10 - [ OK ] - Pegando ID do Portainer: $bege$PORTAINER_URL$reset"
+    else
+        echo "8/10 - [ OFF ] - Erro ao pegar ID do Portainer"
+    fi
 
-    #docker stack rm $STACK_NAME
+    ## Definindo id 1 do Portainer
+    #ENDPOINT_ID=1
     
-    curl -v -k -X POST \
+    ## Pegando o ID do Swarm
+    SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" "https://$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm" | jq -r .ID)
+    if [ $? -eq 0 ]; then
+        echo -e "9/10 - [ OK ] - Pegando ID do Swarm: $bege$PORTAINER_URL$reset"
+    else
+        echo "9/10 - [ OFF ] - Erro ao pegar ID do Swarm"
+    fi
+
+    ## Testa o Swarm
+    SWARM_STATUS=$(docker info --format '{{.Swarm.LocalNodeState}}')
+    if [ "$SWARM_STATUS" != "active" ]; then
+        echo "Erro: Docker Swarm não está ativo."
+        exit 1
+    fi
+
+    # Arquivo temporário para capturar a saída de erro e a resposta
+    erro_output=$(mktemp)
+    response_output=$(mktemp)
+
+    ## Fazendo deploy da stack pelo portainer
+    http_code=$(curl -s -o "$response_output" -w "%{http_code}" -k -X POST \
     -H "Authorization: Bearer $TOKEN" \
     -F "Name=$STACK_NAME" \
     -F "file=@$(pwd)/$STACK_NAME.yaml" \
     -F "SwarmID=$SWARM_ID" \
     -F "endpointId=$ENDPOINT_ID" \
-    "https://$PORTAINER_URL/api/stacks/create/swarm/file"
+    "https://$PORTAINER_URL/api/stacks/create/swarm/file" 2> "$erro_output")
+
+    response_body=$(cat "$response_output")
+
+    if [ "$http_code" -eq 200 ]; then
+        # Verifica o conteúdo da resposta para garantir que o deploy foi bem-sucedido
+        if echo "$response_body" | grep -q "\"Id\""; then
+            echo -e "10/10 - [ OK ] - Deploy da stack $bege$STACK_NAME$reset feito com sucesso!"
+        else
+            echo -e "10/10 - [ OFF ] - Erro, resposta inesperada do servidor ao tentar efetuar deploy da stack $bege$STACK_NAME$reset."
+            echo "Resposta do servidor: $(echo "$response_body" | jq .)"
+        fi
+    else
+        echo "10/10 - [ OFF ] - Erro ao efetuar deploy. Resposta HTTP: $http_code"
+        echo "Mensagem de erro: $(cat "$erro_output")"
+        echo "Detalhes: $(echo "$response_body" | jq .)"
+    fi
+
+    echo ""
+
+    # Remove os arquivos temporários
+    rm "$erro_output"
+    rm "$response_output"
 }
 
 ## Função para verificar se o arquivo de dados do Portainer existe
@@ -2125,7 +2318,7 @@ wait_phpmyadmin(){
 wait_supabase(){
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
     while true; do
-        # Verifica se o serviço phpmyadmin está ativo
+        # Verifica se o serviço supabase está ativo
         if docker service ls --filter "name=supabase" | grep "1/1"; then
             sleep 10
             break
@@ -2134,6 +2327,35 @@ wait_supabase(){
         sleep 5
     done
 }
+
+wait_ntfy(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço ntfy está ativo
+        if docker service ls --filter "name=ntfy" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+
+
+wait_lowcoder(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço lowcoder está ativo
+        if docker service ls --filter "name=lowcoder" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -3179,7 +3401,6 @@ criar_banco_postgres_baserow() {
     done
 }
 
-
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -3423,7 +3644,7 @@ while true; do
     
     ## Pergunta o nome da Rede Interna
     echo -e "\e[97mPasso$amarelo 3/4\e[0m"
-    echo -e "$amarelo--> Não pode conter Espaços e/ou cartacteres especiais, exceto Underline_"
+    echo -e "$amarelo--> Não pode conter Espaços e/ou cartacteres especiais."
     echo -en "\e[33mDigite um nome para sua rede interna (ex: OrionNet): \e[0m" && read -r nome_rede_interna
     echo ""
     
@@ -3634,14 +3855,39 @@ if [ $? -eq 0 ]; then
 else
     echo "2/3 - [ OFF ] - Baixando e Instalando Docker"
 fi
-docker swarm init --advertise-addr $ip > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "3/3 - [ OK ] - Iniciando Swarm"
-else
-    echo "3/3 - [ OFF ] - Iniciando Swarm"
-    echo "Ops não foi possivel iniciar o swarm, tente novamente"
-    sleep 5
-    exit
+#docker swarm init --advertise-addr $ip > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "3/3 - [ OK ] - Iniciando Swarm"
+#else
+#    echo "3/3 - [ OFF ] - Iniciando Swarm"
+#    echo "Ops não foi possivel iniciar o swarm, tente novamente"
+#    sleep 5
+#    exit
+#fi
+sleep 5
+
+max_attempts=3
+attempt=0
+
+while [ $attempt -le $max_attempts ]; do
+    docker swarm init --advertise-addr $ip > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        echo "3/3 - [ OK ] - Iniciando Swarm"
+        break
+    else
+        echo "3/3 - [ OFF ] - Iniciando Swarm"
+        echo "Ops não foi possivel iniciar o swarm, tentativa $attempt de $max_attempts"
+        attempt=$((attempt + 1))
+        sleep 5
+    fi
+done
+
+if [ $attempt -gt $max_attempts ]; then
+    echo "Não foi possível iniciar o Swarm após $max_attempts tentativas..."
+    echo "Recomendo formatar a VPS e tentar novamente"
+    echo "Lembre-se que o primeiro requisito é estar usando uma VPS Vazia."
+    sleep 10
+    exit 1
 fi
 echo ""
 
@@ -4150,6 +4396,8 @@ services:
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
+    ports:
+      - 6379:6379
 
     deploy:
       placement:
@@ -4446,7 +4694,7 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para aplicação
-    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o Dominio para o Chatwoot (ex: chatwoot.oriondesign.art.br): \e[0m" && read -r url_chatwoot
     echo ""
     
@@ -4454,26 +4702,32 @@ while true; do
     nome_empresa_chatwoot="$nome_servidor"
     
     ## Pergunta o email SMTP
-    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_admin_chatwoot
     echo ""
-    
+
     ## Define o dominio SMTP com o dominio do email
     dominio_smtp_chatwoot=$(echo "$email_admin_chatwoot" | cut -d "@" -f 2)
+
+    ##Pergunta o usuário do Email SMTP
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_smtp_chatwoot
+    echo ""
     
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_chatwoot
     echo ""
     
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_chatwoot
     echo ""
     
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_chatwoot
     
     
@@ -4503,6 +4757,10 @@ while true; do
 
     ## Informação sobre Email de SMTP
     echo -e "\e[33mEmail do SMTP:\e[97m $email_admin_chatwoot\e[0m"
+    echo ""
+
+    ## Informação sobre Usuario do SMTP
+    echo -e "\e[33mUser do SMTP:\e[97m $user_smtp_chatwoot\e[0m"
     echo ""
 
     ## Informação sobre Senha de SMTP
@@ -4675,7 +4933,7 @@ services:
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
       - SMTP_PORT=$porta_smtp_chatwoot ## Porta SMTP
       - SMTP_SSL=$sobre_ssl ## Se a porta for 465 = true | Se a porta for 587 = false
-      - SMTP_USERNAME=$email_admin_chatwoot ## Email SMTP
+      - SMTP_USERNAME=$user_smtp_chatwoot ## Usuario SMTP
       - SMTP_PASSWORD=$senha_email_chatwoot ## Senha do SMTP
       - SMTP_AUTHENTICATION=login
       - SMTP_ENABLE_STARTTLS_AUTO=true
@@ -4773,7 +5031,7 @@ services:
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
       - SMTP_PORT=$porta_smtp_chatwoot ## Porta SMTP
       - SMTP_SSL=$sobre_ssl ## Se a porta for 465 = true | Se a porta for 587 = false
-      - SMTP_USERNAME=$email_admin_chatwoot ## Email SMTP
+      - SMTP_USERNAME=$user_smtp_chatwoot ## Usuario SMTP
       - SMTP_PASSWORD=$senha_email_chatwoot ## Senha do SMTP
       - SMTP_AUTHENTICATION=login
       - SMTP_ENABLE_STARTTLS_AUTO=true
@@ -4821,20 +5079,21 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot"
-stack_editavel > /dev/null 2>&1
+stack_editavel #> /dev/null 2>&1
+
 #docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Chatwoot"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Chatwoot"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO \e[33m[4/6]\e[0m"
@@ -5158,7 +5417,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_app:
-    image: amoxt/chatwoot-arm:latest ## Versão do Chatwoot
+    image: sendingtk/chatwoot-arm:latest ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
 
@@ -5257,7 +5516,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_sidekiq:
-    image: amoxt/chatwoot-arm:latest ## Versão do Chatwoot
+    image: sendingtk/chatwoot-arm:latest ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
@@ -5363,20 +5622,21 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Chatwoot"
-fi
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Chatwoot"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO \e[33m[4/6]\e[0m"
@@ -5734,21 +5994,21 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack da Evolution API"
 fi
 STACK_NAME="evolution"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
 
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack da Evolution API"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack da Evolution API"
+#fi
 
 sleep 10
 
@@ -6048,20 +6308,21 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack da Evolution API"
 fi
 STACK_NAME="evolution"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack da Evolution API"
-fi
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack da Evolution API"
+#fi
 
 sleep 10
 
@@ -6299,21 +6560,22 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do MinIO"
 fi
 sleep 1
 STACK_NAME="minio"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c minio.yaml minio
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Minio"
-fi
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Minio"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -6746,20 +7008,21 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Typebot"
 fi
 STACK_NAME="typebot"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c typebot.yaml typebot > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Typebot"
-fi
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Typebot"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -7152,20 +7415,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do N8N"
 fi
 STACK_NAME="n8n"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c n8n.yaml n8n > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do N8N"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do N8N"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -7418,20 +7681,20 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Flowise"
 fi
 STACK_NAME="flowise"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c flowise.yaml flowise  > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Flowise"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Flowise"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -7647,20 +7910,20 @@ volumes:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do PgAdmin 4"
 fi
 STACK_NAME="pgadmin"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c pgadmin.yaml pgadmin  > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do PgAdmin 4"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do PgAdmin 4"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -7928,20 +8191,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Nocobase"
 fi
 STACK_NAME="nocobase"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c nocobase.yaml nocobase > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Nocobase"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Nocobase"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -8174,20 +8437,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Botpress"
 fi
 STACK_NAME="botpress"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c botpress.yaml botpress > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Botpress"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Botpress"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -8466,20 +8729,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Wordpress"
 fi
 STACK_NAME="$nome_da_stack_wordpress_subir"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir #> /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Wordpress"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Wordpress"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/7]\e[0m"
@@ -8508,7 +8771,7 @@ cd
 
 docker service update --force ${nome_do_servico_wordpress}_${nome_do_servico_wordpress} 
 STACK_NAME="$nome_da_stack_wordpress_subir"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir
 
 ## Mensagem de Passo
@@ -8803,21 +9066,21 @@ volumes:
     name: baserow_data
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Baserow"
 fi
 
 STACK_NAME="baserow"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c baserow.yaml baserow #> /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Baserow"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Baserow"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -9028,20 +9291,20 @@ networks:
 
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do MongoDB"
 fi
 STACK_NAME="mongodb"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c mongodb.yaml mongodb > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do MongoDB"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do MongoDB"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -9263,20 +9526,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do RabbitMQ"
 fi
 STACK_NAME="rabbitmq"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c rabbitmq.yaml rabbitmq > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do RabbitMQ"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do RabbitMQ"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -9475,20 +9738,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Uptime Kuma"
 fi
 STACK_NAME="uptimekuma"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c uptimekuma.yaml uptimekuma #> /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Uptime Kuma"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Uptime Kuma"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -9578,28 +9841,34 @@ preencha_as_info
 while true; do
 
     ## Pergunta o Dominio da ferramenta
-    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o dominio para o Cal (ex: calcom.oriondesign.art.br): \e[0m" && read -r url_calcom
     echo ""
     
     ## Pergunta o email SMTP
-    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_calcom
+    echo ""
+
+    ## Pergunta o Ususario SMTP
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuario para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_calcom
     echo ""
     
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_calcom
     echo ""
     
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_calcom
     echo ""
     
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_calcom
     echo ""
     
@@ -9619,6 +9888,10 @@ while true; do
     ## Informação sobre Email SMTP
     echo -e "\e[33mEmail SMTP:\e[97m $email_calcom\e[0m"
     echo ""
+
+    ## Informação sobre Email SMTP
+    echo -e "\e[33mUser SMTP:\e[97m $user_calcom\e[0m"
+    echo ""    
     
     ## Informação sobre Senha SMTP
     echo -e "\e[33mSenha SMTP:\e[97m $senha_email_calcom\e[0m"
@@ -9732,7 +10005,7 @@ services:
       - EMAIL_FROM=$email_calcom
       - EMAIL_SERVER_HOST=$smtp_email_calcom
       - EMAIL_SERVER_PORT=$porta_smtp_calcom
-      - EMAIL_SERVER_USER=$email_calcom
+      - EMAIL_SERVER_USER=$user_calcom
       - EMAIL_SERVER_PASSWORD=$senha_email_calcom
 
     ## Nodes
@@ -9777,20 +10050,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do CalCom"
 fi
 STACK_NAME="calcom"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c calcom.yaml calcom  > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do CalCom"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do CalCom"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -10162,20 +10435,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Mautic"
 fi
 STACK_NAME="mautic"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c mautic.yaml mautic > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Mautic"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Mautic"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -10386,20 +10659,20 @@ networks:
 
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Appsmith"
 fi
 STACK_NAME="appsmith"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c appsmith.yaml appsmith  > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Appsmith"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Appsmith"
+#fi
 
 
 ## Mensagem de Passo
@@ -10621,20 +10894,20 @@ networks:
 EOL
 
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Qdrant"
 fi
 STACK_NAME="qdrant"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c qdrant.yaml qdrant  > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Qdrant"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Qdrant"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -11052,20 +11325,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do WoofedCRM"
 fi
 STACK_NAME="woofedcrm"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c woofedcrm.yaml woofedcrm #> /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do WoofedCRM"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do WoofedCRM"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/7]\e[0m"
@@ -11206,28 +11479,34 @@ preencha_as_info
 while true; do
 
     ## Pergunta o Dominio da ferramenta
-    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o Dominio para o Formbricks (ex: formbricks.oriondesign.art.br): \e[0m" && read -r url_formbricks
     echo ""
     
     ## Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
     echo -en "\e[33mDigite um Email para o SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_formbricks
+    echo ""
+
+    ## Pergunta o User SMTP
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuario do SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_smtp_formbricks
     echo ""
     
     ## Pergunta a Senha SMTP
-    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do email (ex: @Senha123_): \e[0m" && read -r senha_formbricks
     echo ""
     
     ## Pergunta o Host SMTP
-    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mDigite o Host SMTP do email (ex: smtp.hostinger.com): \e[0m" && read -r host_formbricks
     echo ""
     
     ## Pergunta a Porta SMTP 
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
     echo -en "\e[33mDigite a Porta SMTP do email (ex: 465): \e[0m" && read -r porta_formbricks
     echo ""
     
@@ -11252,6 +11531,10 @@ while true; do
     
     ## Informação sobre Email
     echo -e "\e[33mEmail SMTP:\e[97m $email_formbricks\e[0m"
+    echo ""
+
+    ## Informação sobre UserSMTP
+    echo -e "\e[33mUser SMTP:\e[97m $user_smtp_formbricks\e[0m"
     echo ""
     
     ## Informação sobre Senha
@@ -11369,7 +11652,7 @@ services:
       - SMTP_HOST=$host_formbricks
       - SMTP_PORT=$porta_formbricks
       - SMTP_SECURE_ENABLED=$ssl_formbricks #(0= false | 1= true)
-      - SMTP_USER=$email_formbricks
+      - SMTP_USER=$user_smtp_formbricks
       - SMTP_PASSWORD=$senha_formbricks
 
       ## Ativar/Desativar registros e convites (0= false | 1= true)
@@ -11441,20 +11724,20 @@ volumes:
     external: true
 EOF
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Formbricks"
 fi
 STACK_NAME="formbricks"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c formbricks.yaml formbricks > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Formbricks"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Formbricks"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -11677,20 +11960,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do NocoDB"
 fi
 STACK_NAME="nocodb"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c nocodb.yaml nocodb > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do NocoDB"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do NocoDB"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -11925,20 +12208,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do langfuse"
 fi
 STACK_NAME="langfuse"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c langfuse.yaml langfuse > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do langfuse"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do langfuse"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -12171,20 +12454,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do metabase"
 fi
 STACK_NAME="metabase"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c metabase.yaml metabase > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do metabase"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do metabase"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -12418,20 +12701,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do odoo"
 fi
 STACK_NAME="odoo"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c odoo.yaml odoo > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Odoo"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Odoo"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -12816,20 +13099,20 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot_uno"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c chatwoot_uno.yaml chatwoot_uno > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Chatwoot"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Chatwoot"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO \e[33m[4/6]\e[0m"
@@ -12984,7 +13267,7 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para aplicação
-    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o Dominio para o Chatwoot (ex: chatwoot.oriondesign.art.br): \e[0m" && read -r url_chatwoot
     echo ""
     
@@ -12992,26 +13275,32 @@ while true; do
     nome_empresa_chatwoot="$nome_servidor"
     
     ## Pergunta o email SMTP
-    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_admin_chatwoot
     echo ""
     
     ## Define o dominio SMTP com o dominio do email
     dominio_smtp_chatwoot=$(echo "$email_admin_chatwoot" | cut -d "@" -f 2)
+
+    ##Pergunta o usuário do Email SMTP
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_smtp_chatwoot
+    echo ""
     
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_chatwoot
     echo ""
     
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_chatwoot
     echo ""
     
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_chatwoot
     
     
@@ -13041,6 +13330,10 @@ while true; do
 
     ## Informação sobre Email de SMTP
     echo -e "\e[33mEmail do SMTP:\e[97m $email_admin_chatwoot\e[0m"
+    echo ""
+
+    ## Informação sobre Email de SMTP
+    echo -e "\e[33mUser do SMTP:\e[97m $user_smtp_chatwoot\e[0m"
     echo ""
 
     ## Informação sobre Senha de SMTP
@@ -13156,7 +13449,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_app:
-    image: francisbreit/chatwoot-n:v3.9.0-pt-br ## Versão do Chatwoot
+    image: francisbreit/chatwoot-n:v3.9.5-pt-br ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
 
@@ -13215,7 +13508,7 @@ services:
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
       - SMTP_PORT=$porta_smtp_chatwoot ## Porta SMTP
       - SMTP_SSL=$sobre_ssl ## Se a porta for 465 = true | Se a porta for 587 = false
-      - SMTP_USERNAME=$email_admin_chatwoot ## Email SMTP
+      - SMTP_USERNAME=$user_smtp_chatwoot ## Usuario SMTP
       - SMTP_PASSWORD=$senha_email_chatwoot ## Senha do SMTP
       - SMTP_AUTHENTICATION=login
       - SMTP_ENABLE_STARTTLS_AUTO=true
@@ -13255,7 +13548,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_sidekiq:
-    image: francisbreit/chatwoot-n:v3.9.0-pt-br ## Versão do Chatwoot
+    image: francisbreit/chatwoot-n:v3.9.5-pt-br ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
@@ -13313,7 +13606,7 @@ services:
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
       - SMTP_PORT=$porta_smtp_chatwoot ## Porta SMTP
       - SMTP_SSL=$sobre_ssl ## Se a porta for 465 = true | Se a porta for 587 = false
-      - SMTP_USERNAME=$email_admin_chatwoot ## Email SMTP
+      - SMTP_USERNAME=$user_smtp_chatwoot ## Usuario SMTP
       - SMTP_PASSWORD=$senha_email_chatwoot ## Senha do SMTP
       - SMTP_AUTHENTICATION=login
       - SMTP_ENABLE_STARTTLS_AUTO=true
@@ -13361,19 +13654,19 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot_nestor"
-stack_editavel > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Chatwoot"
-fi
+stack_editavel # > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Chatwoot"
+#fi
 #docker stack deploy --prune --resolve-image always -c chatwoot_nestor.yaml chatwoot_nestor > /dev/null 2>&1
 
 ## Mensagem de Passo
@@ -13759,20 +14052,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Uno API"
 fi
 STACK_NAME="unoapi"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c unoapi.yaml unoapi > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Uno API"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Uno API"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -13997,7 +14290,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   n8n_quepasa_editor:
-    image: oriondesign/quepasa:8aca0a3031f0 ## Versão do N8N
+    image: oriondesign/n8n-quepasa:latest ## Versão do N8N
     command: start
 
     volumes:
@@ -14016,13 +14309,32 @@ services:
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
       ## Dados do Quepasa
-      - C8Q_QP_DEFAULT_USER=$email_quepasa
+
+      - C8Q_SINGLETHREAD=false
+      - C8Q_QUEPASAINBOXCONTROL=1001
+      - C8Q_GETCHATWOOTCONTACTS=1002
+      - C8Q_QUEPASACHATCONTROL=1003
+      - C8Q_CHATWOOTPROFILEUPDATE=1004
+      - C8Q_POSTTOWEBCALLBACK=1005
+      - C8Q_POSTTOCHATWOOT=1006
+      - C8Q_CHATWOOTTOQUEPASAGREETINGS=1007
+
       - C8Q_QP_BOTTITLE=$nome_servidor
+      - C8Q_QP_DEFAULT_USER=$email_quepasa
+
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
+      - C8Q_CW_HOST=https://$dominio_chatwoot
       - C8Q_QP_CONTACT=$email_quepasa
-      - C8Q_OR_CHATWOOT_URL=https://$dominio_chatwoot
-      - C8Q_OR_QUEPASA_URL=https://$dominio_quepasa
-      - C8Q_OR_N8N_URL=https://$url_webhookn8n
+      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_N8N_HOST=https://$url_editorn8n
+      - C8Q_N8N_WEBHOOK=https://$url_webhookn8n
+
+      - C8Q_MSGFOR_UNKNOWN_CONTENT=! "Algum EMOJI" ou "Alguma Reação que o sistema não entende ainda ..."
+      - C8Q_MSGFOR_EDITED_CONTENT=⚠️ **Essa mensagem foi editada !**
+      - C8Q_MSGFOR_ATTACHERROR_CONTENT=** Falha ao baixar anexo !
+      - C8Q_MSGFOR_LOCALIZATION_CONTENT=* Localização *
+      - C8Q_MSGFOR_REVOKED_CONTENT=❌ Essa mensagem foi apagada !!!
+      - C8Q_MSGFOR_CALL_CONTENT=\u2699 O usuário requisitou uma chamada de voz !
 
       ## Encryption Key
       - N8N_ENCRYPTION_KEY=$encryption_key
@@ -14093,13 +14405,32 @@ services:
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
       ## Dados do Quepasa
-      - C8Q_QP_DEFAULT_USER=$email_quepasa
+
+      - C8Q_SINGLETHREAD=false
+      - C8Q_QUEPASAINBOXCONTROL=1001
+      - C8Q_GETCHATWOOTCONTACTS=1002
+      - C8Q_QUEPASACHATCONTROL=1003
+      - C8Q_CHATWOOTPROFILEUPDATE=1004
+      - C8Q_POSTTOWEBCALLBACK=1005
+      - C8Q_POSTTOCHATWOOT=1006
+      - C8Q_CHATWOOTTOQUEPASAGREETINGS=1007
+
       - C8Q_QP_BOTTITLE=$nome_servidor
+      - C8Q_QP_DEFAULT_USER=$email_quepasa
+
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
+      - C8Q_CW_HOST=https://$dominio_chatwoot
       - C8Q_QP_CONTACT=$email_quepasa
-      - C8Q_OR_CHATWOOT_URL=https://$dominio_chatwoot
-      - C8Q_OR_QUEPASA_URL=https://$dominio_quepasa
-      - C8Q_OR_N8N_URL=https://$url_webhookn8n
+      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_N8N_HOST=https://$url_editorn8n
+      - C8Q_N8N_WEBHOOK=https://$url_webhookn8n
+
+      - C8Q_MSGFOR_UNKNOWN_CONTENT=! "Algum EMOJI" ou "Alguma Reação que o sistema não entende ainda ..."
+      - C8Q_MSGFOR_EDITED_CONTENT=⚠️ **Essa mensagem foi editada !**
+      - C8Q_MSGFOR_ATTACHERROR_CONTENT=** Falha ao baixar anexo !
+      - C8Q_MSGFOR_LOCALIZATION_CONTENT=* Localização *
+      - C8Q_MSGFOR_REVOKED_CONTENT=❌ Essa mensagem foi apagada !!!
+      - C8Q_MSGFOR_CALL_CONTENT=\u2699 O usuário requisitou uma chamada de voz !
 
       ## Encryption Key
       - N8N_ENCRYPTION_KEY=$encryption_key
@@ -14170,13 +14501,32 @@ services:
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
       ## Dados do Quepasa
-      - C8Q_QP_DEFAULT_USER=$email_quepasa
+
+      - C8Q_SINGLETHREAD=false
+      - C8Q_QUEPASAINBOXCONTROL=1001
+      - C8Q_GETCHATWOOTCONTACTS=1002
+      - C8Q_QUEPASACHATCONTROL=1003
+      - C8Q_CHATWOOTPROFILEUPDATE=1004
+      - C8Q_POSTTOWEBCALLBACK=1005
+      - C8Q_POSTTOCHATWOOT=1006
+      - C8Q_CHATWOOTTOQUEPASAGREETINGS=1007
+
       - C8Q_QP_BOTTITLE=$nome_servidor
+      - C8Q_QP_DEFAULT_USER=$email_quepasa
+
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
+      - C8Q_CW_HOST=https://$dominio_chatwoot
       - C8Q_QP_CONTACT=$email_quepasa
-      - C8Q_OR_CHATWOOT_URL=https://$dominio_chatwoot
-      - C8Q_OR_QUEPASA_URL=https://$dominio_quepasa
-      - C8Q_OR_N8N_URL=https://$url_webhookn8n
+      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_N8N_HOST=https://$url_editorn8n
+      - C8Q_N8N_WEBHOOK=https://$url_webhookn8n
+
+      - C8Q_MSGFOR_UNKNOWN_CONTENT=! "Algum EMOJI" ou "Alguma Reação que o sistema não entende ainda ..."
+      - C8Q_MSGFOR_EDITED_CONTENT=⚠️ **Essa mensagem foi editada !**
+      - C8Q_MSGFOR_ATTACHERROR_CONTENT=** Falha ao baixar anexo !
+      - C8Q_MSGFOR_LOCALIZATION_CONTENT=* Localização *
+      - C8Q_MSGFOR_REVOKED_CONTENT=❌ Essa mensagem foi apagada !!!
+      - C8Q_MSGFOR_CALL_CONTENT=\u2699 O usuário requisitou uma chamada de voz !
 
       ## Encryption Key
       - N8N_ENCRYPTION_KEY=$encryption_key
@@ -14204,17 +14554,6 @@ services:
       ## Timezone
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
-      
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -14229,20 +14568,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do N8N Quepasa"
 fi
 STACK_NAME="n8n_quepasa"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c n8n_quepasa.yaml n8n_quepasa > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do N8N Quepasa"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do N8N Quepasa"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -14403,101 +14742,139 @@ echo ""
 sleep 1
 
 ## Criando a stack
+
+key_quepasa=$(openssl rand -hex 16)
+
 cat > quepasa.yaml <<EOL
 version: "3.7"
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  quepasa:
-    image: oriondesign/quepasa:latest
+    quepasa:
+        image: deividms/quepasa:v3.24.517.1231 ## Imagem/versão do Quepasa
+        
+        volumes:
+            - quepasa_volume:/opt/quepasa
 
-    volumes:
-      - quepasa_data:/opt/quepasa
-      - quepasa_migration:/opt/quepasa/migrations
+        networks:
+            - $nome_rede_interna
 
-    networks:
-        - $nome_rede_interna
+        environment:
+            ## Dados de acesso
+            - DOMAIN=$url_quepasa
 
-    environment:
-      ## Url Quepasa e porta
-      - DOMAIN=$url_quepasa
-      - WEBAPIPORT=31000
+            ## Email Quepasa
+            - EMAIL=$email_quepasa
+            - QUEPASA_BASIC_AUTH_USER=$email_quepasa
+            - QUEPASA_BASIC_AUTH_PASSWORD=$email_quepasa
 
-      ## Email Quepasa
-      - EMAIL=$email_quepasa
+            ## Titulo no celular
+            - APP_TITLE=OrionDesign ## Mude aqui o nome que vai aparecer no celular.
 
-      ## Titulo no celular
-      - APP_TITLE=OrionDesign
+            ## TimeZone
+            - TZ=America/Sao_Paulo
 
-      ## TimeZone
-      - TZ=America/Sao_Paulo
+            ## Configurações para o WhatsApp
+            - GROUPS=true
+            - BROADCASTS=false
+            - READRECEIPTS=forcedfalse
+            - CALLS=true
+            - READUPDATE=false
+            - LOGLEVEL=DEBUG
 
-      ## Tratar digito 9
-      - REMOVEDIGIT9=true
+            ## Configurações quepasa
+            - QUEPASA_HOST_NAME=Quepasa
+            - QUEPASA_MEMORY_LIMIT=4096M
+            - WEBSOCKETSSL=true
+            - REMOVEDIGIT9=true
+            - SIGNING_SECRET=$key_quepasa
 
-      ## Sobre o Node
-      - APP_ENV=production
-      - NODE_ENV=production
+            ## Webhook
+            #- WEBHOOK_QUEPASA=webhook.oriondesign.art.br/webhook/quepasa
+            #- WEBHOOK_TESTE_QUEPASA=n8n.oriondesign.art.br/webhook-test/quepasa
+            
+            ## Portas
+            - QUEPASA_EXTERNAL_PORT=31000
+            - QUEPASA_INTERNAL_PORT=31000
+            - WEBAPIPORT=31000
 
-      ## Outras Informações
-      - WEBSOCKETSSL=true
-      - DEBUGJSONMESSAGES=false
-      - DEBUGREQUESTS=false
-      - READRECEIPTS=false
-      - SYNOPSISLENGTH=500
-      - MIGRATIONS=/builder/migrations
+            ## Outras configurações
+            - DEBUGREQUESTS=false
+            - SYNOPSISLENGTH=500
+            - METRICS_HOST=
+            - METRICS_PORT=9392
+            - MIGRATIONS=/builder/migrations
+            - DEBUGJSONMESSAGES=false
+            - HTTPLOGS=false
 
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 1024M
-      labels:
-        - traefik.enable=true
-        - traefik.http.routers.quepasa.rule=Host(\`$url_quepasa\`)
-        - traefik.http.services.quepasa.loadbalancer.server.port=31000
-        - traefik.http.routers.quepasa.service=quepasa
-        - traefik.http.routers.quepasa.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.quepasa.entrypoints=websecure
-        - traefik.http.routers.quepasa.tls=true
+            ## WHATSMEOW SERVICE
+            - WHATSMEOW_LOGLEVEL=WARN
+            - WHATSMEOW_DBLOGLEVEL=WARN
+
+            ## Env Mode
+            - APP_ENV=production
+            - NODE_ENV=production
+
+        deploy:
+            mode: replicated
+            replicas: 1
+            placement:
+                constraints:
+                - node.role == manager
+            resources:
+                limits:
+                    cpus: "2"
+                    memory: 2096M
+                        
+            labels:
+                - traefik.enable=true
+                - traefik.http.routers.quepasa.rule=Host(\`$url_quepasa\`)
+                - traefik.http.routers.quepasa.tls=true
+                - traefik.http.routers.quepasa.entrypoints=web,websecure
+                - traefik.http.routers.quepasa.tls.certresolver=letsencryptresolver
+                - traefik.http.routers.quepasa.service=quepasa
+                - traefik.http.routers.quepasa.priority=1      
+                - traefik.http.middlewares.quepasa.headers.SSLRedirect=true
+                - traefik.http.middlewares.quepasa.headers.STSSeconds=315360000
+                - traefik.http.middlewares.quepasa.headers.browserXSSFilter=true
+                - traefik.http.middlewares.quepasa.headers.contentTypeNosniff=true
+                - traefik.http.middlewares.quepasa.headers.forceSTSHeader=true
+                - traefik.http.middlewares.quepasa.headers.SSLHost=\${QUEPASA_HOST}
+                - traefik.http.middlewares.quepasa.headers.STSIncludeSubdomains=true
+                - traefik.http.middlewares.quepasa.headers.STSPreload=true
+                - traefik.http.services.quepasa.loadbalancer.server.port=31000
+                - traefik.http.services.quepasa.loadbalancer.passHostHeader=true              
 
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  quepasa_data:
+  quepasa_volume:
     external: true
-    name: quepasa_data
-  quepasa_migration:
-    external: true
-    name: quepasa_migration
+    name: quepasa_volume
 
 networks:
   $nome_rede_interna:
-    name: $nome_rede_interna
     external: true
+    name: $nome_rede_interna 
 EOL
+
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Quepasa"
 
 fi
 STACK_NAME="quepasa"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c quepasa.yaml quepasa > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Quepasa"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Quepasa"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -14587,50 +14964,56 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do Dify AI
-    echo -e "\e[97mPasso$amarelo 1/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/10\e[0m"
     echo -en "\e[33mDigite o dominio para o Dify AI (ex: dify.oriondesign.art.br): \e[0m" && read -r url_dify
     echo ""
 
     ##Pergunta o Dominio do Qdrant
     read -r ip _ <<<$(hostname -I)
-    echo -e "\e[97mPasso$amarelo 2/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/10\e[0m"
     echo -en "\e[33mDigite o dominio do Qdrant (ex: http://$ip  ou http://qdrant.oriondesign.art.br): \e[0m" && read -r url_quedrant
     echo ""
 
     ##Pergunta a Api Key do Qdrant
     key_dify_rand=$(openssl rand -hex 16)
-    echo -e "\e[97mPasso$amarelo 3/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/10\e[0m"
     echo -en "\e[33mDigite a Api Key do Qdrant (ex: $key_dify_rand): \e[0m" && read -r apikey_qdrant
     echo ""
 
     ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 4/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/10\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_dify
     echo ""
-    
+
+    ##Pergunta o usuário do Email SMTP
+    echo -e "\e[97mPasso$amarelo 5/10\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_email_dify
+    echo ""
+
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 5/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/10\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_dify
     echo ""
 
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 6/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/10\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_dify
     echo ""
 
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 7/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_dify
     echo ""
 
     ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 9/10\e[0m"
     echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
     echo ""
 
     ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 9/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 10/10\e[0m"
     echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
     echo ""
 
@@ -14657,6 +15040,10 @@ while true; do
 
     ## Informação sobre Email
     echo -e "\e[33mEmail do SMTP:\e[97m $email_dify\e[0m"
+    echo ""
+
+    ## Informação sobre UserSMTP
+    echo -e "\e[33mUser do SMTP:\e[97m $user_email_dify\e[0m"
     echo ""
 
     ## Informação sobre Senha do Email
@@ -14885,7 +15272,7 @@ services:
       - MAIL_DEFAULT_SEND_FROM=$email_dify (eg=no-reply $email_dify)
       - SMTP_SERVER=$smtp_email_dify
       - SMTP_PORT=$porta_smtp_dify
-      - SMTP_USERNAME=$email_dify
+      - SMTP_USERNAME=$user_email_dify
       - SMTP_PASSWORD=$senha_email_dify
 
       ## Sentry
@@ -14954,7 +15341,7 @@ services:
       - MAIL_DEFAULT_SEND_FROM=$email_dify (eg=no-reply $email_dify)
       - SMTP_SERVER=$smtp_email_dify
       - SMTP_PORT=$porta_smtp_dify
-      - SMTP_USERNAME=$email_dify
+      - SMTP_USERNAME=$user_email_dify
       - SMTP_PASSWORD=$senha_email_dify
 
     depends_on:
@@ -15046,20 +15433,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Dify Ai"
 fi
 STACK_NAME="dify"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c dify.yaml dify > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Dify Ai"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Dify Ai"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -15302,20 +15689,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Ollama"
 fi
 STACK_NAME="ollama"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c ollama.yaml ollama > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Ollama"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Ollama"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -15661,20 +16048,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Affine"
 fi
 STACK_NAME="affine"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c affine.yaml affine > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Affine"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Affine"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -15762,28 +16149,34 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o dominio para o Docuseal (ex: docuseal.oriondesign.art.br): \e[0m" && read -r url_docuseal
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
     echo -en "\e[33mDigite a Email SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_smtp_docuseal
     echo ""
 
+    ##Pergunta o usuário do Email SMTP
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_smtp_docuseal
+    echo ""
+
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP (ex: @Senha123_): \e[0m" && read -r senha_smtp_docuseal
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mDigite o Host SMTP (ex: smtp.hostinger.com): \e[0m" && read -r host_smtp_docuseal
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
     echo -en "\e[33mDigite a Porta SMTP (ex: 465): \e[0m" && read -r porta_smtp_docuseal
     echo ""
     
@@ -15803,6 +16196,10 @@ while true; do
     ## Informação sobre URL do docuseal
     echo -e "\e[33mEmail SMTP:\e[97m $email_smtp_docuseal\e[0m"
     echo ""
+
+    ## Informação sobre URL do docuseal
+    echo -e "\e[33mUser SMTP:\e[97m $user_smtp_docuseal\e[0m"
+    echo ""    
 
     ## Informação sobre URL do docuseal
     echo -e "\e[33mSenha SMTP:\e[97m $senha_smtp_docuseal\e[0m"
@@ -15912,7 +16309,7 @@ services:
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/docuseal
 
       ## Dados SMTP
-      - SMTP_USERNAME=$email_smtp_docuseal
+      - SMTP_USERNAME=$user_smtp_docuseal
       - SMTP_PASSWORD=$senha_smtp_docuseal
       - SMTP_ADDRESS=$host_smtp_docuseal
       - SMTP_PORT=$porta_smtp_docuseal
@@ -15952,20 +16349,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do docuseal"
 fi
 STACK_NAME="docuseal"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c docuseal.yaml docuseal > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do docuseal"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do docuseal"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -16336,20 +16733,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do directus"
 fi
 STACK_NAME="directus"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c directus.yaml directus > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do directus"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do directus"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -16609,20 +17006,20 @@ networks:
     name: $nome_rede_interna
 EOF
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do vaultwarden"
 fi
 STACK_NAME="vaultwarden"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c vaultwarden.yaml vaultwarden > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do vaultwarden"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do vaultwarden"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -17043,20 +17440,20 @@ networks:
     external: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Monitor"
 fi
 STACK_NAME="monitor"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c monitor.yaml monitor > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do Monitor"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do Monitor"
+#fi
 
 echo ""
 sleep 10
@@ -17344,20 +17741,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do nextcloud"
 fi
 STACK_NAME="nextcloud"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c nextcloud.yaml nextcloud > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do nextcloud"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do nextcloud"
+#fi
 echo ""
 
 ## Mensagem de Passo
@@ -17598,20 +17995,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do Strapi"
 fi
 STACK_NAME="strapi"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c strapi.yaml strapi #> /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do Strapi"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do Strapi"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -17840,20 +18237,20 @@ networks:
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do phpmyadmin"
 fi
 STACK_NAME="phpmyadmin"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c phpmyadmin.yaml phpmyadmin #> /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel Subir a stack do phpmyadmin"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do phpmyadmin"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
@@ -18358,7 +18755,6 @@ services:
     image: kong:2.8.1 ## Versão da imagem
     entrypoint: bash -c 'eval "echo \"\$\$(cat ~/temp.yml)\"" > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
 
-    
     volumes:
       - /root/supabase/docker/volumes/api/kong.yml:/home/kong/temp.yml:ro
 
@@ -18466,7 +18862,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   rest:
-    image: postgrest/postgrest:v12.0.1 ## Versão da imagem
+    image: postgrest/postgrest:v12.0.3 ## Versão da imagem
     command: "postgrest"
 
     networks:
@@ -18475,8 +18871,8 @@ services:
     environment:
       ## Dados postgres
       - PGRST_DB_URI=postgres://authenticator:$Senha_Postgres@db:5344/supabase  ## Senha do Postgres #OK
-      #- PGRST_DB_SCHEMAS=public,storage,graphql_public
-      - PGRST_DB_SCHEMAS=public
+      - PGRST_DB_SCHEMAS=public,storage,graphql_public
+      #- PGRST_DB_SCHEMAS=public
       - PGRST_DB_ANON_ROLE=anon
       - PGRST_DB_USE_LEGACY_GUCS=false
 
@@ -18631,6 +19027,7 @@ services:
     environment:
       ## Dados Meta
       - PG_META_PORT=8080
+      - PG_META_HOST=0.0.0.0
 
       ## Dados postgres
       - PG_META_DB_HOST=db
@@ -18796,20 +19193,20 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do supabase"
 fi
 STACK_NAME="supabase"
-stack_editavel > /dev/null 2>&1
+stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c supabase.yaml supabase > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Não foi possivel subir a stack do supabase"
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do supabase"
+#fi
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
@@ -18866,6 +19263,657 @@ echo -e "\e[33mAnon key:\e[97m $ANON_KEY\e[0m"
 echo ""
 
 echo -e "\e[33mService key:\e[97m $SERVICE_KEY\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
+## ███╗   ██╗████████╗███████╗██╗   ██╗
+## ████╗  ██║╚══██╔══╝██╔════╝╚██╗ ██╔╝
+## ██╔██╗ ██║   ██║   █████╗   ╚████╔╝ 
+## ██║╚██╗██║   ██║   ██╔══╝    ╚██╔╝  
+## ██║ ╚████║   ██║   ██║        ██║   
+## ╚═╝  ╚═══╝   ╚═╝   ╚═╝        ╚═╝   
+                                    
+ferramenta_ntfy() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_ntfy
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+    echo -en "\e[33mDigite o Dominio para o Ntfy (ex: ntfy.oriondesign.art.br): \e[0m" && read -r url_ntfy
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 2/3\e[0m"
+    echo -en "\e[33mDigite o Usuario (ex: oriondesign): \e[0m" && read -r user_ntfy
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
+    echo -en "\e[33mDigite a Senha (ex: @Senha123_): \e[0m" && read -r pass_ntfy
+    echo ""
+
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_ntfy
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio da Ntfy:\e[97m $url_ntfy\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mUsuario do Ntfy:\e[97m $user_ntfy\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mSenha do Ntfy:\e[97m $pass_ntfy\e[0m"
+    echo ""
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_ntfy
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO NTFY \e[33m[1/3]\e[0m"
+echo ""
+sleep 1
+
+## Literalmente nada, apenas um espaço vazio caso precisar de adicionar alguma coisa
+## Antes..
+## E claro, para aparecer a mensagem do passo..
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO O NTFY \e[33m[2/3]\e[0m"
+echo ""
+sleep 1
+
+## Gerando Hash
+hashed_senha=$(htpasswd -nb $user_ntfy $pass_ntfy | sed -e s/\\$/\\$\\$/g)
+
+## Gerando Base64
+authentication=$(echo -n "$user_ntfy:$pass_ntfy" | base64)
+
+## Criando a stack
+cat > ntfy.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  ntfy:
+    image: binwiederhier/ntfy:latest
+    command:
+      - serve
+
+    volumes:
+      - ntfy_cache:/var/cache/ntfy
+      - ntfy_etc:/etc/ntfy
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - TZ=UTC
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.ntfy.rule=Host(\`$url_ntfy\`)
+        - traefik.http.services.ntfy.loadbalancer.server.port=80
+        - traefik.http.routers.ntfy.service=ntfy
+        - traefik.http.routers.ntfy.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.ntfy.entrypoints=websecure
+        - traefik.http.middlewares.ntfy-auth.basicauth.users=$hashed_senha
+        - traefik.http.routers.ntfy.middlewares=ntfy-auth
+        - traefik.http.routers.ntfy.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  ntfy_cache:
+    external: true
+    name: ntfy_cache
+  ntfy_etc:
+    external: true
+    name: ntfy_etc
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack da Ntfy"
+fi
+STACK_NAME="ntfy"
+stack_editavel # > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c ntfy.yaml ntfy > /dev/null 2>&1
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack da Ntfy"
+#fi
+
+sleep 10
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_ntfy para verificar se o serviço esta online
+wait_ntfy
+
+cd dados_vps
+
+cat > dados_ntfy <<EOL
+[ NTFY ]
+
+Link do Ntfy: https://$url_ntfy
+
+Usuario: $user_ntfy
+
+Senha: $pass_ntfy
+
+Authentication: Basic $authentication
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ NTFY ]\e[0m"
+echo ""
+
+echo -e "\e[97mLink do Ntfy:\e[33m https://$url_ntfy\e[0m"
+echo ""
+
+echo -e "\e[97mUsuario:\e[33m $user_ntfy\e[0m"
+echo ""
+
+echo -e "\e[97mSenha:\e[33m $pass_ntfy\e[0m"
+echo ""
+
+echo -e "\e[97mAuthentication:\e[33m Basic $authentication\e[0m"
+echo ""
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
+## ██╗      ██████╗ ██╗    ██╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗ 
+## ██║     ██╔═══██╗██║    ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗
+## ██║     ██║   ██║██║ █╗ ██║██║     ██║   ██║██║  ██║█████╗  ██████╔╝
+## ██║     ██║   ██║██║███╗██║██║     ██║   ██║██║  ██║██╔══╝  ██╔══██╗
+## ███████╗╚██████╔╝╚███╔███╔╝╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║
+## ╚══════╝ ╚═════╝  ╚══╝╚══╝  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
+
+ferramenta_lowcoder() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_lowcoder
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 1/8\e[0m"
+    echo -en "\e[33mDigite o Dominio para o Lowcoder (ex: lowcoder.oriondesign.art.br): \e[0m" && read -r url_lowcoder
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 2/8\e[0m"
+    echo -en "\e[33mDigite o User do MongoDB (ex: oriondesign): \e[0m" && read -r user_mongodb_lowcoder
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 3/8\e[0m"
+    echo -en "\e[33mDigite a senha do MongoDB (ex: @Senha123_): \e[0m" && read -r pass_mongodb_lowcoder
+    echo ""
+
+    ## Pergunta o email SMTP
+    echo -e "\e[97mPasso$amarelo 4/8\e[0m"
+    echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_smtp_lowcoder
+    echo ""
+
+    ## Pergunta o Ususario SMTP
+    echo -e "\e[97mPasso$amarelo 5/8\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuario para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_smtp_lowcoder
+    echo ""
+    
+    ## Pergunta a senha do SMTP
+    echo -e "\e[97mPasso$amarelo 6/8\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_smtp_lowcoder
+    echo ""
+    
+    ## Pergunta o Host SMTP do email
+    echo -e "\e[97mPasso$amarelo 7/8\e[0m"
+    echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r host_smtp_lowcoder
+    echo ""
+    
+    ## Pergunta a porta SMTP do email
+    echo -e "\e[97mPasso$amarelo 8/8\e[0m"
+    echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_lowcoder
+    echo ""
+
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_lowcoder
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio da lowcoder:\e[97m $url_lowcoder\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mUsuario do MongoDB:\e[97m $user_mongodb_lowcoder\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mSenha do MongoDB:\e[97m $pass_mongodb_lowcoder\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mEmail SMTP:\e[97m $email_smtp_lowcoder\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mUser SMTP:\e[97m $user_smtp_lowcoder\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mSenha SMTP:\e[97m $senha_smtp_lowcoder\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mHost SMTP:\e[97m $host_smtp_lowcoder\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mPorta SMTP:\e[97m $porta_smtp_lowcoder\e[0m"
+    echo ""
+
+    ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
+    if [ "$porta_smtp_lowcoder" -eq 465 ]; then
+    smtp_secure_lowcoder_ssl=true
+    smtp_secure_lowcoder_startls=false
+    else
+    smtp_secure_lowcoder_ssl=false
+    smtp_secure_lowcoder_startls=true
+    fi
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_lowcoder
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO LOWCODER \e[33m[1/4]\e[0m"
+echo ""
+sleep 1
+
+## Literalmente nada, apenas um espaço vazio caso precisar de adicionar alguma coisa
+## Antes..
+## E claro, para aparecer a mensagem do passo..
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[2/4]\e[0m"
+echo ""
+
+    verificar_container_redis
+    if [ $? -eq 0 ]; then
+        echo ""
+    else
+        ferramenta_redis
+    fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO O LOWCODER \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
+
+## Gerando Encryption
+encryption_key_lowcoder1=$(openssl rand -hex 16)
+encryption_key_lowcoder2=$(openssl rand -hex 16)
+encryption_key_lowcoder3=$(openssl rand -hex 32)
+
+## Pegando ip da vps
+read -r ip _ <<<$(hostname -I)
+
+## Criando a stack
+cat > lowcoder.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  lowcoder_api:
+    image: lowcoderorg/lowcoder-ce-api-service:latest
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - LOWCODER_PUID=9001
+      - LOWCODER_PGID=9001
+
+      ## Dados MongoDB
+      - LOWCODER_MONGODB_URL=mongodb://$user_mongodb_lowcoder:$pass_mongodb_lowcoder@$ip:27017/lowcoder?authSource=admin&readPreference=primary&ssl=false&directConnection=true
+
+      ## Dados Redis
+      - LOWCODER_REDIS_URL=redis://redis:6379
+
+      ## Dominio
+      - LOWCODER_NODE_SERVICE_URL=http://lowcoder_node:6060
+
+      ## Configurações
+      - LOWCODER_MAX_QUERY_TIMEOUT=120
+      - LOWCODER_EMAIL_AUTH_ENABLED=true
+      - LOWCODER_EMAIL_SIGNUP_ENABLED=true ## true = permitir criar novas contas
+      - LOWCODER_CREATE_WORKSPACE_ON_SIGNUP=true ## true = permitir criar novos workspaces
+      - LOWCODER_WORKSPACE_MODE=SAAS
+
+      ## Encryption
+      - LOWCODER_DB_ENCRYPTION_PASSWORD=$encryption_key_lowcoder1 ## hash Encryption
+      - LOWCODER_DB_ENCRYPTION_SALT=$encryption_key_lowcoder2 ## hash Encryption
+      - LOWCODER_API_KEY_SECRET=$encryption_key_lowcoder3 # hash Encryption
+
+      ## Outras configurações
+      - LOWCODER_CORS_DOMAINS=*
+      - LOWCODER_MAX_ORGS_PER_USER=100
+      - LOWCODER_MAX_MEMBERS_PER_ORG=1000
+      - LOWCODER_MAX_GROUPS_PER_ORG=100
+      - LOWCODER_MAX_APPS_PER_ORG=1000
+      - LOWCODER_MAX_DEVELOPERS=50
+
+      ## Dados SMTP
+      - LOWCODER_ADMIN_SMTP_HOST=$host_smtp_lowcoder
+      - LOWCODER_ADMIN_SMTP_PORT=$porta_smtp_lowcoder
+      - LOWCODER_ADMIN_SMTP_USERNAME=$user_smtp_lowcoder
+      - LOWCODER_ADMIN_SMTP_PASSWORD=$senha_smtp_lowcoder
+      - LOWCODER_ADMIN_SMTP_AUTH=true
+      - LOWCODER_ADMIN_SMTP_SSL_ENABLED=$smtp_secure_lowcoder_ssl
+      - LOWCODER_ADMIN_SMTP_STARTTLS_ENABLED=$smtp_secure_lowcoder_startls
+      - LOWCODER_ADMIN_SMTP_STARTTLS_REQUIRED=$smtp_secure_lowcoder_startls
+      - LOWCODER_EMAIL_NOTIFICATIONS_SENDER=$email_smtp_lowcoder
+    
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+  lowcoder_node:
+    image: lowcoderorg/lowcoder-ce-node-service:latest
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - LOWCODER_PUID=9001
+      - LOWCODER_PGID=9001
+      - LOWCODER_API_SERVICE_URL=http://lowcoder_api:8080
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+  lowcoder-frontend:
+    image: lowcoderorg/lowcoder-ce-frontend:latest
+
+    volumes:
+     - lowcoder_assets:/lowcoder/assets
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - LOWCODER_PUID=9001
+      - LOWCODER_PGID=9001
+      - LOWCODER_MAX_REQUEST_SIZE=20m
+      - LOWCODER_MAX_QUERY_TIMEOUT=120
+      - LOWCODER_API_SERVICE_URL=http://lowcoder_api:8080
+      - LOWCODER_NODE_SERVICE_URL=http://lowcoder_node:6060
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager  
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.lowcoder.rule=Host(\`$url_lowcoder\`) && PathPrefix(\`/\`)
+        - traefik.http.services.lowcoder.loadbalancer.server.port=3000
+        - traefik.http.routers.lowcoder.service=lowcoder
+        - traefik.http.routers.lowcoder.entrypoints=websecure
+        - traefik.http.routers.lowcoder.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.lowcoder.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  lowcoder_assets:
+    external: true
+    name: lowcoder_assets
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack da Lowcoder"
+fi
+STACK_NAME="lowcoder"
+stack_editavel # > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c lowcoder.yaml lowcoder > /dev/null 2>&1
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack da lowcoder"
+#fi
+
+sleep 10
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_lowcoder para verificar se o serviço esta online
+wait_lowcoder
+
+cd dados_vps
+
+cat > dados_lowcoder <<EOL
+[ LOWCODER ]
+
+Link do Lowcoder: https://$url_lowcoder
+
+Usuario: Precisa de criar dentro do LowCoder
+
+Senha: Precisa de criar dentro do LowCoder
+
+API_KEY: $encryption_key_lowcoder3
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ lowcoder ]\e[0m"
+echo ""
+
+echo -e "\e[97mLink do Lowcoder:\e[33m https://$url_lowcoder\e[0m"
+echo ""
+
+echo -e "\e[97mUsuario:\e[33m Precisa de criar dentro do LowCoder\e[0m"
+echo ""
+
+echo -e "\e[97mSenha:\e[33m Precisa de criar dentro do LowCoder\e[0m"
 echo ""
 
 ## Creditos do instalador
@@ -19171,17 +20219,18 @@ while true; do
             cd "$temp_dir"
 
             # Baixando workflows
-            wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/ChatwootProfileUpdate.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/ChatwootToQuepasa.json"
-            wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/ChatwootToQuepasaGreetings.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/PostToChatwoot.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/QuepasaAutomatic.json"
-            wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaChatControl.json"
-            wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaInboxControl.json"
-            wget "https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/Extras/Quepasa/workflows_n8n/QuepasaQrcode.json"
-            wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/QuepasaToChatwoot.json"
-            wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/GetChatwootContacts.json"
-            wget "https://raw.githubusercontent.com/nocodeleaks/quepasa/main/extra/n8n%2Bchatwoot/PostToWebCallBack.json"
+
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootExtra.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootProfileUpdate.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootToQuepasa.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/GetChatwootContacts.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/PostToChatwoot.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/PostToWebCallBack.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaAutomatic.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaChatControl.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaQrcode.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaToChatwoot.json"
 
             # Subindo workflows
             n8n import:workflow --input="$temp_dir" --separate
@@ -19374,6 +20423,36 @@ ctop() {
 
 }
 
+quepasa.setup.off(){
+    echo ""
+    echo "Desativando painel /setup do quepasa"
+    mv /var/lib/docker/volumes/quepasa_volume/_data/views/setup.tmpl /var/lib/docker/volumes/quepasa_volume/_data/views/setup.old
+    if [ $? -eq 0 ]; then
+        echo "1/1 - [ OK ] - Painel /setup Desativado"
+    else
+        echo "1/1 - [ OFF ] - Erro ao desativar painel"
+        echo "Tente novamente mais tarde ou verifique se você tem Quepasa instalado."
+    fi
+    echo ""
+    echo "Voltando ao menu de ferramentas..."
+    sleep 5
+}
+
+quepasa.setup.on(){
+    echo ""
+    echo "Ativando painel /setup do quepasa"
+    mv /var/lib/docker/volumes/quepasa_volume/_data/views/setup.old /var/lib/docker/volumes/quepasa_volume/_data/views/setup.tmpl
+    if [ $? -eq 0 ]; then
+        echo "1/1 - [ OK ] - Painel /setup Ativado"
+    else
+        echo "1/1 - [ OFF ] - Erro ao Ativar painel"
+        echo "Tente novamente mais tarde ou verifique se você tem Quepasa instalado."
+    fi
+    echo ""
+    echo "Voltando ao menu de ferramentas..."
+    sleep 5
+}
+
 
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -19396,24 +20475,24 @@ while true; do
     nome_menu
     menu_instalador
 
-    read -p "Digite o NÚMERO da opção desejada: " opcao
+    read -p "Digite o NÚMERO da opção desejada ou COMANDO oculto: " opcao
 
     case $opcao in
 
-        0)
+        0|00)
             ferramenta_testeemail
             ;;
-        1)
+        1|01)
             ferramenta_traefik_e_portainer
             ;;
-        2)
+        2|02)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="chatwoot"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_chatwoot
                 else
                     APP_ORION="ferramenta_chatwoot"
@@ -19422,35 +20501,85 @@ while true; do
 
                 ## FIM TOKEN 
 
+                ### Inicio do teste para unificar AMD/INTEL com ARM
+                #
+                ### Nome da Stack
+                #STACK_NAME="chatwoot"
+                #
+                ### Modelo do processador
+                #cpu_vendor=$(lscpu | grep 'Vendor ID' | awk '{print $3}')
+                #
+                ### Verifica se o processador é INTEL ou AMD
+                #if [[ "$cpu_vendor" == "GenuineIntel" || "$cpu_vendor" == "AuthenticAMD" ]]; then
+                #    
+                #    ## Verifica se tem Token no arquivo dados_portainer
+                #    if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                #        ferramenta_chatwoot ## Inicia instalação para INTEL/AMD
+                #    ## Se não tiver Token no dados_portainer
+                #    else
+                #        ## Nome da Stack
+                #        APP_ORION="ferramenta_chatwoot"
+                #
+                #        ## Verifica o arquivo dados_portainer e pede dados
+                #        verificar_arquivo
+                #    fi
+                #
+                ### Verifica se o processador é ARM
+                #elif [[ "$cpu_arch" == "armv7l" || "$cpu_arch" == "aarch64" || "$cpu_vendor" == "ARM" ]]; then
+                #    
+                #    ## Verifica se tem Token no arquivo dados_portainer
+                #    if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                #        ferramenta_chatwoot_arm ## Inicia instalação para ARM
+                #    ## Se não tiver Token no dados_portainer
+                #    else
+                #        ## Nome da Stack
+                #        APP_ORION="ferramenta_chatwoot_arm"
+                #
+                #        ## Verifica o arquivo dados_portainer e pede dados
+                #        verificar_arquivo
+                #    fi
+                #
+                ### Se não for INTEL, AMD ou ARM
+                #else
+                #    ## Apresenta mensagem de erro.
+                #    clear && erro_msg
+                #    echo "Tipo de processador desconhecido: $cpu_vendor, voltando para o menu iniciar."
+                #    echo "Reporte este erro no whatsapp: +55 11 97305-2593"
+                #    sleep 5
+                #fi
+                ### Fim 
+
             fi
             ;;
+
         2.1)
             if verificar_docker_e_portainer_traefik; then
-
+        
                 ## INICIO TOKEN
-
+        
                 STACK_NAME="chatwoot"
-
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+        
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_chatwoot_arm
                 else
                     APP_ORION="ferramenta_chatwoot_arm"
                     verificar_arquivo
                 fi
-
+        
                 ## FIM TOKEN 
-
+        
             
             fi
             ;;
-        3)
+
+        3|03)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="evolution"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_evolution
                 else
                     APP_ORION="ferramenta_evolution"
@@ -19469,7 +20598,7 @@ while true; do
 
                 STACK_NAME="evolution"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_evolution_arm
                 else
                     APP_ORION="ferramenta_evolution_arm"
@@ -19480,14 +20609,14 @@ while true; do
             
             fi
             ;;
-        4)
+        4|04)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="minio"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_minio
                 else
                     APP_ORION="ferramenta_minio"
@@ -19499,14 +20628,14 @@ while true; do
             
             fi
             ;;
-        5)
+        5|05)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="typebot"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_typebot
                 else
                     APP_ORION="ferramenta_typebot"
@@ -19517,14 +20646,14 @@ while true; do
             
             fi
             ;;
-        6)
+        6|06)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="n8n"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_n8n
                 else
                     APP_ORION="ferramenta_n8n"
@@ -19536,14 +20665,14 @@ while true; do
             
             fi
             ;;
-        7)
+        7|07)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="flowise"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_flowise
                 else
                     APP_ORION="ferramenta_flowise"
@@ -19554,14 +20683,14 @@ while true; do
             
             fi
             ;;
-        8)
+        8|08)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="pgadmin"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_pgAdmin_4
                 else
                     APP_ORION="ferramenta_pgAdmin_4"
@@ -19573,14 +20702,14 @@ while true; do
             
             fi
             ;;
-        9)
+        9|09)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
                 STACK_NAME="nocobase"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_nocobase
                 else
                     APP_ORION="ferramenta_nocobase"
@@ -19599,7 +20728,7 @@ while true; do
 
                 STACK_NAME="botpress"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_botpress
                 else
                     APP_ORION="ferramenta_botpress"
@@ -19616,7 +20745,7 @@ while true; do
 
                 ## INICIO TOKEN
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_wordpress
                 else
                     APP_ORION="ferramenta_wordpress"
@@ -19634,7 +20763,7 @@ while true; do
 
                 STACK_NAME="baserow"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_baserow
                 else
                     APP_ORION="ferramenta_baserow"
@@ -19653,7 +20782,7 @@ while true; do
 
                 STACK_NAME="mongodb"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_mongodb
                 else
                     APP_ORION="ferramenta_mongodb"
@@ -19672,7 +20801,7 @@ while true; do
 
                 STACK_NAME="rabbitmq"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_rabbitmq
                 else
                     APP_ORION="ferramenta_rabbitmq"
@@ -19691,7 +20820,7 @@ while true; do
 
                 STACK_NAME="uptimekuma"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_uptimekuma
                 else
                     APP_ORION="ferramenta_uptimekuma"
@@ -19710,7 +20839,7 @@ while true; do
 
                 STACK_NAME="calcom"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_calcom
                 else
                     APP_ORION="ferramenta_calcom"
@@ -19729,7 +20858,7 @@ while true; do
 
                 STACK_NAME="mautic"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_mautic
                 else
                     APP_ORION="ferramenta_mautic"
@@ -19748,7 +20877,7 @@ while true; do
 
                 STACK_NAME="appsmith"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_appsmith
                 else
                     APP_ORION="ferramenta_appsmith"
@@ -19767,7 +20896,7 @@ while true; do
 
                 STACK_NAME="qdrant"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_qdrant
                 else
                     APP_ORION="ferramenta_qdrant"
@@ -19786,7 +20915,7 @@ while true; do
 
                 STACK_NAME="woofedcrm"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_woofed
                 else
                     APP_ORION="ferramenta_woofed"
@@ -19805,7 +20934,7 @@ while true; do
 
                 STACK_NAME="formbricks"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_formbricks
                 else
                     APP_ORION="ferramenta_formbricks"
@@ -19824,7 +20953,7 @@ while true; do
 
                 STACK_NAME="nocodb"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_nocodb
                 else
                     APP_ORION="ferramenta_nocodb"
@@ -19843,7 +20972,7 @@ while true; do
 
                 STACK_NAME="langfuse"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_langfuse
                 else
                     APP_ORION="ferramenta_langfuse"
@@ -19862,7 +20991,7 @@ while true; do
 
                 STACK_NAME="metabase"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_metabase
                 else
                     APP_ORION="ferramenta_metabase"
@@ -19881,7 +21010,7 @@ while true; do
 
                 STACK_NAME="odoo"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_odoo
                 else
                     APP_ORION="ferramenta_odoo"
@@ -19900,7 +21029,7 @@ while true; do
 
                 STACK_NAME="chatwoot_nestor"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_chatwoot_nestor
                 else
                     APP_ORION="ferramenta_chatwoot_nestor"
@@ -19919,7 +21048,7 @@ while true; do
 
                 STACK_NAME="unoapi"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_unoapi
                 else
                     APP_ORION="ferramenta_unoapi"
@@ -19938,7 +21067,7 @@ while true; do
 
                 STACK_NAME="n8n_quepasa"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_n8n_quepasa
                 else
                     APP_ORION="ferramenta_n8n_quepasa"
@@ -19957,7 +21086,7 @@ while true; do
 
                 STACK_NAME="quepasa"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_quepasa
                 else
                     APP_ORION="ferramenta_quepasa"
@@ -19976,7 +21105,7 @@ while true; do
 
                 STACK_NAME="docuseal"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_docuseal
                 else
                     APP_ORION="ferramenta_docuseal"
@@ -19995,7 +21124,7 @@ while true; do
 
                 STACK_NAME="monitor"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_monitor
                 else
                     APP_ORION="ferramenta_monitor"
@@ -20014,7 +21143,7 @@ while true; do
 
                 STACK_NAME="dify"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_dify
                 else
                     APP_ORION="ferramenta_dify"
@@ -20033,7 +21162,7 @@ while true; do
 
                 STACK_NAME="ollama"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_ollama
                 else
                     APP_ORION="ferramenta_ollama"
@@ -20052,7 +21181,7 @@ while true; do
 
                 STACK_NAME="affine"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_affine
                 else
                     APP_ORION="ferramenta_affine"
@@ -20071,7 +21200,7 @@ while true; do
 
                 STACK_NAME="directus"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_directus
                 else
                     APP_ORION="ferramenta_directus"
@@ -20090,7 +21219,7 @@ while true; do
 
                 STACK_NAME="vaultwarden"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_vaultwarden
                 else
                     APP_ORION="ferramenta_vaultwarden"
@@ -20109,7 +21238,7 @@ while true; do
 
                 STACK_NAME="nextcloud"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_nextcloud
                 else
                     APP_ORION="ferramenta_nextcloud"
@@ -20127,7 +21256,7 @@ while true; do
 
                 STACK_NAME="strapi"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_strapi
                 else
                     APP_ORION="ferramenta_strapi"
@@ -20146,7 +21275,7 @@ while true; do
 
                 STACK_NAME="phpmyadmin"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_phpmyadmin
                 else
                     APP_ORION="ferramenta_phpmyadmin"
@@ -20165,7 +21294,7 @@ while true; do
 
                 STACK_NAME="supabase"
 
-                if grep -q "Token: " /root/dados_vps/dados_portainer; then
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_supabase
                 else
                     APP_ORION="ferramenta_supabase"
@@ -20180,11 +21309,47 @@ while true; do
         41)
             if verificar_docker_e_portainer_traefik; then
 
-                ferramenta_remover_stack
+                ## INICIO TOKEN
+
+                STACK_NAME="ntfy"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_ntfy
+                else
+                    APP_ORION="ferramenta_ntfy"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
 
             fi   
             ;;
         42)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="lowcoder"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_lowcoder
+                else
+                    APP_ORION="ferramenta_lowcoder"
+                    verificar_arquivo
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+        43)
+            if verificar_docker_e_portainer_traefik; then
+
+                ferramenta_remover_stack
+
+            fi   
+            ;;
+        44)
             clear
             nome_saindo
             echo ""
@@ -20238,6 +21403,14 @@ while true; do
         ## Corrigir credenciais do portainer (para instalações)
         credencial.reset)
             criar_arquivo
+            ;;
+
+        quepasa.setup.off)
+            quepasa.setup.off
+            ;;
+
+        quepasa.setup.on)
+            quepasa.setup.on
             ;;
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
