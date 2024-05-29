@@ -1691,6 +1691,29 @@ verificar_antes_se_tem_minio_e_qdrant() {
     return 0
 }
 
+## Verifica se existe Minio
+verificar_antes_se_tem_mongo() {
+
+    ## Verifica se o Portainer está instalado
+    if ! docker ps -a --format "{{.Names}}" | grep -q "mongodb"; then
+        clear
+        erro_msg
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 13 ] - MongoDB${reset} ${branco}do nosso instalador.${reset}"
+        echo "Instale antes de tentar instalar esta aplicação."
+
+        echo ""
+        echo "Voltando ao menu em 5 segundos."
+        sleep 5
+
+        nome_menu
+        menu_instalador
+
+        return 1
+    fi
+
+    return 0
+}
+
 ## Verificar Container Postgres
 
 verificar_container_postgres() {
@@ -21325,7 +21348,7 @@ while true; do
             fi   
             ;;
         42)
-            if verificar_docker_e_portainer_traefik; then
+            if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_mongo; then
 
                 ## INICIO TOKEN
 
