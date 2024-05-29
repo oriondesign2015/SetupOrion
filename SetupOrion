@@ -14774,78 +14774,112 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  quepasa:
-    image: oriondesign/quepasa:latest
+    quepasa:
+        image: deividms/quepasa:v3.24.517.1231 ## Imagem/versão do Quepasa
+        
+        volumes:
+            - quepasa_volume:/opt/quepasa
 
-    volumes:
-      - quepasa_data:/opt/quepasa
-      - quepasa_migration:/opt/quepasa/migrations
+        networks:
+            - $nome_rede_interna
 
-    networks:
-        - $nome_rede_interna
+        environment:
+            ## Dados de acesso
+            - DOMAIN=$url_quepasa
 
-    environment:
-      ## Url Quepasa e porta
-      - DOMAIN=$url_quepasa
-      - WEBAPIPORT=31000
+            ## Email Quepasa
+            - EMAIL=$email_quepasa
+            - QUEPASA_BASIC_AUTH_USER=$email_quepasa
+            - QUEPASA_BASIC_AUTH_PASSWORD=$email_quepasa
 
-      ## Email Quepasa
-      - EMAIL=$email_quepasa
+            ## Titulo no celular
+            - APP_TITLE=OrionDesign ## Mude aqui o nome que vai aparecer no celular.
 
-      ## Titulo no celular
-      - APP_TITLE=OrionDesign
+            ## TimeZone
+            - TZ=America/Sao_Paulo
 
-      ## TimeZone
-      - TZ=America/Sao_Paulo
+            ## Configurações para o WhatsApp
+            - GROUPS=true
+            - BROADCASTS=false
+            - READRECEIPTS=forcedfalse
+            - CALLS=true
+            - READUPDATE=false
+            - LOGLEVEL=DEBUG
 
-      ## Tratar digito 9
-      - REMOVEDIGIT9=true
+            ## Configurações quepasa
+            - QUEPASA_HOST_NAME=Quepasa
+            - QUEPASA_MEMORY_LIMIT=4096M
+            - WEBSOCKETSSL=true
+            - REMOVEDIGIT9=true
+            - SIGNING_SECRET=$key_quepasa
 
-      ## Sobre o Node
-      - APP_ENV=production
-      - NODE_ENV=production
+            ## Webhook
+            #- WEBHOOK_QUEPASA=webhook.oriondesign.art.br/webhook/quepasa
+            #- WEBHOOK_TESTE_QUEPASA=n8n.oriondesign.art.br/webhook-test/quepasa
+            
+            ## Portas
+            - QUEPASA_EXTERNAL_PORT=31000
+            - QUEPASA_INTERNAL_PORT=31000
+            - WEBAPIPORT=31000
 
-      ## Outras Informações
-      - WEBSOCKETSSL=true
-      - DEBUGJSONMESSAGES=false
-      - DEBUGREQUESTS=false
-      - READRECEIPTS=false
-      - SYNOPSISLENGTH=500
-      - MIGRATIONS=/builder/migrations
+            ## Outras configurações
+            - DEBUGREQUESTS=false
+            - SYNOPSISLENGTH=500
+            - METRICS_HOST=
+            - METRICS_PORT=9392
+            - MIGRATIONS=/builder/migrations
+            - DEBUGJSONMESSAGES=false
+            - HTTPLOGS=false
 
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "0.5"
-          memory: 1024M
-      labels:
-        - traefik.enable=true
-        - traefik.http.routers.quepasa.rule=Host(\`$url_quepasa\`)
-        - traefik.http.services.quepasa.loadbalancer.server.port=31000
-        - traefik.http.routers.quepasa.service=quepasa
-        - traefik.http.routers.quepasa.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.quepasa.entrypoints=websecure
-        - traefik.http.routers.quepasa.tls=true
+            ## WHATSMEOW SERVICE
+            - WHATSMEOW_LOGLEVEL=WARN
+            - WHATSMEOW_DBLOGLEVEL=WARN
+
+            ## Env Mode
+            - APP_ENV=production
+            - NODE_ENV=production
+
+        deploy:
+            mode: replicated
+            replicas: 1
+            placement:
+                constraints:
+                - node.role == manager
+            resources:
+                limits:
+                    cpus: "2"
+                    memory: 2096M
+                        
+            labels:
+                - traefik.enable=true
+                - traefik.http.routers.quepasa.rule=Host(\`$url_quepasa\`)
+                - traefik.http.routers.quepasa.tls=true
+                - traefik.http.routers.quepasa.entrypoints=web,websecure
+                - traefik.http.routers.quepasa.tls.certresolver=letsencryptresolver
+                - traefik.http.routers.quepasa.service=quepasa
+                - traefik.http.routers.quepasa.priority=1      
+                - traefik.http.middlewares.quepasa.headers.SSLRedirect=true
+                - traefik.http.middlewares.quepasa.headers.STSSeconds=315360000
+                - traefik.http.middlewares.quepasa.headers.browserXSSFilter=true
+                - traefik.http.middlewares.quepasa.headers.contentTypeNosniff=true
+                - traefik.http.middlewares.quepasa.headers.forceSTSHeader=true
+                - traefik.http.middlewares.quepasa.headers.SSLHost=\${QUEPASA_HOST}
+                - traefik.http.middlewares.quepasa.headers.STSIncludeSubdomains=true
+                - traefik.http.middlewares.quepasa.headers.STSPreload=true
+                - traefik.http.services.quepasa.loadbalancer.server.port=31000
+                - traefik.http.services.quepasa.loadbalancer.passHostHeader=true              
 
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  quepasa_data:
+  quepasa_volume:
     external: true
-    name: quepasa_data
-  quepasa_migration:
-    external: true
-    name: quepasa_migration
+    name: quepasa_volume
 
 networks:
   $nome_rede_interna:
-    name: $nome_rede_interna
     external: true
+    name: $nome_rede_interna 
 EOL
 
 if [ $? -eq 0 ]; then
