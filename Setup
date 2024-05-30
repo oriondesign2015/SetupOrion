@@ -28,6 +28,10 @@ sudo apt-get install -y jq
 
 sudo apt install jq -y
 
+sudo apt install apache2-utils -y
+
+apt install apache2-utils -y
+
 sudo apt update
 
 sudo apt upgrade -y
