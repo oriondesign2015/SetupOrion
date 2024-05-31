@@ -1254,7 +1254,7 @@ stack_editavel(){
     ## Pegando o id do portainer
     ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" https://$PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
     if [ $? -eq 0 ]; then
-        echo -e "8/10 - [ OK ] - Pegando ID do Portainer: $bege$PORTAINER_URL$reset"
+        echo -e "8/10 - [ OK ] - Pegando ID do Portainer: $bege$ENDPOINT_ID$reset"
     else
         echo "8/10 - [ OFF ] - Erro ao pegar ID do Portainer"
     fi
@@ -1265,7 +1265,7 @@ stack_editavel(){
     ## Pegando o ID do Swarm
     SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" "https://$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm" | jq -r .ID)
     if [ $? -eq 0 ]; then
-        echo -e "9/10 - [ OK ] - Pegando ID do Swarm: $bege$PORTAINER_URL$reset"
+        echo -e "9/10 - [ OK ] - Pegando ID do Swarm: $bege$SWARM_ID$reset"
     else
         echo "9/10 - [ OFF ] - Erro ao pegar ID do Swarm"
     fi
