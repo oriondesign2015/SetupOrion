@@ -9899,7 +9899,7 @@ while true; do
     clear
     
     ## Mostra o nome da aplicação
-    nome_chatwoot
+    nome_calcom
     
     ## Mostra mensagem para verificar as informações
     conferindo_as_info
