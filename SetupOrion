@@ -11430,7 +11430,7 @@ Email: Precisa criar dentro do WoofedCRM
 
 Senha: Precisa criar dentro do WoofedCRM
 
-Dominio do WoofedCRM: https://$url_woofed/motor_admin
+Acesso ao Motor: https://$url_woofed/motor_admin
 
 Usuario do Motor: $email_admin_woofed
 
