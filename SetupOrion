@@ -11161,6 +11161,9 @@ services:
       - FRONTEND_URL=https://$url_woofed
       - SECRET_KEY_BASE=$encryption_key_woofed
 
+      ## Idioma
+      - LANGUAGE=pt-BR
+
       ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
 
@@ -11232,6 +11235,9 @@ services:
       - FRONTEND_URL=https://$url_woofed
       - SECRET_KEY_BASE=$encryption_key_woofed
 
+      ## Idioma
+      - LANGUAGE=pt-BR
+
       ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
 
@@ -11291,6 +11297,9 @@ services:
       ## Url WoofedCRM
       - FRONTEND_URL=https://$url_woofed
       - SECRET_KEY_BASE=$encryption_key_woofed
+
+      ## Idioma
+      - LANGUAGE=pt-BR
 
       ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
