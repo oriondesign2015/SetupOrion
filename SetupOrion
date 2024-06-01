@@ -4419,8 +4419,8 @@ services:
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    ports:
-      - 6379:6379
+    #ports:
+    #  - 6379:6379
 
     deploy:
       placement:
@@ -4428,8 +4428,8 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "0.5"
-          memory: 1024M
+          cpus: "1"
+          memory: 2048M
 
 ## --------------------------- ORION --------------------------- ##
 
