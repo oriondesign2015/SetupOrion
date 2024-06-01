@@ -7601,7 +7601,7 @@ while true; do
         clear
 
         ## Mostra o nome da ferramenta
-        nome_minio
+        nome_flowise
 
         ## Mostra mensagem para preencher informações
         preencha_as_info
