@@ -1,5 +1,37 @@
 #!/bin/bash
 
+## Cores do Setup
+
+amarelo="\e[33m"
+verde="\e[32m"
+branco="\e[97m"
+bege="\e[93m"
+vermelho="\e[91m"
+reset="\e[0m"
+
+nome_aviso(){
+
+clear
+echo ""
+echo -e "$amarelo===================================================================================================$reset"
+echo -e "$amarelo=                                                                                                 $amarelo=$reset"
+echo -e "$amarelo=                     $branco  █████╗     ██╗   ██╗    ██╗    ███████╗     ██████╗                       $amarelo=$reset"
+echo -e "$amarelo=                     $branco ██╔══██╗    ██║   ██║    ██║    ██╔════╝    ██╔═══██╗                      $amarelo=$reset"
+echo -e "$amarelo=                     $branco ███████║    ██║   ██║    ██║    ███████╗    ██║   ██║                      $amarelo=$reset"
+echo -e "$amarelo=                     $branco ██╔══██║    ╚██╗ ██╔╝    ██║    ╚════██║    ██║   ██║                      $amarelo=$reset"
+echo -e "$amarelo=                     $branco ██║  ██║     ╚████╔╝     ██║    ███████║    ╚██████╔╝                      $amarelo=$reset"
+echo -e "$amarelo=                     $branco ╚═╝  ╚═╝      ╚═══╝      ╚═╝    ╚══════╝     ╚═════╝                       $amarelo=$reset"
+echo -e "$amarelo=                                                                                                 $amarelo=$reset"
+echo -e "$amarelo===================================================================================================$reset"
+echo ""
+echo ""
+}
+
+desc_ver(){
+echo -e "                            Este script recomenda o uso do Ubuntu$amarelo 20.04$branco.$reset"
+echo ""
+}                                                 
+
 # Verifica se o usuário é root
 if [ "$(id -u)" -ne 0 ]; then
     echo "Este script precisa ser executado como root. Executando sudo su..."
@@ -14,8 +46,11 @@ fi
 
 # Verifica se está usando Ubuntu 20.04
 if ! grep -q 'Ubuntu 20.04' /etc/os-release; then
-    echo "Este script recomenda o uso do Ubuntu 20.04."
-    sleep 3
+    nome_aviso
+    desc_ver
+    #echo "Este script recomenda o uso do Ubuntu 20.04."
+    sleep 5
+    clear
 fi
 
 apt install sudo -y
