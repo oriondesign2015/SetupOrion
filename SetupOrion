@@ -4653,20 +4653,20 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "1/10 - [ OFF ] - Criando Stack"
     echo "Ops, não foi criar a stack do Mysql."
 fi
 
 STACK_NAME="mysql"
-stack_editavel > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Ops, não foi possivel subir a stack do Postgres."
-fi
+stack_editavel
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Ops, não foi possivel subir a stack do Postgres."
+#fi
 
 #docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
 
@@ -4681,8 +4681,40 @@ Dominio do mysql: mysql
 Usuario: mysql ou root
 
 Senha: $senha_mysql
-
 EOL
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ MYSQL ]\e[0m"
+echo ""
+
+echo -e "\e[97mHost:\e[33m mysql\e[0m"
+echo ""
+
+echo -e "\e[97mUsuario:\e[33m root\e[0m"
+echo ""
+
+echo -e "\e[97mSenha:\e[33m $senha_mysql\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
 
 cd
 cd
@@ -21386,6 +21418,25 @@ while true; do
             nome_saindo
             echo ""
             break
+            ;;
+            
+        mysql)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="mysql"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_mysql_setup
+                else
+                    APP_ORION="ferramenta_mysql_setup"
+                    ferramenta_mysql_setup
+                fi
+
+                ## FIM TOKEN
+
+            fi   
             ;;
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
