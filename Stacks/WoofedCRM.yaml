@@ -38,7 +38,7 @@ services:
 
       ## Dados OpenAI
       ## Descomente a linha abaixo (removendo o # do inicio) para usar a OpenAI no WoofedCRM
-      #- OPENAI_API_KEY=
+      #- OPENAI_API_KEY= 
 
       ## Dados PgVector
       ## Necessario ter instalado o pgvecotr e criado uma database com nome de "woofrdcrm"
