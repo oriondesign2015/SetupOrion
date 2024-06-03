@@ -81,7 +81,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   woofedcrm_sidekiq_orion:
-    image: douglara/woofedcrm:latest ## ---> Troque para a versão que deseja usar <--- ##
+    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
     command: bundle exec sidekiq -C config/sidekiq.yml
    
     volumes:
@@ -147,7 +147,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   woofedcrm_job_orion:
-    image: douglara/woofedcrm:latest ## ---> Troque para a versão que deseja usar <--- ##
+    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
     command: bundle exec good_job
     
     volumes:
