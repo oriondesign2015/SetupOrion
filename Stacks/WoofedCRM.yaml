@@ -1,25 +1,61 @@
-version: '3.7'
-
+version: "3.7"
 services:
-  woofedcrm:
-    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
+
+## --------------------------- ORION --------------------------- ##
+
+  woofedcrm_web_orion:
+    image: douglara/woofedcrm:latest ## ---> Troque para a versão que deseja usar <--- ##
     command: bundle exec rails s -p 3000 -b 0.0.0.0
+
+    volumes:
+      - woofedcrm_public:/app/public/assets
+      
     networks:
       - NOME_DA_REDE ## ---> Defina o nome da rede interna  <--- ##
-    volumes:
-      - woofedcrm_data:/app
+      
     environment:
+      ## Url WoofedCRM
+      - FRONTEND_URL=https://crm.dominio.com ## Troque pelo seu dominio
+      - SECRET_KEY_BASE=BDYcdCHe7luXMBgSpUVQD3mbrUbDJmGv ## Troque por uma hash de 32 caracteres
+
+      ## Idioma
+      - LANGUAGE=pt-BR
+
+      ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
+
+      ## Credenciais Motor
+      - MOTOR_AUTH_USERNAME=admin ## ---> Usuario para o motor <--- ##
+      - MOTOR_AUTH_PASSWORD=@admin123_ ## ---> Senha para o motor <--- ##
+
+      ## Dados Evolution API
+      ## Descomente as linhas abaixo (removendo o # do inicio) para usar a Evolution API no WoofedCRM
+      #- EVOLUTION_API_ENDPOINT=https://evolution.dominio.com ## Dominio da sua Evolution API
+      #- EVOLUTION_API_ENDPOINT_TOKEN=a37f14b87e32f3db4a10e15a0008034f ## Sua Global Api Key da Evolution API
+
+      ## Timezone
+      - DEFAULT_TIMEZONE=Brasilia
+
+      ## Dados OpenAI
+      ## Descomente a linha abaixo (removendo o # do inicio) para usar a OpenAI no WoofedCRM
+      #- OPENAI_API_KEY=
+
+      ## Dados PgVector
+      ## Necessario ter instalado o pgvecotr e criado uma database com nome de "woofrdcrm"
+      - DATABASE_URL=postgres://postgres:senha_pgvector@pgvector:5432/woofedcrm ## Troque a "senha_pgvector"
+
+      ## Dados Redis
+      - REDIS_URL=redis://redis:6379/0
+
+      ## Dados Storage
+      - ACTIVE_STORAGE_SERVICE=local
+
+      ## Modo de Produção
       - RAILS_ENV=production
       - RACK_ENV=production
       - NODE_ENV=production
-      - MOTOR_AUTH_USERNAME=USUARIO ## ---> Usuario para o motor <--- ##
-      - MOTOR_AUTH_PASSWORD=SENHA ## ---> Senha para o motor <--- ##
-      - FRONTEND_URL=https://URL_DO_WOOFED ## ---> Url para o WoofedCRM <--- ##
-      - DATABASE_URL=postgres://postgres:SENHA_POSTGRES@postgres:5432/woofedcrm ## ---> Dados do postgres <--- ##
-      - REDIS_URL=redis://redis:6379/0
-      - ACTIVE_STORAGE_SERVICE=local
       - RAILS_LOG_LEVEL=debug
+
     deploy:
       mode: replicated
       replicas: 1
@@ -42,28 +78,61 @@ services:
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.routers.woofedcrm.middlewares=sslheader@docker
 
-  sidekiq:
-    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
+## --------------------------- ORION --------------------------- ##
+
+  woofedcrm_sidekiq_orion:
+    image: douglara/woofedcrm:latest ## ---> Troque para a versão que deseja usar <--- ##
     command: bundle exec sidekiq -C config/sidekiq.yml
+   
+    volumes:
+      - woofedcrm_public:/app/public/assets
+      
     networks:
       - NOME_DA_REDE ## ---> Defina o nome da rede interna  <--- ##
-    volumes:
-      - woofedcrm_data:/app
+      
     environment:
+      ## Url WoofedCRM
+      - FRONTEND_URL=https://crm.dominio.com ## Troque pelo seu dominio
+      - SECRET_KEY_BASE=BDYcdCHe7luXMBgSpUVQD3mbrUbDJmGv ## Troque por uma hash de 32 caracteres
+
+      ## Idioma
+      - LANGUAGE=pt-BR
+
+      ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
+
+      ## Credenciais Motor
+      - MOTOR_AUTH_USERNAME=admin ## ---> Usuario para o motor <--- ##
+      - MOTOR_AUTH_PASSWORD=@admin123_ ## ---> Senha para o motor <--- ##
+
+      ## Dados Evolution API
+      ## Descomente as linhas abaixo (removendo o # do inicio) para usar a Evolution API no WoofedCRM
+      #- EVOLUTION_API_ENDPOINT=https://evolution.dominio.com ## Dominio da sua Evolution API
+      #- EVOLUTION_API_ENDPOINT_TOKEN=a37f14b87e32f3db4a10e15a0008034f ## Sua Global Api Key da Evolution API
+
+      ## Timezone
+      - DEFAULT_TIMEZONE=Brasilia
+
+      ## Dados OpenAI
+      ## Descomente a linha abaixo (removendo o # do inicio) para usar a OpenAI no WoofedCRM
+      #- OPENAI_API_KEY=
+
+      ## Dados PgVector
+      ## Necessario ter instalado o pgvecotr e criado uma database com nome de "woofrdcrm"
+      - DATABASE_URL=postgres://postgres:senha_pgvector@pgvector:5432/woofedcrm ## Troque a "senha_pgvector"
+
+      ## Dados Redis
+      - REDIS_URL=redis://redis:6379/0
+
+      ## Dados Storage
+      - ACTIVE_STORAGE_SERVICE=local
+
+      ## Modo de Produção
       - RAILS_ENV=production
       - RACK_ENV=production
       - NODE_ENV=production
-      - MOTOR_AUTH_USERNAME=USUARIO ## ---> Usuario para o motor <--- ##
-      - MOTOR_AUTH_PASSWORD=SENHA ## ---> Senha para o motor <--- ##
-      - FRONTEND_URL=https://URL_DO_WOOFED ## ---> Url para o WoofedCRM <--- ##
-      - DATABASE_URL=postgres://postgres:SENHA_POSTGRES@postgres:5432/woofedcrm ## ---> Dados do postgres <--- ##
-      - REDIS_URL=redis://redis:6379/0
-      - ACTIVE_STORAGE_SERVICE=local
-      - RAILS_LOG_LEVEL=debugwoofedcrm
-      - REDIS_URL=redis://redis:6379/0
-      - ACTIVE_STORAGE_SERVICE=local
       - RAILS_LOG_LEVEL=debug
+      
     deploy:
       mode: replicated
       replicas: 1
@@ -74,26 +143,62 @@ services:
         limits:
           cpus: "1"
           memory: 1024M
-    
-  good_job:
-    image: douglara/woofedcrm:VERSAO ## ---> Troque para a versão que deseja usar <--- ##
+          
+## --------------------------- ORION --------------------------- ##
+
+  woofedcrm_job_orion:
+    image: douglara/woofedcrm:latest ## ---> Troque para a versão que deseja usar <--- ##
     command: bundle exec good_job
+    
+    volumes:
+      - woofedcrm_public:/app/public/assets
+      
     networks:
       - NOME_DA_REDE ## ---> Defina o nome da rede interna  <--- ##
-    volumes:
-      - woofedcrm_data:/app
+      
     environment:
+      ## Url WoofedCRM
+      - FRONTEND_URL=https://crm.dominio.com ## Troque pelo seu dominio
+      - SECRET_KEY_BASE=BDYcdCHe7luXMBgSpUVQD3mbrUbDJmGv ## Troque por uma hash de 32 caracteres
+
+      ## Idioma
+      - LANGUAGE=pt-BR
+
+      ## Permitir/Bloquear novas Inscrições
       - ENABLE_USER_SIGNUP=true
+
+      ## Credenciais Motor
+      - MOTOR_AUTH_USERNAME=admin ## ---> Usuario para o motor <--- ##
+      - MOTOR_AUTH_PASSWORD=@admin123_ ## ---> Senha para o motor <--- ##
+
+      ## Dados Evolution API
+      ## Descomente as linhas abaixo (removendo o # do inicio) para usar a Evolution API no WoofedCRM
+      #- EVOLUTION_API_ENDPOINT=https://evolution.dominio.com ## Dominio da sua Evolution API
+      #- EVOLUTION_API_ENDPOINT_TOKEN=a37f14b87e32f3db4a10e15a0008034f ## Sua Global Api Key da Evolution API
+
+      ## Timezone
+      - DEFAULT_TIMEZONE=Brasilia
+
+      ## Dados OpenAI
+      ## Descomente a linha abaixo (removendo o # do inicio) para usar a OpenAI no WoofedCRM
+      #- OPENAI_API_KEY=
+
+      ## Dados PgVector
+      ## Necessario ter instalado o pgvecotr e criado uma database com nome de "woofrdcrm"
+      - DATABASE_URL=postgres://postgres:senha_pgvector@pgvector:5432/woofedcrm ## Troque a "senha_pgvector"
+
+      ## Dados Redis
+      - REDIS_URL=redis://redis:6379/0
+
+      ## Dados Storage
+      - ACTIVE_STORAGE_SERVICE=local
+
+      ## Modo de Produção
       - RAILS_ENV=production
       - RACK_ENV=production
       - NODE_ENV=production
-      - MOTOR_AUTH_USERNAME=USUARIO ## ---> Usuario para o motor <--- ##
-      - MOTOR_AUTH_PASSWORD=SENHA ## ---> Senha para o motor <--- ##
-      - FRONTEND_URL=https://URL_DO_WOOFED ## ---> Url para o WoofedCRM <--- ##
-      - DATABASE_URL=postgres://postgres:SENHA_POSTGRES@postgres:5432/woofedcrm ## ---> Dados do postgres <--- ##
-      - REDIS_URL=redis://redis:6379/0
-      - ACTIVE_STORAGE_SERVICE=local
       - RAILS_LOG_LEVEL=debug
+      
     deploy:
       mode: replicated
       replicas: 1
@@ -104,11 +209,13 @@ services:
         limits:
           cpus: "1"
           memory: 1024M
+          
+## --------------------------- ORION --------------------------- ##
 
 volumes:
-  woofedcrm_data:
+  woofedcrm_public:
     external: true
-    name: woofedcrm_data
+    name: woofedcrm_public
 
 networks:
   NOME_DA_REDE: ## ---> Defina o nome da rede interna  <--- ##
