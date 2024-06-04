@@ -20318,7 +20318,7 @@ while true; do
         clear
         erro_msg
         echo ""
-        echo -e "Ops, parece que você não instalou a opção \e[32m[6] N8N${reset} ${branco}do nosso instalador.${reset}"
+        echo -e "Ops, parece que você não instalou a opção \e[32m[28] N8N + Nodes Quepasa${reset} ${branco}do nosso instalador.${reset}"
         echo "Instale antes de tentar instalar esta aplicação."
         echo ""
         echo "Pressione CTRL C para sair do instalador."
