@@ -5900,6 +5900,15 @@ echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
+## Verifica se existe postgres
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+    pegar_senha_postgres > /dev/null 2>&1
+    senha_do_postgres=$senha_postgres
+else
+    senha_do_postgres=SENHA_DO_POSTGRES_AQUI
+fi
+
 ## Aqui de fato vamos iniciar a instalação da Evolution API
 
 ## Criando uma Global Key Aleatória
@@ -5975,6 +5984,11 @@ services:
     ## Novas variaveis para o Chatwoot
     - CHATWOOT_MESSAGE_DELETE=true
     - CHATWOOT_MESSAGE_READ=true
+
+    ## Importar mensagens para o Chawoot
+    ## Se estiver usando Chatwoot do Nestor mude o a parte "chatwoot" para "chatwoot_nestor"
+    - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
+    - CHATWOOT_IMPORT_DATABASE_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia
 
     ## Informações do Webhook
     - WEBHOOK_GLOBAL_ENABLED=false
