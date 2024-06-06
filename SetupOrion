@@ -5946,6 +5946,10 @@ services:
     - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
     - CONFIG_SESSION_PHONE_NAME=chrome
 
+    ## Definir versão do Whatsapp Web
+    ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
+    #- CONFIG_SESSION_PHONE_VERSION=2.2413.51
+
     ## Sobre os QR-Codes
     - QRCODE_LIMIT=1902
     - QRCODE_COLOR=#000000
