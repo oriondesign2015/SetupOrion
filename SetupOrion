@@ -5985,10 +5985,10 @@ services:
     - CHATWOOT_MESSAGE_DELETE=true
     - CHATWOOT_MESSAGE_READ=true
 
-    ## Importar mensagens para o Chawoot
+    ## Importar mensagens para o Chawoot | Descomente para usar
     ## Se estiver usando Chatwoot do Nestor mude o a parte "chatwoot" para "chatwoot_nestor"
-    - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
-    - CHATWOOT_IMPORT_DATABASE_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
+    #- CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
+    #- CHATWOOT_IMPORT_DATABASE_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
 
     ## Informações do Webhook
     - WEBHOOK_GLOBAL_ENABLED=false
