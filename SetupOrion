@@ -3661,7 +3661,7 @@ while true; do
 
     ## Pergunta o Nome do Servidor
     echo -e "\e[97mPasso$amarelo 2/4\e[0m"
-    echo -e "$amarelo--> Não pode conter Espaços e/ou cartacteres especiais, exceto Underline_"
+    echo -e "$amarelo--> Não pode conter Espaços e/ou cartacteres especiais"
     echo -en "\e[33mEscolha um nome para o seu servidor (ex: OrionDesign): \e[0m" && read -r nome_servidor
     echo ""
     
