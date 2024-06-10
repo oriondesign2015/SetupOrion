@@ -12862,13 +12862,12 @@ services:
         constraints:
           - node.role == manager
       labels:
-        - traefik.enable=true"
+        - traefik.enable=true
         - traefik.http.routers.odoo.rule=Host(\`$url_odoo\`)
         - traefik.http.routers.odoo.entrypoints=websecure
-        - traefik.http.routers.odoo.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.odoo.service=odoo
-        - traefik.http.services.odoo.loadbalancer.server.port=8069
         - traefik.http.routers.odoo.tls=true
+        - traefik.http.routers.odoo.tls.certresolver=letsencryptresolver
+        - traefik.http.services.odoo.loadbalancer.server.port=8069
 
 ## --------------------------- ORION --------------------------- ##
 
