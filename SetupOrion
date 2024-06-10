@@ -4480,6 +4480,139 @@ wait_30_sec
 
 }
 
+## ██████╗ ███████╗██████╗ ██╗███████╗
+## ██╔══██╗██╔════╝██╔══██╗██║██╔════╝
+## ██████╔╝█████╗  ██║  ██║██║███████╗
+## ██╔══██╗██╔══╝  ██║  ██║██║╚════██║
+## ██║  ██║███████╗██████╔╝██║███████║
+## ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝╚══════╝
+
+ferramenta_redis_setup() {
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Criando a stack
+cat > redis.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  redis:
+    image: redis:latest  ## Versão do Redis
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+
+    volumes:
+      - redis_data:/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+    #ports:
+    #  - 6379:6379
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  redis_data:
+    external: true
+    name: redis_data
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Ops, não foi criar a stack do Redis."
+fi
+sleep 1
+STACK_NAME="redis"
+stack_editavel
+#stack_editavel > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c redis.yaml redis
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Ops, não foi possivel subir a stack do Redis."
+#fi
+
+## Salvando informações da instalação dentro de /dados_vps/
+cd dados_vps
+
+cat > dados_redis <<EOL
+[ REDIS ]
+
+Dominio do Redis: redis://redis:6379
+
+Usuario: redis
+
+EOL
+
+cd
+cd
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ REDIS ]\e[0m"
+echo ""
+
+
+echo -e "\e[97mHost:\e[33m redis\e[0m"
+echo ""
+
+echo -e "\e[97mUsuario:\e[33m redis\e[0m"
+echo ""
+
+echo -e "\e[97mPorta:\e[33m 6379\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+}
+
 ## ███╗   ███╗██╗   ██╗███████╗ ██████╗ ██╗     
 ## ████╗ ████║╚██╗ ██╔╝██╔════╝██╔═══██╗██║     
 ## ██╔████╔██║ ╚████╔╝ ███████╗██║   ██║██║     
@@ -5956,7 +6089,7 @@ services:
 
     # Ativer o RabbitMQ
     - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
-    - RABBITMQ_URI=amqp://USER:PASS@rabbit_mq:5672
+    - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672
 
     # Aivar Banco de Dados MongoDB
     - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
@@ -6275,7 +6408,7 @@ services:
 
     # Ativer o RabbitMQ
     - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
-    - RABBITMQ_URI=amqp://USER:PASS@rabbit_mq:5672
+    - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672
 
     # Aivar Banco de Dados MongoDB
     - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
@@ -12729,12 +12862,13 @@ services:
         constraints:
           - node.role == manager
       labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.odoo.rule=Host(\`$url_odoo\`)"
-        - "traefik.http.routers.odoo.entrypoints=websecure"
-        - "traefik.http.routers.odoo.tls.certresolver=letsencryptresolver"
-        - "traefik.http.services.odoo.loadbalancer.server.port=8069"
-        - "traefik.http.routers.odoo.tls=true"
+        - traefik.enable=true"
+        - traefik.http.routers.odoo.rule=Host(\`$url_odoo\`)
+        - traefik.http.routers.odoo.entrypoints=websecure
+        - traefik.http.routers.odoo.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.odoo.service=odoo
+        - traefik.http.services.odoo.loadbalancer.server.port=8069
+        - traefik.http.routers.odoo.tls=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -21456,6 +21590,25 @@ while true; do
 
             fi   
             ;;
+        redis)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="redis"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_redis_setup
+                else
+                    APP_ORION="ferramenta_redis_setup"
+                    ferramenta_redis_setup
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
