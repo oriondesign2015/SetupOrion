@@ -12944,7 +12944,7 @@ cd dados_vps
 cat > dados_odoo <<EOL
 [ ODOO ]
 
-Dominio do odoo: http://$url_odoo
+Dominio do odoo: https://$url_odoo
 
 Usuario: Precisa criar no primeiro acesso do Odoo
 
@@ -12968,7 +12968,7 @@ guarde_os_dados_msg
 echo -e "\e[32m[ ODOO ]\e[0m"
 echo ""
 
-echo -e "\e[33mDominio:\e[97m http://$url_odoo\e[0m"
+echo -e "\e[33mDominio:\e[97m https://$url_odoo\e[0m"
 echo ""
 
 echo -e "\e[33mUsuario:\e[97m Precisa criar no primeiro acesso do Odoo\e[0m"
