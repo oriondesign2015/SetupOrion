@@ -20971,7 +20971,7 @@ Usuario: $user_humhub
 
 Email: $email_humhub
 
-Senha: $senha_email_humhub
+Senha: $pass_humhub
 
 EOL
 
@@ -20997,7 +20997,7 @@ echo ""
 echo -e "\e[33mUsuario:\e[97m $user_humhub\e[0m"
 echo ""
 
-echo -e "\e[33mSenha:\e[97m $senha_email_humhub\e[0m"
+echo -e "\e[33mSenha:\e[97m $pass_humhub\e[0m"
 echo ""
 
 echo -e "\e[33mHost MySQL:\e[97m mysql\e[0m"
