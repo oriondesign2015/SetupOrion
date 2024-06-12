@@ -998,6 +998,19 @@ nome_lowcoder(){
     echo ""  
 }
 
+nome_humhub() {
+    clear
+    echo ""
+    echo -e "$branco                       ██╗  ██╗██╗   ██╗███╗   ███╗██╗  ██╗██╗   ██╗██████╗ \e[0m"
+    echo -e "$branco                       ██║  ██║██║   ██║████╗ ████║██║  ██║██║   ██║██╔══██╗\e[0m"
+    echo -e "$branco                       ███████║██║   ██║██╔████╔██║███████║██║   ██║██████╔╝\e[0m"
+    echo -e "$branco                       ██╔══██║██║   ██║██║╚██╔╝██║██╔══██║██║   ██║██╔══██╗\e[0m"
+    echo -e "$branco                       ██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╔╝██████╔╝\e[0m"
+    echo -e "$branco                       ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ \e[0m"
+    echo ""
+    echo ""
+}
+
 # ===================================================================================================
 
 
@@ -1165,6 +1178,10 @@ menu_instalador(){
     echo -e "${amarelo}[ 21 ]${reset} - ${branco}Formbricks                           ${verde}| ${reset}  ${amarelo}[ 44 ]${reset} - ${branco}Sair do instalador${reset}"
     echo""
 }
+
+## 45 ZEP
+## 46 OpenProject
+## 47 HumHub
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -2408,6 +2425,19 @@ wait_lowcoder(){
     done
 }
 
+wait_humhub(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço lowcoder está ativo
+        if docker service ls --filter "name=humhub" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -3510,19 +3540,19 @@ criar_banco_mysql_mautic() {
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
-            if docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
+            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
                 echo "O banco de dados mautic já existe."
 
                 resposta="N"
                 if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE IF EXISTS mautic;"
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE mautic;"
                     echo "Banco de dados mautic apagado com sucesso."
                 else
                     echo "Usando o banco de dados existente."
                     break
                 fi
             else
-                docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
+                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
                 echo "Banco de dados mautic criado com sucesso."
                 break
             fi
@@ -3537,19 +3567,19 @@ criar_banco_mysql_wordpress() {
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
-            if docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
+            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
                 echo "O banco de dados Wordpress já existe."
 
                 resposta="N"
                 if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE IF EXISTS $nome_site_wordpress;"
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE $nome_site_wordpress;"
                     echo "Banco de dados Wordpress apagado com sucesso."
                 else
                     echo "Usando o banco de dados existente."
                     break
                 fi
             else
-                docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
+                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
                 echo "Banco de dados Wordpress criado com sucesso."
                 break
             fi
@@ -3564,20 +3594,47 @@ criar_banco_mysql_strapi() {
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
-            if docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
+            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
                 echo "O banco de dados strapi já existe."
 
                 resposta="N"
                 if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE IF EXISTS strapi;"
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE strapi;"
                     echo "Banco de dados strapi apagado com sucesso."
                 else
                     echo "Usando o banco de dados existente."
                     break
                 fi
             else
-                docker exec "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
+                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
                 echo "Banco de dados strapi criado com sucesso."
+                break
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
+criar_banco_mysql_humhub() {
+    dados
+    pegar_senha_mysql
+    while :; do
+        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'humhub';" | grep -qw "humhub"; then
+                echo "O banco de dados humhub já existe."
+
+                resposta="N"
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE humhub;"
+                    echo "Banco de dados humhub apagado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                    break
+                fi
+            else
+                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE humhub;"
+                echo "Banco de dados humhub criado com sucesso."
                 break
             fi
         else
@@ -10873,7 +10930,7 @@ echo ""
 sleep 1
 
 ## Mensagem de Passo
-echo -e "\e[97m• ERIFICANDO/INSTALANDO MYSQL \e[33m[2/4]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
@@ -20579,6 +20636,399 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+## ██╗  ██╗██╗   ██╗███╗   ███╗██╗  ██╗██╗   ██╗██████╗ 
+## ██║  ██║██║   ██║████╗ ████║██║  ██║██║   ██║██╔══██╗
+## ███████║██║   ██║██╔████╔██║███████║██║   ██║██████╔╝
+## ██╔══██║██║   ██║██║╚██╔╝██║██╔══██║██║   ██║██╔══██╗
+## ██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╔╝██████╔╝
+## ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
+                                                     
+ferramenta_humhub() {
+
+# Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_humhub
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ## Pergunta o Dominio da ferramenta
+    echo -e "\e[97mPasso$amarelo 1/10\e[0m"
+    echo -en "\e[33mDigite o Dominio para o HumHub (ex: humhub.oriondesign.art.br): \e[0m" && read -r url_humhub
+    echo ""
+
+    ## Pergunta o usuario da ferramenta
+    echo -e "\e[97mPasso$amarelo 2/10\e[0m"
+    echo -e "$amarelo--> AutoConfig é uma função que pula as etapas de configurações pós instalação"
+    echo -en "\e[33mUsar o AutoConfig do HumHub (exemplo: 0 para não ou 1 para sim): \e[0m" && read -r autoconfig_humhub
+    echo ""
+
+    ## Pergunta o usuario da ferramenta
+    echo -e "\e[97mPasso$amarelo 3/10\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ e/ou espaços"
+    echo -en "\e[33mDigite um Usuario Admin (ex: OrionDesign): \e[0m" && read -r user_humhub
+    echo ""
+
+    ## Pergunta o email da ferramenta
+    echo -e "\e[97mPasso$amarelo 4/10\e[0m"
+    echo -en "\e[33mDigite o Email do Admin: (ex: contato@oriondesign.art.br): \e[0m" && read -r email_humhub
+    echo ""
+    
+    ## Pergunta o senha da ferramenta
+    echo -e "\e[97mPasso$amarelo 5/10\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$"
+    echo -en "\e[33mDigite uma Senha para o Admin (ex: @Senha123_): \e[0m" && read -r pass_humhub
+    echo ""
+
+    ## Pergunta o Email SMTP
+    echo -e "\e[97mPasso$amarelo 6/10\e[0m"
+    echo -en "\e[33mDigite um Email para o SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_smtp_humhub
+    echo ""
+
+    ## Pergunta o User SMTP
+    echo -e "\e[97mPasso$amarelo 7/10\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuario do SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_smtp_humhub
+    echo ""
+    
+    ## Pergunta a Senha SMTP
+    echo -e "\e[97mPasso$amarelo 8/10\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    echo -en "\e[33mDigite a Senha SMTP do email (ex: @Senha123_): \e[0m" && read -r senha_smtp_humhub
+    echo ""
+    
+    ## Pergunta o Host SMTP
+    echo -e "\e[97mPasso$amarelo 9/10\e[0m"
+    echo -en "\e[33mDigite o Host SMTP do email (ex: smtp.hostinger.com): \e[0m" && read -r host_smtp_humhub
+    echo ""
+    
+    ## Pergunta a Porta SMTP 
+    echo -e "\e[97mPasso$amarelo 10/10\e[0m"
+    echo -en "\e[33mDigite a Porta SMTP do email (ex: 465): \e[0m" && read -r porta_smtp_humhub
+    echo ""
+
+    if [ "$porta_smtp_humhub" -eq 465 ] || [ "$porta_smtp_humhub" -eq 25 ]; then
+        porta_smtp_humhub_conv=1
+    else
+        porta_smtp_humhub_conv=0
+    fi
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_humhub
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ## Informação sobre URL
+    echo -e "\e[33mDominio do HumHub:\e[97m $url_humhub\e[0m"
+    echo ""
+
+    echo -e "\e[33mUsar AutoConfig:\e[97m $autoconfig_humhub\e[0m"
+    echo ""
+
+    ## Informação sobre Usuario Admin
+    echo -e "\e[33mUsuario Admin:\e[97m $user_humhub\e[0m"
+    echo ""
+
+    ## Informação sobre Email Admin
+    echo -e "\e[33mEmail do Admin:\e[97m $email_humhub\e[0m"
+    echo ""    
+
+    ## Informação sobre Senha Admin
+    echo -e "\e[33mSenha do Admin:\e[97m $pass_humhub\e[0m"
+    echo ""
+
+    ## Informação sobre Senha Admin
+    echo -e "\e[33mEmail SMTP:\e[97m $email_smtp_humhub\e[0m"
+    echo ""
+
+    ## Informação sobre Senha Admin
+    echo -e "\e[33mUsuario SMTP:\e[97m $user_smtp_humhub\e[0m"
+    echo ""
+
+    ## Informação sobre Senha Admin
+    echo -e "\e[33mSenha SMTP:\e[97m $senha_smtp_humhub\e[0m"
+    echo ""
+
+    ## Informação sobre Senha Admin
+    echo -e "\e[33mHost SMTP:\e[97m $host_smtp_humhub\e[0m"
+    echo ""
+
+    ## Informação sobre Senha Admin
+    echo -e "\e[33mPorta SMTP:\e[97m $porta_smtp_humhub\e[0m"
+    echo ""
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_humhub
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO HUMHUB \e[33m[1/5]\e[0m"
+echo ""
+sleep 1
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/5]\e[0m"
+echo ""
+sleep 1
+
+dados
+
+verificar_container_mysql
+    if [ $? -eq 0 ]; then
+        pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_humhub
+    else
+        ferramenta_mysql
+        pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_humhub
+    fi
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
+echo ""
+sleep 1
+
+## Cansei já de explicar o que isso faz kkkk
+verificar_container_redis
+    if [ $? -eq 0 ]; then
+        sleep 1
+    else
+        ferramenta_redis > /dev/null 2>&1
+    fi
+
+sleep 3
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO HUMHUB \e[33m[4/5]\e[0m"
+echo ""
+sleep 1
+
+## Criando a stack
+cat > humhub.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  humhub:
+    image: mriedmann/humhub:latest
+
+    volumes:
+      - humhub_data:/var/www/localhost/htdocs/protected/modules
+      - humhub_uploads:/var/www/localhost/htdocs/uploads
+      - humhub_assets:/var/www/localhost/htdocs/assets
+      - humhub_themes:/var/www/localhost/htdocs/themes
+      
+    networks:
+      - $nome_rede_interna
+      
+    environment:
+      ## Dados de acesso
+      - HUMHUB_ADMIN_USERNAME=$user_humhub
+      - HUMHUB_ADMIN_PASSWORD=$pass_humhub
+      - HUMHUB_EMAIL=$email_humhub
+      - HUMHUB_EMAIL_NAME=$user_humhub
+      - HUMHUB_ADMIN_EMAIL=$email_humhub
+
+      ## Dados SMTP
+      - HUMHUB_MAILER_TRANSPORT_TYPE=smtp
+      - HUMHUB_MAILER_SYSTEM_EMAIL_ADDRESS=$email_smtp_humhub
+      - HUMHUB_MAILER_USERNAME=$user_smtp_humhub
+      - HUMHUB_MAILER_PASSWORD=$senha_smtp_humhub
+      - HUMHUB_MAILER_SYSTEM_EMAIL_NAME=Suporte
+      - HUMHUB_MAILER_HOSTNAME=$host_smtp_humhub
+      - HUMHUB_MAILER_PORT=$porta_smtp_humhub
+      - HUMHUB_MAILER_ALLOW_SELF_SIGNED_CERTS=$porta_smtp_humhub_conv ## 0 = TLS | 1 = SSL
+      
+      ## Dados do MySQL
+      - HUMHUB_DB_HOST=mysql
+      - HUMHUB_DB_USER=root
+      - HUMHUB_DB_PASSWORD=$senha_mysql
+      - HUMHUB_DB_NAME=humhub
+      - HUMHUB_AUTO_INSTALL=$autoconfig_humhub
+
+      ## Dados Redis
+      - HUMHUB_REDIS_HOSTNAME=redis
+      - HUMHUB_REDIS_PORT=6379
+      - HUMHUB_CACHE_EXPIRE_TIME=3600
+      - HUMHUB_CACHE_CLASS=yii\redis\Cache
+      - HUMHUB_QUEUE_CLASS=humhub\modules\queue\driver\Redis
+  
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.humhub.rule=Host(\`$url_humhub\`)
+        - traefik.http.routers.humhub.entrypoints=websecure
+        - traefik.http.routers.humhub.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.humhub.service=humhub
+        - traefik.http.services.humhub.loadbalancer.server.port=80
+        - traefik.http.services.humhub.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  humhub_data:
+    external: true
+    name: humhub_data
+  humhub_uploads:
+    external: true
+    name: humhub_uploads
+  humhub_themes:
+    external: true
+    name: humhub_themes
+  humhub_assets:
+    external: true
+    name: humhub_assets
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do HumHub"
+fi
+STACK_NAME="humhub"
+stack_editavel # > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c humhub.yaml humhub > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack do humhub"
+#fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_calcom para verificar se o serviço esta online
+wait_humhub
+
+cd dados_vps
+
+cat > dados_humhub <<EOL
+[ HUMHUB ]
+
+Dominio do humhub: $url_humhub
+
+Usuario: $user_humhub
+
+Email: $email_humhub
+
+Senha: $senha_email_humhub
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ HUMHUB ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_humhub\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario:\e[97m $user_humhub\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m $senha_email_humhub\e[0m"
+echo ""
+
+echo -e "\e[33mHost MySQL:\e[97m mysql\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario MySQL:\e[97m root\e[0m"
+echo ""
+
+echo -e "\e[33mSenha MySQL:\e[97m $senha_mysql\e[0m"
+echo ""
+
+echo -e "\e[33mBase de dados MySQL:\e[97m humhub\e[0m"
+echo ""
+
+
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -22034,6 +22484,47 @@ while true; do
                 else
                     APP_ORION="ferramenta_redis_setup"
                     ferramenta_redis_setup
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+        
+        2.beta)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="evolution2"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_evolution_beta
+                else
+                    APP_ORION="ferramenta_evolution_beta"
+                    ferramenta_evolution_beta
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        humhub.beta)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="humhub"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_humhub
+                else
+                    APP_ORION="ferramenta_humhub"
+                    ferramenta_humhub
                 fi
 
                 ## FIM TOKEN
