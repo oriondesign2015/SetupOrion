@@ -20747,11 +20747,12 @@ while true; do
     echo -en "\e[33mUsar o AutoConfig do HumHub (exemplo: 0 para não ou 1 para sim): \e[0m" && read -r autoconfig_humhub_valor
     echo ""
 
-    if [ "$autoconfig_humhub_valor" -eq 1 ] || [ "$autoconfig_humhub_valor" -eq 0 ]; then
-        autoconfig_humhub="- HUMHUB_AUTO_INSTALL=$autoconfig_humhub_valor"
-        
+    if [ "$autoconfig_humhub_valor" -eq 1 ]; then
+      autoconfig_humhub="- HUMHUB_AUTO_INSTALL=1"
+    elif [ "$autoconfig_humhub_valor" -eq 0 ]; then
+      autoconfig_humhub="- HUMHUB_AUTO_INSTALL=0"
     else
-        autoconfig_humhub="#- HUMHUB_AUTO_INSTALL=$autoconfig_humhub_valor"
+      echo "Erro ao receber resposta do AutoConfig. Resposta precisa ser 0 ou 1"
     fi
 
     ## Pergunta o usuario da ferramenta
