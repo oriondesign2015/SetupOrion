@@ -20744,8 +20744,15 @@ while true; do
     ## Pergunta o usuario da ferramenta
     echo -e "\e[97mPasso$amarelo 2/10\e[0m"
     echo -e "$amarelo--> AutoConfig é uma função que pula as etapas de configurações pós instalação"
-    echo -en "\e[33mUsar o AutoConfig do HumHub (exemplo: 0 para não ou 1 para sim): \e[0m" && read -r autoconfig_humhub
+    echo -en "\e[33mUsar o AutoConfig do HumHub (exemplo: 0 para não ou 1 para sim): \e[0m" && read -r autoconfig_humhub_valor
     echo ""
+
+    if [ "$autoconfig_humhub_valor" -eq 1 ] || [ "$autoconfig_humhub_valor" -eq 0 ]; then
+        autoconfig_humhub="- HUMHUB_AUTO_INSTALL=$autoconfig_humhub_valor"
+        
+    else
+        autoconfig_humhub="#- HUMHUB_AUTO_INSTALL=$autoconfig_humhub_valor"
+    fi
 
     ## Pergunta o usuario da ferramenta
     echo -e "\e[97mPasso$amarelo 3/10\e[0m"
@@ -20963,7 +20970,7 @@ services:
       - HUMHUB_DB_USER=root
       - HUMHUB_DB_PASSWORD=$senha_mysql
       - HUMHUB_DB_NAME=humhub
-      - HUMHUB_AUTO_INSTALL=$autoconfig_humhub
+      $autoconfig_humhub
 
       ## Dados Redis
       - HUMHUB_REDIS_HOSTNAME=redis
