@@ -3540,23 +3540,42 @@ criar_banco_mysql_mautic() {
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
-            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
-                echo "O banco de dados mautic já existe."
+            if [ -n "$CONTAINER_ID" ]; then
+                # Verificar se o banco de dados já existe
+                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
+                    echo "O banco de dados mautic já existe."
 
-                resposta="N"
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE mautic;"
-                    echo "Banco de dados mautic apagado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
+                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                        # Apagar o banco de dados
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE mautic;"
+                        echo "Banco de dados mautic apagado com sucesso."
+
+                        # Criar o banco de dados novamente
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
+                        echo "Banco de dados mautic criado com sucesso."
+                    else
+                        echo "Usando o banco de dados existente."
+                    fi
                     break
+                else
+                    # Criar o banco de dados
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
+                    
+                    # Verificar novamente se o banco de dados foi criado com sucesso
+                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
+                        echo "Banco de dados mautic criado com sucesso."
+                        break
+                    else
+                        echo "Erro ao criar o banco de dados. Tentando novamente..."
+                    fi
                 fi
             else
-                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
-                echo "Banco de dados mautic criado com sucesso."
-                break
+                echo "Container MySQL não encontrado. Tentando novamente..."
+                sleep 5
             fi
         else
+            echo "Container MySQL não encontrado. Tentando novamente..."
             sleep 5
         fi
     done
@@ -3567,23 +3586,42 @@ criar_banco_mysql_wordpress() {
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
-            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
-                echo "O banco de dados Wordpress já existe."
+            if [ -n "$CONTAINER_ID" ]; then
+                # Verificar se o banco de dados já existe
+                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
+                    echo "O banco de dados $nome_site_wordpress já existe."
 
-                resposta="N"
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE $nome_site_wordpress;"
-                    echo "Banco de dados Wordpress apagado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
+                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                        # Apagar o banco de dados
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE $nome_site_wordpress;"
+                        echo "Banco de dados $nome_site_wordpress apagado com sucesso."
+
+                        # Criar o banco de dados novamente
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
+                        echo "Banco de dados $nome_site_wordpress criado com sucesso."
+                    else
+                        echo "Usando o banco de dados existente."
+                    fi
                     break
+                else
+                    # Criar o banco de dados
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
+                    
+                    # Verificar novamente se o banco de dados foi criado com sucesso
+                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
+                        echo "Banco de dados $nome_site_wordpress criado com sucesso."
+                        break
+                    else
+                        echo "Erro ao criar o banco de dados. Tentando novamente..."
+                    fi
                 fi
             else
-                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
-                echo "Banco de dados Wordpress criado com sucesso."
-                break
+                echo "Container MySQL não encontrado. Tentando novamente..."
+                sleep 5
             fi
         else
+            echo "Container MySQL não encontrado. Tentando novamente..."
             sleep 5
         fi
     done
@@ -3594,23 +3632,42 @@ criar_banco_mysql_strapi() {
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
-            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
-                echo "O banco de dados strapi já existe."
+            if [ -n "$CONTAINER_ID" ]; then
+                # Verificar se o banco de dados já existe
+                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
+                    echo "O banco de dados strapi já existe."
 
-                resposta="N"
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE strapi;"
-                    echo "Banco de dados strapi apagado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
+                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                        # Apagar o banco de dados
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE strapi;"
+                        echo "Banco de dados strapi apagado com sucesso."
+
+                        # Criar o banco de dados novamente
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
+                        echo "Banco de dados strapi criado com sucesso."
+                    else
+                        echo "Usando o banco de dados existente."
+                    fi
                     break
+                else
+                    # Criar o banco de dados
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
+                    
+                    # Verificar novamente se o banco de dados foi criado com sucesso
+                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
+                        echo "Banco de dados strapi criado com sucesso."
+                        break
+                    else
+                        echo "Erro ao criar o banco de dados. Tentando novamente..."
+                    fi
                 fi
             else
-                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
-                echo "Banco de dados strapi criado com sucesso."
-                break
+                echo "Container MySQL não encontrado. Tentando novamente..."
+                sleep 5
             fi
         else
+            echo "Container MySQL não encontrado. Tentando novamente..."
             sleep 5
         fi
     done
@@ -3621,23 +3678,42 @@ criar_banco_mysql_humhub() {
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
-            if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'humhub';" | grep -qw "humhub"; then
-                echo "O banco de dados humhub já existe."
+            if [ -n "$CONTAINER_ID" ]; then
+                # Verificar se o banco de dados já existe
+                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'humhub';" | grep -qw "humhub"; then
+                    echo "O banco de dados humhub já existe."
 
-                resposta="N"
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE humhub;"
-                    echo "Banco de dados humhub apagado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
+                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                        # Apagar o banco de dados
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE humhub;"
+                        echo "Banco de dados humhub apagado com sucesso."
+
+                        # Criar o banco de dados novamente
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE humhub;"
+                        echo "Banco de dados humhub criado com sucesso."
+                    else
+                        echo "Usando o banco de dados existente."
+                    fi
                     break
+                else
+                    # Criar o banco de dados
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE humhub;"
+                    
+                    # Verificar novamente se o banco de dados foi criado com sucesso
+                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'humhub';" | grep -qw "humhub"; then
+                        echo "Banco de dados humhub criado com sucesso."
+                        break
+                    else
+                        echo "Erro ao criar o banco de dados. Tentando novamente..."
+                    fi
                 fi
             else
-                docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE humhub;"
-                echo "Banco de dados humhub criado com sucesso."
-                break
+                echo "Container MySQL não encontrado. Tentando novamente..."
+                sleep 5
             fi
         else
+            echo "Container MySQL não encontrado. Tentando novamente..."
             sleep 5
         fi
     done
