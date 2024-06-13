@@ -4427,6 +4427,7 @@ services:
     command: -H tcp://tasks.agent:9001 --tlsskipverify
 
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
 
     networks:
@@ -20414,7 +20415,7 @@ Usuario: $user_ntfy
 
 Senha: $pass_ntfy
 
-Authentication: Basic $authentication
+Authorization: Basic $authentication
 EOL
 
 cd
@@ -20442,7 +20443,7 @@ echo ""
 echo -e "\e[97mSenha:\e[33m $pass_ntfy\e[0m"
 echo ""
 
-echo -e "\e[97mAuthentication:\e[33m Basic $authentication\e[0m"
+echo -e "\e[97mAuthorization:\e[33m Basic $authentication\e[0m"
 echo ""
 ## Creditos do instalador
 creditos_msg
