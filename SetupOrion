@@ -2456,7 +2456,7 @@ wait_lowcoder(){
 wait_humhub(){
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
     while true; do
-        # Verifica se o serviço lowcoder está ativo
+        # Verifica se o serviço humhub está ativo
         if docker service ls --filter "name=humhub" | grep "1/1"; then
             sleep 10
             break
@@ -2469,8 +2469,21 @@ wait_humhub(){
 wait_langflow(){
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
     while true; do
-        # Verifica se o serviço lowcoder está ativo
+        # Verifica se o serviço langflow está ativo
         if docker service ls --filter "name=langflow" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_zep(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço zep está ativo
+        if docker service ls --filter "name=zep" | grep "1/1"; then
             sleep 10
             break
         fi
@@ -21753,7 +21766,7 @@ cd dados_vps
 cat > dados_zep <<EOL
 [ ZEP ]
 
-Dominio do Zep: https://$url_zep
+Dominio do Zep: https://$url_zep/admin
 
 ApiKey da OpenAI: $apikey_openai_zep
 
