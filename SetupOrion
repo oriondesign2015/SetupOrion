@@ -8546,7 +8546,7 @@ services:
 
   flowise:
     image: flowiseai/flowise:latest ## Versão do Flowise
-    command: flowise start
+    #command: flowise start
 
     volumes:
      - flowise_data:/root/.flowise
