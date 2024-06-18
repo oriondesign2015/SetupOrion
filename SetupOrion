@@ -10079,6 +10079,9 @@ services:
       placement:
         constraints:
           - node.role == manager
+        limits:
+          cpus: "1"
+          memory: 1024M
       labels:
         - traefik.enable=true
         - traefik.http.routers.baserow.rule=Host(\`$url_baserow\`)
