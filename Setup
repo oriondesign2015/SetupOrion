@@ -87,6 +87,7 @@ if [ $? -eq 0 ]; then
     ./SetupOrion
 else
     echo "Falha ao baixar o script SetupOrion"
+    sleep 5
 fi
 
 sudo apt update

@@ -5,7 +5,7 @@
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 versao() {
-echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.5.5\e[0m                                  "
+echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.5.6\e[0m                                  "
 echo -e "\e[32moriondesign.art.br/whatsapp1      \e[97m<----- Grupos no WhatsApp ----->     \e[32moriondesign.art.br/whatsapp2\e[0m"
 }
 
@@ -21,6 +21,12 @@ branco="\e[97m"
 bege="\e[93m"
 vermelho="\e[91m"
 reset="\e[0m"
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+
+menu_instalador="1"
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -283,20 +289,19 @@ nome_instalador() {
     echo -e "$branco       ███████║███████╗   ██║   ╚██████╔╝██║         ╚██████╔╝██║  ██║██║╚██████╔╝██║ ╚████║\e[0m"
     echo -e "$branco       ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝          ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝\e[0m"
     echo -e "$branco                                                                                            \e[0m"
-    echo -e "$branco                                 ██████╗    ███████╗   ███████╗                             \e[0m"
+    echo -e "$branco                                 ██████╗    ███████╗    ██████╗                             \e[0m"
     echo -e "$branco                                 ╚════██╗   ██╔════╝   ██╔════╝                             \e[0m"
-    echo -e "$branco                       █████╗     █████╔╝   ███████╗   ███████╗    █████╗                   \e[0m"
-    echo -e "$branco                       ╚════╝    ██╔═══╝    ╚════██║   ╚════██║    ╚════╝                   \e[0m"
-    echo -e "$branco                                 ███████╗██╗███████║██╗███████║                             \e[0m"
-    echo -e "$branco                                 ╚══════╝╚═╝╚══════╝╚═╝╚══════╝                             \e[0m"
-    echo ""                                                                          
+    echo -e "$branco                       █████╗     █████╔╝   ███████╗   ███████╗     █████╗                  \e[0m"
+    echo -e "$branco                       ╚════╝    ██╔═══╝    ╚════██║   ██╔═══██╗    ╚════╝                  \e[0m"
+    echo -e "$branco                                 ███████╗██╗███████║██╗╚██████╔╝                            \e[0m"
+    echo -e "$branco                                 ╚══════╝╚═╝╚══════╝╚═╝ ╚═════╝                             \e[0m"
+    echo ""
 }
 
 ## Menu de ferramentas
 
 nome_menu() {
     clear
-    echo ""
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
     echo -e "$branco                    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ██████╗ ███████╗                \e[0m"
@@ -1039,6 +1044,19 @@ nome_zep() {
     echo ""
 }
 
+nome_openproject() {
+    clear
+    echo ""
+    echo -e "$branco   ██████╗ ██████╗ ███████╗███╗   ██╗    ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗\e[0m"
+    echo -e "$branco  ██╔═══██╗██╔══██╗██╔════╝████╗  ██║    ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝\e[0m"
+    echo -e "$branco  ██║   ██║██████╔╝█████╗  ██╔██╗ ██║    ██████╔╝██████╔╝██║   ██║     ██║█████╗  ██║        ██║   \e[0m"
+    echo -e "$branco  ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║    ██╔═══╝ ██╔══██╗██║   ██║██   ██║██╔══╝  ██║        ██║   \e[0m"
+    echo -e "$branco  ╚██████╔╝██║     ███████╗██║ ╚████║    ██║     ██║  ██║╚██████╔╝╚█████╔╝███████╗╚██████╗   ██║   \e[0m"
+    echo -e "$branco   ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚════╝ ╚══════╝ ╚═════╝   ╚═╝   \e[0m"
+    echo ""
+    echo ""
+}
+
 # ===================================================================================================
 
 
@@ -1180,36 +1198,76 @@ nome_finalizado() {
 #    echo""
 #}
 
-menu_instalador(){
-    echo -e "${amarelo}[ 00 ]${reset} - ${branco}Testar SMTP                          ${verde}| ${reset}  ${amarelo}[ 22 ]${reset} - ${branco}NocoDB${reset}"
-    echo -e "${amarelo}[ 01 ]${reset} - ${branco}Traefik & Portainer                  ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse${reset}"
-    echo -e "${amarelo}[ 02 ]${reset} - ${branco}Chatwoot                             ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase${reset}"
-    echo -e "${branco}  '-->${amarelo}[ 2.1 ]${reset} - ${branco}Chatwoot (ARM)                ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo${reset}"
-    echo -e "${amarelo}[ 03 ]${reset} -  ${branco}Evolution API                       ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor${reset}"
-    echo -e "${amarelo}[ 04 ]${reset} - ${branco}MinIO                                ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API${reset}"
-    echo -e "${amarelo}[ 05 ]${reset} - ${branco}Typebot                              ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
-    echo -e "${amarelo}[ 06 ]${reset} - ${branco}N8N                                  ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
-    echo -e "${amarelo}[ 07 ]${reset} - ${branco}Flowise                              ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
-    echo -e "${amarelo}[ 08 ]${reset} - ${branco}PgAdmin 4                            ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor${reset}"
-    echo -e "${amarelo}[ 09 ]${reset} - ${branco}Nocobase                             ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
-    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                             ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
-    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                            ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
-    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                              ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
-    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                              ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden${reset}"
-    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                             ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
-    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                          ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi${reset}"
-    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                              ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin${reset}"
-    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                               ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase${reset}"
-    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                             ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Ntfy ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                               ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}LowCoder ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                           ${verde}| ${reset}  ${amarelo}[ 43 ]${reset} - ${branco}REMOVER STACK${reset}"
-    echo -e "${amarelo}[ 21 ]${reset} - ${branco}Formbricks                           ${verde}| ${reset}  ${amarelo}[ 44 ]${reset} - ${branco}Sair do instalador${reset}"
-    echo""
+menu_instalador() {
+  case $menu_instalador in
+    1) menu_instalador_pg_1 ;;
+    2) menu_instalador_pg_2 ;;
+    *) echo "Erro ao listar menu..." ;;
+  esac
+}
+
+menu_instalador_pg_1(){
+    echo -e "${amarelo}[ 00 ]${reset} - ${branco}Testar SMTP                            ${verde}| ${reset}  ${amarelo}[ 22 ]${reset} - ${branco}NocoDB${reset}"
+    echo -e "${amarelo}[ 01 ]${reset} - ${branco}Traefik & Portainer                    ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse${reset}"
+    echo -e "${amarelo}[ 02 ]${reset} - ${branco}Chatwoot                               ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase${reset}"
+    echo -e "${branco}  '-->${amarelo}[ 2.1 ]${reset} - ${branco}Chatwoot (ARM)                  ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo${reset}"
+    echo -e "${amarelo}[ 03 ]${reset} -  ${branco}Evolution API                         ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor${reset}"
+    echo -e "${amarelo}[ 04 ]${reset} - ${branco}MinIO                                  ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API${reset}"
+    echo -e "${amarelo}[ 05 ]${reset} - ${branco}Typebot                                ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa${reset}"
+    echo -e "${amarelo}[ 06 ]${reset} - ${branco}N8N                                    ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API${reset}"
+    echo -e "${amarelo}[ 07 ]${reset} - ${branco}Flowise                                ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal${reset}"
+    echo -e "${amarelo}[ 08 ]${reset} - ${branco}PgAdmin 4                              ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor${reset}"
+    echo -e "${amarelo}[ 09 ]${reset} - ${branco}Nocobase                               ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI${reset}"
+    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress                               ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama${reset}"
+    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress                              ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine${reset}"
+    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow                                ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus${reset}"
+    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB                                ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden${reset}"
+    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ                               ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud${reset}"
+    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma                            ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi${reset}"
+    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com                                ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin${reset}"
+    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic                                 ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase${reset}"
+    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith                               ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Ntfy${reset}"
+    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant                                 ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}LowCoder ${reset}"
+    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM                             ${verde}| ${reset}  ${amarelo}[ 43 ]${reset} - ${branco}LangFlow ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 21 ]${reset} - ${branco}Formbricks                             ${verde}| ${reset}  ${amarelo}[ 44 ]${reset} - ${branco}OpenProject ${verde}[NOVO]${reset}"
+    echo -e ""
+    echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
+    echo -e ""
+}
+
+menu_instalador_pg_2(){
+    echo -e "${amarelo}[ 45 ]${reset} - ${branco}ZEP ${verde}[NOVO]                             ${verde}| ${reset}  ${amarelo}[ 68 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 46 ]${reset} - ${branco}HumHub ${verde}[NOVO]                          ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 47 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 48 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 49 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 50 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 51 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 52 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 53 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 54 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 77 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 55 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 56 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 57 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 80 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 58 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 81 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 59 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 82 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 60 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 83 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 61 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 84 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 62 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 85 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 63 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 86 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 64 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 87 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 65 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 88 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 66 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 89 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 67 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 90 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e ""
+    echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
+    echo -e ""
 }
 
 ## 45 ZEP
 ## 46 OpenProject
 ## 47 HumHub
+## LangFlow - OK
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -2479,6 +2537,19 @@ wait_langflow(){
     done
 }
 
+wait_openproject(){
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+    while true; do
+        # Verifica se o serviço zep está ativo
+        if docker service ls --filter "name=openproject" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
 wait_zep(){
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
     while true; do
@@ -3616,6 +3687,51 @@ criar_banco_postgres_langflow() {
 
                 if [ $? -eq 0 ]; then
                     echo "Banco de dados langflow criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
+criar_banco_postgres_openproject() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "openproject"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados openproject já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS openproject;"
+                    echo "Banco de dados openproject apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE openproject;"
+                    
+                    echo "Banco de dados openproject criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE openproject;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "openproject"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados openproject criado com sucesso."
                     break
                 else
                     echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -20897,9 +21013,12 @@ while true; do
     if [ "$autoconfig_humhub_valor" -eq 1 ]; then
       autoconfig_humhub="- HUMHUB_AUTO_INSTALL=1"
     elif [ "$autoconfig_humhub_valor" -eq 0 ]; then
-      autoconfig_humhub="- HUMHUB_AUTO_INSTALL=0"
+      autoconfig_humhub="#- HUMHUB_AUTO_INSTALL=0"
     else
       echo "Erro ao receber resposta do AutoConfig. Resposta precisa ser 0 ou 1"
+      echo "Definindo para 0"
+      autoconfig_humhub_valor="0"
+      autoconfig_humhub="#- HUMHUB_AUTO_INSTALL=0"
     fi
 
     ## Pergunta o usuario da ferramenta
@@ -21813,6 +21932,278 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+##  ██████╗ ██████╗ ███████╗███╗   ██╗    ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗
+## ██╔═══██╗██╔══██╗██╔════╝████╗  ██║    ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝
+## ██║   ██║██████╔╝█████╗  ██╔██╗ ██║    ██████╔╝██████╔╝██║   ██║     ██║█████╗  ██║        ██║   
+## ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║    ██╔═══╝ ██╔══██╗██║   ██║██   ██║██╔══╝  ██║        ██║   
+## ╚██████╔╝██║     ███████╗██║ ╚████║    ██║     ██║  ██║╚██████╔╝╚█████╔╝███████╗╚██████╗   ██║   
+##  ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚════╝ ╚══════╝ ╚═════╝   ╚═╝   
+
+ferramenta_openproject() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_openproject
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o dominio para o OpenProject (ex: openproject.oriondesign.art.br): \e[0m" && read -r url_openproject
+    echo ""
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_openproject
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ## Informação sobre URL do openproject
+    echo -e "\e[33mDominio do OpenProject:\e[97m $url_openproject\e[0m"
+    echo ""
+    
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_minio
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OPENPROJECT \e[33m[1/5]\e[0m"
+echo ""
+sleep 1
+
+## Nadaaaaa
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo ""
+sleep 1
+
+## Cansei já de explicar o que isso faz kkkk
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+        sleep 1
+        pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_openproject #> /dev/null 2>&1
+
+    else
+        ferramenta_postgres > /dev/null 2>&1
+        pegar_senha_postgres > /dev/null 2>&1
+        criar_banco_postgres_openproject #> /dev/null 2>&1
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
+echo ""
+sleep 1
+
+verificar_container_redis
+    if [ $? -eq 0 ]; then
+        sleep 1
+    else
+        ferramenta_redis  > /dev/null 2>&1
+    fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO OPENPROJECT \e[33m[4/5]\e[0m"
+echo ""
+sleep 1
+
+key_openproject=$(openssl rand -hex 16)
+
+## Criando a stack
+cat > openproject.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  openproject:
+    image: openproject/openproject:14.1.1
+
+    volumes:
+      - openproject_pgdata:/var/openproject/pgdata
+      - openproject_assets:/var/openproject/assets
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      ## Secret Key
+      - OPENPROJECT_SECRET_KEY_BASE=$key_openproject
+
+      ## Dominio:
+      - OPENPROJECT_HOST__NAME=$url_openproject
+      - OPENPROJECT_HTTPS=true
+
+      ## Dados do Redis
+      - OPENPROJECT_RAILS__CACHE__STORE=redis
+      - OPENPROJECT_CACHE_REDIS_URL=redis://redis:6379
+
+      ## Dados do Postgres
+      - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/openproject
+
+      ## Configurações
+      - OPENPROJECT_DEFAULT__LANGUAGE=pt-BR
+
+      ## Dados SMTP
+      ## Deixei comentado pois a environment da senha não esta funcionando como o esperado
+      #- OPENPROJECT_EMAIL__DELIVERY__METHOD=smtp
+      #- OPENPROJECT_MAIL__FROM=email@dominio.com
+      #- OPENPROJECT_SMTP__USER__NAME=Usuario_do_Email
+      #- OPENPROJECT_SMTP__DOMAIN=dominio.com
+      #- OPENPROJECT_SMTP__PASSWORD=Senha_do_Email
+      #- OPENPROJECT_SMTP__ADDRESS=smtp.dominio.com
+      #- OPENPROJECT_SMTP__PORT=587
+      #- OPENPROJECT_SMTP__ENABLE__STARTTLS__AUTO=true
+      #- OPENPROJECT_SMTP__AUTHENTICATION=plain
+      #- OPENPROJECT_SMTP__OPENSSL__VERIFY__MODE=peer 
+      
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=1
+        - traefik.http.routers.openproject.rule=Host(\`$url_openproject\`)
+        - traefik.http.routers.openproject.entrypoints=websecure
+        - traefik.http.routers.openproject.priority=1
+        - traefik.http.routers.openproject.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.openproject.service=openproject
+        - traefik.http.services.openproject.loadbalancer.server.port=8080
+        - traefik.http.services.openproject.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  openproject_pgdata:
+    external: true
+    name: openproject_pgdata
+  openproject_assets:
+    external: true
+    name: openproject_assets
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do OpenProject"
+fi
+STACK_NAME="openproject"
+stack_editavel # > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c openproject.yaml openproject > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do openproject"
+#fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_openproject para verificar se o serviço esta online
+wait_openproject
+
+cd dados_vps
+
+cat > dados_openproject <<EOL
+[ OPENPROJECT ]
+
+Dominio do openproject: https://$url_openproject
+
+Usuario: admin
+
+Senha: admin
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ OPENPROJECT ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_openproject\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario:\e[97m admin\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m admin\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -22361,13 +22752,13 @@ while true; do
 
     case $opcao in
 
-        0|00)
+        0|00|teste_smtp)
             ferramenta_testeemail
             ;;
-        1|01)
+        1|01|portainer|traefik)
             ferramenta_traefik_e_portainer
             ;;
-        2|02)
+        2|02|chatwoot)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22434,7 +22825,7 @@ while true; do
             fi
             ;;
 
-        2.1)
+        2.1|02.1|chatwoot_arm)
             if verificar_docker_e_portainer_traefik; then
         
                 ## INICIO TOKEN
@@ -22454,7 +22845,7 @@ while true; do
             fi
             ;;
 
-        3|03)
+        3|03|evolution|evo)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22473,25 +22864,25 @@ while true; do
             fi
 
             ;;
-        3.1)
-            if verificar_docker_e_portainer_traefik; then
+        #.1)
+        #   if verificar_docker_e_portainer_traefik; then
 
-                ## INICIO TOKEN
+        #       ## INICIO TOKEN
 
-                STACK_NAME="evolution"
+        #       STACK_NAME="evolution"
 
-                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_evolution_arm
-                else
-                    APP_ORION="ferramenta_evolution_arm"
-                    verificar_arquivo
-                fi
+        #       if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+        #           ferramenta_evolution_arm
+        #       else
+        #           APP_ORION="ferramenta_evolution_arm"
+        #           verificar_arquivo
+        #       fi
 
-                ## FIM TOKEN 
-            
-            fi
-            ;;
-        4|04)
+        #       ## FIM TOKEN 
+        #   
+        #   fi
+        #   ;;
+        4|04|minio)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22510,7 +22901,7 @@ while true; do
             
             fi
             ;;
-        5|05)
+        5|05|typebot)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
 
                 ## INICIO TOKEN
@@ -22528,7 +22919,7 @@ while true; do
             
             fi
             ;;
-        6|06)
+        6|06|n8n)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22547,7 +22938,7 @@ while true; do
             
             fi
             ;;
-        7|07)
+        7|07|flowise)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22565,7 +22956,7 @@ while true; do
             
             fi
             ;;
-        8|08)
+        8|08|pgadmin)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22584,7 +22975,7 @@ while true; do
             
             fi
             ;;
-        9|09)
+        9|09|nocobase)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22603,7 +22994,7 @@ while true; do
             
             fi
             ;;
-        10)
+        10|botpress)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22622,7 +23013,7 @@ while true; do
             
             fi
             ;;
-        11)
+        11|wordpress)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22638,7 +23029,7 @@ while true; do
 
             fi
             ;;
-        12)
+        12|baserow)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22657,7 +23048,7 @@ while true; do
             
             fi
             ;;
-        13)
+        13|mongodb)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22676,7 +23067,7 @@ while true; do
             
             fi
             ;;
-        14)
+        14|rabbitmq)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22695,7 +23086,7 @@ while true; do
             
             fi
             ;;
-        15)
+        15|uptimekuma)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22714,7 +23105,7 @@ while true; do
             
             fi
             ;;
-        16)
+        16|calcom)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22733,7 +23124,7 @@ while true; do
             
             fi
             ;;
-        17)
+        17|mautic)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22752,7 +23143,7 @@ while true; do
             
             fi
             ;;
-        18)
+        18|appsmith)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22771,7 +23162,7 @@ while true; do
             
             fi
             ;;
-        19)
+        19|qdrant)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22790,7 +23181,7 @@ while true; do
             
             fi
             ;;
-        20)
+        20|woofedcrm)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22809,7 +23200,7 @@ while true; do
             
             fi
             ;;
-        21)
+        21|formbricks)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22828,7 +23219,7 @@ while true; do
             
             fi
             ;;
-        22)
+        22|nocodb)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22847,7 +23238,7 @@ while true; do
             
             fi
             ;;
-        23)
+        23|langfuse)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22866,7 +23257,7 @@ while true; do
             
             fi
             ;;
-        24)
+        24|metabase)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22885,7 +23276,7 @@ while true; do
             
             fi
             ;;
-        25)
+        25|odoo)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22904,7 +23295,7 @@ while true; do
             
             fi
             ;;
-        26)
+        26|chatwoot_nestor)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22923,7 +23314,7 @@ while true; do
             
             fi
             ;;
-        27)
+        27|unoapi)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio_e_rabbitmq_e_chatwoot; then
 
                 ## INICIO TOKEN
@@ -22942,7 +23333,7 @@ while true; do
             
             fi
             ;;
-        28)
+        28|n8n_quepasa)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22961,7 +23352,7 @@ while true; do
             
             fi
             ;;
-        29)
+        29|quepasa)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22980,7 +23371,7 @@ while true; do
             
             fi
             ;;
-        30)
+        30|docueal)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -22999,7 +23390,7 @@ while true; do
             
             fi
             ;;
-        31)
+        31|monitor)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23018,7 +23409,7 @@ while true; do
             
             fi
             ;;
-        32)
+        32|dify)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio_e_qdrant; then
 
                 ## INICIO TOKEN
@@ -23037,7 +23428,7 @@ while true; do
             
             fi
             ;;
-        33)
+        33|ollama)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23056,7 +23447,7 @@ while true; do
             
             fi
             ;;
-        34)
+        34|affine)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23075,7 +23466,7 @@ while true; do
             
             fi
             ;;
-        35)
+        35|directus)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
 
                 ## INICIO TOKEN
@@ -23094,7 +23485,7 @@ while true; do
             
             fi
             ;;
-        36)
+        36|vaultwarden)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23113,7 +23504,7 @@ while true; do
             
             fi
             ;;
-        37)
+        37|nextcloud)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23131,7 +23522,7 @@ while true; do
             
             fi
             ;;
-        38)
+        38|strapi)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23150,7 +23541,7 @@ while true; do
             
             fi
             ;;
-        39)
+        39|phpmyadmin|pma)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23169,7 +23560,7 @@ while true; do
             
             fi
             ;;
-        40)
+        40|supabase|supa)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
 
                 ## INICIO TOKEN
@@ -23188,7 +23579,7 @@ while true; do
             
             fi
             ;;
-        41)
+        41|ntfy)
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -23206,7 +23597,7 @@ while true; do
 
             fi   
             ;;
-        42)
+        42|lowcoder)
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_mongo; then
 
                 ## INICIO TOKEN
@@ -23224,20 +23615,99 @@ while true; do
 
             fi   
             ;;
-        43)
+        43|langflow)
             if verificar_docker_e_portainer_traefik; then
 
-                ferramenta_remover_stack
+                ## INICIO TOKEN
+
+                STACK_NAME="langflow"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_langflow
+                else
+                    APP_ORION="ferramenta_langflow"
+                    ferramenta_langflow
+                fi
+
+                ## FIM TOKEN
 
             fi   
             ;;
-        44)
+        44|openproject)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="openproject"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_openproject
+                else
+                    APP_ORION="ferramenta_openproject"
+                    ferramenta_openproject
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+        45|zep)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="zep"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_zep
+                else
+                    APP_ORION="ferramenta_zep"
+                    ferramenta_zep
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+        46|humhub) 
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="humhub"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_humhub
+                else
+                    APP_ORION="ferramenta_humhub"
+                    ferramenta_humhub
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        ##remover.stack)
+        ##    if verificar_docker_e_portainer_traefik; then
+        ##
+        ##        ferramenta_remover_stack
+        ##
+        ##    fi   
+        ##    ;;
+
+        sair|fechar|exit|close|x)
             clear
             nome_saindo
             echo ""
             break
             ;;
-            
+
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+
         mysql)
             if verificar_docker_e_portainer_traefik; then
 
@@ -23256,6 +23726,7 @@ while true; do
 
             fi   
             ;;
+
         redis)
             if verificar_docker_e_portainer_traefik; then
 
@@ -23274,6 +23745,7 @@ while true; do
 
             fi   
             ;;
+
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -23296,65 +23768,6 @@ while true; do
 
             fi   
             ;;
-
-        humhub.beta)
-            if verificar_docker_e_portainer_traefik; then
-
-                ## INICIO TOKEN
-
-                STACK_NAME="humhub"
-
-                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_humhub
-                else
-                    APP_ORION="ferramenta_humhub"
-                    ferramenta_humhub
-                fi
-
-                ## FIM TOKEN
-
-            fi   
-            ;;
-
-        langflow.beta)
-            if verificar_docker_e_portainer_traefik; then
-
-                ## INICIO TOKEN
-
-                STACK_NAME="langflow"
-
-                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_langflow
-                else
-                    APP_ORION="ferramenta_langflow"
-                    ferramenta_langflow
-                fi
-
-                ## FIM TOKEN
-
-            fi   
-            ;;
-
-        zep.beta)
-            if verificar_docker_e_portainer_traefik; then
-
-                ## INICIO TOKEN
-
-                STACK_NAME="zep"
-
-                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_zep
-                else
-                    APP_ORION="ferramenta_zep"
-                    ferramenta_zep
-                fi
-
-                ## FIM TOKEN
-
-            fi   
-            ;;
-
-
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -23411,6 +23824,13 @@ while true; do
 
         quepasa.setup.on)
             quepasa.setup.on
+            ;;
+
+        p1)
+            menu_instalador="1"
+            ;;
+
+        p2) menu_instalador="2"
             ;;
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
