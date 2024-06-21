@@ -19746,8 +19746,8 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   studio:
-    #image: supabase/studio:20240205-b145c86 ## Versão da imagem
-    image: supabase/studio:20240422-5cf8f30 ## Versão da imagem
+    image: supabase/studio:20240205-b145c86 ## Versão da imagem
+    #image: supabase/studio:20240422-5cf8f30 ## Versão da imagem
 
     healthcheck:
       test:
