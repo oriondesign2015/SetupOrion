@@ -21550,9 +21550,6 @@ services:
 
       ## Dados do Postgres
       - LANGFLOW_DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/langflow
-      
-      ## Diretório
-      - LANGFLOW_CONFIG_DIR=/var/lib/langflow
 
     deploy:
       mode: replicated
