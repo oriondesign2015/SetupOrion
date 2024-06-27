@@ -12118,7 +12118,7 @@ if [ $? -eq 0 ]; then
     pegar_senha_pgvector > /dev/null 2>&1
     criar_banco_pgvector_woofedcrm #> /dev/null 2>&1
 else
-    ferramenta_pgvector > /dev/null 2>&1
+    ferramenta_pgvector #> /dev/null 2>&1
     pegar_senha_pgvector > /dev/null 2>&1
     criar_banco_pgvector_woofedcrm #> /dev/null 2>&1
 fi
