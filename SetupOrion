@@ -16150,15 +16150,7 @@ done
 echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO DIFY \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
-
 cd
-
-if [ ! -d "nginx" ]; then
-    mkdir nginx
-fi
-
-cd nginx
-
 git clone https://github.com/langgenius/dify.git > /dev/null 2>&1
 #wget https://raw.githubusercontent.com/langgenius/dify/main/docker/nginx/nginx.conf > /dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -16167,7 +16159,7 @@ else
     echo "1/3 - [ OFF ] - Baixando arquivos"
 fi
 
-mv /root/dify/docker/nginx /root/nginx > /dev/null 2>&1
+sudo mv /root/dify/docker/nginx /root/nginx > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "2/3 - [ OK ] - Extraindo arquivos"
 else
