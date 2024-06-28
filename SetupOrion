@@ -21530,7 +21530,7 @@ services:
     image: langflowai/langflow:latest
 
     volumes:
-      - langflow_data:/var/lib/langflow
+      - langflow_data:/app
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -21540,7 +21540,8 @@ services:
       - LANGFLOW_AUTO_LOGIN=false
       - LANGFLOW_SUPERUSER=$user_langflow
       - LANGFLOW_SUPERUSER_PASSWORD=$pass_langflow
-      - LANGFLOW_HOST=$url_langflow
+      - LANGFLOW_HOST=0.0.0.0
+      - BACKEND_URL=$url_langflow
 
       ## Secret Key
       - LANGFLOW_SECRET_KEY=$key_langflow
@@ -21550,6 +21551,9 @@ services:
 
       ## Dados do Postgres
       - LANGFLOW_DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/langflow
+
+      ## Diretório
+      - LANGFLOW_CONFIG_DIR=/app/flowise
 
     deploy:
       mode: replicated
