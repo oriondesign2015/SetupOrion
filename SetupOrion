@@ -23841,11 +23841,11 @@ while true; do
             quepasa.setup.on
             ;;
 
-        p1)
+        p1|P1)
             menu_instalador="1"
             ;;
 
-        p2) menu_instalador="2"
+        p2|P2) menu_instalador="2"
             ;;
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
