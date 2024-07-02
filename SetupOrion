@@ -9741,7 +9741,7 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.$nome_do_servico_wordpress.rule=Host(\`$url_wordpress\`)
+        - traefik.http.routers.$nome_do_servico_wordpress.rule=Host(\`$url_wordpress, www.$url_wordpress\`)
         - traefik.http.routers.$nome_do_servico_wordpress.entrypoints=websecure
         - traefik.http.routers.$nome_do_servico_wordpress.tls.certresolver=letsencryptresolver
         - traefik.http.routers.$nome_do_servico_wordpress.service=$nome_do_servico_wordpress
