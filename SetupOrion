@@ -6919,7 +6919,7 @@ services:
     - LANGUAGE=pt-BR
     - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
     - CONFIG_SESSION_PHONE_NAME=chrome
-    #- CONFIG_SESSION_PHONE_VERSION=2.2413.51 ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
+    - CONFIG_SESSION_PHONE_VERSION=2.2413.51 ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
 
     ## Configurações do Whatsapp Business Cloud (Api Oficial)
     - WA_BUSINESS_TOKEN_WEBHOOK=evolution
