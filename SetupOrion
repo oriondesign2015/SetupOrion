@@ -21532,7 +21532,7 @@ services:
     image: langflowai/langflow:latest
 
     volumes:
-      - langflow_data:/app
+      - langflow_data:/app/langflow
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -21553,9 +21553,6 @@ services:
 
       ## Dados do Postgres
       - LANGFLOW_DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/langflow
-
-      ## Diretório
-      - LANGFLOW_CONFIG_DIR=/app/flowise
 
     deploy:
       mode: replicated
