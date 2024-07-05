@@ -21543,7 +21543,7 @@ services:
       - LANGFLOW_SUPERUSER=$user_langflow
       - LANGFLOW_SUPERUSER_PASSWORD=$pass_langflow
       - LANGFLOW_HOST=0.0.0.0
-      - BACKEND_URL=$url_langflow
+      - BACKEND_URL=https://$url_langflow
 
       ## Secret Key
       - LANGFLOW_SECRET_KEY=$key_langflow
