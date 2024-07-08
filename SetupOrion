@@ -4855,6 +4855,141 @@ wait_30_sec
 
 }
 
+## ██████╗  ██████╗     ██╗   ██╗███████╗ ██████╗████████╗ ██████╗ ██████╗ 
+## ██╔══██╗██╔════╝     ██║   ██║██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗
+## ██████╔╝██║  ███╗    ██║   ██║█████╗  ██║        ██║   ██║   ██║██████╔╝
+## ██╔═══╝ ██║   ██║    ╚██╗ ██╔╝██╔══╝  ██║        ██║   ██║   ██║██╔══██╗
+## ██║     ╚██████╔╝     ╚████╔╝ ███████╗╚██████╗   ██║   ╚██████╔╝██║  ██║
+## ╚═╝      ╚═════╝       ╚═══╝  ╚══════╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
+                                                                        
+
+ferramenta_pgvector_setup() {
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Gerando uma senha aleatória para o Postgres
+senha_pgvector=$(openssl rand -hex 16)
+
+## Criando a stack
+cat > pgvector.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  pgvector:
+    image: pgvector/pgvector:pg16
+
+    ports:
+      - 5433:5432
+
+    volumes:
+      - pgvector:/var/lib/postgresql/data
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - POSTGRES_PASSWORD=$senha_pgvector
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  pgvector:
+    external: true
+    name: pgvector
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/2 - [ OK ] - Criando Stack"
+else
+    echo "1/2 - [ OFF ] - Criando Stack"
+    echo "Ops, não foi criar a stack do PgVector."
+fi
+STACK_NAME="pgvector"
+stack_editavel > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "2/2 - [ OK ] - Deploy Stack"
+else
+    echo "2/2 - [ OFF ] - Deploy Stack"
+    echo "Ops, não foi possivel subir a stack do PgVector."
+fi
+#docker stack deploy --prune --resolve-image always -c pgvector.yaml pgvector > /dev/null 2>&1
+
+## Salvando informações da instalação dentro de /dados_vps/
+cd dados_vps
+
+cat > dados_pgvector <<EOL
+[ PGVECTOR ]
+
+Dominio do pgvector: postgres://pgvector:5432
+
+Usuario: postgres
+
+Senha: $senha_pgvector
+EOL
+
+cd
+cd
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ REDIS ]\e[0m"
+echo ""
+
+
+echo -e "\e[97mDominio do PgVector:\e[33m postgres://pgvector:5432\e[0m"
+echo ""
+
+echo -e "\e[97mUsuario:\e[33m postgres\e[0m"
+echo ""
+
+echo -e "\e[97mSenha:\e[33m $senha_pgvector\e[0m"
+echo ""
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+}
+
 ## ██████╗ ███████╗██████╗ ██╗███████╗
 ## ██╔══██╗██╔════╝██╔══██╗██║██╔════╝
 ## ██████╔╝█████╗  ██║  ██║██║███████╗
@@ -23757,6 +23892,24 @@ while true; do
 
             fi   
             ;;
+        pgvector)
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="pgvector"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_pgvector_setup
+                else
+                    APP_ORION="ferramenta_pgvector_setup"
+                    ferramenta_pgvector_setup
+                fi
+
+                ## FIM TOKEN
+
+            fi
+            
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
