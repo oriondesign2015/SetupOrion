@@ -4696,6 +4696,7 @@ services:
     environment:
     ## Senha do postgres 
       - POSTGRES_PASSWORD=$senha_postgres
+      #- PG_MAX_CONNECTIONS=500
 
     deploy:
       mode: replicated
@@ -11715,7 +11716,7 @@ preencha_as_info
 while true; do
 
     ## Pergunta o Dominio da ferramenta
-    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
     echo -en "\e[33mDigite o dominio para o Appsmith (ex: appsmith.oriondesign.art.br): \e[0m" && read -r url_appsmith
     echo ""
     
