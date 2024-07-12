@@ -24565,7 +24565,7 @@ while true; do
         0|00|teste_smtp|TESTE_SMTP)
             ferramenta_testeemail
             ;;
-        1|01|portainer|traefik|PORTAINER|TRAEFIK|)
+        1|01|portainer|traefik|PORTAINER|TRAEFIK)
             ferramenta_traefik_e_portainer
             ;;
         2|02|chatwoot|CHATWOOT)
