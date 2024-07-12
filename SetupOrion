@@ -987,7 +987,7 @@ nome_ntfy(){
     echo "" 
     echo ""
 }
-
+ 
 ## Titulo Lowcoder [42]
 
 nome_lowcoder(){
@@ -1003,7 +1003,6 @@ nome_lowcoder(){
     echo ""  
 }
 
-    echo -e "$branco                       ██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║╚██████╔╝██████╔╝\e[0m"
 ## Titulo Langflow [43]
 
 nome_langflow() {
