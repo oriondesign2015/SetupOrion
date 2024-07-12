@@ -23690,8 +23690,8 @@ services:
       - URL=https://$url_outline
       - FORCE_HTTPS=true
 
-      ## Permitir novos cadastros
-      - LIMITS_INVITATION_REQUIRED=true
+      ## Desativar novos cadastros
+      - LIMITS_INVITATION_REQUIRED=false
 
       # IDIOMA PADRÃO
       - DEFAULT_LANGUAGE=pt_BR
