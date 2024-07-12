@@ -3935,6 +3935,51 @@ criar_banco_postgres_mattermost() {
     done
 }
 
+criar_banco_postgres_outline() {
+    while :; do
+        if docker ps -q --filter "name=postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "outline"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados outline já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS outline;"
+                    echo "Banco de dados outline apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE outline;"
+                    
+                    echo "Banco de dados outline criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE outline;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "outline"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados outline criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
+
 ## Criar banco do Zep
 criar_banco_pgvector_zep() {
     while :; do
@@ -23351,7 +23396,7 @@ services:
 
       ## Dados do Postgres
       - MM_SQLSETTINGS_DRIVERNAME=postgres
-      - MM_SQLSETTINGS_DATASOURCE=postgres://postgres:$senha_postgres@postgres:5432/mattermost
+      - MM_SQLSETTINGS_DATASOURCE=postgres://postgres:$senha_postgres@postgres:5432/mattermost?sslmode=disable&connect_timeout=10
 
     deploy:
       mode: replicated
