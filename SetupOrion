@@ -22860,7 +22860,7 @@ while true; do
 
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 1/6\e[0m"
-    echo -en "\e[33mDigite o dominio para o TwentyCRM (ex: $url_twentycrm): \e[0m" && read -r url_twentycrm
+    echo -en "\e[33mDigite o dominio para o TwentyCRM (ex: twentycrm.oriondesign.art.br): \e[0m" && read -r url_twentycrm
     echo ""
 
     ## Pergunta o email SMTP
@@ -23038,7 +23038,7 @@ services:
           memory: 4192M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.twentycrm.rule=Host(`$url_twentycrm`) ## Url da aplicação
+        - traefik.http.routers.twentycrm.rule=Host(\`$url_twentycrm\`) ## Url da aplicação
         - traefik.http.services.twentycrm.loadbalancer.server.port=3000
         - traefik.http.routers.twentycrm.service=twentycrm
         - traefik.http.routers.twentycrm.tls.certresolver=letsencryptresolver
