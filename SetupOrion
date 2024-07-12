@@ -23507,7 +23507,7 @@ while true; do
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 2/4\e[0m"
     echo -e "$amarelo--> Caso não tiver crie em: https://console.cloud.google.com/apis/credentials"
-    echo -en "\e[33mDigite o seu ID do Cliente Google (ex: XXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com): \e[0m" && read -r id_google_outline
+    echo -en "\e[33mDigite o seu ID do Cliente Google (ex: XXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com): \e[0m" && read -r id_google_outline
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
