@@ -1317,13 +1317,13 @@ menu_instalador_pg_1(){
 }
 
 menu_instalador_pg_2(){
-    echo -e "${amarelo}[ 45 ]${reset} - ${branco}ZEP ${verde}[NOVO]                             ${verde}| ${reset}  ${amarelo}[ 68 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 46 ]${reset} - ${branco}HumHub ${verde}[NOVO]                          ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 47 ]${reset} - ${branco}Yourls                                         ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 48 ]${reset} - ${branco}TwentyCRM                                      ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost                                     ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline                                        ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 51 ]${reset} - ${branco}Focalboard                            ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 45 ]${reset} - ${branco}ZEP                                    ${verde}| ${reset}  ${amarelo}[ 68 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 46 ]${reset} - ${branco}HumHub                                 ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 47 ]${reset} - ${branco}Yourls ${verde}[NOVO]                          ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 48 ]${reset} - ${branco}TwentyCRM ${verde}[NOVO]                       ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[NOVO]                      ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline ${verde}[NOVO]                         ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 51 ]${reset} - ${branco}Focalboard ${verde}[NOVO]                      ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 52 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 53 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 54 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 77 ]${reset} - ${branco}EM BREVE...${reset}"
@@ -1340,6 +1340,7 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 65 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 88 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 66 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 89 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 67 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 90 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e ""
     echo -e ""
     echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
     echo -e ""
