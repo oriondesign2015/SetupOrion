@@ -5553,7 +5553,7 @@ services:
         "--character-set-server=utf8mb4",
         "--collation-server=utf8mb4_general_ci",
         "--sql-mode=",
-        "--default-authentication-plugin=mysql_native_password",
+        "--default-authentication-plugin=caching_sha2_password",
         "--max-allowed-packet=512MB",
       ]
 
@@ -5659,7 +5659,7 @@ services:
         "--character-set-server=utf8mb4",
         "--collation-server=utf8mb4_general_ci",
         "--sql-mode=",
-        "--default-authentication-plugin=mysql_native_password",
+        "--default-authentication-plugin=caching_sha2_password",
         "--max-allowed-packet=512MB",
       ]
 
@@ -14133,7 +14133,7 @@ services:
     networks:
       - $nome_rede_interna
     ports:
-      - 5433:5432
+      - 5434:5432
 
     environment:
       ## Dados Postgres
