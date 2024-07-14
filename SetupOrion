@@ -7413,12 +7413,15 @@ services:
     - LANGUAGE=pt-BR
     - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
     - CONFIG_SESSION_PHONE_NAME=chrome
-    - CONFIG_SESSION_PHONE_VERSION=2.2413.51 ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
+    
+    ## Definir versão do Whatsapp Web
+    ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
+    - CONFIG_SESSION_PHONE_VERSION=2.2413.51
 
     ## Configurações do Whatsapp Business Cloud (Api Oficial)
     - WA_BUSINESS_TOKEN_WEBHOOK=evolution
     - WA_BUSINESS_URL=https://graph.facebook.com
-    - WA_BUSINESS_VERSION=v18.0
+    - WA_BUSINESS_VERSION=v20.0
     - WA_BUSINESS_LANGUAGE=pt_BR
 
     ## Sobre o QR-Code
@@ -7441,15 +7444,28 @@ services:
     - DATABASE_SAVE_MESSAGE_UPDATE=true
     - DATABASE_SAVE_DATA_CONTACTS=true
     - DATABASE_SAVE_DATA_CHATS=true
+
+    ## Ativar Banco de dados MinIO ou S3
+    - S3_ENABLED=false
+    - S3_ACCESS_KEY=
+    - S3_SECRET_KEY=
+    - S3_BUCKET=evolution
+    - S3_PORT=443
+    - S3_ENDPOINT=
+    - S3_USE_SSL=true
     
     ## Ativar o Cache Redis
     - CACHE_REDIS_ENABLED=true
     - CACHE_REDIS_URI=redis://redis:6379/8
     - CACHE_REDIS_PREFIX_KEY=evolution
-    - CACHE_REDIS_TTL=604800
     - CACHE_REDIS_SAVE_INSTANCES=false
     - CACHE_LOCAL_ENABLED=false
-    - CACHE_LOCAL_TTL=604800
+    - CACHE_LOCAL_TTL=604800 ## OBSERVAR
+
+
+    ## Configurações das instancias
+    - DEL_INSTANCE=false
+    - DEL_TEMP_INSTANCES=false ## OBSERVAR
 
     ## Carregar módulo Typebot
     - TYPEBOT_ENABLED=true
@@ -7457,10 +7473,10 @@ services:
 
     ## Carregar módulo Chatwoot
     - CHATWOOT_ENABLED=true
-    - CHATWOOT_MESSAGE_DELETE=true
     - CHATWOOT_MESSAGE_READ=true
+    - CHATWOOT_MESSAGE_DELETE=true
     - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
-    - CHATWOOT_IMPORT_DATABASE_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
+    - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
 
     ## Informações do Webhook
     - WEBHOOK_GLOBAL_ENABLED=false
