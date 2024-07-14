@@ -5,7 +5,7 @@
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 versao() {
-echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.5.7\e[0m                                  "
+echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.5.8\e[0m                                  "
 echo -e "\e[32moriondesign.art.br/whatsapp1      \e[97m<----- Grupos no WhatsApp ----->     \e[32moriondesign.art.br/whatsapp2\e[0m"
 }
 
@@ -289,12 +289,12 @@ nome_instalador() {
     echo -e "$branco       ███████║███████╗   ██║   ╚██████╔╝██║         ╚██████╔╝██║  ██║██║╚██████╔╝██║ ╚████║\e[0m"
     echo -e "$branco       ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝          ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝\e[0m"
     echo -e "$branco                                                                                            \e[0m"
-    echo -e "$branco                                  ██████╗    ███████╗███████╗                               \e[0m"
-    echo -e "$branco                                  ╚════██╗   ██╔════╝╚════██║                               \e[0m"
-    echo -e "$branco                        █████╗     █████╔╝   ███████╗    ██╔╝    █████╗                     \e[0m"
-    echo -e "$branco                        ╚════╝    ██╔═══╝    ╚════██║   ██╔╝     ╚════╝                     \e[0m"
-    echo -e "$branco                                  ███████╗██╗███████║██╗██║                                 \e[0m"
-    echo -e "$branco                                  ╚══════╝╚═╝╚══════╝╚═╝╚═╝                                 \e[0m"
+    echo -e "$branco                                  ██████╗    ███████╗    █████╗                             \e[0m"
+    echo -e "$branco                                  ╚════██╗   ██╔════╝   ██╔══██╗                            \e[0m"
+    echo -e "$branco                        █████╗     █████╔╝   ███████╗   ╚█████╔╝    █████╗                  \e[0m"
+    echo -e "$branco                        ╚════╝    ██╔═══╝    ╚════██║   ██╔══██╗    ╚════╝                  \e[0m"
+    echo -e "$branco                                  ███████╗██╗███████║██╗╚█████╔╝                            \e[0m"
+    echo -e "$branco                                  ╚══════╝╚═╝╚══════╝╚═╝ ╚════╝                             \e[0m" 
     echo ""                                            
 }
 
@@ -1126,16 +1126,31 @@ echo ""
 ## Titulo FocalBoard [51]
 
 nome_focalboard(){
-clear
-echo ""
-echo -e "$branco         ███████╗ ██████╗  ██████╗ █████╗ ██╗     ██████╗  ██████╗  █████╗ ██████╗ ██████╗ \e[0m"
-echo -e "$branco         ██╔════╝██╔═══██╗██╔════╝██╔══██╗██║     ██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗\e[0m"
-echo -e "$branco         █████╗  ██║   ██║██║     ███████║██║     ██████╔╝██║   ██║███████║██████╔╝██║  ██║\e[0m"
-echo -e "$branco         ██╔══╝  ██║   ██║██║     ██╔══██║██║     ██╔══██╗██║   ██║██╔══██║██╔══██╗██║  ██║\e[0m"
-echo -e "$branco         ██║     ╚██████╔╝╚██████╗██║  ██║███████╗██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝\e[0m"
-echo -e "$branco         ╚═╝      ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ \e[0m"
-echo ""
-echo ""
+    clear
+    echo ""
+    echo -e "$branco         ███████╗ ██████╗  ██████╗ █████╗ ██╗     ██████╗  ██████╗  █████╗ ██████╗ ██████╗ \e[0m"
+    echo -e "$branco         ██╔════╝██╔═══██╗██╔════╝██╔══██╗██║     ██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗\e[0m"
+    echo -e "$branco         █████╗  ██║   ██║██║     ███████║██║     ██████╔╝██║   ██║███████║██████╔╝██║  ██║\e[0m"
+    echo -e "$branco         ██╔══╝  ██║   ██║██║     ██╔══██║██║     ██╔══██╗██║   ██║██╔══██║██╔══██╗██║  ██║\e[0m"
+    echo -e "$branco         ██║     ╚██████╔╝╚██████╗██║  ██║███████╗██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝\e[0m"
+    echo -e "$branco         ╚═╝      ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ \e[0m"
+    echo ""
+    echo ""
+}
+
+## Titulo GLPI [52]
+
+nome_glpi(){
+    clear
+    echo ""
+    echo -e "$branco                                     ██████╗ ██╗     ██████╗ ██╗\e[0m"
+    echo -e "$branco                                    ██╔════╝ ██║     ██╔══██╗██║\e[0m"
+    echo -e "$branco                                    ██║  ███╗██║     ██████╔╝██║\e[0m"
+    echo -e "$branco                                    ██║   ██║██║     ██╔═══╝ ██║\e[0m"
+    echo -e "$branco                                    ╚██████╔╝███████╗██║     ██║\e[0m"
+    echo -e "$branco                                     ╚═════╝ ╚══════╝╚═╝     ╚═╝\e[0m"
+    echo ""
+    echo ""
 }
 
 # ===================================================================================================
@@ -1324,7 +1339,7 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[NOVO]                      ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline ${verde}[NOVO]                         ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 51 ]${reset} - ${branco}Focalboard ${verde}[NOVO]                      ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 52 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 52 ]${reset} - ${branco}GLPI ${verde}[NOVO]                            ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 53 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 54 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 77 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 55 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}EM BREVE...${reset}"
@@ -2702,6 +2717,19 @@ wait_focalboard(){
     while true; do
         # Verifica se o serviço focalboard está ativo
         if docker service ls --filter "name=focalboard" | grep "1/1"; then
+            sleep 10
+            break
+        fi
+    
+        sleep 5
+    done
+}
+
+wait_glpi(){
+    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
+    while true; do
+        # Verifica se o serviço glpi está ativo
+        if docker service ls --filter "name=glpi" | grep "1/1"; then
             sleep 10
             break
         fi
@@ -4249,6 +4277,52 @@ criar_banco_mysql_yourls() {
                     # Verificar novamente se o banco de dados foi criado com sucesso
                     if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'yourls';" | grep -qw "yourls"; then
                         echo "Banco de dados yourls criado com sucesso."
+                        break
+                    else
+                        echo "Erro ao criar o banco de dados. Tentando novamente..."
+                    fi
+                fi
+            else
+                echo "Container MySQL não encontrado. Tentando novamente..."
+                sleep 5
+            fi
+        else
+            echo "Container MySQL não encontrado. Tentando novamente..."
+            sleep 5
+        fi
+    done
+}
+
+criar_banco_mysql_glpi() {
+    dados
+    pegar_senha_mysql
+    while :; do
+        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+            if [ -n "$CONTAINER_ID" ]; then
+                # Verificar se o banco de dados já existe
+                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'glpi';" | grep -qw "glpi"; then
+                    echo "O banco de dados glpi já existe."
+
+                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                        # Apagar o banco de dados
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE glpi;"
+                        echo "Banco de dados glpi apagado com sucesso."
+
+                        # Criar o banco de dados novamente
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE glpi;"
+                        echo "Banco de dados glpi criado com sucesso."
+                    else
+                        echo "Usando o banco de dados existente."
+                    fi
+                    break
+                else
+                    # Criar o banco de dados
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE glpi;"
+                    
+                    # Verificar novamente se o banco de dados foi criado com sucesso
+                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'glpi';" | grep -qw "glpi"; then
+                        echo "Banco de dados glpi criado com sucesso."
                         break
                     else
                         echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -14133,7 +14207,7 @@ services:
     networks:
       - $nome_rede_interna
     ports:
-      - 5434:5432
+      - 543:45432
 
     environment:
       ## Dados Postgres
@@ -24059,6 +24133,250 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
     fi
 }
 
+##  ██████╗ ██╗     ██████╗ ██╗
+## ██╔════╝ ██║     ██╔══██╗██║
+## ██║  ███╗██║     ██████╔╝██║
+## ██║   ██║██║     ██╔═══╝ ██║
+## ╚██████╔╝███████╗██║     ██║
+##  ╚═════╝ ╚══════╝╚═╝     ╚═╝
+
+ferramenta_glpi() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_glpi
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para a ferramenta
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o dominio para o GLPI (ex: glpi.oriondesign.art.br): \e[0m" && read -r url_glpi
+    echo ""
+    
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_glpi
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+    
+    ## Informação sobre URL do glpi
+    echo -e "\e[33mDominio do GLPI:\e[97m $url_glpi\e[0m"
+    echo ""
+    
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_glpi
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO GLPI \e[33m[1/4]\e[0m"
+echo ""
+sleep 1
+
+## Nadaaaaa
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+## Cansei já de explicar o que isso faz kkkk
+verificar_container_mysql
+    if [ $? -eq 0 ]; then
+        pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_glpi
+    else
+        ferramenta_mysql
+        pegar_senha_mysql > /dev/null 2>&1
+        criar_banco_mysql_glpi
+    fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO GLPI \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
+
+## Criando a stack
+cat > glpi.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  glpi:
+    image: diouxx/glpi:latest
+
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - glpi_glpi:/var/www/html/glpi
+
+    networks:
+        - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+      - TIMEZONE=America/Sao_Paulo
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.glpi.rule=Host(\`$url_glpi\`)
+        - traefik.http.services.glpi.loadbalancer.server.port=80
+        - traefik.http.routers.glpi.service=glpi
+        - traefik.http.routers.glpi.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.glpi.entrypoints=websecure
+        - traefik.http.routers.glpi.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  glpi_glpi:
+    external: true
+    name: glpi_glpi
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    name: $nome_rede_interna ## Nome da rede interna
+    external: true
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do GLPI"
+fi
+STACK_NAME="glpi"
+stack_editavel # > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c glpi.yaml glpi > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel Subir a stack do glpi"
+#fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_glpi para verificar se o serviço esta online
+wait_glpi
+
+cd dados_vps
+
+cat > dados_glpi <<EOL
+[ GLPI ]
+
+Dominio do GLPI: https://$url_glpi
+
+Usuario: glpi
+
+Senha: glpi
+
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ GLPI ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio:\e[97m https://$url_glpi\e[0m"
+echo ""
+
+echo -e "\e[33mUsuario:\e[97m glpi\e[0m"
+echo ""
+
+echo -e "\e[33mSenha:\e[97m glpi\e[0m"
+echo ""
+
+echo -e "\e[33mEndereço do servidor SQL:\e[97m mysql\e[0m"
+echo ""
+
+echo -e "\e[33mUsuário SQL:\e[97m root\e[0m"
+echo ""
+
+echo -e "\e[33mSenha SQL:\e[97m $senha_mysql\e[0m"
+echo ""
+
+echo -e "\e[33mBanco de dados:\e[97m glpi\e[0m"
+echo ""
+
+
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+
 ## Ignore esta parte, só para facilitar minha identificação com esta parte "XXOOXX"
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -25632,6 +25950,25 @@ while true; do
                 else
                     APP_ORION="ferramenta_focalboard"
                     ferramenta_focalboard
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        52|glpi|GLPI) 
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="glpi"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_glpi
+                else
+                    APP_ORION="ferramenta_glpi"
+                    ferramenta_glpi
                 fi
 
                 ## FIM TOKEN
