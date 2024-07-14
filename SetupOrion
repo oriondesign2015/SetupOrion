@@ -3330,7 +3330,7 @@ criar_banco_postgres_calcom() {
 ## Criar banco do WoofedCRM
 criar_banco_pgvector_woofedcrm() {
     while :; do
-        if docker ps -q --filter "name=pgvector" | grep -q .; then
+        if docker ps -q --filter "name=^pgvector_pgvector" | grep -q .; then
             CONTAINER_PGVECTOR_ID=$(docker ps -q --filter "name=pgvector")
 
             # Verificar se o banco de dados já existe
@@ -4012,7 +4012,7 @@ criar_banco_postgres_outline() {
 ## Criar banco do Zep
 criar_banco_pgvector_zep() {
     while :; do
-        if docker ps -q --filter "name=pgvector" | grep -q .; then
+        if docker ps -q --filter "name=^pgvector_pgvector" | grep -q .; then
             CONTAINER_PGVECTOR_ID=$(docker ps -q --filter "name=pgvector")
 
             # Verificar se o banco de dados já existe
@@ -4067,7 +4067,7 @@ criar_banco_mysql_mautic() {
     dados
     pegar_senha_mysql
     while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
             if [ -n "$CONTAINER_ID" ]; then
                 # Verificar se o banco de dados já existe
                 if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
@@ -4113,7 +4113,7 @@ criar_banco_mysql_wordpress() {
     dados
     pegar_senha_mysql
     while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
             if [ -n "$CONTAINER_ID" ]; then
                 # Verificar se o banco de dados já existe
                 if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
@@ -4159,7 +4159,7 @@ criar_banco_mysql_strapi() {
     dados
     pegar_senha_mysql
     while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
             if [ -n "$CONTAINER_ID" ]; then
                 # Verificar se o banco de dados já existe
                 if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
@@ -4205,7 +4205,7 @@ criar_banco_mysql_humhub() {
     dados
     pegar_senha_mysql
     while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
             if [ -n "$CONTAINER_ID" ]; then
                 # Verificar se o banco de dados já existe
                 if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'humhub';" | grep -qw "humhub"; then
@@ -4251,7 +4251,7 @@ criar_banco_mysql_yourls() {
     dados
     pegar_senha_mysql
     while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
             if [ -n "$CONTAINER_ID" ]; then
                 # Verificar se o banco de dados já existe
                 if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'yourls';" | grep -qw "yourls"; then
@@ -4297,7 +4297,7 @@ criar_banco_mysql_glpi() {
     dados
     pegar_senha_mysql
     while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=mysql"); then
+        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
             if [ -n "$CONTAINER_ID" ]; then
                 # Verificar se o banco de dados já existe
                 if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'glpi';" | grep -qw "glpi"; then
