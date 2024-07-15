@@ -5314,7 +5314,7 @@ instalado_msg
 guarde_os_dados_msg
 
 ## Dados da Aplicação:
-echo -e "\e[32m[ REDIS ]\e[0m"
+echo -e "\e[32m[ PGVECTOR ]\e[0m"
 echo ""
 
 
@@ -7428,12 +7428,6 @@ services:
     - QRCODE_LIMIT=1902
     - QRCODE_COLOR=#000000
 
-    ## Dados do RabbitMQ
-    - RABBITMQ_ENABLED=false
-    - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672
-    - RABBITMQ_EXCHANGE_NAME=evolution
-    - RABBITMQ_GLOBAL_ENABLED=true
-
     ## Aivar Banco de Dados Postgres
     - DATABASE_ENABLED=true
     - DATABASE_PROVIDER=postgresql
@@ -7460,12 +7454,10 @@ services:
     - CACHE_REDIS_PREFIX_KEY=evolution
     - CACHE_REDIS_SAVE_INSTANCES=false
     - CACHE_LOCAL_ENABLED=false
-    - CACHE_LOCAL_TTL=604800 ## OBSERVAR
-
 
     ## Configurações das instancias
     - DEL_INSTANCE=false
-    - DEL_TEMP_INSTANCES=false ## OBSERVAR
+    - DEL_TEMP_INSTANCES=false
 
     ## Carregar módulo Typebot
     - TYPEBOT_ENABLED=true
@@ -7477,10 +7469,41 @@ services:
     - CHATWOOT_MESSAGE_DELETE=true
     - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
     - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
+    
+    ## Dados do RabbitMQ
+    - RABBITMQ_ENABLED=false
+    - RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/default
+    - RABBITMQ_EXCHANGE_NAME=evolution
+    - RABBITMQ_GLOBAL_ENABLED=false
+    - RABBITMQ_EVENTS_APPLICATION_STARTUP=false
+    - RABBITMQ_EVENTS_INSTANCE_CREATE=false
+    - RABBITMQ_EVENTS_INSTANCE_DELETE=false
+    - RABBITMQ_EVENTS_QRCODE_UPDATED=false
+    - RABBITMQ_EVENTS_MESSAGES_SET=false
+    - RABBITMQ_EVENTS_MESSAGES_UPSERT=true
+    - RABBITMQ_EVENTS_MESSAGES_EDITED=false
+    - RABBITMQ_EVENTS_MESSAGES_UPDATE=false
+    - RABBITMQ_EVENTS_MESSAGES_DELETE=false
+    - RABBITMQ_EVENTS_SEND_MESSAGE=false
+    - RABBITMQ_EVENTS_CONTACTS_SET=false
+    - RABBITMQ_EVENTS_CONTACTS_UPSERT=false
+    - RABBITMQ_EVENTS_CONTACTS_UPDATE=false
+    - RABBITMQ_EVENTS_PRESENCE_UPDATE=false
+    - RABBITMQ_EVENTS_CHATS_SET=false
+    - RABBITMQ_EVENTS_CHATS_UPSERT=false
+    - RABBITMQ_EVENTS_CHATS_UPDATE=false
+    - RABBITMQ_EVENTS_CHATS_DELETE=false
+    - RABBITMQ_EVENTS_GROUPS_UPSERT=false
+    - RABBITMQ_EVENTS_GROUP_UPDATE=false
+    - RABBITMQ_EVENTS_GROUP_PARTICIPANTS_UPDATE=false
+    - RABBITMQ_EVENTS_CONNECTION_UPDATE=true
+    - RABBITMQ_EVENTS_CALL=false
+    - RABBITMQ_EVENTS_TYPEBOT_START=false
+    - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
 
     ## Informações do Webhook
     - WEBHOOK_GLOBAL_ENABLED=false
-    - WEBHOOK_GLOBAL_URL=''
+    - WEBHOOK_GLOBAL_URL=
     - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
     - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
     - WEBHOOK_EVENTS_QRCODE_UPDATED=true
