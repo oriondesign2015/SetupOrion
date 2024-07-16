@@ -16,6 +16,14 @@ reset="\e[0m"
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
+sudo apt update
+
+sudo apt upgrade -y
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+
 nome_aviso(){
 
 clear
@@ -135,6 +143,8 @@ if [ $? -eq 0 ]; then
 else
     echo "1/11 - [ OFF ] - Fazendo Upgrade"
 fi
+
+echo ""
 
 ## Instalando Sudo
 apt install sudo -y > /dev/null 2>&1
