@@ -9998,6 +9998,7 @@ services:
 volumes:
   botpress_data:
     external: true
+    name: botpress_data
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -20032,7 +20033,7 @@ while true; do
 
     ##Pergunta a versão da ferramenta
     echo -e "\e[97mPasso$amarelo 3/10\e[0m"
-    echo -e "$amarelo--> Sem caracteres especiais: @\!#$"
+    echo -e "$amarelo--> Sem NENHUM caracteres especiais, tais como: @\!#$ entre outros"
     echo -en "\e[33mDigite a Senha do usuario para o Supabase (ex: Senha123_): \e[0m" && read -r pass_supabase
     echo ""
 
