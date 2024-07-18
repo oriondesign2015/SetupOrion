@@ -5982,7 +5982,7 @@ if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot
 else
-    ferramenta_postgres > /dev/null 2>&1
+    ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot
 fi
@@ -6525,7 +6525,7 @@ if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot
 else
-    ferramenta_postgres > /dev/null 2>&1
+    ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot
 fi
@@ -7346,7 +7346,7 @@ if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_evolution
 else
-    ferramenta_postgres > /dev/null 2>&1
+    ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_evolution
 fi
@@ -8753,7 +8753,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_n8n_queue #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_n8n_queue #> /dev/null 2>&1
 fi
@@ -9173,7 +9173,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_flowise #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_flowise #> /dev/null 2>&1
 fi
@@ -9674,7 +9674,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_nocobase #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_nocobase #> /dev/null 2>&1
 fi
@@ -9928,7 +9928,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_botpress #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_botpress #> /dev/null 2>&1
 fi
@@ -10541,7 +10541,7 @@ if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_baserow
 else
-    ferramenta_postgres > /dev/null 2>&1
+    ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_baserow
 fi
@@ -11526,7 +11526,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_calcom #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_calcom #> /dev/null 2>&1
 fi
@@ -13181,7 +13181,7 @@ if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_formbricks #> /dev/null 2>&1
 fi
@@ -13474,7 +13474,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_nocodb #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_nocodb #> /dev/null 2>&1
 fi
@@ -13711,7 +13711,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_langfuse #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_langfuse #> /dev/null 2>&1
 fi
@@ -13959,7 +13959,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_metabase #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_metabase #> /dev/null 2>&1
 fi
@@ -14517,7 +14517,7 @@ if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot_uno
 else
-    ferramenta_postgres > /dev/null 2>&1
+    ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot_uno
 fi
@@ -14985,7 +14985,7 @@ if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot_nestor
 else
-    ferramenta_postgres > /dev/null 2>&1
+    ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_chatwoot_nestor
 fi
@@ -15843,7 +15843,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_n8n_quepasa #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_n8n_quepasa #> /dev/null 2>&1
 fi
@@ -16724,7 +16724,7 @@ if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_dify #> /dev/null 2>&1
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_dify #> /dev/null 2>&1
 fi
@@ -17528,7 +17528,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_affine #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_affine #> /dev/null 2>&1
 fi
@@ -17848,7 +17848,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_docuseal #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_docuseal #> /dev/null 2>&1
 fi
@@ -18198,7 +18198,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_directus #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_directus #> /dev/null 2>&1
 fi
@@ -19229,7 +19229,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_nextcloud #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_nextcloud #> /dev/null 2>&1
 fi
@@ -22571,7 +22571,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_openproject #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_openproject #> /dev/null 2>&1
 fi
@@ -23475,7 +23475,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_mattermost #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_mattermost #> /dev/null 2>&1
 fi
@@ -23759,7 +23759,7 @@ if [ $? -eq 0 ]; then
         criar_banco_postgres_outline #> /dev/null 2>&1
 
     else
-        ferramenta_postgres > /dev/null 2>&1
+        ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
         criar_banco_postgres_outline #> /dev/null 2>&1
 fi
