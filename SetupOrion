@@ -7392,7 +7392,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution_v2:
-    image: atendai/evolution-api:v2.0.0-beta ## Versão da Evolution API
+    image: atendai/evolution-api:v2.0.2-beta ## Versão da Evolution API
 
     volumes:
       - evolution_instances:/evolution/instances
@@ -7457,7 +7457,6 @@ services:
 
     ## Configurações das instancias
     - DEL_INSTANCE=false
-    - DEL_TEMP_INSTANCES=false
 
     ## Carregar módulo Typebot
     - TYPEBOT_ENABLED=true
