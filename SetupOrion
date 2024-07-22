@@ -19289,6 +19289,10 @@ services:
       ## Dados do Redis
       - REDIS_HOST=redis
 
+      ## Configurações para HTTPS
+      - OVERWRITEPROTOCOL=https
+      - TRUSTED_PROXIES=127.0.0.1
+
     deploy:
       mode: replicated
       replicas: 1
@@ -19303,6 +19307,10 @@ services:
         - traefik.http.routers.nextcloud.tls.certresolver=letsencryptresolver
         - traefik.http.routers.nextcloud.entrypoints=web,websecure
         - traefik.http.routers.nextcloud.tls=true
+        - traefik.http.routers.nextcloud.middlewares=nextcloud_redirectregex
+        - traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent=true
+        - traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex=https://(.*)/.well-known/(?:card|cal)dav
+        - traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement=https://$$1/remote.php/dav
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -19349,6 +19357,14 @@ sleep 1
 wait_nextcloud
 
 cd dados_vps
+
+# Caminho do arquivo onde a substituição será feita
+arquivo_next_cloud="/var/lib/docker/volumes/nextcloud_data/_data/config/config.php"
+
+# Comando sed para substituir a linha, utilizando a variável
+sed -i "s/0 => 'localhost'/0 => '$url_nextcloud'/" "$arquivo_next_cloud"
+
+sed -i "/'maintenance' => false,/a \  'overwriteprotocol' => 'https',\n  'trusted_proxies' => ['127.0.0.1']," "$arquivo_next_cloud"
 
 cat > dados_nextcloud <<EOL
 [ NEXTCLOUD ]
@@ -24939,7 +24955,6 @@ quepasa.setup.on(){
     echo "Voltando ao menu de ferramentas..."
     sleep 5
 }
-
 
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
