@@ -10274,7 +10274,7 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.$nome_do_servico_wordpress.rule=Host(\`$url_wordpress\`, \`www.$url_wordpress\`)
+        - traefik.http.routers.$nome_do_servico_wordpress.rule=Host(\`$url_wordpress\`)
         - traefik.http.routers.$nome_do_servico_wordpress.entrypoints=websecure
         - traefik.http.routers.$nome_do_servico_wordpress.tls.certresolver=letsencryptresolver
         - traefik.http.routers.$nome_do_servico_wordpress.service=$nome_do_servico_wordpress
@@ -15030,7 +15030,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_app:
-    image: francisbreit/chatwoot-n:v3.9.5-pt-br ## Versão do Chatwoot
+    image: francisbreit/chatwoot-n:v3.10.3-pt-br ## Versão do Chatwoot
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     entrypoint: docker/entrypoints/rails.sh
 
@@ -15129,7 +15129,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot_sidekiq:
-    image: francisbreit/chatwoot-n:v3.9.5-pt-br ## Versão do Chatwoot
+    image: francisbreit/chatwoot-n:v3.10.3-pt-br ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
