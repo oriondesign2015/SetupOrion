@@ -5039,7 +5039,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   postgres:
-    image: postgres:14 ## Versão do postgres
+    image: postgres:16 ## Versão do postgres
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
