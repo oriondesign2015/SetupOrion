@@ -8456,7 +8456,7 @@ services:
       - NEXT_PUBLIC_VIEWER_URL=https://$url_viewer ## URL Viewer
       - NEXTAUTH_URL_INTERNAL=http://localhost:3000
 
-      ## Desativer/ativar novos cadastros
+      ## Desativar/ativar novos cadastros
       - DISABLE_SIGNUP=false
 
       ## Dados do SMTP
@@ -8523,7 +8523,7 @@ services:
       - NEXT_PUBLIC_VIEWER_URL=https://$url_viewer ## URL Viewer
       - NEXTAUTH_URL_INTERNAL=http://localhost:3000
 
-      ## Desativer/ativar novos cadastros
+      ## Desativar/ativar novos cadastros
       - DISABLE_SIGNUP=false
 
       ## Dados do SMTP
