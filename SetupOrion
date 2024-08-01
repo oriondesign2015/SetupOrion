@@ -7392,7 +7392,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution_v2:
-    image: atendai/evolution-api:v2.0.2-beta ## Versão da Evolution API
+    image: atendai/evolution-api:v2.0.5-rc ## Versão da Evolution API
 
     volumes:
       - evolution_instances:/evolution/instances
@@ -20297,18 +20297,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   studio:
-    image: supabase/studio:20240205-b145c86 ## Versão da imagem
-    #image: supabase/studio:20240422-5cf8f30 ## Versão da imagem
-
-    healthcheck:
-      test:
-        - CMD
-        - node
-        - '-e'
-        - "require('http').get('http://localhost:3000/api/profile', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
-      timeout: 5s
-      interval: 5s
-      retries: 3
+    image: supabase/studio:20240701-05dfbec ## Versão da imagem
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20404,7 +20393,6 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   auth:
-    #image: supabase/gotrue:v2.132.3 ## Versão da imagem
     image: supabase/gotrue:v2.151.0 ## Versão da imagem
 
     healthcheck:
@@ -20461,6 +20449,13 @@ services:
       - GOTRUE_EXTERNAL_PHONE_ENABLED=false
       - GOTRUE_SMS_AUTOCONFIRM=false
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 ## --------------------------- ORION --------------------------- ##
 
   rest:
@@ -20483,11 +20478,17 @@ services:
       - PGRST_APP_SETTINGS_JWT_SECRET=$JWT_Key ## JWT_SECRET
       - PGRST_APP_SETTINGS_JWT_EXP=3600
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 ## --------------------------- ORION --------------------------- ##
 
   realtime:
-    #image: supabase/realtime:v2.25.50 ## Versão da imagem
-    image: supabase/realtime:v2.28.32 ## Versão da imagem
+    image: supabase/realtime:v2.25.50 ## Versão da imagem
     command: "sh -c \"/app/bin/migrate && /app/bin/realtime eval 'Realtime.Release.seeds(Realtime.Repo)' && /app/bin/server\"\n"
 
     healthcheck:
@@ -20529,10 +20530,16 @@ services:
       - ENABLE_TAILSCALE=false
       - DNS_NODES="''"
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 ## --------------------------- ORION --------------------------- ##
 
   storage:
-    #image: supabase/storage-api:v0.46.4 ## Versão da imagem
     image: supabase/storage-api:v1.0.6 ## Versão da imagem
 
     volumes:
@@ -20590,6 +20597,13 @@ services:
       - ANON_KEY=$ANON_KEY ## ANON_KEY
       - SERVICE_KEY=$SERVICE_KEY ## SERVICE_KEY
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 ## --------------------------- ORION --------------------------- ##
 
   imgproxy:
@@ -20617,11 +20631,18 @@ services:
       - IMGPROXY_USE_ETAG=true
       - IMGPROXY_ENABLE_WEBP_DETECTION=true
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 
 ## --------------------------- ORION --------------------------- ##
 
   meta:
-    image: supabase/postgres-meta:v0.80.0 ## Versão da imagem
+    image: supabase/postgres-meta:v0.83.2 ## Versão da imagem
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20640,11 +20661,17 @@ services:
       - PG_META_DB_USER=supabase_admin
       - PG_META_DB_PASSWORD=$Senha_Postgres  ## Senha do Postgres # OK
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 ## --------------------------- ORION --------------------------- ##
 
   functions:
-    #image: supabase/edge-runtime:v1.36.1 ## Versão da imagem
-    image: supabase/edge-runtime:v1.54.2 ## Versão da imagem
+    image: supabase/edge-runtime:v1.55.0 ## Versão da imagem
     command:
       - start
       - '--main-service'
@@ -20672,6 +20699,13 @@ services:
       ## Dados JWT
       - JWT_SECRET=$JWT_Key ## JWT_SECRET
       - VERIFY_JWT=false
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -20714,10 +20748,16 @@ services:
       - LOGFLARE_MIN_CLUSTER_SIZE=1
       - LOGFLARE_FEATURE_FLAG_OVERRIDE=multibackend=true
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 ## --------------------------- ORION --------------------------- ##
 
   db:
-    #image: supabase/postgres:15.1.0.147 ## Versão da imagem
     image: supabase/postgres:15.1.1.61 ## Versão da imagem
 
     healthcheck:
@@ -20761,6 +20801,13 @@ services:
       - JWT_SECRET=$JWT_Key ## JWT_SECRET
       - JWT_EXP=3600
 
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
 ## --------------------------- ORION --------------------------- ##
 
   vector:
@@ -20785,6 +20832,13 @@ services:
       
       ## Logflare key
       - LOGFLARE_API_KEY=$Logflare_key ## Key aleatória
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
 
 ## --------------------------- ORION --------------------------- ##
 
