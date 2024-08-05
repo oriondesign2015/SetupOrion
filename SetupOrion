@@ -12212,7 +12212,7 @@ volumes:
     name: mautic_config
     external: true
   mautic_docroot:
-    name: mautic_docroom
+    name: mautic_docroot
     external: true
   mautic_media:
     name: mautic_media
