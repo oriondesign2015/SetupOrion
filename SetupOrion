@@ -7392,7 +7392,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution_v2:
-    image: atendai/evolution-api:v2.0.5-rc ## Versão da Evolution API
+    image: atendai/evolution-api:v2.0.7-rc ## Versão da Evolution API
 
     volumes:
       - evolution_instances:/evolution/instances
