@@ -1415,8 +1415,8 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 52 ]${reset} - ${branco}GLPI                                   ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 53 ]${reset} - ${branco}Anything LLM ${verde}[NOVO]                    ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 54 ]${reset} - ${branco}Excalidraw ${verde}[NOVO]                      ${verde}| ${reset}  ${amarelo}[ 77 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 55 ]${reset} - ${branco}Documeso ${verde}[NOVO]                        ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 56 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 55 ]${reset} - ${branco}Easy!Apointments ${verde}[NOVO]                ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 56 ]${reset} - ${branco}Documeso ${verde}[NOVO]                        ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 57 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 80 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 58 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 81 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 59 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 82 ]${reset} - ${branco}EM BREVE...${reset}"
@@ -27388,6 +27388,82 @@ while true; do
                 else
                     APP_ORION="ferramenta_glpi"
                     ferramenta_glpi
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        53|anythingllm|anything|AnythingLLM|Anything) 
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="anythingllm"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_anythingllm
+                else
+                    APP_ORION="ferramenta_anythingllm"
+                    ferramenta_anythingllm
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+        
+        54|excalidraw|Excalidraw) 
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="excalidraw"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_excalidraw
+                else
+                    APP_ORION="ferramenta_excalidraw"
+                    ferramenta_excalidraw
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        55|easyappointments|EasyAppointments|Easy!Appointments|easy!appointments) 
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="easyappointments"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_easyappointments
+                else
+                    APP_ORION="ferramenta_easyappointments"
+                    ferramenta_easyappointments
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        56|documenso|Documenso) 
+            if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="documenso"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_documenso
+                else
+                    APP_ORION="ferramenta_documenso"
+                    ferramenta_documenso
                 fi
 
                 ## FIM TOKEN
