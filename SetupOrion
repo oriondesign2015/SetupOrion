@@ -10406,6 +10406,7 @@ services:
 
     volumes:
       - mongodb_data:/data/db
+      - mongodb_dump:/dump
       - mongodb_configdb_data:/data/configdb
 
     networks:
@@ -10437,6 +10438,9 @@ volumes:
   mongodb_data:
     external: true
     name: mongodb_data
+  mongodb_dump:
+    external: true
+    name: mongodb_dump
   mongodb_configdb_data:
     external: true
     name: mongodb_configdb_data
@@ -24672,6 +24676,13 @@ services:
       - DB_NAME=easyapointments
       - DB_USERNAME=root
       - DB_PASSWORD=$senha_mysql
+
+      ## Dados Google Calendar
+      - GOOGLE_SYNC_FEATURE=false
+      - GOOGLE_PRODUCT_NAME=
+      - GOOGLE_CLIENT_ID=
+      - GOOGLE_CLIENT_SECRET=
+      - GOOGLE_API_KEY=
 
       ## Modo de Debug
       - DEBUG_MODE=TRUE
