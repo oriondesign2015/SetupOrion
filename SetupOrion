@@ -1208,7 +1208,7 @@ nome_easyappointments(){
     echo ""
 }
 
-## Titulo Documeso [56]
+## Titulo Documenso [56]
 
 nome_documenso(){
     clear
@@ -1416,7 +1416,7 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 53 ]${reset} - ${branco}Anything LLM ${verde}[NOVO]                    ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 54 ]${reset} - ${branco}Excalidraw ${verde}[NOVO]                      ${verde}| ${reset}  ${amarelo}[ 77 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 55 ]${reset} - ${branco}Easy!Apointments ${verde}[NOVO]                ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 56 ]${reset} - ${branco}Documeso ${verde}[NOVO]                        ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 56 ]${reset} - ${branco}Documenso ${verde}[NOVO]                       ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 57 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 80 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 58 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 81 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 59 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 82 ]${reset} - ${branco}EM BREVE...${reset}"
@@ -7202,345 +7202,6 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API \e[33m[1/3]\e[0m"
-echo ""
-sleep 1
-
-## Literalmente nada, apenas um espaço vazio caso precisar de adicionar alguma coisa
-## Antes..
-## E claro, para aparecer a mensagem do passo..
-
-## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[2/3]\e[0m"
-echo ""
-sleep 1
-
-## Verifica se existe postgres
-verificar_container_postgres
-if [ $? -eq 0 ]; then
-    pegar_senha_postgres > /dev/null 2>&1
-    senha_do_postgres=$senha_postgres
-else
-    senha_do_postgres=SENHA_DO_POSTGRES_AQUI
-fi
-
-## Aqui de fato vamos iniciar a instalação da Evolution API
-
-## Criando uma Global Key Aleatória
-apikeyglobal=$(openssl rand -hex 16)
-
-## Criando a stack
-cat > evolution.yaml <<EOL
-version: "3.7"
-services:
-
-## --------------------------- ORION --------------------------- ##
-
-  evolution_oriondesign:
-    image: atendai/evolution-api:latest ## Versão da Evolution API
-    command: ["node", "./dist/src/main.js"]
-
-    volumes:
-    - evolution_oriondesign_instances:/evolution/instances
-    - evolution_oriondesign_store:/evolution/store
-    - evolution_oriondesign_views:/evolution/views
-
-    networks:
-      - $nome_rede_interna ## Nome da rede interna
-
-    environment:
-    ## Url da Evolution API
-    - SERVER_URL=https://$url_evolution ## Url da aplicação
-
-    ## Dados de Autenticação
-    - AUTHENTICATION_TYPE=apikey
-    - AUTHENTICATION_API_KEY=$apikeyglobal ## GLOBAL API KEY
-    - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
-
-    ## Configurações
-    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
-    - CONFIG_SESSION_PHONE_NAME=chrome
-
-    ## Definir versão do Whatsapp Web
-    ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-    #- CONFIG_SESSION_PHONE_VERSION=2.2413.51
-
-    ## Sobre os QR-Codes
-    - QRCODE_LIMIT=1902
-    - QRCODE_COLOR=#000000
-
-    # Ativer o RabbitMQ
-    - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
-    - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672
-
-    # Aivar Banco de Dados MongoDB
-    - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
-    - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
-    - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution
-    - DATABASE_SAVE_DATA_INSTANCE=true
-    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
-    - DATABASE_SAVE_MESSAGE_UPDATE=true
-    - DATABASE_SAVE_DATA_CONTACTS=true
-    - DATABASE_SAVE_DATA_CHATS=true
-
-    ## Ativar o Redis
-    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
-    - REDIS_URI=redis://redis:6379
-
-    ## Ativar o Cache Redis (Em testes)
-    - CACHE_REDIS_ENABLED=false
-    - CACHE_REDIS_URI=redis://redis:6379
-    - CACHE_REDIS_PREFIX_KEY=evolution
-    - CACHE_REDIS_TTL=604800
-    - CACHE_REDIS_SAVE_INSTANCES=false
-    - CACHE_LOCAL_ENABLED=false
-    - CACHE_LOCAL_TTL=604800
-
-    ## Novas variaveis para o Typebot
-    - TYPEBOT_KEEP_OPEN=true
-    - TYPEBOT_API_VERSION=latest
-
-    ## Novas variaveis para o Chatwoot
-    - CHATWOOT_MESSAGE_DELETE=true
-    - CHATWOOT_MESSAGE_READ=true
-
-    ## Importar mensagens para o Chawoot | Descomente para usar
-    ## Se estiver usando Chatwoot do Nestor mude o a parte "chatwoot" para "chatwoot_nestor"
-    #- CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
-    #- CHATWOOT_IMPORT_DATABASE_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
-
-    ## Informações do Webhook
-    - WEBHOOK_GLOBAL_ENABLED=false
-    - WEBHOOK_GLOBAL_URL=
-    - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
-    - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
-    - WEBHOOK_EVENTS_QRCODE_UPDATED=true
-    - WEBHOOK_EVENTS_MESSAGES_SET=false
-    - WEBHOOK_EVENTS_MESSAGES_UPSERT=true
-    - WEBHOOK_EVENTS_MESSAGES_UPDATE=true
-    - WEBHOOK_EVENTS_CONTACTS_SET=true
-    - WEBHOOK_EVENTS_CONTACTS_UPSERT=true
-    - WEBHOOK_EVENTS_CONTACTS_UPDATE=true
-    - WEBHOOK_EVENTS_PRESENCE_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_SET=true
-    - WEBHOOK_EVENTS_CHATS_UPSERT=true
-    - WEBHOOK_EVENTS_CHATS_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_DELETE=true
-    - WEBHOOK_EVENTS_GROUPS_UPSERT=true
-    - WEBHOOK_EVENTS_GROUPS_UPDATE=true
-    - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
-    - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
-
-    ## Sobre as instancias
-    - DEL_INSTANCE=false
-    - DEL_TEMP_INSTANCES=false
-    - STORE_MESSAGES=true
-    - STORE_MESSAGE_UP=true
-    - STORE_CONTACTS=true
-    - STORE_CHATS=true
-    - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
-    - CLEAN_STORE_MESSAGES=true
-    - CLEAN_STORE_MESSAGE_UP=true
-    - CLEAN_STORE_CONTACTS=true
-    - CLEAN_STORE_CHATS=true
-
-    ## Outros dados
-    - DOCKER_ENV=true
-    - LOG_LEVEL=ERROR
-
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-        - node.role == manager
-      labels:
-      - traefik.enable=1
-      - traefik.http.routers.evolution_oriondesign.rule=Host(\`$url_evolution\`) ## Url da aplicação
-      - traefik.http.routers.evolution_oriondesign.entrypoints=websecure
-      - traefik.http.routers.evolution_oriondesign.priority=1
-      - traefik.http.routers.evolution_oriondesign.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution_oriondesign.service=evolution_oriondesign
-      - traefik.http.services.evolution_oriondesign.loadbalancer.server.port=8080
-      - traefik.http.services.evolution_oriondesign.loadbalancer.passHostHeader=1
-
-## --------------------------- ORION --------------------------- ##
-
-volumes:
-  evolution_oriondesign_instances:
-    external: true
-    name: evolution_oriondesign_instances
-  evolution_oriondesign_store:
-    external: true
-    name: evolution_oriondesign_store
-  evolution_oriondesign_views:
-    external: true
-    name: evolution_oriondesign_views
-networks:
-  $nome_rede_interna: ## Nome da rede interna
-    name: $nome_rede_interna ## Nome da rede interna
-    external: true
-EOL
-if [ $? -eq 0 ]; then
-    echo "1/10 - [ OK ] - Criando Stack"
-else
-    echo "1/10 - [ OFF ] - Criando Stack"
-    echo "Não foi possivel criar a stack da Evolution API"
-fi
-STACK_NAME="evolution"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da Evolution API"
-#fi
-
-sleep 10
-
-## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
-echo ""
-sleep 1
-
-## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
-
-cd dados_vps
-
-cat > dados_evolution <<EOL
-[ EVOLUTION API ]
-
-Manager Evolution: https://$url_evolution/manager
-
-URL: https://$url_evolution
-
-Global API Key: $apikeyglobal
-EOL
-
-cd
-cd
-
-## Espera 30 segundos
-wait_30_sec
-
-## Mensagem de finalizado
-instalado_msg
-
-## Mensagem de Guarde os Dados
-guarde_os_dados_msg
-
-## Dados da Aplicação:
-echo -e "\e[32m[ Evolution API ]\e[0m"
-echo ""
-
-echo -e "\e[97mLink do Manager:\e[33m https://$url_evolution/manager\e[0m"
-echo ""
-
-echo -e "\e[97mAPI URL:\e[33m https://$url_evolution\e[0m"
-echo ""
-
-echo -e "\e[97mGLOBAL API KEY:\e[33m $apikeyglobal\e[0m"
-echo ""
-
-## Creditos do instalador
-creditos_msg
-
-## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
-
-##███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗
-##██╔════╝██║   ██║██╔═══██╗██║     ██║   ██║╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔══██╗██║
-##█████╗  ██║   ██║██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ███████║██████╔╝██║
-##██╔══╝  ╚██╗ ██╔╝██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██║╚██╗██║    ██╔══██║██╔═══╝ ██║
-##███████╗ ╚████╔╝ ╚██████╔╝███████╗╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ██║  ██║██║     ██║
-##╚══════╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝     ╚═╝
-##                                                                                                 
-##                                   ██╗   ██╗██████╗     ██████╗                                 
-##                                   ██║   ██║╚════██╗   ██╔═████╗                                
-##                                   ██║   ██║ █████╔╝   ██║██╔██║                                
-##                                   ╚██╗ ██╔╝██╔═══╝    ████╔╝██║                                
-##                                    ╚████╔╝ ███████╗██╗╚██████╔╝                                
-##                                     ╚═══╝  ╚══════╝╚═╝ ╚═════╝                                 
-
-ferramenta_evolution_beta() {
-
-## Limpa o terminal
-clear
-
-## Ativa a função dados para pegar os dados da vps
-dados
-
-## Mostra o nome da aplicação
-nome_evolution_v2
-
-## Mostra mensagem para preencher informações
-preencha_as_info
-
-## Inicia um Loop até os dados estarem certos
-while true; do
-
-    ##Pergunta o Dominio para aplicação
-    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
-    echo -en "\e[33mDigite o Dominio para a Evolution API (ex: api.oriondesign.art.br): \e[0m" && read -r url_evolution
-    echo ""
-
-    ## Limpa o terminal
-    clear
-    
-    ## Mostra o nome da aplicação
-    nome_evolution_v2
-    
-    ## Mostra mensagem para verificar as informações
-    conferindo_as_info
-
-    ## Informação sobre URL
-    echo -e "\e[33mDominio da Evolution API:\e[97m $url_evolution\e[0m"
-    echo ""
-
-    ## Pergunta se as respostas estão corretas
-    read -p "As respostas estão corretas? (Y/N): " confirmacao
-    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
-
-        ## Digitou Y para confirmar que as informações estão corretas
-
-        ## Limpar o terminal
-        clear
-
-        ## Mostrar mensagem de Instalando
-        instalando_msg
-
-        ## Sai do Loop
-        break
-    else
-
-        ## Digitou N para dizer que as informações não estão corretas.
-
-        ## Limpar o terminal
-        clear
-
-        ## Mostra o nome da ferramenta
-        nome_evolution_v2
-
-        ## Mostra mensagem para preencher informações
-        preencha_as_info
-
-    ## Volta para o inicio do loop com as perguntas
-    fi
-done
-
-## Mensagem de Passo
 echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API \e[33m[1/5]\e[0m"
 echo ""
 sleep 1
@@ -7554,7 +7215,7 @@ echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
 echo ""
 sleep 1
 
-## Aqui vamos fazer uma verificação se já existe Postgres e redis instalado
+## Aqui vamos fazer uma verificação se já existe Postgres Instalado
 ## Se tiver ele vai criar um banco de dados no postgres ou perguntar se deseja apagar o que já existe e criar outro
 
 ## Verifica container postgres e cria banco no postgres
@@ -7603,153 +7264,168 @@ sleep 1
 apikeyglobal=$(openssl rand -hex 16)
 
 ## Criando a stack
-cat > evolution2.yaml <<EOL
+cat > evolution.yaml <<EOL
 version: "3.7"
 services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  evolution_v2:
-    image: atendai/evolution-api:v2.0.5-rc ## Versão da Evolution API
+  evolution:
+    image: atendai/evolution-api:v2.0.7-rc
 
     volumes:
       - evolution_instances:/evolution/instances
-    
+
     networks:
-      - $nome_rede_interna ## Nome da rede interna
+      - $nome_rede_interna
 
     environment:
-    ## Url da Evolution API
-    - SERVER_URL=https://$url_evolution
+      ## Configurações Gerais
+      - SERVER_URL=https://$url_evolution
+      - AUTHENTICATION_API_KEY=$apikeyglobal
+      - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+      - DEL_INSTANCE=false
+      - QRCODE_LIMIT=1902
+      - LANGUAGE=pt-BR
+      
+      ## Configuração do Cliente
+      ## Pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
+      - CONFIG_SESSION_PHONE_VERSION=2.2413.51
+      - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
+      - CONFIG_SESSION_PHONE_NAME=Chrome
+      
+      ## Configuração do Banco de Dados
+      - DATABASE_ENABLED=true
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution
+      - DATABASE_SAVE_DATA_INSTANCE=true
+      - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+      - DATABASE_SAVE_MESSAGE_UPDATE=true
+      - DATABASE_SAVE_DATA_CONTACTS=true
+      - DATABASE_SAVE_DATA_CHATS=true
+      - DATABASE_SAVE_DATA_LABELS=true
+      - DATABASE_SAVE_DATA_HISTORIC=true
+      
+      ## Integração com OpenAI
+      - OPENAI_ENABLED=true
+      
+      ## Integração com Dify
+      - DIFY_ENABLED=true
+      
+      ## Integração com Typebot
+      - TYPEBOT_ENABLED=true
+      - TYPEBOT_API_VERSION=latest
+      
+      ## Integração com Chatwoot
+      - CHATWOOT_ENABLED=true
+      - CHATWOOT_MESSAGE_READ=true
+      - CHATWOOT_MESSAGE_DELETE=true
+      - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/chatwoot?sslmode=disable
+      - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false
+      
+      ## Configuração do Cache
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://evo_redis:6379/1
+      - CACHE_REDIS_PREFIX_KEY=evolution
+      - CACHE_REDIS_SAVE_INSTANCES=false
+      - CACHE_LOCAL_ENABLED=false
+      
+      ## Configuração do S3
+      - S3_ENABLED=false
+      - S3_ACCESS_KEY=
+      - S3_SECRET_KEY=
+      - S3_BUCKET=evolution
+      - S3_PORT=443
+      - S3_ENDPOINT=
+      - S3_USE_SSL=true
 
-    ## Dados de Autenticação
-    - AUTHENTICATION_TYPE=apikey
-    - AUTHENTICATION_API_KEY=$apikeyglobal ## GLOBAL API KEY
-    - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+      ## Configuração do WhatsApp Business
+      - WA_BUSINESS_TOKEN_WEBHOOK=evolution
+      - WA_BUSINESS_URL=https://graph.facebook.com
+      - WA_BUSINESS_VERSION=v20.0
+      - WA_BUSINESS_LANGUAGE=pt_BR
 
-    ## Configurações
-    - LANGUAGE=pt-BR
-    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
-    - CONFIG_SESSION_PHONE_NAME=chrome
-    
-    ## Definir versão do Whatsapp Web
-    ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-    - CONFIG_SESSION_PHONE_VERSION=2.2413.51
+      ## Configuração do WebSocket
+      - WEBSOCKET_ENABLED=false
+      - WEBSOCKET_GLOBAL_EVENTS=false
 
-    ## Configurações do Whatsapp Business Cloud (Api Oficial)
-    - WA_BUSINESS_TOKEN_WEBHOOK=evolution
-    - WA_BUSINESS_URL=https://graph.facebook.com
-    - WA_BUSINESS_VERSION=v20.0
-    - WA_BUSINESS_LANGUAGE=pt_BR
+      ## Configuração do SQS
+      - SQS_ENABLED=false
+      - SQS_ACCESS_KEY_ID=
+      - SQS_SECRET_ACCESS_KEY=
+      - SQS_ACCOUNT_ID=
+      - SQS_REGION=
 
-    ## Sobre o QR-Code
-    - QRCODE_LIMIT=1902
-    - QRCODE_COLOR=#000000
+      ## Configuração do RabbitMQ
+      - RABBITMQ_ENABLED=false
+      - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/default
+      - RABBITMQ_EXCHANGE_NAME=evolution
+      - RABBITMQ_GLOBAL_ENABLED=false
+      - RABBITMQ_EVENTS_APPLICATION_STARTUP=false
+      - RABBITMQ_EVENTS_INSTANCE_CREATE=false
+      - RABBITMQ_EVENTS_INSTANCE_DELETE=false
+      - RABBITMQ_EVENTS_QRCODE_UPDATED=false
+      - RABBITMQ_EVENTS_MESSAGES_SET=false
+      - RABBITMQ_EVENTS_MESSAGES_UPSERT=true
+      - RABBITMQ_EVENTS_MESSAGES_EDITED=false
+      - RABBITMQ_EVENTS_MESSAGES_UPDATE=false
+      - RABBITMQ_EVENTS_MESSAGES_DELETE=false
+      - RABBITMQ_EVENTS_SEND_MESSAGE=false
+      - RABBITMQ_EVENTS_CONTACTS_SET=false
+      - RABBITMQ_EVENTS_CONTACTS_UPSERT=false
+      - RABBITMQ_EVENTS_CONTACTS_UPDATE=false
+      - RABBITMQ_EVENTS_PRESENCE_UPDATE=false
+      - RABBITMQ_EVENTS_CHATS_SET=false
+      - RABBITMQ_EVENTS_CHATS_UPSERT=false
+      - RABBITMQ_EVENTS_CHATS_UPDATE=false
+      - RABBITMQ_EVENTS_CHATS_DELETE=false
+      - RABBITMQ_EVENTS_GROUPS_UPSERT=false
+      - RABBITMQ_EVENTS_GROUP_UPDATE=false
+      - RABBITMQ_EVENTS_GROUP_PARTICIPANTS_UPDATE=false
+      - RABBITMQ_EVENTS_CONNECTION_UPDATE=true
+      - RABBITMQ_EVENTS_CALL=false
+      - RABBITMQ_EVENTS_TYPEBOT_START=false
+      - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
 
-    ## Aivar Banco de Dados Postgres
-    - DATABASE_ENABLED=true
-    - DATABASE_PROVIDER=postgresql
-    - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution
-    - DATABASE_CONNECTION_CLIENT_NAME=evolution
-    - DATABASE_SAVE_DATA_INSTANCE=true
-    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
-    - DATABASE_SAVE_MESSAGE_UPDATE=true
-    - DATABASE_SAVE_DATA_CONTACTS=true
-    - DATABASE_SAVE_DATA_CHATS=true
+      ## Configuração do Webhook
+      - WEBHOOK_GLOBAL_ENABLED=false
+      - WEBHOOK_GLOBAL_URL=
+      - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
+      - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
+      - WEBHOOK_EVENTS_QRCODE_UPDATED=false
+      - WEBHOOK_EVENTS_MESSAGES_SET=false
+      - WEBHOOK_EVENTS_MESSAGES_UPSERT=false
+      - WEBHOOK_EVENTS_MESSAGES_EDITED=false
+      - WEBHOOK_EVENTS_MESSAGES_UPDATE=false
+      - WEBHOOK_EVENTS_MESSAGES_DELETE=false
+      - WEBHOOK_EVENTS_SEND_MESSAGE=false
+      - WEBHOOK_EVENTS_CONTACTS_SET=false
+      - WEBHOOK_EVENTS_CONTACTS_UPSERT=false
+      - WEBHOOK_EVENTS_CONTACTS_UPDATE=false
+      - WEBHOOK_EVENTS_PRESENCE_UPDATE=false
+      - WEBHOOK_EVENTS_CHATS_SET=false
+      - WEBHOOK_EVENTS_CHATS_UPSERT=false
+      - WEBHOOK_EVENTS_CHATS_UPDATE=false
+      - WEBHOOK_EVENTS_CHATS_DELETE=false
+      - WEBHOOK_EVENTS_GROUPS_UPSERT=false
+      - WEBHOOK_EVENTS_GROUPS_UPDATE=false
+      - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=false
+      - WEBHOOK_EVENTS_CONNECTION_UPDATE=false
+      - WEBHOOK_EVENTS_LABELS_EDIT=false
+      - WEBHOOK_EVENTS_LABELS_ASSOCIATION=false
+      - WEBHOOK_EVENTS_CALL=false
+      - WEBHOOK_EVENTS_TYPEBOT_START=false
+      - WEBHOOK_EVENTS_TYPEBOT_CHANGE_STATUS=false
+      - WEBHOOK_EVENTS_ERRORS=false
+      - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
 
-    ## Ativar Banco de dados MinIO ou S3
-    - S3_ENABLED=false
-    - S3_ACCESS_KEY=
-    - S3_SECRET_KEY=
-    - S3_BUCKET=evolution
-    - S3_PORT=443
-    - S3_ENDPOINT=
-    - S3_USE_SSL=true
-    
-    ## Ativar o Cache Redis
-    - CACHE_REDIS_ENABLED=true
-    - CACHE_REDIS_URI=redis://redis:6379/8
-    - CACHE_REDIS_PREFIX_KEY=evolution
-    - CACHE_REDIS_SAVE_INSTANCES=false
-    - CACHE_LOCAL_ENABLED=false
-
-    ## Configurações das instancias
-    - DEL_INSTANCE=false
-
-    ## Carregar módulo Typebot
-    - TYPEBOT_ENABLED=true
-    - TYPEBOT_API_VERSION=latest
-
-    ## Carregar módulo Chatwoot
-    - CHATWOOT_ENABLED=true
-    - CHATWOOT_MESSAGE_READ=true
-    - CHATWOOT_MESSAGE_DELETE=true
-    - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
-    - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
-    
-    ## Dados do RabbitMQ
-    - RABBITMQ_ENABLED=false
-    - RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/default
-    - RABBITMQ_EXCHANGE_NAME=evolution
-    - RABBITMQ_GLOBAL_ENABLED=false
-    - RABBITMQ_EVENTS_APPLICATION_STARTUP=false
-    - RABBITMQ_EVENTS_INSTANCE_CREATE=false
-    - RABBITMQ_EVENTS_INSTANCE_DELETE=false
-    - RABBITMQ_EVENTS_QRCODE_UPDATED=false
-    - RABBITMQ_EVENTS_MESSAGES_SET=false
-    - RABBITMQ_EVENTS_MESSAGES_UPSERT=true
-    - RABBITMQ_EVENTS_MESSAGES_EDITED=false
-    - RABBITMQ_EVENTS_MESSAGES_UPDATE=false
-    - RABBITMQ_EVENTS_MESSAGES_DELETE=false
-    - RABBITMQ_EVENTS_SEND_MESSAGE=false
-    - RABBITMQ_EVENTS_CONTACTS_SET=false
-    - RABBITMQ_EVENTS_CONTACTS_UPSERT=false
-    - RABBITMQ_EVENTS_CONTACTS_UPDATE=false
-    - RABBITMQ_EVENTS_PRESENCE_UPDATE=false
-    - RABBITMQ_EVENTS_CHATS_SET=false
-    - RABBITMQ_EVENTS_CHATS_UPSERT=false
-    - RABBITMQ_EVENTS_CHATS_UPDATE=false
-    - RABBITMQ_EVENTS_CHATS_DELETE=false
-    - RABBITMQ_EVENTS_GROUPS_UPSERT=false
-    - RABBITMQ_EVENTS_GROUP_UPDATE=false
-    - RABBITMQ_EVENTS_GROUP_PARTICIPANTS_UPDATE=false
-    - RABBITMQ_EVENTS_CONNECTION_UPDATE=true
-    - RABBITMQ_EVENTS_CALL=false
-    - RABBITMQ_EVENTS_TYPEBOT_START=false
-    - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
-
-    ## Informações do Webhook
-    - WEBHOOK_GLOBAL_ENABLED=false
-    - WEBHOOK_GLOBAL_URL=
-    - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
-    - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
-    - WEBHOOK_EVENTS_QRCODE_UPDATED=true
-    - WEBHOOK_EVENTS_MESSAGES_SET=true
-    - WEBHOOK_EVENTS_MESSAGES_UPSERT=true
-    - WEBHOOK_EVENTS_MESSAGES_EDITED=true
-    - WEBHOOK_EVENTS_MESSAGES_UPDATE=true
-    - WEBHOOK_EVENTS_MESSAGES_DELETE=true
-    - WEBHOOK_EVENTS_SEND_MESSAGE=true
-    - WEBHOOK_EVENTS_CONTACTS_SET=true
-    - WEBHOOK_EVENTS_CONTACTS_UPSERT=true
-    - WEBHOOK_EVENTS_CONTACTS_UPDATE=true
-    - WEBHOOK_EVENTS_PRESENCE_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_SET=true
-    - WEBHOOK_EVENTS_CHATS_UPSERT=true
-    - WEBHOOK_EVENTS_CHATS_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_DELETE=true
-    - WEBHOOK_EVENTS_GROUPS_UPSERT=true
-    - WEBHOOK_EVENTS_GROUPS_UPDATE=true
-    - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
-    - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
-    - WEBHOOK_EVENTS_LABELS_EDIT=true
-    - WEBHOOK_EVENTS_LABELS_ASSOCIATION=true
-    - WEBHOOK_EVENTS_CALL=true
-    - WEBHOOK_EVENTS_TYPEBOT_START=false
-    - WEBHOOK_EVENTS_TYPEBOT_CHANGE_STATUS=false
-    - WEBHOOK_EVENTS_ERRORS=false
-    - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
-
+      ## Configuração do Provider
+      - PROVIDER_ENABLED=false
+      - PROVIDER_HOST=127.0.0.1
+      - PROVIDER_PORT=5656
+      - PROVIDER_PREFIX=evolution
+      
     deploy:
       mode: replicated
       replicas: 1
@@ -7758,13 +7434,13 @@ services:
         - node.role == manager
       labels:
       - traefik.enable=1
-      - traefik.http.routers.evolution_v2.rule=Host(\`$url_evolution\`) ## Url da aplicação
-      - traefik.http.routers.evolution_v2.entrypoints=websecure
-      - traefik.http.routers.evolution_v2.priority=1
-      - traefik.http.routers.evolution_v2.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution_v2.service=evolution_v2
-      - traefik.http.services.evolution_v2.loadbalancer.server.port=8080
-      - traefik.http.services.evolution_v2.loadbalancer.passHostHeader=true
+      - traefik.http.routers.evolution.rule=Host(\`$url_evolution\`) ## Url da aplicação
+      - traefik.http.routers.evolution.entrypoints=websecure
+      - traefik.http.routers.evolution.priority=1
+      - traefik.http.routers.evolution.tls.certresolver=letsencryptresolver
+      - traefik.http.routers.evolution.service=evolution
+      - traefik.http.services.evolution.loadbalancer.server.port=8080
+      - traefik.http.services.evolution.loadbalancer.passHostHeader=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -7774,323 +7450,9 @@ volumes:
     name: evolution_instances
 
 networks:
-  $nome_rede_interna: ## Nome da rede interna
-    name: $nome_rede_interna ## Nome da rede interna
+  $nome_rede_interna:
     external: true
-EOL
-if [ $? -eq 0 ]; then
-    echo "1/10 - [ OK ] - Criando Stack"
-else
-    echo "1/10 - [ OFF ] - Criando Stack"
-    echo "Não foi possivel criar a stack da Evolution API"
-fi
-STACK_NAME="evolution2"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c evolution2.yaml evolution > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da Evolution API"
-#fi
-
-sleep 10
-
-## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
-echo ""
-sleep 1
-
-## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
-
-cd dados_vps
-
-cat > dados_evolution <<EOL
-[ EVOLUTION API v2 ]
-
-Manager Evolution: https://$url_evolution/manager
-
-URL: https://$url_evolution
-
-Global API Key: $apikeyglobal
-EOL
-
-cd
-cd
-
-## Espera 30 segundos
-wait_30_sec
-
-## Mensagem de finalizado
-instalado_msg
-
-## Mensagem de Guarde os Dados
-guarde_os_dados_msg
-
-## Dados da Aplicação:
-echo -e "\e[32m[ Evolution API v2 ]\e[0m"
-echo ""
-
-echo -e "\e[97mLink do Manager:\e[33m https://$url_evolution/manager\e[0m"
-echo ""
-
-echo -e "\e[97mAPI URL:\e[33m https://$url_evolution\e[0m"
-echo ""
-
-echo -e "\e[97mGLOBAL API KEY:\e[33m $apikeyglobal\e[0m"
-echo ""
-
-## Creditos do instalador
-creditos_msg
-
-## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
-
-## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗
-## ██╔════╝██║   ██║██╔═══██╗██║     ██║   ██║╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔══██╗██║
-## █████╗  ██║   ██║██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ███████║██████╔╝██║
-## ██╔══╝  ╚██╗ ██╔╝██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██║╚██╗██║    ██╔══██║██╔═══╝ ██║
-## ███████╗ ╚████╔╝ ╚██████╔╝███████╗╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ██║  ██║██║     ██║
-## ╚══════╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝     ╚═╝
-
-ferramenta_evolution_arm() {
-
-## Limpa o terminal
-clear
-
-## Ativa a função dados para pegar os dados da vps
-dados
-
-## Mostra o nome da aplicação
-nome_evolution
-
-## Mostra mensagem para preencher informações
-preencha_as_info
-
-## Inicia um Loop até os dados estarem certos
-while true; do
-
-    ##Pergunta o Dominio para aplicação
-    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
-    echo -en "\e[33mDigite o Dominio para a Evolution API (ex: api.oriondesign.art.br): \e[0m" && read -r url_evolution
-    echo ""
-
-    ## Limpa o terminal
-    clear
-    
-    ## Mostra o nome da aplicação
-    nome_evolution
-    
-    ## Mostra mensagem para verificar as informações
-    conferindo_as_info
-
-    ## Informação sobre URL
-    echo -e "\e[33mDominio da Evolution API:\e[97m $url_evolution\e[0m"
-    echo ""
-
-    ## Pergunta se as respostas estão corretas
-    read -p "As respostas estão corretas? (Y/N): " confirmacao
-    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
-
-        ## Digitou Y para confirmar que as informações estão corretas
-
-        ## Limpar o terminal
-        clear
-
-        ## Mostrar mensagem de Instalando
-        instalando_msg
-
-        ## Sai do Loop
-        break
-    else
-
-        ## Digitou N para dizer que as informações não estão corretas.
-
-        ## Limpar o terminal
-        clear
-
-        ## Mostra o nome da ferramenta
-        nome_evolution
-
-        ## Mostra mensagem para preencher informações
-        preencha_as_info
-
-    ## Volta para o inicio do loop com as perguntas
-    fi
-done
-
-## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API ARM \e[33m[1/3]\e[0m"
-echo ""
-sleep 1
-
-## Literalmente nada, apenas um espaço vazio caso precisar de adicionar alguma coisa
-## Antes..
-## E claro, para aparecer a mensagem do passo..
-
-## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[2/3]\e[0m"
-echo ""
-sleep 1
-
-## Aqui de fato vamos iniciar a instalação da Evolution API
-
-## Criando uma Global Key Aleatória
-apikeyglobal=$(openssl rand -hex 16)
-
-## Criando a stack
-cat > evolution.yaml <<EOL
-version: "3.7"
-services:
-
-## --------------------------- ORION --------------------------- ##
-
-  evolution_oriondesign:
-    image: jquerubim/evolution-api-arm:latest ## Versão da Evolution API
-    command: ["node", "./dist/src/main.js"]
-
-    volumes:
-    - evolution_oriondesign_instances:/evolution/instances
-    - evolution_oriondesign_store:/evolution/store
-    - evolution_oriondesign_views:/evolution/views
-
-    networks:
-      - $nome_rede_interna ## Nome da rede interna
-
-    environment:
-    ## Url da Evolution API
-    - SERVER_URL=https://$url_evolution ## Url da aplicação
-
-    ## Dados de Autenticação
-    - AUTHENTICATION_TYPE=apikey
-    - AUTHENTICATION_API_KEY=$apikeyglobal ## GLOBAL API KEY
-    - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
-
-    ## Configurações
-    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
-    - CONFIG_SESSION_PHONE_NAME=chrome
-
-    ## Sobre os QR-Codes
-    - QRCODE_LIMIT=1902
-    - QRCODE_COLOR=#000000
-
-    # Ativer o RabbitMQ
-    - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
-    - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672
-
-    # Aivar Banco de Dados MongoDB
-    - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
-    - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
-    - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution
-    - DATABASE_SAVE_DATA_INSTANCE=true
-    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
-    - DATABASE_SAVE_MESSAGE_UPDATE=true
-    - DATABASE_SAVE_DATA_CONTACTS=true
-    - DATABASE_SAVE_DATA_CHATS=true
-
-    ## Ativar o Redis
-    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
-    - REDIS_URI=redis://redis:6379
-
-    ## Ativar o Cache Redis (Em testes)
-    - CACHE_REDIS_ENABLED=false
-    - CACHE_REDIS_URI=redis://redis:6379
-    - CACHE_REDIS_PREFIX_KEY=evolution
-    - CACHE_REDIS_TTL=604800
-    - CACHE_REDIS_SAVE_INSTANCES=false
-    - CACHE_LOCAL_ENABLED=false
-    - CACHE_LOCAL_TTL=604800
-
-    ## Novas variaveis para o Typebot
-    - TYPEBOT_KEEP_OPEN=true
-    - TYPEBOT_API_VERSION=latest
-
-    ## Novas variaveis para o Chatwoot
-    - CHATWOOT_MESSAGE_DELETE=true
-    - CHATWOOT_MESSAGE_READ=true
-
-    ## Informações do Webhook
-    - WEBHOOK_GLOBAL_ENABLED=false
-    - WEBHOOK_GLOBAL_URL=
-    - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
-    - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
-    - WEBHOOK_EVENTS_QRCODE_UPDATED=true
-    - WEBHOOK_EVENTS_MESSAGES_SET=false
-    - WEBHOOK_EVENTS_MESSAGES_UPSERT=true
-    - WEBHOOK_EVENTS_MESSAGES_UPDATE=true
-    - WEBHOOK_EVENTS_CONTACTS_SET=true
-    - WEBHOOK_EVENTS_CONTACTS_UPSERT=true
-    - WEBHOOK_EVENTS_CONTACTS_UPDATE=true
-    - WEBHOOK_EVENTS_PRESENCE_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_SET=true
-    - WEBHOOK_EVENTS_CHATS_UPSERT=true
-    - WEBHOOK_EVENTS_CHATS_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_DELETE=true
-    - WEBHOOK_EVENTS_GROUPS_UPSERT=true
-    - WEBHOOK_EVENTS_GROUPS_UPDATE=true
-    - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
-    - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
-
-    ## Sobre as instancias
-    - DEL_INSTANCE=false
-    - DEL_TEMP_INSTANCES=false
-    - STORE_MESSAGES=true
-    - STORE_MESSAGE_UP=true
-    - STORE_CONTACTS=true
-    - STORE_CHATS=true
-    - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
-    - CLEAN_STORE_MESSAGES=true
-    - CLEAN_STORE_MESSAGE_UP=true
-    - CLEAN_STORE_CONTACTS=true
-    - CLEAN_STORE_CHATS=true
-
-    ## Outros dados
-    - DOCKER_ENV=true
-    - LOG_LEVEL=ERROR
-
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-        - node.role == manager
-      labels:
-      - traefik.enable=1
-      - traefik.http.routers.evolution_oriondesign.rule=Host(\`$url_evolution\`) ## Url da aplicação
-      - traefik.http.routers.evolution_oriondesign.entrypoints=websecure
-      - traefik.http.routers.evolution_oriondesign.priority=1
-      - traefik.http.routers.evolution_oriondesign.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution_oriondesign.service=evolution_oriondesign
-      - traefik.http.services.evolution_oriondesign.loadbalancer.server.port=8080
-      - traefik.http.services.evolution_oriondesign.loadbalancer.passHostHeader=1
-
-## --------------------------- ORION --------------------------- ##
-
-volumes:
-  evolution_oriondesign_instances:
-    external: true
-    name: evolution_oriondesign_instances
-  evolution_oriondesign_store:
-    external: true
-    name: evolution_oriondesign_store
-  evolution_oriondesign_views:
-    external: true
-    name: evolution_oriondesign_views
-networks:
-  $nome_rede_interna: ## Nome da rede interna
-    name: $nome_rede_interna ## Nome da rede interna
-    external: true
+    name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
     echo "1/10 - [ OK ] - Criando Stack"
@@ -8112,7 +7474,7 @@ stack_editavel # > /dev/null 2>&1
 sleep 10
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
@@ -8144,7 +7506,7 @@ instalado_msg
 guarde_os_dados_msg
 
 ## Dados da Aplicação:
-echo -e "\e[32m[ Evolution API ]\e[0m"
+echo -e "\e[32m[ EVOLUTION API ]\e[0m"
 echo ""
 
 echo -e "\e[97mLink do Manager:\e[33m https://$url_evolution/manager\e[0m"
@@ -8169,8 +7531,8 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
         clear
         exit 1
     fi
-
 }
+
 ## ███╗   ███╗██╗███╗   ██╗██╗ ██████╗ 
 ## ████╗ ████║██║████╗  ██║██║██╔═══██╗
 ## ██╔████╔██║██║██╔██╗ ██║██║██║   ██║
