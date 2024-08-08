@@ -7326,7 +7326,7 @@ services:
       
       ## Configuração do Cache
       - CACHE_REDIS_ENABLED=true
-      - CACHE_REDIS_URI=redis://evo_redis:6379/1
+      - CACHE_REDIS_URI=redis://redis:6379/8
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
       - CACHE_LOCAL_ENABLED=false
@@ -8399,6 +8399,10 @@ services:
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
 
+      ## Community Nodes
+      - N8N_REINSTALL_MISSING_PACKAGES=true
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+
       ## Dados do Redis
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
@@ -8465,6 +8469,10 @@ services:
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
 
+      ## Community Nodes
+      - N8N_REINSTALL_MISSING_PACKAGES=true
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+
       ## Dados do Redis
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
@@ -8530,6 +8538,10 @@ services:
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
+
+      ## Community Nodes
+      - N8N_REINSTALL_MISSING_PACKAGES=true
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
 
       ## Dados do Redis
       - QUEUE_BULL_REDIS_HOST=redis
@@ -16136,56 +16148,56 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do Dify AI
-    echo -e "\e[97mPasso$amarelo 1/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/8\e[0m"
     echo -en "\e[33mDigite o dominio para o Dify AI (ex: dify.oriondesign.art.br): \e[0m" && read -r url_dify
     echo ""
 
     ##Pergunta o Dominio do Qdrant
-    read -r ip _ <<<$(hostname -I)
-    echo -e "\e[97mPasso$amarelo 2/10\e[0m"
-    echo -en "\e[33mDigite o dominio do Qdrant (ex: http://$ip  ou http://qdrant.oriondesign.art.br): \e[0m" && read -r url_quedrant
-    echo ""
+    #read -r ip _ <<<$(hostname -I)
+    #echo -e "\e[97mPasso$amarelo 2/10\e[0m"
+    #echo -en "\e[33mDigite o dominio do Qdrant (ex: http://$ip  ou http://qdrant.oriondesign.art.br): \e[0m" && read -r url_quedrant
+    #echo ""
 
     ##Pergunta a Api Key do Qdrant
-    key_dify_rand=$(openssl rand -hex 16)
-    echo -e "\e[97mPasso$amarelo 3/10\e[0m"
-    echo -en "\e[33mDigite a Api Key do Qdrant (ex: $key_dify_rand): \e[0m" && read -r apikey_qdrant
-    echo ""
+    #key_dify_rand=$(openssl rand -hex 16)
+    #echo -e "\e[97mPasso$amarelo 3/10\e[0m"
+    #echo -en "\e[33mDigite a Api Key do Qdrant (ex: $key_dify_rand): \e[0m" && read -r apikey_qdrant
+    #echo ""
 
     ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 4/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/8\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_dify
     echo ""
 
     ##Pergunta o usuário do Email SMTP
-    echo -e "\e[97mPasso$amarelo 5/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/8\e[0m"
     echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
     echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_email_dify
     echo ""
 
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 6/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/8\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_dify
     echo ""
 
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 7/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/8\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_dify
     echo ""
 
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/9\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_dify
     echo ""
 
     ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 9/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/8\e[0m"
     echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
     echo ""
 
     ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 10/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 8/8\e[0m"
     echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
     echo ""
 
@@ -16203,12 +16215,12 @@ while true; do
     echo ""
 
     ## Informação sobre URL do Viewer
-    echo -e "\e[33mDominio do Qdrant:\e[97m $url_quedrant\e[0m"
-    echo ""
+    #echo -e "\e[33mDominio do Qdrant:\e[97m $url_quedrant\e[0m"
+    #echo ""
 
     ## Informação sobre a versão da ferramenta
-    echo -e "\e[33mApi Key Qdrant:\e[97m $apikey_qdrant\e[0m"
-    echo ""    
+    #echo -e "\e[33mApi Key Qdrant:\e[97m $apikey_qdrant\e[0m"
+    #echo ""    
 
     ## Informação sobre Email
     echo -e "\e[33mEmail do SMTP:\e[97m $email_dify\e[0m"
@@ -16354,6 +16366,7 @@ sleep 1
 
 ## Criando key Aleatória
 secret_key=$(openssl rand -hex 16)
+token_weaviate=$(openssl rand -hex 16)
 
 ## Criando a stack
 cat > dify.yaml <<EOL
@@ -16366,7 +16379,7 @@ services:
     image: langgenius/dify-api:latest ## Versão do Dify
 
     volumes:
-      - storage_data:/app/api/storage
+      - dify_storage:/app/api/storage
 
     networks:
       - $nome_rede_interna
@@ -16420,11 +16433,11 @@ services:
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
       - S3_SECRET_KEY=$S3_SECRET_KEY
 
-      ## Dados Qdrant
-      - VECTOR_STORE=qdrant
-      - QDRANT_URL=$url_quedrant
-      - QDRANT_API_KEY=$apikey_qdrant
-      - QDRANT_CLIENT_TIMEOUT=20
+      ## Dados Weaviate
+      - VECTOR_STORE=weaviate
+      - WEAVIATE_ENDPOINT=http://weaviate:8080
+      - WEAVIATE_API_KEY=$token_weaviate
+      - WEAVIATE_CLIENT_TIMEOUT=20
 
       ## Dados do Email
       - MAIL_TYPE=smtp
@@ -16456,7 +16469,7 @@ services:
     image: langgenius/dify-api:latest ## Versão do Dify
 
     volumes:
-      - storage_data:/app/api/storage
+      - dify_storage:/app/api/storage
 
     networks:
       - $nome_rede_interna
@@ -16487,13 +16500,13 @@ services:
       - REDIS_DB=0
       - CELERY_BROKER_URL=redis://redis:6379/1
 
-      ## Dados Qdrant
+      ## Dados Weaviate
       - STORAGE_TYPE=local
       - STORAGE_LOCAL_PATH=storage
-      - VECTOR_STORE=qdrant
-      - QDRANT_URL=$url_quedrant
-      - QDRANT_API_KEY=$apikey_qdrant
-      - QDRANT_CLIENT_TIMEOUT=20
+      - VECTOR_STORE=weaviate
+      - WEAVIATE_ENDPOINT=http://weaviate:8080
+      - WEAVIATE_API_KEY=$token_weaviate
+      - WEAVIATE_CLIENT_TIMEOUT=20
 
       ## Dados do Email
       - MAIL_TYPE=smtp
@@ -16549,8 +16562,45 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
+  weaviate:
+    image: semitechnologies/weaviate:latest ## Versão do Weaviate
+
+    volumes:
+      - dify_weaviate:/var/lib/weaviate
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      ## Configurações Gerais
+      - QUERY_DEFAULTS_LIMIT=25
+      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=false
+      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
+      - DEFAULT_VECTORIZER_MODULE=none
+      - CLUSTER_HOSTNAME=node1
+
+      ## Dados de Autenticação
+      - AUTHENTICATION_APIKEY_ENABLED=true
+      - AUTHENTICATION_APIKEY_ALLOWED_KEYS=$token_weaviate
+      - AUTHENTICATION_APIKEY_USERS=contato@oriondesign.art.br
+      - AUTHORIZATION_ADMINLIST_ENABLED=true
+      - AUTHORIZATION_ADMINLIST_USERS=contato@oriondesign.art.br
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M
+
+## --------------------------- ORION --------------------------- ##
+
   nginx:
-    image: nginx:latest
+    image: nginx:latest ## Versão do nginx
     entrypoint: ["sh", "-c", "chmod +x /docker-entrypoint.sh && /docker-entrypoint.sh"]
     
     volumes:
@@ -16597,9 +16647,12 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  storage_data:
+  dify_storage:
     external: true
-    name: storage_data
+    name: dify_storage
+  dify_weaviate:
+    external: true
+    name: dify_weaviate
 
 networks:
   $nome_rede_interna:
@@ -26377,7 +26430,7 @@ while true; do
             fi
             ;;
         32|dify|DIFY)
-            if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio_e_qdrant; then
+            if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
 
                 ## INICIO TOKEN
 
