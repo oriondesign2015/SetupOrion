@@ -5280,7 +5280,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "1"
           memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
@@ -8369,9 +8369,6 @@ services:
     image: n8nio/n8n:latest ## Versão do N8N
     command: start
 
-    volumes:
-      - n8n_data:/home/node/.n8n/nodes
-
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
@@ -8439,11 +8436,11 @@ services:
 
   n8n_webhook:
     image: n8nio/n8n:latest ## Versão do N8N
-    volumes:
-      - n8n_data:/home/node/.n8n/nodes
     command: webhook
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     environment:
 
       ## Dados do postgres
@@ -8509,11 +8506,11 @@ services:
 
   n8n_worker:
     image: n8nio/n8n:latest ## Versão do N8N
-    volumes:
-      - n8n_data:/home/node/.n8n/nodes
     command: worker --concurrency=10
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
     environment:
 
       ## Dados do postgres
@@ -8567,11 +8564,6 @@ services:
           memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
-
-volumes:
-  n8n_data:
-    external: true
-    name: n8n_data
 
 networks:
   $nome_rede_interna:
