@@ -7300,7 +7300,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution:
-    image: atendai/evolution-api:v2.0.7-rc
+    image: atendai/evolution-api:latest
 
     volumes:
       - evolution_instances:/evolution/instances
@@ -7374,6 +7374,10 @@ services:
       - WA_BUSINESS_URL=https://graph.facebook.com
       - WA_BUSINESS_VERSION=v20.0
       - WA_BUSINESS_LANGUAGE=pt_BR
+
+      ## Telemetria
+      - TELEMETRY=false
+      - TELEMETRY_URL=
 
       ## Configuração do WebSocket
       - WEBSOCKET_ENABLED=false
@@ -18469,7 +18473,7 @@ datasources:
   editable: true
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/4 - [ OK ]"
+    echo "1/4 - [ OK ] - Criando datasource.yml"
 else
     echo "1/4 - [ OFF ]"
     echo "Não foi possivel criar o datasource"
@@ -21787,8 +21791,8 @@ sleep 1
 
 ## Criando key Aleatória
 #key_langflow=$(openssl rand -hex 16)
-key_langflow=$(openssl rand -base64 33 | tr -d '\n' | tr '+/' '-_' | cut -c1-44)
-
+#key_langflow=$(openssl rand -hex 16 | sed 's/\(..\)/\1/g' | sed 's/\(....\)\(....\)\(....\)\(....\)\(....\)/\1-\2-\3-\4-\5/')
+key_langflow=$(curl -s https://www.uuidgenerator.net/api/version1)
 ## Criando a stack
 cat > langflow.yaml <<EOL
 version: "3.8"
@@ -21814,6 +21818,7 @@ services:
       - BACKEND_URL=https://$url_langflow
 
       ## Secret Key
+      ## Gere em: https://www.uuidgenerator.net/api/version1
       - LANGFLOW_SECRET_KEY=$key_langflow
 
       ## Permitir novas incrições
