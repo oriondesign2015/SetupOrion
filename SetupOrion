@@ -5395,20 +5395,20 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
-    echo "Ops, não foi criar a stack do Postgres."
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do Postgres"
 fi
 STACK_NAME="postgres"
-stack_editavel > /dev/null 2>&1
+stack_editavel #> /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c postgres.yaml postgres > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Ops, não foi possivel subir a stack do Postgres."
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Ops, não foi possivel subir a stack do Postgres."
+#fi
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -5493,19 +5493,19 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
-    echo "Ops, não foi criar a stack do PgVector."
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do PgVector"
 fi
 STACK_NAME="pgvector"
-stack_editavel > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Ops, não foi possivel subir a stack do PgVector."
-fi
+stack_editavel #> /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Ops, não foi possivel subir a stack do PgVector."
+#fi
 #docker stack deploy --prune --resolve-image always -c pgvector.yaml pgvector > /dev/null 2>&1
 
 ## Salvando informações da instalação dentro de /dados_vps/
@@ -5591,19 +5591,19 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
-    echo "Ops, não foi criar a stack do PgVector."
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do PgVector"
 fi
 STACK_NAME="pgvector"
-stack_editavel > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Ops, não foi possivel subir a stack do PgVector."
-fi
+stack_editavel #> /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Ops, não foi possivel subir a stack do PgVector."
+#fi
 #docker stack deploy --prune --resolve-image always -c pgvector.yaml pgvector > /dev/null 2>&1
 
 ## Salvando informações da instalação dentro de /dados_vps/
@@ -5723,21 +5723,20 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
-    echo "Ops, não foi criar a stack do Redis."
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do Redis"
 fi
-sleep 1
 STACK_NAME="redis"
-stack_editavel > /dev/null 2>&1
+stack_editavel #> /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c redis.yaml redis
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Ops, não foi possivel subir a stack do Redis."
-fi
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Ops, não foi possivel subir a stack do Redis."
+#fi
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -5959,20 +5958,20 @@ networks:
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Criando Stack"
+    echo "1/10 - [ OK ] - Criando Stack"
 else
-    echo "1/2 - [ OFF ] - Criando Stack"
-    echo "Ops, não foi criar a stack do Mysql."
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do MySQL"
 fi
 
 STACK_NAME="mysql"
-stack_editavel > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Deploy Stack"
-else
-    echo "2/2 - [ OFF ] - Deploy Stack"
-    echo "Ops, não foi possivel subir a stack do Postgres."
-fi
+stack_editavel #> /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Ops, não foi possivel subir a stack do Postgres."
+#fi
 
 #docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
 
