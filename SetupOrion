@@ -1450,7 +1450,7 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 55 ]${reset} - ${branco}Easy!Apointments ${verde}[NOVO]                ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 56 ]${reset} - ${branco}Documenso ${verde}[NOVO]                       ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 57 ]${reset} - ${branco}Moodle ${verde}[NOVO]                          ${verde}| ${reset}  ${amarelo}[ 80 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 58 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 81 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 58 ]${reset} - ${branco}ToolJet ${verde}[NOVO]                         ${verde}| ${reset}  ${amarelo}[ 81 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 59 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 82 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 60 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 83 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 61 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 84 ]${reset} - ${branco}EM BREVE...${reset}"
@@ -1465,11 +1465,6 @@ menu_instalador_pg_2(){
     echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
     echo -e ""
 }
-
-## 45 ZEP
-## 46 OpenProject
-## 47 HumHub
-## LangFlow - OK
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -26015,7 +26010,7 @@ stack_editavel # > /dev/null 2>&1
 #    echo "2/2 - [ OK ] - Deploy Stack"
 #else
 #    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da tooljet "
+#    echo "Não foi possivel subir a stack da tooljet"
 #fi
 
 sleep 10
