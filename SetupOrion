@@ -7369,7 +7369,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution:
-    image: atendai/evolution-api:latest
+    image: atendai/evolution-api:v2.0.9-rc
 
     volumes:
       - evolution_instances:/evolution/instances
