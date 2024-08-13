@@ -9106,14 +9106,48 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do N8N
-    echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/7\e[0m"
     echo -en "\e[33mDigite o dominio para o N8N (ex: n8n.oriondesign.art.br): \e[0m" && read -r url_editorn8n
     echo ""
     
     ##Pergunta o Dominio do Webhook
-    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/7\e[0m"
     echo -en "\e[33mDigite o dominio para o Webhook do N8N (ex: webhook.oriondesign.art.br): \e[0m" && read -r url_webhookn8n
     echo ""
+
+    ##Pergunta o Email SMTP
+    echo -e "\e[97mPasso$amarelo 3/7\e[0m"
+    echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_smtp_n8n
+    echo ""
+
+    ##Pergunta o usuário do Email SMTP
+    echo -e "\e[97mPasso$amarelo 4/7\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r usuario_smtp_n8n
+    echo ""
+    
+    ## Pergunta a senha do SMTP
+    echo -e "\e[97mPasso$amarelo 5/7\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_smtp_n8n
+    echo ""
+
+    ## Pergunta o Host SMTP do email
+    echo -e "\e[97mPasso$amarelo 6/7\e[0m"
+    echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r host_smtp_n8n
+    echo ""
+
+    ## Pergunta a porta SMTP do email
+    echo -e "\e[97mPasso$amarelo 7/7\e[0m"
+    echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_n8n
+    echo ""
+
+    ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
+    if [ "$porta_smtp_typebot" -eq 465 ]; then
+    smtp_secure_smtp_n8n=true
+    else
+    smtp_secure_smtp_n8n=false
+    fi
         
     ## Limpa o terminal
     clear
@@ -9130,6 +9164,30 @@ while true; do
     
     ## Informação sobre URL do Webhook
     echo -e "\e[33mDominio para o Webhook:\e[97m $url_webhookn8n\e[0m"
+    echo ""
+
+    ## Informação sobre Email
+    echo -e "\e[33mEmail do SMTP:\e[97m $email_smtp_n8n\e[0m"
+    echo ""
+
+    ## Informação sobre Email
+    echo -e "\e[33mUsuário do SMTP:\e[97m $usuario_smtp_n8n\e[0m"
+    echo ""
+
+    ## Informação sobre Senha do Email
+    echo -e "\e[33mSenha do Email:\e[97m $senha_smtp_n8n\e[0m"
+    echo ""
+
+    ## Informação sobre Host SMTP
+    echo -e "\e[33mHost SMTP do Email:\e[97m $host_smtp_n8n\e[0m"
+    echo ""
+
+    ## Informação sobre Porta SMTP
+    echo -e "\e[33mPorta SMTP do Email:\e[97m $porta_smtp_n8n\e[0m"
+    echo ""
+
+    ## Informação sobre Secure SMTP
+    echo -e "\e[33mSecure SMTP do Email:\e[97m $smtp_secure_smtp_n8n\e[0m"
     echo ""
     
     read -p "As respostas estão corretas? (Y/N): " confirmacao
@@ -9245,6 +9303,14 @@ services:
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
 
+      ## Dados SMTP
+      - N8N_SMTP_SENDER=$email_smtp_n8n
+      - N8N_SMTP_USER=$usuario_smtp_n8n
+      - N8N_SMTP_PASS=$senha_smtp_n8n
+      - N8N_SMTP_HOST=$host_smtp_n8n
+      - N8N_SMTP_PORT=$porta_smtp_n8n
+      - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
+
       ## Dados do Redis
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
@@ -9315,6 +9381,14 @@ services:
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
 
+      ## Dados SMTP
+      - N8N_SMTP_SENDER=$email_smtp_n8n
+      - N8N_SMTP_USER=$usuario_smtp_n8n
+      - N8N_SMTP_PASS=$senha_smtp_n8n
+      - N8N_SMTP_HOST=$host_smtp_n8n
+      - N8N_SMTP_PORT=$porta_smtp_n8n
+      - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
+
       ## Dados do Redis
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
@@ -9384,6 +9458,14 @@ services:
       ## Community Nodes
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
+
+      ## Dados SMTP
+      - N8N_SMTP_SENDER=$email_smtp_n8n
+      - N8N_SMTP_USER=$usuario_smtp_n8n
+      - N8N_SMTP_PASS=$senha_smtp_n8n
+      - N8N_SMTP_HOST=$host_smtp_n8n
+      - N8N_SMTP_PORT=$porta_smtp_n8n
+      - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
       ## Dados do Redis
       - QUEUE_BULL_REDIS_HOST=redis
