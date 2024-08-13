@@ -17504,7 +17504,7 @@ services:
       - GIN_MODE=release
       - WORKER_TIMEOUT=15
 
-     deploy:
+    deploy:
       mode: replicated
       replicas: 1
       placement:
