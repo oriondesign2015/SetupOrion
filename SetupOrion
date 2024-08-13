@@ -25542,10 +25542,13 @@ echo ""
 sleep 1
 
 
-# Cria o arquivo temporário com o conteúdo desejado
-cat > apache-custom.conf > /dev/null << EOL
+# Cria o arquivo com o conteúdo desejado
+cat > apache-custom.conf << EOL
 ServerName $url_easyappointments
 EOL
+
+# Cria o diretório, se ainda não existir
+mkdir -p /data/compose/15/ > /dev/null 2>&1
 
 # Move o arquivo para o diretório de destino
 sudo mv apache-custom.conf /data/compose/15/apache-custom.conf
