@@ -25548,10 +25548,10 @@ ServerName $url_easyappointments
 EOL
 
 # Cria o diretório, se ainda não existir
-mkdir -p /data/compose/15/ > /dev/null 2>&1
+mkdir -p /root/easyappointments > /dev/null 2>&1
 
 # Move o arquivo para o diretório de destino
-sudo mv apache-custom.conf /data/compose/15/apache-custom.conf
+sudo mv apache-custom.conf /root/easyappointments/apache-custom.conf
 
 ## Criando a stack
 cat > easyappointments.yaml <<EOL
@@ -25565,7 +25565,7 @@ services:
 
     volumes:
       - easyapointments_data:/var/www/html
-      - ./apache-custom.conf:/etc/apache2/conf-enabled/custom.conf:ro
+      - root/easyappointments:/etc/apache2/conf-enabled/custom.conf:ro
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
