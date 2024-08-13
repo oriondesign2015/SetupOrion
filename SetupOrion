@@ -17541,6 +17541,9 @@ services:
       - AUTHORIZATION_ADMINLIST_ENABLED=true
       - AUTHORIZATION_ADMINLIST_USERS=contato@oriondesign.art.br
 
+      ## Telemetria
+      - DISABLE_TELEMETRY=true
+
     deploy:
       mode: replicated
       replicas: 1
