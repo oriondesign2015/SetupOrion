@@ -25541,6 +25541,10 @@ echo -e "\e[97m• INSTALANDO EASY!APPOINTMENTS \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
+sudo mkdir -p /data/compose/13/ > /dev/null 2>&1
+sudo touch /data/compose/13/apache-custom.conf > /dev/null 2>&1
+echo "ServerName $url_easyappointments" > /data/compose/13/apache-custom.conf
+
 ## Criando a stack
 cat > easyappointments.yaml <<EOL
 version: "3.7"
@@ -25553,6 +25557,7 @@ services:
 
     volumes:
       - easyapointments_data:/var/www/html
+      - ./apache-custom.conf:/etc/apache2/conf-enabled/custom.conf:ro
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -25560,8 +25565,8 @@ services:
     environment:
       ## Dados de acesso
       - BASE_URL=https://$url_easyappointments
+      - APACHE_SERVER_NAME=$url_easyappointments
 
-      
       ## Dados do banco de dados
       - DB_HOST=mysql
       - DB_NAME=easyapointments
@@ -25591,7 +25596,7 @@ services:
       labels:
         - traefik.enable=true
         - traefik.http.routers.easyapointments.rule=Host(\`$url_easyappointments\`)
-        - traefik.http.services.easyapointments.loadbalancer.server.port=3001
+        - traefik.http.services.easyapointments.loadbalancer.server.port=80
         - traefik.http.routers.easyapointments.service=easyapointments
         - traefik.http.routers.easyapointments.tls.certresolver=letsencryptresolver
         - traefik.http.routers.easyapointments.entrypoints=websecure
@@ -25930,7 +25935,7 @@ services:
 
       ## Configurações MinIO
       - NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-      - NEXT_PRIVATE_UPLOAD_ENDPOINT=$url_s3
+      - NEXT_PRIVATE_UPLOAD_ENDPOINT=https://$url_s3
       - NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=true
       - NEXT_PRIVATE_UPLOAD_REGION=eu-south
       - NEXT_PRIVATE_UPLOAD_BUCKET=documenso
