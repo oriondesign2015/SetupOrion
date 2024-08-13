@@ -25541,13 +25541,14 @@ echo -e "\e[97m• INSTALANDO EASY!APPOINTMENTS \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
-# Cria o diretório, se ainda não existir
-sudo mkdir -p /data/compose/13/ > /dev/null 2>&1
 
-# Cria o arquivo e escreve o conteúdo diretamente usando cat e EOF
-sudo tee /data/compose/13/apache-custom.conf > /dev/null << EOL
+# Cria o arquivo temporário com o conteúdo desejado
+cat > apache-custom.conf > /dev/null << EOL
 ServerName $url_easyappointments
 EOL
+
+# Move o arquivo para o diretório de destino
+sudo mv apache-custom.conf /data/compose/15/apache-custom.conf
 
 ## Criando a stack
 cat > easyappointments.yaml <<EOL
