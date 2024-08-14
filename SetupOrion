@@ -3046,7 +3046,7 @@ criar_banco_postgres_chatwoot() {
 criar_banco_postgres_chatwoot_uno() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_uno"
@@ -3091,7 +3091,7 @@ criar_banco_postgres_chatwoot_uno() {
 criar_banco_postgres_chatwoot_nestor() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_nestor"
@@ -3137,7 +3137,7 @@ criar_banco_postgres_chatwoot_nestor() {
 criar_banco_postgres_n8n_queue() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_queue"
@@ -3182,7 +3182,7 @@ criar_banco_postgres_n8n_queue() {
 criar_banco_postgres_evolution() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "evolution"
@@ -3228,7 +3228,7 @@ criar_banco_postgres_evolution() {
 criar_banco_postgres_n8n_quepasa() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_quepasa"
@@ -3274,7 +3274,7 @@ criar_banco_postgres_n8n_quepasa() {
 criar_banco_postgres_typebot() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "typebot"
@@ -3320,7 +3320,7 @@ criar_banco_postgres_typebot() {
 criar_banco_postgres_flowise() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "flowise"
@@ -3366,7 +3366,7 @@ criar_banco_postgres_flowise() {
 criar_banco_postgres_nocobase() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocobase"
@@ -3418,7 +3418,7 @@ criar_banco_postgres_nocobase() {
 criar_banco_postgres_botpress() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "botpress"
@@ -3464,7 +3464,7 @@ criar_banco_postgres_botpress() {
 criar_banco_postgres_calcom() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "calcom"
@@ -3557,7 +3557,7 @@ criar_banco_pgvector_woofedcrm() {
 criar_banco_postgres_formbricks() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "formbricks"
@@ -3604,7 +3604,7 @@ criar_banco_postgres_formbricks() {
 criar_banco_postgres_nocodb() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocodb"
@@ -3650,7 +3650,7 @@ criar_banco_postgres_nocodb() {
 criar_banco_postgres_langfuse() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "langfuse"
@@ -3696,7 +3696,7 @@ criar_banco_postgres_langfuse() {
 criar_banco_postgres_metabase() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "metabase"
@@ -3741,7 +3741,7 @@ criar_banco_postgres_metabase() {
 criar_banco_postgres_dify() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "dify"
@@ -3786,7 +3786,7 @@ criar_banco_postgres_dify() {
 criar_banco_postgres_affine() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "affine"
@@ -3831,7 +3831,7 @@ criar_banco_postgres_affine() {
 criar_banco_postgres_docuseal() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "docuseal"
@@ -3876,7 +3876,7 @@ criar_banco_postgres_docuseal() {
 criar_banco_postgres_directus() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "directus"
@@ -3921,7 +3921,7 @@ criar_banco_postgres_directus() {
 criar_banco_postgres_nextcloud() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nextcloud"
@@ -3966,7 +3966,7 @@ criar_banco_postgres_nextcloud() {
 criar_banco_postgres_baserow() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "baserow"
@@ -4011,7 +4011,7 @@ criar_banco_postgres_baserow() {
 criar_banco_postgres_langflow() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "langflow"
@@ -4056,7 +4056,7 @@ criar_banco_postgres_langflow() {
 criar_banco_postgres_openproject() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "openproject"
@@ -4101,7 +4101,7 @@ criar_banco_postgres_openproject() {
 criar_banco_postgres_mattermost() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "mattermost"
@@ -4146,7 +4146,7 @@ criar_banco_postgres_mattermost() {
 criar_banco_postgres_outline() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "outline"
@@ -4191,7 +4191,7 @@ criar_banco_postgres_outline() {
 criar_banco_postgres_documenso() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "documenso"
@@ -4236,7 +4236,7 @@ criar_banco_postgres_documenso() {
 criar_banco_postgres_tooljet() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=postgres")
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "tooljet"
@@ -4282,7 +4282,7 @@ criar_banco_postgres_tooljet() {
 criar_banco_pgvector_zep() {
     while :; do
         if docker ps -q --filter "name=^pgvector_pgvector" | grep -q .; then
-            CONTAINER_PGVECTOR_ID=$(docker ps -q --filter "name=pgvector")
+            CONTAINER_PGVECTOR_ID=$(docker ps -q --filter "name=^pgvector_pgvector")
 
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "zep"
