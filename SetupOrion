@@ -9304,6 +9304,7 @@ services:
       ## Community Nodes
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      - N8N_NODE_PATH=/home/note/.n8n/nodes
 
       ## Dados SMTP
       - N8N_SMTP_SENDER=$email_smtp_n8n
@@ -9333,7 +9334,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "1"
           memory: 1024M
       labels:
         - traefik.enable=true
@@ -9382,6 +9383,7 @@ services:
       ## Community Nodes
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      - N8N_NODE_PATH=/home/note/.n8n/nodes
 
       ## Dados SMTP
       - N8N_SMTP_SENDER=$email_smtp_n8n
@@ -9411,7 +9413,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "1"
           memory: 1024M
       labels:
         - traefik.enable=true
@@ -9460,6 +9462,7 @@ services:
       ## Community Nodes
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      - N8N_NODE_PATH=/home/note/.n8n/nodes
 
       ## Dados SMTP
       - N8N_SMTP_SENDER=$email_smtp_n8n
@@ -9489,7 +9492,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "0.5"
+          cpus: "1"
           memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
@@ -9963,6 +9966,15 @@ services:
       ## Dados de Acesso
       - PGADMIN_DEFAULT_EMAIL=$user_PgAdmin_4
       - PGADMIN_DEFAULT_PASSWORD=$pass_PgAdmin_4
+
+      ## Dados de SMTP (testando)
+      #- MAIL_USERNAME=
+      #- MAIL_PASSWORD=
+      #- MAIL_SERVER=
+      #- MAIL_PORT=587
+      #- MAIL_USE_SSL=False
+      #- MAIL_USE_TLS=False
+      #- MAIL_DEBUG=False
 
     deploy:
       mode: replicated
