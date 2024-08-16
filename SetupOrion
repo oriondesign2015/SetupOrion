@@ -11587,6 +11587,8 @@ services:
     image: rabbitmq:management
     command: rabbitmq-server
 
+    hostname: rabbitmq
+
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
 
