@@ -26401,7 +26401,8 @@ services:
     image: bitnami/moodle:latest
 
     volumes:
-      - moodle_data:/bitnami/moodle
+      - moodle_app_apache_conf:/opt/bitnami/apache/conf
+      - moodle_app_apache:/bitnami/apache/conf
 
     networks:
        - $nome_rede_interna ## Nome da rede interna
@@ -26446,7 +26447,7 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.moodle.rule=Host(`$url_moodle`)
+        - traefik.http.routers.moodle.rule=Host(\`$url_moodle\`)
         - traefik.http.services.moodle.loadbalancer.server.port=8080
         - traefik.http.routers.moodle.service=moodle
         - traefik.http.routers.moodle.tls.certresolver=letsencryptresolver
@@ -26488,12 +26489,15 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
+  moodle_app_apache_conf:
+    external: true
+    name: moodle_app_apache_conf
+  moodle_app_apache:
+    external: true
+    name: moodle_app_apache
   moodle_mariadb_data:
     external: true
     name: moodle_mariadb_data
-  moodle_data:
-    external: true
-    name: moodle_data
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
