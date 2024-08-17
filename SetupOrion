@@ -10488,7 +10488,7 @@ services:
       - botpress_data:/botpress/data
 
     networks:
-       - $nome_rede_interna ## Nome da rede interna
+      - $nome_rede_interna ## Nome da rede interna
 
     environment:
       ## Url Botpress
