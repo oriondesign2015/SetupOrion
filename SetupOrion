@@ -22741,7 +22741,8 @@ sleep 1
 ## Criando key Aleatória
 #key_langflow=$(openssl rand -hex 16)
 #key_langflow=$(openssl rand -hex 16 | sed 's/\(..\)/\1/g' | sed 's/\(....\)\(....\)\(....\)\(....\)\(....\)/\1-\2-\3-\4-\5/')
-key_langflow=$(curl -s https://www.uuidgenerator.net/api/version1)
+#key_langflow=$(curl -s https://www.uuidgenerator.net/api/version1)
+key_langflow=$(python3 -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())')
 ## Criando a stack
 cat > langflow.yaml <<EOL
 version: "3.8"
