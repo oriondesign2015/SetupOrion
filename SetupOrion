@@ -16924,6 +16924,7 @@ creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
 requisitar_outra_instalacao
+}
 
 ferramenta_remover_stack() {
     while true; do
