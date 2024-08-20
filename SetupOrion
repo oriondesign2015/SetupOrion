@@ -4295,15 +4295,6 @@ if [ $? -eq 0 ]; then
 else
     echo "2/3 - [ OFF ] - Baixando e Instalando Docker"
 fi
-#docker swarm init --advertise-addr $ip > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "3/3 - [ OK ] - Iniciando Swarm"
-#else
-#    echo "3/3 - [ OFF ] - Iniciando Swarm"
-#    echo "Ops não foi possivel iniciar o swarm, tente novamente"
-#    sleep 5
-#    exit
-#fi
 sleep 5
 
 max_attempts=3
@@ -4424,6 +4415,7 @@ volumes:
 networks:
   $nome_rede_interna: ## Nome da rede interna
     external: true
+    attachable: true
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
