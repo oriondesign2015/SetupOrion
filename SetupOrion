@@ -2134,7 +2134,7 @@ wait_stack() {
 }
 
 requisitar_outra_instalacao(){
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    read -p "Deseja instalar outra aplicação? (Y/N): " choice
     if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
         return
     else
@@ -4590,7 +4590,7 @@ creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
 requisitar_outra_instalacao
-
+}
 
 ## ██████╗  ██████╗ ███████╗████████╗ ██████╗ ██████╗ ███████╗███████╗
 ## ██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝██╔════╝ ██╔══██╗██╔════╝██╔════╝
