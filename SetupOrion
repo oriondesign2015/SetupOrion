@@ -2916,6 +2916,19 @@ wait_tooljet(){
     done
 }
 
+requisitar_outra_instalacao(){
+read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
+}
+}
+
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -5322,16 +5335,8 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
+
 
 ## ██████╗  ██████╗ ███████╗████████╗ ██████╗ ██████╗ ███████╗███████╗
 ## ██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝██╔════╝ ██╔══██╗██╔════╝██╔════╝
@@ -5648,15 +5653,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 
 cd
 cd
@@ -5875,15 +5872,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 
 cd
 cd
@@ -6119,15 +6108,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 
 cd
 cd
@@ -6674,16 +6655,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
 ## ██╔════╝██║  ██║██╔══██╗╚══██╔══╝██║    ██║██╔═══██╗██╔═══██╗╚══██╔══╝
@@ -7217,16 +7189,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗
 ## ██╔════╝██║   ██║██╔═══██╗██║     ██║   ██║╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔══██╗██║
@@ -7626,16 +7589,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 
 
@@ -7960,16 +7914,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗    ██╗   ██╗██████╗ 
 ## ██╔════╝██║   ██║██╔═══██╗██║     ██║   ██║╚══██╔══╝██║██╔═══██╗████╗  ██║    ██║   ██║╚════██╗
@@ -8369,16 +8314,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ███╗██╗███╗   ██╗██╗ ██████╗ 
 ## ████╗ ████║██║████╗  ██║██║██╔═══██╗
@@ -8626,16 +8562,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 
 ## ████████╗██╗   ██╗██████╗ ███████╗██████╗  ██████╗ ████████╗
@@ -9072,16 +8999,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ██╗ █████╗ ███╗   ██╗
 ## ████╗  ██║██╔══██╗████╗  ██║
@@ -9570,16 +9488,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗██╗      ██████╗ ██╗    ██╗██╗███████╗███████╗
 ## ██╔════╝██║     ██╔═══██╗██║    ██║██║██╔════╝██╔════╝
@@ -9830,16 +9739,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗  ██████╗      █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ██╗  ██╗
 ## ██╔══██╗██╔════╝     ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║    ██║  ██║
@@ -10071,16 +9971,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ██╗ ██████╗  ██████╗ ██████╗ ██████╗  █████╗ ███████╗███████╗
 ## ████╗  ██║██╔═══██╗██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -10353,16 +10244,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗  ██████╗ ████████╗██████╗ ██████╗ ███████╗███████╗███████╗
 ## ██╔══██╗██╔═══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝
@@ -10600,16 +10482,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 
 ## ██╗    ██╗ ██████╗ ██████╗ ██████╗ ██████╗ ██████╗ ███████╗███████╗███████╗
@@ -10912,16 +10785,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗  █████╗ ███████╗███████╗██████╗  ██████╗ ██╗    ██╗
 ## ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗██╔═══██╗██║    ██║
@@ -11234,16 +11098,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ███╗ ██████╗ ███╗   ██╗ ██████╗  ██████╗ ██████╗ ██████╗ 
 ## ████╗ ████║██╔═══██╗████╗  ██║██╔════╝ ██╔═══██╗██╔══██╗██╔══██╗
@@ -11464,16 +11319,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗  █████╗ ██████╗ ██████╗ ██╗████████╗███╗   ███╗ ██████╗ 
 ## ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝████╗ ████║██╔═══██╗
@@ -11704,16 +11550,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗   ██╗██████╗ ████████╗██╗███╗   ███╗███████╗    ██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ 
 ## ██║   ██║██╔══██╗╚══██╔══╝██║████╗ ████║██╔════╝    ██║ ██╔╝██║   ██║████╗ ████║██╔══██╗
@@ -11913,16 +11750,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗ █████╗ ██╗      ██████╗ ██████╗ ███╗   ███╗
 ## ██╔════╝██╔══██╗██║     ██╔════╝██╔═══██╗████╗ ████║
@@ -12223,16 +12051,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ███╗ █████╗ ██╗   ██╗████████╗██╗ ██████╗
 ## ████╗ ████║██╔══██╗██║   ██║╚══██╔══╝██║██╔════╝
@@ -12613,16 +12432,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  █████╗ ██████╗ ██████╗ ███████╗███╗   ███╗██╗████████╗██╗  ██╗
 ## ██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
@@ -12832,16 +12642,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗ ██████╗ ██████╗  █████╗ ███╗   ██╗████████╗
 ## ██╔═══██╗██╔══██╗██╔══██╗██╔══██╗████╗  ██║╚══██╔══╝
@@ -13066,16 +12867,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗    ██╗ ██████╗  ██████╗ ███████╗███████╗██████╗      ██████╗██████╗ ███╗   ███╗
 ## ██║    ██║██╔═══██╗██╔═══██╗██╔════╝██╔════╝██╔══██╗    ██╔════╝██╔══██╗████╗ ████║
@@ -13560,16 +13352,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗ ██████╗ ██████╗ ███╗   ███╗██████╗ ██████╗ ██╗ ██████╗██╗  ██╗███████╗
 ## ██╔════╝██╔═══██╗██╔══██╗████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║ ██╔╝██╔════╝
@@ -13905,16 +13688,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ██╗ ██████╗  ██████╗ ██████╗ ██████╗ ██████╗ 
 ## ████╗  ██║██╔═══██╗██╔════╝██╔═══██╗██╔══██╗██╔══██╗
@@ -14142,16 +13916,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗      █████╗ ███╗   ██╗ ██████╗ ███████╗██╗   ██╗███████╗███████╗
 ## ██║     ██╔══██╗████╗  ██║██╔════╝ ██╔════╝██║   ██║██╔════╝██╔════╝
@@ -14390,16 +14155,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ███╗███████╗████████╗ █████╗ ██████╗  █████╗ ███████╗███████╗
 ## ████╗ ████║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -14636,16 +14392,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗ ██████╗  ██████╗  ██████╗ 
 ## ██╔═══██╗██╔══██╗██╔═══██╗██╔═══██╗
@@ -14883,16 +14630,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
 ## ██╔════╝██║  ██║██╔══██╗╚══██╔══╝██║    ██║██╔═══██╗██╔═══██╗╚══██╔══╝
@@ -15340,16 +15078,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
 ## ██╔════╝██║  ██║██╔══██╗╚══██╔══╝██║    ██║██╔═══██╗██╔═══██╗╚══██╔══╝
@@ -15878,16 +15607,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗   ██╗███╗   ██╗ ██████╗      █████╗ ██████╗ ██╗
 ## ██║   ██║████╗  ██║██╔═══██╗    ██╔══██╗██╔══██╗██║
@@ -16234,16 +15954,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ██╗ █████╗ ███╗   ██╗     ██████╗ ██████╗ ███╗   ███╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗███████╗
 ## ████╗  ██║██╔══██╗████╗  ██║    ██╔════╝██╔═══██╗████╗ ████║    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝██╔════╝
@@ -16754,16 +16465,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 
 ##  ██████╗ ██╗   ██╗███████╗██████╗  █████╗ ███████╗ █████╗ 
@@ -17047,16 +16749,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗ ██╗███████╗██╗   ██╗ █████╗ ██╗
 ## ██╔══██╗██║██╔════╝╚██╗ ██╔╝██╔══██╗██║
@@ -17698,16 +17391,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗ ██╗     ██╗      █████╗ ███╗   ███╗ █████╗ 
 ## ██╔═══██╗██║     ██║     ██╔══██╗████╗ ████║██╔══██╗
@@ -17953,16 +17637,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ferramenta_remover_stack() {
     while true; do
@@ -18314,16 +17989,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗  ██████╗  ██████╗██╗   ██╗███████╗███████╗ █████╗ ██╗     
 ## ██╔══██╗██╔═══██╗██╔════╝██║   ██║██╔════╝██╔════╝██╔══██╗██║     
@@ -18615,16 +18281,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗ ██╗██████╗ ███████╗ ██████╗████████╗██╗   ██╗███████╗
 ## ██╔══██╗██║██╔══██╗██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔════╝
@@ -18999,16 +18656,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗   ██╗ █████╗ ██╗   ██╗██╗  ████████╗██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗
 ## ██║   ██║██╔══██╗██║   ██║██║  ╚══██╔══╝██║    ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝████╗  ██║
@@ -19271,16 +18919,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗ ██████╗  █████╗ ███████╗ █████╗ ███╗   ██╗ █████╗ 
 ## ██╔════╝ ██╔══██╗██╔══██╗██╔════╝██╔══██╗████╗  ██║██╔══██╗
@@ -19721,16 +19360,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ██╗███████╗██╗  ██╗████████╗ ██████╗██╗      ██████╗ ██╗   ██╗██████╗ 
 ## ████╗  ██║██╔════╝╚██╗██╔╝╚══██╔══╝██╔════╝██║     ██╔═══██╗██║   ██║██╔══██╗
@@ -20024,16 +19654,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗████████╗██████╗  █████╗ ██████╗ ██╗
 ## ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██║
@@ -20277,16 +19898,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗ ██╗  ██╗██████╗     ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗
 ## ██╔══██╗██║  ██║██╔══██╗    ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║
@@ -20519,16 +20131,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗██╗   ██╗██████╗  █████╗ ██████╗  █████╗ ███████╗███████╗
 ## ██╔════╝██║   ██║██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -21547,16 +21150,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ██╗████████╗███████╗██╗   ██╗
 ## ████╗  ██║╚══██╔══╝██╔════╝╚██╗ ██╔╝
@@ -21799,16 +21393,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗      ██████╗ ██╗    ██╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗ 
 ## ██║     ██╔═══██╗██║    ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗
@@ -22198,16 +21783,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗  ██╗██╗   ██╗███╗   ███╗██╗  ██╗██╗   ██╗██████╗ 
 ## ██║  ██║██║   ██║████╗ ████║██║  ██║██║   ██║██╔══██╗
@@ -22602,16 +22178,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗      █████╗ ███╗   ██╗ ██████╗ ███████╗██╗      ██████╗ ██╗    ██╗
 ## ██║     ██╔══██╗████╗  ██║██╔════╝ ██╔════╝██║     ██╔═══██╗██║    ██║
@@ -22873,16 +22440,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##███████╗███████╗██████╗ 
 ##╚══███╔╝██╔════╝██╔══██╗
@@ -23156,16 +22714,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗ ██████╗ ███████╗███╗   ██╗    ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗
 ## ██╔═══██╗██╔══██╗██╔════╝████╗  ██║    ██╔══██╗██╔══██╗██╔═══██╗     ██║██╔════╝██╔════╝╚══██╔══╝
@@ -23428,16 +22977,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     ███████╗
 ## ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗██║     ██╔════╝
@@ -23671,16 +23211,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ████████╗██╗    ██╗███████╗███╗   ██╗████████╗██╗   ██╗ ██████╗██████╗ ███╗   ███╗
 ## ╚══██╔══╝██║    ██║██╔════╝████╗  ██║╚══██╔══╝╚██╗ ██╔╝██╔════╝██╔══██╗████╗ ████║
@@ -24059,16 +23590,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ███╗ █████╗ ████████╗████████╗███████╗██████╗ ███╗   ███╗ ██████╗ ███████╗████████╗
 ## ████╗ ████║██╔══██╗╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██╔═══██╗██╔════╝╚══██╔══╝
@@ -24314,16 +23836,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##   ██████╗ ██╗   ██╗████████╗██╗     ██╗███╗   ██╗███████╗
 ##  ██╔═══██╗██║   ██║╚══██╔══╝██║     ██║████╗  ██║██╔════╝
@@ -24639,16 +24152,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗ ██████╗  ██████╗ █████╗ ██╗     ██████╗  ██████╗  █████╗ ██████╗ ██████╗ 
 ## ██╔════╝██╔═══██╗██╔════╝██╔══██╗██║     ██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗
@@ -24851,16 +24355,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  ██████╗ ██╗     ██████╗ ██╗
 ## ██╔════╝ ██║     ██╔══██╗██║
@@ -25095,16 +24590,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ##  █████╗ ███╗   ██╗██╗   ██╗████████╗██╗  ██╗██╗███╗   ██╗ ██████╗     ██╗     ██╗     ███╗   ███╗
 ## ██╔══██╗████╗  ██║╚██╗ ██╔╝╚══██╔══╝██║  ██║██║████╗  ██║██╔════╝     ██║     ██║     ████╗ ████║
@@ -25343,16 +24829,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗██╗  ██╗ ██████╗ █████╗ ██╗     ██╗██████╗ ██████╗  █████╗ ██╗    ██╗
 ## ██╔════╝╚██╗██╔╝██╔════╝██╔══██╗██║     ██║██╔══██╗██╔══██╗██╔══██╗██║    ██║
@@ -25556,16 +25033,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███████╗ █████╗ ███████╗██╗   ██╗██╗                                                                 
 ## ██╔════╝██╔══██╗██╔════╝╚██╗ ██╔╝██║                                                                 
@@ -25826,16 +25294,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ██████╗  ██████╗  ██████╗██╗   ██╗███╗   ███╗███████╗███╗   ██╗███████╗ ██████╗ 
 ## ██╔══██╗██╔═══██╗██╔════╝██║   ██║████╗ ████║██╔════╝████╗  ██║██╔════╝██╔═══██╗
@@ -26201,16 +25660,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ███╗   ███╗ ██████╗  ██████╗ ██████╗ ██╗     ███████╗
 ## ████╗ ████║██╔═══██╗██╔═══██╗██╔══██╗██║     ██╔════╝
@@ -26577,16 +26027,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## ████████╗ ██████╗  ██████╗ ██╗          ██╗███████╗████████╗
 ## ╚══██╔══╝██╔═══██╗██╔═══██╗██║          ██║██╔════╝╚══██╔══╝
@@ -26961,16 +26402,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
-}
+requisitar_outra_instalacao
 
 ## Ignore esta parte, só para facilitar minha identificação com esta parte "XXOOXX"
 
