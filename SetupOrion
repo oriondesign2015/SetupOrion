@@ -2927,7 +2927,6 @@ read -p "Deseja instalar outra aplicação? (Y/N): " choice
         exit 1
     fi
 }
-}
 
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
