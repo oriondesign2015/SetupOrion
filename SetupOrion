@@ -2120,798 +2120,15 @@ wait_30_sec() {
     sleep 30
 }
 
-wait_traefik() {
+wait_stack() {
     echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
     while true; do
-    # Verifica se o serviço trarik está ativo
-    if docker service ls --filter "name=traefik" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_portainer() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço portainer está ativo
-    if docker service ls --filter "name=portainer" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot está ativo
-    if docker service ls --format '{{.Name}} {{.Replicas}}' | awk '$1 ~ /chatwoot_chatwoot/ && $2 == "1/1"'; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot_arm() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot está ativo
-    if docker service ls --filter "name=chatwoot_arm" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot_uno() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot Uno está ativo
-    if docker service ls --filter "name=chatwoot_uno" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot_nestor() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot Nestor está ativo
-    if docker service ls --filter "name=chatwoot_nestor" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-
-wait_evolution() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço evolution está ativo
-    if docker service ls --filter "name=evolution" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_typebot() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço typebot está ativo
-    if docker service ls --filter "name=typebot" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_minio() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço minio está ativo
-    if docker service ls --filter "name=minio" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_n8n() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço n8n está ativo
-    if docker service ls --filter "name=n8n" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_n8n_quepasa() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço n8n quepasa está ativo
-    if docker service ls --filter "name=n8n_quepasa" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_flowise() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço flowise está ativo
-    if docker service ls --filter "name=flowise" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_pgadmin_4() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço pgadmin está ativo
-    if docker service ls --filter "name=pgadmin" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_nocobase() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço nocobase está ativo
-    if docker service ls --filter "name=nocobase" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_botpress() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço botpress está ativo
-    if docker service ls --filter "name=botpress" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_wordpress() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço wordpress está ativo
-    if docker service ls --filter "name=$nome_do_servico_wordpress" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_baserow() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço baserow está ativo
-    if docker service ls --filter "name=baserow" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_mongodb() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço mongodb está ativo
-    if docker service ls --filter "name=mongodb" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_rabbitmq() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço rabbitmq está ativo
-    if docker service ls --filter "name=rabbit" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_uptimekuma() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço uptimekuma está ativo
-    if docker service ls --filter "name=uptime" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_calcom() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço calcom está ativo
-    if docker service ls --filter "name=calcom" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_mautic() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço mautic está ativo
-    if docker service ls --filter "name=mautic" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_appsmith() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço appsmith está ativo
-    if docker service ls --filter "name=appsmith" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_qdrant() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço qdrant está ativo
-    if docker service ls --filter "name=qdrant" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_woofedcrm() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço woofedcrm está ativo
-    if docker service ls --filter "name=woofedcrm_woofedcrm" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_formbricks() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço formbricks está ativo
-    if docker service ls --filter "name=formbricks" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_nocodb() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço nocobase está ativo
-    if docker service ls --filter "name=nocobase" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_langfuse() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço langfuse está ativo
-    if docker service ls --filter "name=langfuse" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_metabase() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço metabase está ativo
-    if docker service ls --filter "name=metabase" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_odoo() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço Odoo está ativo
-    if docker service ls --filter "name=odoo" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_unoapi(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço UnoAPI está ativo
-        if docker service ls --filter "name=unoapi_unoapi" | grep "1/1"; then
+        # Verifica se o serviço trarik está ativo
+        if docker service ls --filter "name=$1" | grep "1/1"; then
             sleep 10
             break
         fi
-    
-        sleep 5
-    done
-}
 
-wait_quepasa(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço Quepasa está ativo
-        if docker service ls --filter "name=quepasa" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_dify(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço Dify está ativo
-        if docker service ls --filter "name=dify" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_ollama(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço ollama está ativo
-        if docker service ls --filter "name=ollama" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_affine(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço affine está ativo
-        if docker service ls --filter "name=affine" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_docuseal(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço docuseal está ativo
-        if docker service ls --filter "name=docuseal" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_directus(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço directus está ativo
-        if docker service ls --filter "name=directus" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_vaultwarden(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço vaultwarden está ativo
-        if docker service ls --filter "name=vaultwarden" | grep "1/1"; then
-            sleep 30
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_monitor(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço monitor está ativo
-        if docker service ls --filter "name=monitor" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_nextcloud(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço nextcloud está ativo
-        if docker service ls --filter "name=nextcloud" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_strapi(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço strapi está ativo
-        if docker service ls --filter "name=strapi" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_phpmyadmin(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço phpmyadmin está ativo
-        if docker service ls --filter "name=phpmyadmin" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_supabase(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço supabase está ativo
-        if docker service ls --filter "name=supabase" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_ntfy(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço ntfy está ativo
-        if docker service ls --filter "name=ntfy" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-
-
-wait_lowcoder(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço lowcoder está ativo
-        if docker service ls --filter "name=lowcoder" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_humhub(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço humhub está ativo
-        if docker service ls --filter "name=humhub" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_langflow(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço langflow está ativo
-        if docker service ls --filter "name=langflow" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_openproject(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço openproject está ativo
-        if docker service ls --filter "name=openproject" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_zep(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço zep está ativo
-        if docker service ls --filter "name=zep" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_yourls(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço yourls está ativo
-        if docker service ls --filter "name=yourls" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_twentycrm(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço twentycrm está ativo
-        if docker service ls --filter "name=twentycrm" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_mattermost(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço mattermost está ativo
-        if docker service ls --filter "name=mattermost" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_outline(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço outline está ativo
-        if docker service ls --filter "name=outline" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_focalboard(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço focalboard está ativo
-        if docker service ls --filter "name=focalboard" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_glpi(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço glpi está ativo
-        if docker service ls --filter "name=glpi" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_anythingllm(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço anythingllm está ativo
-        if docker service ls --filter "name=anythingllm" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_excalidraw(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço excalidraw está ativo
-        if docker service ls --filter "name=excalidraw" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_easyappointments(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço easyappointments está ativo
-        if docker service ls --filter "name=easyappointments" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_documenso(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço documenso está ativo
-        if docker service ls --filter "name=documenso" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_moodle(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço moodle está ativo
-        if docker service ls --filter "name=moodle" | grep "1/1"; then
-            sleep 30
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_tooljet(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço tooljet está ativo
-        if docker service ls --filter "name=tooljet" | grep "1/1"; then
-            sleep 30
-            break
-        fi
-    
         sleep 5
     done
 }
@@ -3006,6 +2223,52 @@ pegar_link_s3() {
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 ## Criadores de banco de dados Postgres
+
+## Criar banco do Chatwoot
+criar_banco_postgres_da_stack() {
+    while :; do
+        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
+            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
+
+            # Verificar se o banco de dados já existe
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$1"
+
+            if [ $? -eq 0 ]; then
+                echo "O banco de dados $1 já existe."
+
+                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
+                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
+                    # Apagar o banco de dados
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS $1;"
+                    echo "Banco de dados $1 apagado com sucesso."
+                    
+                    # Criar o banco de dados novamente
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE $1;"
+                    
+                    echo "Banco de dados $1 criado com sucesso."
+                else
+                    echo "Usando o banco de dados existente."
+                fi
+                break
+            else
+                # Criar o banco de dados
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE $1;"
+                
+                # Verificar novamente se o banco de dados foi criado com sucesso
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$1"
+
+                if [ $? -eq 0 ]; then
+                    echo "Banco de dados $1 criado com sucesso."
+                    break
+                else
+                    echo "Erro ao criar o banco de dados. Tentando novamente..."
+                fi
+            fi
+        else
+            sleep 5
+        fi
+    done
+}
 
 ## Criar banco do Chatwoot
 criar_banco_postgres_chatwoot() {
@@ -5184,8 +4447,8 @@ echo -e "\e[97m• ESPERANDO O TRAEFIK ESTAR ONLINE \e[33m[6/8]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_traefik para verificar se o serviço esta online
-wait_traefik
+## Usa o serviço wait_stack "traefik" para verificar se o serviço esta online
+wait_stack "traefik"
 
 ## Espera 30 segundos
 wait_30_sec
@@ -5285,7 +4548,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_portainer para verificar se o serviço esta online
-wait_portainer
+wait_stack "portainer"
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -6551,7 +5814,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
-wait_chatwoot
+wait_stack "chatwoot"
 
 ## Mensagem de Passo
 echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
@@ -7085,7 +6348,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
-wait_chatwoot
+wait_stack "chatwoot"
 
 ## Mensagem de Passo
 echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
@@ -7545,7 +6808,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
+wait_stack "evolution"
 
 cd dados_vps
 
@@ -7870,7 +7133,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
+wait_stack "evolution"
 
 cd dados_vps
 
@@ -8270,7 +7533,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
+wait_stack "evolution"
 
 cd dados_vps
 
@@ -8512,7 +7775,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_minio para verificar se o serviço esta online
-wait_minio
+wait_stack "minio"
 
 cd dados_vps
 
@@ -8955,7 +8218,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_typebot para verificar se o serviço esta online
-wait_typebot
+wait_stack "typebot"
 
 cd dados_vps
 
@@ -9441,7 +8704,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_n8n para verificar se o serviço esta online
-wait_n8n
+wait_stack "n8n"
 
 cd dados_vps
 
@@ -9698,7 +8961,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_flowise para verificar se o serviço esta online
-wait_flowise
+wait_stack "flowise"
 
 cd dados_vps
 
@@ -9927,7 +9190,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_pgadmin_4
+wait_stack "pgadmin"
 
 cd dados_vps
 
@@ -10198,8 +9461,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_nocobase para verificar se o serviço esta online
-wait_nocobase
+## Usa o serviço wait_stack "nocobase" para verificar se o serviço esta online
+wait_stack "nocobase"
 
 cd dados_vps
 
@@ -10437,7 +9700,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_botpress para verificar se o serviço esta online
-wait_botpress
+wait_stack "botpress"
 
 cd dados_vps
 
@@ -10720,7 +9983,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_wordpress para verificar se o serviço esta online
-wait_wordpress
+wait_stack "$nome_do_servico_wordpress"
 
 ## Mensagem de Passo
 echo -e "\e[97m• EDITANDO PHP.INI \e[33m[6/7]\e[0m"
@@ -10750,7 +10013,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_wordpress para verificar se o serviço esta online
-wait_wordpress
+wait_stack "wordpress"
 
 cd dados_vps
 
@@ -11053,7 +10316,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_baserow para verificar se o serviço esta online
-wait_baserow
+wait_stack "baserow"
 
 cd dados_vps
 
@@ -11271,8 +10534,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_mongodb
+## Usa o serviço wait_stack "mongodb" para verificar se o serviço esta online
+wait_stack "mongodb"
 
 cd dados_vps
 
@@ -11499,8 +10762,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_rabbitmq
+## Usa o serviço wait_stack "pgadmin_4" para verificar se o serviço esta online
+wait_stack "rabbit"
 
 cd dados_vps
 
@@ -11702,8 +10965,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_uptimekuma
+## Usa o serviço wait_stack "uptimekuma" para verificar se o serviço esta online
+wait_stack "uptime"
 
 cd dados_vps
 
@@ -12005,8 +11268,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_calcom para verificar se o serviço esta online
-wait_calcom
+## Usa o serviço wait_stack "calcom" para verificar se o serviço esta online
+wait_stack "calcom"
 
 cd dados_vps
 
@@ -12381,8 +11644,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_calcom para verificar se o serviço esta online
-wait_mautic
+## Usa o serviço wait_stack "mautic" para verificar se o serviço esta online
+wait_stack "mautic"
 
 cd dados_vps
 
@@ -12597,8 +11860,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_nocobase para verificar se o serviço esta online
-wait_appsmith
+## Usa o serviço wait_stack "nocobase" para verificar se o serviço esta online
+wait_stack "appsmith"
 
 cd dados_vps
 
@@ -12822,8 +12085,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_nocobase para verificar se o serviço esta online
-wait_qdrant
+## Usa o serviço wait_stack "qdrant" para verificar se o serviço esta online
+wait_stack "qdrant"
 
 cd dados_vps
 
@@ -13253,8 +12516,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/7]\e[0m"
 wait_30_sec
 echo ""
 sleep 1
-## Usa o serviço wait_woofedcrm para verificar se o serviço esta online
-wait_woofedcrm
+## Usa o serviço wait_stack "woofedcrm" para verificar se o serviço esta online
+wait_stack "woofedcrm"
 
 ## Mensagem de Passo
 echo -e "\e[97m• CONFIGURANDO E MIGRANDO BANCO DE DADOS \e[33m[6/7]\e[0m"
@@ -13292,8 +12555,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[7/7]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_woofedcrm para verificar se o serviço esta online
-wait_woofedcrm
+## Usa o serviço wait_stack "woofedcrm" para verificar se o serviço esta online
+wait_stack "woofedcrm"
 
 cd dados_vps
 
@@ -13643,8 +12906,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_formbricks para verificar se o serviço esta online
-wait_formbricks
+## Usa o serviço wait_stack "formbricks" para verificar se o serviço esta online
+wait_stack "formbricks"
 
 cd dados_vps
 
@@ -13871,7 +13134,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_nocodb para verificar se o serviço esta online
-wait_nocodb
+wait_stack "nocobase"
 
 cd dados_vps
 
@@ -14110,7 +13373,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_langfuse para verificar se o serviço esta online
-wait_langfuse
+wait_stack "langfuse"
 
 cd dados_vps
 
@@ -14346,8 +13609,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_metabase para verificar se o serviço esta online
-wait_metabase
+## Usa o serviço wait_stack "metabase" para verificar se o serviço esta online
+wait_stack "metabase"
 
 cd dados_vps
 
@@ -14585,7 +13848,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_odoo para verificar se o serviço esta online
-wait_odoo
+wait_stack "odoo"
 
 cd dados_vps
 
@@ -14974,7 +14237,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
-wait_chatwoot_uno
+wait_stack "chatwoot_uno"
 
 ## Mensagem de Passo
 echo -e "\e[97m• REINICIANDO CHATWOOT \e[33m[5/6]\e[0m"
@@ -15522,7 +14785,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot_nestor para verificar se o serviço esta online
-wait_chatwoot_nestor
+wait_stack "chatwoot_nestor"
 
 ## Mensagem de Passo
 echo -e "\e[97m• PREPARANDO BANCO DE DADOS  \e[33m[5/5]\e[0m"
@@ -15911,7 +15174,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_unoapi para verificar se o serviço esta online
-wait_unoapi
+wait_stack "unoapi_unoapi"
 
 cd dados_vps
 
@@ -16418,7 +15681,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_n8n para verificar se o serviço esta online
-wait_n8n_quepasa
+wait_stack "n8n_quepasa"
 
 cd dados_vps
 
@@ -16702,7 +15965,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_quepasa para verificar se o serviço esta online
-wait_quepasa
+wait_stack "quepasa"
 
 cd dados_vps
 
@@ -17347,7 +16610,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_dify para verificar se o serviço esta online
-wait_dify
+wait_stack "dify"
 
 cd dados_vps
 
@@ -17594,7 +16857,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_nocodb para verificar se o serviço esta online
-wait_ollama
+wait_stack "ollama"
 
 cd dados_vps
 
@@ -17943,8 +17206,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_affine para verificar se o serviço esta online
-wait_affine
+## Usa o serviço wait_stack "affine" para verificar se o serviço esta online
+wait_stack "affine"
 
 cd dados_vps
 
@@ -18236,7 +17499,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_docuseal para verificar se o serviço esta online
-wait_docuseal
+wait_stack "docuseal"
 
 cd dados_vps
 
@@ -18610,8 +17873,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_directus para verificar se o serviço esta online
-wait_directus
+## Usa o serviço wait_tack "directus" para verificar se o serviço esta online
+wait_stack "directus"
 
 cd dados_vps
 
@@ -18875,7 +18138,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_vaultwarden para verificar se o serviço esta online
-wait_vaultwarden
+wait_stack "vaultwarden"
 
 cd dados_vps
 
@@ -19303,7 +18566,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_monitor para verificar se o serviço esta online
-wait_monitor
+wait_stack "monitor"
 
 cd dados_vps
 
@@ -19852,8 +19115,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_strapi para verificar se o serviço esta online
-wait_strapi
+## Usa o serviço wait_stack "strapi" para verificar se o serviço esta online
+wait_stack "strapi"
 
 cd dados_vps
 
@@ -20085,8 +19348,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_phpmyadmin para verificar se o serviço esta online
-wait_phpmyadmin
+## Usa o serviço wait_stack "phpmyadmin" para verificar se o serviço esta online
+wait_stack "phpmyadmin"
 
 cd dados_vps
 
@@ -21093,8 +20356,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_supabase para verificar se o serviço esta online
-wait_supabase
+## Usa o serviço wait_stack "supabase" para verificar se o serviço esta online
+wait_stack "supabase"
 
 cd dados_vps
 
@@ -21345,7 +20608,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_ntfy para verificar se o serviço esta online
-wait_ntfy
+wait_stack "ntfy"
 
 cd dados_vps
 
@@ -21736,8 +20999,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_lowcoder para verificar se o serviço esta online
-wait_lowcoder
+## Usa o serviço wait_stack "lowcoder" para verificar se o serviço esta online
+wait_stack "lowcoder"
 
 cd dados_vps
 
@@ -22117,7 +21380,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_calcom para verificar se o serviço esta online
-wait_humhub
+wait_stack "humhub"
 
 cd dados_vps
 
@@ -22395,8 +21658,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_langflow para verificar se o serviço esta online
-wait_langflow
+## Usa o serviço wait_stack "langflow" para verificar se o serviço esta online
+wait_stack "langflow"
 
 cd dados_vps
 
@@ -22669,8 +21932,10 @@ stack_editavel # > /dev/null 2>&1
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
+
 ## Usa o serviço wait_zep para verificar se o serviço esta online
-wait_zep
+wait_stack "zep"
+
 wait_30_sec
 
 cd dados_vps
@@ -22932,8 +22197,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_openproject para verificar se o serviço esta online
-wait_openproject
+## Usa o serviço wait_stack "openproject" para verificar se o serviço esta online
+wait_stack "openproject"
 
 cd dados_vps
 
@@ -23165,8 +22430,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_yourls para verificar se o serviço esta online
-wait_yourls
+## Usa o serviço wait_stack "yourls" para verificar se o serviço esta online
+wait_stack "yourls"
 
 cd dados_vps
 
@@ -23544,8 +22809,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_twentycrm para verificar se o serviço esta online
-wait_twentycrm
+## Usa o serviço wait_stack "twentycrm" para verificar se o serviço esta online
+wait_stack "twentycrm"
 
 cd dados_vps
 
@@ -23790,8 +23055,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_mattermost para verificar se o serviço esta online
-wait_mattermost
+## Usa o serviço wait_stack "mattermost" para verificar se o serviço esta online
+wait_stack "mattermost"
 
 cd dados_vps
 
@@ -24106,8 +23371,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_outline para verificar se o serviço esta online
-wait_outline
+## Usa o serviço wait_stack "outline" para verificar se o serviço esta online
+wait_stack "outline"
 
 cd dados_vps
 
@@ -24310,7 +23575,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_focalboard para verificar se o serviço esta online
-wait_focalboard
+wait_stack "focalboard"
 
 cd dados_vps
 
@@ -24530,8 +23795,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_glpi para verificar se o serviço esta online
-wait_glpi
+## Usa o serviço wait_stack "glpi" para verificar se o serviço esta online
+wait_stack "glpi"
 
 cd dados_vps
 
@@ -24783,8 +24048,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_anythingllm para verificar se o serviço esta online
-wait_anythingllm
+## Usa o serviço wait_stack "anythingllm" para verificar se o serviço esta online
+wait_stack "anythingllm"
 
 cd dados_vps
 
@@ -24987,8 +24252,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_excalidraw para verificar se o serviço esta online
-wait_excalidraw
+## Usa o serviço wait_stack "excalidraw" para verificar se o serviço esta online
+wait_stack "excalidraw"
 
 cd dados_vps
 
@@ -25248,8 +24513,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_easyappointments para verificar se o serviço esta online
-wait_easyappointments
+## Usa o serviço wait_stack "easyappointments" para verificar se o serviço esta online
+wait_stack "easyappointments"
 
 cd dados_vps
 
@@ -25615,8 +24880,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_documenso para verificar se o serviço esta online
-wait_documenso
+## Usa o serviço wait_stack "documenso" para verificar se o serviço esta online
+wait_stack "documenso"
 
 cd dados_vps
 
@@ -25975,8 +25240,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_moodle para verificar se o serviço esta online
-wait_moodle
+## Usa o serviço wait_stack "moodle" para verificar se o serviço esta online
+wait_stack "moodle"
 sleep 120
 
 cd dados_vps
@@ -26357,8 +25622,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_tooljet para verificar se o serviço esta online
-wait_tooljet
+## Usa o serviço wait_stack "tooljet" para verificar se o serviço esta online
+wait_stack "tooljet"
 
 cd dados_vps
 
@@ -26857,7 +26122,8 @@ traefik.fix() {
     echo ""
     
     echo "Verificando stack do Traefik"
-    wait_traefik
+    wait_stack "traefik"
+
     if [ $? -eq 0 ]; then
         echo "3/3 - [ OK ] - Verificando Stack"
     else
