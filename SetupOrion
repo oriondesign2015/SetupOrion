@@ -2353,7 +2353,7 @@ criar_banco_mysql_da_stack() {
                     
                     # Verificar novamente se o banco de dados foi criado com sucesso
                     if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$1';" | grep -qw "$1"; then
-                        echo "Banco de dados mautic criado com sucesso."
+                        echo "Banco de dados $1 criado com sucesso."
                         break
                     else
                         echo "Erro ao criar o banco de dados. Tentando novamente..."
