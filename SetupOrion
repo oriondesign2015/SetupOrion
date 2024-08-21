@@ -2120,800 +2120,29 @@ wait_30_sec() {
     sleep 30
 }
 
-wait_traefik() {
+wait_stack() {
     echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
     while true; do
-    # Verifica se o serviço trarik está ativo
-    if docker service ls --filter "name=traefik" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_portainer() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço portainer está ativo
-    if docker service ls --filter "name=portainer" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot está ativo
-    if docker service ls --format '{{.Name}} {{.Replicas}}' | awk '$1 ~ /chatwoot_chatwoot/ && $2 == "1/1"'; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot_arm() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot está ativo
-    if docker service ls --filter "name=chatwoot_arm" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot_uno() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot Uno está ativo
-    if docker service ls --filter "name=chatwoot_uno" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_chatwoot_nestor() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço chatwoot Nestor está ativo
-    if docker service ls --filter "name=chatwoot_nestor" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-
-wait_evolution() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço evolution está ativo
-    if docker service ls --filter "name=evolution" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_typebot() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço typebot está ativo
-    if docker service ls --filter "name=typebot" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_minio() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço minio está ativo
-    if docker service ls --filter "name=minio" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_n8n() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço n8n está ativo
-    if docker service ls --filter "name=n8n" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_n8n_quepasa() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço n8n quepasa está ativo
-    if docker service ls --filter "name=n8n_quepasa" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_flowise() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço flowise está ativo
-    if docker service ls --filter "name=flowise" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_pgadmin_4() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço pgadmin está ativo
-    if docker service ls --filter "name=pgadmin" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_nocobase() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço nocobase está ativo
-    if docker service ls --filter "name=nocobase" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_botpress() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço botpress está ativo
-    if docker service ls --filter "name=botpress" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_wordpress() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço wordpress está ativo
-    if docker service ls --filter "name=$nome_do_servico_wordpress" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_baserow() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço baserow está ativo
-    if docker service ls --filter "name=baserow" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_mongodb() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço mongodb está ativo
-    if docker service ls --filter "name=mongodb" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_rabbitmq() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço rabbitmq está ativo
-    if docker service ls --filter "name=rabbit" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_uptimekuma() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço uptimekuma está ativo
-    if docker service ls --filter "name=uptime" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_calcom() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço calcom está ativo
-    if docker service ls --filter "name=calcom" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_mautic() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço mautic está ativo
-    if docker service ls --filter "name=mautic" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_appsmith() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço appsmith está ativo
-    if docker service ls --filter "name=appsmith" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_qdrant() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço qdrant está ativo
-    if docker service ls --filter "name=qdrant" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_woofedcrm() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço woofedcrm está ativo
-    if docker service ls --filter "name=woofedcrm_woofedcrm" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_formbricks() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço formbricks está ativo
-    if docker service ls --filter "name=formbricks" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_nocodb() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço nocobase está ativo
-    if docker service ls --filter "name=nocobase" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_langfuse() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço langfuse está ativo
-    if docker service ls --filter "name=langfuse" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_metabase() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço metabase está ativo
-    if docker service ls --filter "name=metabase" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_odoo() {
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-while true; do
-    # Verifica se o serviço Odoo está ativo
-    if docker service ls --filter "name=odoo" | grep "1/1"; then
-        sleep 10
-        break
-    fi
-
-    sleep 5
-done
-}
-
-wait_unoapi(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço UnoAPI está ativo
-        if docker service ls --filter "name=unoapi_unoapi" | grep "1/1"; then
+        # Verifica se o serviço trarik está ativo
+        if docker service ls --filter "name=$1" | grep "1/1"; then
             sleep 10
             break
         fi
-    
+
         sleep 5
     done
 }
 
-wait_quepasa(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço Quepasa está ativo
-        if docker service ls --filter "name=quepasa" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_dify(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço Dify está ativo
-        if docker service ls --filter "name=dify" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_ollama(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço ollama está ativo
-        if docker service ls --filter "name=ollama" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_affine(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço affine está ativo
-        if docker service ls --filter "name=affine" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_docuseal(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço docuseal está ativo
-        if docker service ls --filter "name=docuseal" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_directus(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço directus está ativo
-        if docker service ls --filter "name=directus" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_vaultwarden(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço vaultwarden está ativo
-        if docker service ls --filter "name=vaultwarden" | grep "1/1"; then
-            sleep 30
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_monitor(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço monitor está ativo
-        if docker service ls --filter "name=monitor" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_nextcloud(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço nextcloud está ativo
-        if docker service ls --filter "name=nextcloud" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_strapi(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço strapi está ativo
-        if docker service ls --filter "name=strapi" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_phpmyadmin(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço phpmyadmin está ativo
-        if docker service ls --filter "name=phpmyadmin" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_supabase(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço supabase está ativo
-        if docker service ls --filter "name=supabase" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_ntfy(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço ntfy está ativo
-        if docker service ls --filter "name=ntfy" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-
-
-wait_lowcoder(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço lowcoder está ativo
-        if docker service ls --filter "name=lowcoder" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_humhub(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço humhub está ativo
-        if docker service ls --filter "name=humhub" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_langflow(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço langflow está ativo
-        if docker service ls --filter "name=langflow" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_openproject(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço openproject está ativo
-        if docker service ls --filter "name=openproject" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_zep(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço zep está ativo
-        if docker service ls --filter "name=zep" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_yourls(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço yourls está ativo
-        if docker service ls --filter "name=yourls" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_twentycrm(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço twentycrm está ativo
-        if docker service ls --filter "name=twentycrm" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_mattermost(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço mattermost está ativo
-        if docker service ls --filter "name=mattermost" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_outline(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço outline está ativo
-        if docker service ls --filter "name=outline" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_focalboard(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço focalboard está ativo
-        if docker service ls --filter "name=focalboard" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_glpi(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço glpi está ativo
-        if docker service ls --filter "name=glpi" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_anythingllm(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço anythingllm está ativo
-        if docker service ls --filter "name=anythingllm" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_excalidraw(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço excalidraw está ativo
-        if docker service ls --filter "name=excalidraw" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_easyappointments(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço easyappointments está ativo
-        if docker service ls --filter "name=easyappointments" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_documenso(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 5 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço documenso está ativo
-        if docker service ls --filter "name=documenso" | grep "1/1"; then
-            sleep 10
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_moodle(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço moodle está ativo
-        if docker service ls --filter "name=moodle" | grep "1/1"; then
-            sleep 30
-            break
-        fi
-    
-        sleep 5
-    done
-}
-
-wait_tooljet(){
-    echo "Este processo pode demorar um pouco. Se levar mais de 10 minutos, cancele, pois algo deu errado."
-    while true; do
-        # Verifica se o serviço tooljet está ativo
-        if docker service ls --filter "name=tooljet" | grep "1/1"; then
-            sleep 30
-            break
-        fi
-    
-        sleep 5
-    done
+requisitar_outra_instalacao(){
+    read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+        return
+    else
+        cd
+        cd
+        clear
+        exit 1
+    fi
 }
 
 
@@ -2996,1277 +2225,40 @@ pegar_link_s3() {
 ## Criadores de banco de dados Postgres
 
 ## Criar banco do Chatwoot
-criar_banco_postgres_chatwoot() {
+criar_banco_postgres_da_stack() {
     while :; do
         if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
             CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
 
             # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot"
+            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$1"
 
             if [ $? -eq 0 ]; then
-                echo "O banco de dados chatwoot já existe."
+                echo "O banco de dados $1 já existe."
 
                 read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
                 if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
                     # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS chatwoot;"
-                    echo "Banco de dados chatwoot apagado com sucesso."
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS $1;"
+                    echo "Banco de dados $1 apagado com sucesso."
                     
                     # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot;"
+                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE $1;"
                     
-                    echo "Banco de dados chatwoot criado com sucesso."
+                    echo "Banco de dados $1 criado com sucesso."
                 else
                     echo "Usando o banco de dados existente."
                 fi
                 break
             else
                 # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot;"
+                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE $1;"
                 
                 # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot"
+                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$1"
 
                 if [ $? -eq 0 ]; then
-                    echo "Banco de dados chatwoot criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-
-## Criar banco do Chatwoot_UNO
-criar_banco_postgres_chatwoot_uno() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_uno"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados chatwoot_uno já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS chatwoot_uno;"
-                    echo "Banco de dados chatwoot_uno apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot_uno;"
-                    
-                    echo "Banco de dados chatwoot_uno criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot_uno;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_uno"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados chatwoot_uno criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_chatwoot_nestor() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_nestor"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados chatwoot_nestor já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS chatwoot_nestor;"
-                    echo "Banco de dados chatwoot_nestor apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot_nestor;"
-                    
-                    echo "Banco de dados chatwoot_nestor criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE chatwoot_nestor;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "chatwoot_nestor"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados chatwoot_nestor criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do N8N
-criar_banco_postgres_n8n_queue() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_queue"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados n8n_queue já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS n8n_queue;"
-                    echo "Banco de dados n8n_queue apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_queue;"
-                    
-                    echo "Banco de dados n8n_queue criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_queue;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_queue"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados n8n_queue criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_evolution() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "evolution"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados evolution já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS evolution;"
-                    echo "Banco de dados evolution apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE evolution;"
-                    
-                    echo "Banco de dados evolution criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE evolution;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "evolution"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados evolution criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do N8N_Quepasa
-criar_banco_postgres_n8n_quepasa() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_quepasa"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados n8n_quepasa já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS n8n_quepasa;"
-                    echo "Banco de dados n8n_quepasa apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_quepasa;"
-                    
-                    echo "Banco de dados n8n_quepasa criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE n8n_quepasa;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "n8n_quepasa"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados n8n_quepasa criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do Typebot
-criar_banco_postgres_typebot() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "typebot"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados typebot já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS typebot;"
-                    echo "Banco de dados typebot apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE typebot;"
-                    
-                    echo "Banco de dados typebot criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE typebot;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "typebot"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados typebot criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco de Flowise
-criar_banco_postgres_flowise() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "flowise"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados flowise já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS flowise;"
-                    echo "Banco de dados flowise apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE flowise;"
-                    
-                    echo "Banco de dados flowise criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE flowise;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "flowise"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados flowise criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do Nocobase
-criar_banco_postgres_nocobase() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocobase"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados nocobase já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS nocobase;"
-                    echo "Banco de dados nocobase apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nocobase;"
-                    
-                    # Conceder privilégios ao usuário postgres
-                    docker exec "$CONTAINER_ID" psql -U postgres -d nocobase -c "GRANT ALL PRIVILEGES ON DATABASE nocobase TO postgres;"
-                    
-                    echo "Banco de dados nocobase criado com sucesso e permissões concedidas."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nocobase;"
-                
-                # Conceder privilégios ao usuário postgres
-                docker exec "$CONTAINER_ID" psql -U postgres -d nocobase -c "GRANT ALL PRIVILEGES ON DATABASE nocobase TO postgres;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocobase"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados nocobase criado com sucesso e permissões concedidas."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do Botpress
-criar_banco_postgres_botpress() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "botpress"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados botpress já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS botpress;"
-                    echo "Banco de dados botpress apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE botpress;"
-                    
-                    echo "Banco de dados botpress criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE botpress;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "botpress"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados botpress criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do Calcom
-criar_banco_postgres_calcom() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "calcom"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados calcom já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS calcom;"
-                    echo "Banco de dados calcom apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE calcom;"
-                    
-                    echo "Banco de dados calcom criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE calcom;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "calcom"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados calcom criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do WoofedCRM
-criar_banco_pgvector_woofedcrm() {
-    while :; do
-        if docker ps -q --filter "name=^pgvector_pgvector" | grep -q .; then
-            CONTAINER_PGVECTOR_ID=$(docker ps -q --filter "name=pgvector")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
-
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados woofedcrm já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "DROP DATABASE IF EXISTS woofedcrm;"
-                    echo "Banco de dados woofedcrm apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
-                    
-                    echo "Banco de dados woofedcrm criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE woofedcrm;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "woofedcrm"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados woofedcrm criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do Formbricks
-criar_banco_postgres_formbricks() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "formbricks"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados formbricks já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS formbricks;"
-                    echo "Banco de dados formbricks apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE formbricks;"
-                    
-                    echo "Banco de dados formbricks criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE formbricks;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "formbricks"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados formbricks criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-
-## Criar banco do NocoDB
-criar_banco_postgres_nocodb() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocodb"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados nocodb já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS nocodb;"
-                    echo "Banco de dados nocodb apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nocodb;"
-                    
-                    echo "Banco de dados nocodb criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nocodb;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nocodb"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados nocodb criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do Langfuse
-criar_banco_postgres_langfuse() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "langfuse"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados langfuse já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS langfuse;"
-                    echo "Banco de dados nocodb apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE langfuse;"
-                    
-                    echo "Banco de dados langfuse criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE langfuse;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "langfuse"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados langfuse criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-## Criar banco do Metabase
-criar_banco_postgres_metabase() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "metabase"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados metabase já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS metabase;"
-                    echo "Banco de dados metabase apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE metabase;"
-                    
-                    echo "Banco de dados metabase criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE metabase;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "metabase"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados metabase criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_dify() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "dify"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados dify já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS dify;"
-                    echo "Banco de dados dify apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE dify;"
-                    
-                    echo "Banco de dados dify criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE dify;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "dify"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados dify criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_affine() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "affine"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados affine já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS affine;"
-                    echo "Banco de dados affine apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE affine;"
-                    
-                    echo "Banco de dados affine criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE affine;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "affine"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados affine criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_docuseal() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "docuseal"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados docuseal já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS docuseal;"
-                    echo "Banco de dados docuseal apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE docuseal;"
-                    
-                    echo "Banco de dados docuseal criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE docuseal;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "docuseal"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados docuseal criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_directus() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "directus"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados directus já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS directus;"
-                    echo "Banco de dados directus apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE directus;"
-                    
-                    echo "Banco de dados directus criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE directus;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "directus"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados directus criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_nextcloud() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nextcloud"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados nextcloud já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS nextcloud;"
-                    echo "Banco de dados nextcloud apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nextcloud;"
-                    
-                    echo "Banco de dados nextcloud criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE nextcloud;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "nextcloud"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados nextcloud criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_baserow() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "baserow"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados baserow já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS baserow;"
-                    echo "Banco de dados baserow apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE baserow;"
-                    
-                    echo "Banco de dados baserow criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE baserow;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "baserow"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados baserow criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_langflow() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "langflow"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados langflow já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS langflow;"
-                    echo "Banco de dados langflow apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE langflow;"
-                    
-                    echo "Banco de dados langflow criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE langflow;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "langflow"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados langflow criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_openproject() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "openproject"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados openproject já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS openproject;"
-                    echo "Banco de dados openproject apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE openproject;"
-                    
-                    echo "Banco de dados openproject criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE openproject;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "openproject"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados openproject criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_mattermost() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "mattermost"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados mattermost já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS mattermost;"
-                    echo "Banco de dados mattermost apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE mattermost;"
-                    
-                    echo "Banco de dados mattermost criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE mattermost;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "mattermost"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados mattermost criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_outline() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "outline"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados outline já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS outline;"
-                    echo "Banco de dados outline apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE outline;"
-                    
-                    echo "Banco de dados outline criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE outline;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "outline"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados outline criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_documenso() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "documenso"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados documenso já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS documenso;"
-                    echo "Banco de dados documenso apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE documenso;"
-                    
-                    echo "Banco de dados documenso criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE documenso;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "documenso"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados documenso criado com sucesso."
-                    break
-                else
-                    echo "Erro ao criar o banco de dados. Tentando novamente..."
-                fi
-            fi
-        else
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_postgres_tooljet() {
-    while :; do
-        if docker ps -q --filter "name=^postgres_postgres" | grep -q .; then
-            CONTAINER_ID=$(docker ps -q --filter "name=^postgres_postgres")
-
-            # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "tooljet"
-
-            if [ $? -eq 0 ]; then
-                echo "O banco de dados tooljet já existe."
-
-                read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                    # Apagar o banco de dados
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "DROP DATABASE IF EXISTS tooljet;"
-                    echo "Banco de dados tooljet apagado com sucesso."
-                    
-                    # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE tooljet;"
-                    
-                    echo "Banco de dados tooljet criado com sucesso."
-                else
-                    echo "Usando o banco de dados existente."
-                fi
-                break
-            else
-                # Criar o banco de dados
-                docker exec "$CONTAINER_ID" psql -U postgres -c "CREATE DATABASE tooljet;"
-                
-                # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "tooljet"
-
-                if [ $? -eq 0 ]; then
-                    echo "Banco de dados tooljet criado com sucesso."
+                    echo "Banco de dados $1 criado com sucesso."
                     break
                 else
                     echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -4332,312 +2324,36 @@ criar_banco_pgvector_zep() {
 ## Criadores de banco de dados Mysql
 
 ## Criar banco do Mautic
-criar_banco_mysql_mautic() {
+criar_banco_mysql_da_stack() {
     dados
     pegar_senha_mysql
     while :; do
         if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
             if [ -n "$CONTAINER_ID" ]; then
                 # Verificar se o banco de dados já existe
-                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
-                    echo "O banco de dados mautic já existe."
+                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$1';" | grep -qw "$1"; then
+                    echo "O banco de dados $1 já existe."
 
                     read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
                     if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
                         # Apagar o banco de dados
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE mautic;"
-                        echo "Banco de dados mautic apagado com sucesso."
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE $1;"
+                        echo "Banco de dados $1 apagado com sucesso."
 
                         # Criar o banco de dados novamente
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
+                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $1;"
+                        echo "Banco de dados $1 criado com sucesso."
+                    else
+                        echo "Usando o banco de dados existente."
+                    fi
+                    break
+                else
+                    # Criar o banco de dados
+                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $1;"
+                    
+                    # Verificar novamente se o banco de dados foi criado com sucesso
+                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$1';" | grep -qw "$1"; then
                         echo "Banco de dados mautic criado com sucesso."
-                    else
-                        echo "Usando o banco de dados existente."
-                    fi
-                    break
-                else
-                    # Criar o banco de dados
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE mautic;"
-                    
-                    # Verificar novamente se o banco de dados foi criado com sucesso
-                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'mautic';" | grep -qw "mautic"; then
-                        echo "Banco de dados mautic criado com sucesso."
-                        break
-                    else
-                        echo "Erro ao criar o banco de dados. Tentando novamente..."
-                    fi
-                fi
-            else
-                echo "Container MySQL não encontrado. Tentando novamente..."
-                sleep 5
-            fi
-        else
-            echo "Container MySQL não encontrado. Tentando novamente..."
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_mysql_wordpress() {
-    dados
-    pegar_senha_mysql
-    while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
-            if [ -n "$CONTAINER_ID" ]; then
-                # Verificar se o banco de dados já existe
-                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
-                    echo "O banco de dados $nome_site_wordpress já existe."
-
-                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                        # Apagar o banco de dados
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE $nome_site_wordpress;"
-                        echo "Banco de dados $nome_site_wordpress apagado com sucesso."
-
-                        # Criar o banco de dados novamente
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
-                        echo "Banco de dados $nome_site_wordpress criado com sucesso."
-                    else
-                        echo "Usando o banco de dados existente."
-                    fi
-                    break
-                else
-                    # Criar o banco de dados
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE $nome_site_wordpress;"
-                    
-                    # Verificar novamente se o banco de dados foi criado com sucesso
-                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$nome_site_wordpress';" | grep -qw "$nome_site_wordpress"; then
-                        echo "Banco de dados $nome_site_wordpress criado com sucesso."
-                        break
-                    else
-                        echo "Erro ao criar o banco de dados. Tentando novamente..."
-                    fi
-                fi
-            else
-                echo "Container MySQL não encontrado. Tentando novamente..."
-                sleep 5
-            fi
-        else
-            echo "Container MySQL não encontrado. Tentando novamente..."
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_mysql_strapi() {
-    dados
-    pegar_senha_mysql
-    while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
-            if [ -n "$CONTAINER_ID" ]; then
-                # Verificar se o banco de dados já existe
-                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
-                    echo "O banco de dados strapi já existe."
-
-                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                        # Apagar o banco de dados
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE strapi;"
-                        echo "Banco de dados strapi apagado com sucesso."
-
-                        # Criar o banco de dados novamente
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
-                        echo "Banco de dados strapi criado com sucesso."
-                    else
-                        echo "Usando o banco de dados existente."
-                    fi
-                    break
-                else
-                    # Criar o banco de dados
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE strapi;"
-                    
-                    # Verificar novamente se o banco de dados foi criado com sucesso
-                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'strapi';" | grep -qw "strapi"; then
-                        echo "Banco de dados strapi criado com sucesso."
-                        break
-                    else
-                        echo "Erro ao criar o banco de dados. Tentando novamente..."
-                    fi
-                fi
-            else
-                echo "Container MySQL não encontrado. Tentando novamente..."
-                sleep 5
-            fi
-        else
-            echo "Container MySQL não encontrado. Tentando novamente..."
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_mysql_humhub() {
-    dados
-    pegar_senha_mysql
-    while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
-            if [ -n "$CONTAINER_ID" ]; then
-                # Verificar se o banco de dados já existe
-                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'humhub';" | grep -qw "humhub"; then
-                    echo "O banco de dados humhub já existe."
-
-                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                        # Apagar o banco de dados
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE humhub;"
-                        echo "Banco de dados humhub apagado com sucesso."
-
-                        # Criar o banco de dados novamente
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE humhub;"
-                        echo "Banco de dados humhub criado com sucesso."
-                    else
-                        echo "Usando o banco de dados existente."
-                    fi
-                    break
-                else
-                    # Criar o banco de dados
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE humhub;"
-                    
-                    # Verificar novamente se o banco de dados foi criado com sucesso
-                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'humhub';" | grep -qw "humhub"; then
-                        echo "Banco de dados humhub criado com sucesso."
-                        break
-                    else
-                        echo "Erro ao criar o banco de dados. Tentando novamente..."
-                    fi
-                fi
-            else
-                echo "Container MySQL não encontrado. Tentando novamente..."
-                sleep 5
-            fi
-        else
-            echo "Container MySQL não encontrado. Tentando novamente..."
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_mysql_yourls() {
-    dados
-    pegar_senha_mysql
-    while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
-            if [ -n "$CONTAINER_ID" ]; then
-                # Verificar se o banco de dados já existe
-                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'yourls';" | grep -qw "yourls"; then
-                    echo "O banco de dados yourls já existe."
-
-                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                        # Apagar o banco de dados
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE yourls;"
-                        echo "Banco de dados yourls apagado com sucesso."
-
-                        # Criar o banco de dados novamente
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE yourls;"
-                        echo "Banco de dados yourls criado com sucesso."
-                    else
-                        echo "Usando o banco de dados existente."
-                    fi
-                    break
-                else
-                    # Criar o banco de dados
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE yourls;"
-                    
-                    # Verificar novamente se o banco de dados foi criado com sucesso
-                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'yourls';" | grep -qw "yourls"; then
-                        echo "Banco de dados yourls criado com sucesso."
-                        break
-                    else
-                        echo "Erro ao criar o banco de dados. Tentando novamente..."
-                    fi
-                fi
-            else
-                echo "Container MySQL não encontrado. Tentando novamente..."
-                sleep 5
-            fi
-        else
-            echo "Container MySQL não encontrado. Tentando novamente..."
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_mysql_glpi() {
-    dados
-    pegar_senha_mysql
-    while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
-            if [ -n "$CONTAINER_ID" ]; then
-                # Verificar se o banco de dados já existe
-                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'glpi';" | grep -qw "glpi"; then
-                    echo "O banco de dados glpi já existe."
-
-                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                        # Apagar o banco de dados
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE glpi;"
-                        echo "Banco de dados glpi apagado com sucesso."
-
-                        # Criar o banco de dados novamente
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE glpi;"
-                        echo "Banco de dados glpi criado com sucesso."
-                    else
-                        echo "Usando o banco de dados existente."
-                    fi
-                    break
-                else
-                    # Criar o banco de dados
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE glpi;"
-                    
-                    # Verificar novamente se o banco de dados foi criado com sucesso
-                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'glpi';" | grep -qw "glpi"; then
-                        echo "Banco de dados glpi criado com sucesso."
-                        break
-                    else
-                        echo "Erro ao criar o banco de dados. Tentando novamente..."
-                    fi
-                fi
-            else
-                echo "Container MySQL não encontrado. Tentando novamente..."
-                sleep 5
-            fi
-        else
-            echo "Container MySQL não encontrado. Tentando novamente..."
-            sleep 5
-        fi
-    done
-}
-
-criar_banco_mysql_easyapointments() {
-    dados
-    pegar_senha_mysql
-    while :; do
-        if CONTAINER_ID=$(docker ps -q --filter "name=^mysql_mysql"); then
-            if [ -n "$CONTAINER_ID" ]; then
-                # Verificar se o banco de dados já existe
-                if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'easyapointments';" | grep -qw "easyapointments"; then
-                    echo "O banco de dados easyapointments já existe."
-
-                    read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
-                    if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
-                        # Apagar o banco de dados
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "DROP DATABASE easyapointments;"
-                        echo "Banco de dados easyapointments apagado com sucesso."
-
-                        # Criar o banco de dados novamente
-                        docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE easyapointments;"
-                        echo "Banco de dados easyapointments criado com sucesso."
-                    else
-                        echo "Usando o banco de dados existente."
-                    fi
-                    break
-                else
-                    # Criar o banco de dados
-                    docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE easyapointments;"
-                    
-                    # Verificar novamente se o banco de dados foi criado com sucesso
-                    if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE 'easyapointments';" | grep -qw "easyapointments"; then
-                        echo "Banco de dados easyapointments criado com sucesso."
                         break
                     else
                         echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -5020,15 +2736,6 @@ if [ $? -eq 0 ]; then
 else
     echo "2/3 - [ OFF ] - Baixando e Instalando Docker"
 fi
-#docker swarm init --advertise-addr $ip > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "3/3 - [ OK ] - Iniciando Swarm"
-#else
-#    echo "3/3 - [ OFF ] - Iniciando Swarm"
-#    echo "Ops não foi possivel iniciar o swarm, tente novamente"
-#    sleep 5
-#    exit
-#fi
 sleep 5
 
 max_attempts=3
@@ -5149,6 +2856,7 @@ volumes:
 networks:
   $nome_rede_interna: ## Nome da rede interna
     external: true
+    attachable: true
     name: $nome_rede_interna ## Nome da rede interna
 EOL
 if [ $? -eq 0 ]; then
@@ -5172,8 +2880,8 @@ echo -e "\e[97m• ESPERANDO O TRAEFIK ESTAR ONLINE \e[33m[6/8]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_traefik para verificar se o serviço esta online
-wait_traefik
+## Usa o serviço wait_stack "traefik" para verificar se o serviço esta online
+wait_stack "traefik"
 
 ## Espera 30 segundos
 wait_30_sec
@@ -5273,7 +2981,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_portainer para verificar se o serviço esta online
-wait_portainer
+wait_stack "portainer"
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -5322,15 +3030,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗  ██████╗ ███████╗████████╗ ██████╗ ██████╗ ███████╗███████╗
@@ -5648,15 +3348,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 
 cd
 cd
@@ -5875,15 +3567,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 
 cd
 cd
@@ -6119,15 +3803,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 
 cd
 cd
@@ -6296,11 +3972,11 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot
+    criar_banco_postgres_da_stack "chatwoot"
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot
+    criar_banco_postgres_da_stack "chatwoot"
 fi
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
@@ -6571,7 +4247,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
-wait_chatwoot
+wait_stack "chatwoot"
 
 ## Mensagem de Passo
 echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
@@ -6674,15 +4350,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
@@ -6841,11 +4509,11 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot
+    criar_banco_postgres_da_stack "chatwoot"
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot
+    criar_banco_postgres_da_stack "chatwoot"
 fi
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
@@ -7114,7 +4782,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
-wait_chatwoot
+wait_stack "chatwoot"
 
 ## Mensagem de Passo
 echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
@@ -7217,15 +4885,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗
@@ -7323,12 +4983,13 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_evolution
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_evolution
 fi
+
+criar_banco_postgres_da_stack "evolution"
+
 if [ $? -eq 0 ]; then
     echo "1/1 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -7583,7 +5244,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
+wait_stack "evolution"
 
 cd dados_vps
 
@@ -7626,17 +5287,8 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
-
 
 
 ## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗    ██╗   ██╗ ██╗
@@ -7917,7 +5569,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
+wait_stack "evolution"
 
 cd dados_vps
 
@@ -7960,15 +5612,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗    ██╗   ██╗██████╗ 
@@ -8066,12 +5710,13 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_evolution
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_evolution
 fi
+
+criar_banco_postgres_da_stack "evolution"
+
 if [ $? -eq 0 ]; then
     echo "1/1 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -8326,7 +5971,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_evolution
+wait_stack "evolution"
 
 cd dados_vps
 
@@ -8369,15 +6014,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ███╗██╗███╗   ██╗██╗ ██████╗ 
@@ -8577,7 +6214,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_minio para verificar se o serviço esta online
-wait_minio
+wait_stack "minio"
 
 cd dados_vps
 
@@ -8626,15 +6263,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 
@@ -8825,12 +6454,12 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_typebot #> /dev/null 2>&1
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_typebot #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "typebot"
 
 ## Mensagem de Passo
 echo -e "\e[97m• PEGANDO DADOS DO MINIO \e[33m[3/5]\e[0m"
@@ -9029,7 +6658,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_typebot para verificar se o serviço esta online
-wait_typebot
+wait_stack "typebot"
 
 cd dados_vps
 
@@ -9072,15 +6701,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ██╗ █████╗ ███╗   ██╗
@@ -9239,13 +6860,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_n8n_queue #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_n8n_queue #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "n8n_queue"
 
 ## Verifica se tem redis, se tiver, continua, se não tiver instala
 verificar_container_redis
@@ -9524,7 +7144,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_n8n para verificar se o serviço esta online
-wait_n8n
+wait_stack "n8n"
 
 cd dados_vps
 
@@ -9570,15 +7190,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗██╗      ██████╗ ██╗    ██╗██╗███████╗███████╗
@@ -9690,13 +7302,13 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_flowise #> /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_flowise #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "flowise"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO FLOWISE \e[33m[3/4]\e[0m"
@@ -9790,7 +7402,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_flowise para verificar se o serviço esta online
-wait_flowise
+wait_stack "flowise"
 
 cd dados_vps
 
@@ -9830,15 +7442,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗  ██████╗      █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ██╗  ██╗
@@ -10028,7 +7632,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_pgadmin_4
+wait_stack "pgadmin"
 
 cd dados_vps
 
@@ -10071,15 +7675,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ██╗ ██████╗  ██████╗ ██████╗ ██████╗  █████╗ ███████╗███████╗
@@ -10200,12 +7796,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_nocobase #> /dev/null 2>&1
+        criar_banco_postgres_da_stack "nocobase"
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_nocobase #> /dev/null 2>&1
+        criar_banco_postgres_da_stack "nocobase"
 fi
 
 ## Mensagem de Passo
@@ -10308,8 +7904,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_nocobase para verificar se o serviço esta online
-wait_nocobase
+## Usa o serviço wait_stack "nocobase" para verificar se o serviço esta online
+wait_stack "nocobase"
 
 cd dados_vps
 
@@ -10353,15 +7949,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗  ██████╗ ████████╗██████╗ ██████╗ ███████╗███████╗███████╗
@@ -10454,13 +8042,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_botpress #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_botpress #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "botpress"
 
 verificar_container_redis
     if [ $? -eq 0 ]; then
@@ -10556,7 +8143,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_botpress para verificar se o serviço esta online
-wait_botpress
+wait_stack "botpress"
 
 cd dados_vps
 
@@ -10600,15 +8187,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 
@@ -10754,7 +8333,7 @@ wait_30_sec
 
 ## Cria banco de dados do site no mysql
 dados
-criar_banco_mysql_wordpress
+criar_banco_mysql_da_stack "$nome_site_wordpress"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO WORDPRESS \e[33m[4/7]\e[0m"
@@ -10848,7 +8427,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_wordpress para verificar se o serviço esta online
-wait_wordpress
+wait_stack "$nome_do_servico_wordpress"
 
 ## Mensagem de Passo
 echo -e "\e[97m• EDITANDO PHP.INI \e[33m[6/7]\e[0m"
@@ -10878,7 +8457,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_wordpress para verificar se o serviço esta online
-wait_wordpress
+wait_stack "wordpress"
 
 cd dados_vps
 
@@ -10912,15 +8491,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗  █████╗ ███████╗███████╗██████╗  ██████╗ ██╗    ██╗
@@ -11068,12 +8639,13 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_baserow
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_baserow
 fi
+
+criar_banco_postgres_da_stack "baserow"
+
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -11190,7 +8762,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_baserow para verificar se o serviço esta online
-wait_baserow
+wait_stack "baserow"
 
 cd dados_vps
 
@@ -11234,15 +8806,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ███╗ ██████╗ ███╗   ██╗ ██████╗  ██████╗ ██████╗ ██████╗ 
@@ -11417,8 +8981,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_mongodb
+## Usa o serviço wait_stack "mongodb" para verificar se o serviço esta online
+wait_stack "mongodb"
 
 cd dados_vps
 
@@ -11464,15 +9028,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗  █████╗ ██████╗ ██████╗ ██╗████████╗███╗   ███╗ ██████╗ 
@@ -11654,8 +9210,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_rabbitmq
+## Usa o serviço wait_stack "pgadmin_4" para verificar se o serviço esta online
+wait_stack "rabbit"
 
 cd dados_vps
 
@@ -11704,15 +9260,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗   ██╗██████╗ ████████╗██╗███╗   ███╗███████╗    ██╗  ██╗██╗   ██╗███╗   ███╗ █████╗ 
@@ -11866,8 +9414,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_pgadmin_4 para verificar se o serviço esta online
-wait_uptimekuma
+## Usa o serviço wait_stack "uptimekuma" para verificar se o serviço esta online
+wait_stack "uptime"
 
 cd dados_vps
 
@@ -11913,15 +9461,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗ █████╗ ██╗      ██████╗ ██████╗ ███╗   ███╗
@@ -12058,13 +9598,13 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_calcom #> /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_calcom #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "calcom"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO CAL.COM \e[33m[3/4]\e[0m"
@@ -12178,8 +9718,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_calcom para verificar se o serviço esta online
-wait_calcom
+## Usa o serviço wait_stack "calcom" para verificar se o serviço esta online
+wait_stack "calcom"
 
 cd dados_vps
 
@@ -12223,15 +9763,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ███╗ █████╗ ██╗   ██╗████████╗██╗ ██████╗
@@ -12351,12 +9883,12 @@ dados
 verificar_container_mysql
     if [ $? -eq 0 ]; then
         pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_mautic
     else
         ferramenta_mysql
         pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_mautic
     fi
+
+criar_banco_mysql_da_stack "mautic"
 
 ## Espera 30 segundos
 wait_30_sec
@@ -12563,8 +10095,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_calcom para verificar se o serviço esta online
-wait_mautic
+## Usa o serviço wait_stack "mautic" para verificar se o serviço esta online
+wait_stack "mautic"
 
 cd dados_vps
 
@@ -12613,15 +10145,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  █████╗ ██████╗ ██████╗ ███████╗███╗   ███╗██╗████████╗██╗  ██╗
@@ -12788,8 +10312,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_nocobase para verificar se o serviço esta online
-wait_appsmith
+## Usa o serviço wait_stack "nocobase" para verificar se o serviço esta online
+wait_stack "appsmith"
 
 cd dados_vps
 
@@ -12832,15 +10356,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗ ██████╗ ██████╗  █████╗ ███╗   ██╗████████╗
@@ -13022,8 +10538,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_nocobase para verificar se o serviço esta online
-wait_qdrant
+## Usa o serviço wait_stack "qdrant" para verificar se o serviço esta online
+wait_stack "qdrant"
 
 cd dados_vps
 
@@ -13066,15 +10582,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗    ██╗ ██████╗  ██████╗ ███████╗███████╗██████╗      ██████╗██████╗ ███╗   ███╗
@@ -13462,8 +10970,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/7]\e[0m"
 wait_30_sec
 echo ""
 sleep 1
-## Usa o serviço wait_woofedcrm para verificar se o serviço esta online
-wait_woofedcrm
+## Usa o serviço wait_stack "woofedcrm" para verificar se o serviço esta online
+wait_stack "woofedcrm"
 
 ## Mensagem de Passo
 echo -e "\e[97m• CONFIGURANDO E MIGRANDO BANCO DE DADOS \e[33m[6/7]\e[0m"
@@ -13501,8 +11009,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[7/7]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_woofedcrm para verificar se o serviço esta online
-wait_woofedcrm
+## Usa o serviço wait_stack "woofedcrm" para verificar se o serviço esta online
+wait_stack "woofedcrm"
 
 cd dados_vps
 
@@ -13560,15 +11068,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗ ██████╗ ██████╗ ███╗   ███╗██████╗ ██████╗ ██╗ ██████╗██╗  ██╗███████╗
@@ -13712,14 +11212,14 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
-        criar_banco_postgres_formbricks #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_formbricks #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "formbricks"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO FORMBRICKS \e[33m[3/4]\e[0m"
@@ -13861,8 +11361,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_formbricks para verificar se o serviço esta online
-wait_formbricks
+## Usa o serviço wait_stack "formbricks" para verificar se o serviço esta online
+wait_stack "formbricks"
 
 cd dados_vps
 
@@ -13905,15 +11405,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ██╗ ██████╗  ██████╗ ██████╗ ██████╗ ██████╗ 
@@ -14006,13 +11498,13 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_nocodb #> /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_nocodb #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "nocodb"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO NOCODB \e[33m[3/4]\e[0m"
@@ -14098,7 +11590,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_nocodb para verificar se o serviço esta online
-wait_nocodb
+wait_stack "nocobase"
 
 cd dados_vps
 
@@ -14142,15 +11634,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗      █████╗ ███╗   ██╗ ██████╗ ███████╗██╗   ██╗███████╗███████╗
@@ -14243,13 +11727,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_langfuse #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_langfuse #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "langfuse"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO LANGFUSE \e[33m[3/4]\e[0m"
@@ -14346,7 +11829,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_langfuse para verificar se o serviço esta online
-wait_langfuse
+wait_stack "langfuse"
 
 cd dados_vps
 
@@ -14390,15 +11873,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ███╗███████╗████████╗ █████╗ ██████╗  █████╗ ███████╗███████╗
@@ -14491,13 +11966,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_metabase #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_metabase #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "metabase"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO METABASE \e[33m[3/4]\e[0m"
@@ -14591,8 +12065,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_metabase para verificar se o serviço esta online
-wait_metabase
+## Usa o serviço wait_stack "metabase" para verificar se o serviço esta online
+wait_stack "metabase"
 
 cd dados_vps
 
@@ -14636,15 +12110,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗ ██████╗  ██████╗  ██████╗ 
@@ -14839,7 +12305,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_odoo para verificar se o serviço esta online
-wait_odoo
+wait_stack "odoo"
 
 cd dados_vps
 
@@ -14883,15 +12349,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
@@ -15050,12 +12508,13 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot_uno
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot_uno
 fi
+
+criar_banco_postgres_da_stack "chatwoot_uno"
+
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -15237,7 +12696,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
-wait_chatwoot_uno
+wait_stack "chatwoot_uno"
 
 ## Mensagem de Passo
 echo -e "\e[97m• REINICIANDO CHATWOOT \e[33m[5/6]\e[0m"
@@ -15340,15 +12799,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗██╗  ██╗ █████╗ ████████╗██╗    ██╗ ██████╗  ██████╗ ████████╗
@@ -15518,12 +12969,13 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot_nestor
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_chatwoot_nestor
 fi
+
+criar_banco_postgres_da_stack "chatwoot_nestor"
+
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -15794,7 +13246,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_chatwoot_nestor para verificar se o serviço esta online
-wait_chatwoot_nestor
+wait_stack "chatwoot_nestor"
 
 ## Mensagem de Passo
 echo -e "\e[97m• PREPARANDO BANCO DE DADOS  \e[33m[5/5]\e[0m"
@@ -15878,15 +13330,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗   ██╗███╗   ██╗ ██████╗      █████╗ ██████╗ ██╗
@@ -16192,7 +13636,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_unoapi para verificar se o serviço esta online
-wait_unoapi
+wait_stack "unoapi_unoapi"
 
 cd dados_vps
 
@@ -16234,15 +13678,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ██╗ █████╗ ███╗   ██╗     ██████╗ ██████╗ ███╗   ███╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗███████╗
@@ -16377,13 +13813,13 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_n8n_quepasa #> /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_n8n_quepasa #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "n8n_quepasa"
 
 ## Verifica se tem redis, se tiver, continua, se não tiver instala
 verificar_container_redis
@@ -16708,7 +14144,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_n8n para verificar se o serviço esta online
-wait_n8n_quepasa
+wait_stack "n8n_quepasa"
 
 cd dados_vps
 
@@ -16754,15 +14190,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 
@@ -17001,7 +14429,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_quepasa para verificar se o serviço esta online
-wait_quepasa
+wait_stack "quepasa"
 
 cd dados_vps
 
@@ -17047,15 +14475,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗ ██╗███████╗██╗   ██╗ █████╗ ██╗
@@ -17259,12 +14679,12 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_dify #> /dev/null 2>&1
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_dify #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "dify"
 
 verificar_container_redis
     if [ $? -eq 0 ]; then
@@ -17655,7 +15075,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_dify para verificar se o serviço esta online
-wait_dify
+wait_stack "dify"
 
 cd dados_vps
 
@@ -17698,15 +15118,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗ ██╗     ██╗      █████╗ ███╗   ███╗ █████╗ 
@@ -17911,7 +15323,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_nocodb para verificar se o serviço esta online
-wait_ollama
+wait_stack "ollama"
 
 cd dados_vps
 
@@ -17953,15 +15365,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ferramenta_remover_stack() {
@@ -18142,13 +15546,13 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_affine #> /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_affine #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "affine"
 
 verificar_container_redis
     if [ $? -eq 0 ]; then
@@ -18269,8 +15673,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_affine para verificar se o serviço esta online
-wait_affine
+## Usa o serviço wait_stack "affine" para verificar se o serviço esta online
+wait_stack "affine"
 
 cd dados_vps
 
@@ -18314,15 +15718,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗  ██████╗  ██████╗██╗   ██╗███████╗███████╗ █████╗ ██╗     
@@ -18462,13 +15858,13 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_docuseal #> /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_docuseal #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "docuseal"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO DOCUSEAL \e[33m[3/4]\e[0m"
@@ -18571,7 +15967,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_docuseal para verificar se o serviço esta online
-wait_docuseal
+wait_stack "docuseal"
 
 cd dados_vps
 
@@ -18615,15 +16011,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗ ██╗██████╗ ███████╗ ██████╗████████╗██╗   ██╗███████╗
@@ -18812,13 +16200,14 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_directus #> /dev/null 2>&1
 
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_directus #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "directus"
+
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -18954,8 +16343,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_directus para verificar se o serviço esta online
-wait_directus
+## Usa o serviço wait_tack "directus" para verificar se o serviço esta online
+wait_stack "directus"
 
 cd dados_vps
 
@@ -18999,15 +16388,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗   ██╗ █████╗ ██╗   ██╗██╗  ████████╗██╗    ██╗ █████╗ ██████╗ ██████╗ ███████╗███╗   ██╗
@@ -19228,7 +16609,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_vaultwarden para verificar se o serviço esta online
-wait_vaultwarden
+wait_stack "vaultwarden"
 
 cd dados_vps
 
@@ -19271,15 +16652,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗ ██████╗  █████╗ ███████╗ █████╗ ███╗   ██╗ █████╗ 
@@ -19665,7 +17038,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_monitor para verificar se o serviço esta online
-wait_monitor
+wait_stack "monitor"
 
 cd dados_vps
 
@@ -19721,15 +17094,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ██╗███████╗██╗  ██╗████████╗ ██████╗██╗      ██████╗ ██╗   ██╗██████╗ 
@@ -19843,13 +17208,13 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_nextcloud #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_nextcloud #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "nextcloud"
+
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -20024,15 +17389,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗████████╗██████╗  █████╗ ██████╗ ██╗
@@ -20121,20 +17478,20 @@ echo ""
 sleep 1
 
 verificar_container_mysql
-    if [ $? -eq 0 ]; then
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_strapi
-    else
-        ferramenta_mysql > /dev/null 2>&1
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_strapi
-    fi
+if [ $? -eq 0 ]; then
+    pegar_senha_mysql > /dev/null 2>&1
+else
+    ferramenta_mysql > /dev/null 2>&1
+    pegar_senha_mysql > /dev/null 2>&1
+fi
 
-    if [ $? -eq 0 ]; then
+criar_banco_mysql_da_stack "strapi"
+
+if [ $? -eq 0 ]; then
     echo "1/1 - [ OK ] - Verificando/Instalando MySQL"
-    else
+else
     echo "1/1 - [ OFF ] - Verificando/Instalando MySQL"
-    fi
+fi
 
 ## Espera 30 segundos
 wait_30_sec
@@ -20232,8 +17589,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_strapi para verificar se o serviço esta online
-wait_strapi
+## Usa o serviço wait_stack "strapi" para verificar se o serviço esta online
+wait_stack "strapi"
 
 cd dados_vps
 
@@ -20277,15 +17634,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██████╗ ██╗  ██╗██████╗     ███╗   ███╗██╗   ██╗     █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗
@@ -20474,8 +17823,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_phpmyadmin para verificar se o serviço esta online
-wait_phpmyadmin
+## Usa o serviço wait_stack "phpmyadmin" para verificar se o serviço esta online
+wait_stack "phpmyadmin"
 
 cd dados_vps
 
@@ -20519,15 +17868,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗██╗   ██╗██████╗  █████╗ ██████╗  █████╗ ███████╗███████╗
@@ -21491,8 +18832,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_supabase para verificar se o serviço esta online
-wait_supabase
+## Usa o serviço wait_stack "supabase" para verificar se o serviço esta online
+wait_stack "supabase"
 
 cd dados_vps
 
@@ -21547,15 +18888,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ██╗████████╗███████╗██╗   ██╗
@@ -21752,7 +19085,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_ntfy para verificar se o serviço esta online
-wait_ntfy
+wait_stack "ntfy"
 
 cd dados_vps
 
@@ -21799,15 +19132,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗      ██████╗ ██╗    ██╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗ 
@@ -22152,8 +19477,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_lowcoder para verificar se o serviço esta online
-wait_lowcoder
+## Usa o serviço wait_stack "lowcoder" para verificar se o serviço esta online
+wait_stack "lowcoder"
 
 cd dados_vps
 
@@ -22198,15 +19523,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗  ██╗██╗   ██╗███╗   ███╗██╗  ██╗██╗   ██╗██████╗ 
@@ -22397,14 +19714,14 @@ sleep 1
 dados
 
 verificar_container_mysql
-    if [ $? -eq 0 ]; then
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_humhub
-    else
-        ferramenta_mysql
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_humhub
-    fi
+if [ $? -eq 0 ]; then
+    pegar_senha_mysql > /dev/null 2>&1
+else
+    ferramenta_mysql
+    pegar_senha_mysql > /dev/null 2>&1
+fi
+
+criar_banco_mysql_da_stack "humhub"
 
 ## Espera 30 segundos
 wait_30_sec
@@ -22416,11 +19733,11 @@ sleep 1
 
 ## Cansei já de explicar o que isso faz kkkk
 verificar_container_redis
-    if [ $? -eq 0 ]; then
-        sleep 1
-    else
-        ferramenta_redis > /dev/null 2>&1
-    fi
+if [ $? -eq 0 ]; then
+    sleep 1
+else
+    ferramenta_redis > /dev/null 2>&1
+fi
 
 sleep 3
 
@@ -22542,7 +19859,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_calcom para verificar se o serviço esta online
-wait_humhub
+wait_stack "humhub"
 
 cd dados_vps
 
@@ -22602,15 +19919,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗      █████╗ ███╗   ██╗ ██████╗ ███████╗██╗      ██████╗ ██╗    ██╗
@@ -22726,12 +20035,12 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_langflow #> /dev/null 2>&1
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_langflow #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "langflow"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO LANGFLOW \e[33m[3/4]\e[0m"
@@ -22829,8 +20138,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_langflow para verificar se o serviço esta online
-wait_langflow
+## Usa o serviço wait_stack "langflow" para verificar se o serviço esta online
+wait_stack "langflow"
 
 cd dados_vps
 
@@ -22873,15 +20182,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##███████╗███████╗██████╗ 
@@ -23112,8 +20413,10 @@ stack_editavel # > /dev/null 2>&1
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
+
 ## Usa o serviço wait_zep para verificar se o serviço esta online
-wait_zep
+wait_stack "zep"
+
 wait_30_sec
 
 cd dados_vps
@@ -23156,15 +20459,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗ ██████╗ ███████╗███╗   ██╗    ██████╗ ██████╗  ██████╗      ██╗███████╗ ██████╗████████╗
@@ -23257,13 +20552,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_openproject #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_openproject #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "openproject"
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
@@ -23384,8 +20678,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_openproject para verificar se o serviço esta online
-wait_openproject
+## Usa o serviço wait_stack "openproject" para verificar se o serviço esta online
+wait_stack "openproject"
 
 cd dados_vps
 
@@ -23428,15 +20722,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ██╗   ██╗ ██████╗ ██╗   ██╗██████╗ ██╗     ███████╗
@@ -23543,15 +20829,15 @@ sleep 1
 
 ## Cansei já de explicar o que isso faz kkkk
 verificar_container_mysql
-    if [ $? -eq 0 ]; then
-        sleep 1
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_yourls
-    else
-        ferramenta_mysql
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_yourls
-    fi
+if [ $? -eq 0 ]; then
+    sleep 1
+    pegar_senha_mysql > /dev/null 2>&1
+else
+    ferramenta_mysql
+    pegar_senha_mysql > /dev/null 2>&1
+fi
+
+criar_banco_mysql_da_stack "yourls"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO YOURLS \e[33m[3/4]\e[0m"
@@ -23626,8 +20912,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_yourls para verificar se o serviço esta online
-wait_yourls
+## Usa o serviço wait_stack "yourls" para verificar se o serviço esta online
+wait_stack "yourls"
 
 cd dados_vps
 
@@ -23671,15 +20957,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ████████╗██╗    ██╗███████╗███╗   ██╗████████╗██╗   ██╗ ██████╗██████╗ ███╗   ███╗
@@ -24014,8 +21292,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_twentycrm para verificar se o serviço esta online
-wait_twentycrm
+## Usa o serviço wait_stack "twentycrm" para verificar se o serviço esta online
+wait_stack "twentycrm"
 
 cd dados_vps
 
@@ -24059,15 +21337,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███╗   ███╗ █████╗ ████████╗████████╗███████╗██████╗ ███╗   ███╗ ██████╗ ███████╗████████╗
@@ -24161,13 +21431,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_mattermost #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_mattermost #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "mattermost"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO MATTERMOST \e[33m[3/4]\e[0m"
@@ -24269,8 +21538,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_mattermost para verificar se o serviço esta online
-wait_mattermost
+## Usa o serviço wait_stack "mattermost" para verificar se o serviço esta online
+wait_stack "mattermost"
 
 cd dados_vps
 
@@ -24314,15 +21583,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##   ██████╗ ██╗   ██╗████████╗██╗     ██╗███╗   ██╗███████╗
@@ -24445,13 +21706,12 @@ verificar_container_postgres
 if [ $? -eq 0 ]; then
         sleep 1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_outline #> /dev/null 2>&1
-
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_outline #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "outline"
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
@@ -24594,8 +21854,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_outline para verificar se o serviço esta online
-wait_outline
+## Usa o serviço wait_stack "outline" para verificar se o serviço esta online
+wait_stack "outline"
 
 cd dados_vps
 
@@ -24639,15 +21899,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗ ██████╗  ██████╗ █████╗ ██╗     ██████╗  ██████╗  █████╗ ██████╗ ██████╗ 
@@ -24807,7 +22059,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_focalboard para verificar se o serviço esta online
-wait_focalboard
+wait_stack "focalboard"
 
 cd dados_vps
 
@@ -24851,15 +22103,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  ██████╗ ██╗     ██████╗ ██╗
@@ -24949,14 +22193,14 @@ sleep 1
 
 ## Cansei já de explicar o que isso faz kkkk
 verificar_container_mysql
-    if [ $? -eq 0 ]; then
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_glpi
-    else
-        ferramenta_mysql
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_glpi
-    fi
+if [ $? -eq 0 ]; then
+    pegar_senha_mysql > /dev/null 2>&1
+else
+    ferramenta_mysql
+    pegar_senha_mysql > /dev/null 2>&1
+fi
+
+criar_banco_mysql_da_stack "glpi"
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO GLPI \e[33m[3/4]\e[0m"
@@ -25036,8 +22280,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_glpi para verificar se o serviço esta online
-wait_glpi
+## Usa o serviço wait_stack "glpi" para verificar se o serviço esta online
+wait_stack "glpi"
 
 cd dados_vps
 
@@ -25095,15 +22339,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ##  █████╗ ███╗   ██╗██╗   ██╗████████╗██╗  ██╗██╗███╗   ██╗ ██████╗     ██╗     ██╗     ███╗   ███╗
@@ -25298,8 +22534,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_anythingllm para verificar se o serviço esta online
-wait_anythingllm
+## Usa o serviço wait_stack "anythingllm" para verificar se o serviço esta online
+wait_stack "anythingllm"
 
 cd dados_vps
 
@@ -25343,15 +22579,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗██╗  ██╗ ██████╗ █████╗ ██╗     ██╗██████╗ ██████╗  █████╗ ██╗    ██╗
@@ -25511,8 +22739,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_excalidraw para verificar se o serviço esta online
-wait_excalidraw
+## Usa o serviço wait_stack "excalidraw" para verificar se o serviço esta online
+wait_stack "excalidraw"
 
 cd dados_vps
 
@@ -25556,15 +22784,7 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
 }
 
 ## ███████╗ █████╗ ███████╗██╗   ██╗██╗                                                                 
@@ -25662,14 +22882,14 @@ sleep 1
 dados
 
 verificar_container_mysql
-    if [ $? -eq 0 ]; then
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_easyapointments
-    else
-        ferramenta_mysql
-        pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_easyapointments
-    fi
+if [ $? -eq 0 ]; then
+    pegar_senha_mysql > /dev/null 2>&1
+else
+    ferramenta_mysql
+    pegar_senha_mysql > /dev/null 2>&1
+fi
+
+criar_banco_mysql_da_stack "easyapointments"
 
 ## Espera 30 segundos
 wait_30_sec
@@ -25781,8 +23001,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_easyappointments para verificar se o serviço esta online
-wait_easyappointments
+## Usa o serviço wait_stack "easyappointments" para verificar se o serviço esta online
+wait_stack "easyappointments"
 
 cd dados_vps
 
@@ -25826,15 +23046,8 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
+
 }
 
 ## ██████╗  ██████╗  ██████╗██╗   ██╗███╗   ███╗███████╗███╗   ██╗███████╗ ██████╗ 
@@ -26006,12 +23219,12 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_documenso #> /dev/null 2>&1
     else
         ferramenta_postgres #> /dev/null 2>&1
         pegar_senha_postgres > /dev/null 2>&1
-        criar_banco_postgres_documenso #> /dev/null 2>&1
 fi
+
+criar_banco_postgres_da_stack "documenso"
 
 ## Mensagem de Passo
 echo -e "\e[97m• PEGANDO DADOS DO MINIO \e[33m[3/5]\e[0m"
@@ -26157,8 +23370,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_documenso para verificar se o serviço esta online
-wait_documenso
+## Usa o serviço wait_stack "documenso" para verificar se o serviço esta online
+wait_stack "documenso"
 
 cd dados_vps
 
@@ -26201,15 +23414,8 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
+
 }
 
 ## ███╗   ███╗ ██████╗  ██████╗ ██████╗ ██╗     ███████╗
@@ -26526,8 +23732,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_moodle para verificar se o serviço esta online
-wait_moodle
+## Usa o serviço wait_stack "moodle" para verificar se o serviço esta online
+wait_stack "moodle"
 sleep 120
 
 cd dados_vps
@@ -26577,15 +23783,8 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
+
 }
 
 ## ████████╗ ██████╗  ██████╗ ██╗          ██╗███████╗████████╗
@@ -26730,12 +23929,13 @@ sleep 1
 verificar_container_postgres
 if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_tooljet
 else
     ferramenta_postgres #> /dev/null 2>&1
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_tooljet
 fi
+
+criar_banco_postgres_da_stack "tooljet"
+
 if [ $? -eq 0 ]; then
     echo "1/1 - [ OK ] - Verificando/Instalando Postgres"
 else
@@ -26917,8 +24117,8 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
-## Usa o serviço wait_tooljet para verificar se o serviço esta online
-wait_tooljet
+## Usa o serviço wait_stack "tooljet" para verificar se o serviço esta online
+wait_stack "tooljet"
 
 cd dados_vps
 
@@ -26961,15 +24161,8 @@ echo ""
 creditos_msg
 
 ## Pergunta se deseja instalar outra aplicação
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
-        return
-    else
-        cd
-        cd
-        clear
-        exit 1
-    fi
+requisitar_outra_instalacao
+
 }
 
 ## Ignore esta parte, só para facilitar minha identificação com esta parte "XXOOXX"
@@ -27426,7 +24619,8 @@ traefik.fix() {
     echo ""
     
     echo "Verificando stack do Traefik"
-    wait_traefik
+    wait_stack "traefik"
+
     if [ $? -eq 0 ]; then
         echo "3/3 - [ OK ] - Verificando Stack"
     else
