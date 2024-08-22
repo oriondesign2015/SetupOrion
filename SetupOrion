@@ -1506,18 +1506,14 @@ stack_editavel(){
         echo "6/10 - [ OFF ] - Erro ao pegar dominio do Portainer"
     fi
 
-    ## Usa o token do portainer
-    #TOKEN=$(grep "Token: " /root/dados_vps/dados_portainer | awk -F "Token: " '{print $2}')
-    
-    ## Pega um token do portainer
-    #TOKEN=$(curl -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" https://$PORTAINER_URL/api/auth | jq -r .jwt)
-
     TOKEN=""
     Tentativa_atual=0
     Maximo_de_tentativas=6
     
     while [ -z "$TOKEN" ] || [ "$TOKEN" == "null" ]; do
-        TOKEN=$(curl -k -s -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" https://$PORTAINER_URL/api/auth | jq -r .jwt)
+        credentials="{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}"
+        portainer_auth_url="https://$PORTAINER_URL/api/auth"
+        TOKEN=$(curl -k -s -X POST -H "Content-Type: application/json" -d "$credentials" "$portainer_auth_url" | jq -r .jwt)
     
         Tentativa_atual=$((Tentativa_atual + 1))
     
@@ -1546,21 +1542,21 @@ stack_editavel(){
     if [ $? -eq 0 ]; then
         echo -e "7/10 - [ OK ] - Pegando token do Portainer: $bege$TOKEN$reset"
     fi
-    
-
-    ### Verifica se o token veio vazio
-    #if [ -z "$TOKEN" ] || [ "$TOKEN" == "null" ]; then
-    #    echo "Erro: Falha ao obter token. Preencha com suas credenciais do portainer a seguir."
-    #    sleep 5
-    #    criar_arquivo
-    #    #exit 1
-    #fi
 
     ## Salva dados no arquivo do portainer
-    echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
+    echo -e "[ PORTAINER ]\n\
+    Dominio do portainer: $PORTAINER_URL\n\
+    \n\
+    Usuario: $USUARIO\n\
+    \n\
+    Senha: $SENHA\n\
+    \n\
+    Token: $TOKEN" > "/root/dados_vps/dados_portainer"
 
     ## Pegando o id do portainer
-    ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" https://$PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
+    portainer_endpoints="https://$PORTAINER_URL/api/endpoints"
+    auth_header="Authorization: Bearer $TOKEN"
+    ENDPOINT_ID=$(curl -k -s -X GET -H $auth_header $portainer_endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
     if [ $? -eq 0 ]; then
         echo -e "8/10 - [ OK ] - Pegando ID do Portainer: $bege$ENDPOINT_ID$reset"
     else
@@ -1571,7 +1567,8 @@ stack_editavel(){
     #ENDPOINT_ID=1
     
     ## Pegando o ID do Swarm
-    SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" "https://$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm" | jq -r .ID)
+    portainer_swarm_endpoint="https://$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm"
+    SWARM_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" $portainer_swarm_endpoint | jq -r .ID)
     if [ $? -eq 0 ]; then
         echo -e "9/10 - [ OK ] - Pegando ID do Swarm: $bege$SWARM_ID$reset"
     else
@@ -1590,13 +1587,15 @@ stack_editavel(){
     response_output=$(mktemp)
 
     ## Fazendo deploy da stack pelo portainer
+    portainer_swarm_file_url="https://$PORTAINER_URL/api/stacks/create/swarm/file"
+    
     http_code=$(curl -s -o "$response_output" -w "%{http_code}" -k -X POST \
     -H "Authorization: Bearer $TOKEN" \
     -F "Name=$STACK_NAME" \
     -F "file=@$(pwd)/$STACK_NAME.yaml" \
     -F "SwarmID=$SWARM_ID" \
     -F "endpointId=$ENDPOINT_ID" \
-    "https://$PORTAINER_URL/api/stacks/create/swarm/file" 2> "$erro_output")
+    $portainer_swarm_file_url 2> "$erro_output")
 
     response_body=$(cat "$response_output")
 
@@ -1727,7 +1726,10 @@ verificar_token() {
         #echo "Usuário: $USUARIO"
         #echo "Senha: $SENHA"
 
-        RESPONSE=$(curl -s -w "\n%{http_code}" -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" "https://$PORTAINER_URL/api/auth")
+        credentials="{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}"
+        content_type_header="Content-Type: application/json"
+        portainer_auth_url="https://$PORTAINER_URL/api/auth"
+        RESPONSE=$(curl -s -w "\n%{http_code}" -k -X POST -H "$content_type_header" -d "$credentials" "$portainer_auth_url")
         TOKEN=$(echo "$RESPONSE" | sed '$d' | jq -r '.jwt')
         HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
 
@@ -1791,7 +1793,10 @@ verificar_token() {
 
 ## Função para atualizar o arquivo de dados do Portainer com o novo usuário e senha
 atualizar_arquivo() {
-    echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
+    echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\
+    \nUsuario: $USUARIO\n\n\
+    Senha: $SENHA\n\n\
+    Token: $TOKEN" > "/root/dados_vps/dados_portainer"
     echo -e "\nArquivo de dados do Portainer atualizado com sucesso!"
 }
 
@@ -1832,14 +1837,16 @@ verifica_stack_instalada(){
 
         return 1
     fi
+} 
 
-    ## Verificar se o Traefik está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "traefik"; then
+## Verifica se existe Docker, Portainer e Traefik na VPS
+verificar_docker_e_portainer_traefik() {
+    ## Verifica se o Docker está instalado
+    if ! command -v docker &> /dev/null; then
         clear
         erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[1] Traefik e Portainer${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
+        mostrar_mensagem_de_verificacao 1 "Traefik e Portainer"
+        
         echo ""
         echo "Voltando ao menu em 5 segundos."
         sleep 5
@@ -1849,6 +1856,12 @@ verifica_stack_instalada(){
 
         return 1
     fi
+
+    ## Verifica se o Portainer está instalado
+    verifica_stack_instalada "portainer" 1 "Traefik e Portainer"
+    
+    ## Verificar se o Traefik está instalado
+    verifica_stack_instalada "traefik" 1 "Traefik e Portainer"
 
     return 0
 }
@@ -1856,22 +1869,8 @@ verifica_stack_instalada(){
 ## Verifica se existe Minio
 verificar_antes_se_tem_minio() {
 
-    ## Verifica se o Portainer está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "minio"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 4 ] - MinIO${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
+    ## Verifica se o minio está instalado
+    verifica_stack_instalada "minio" 1 "MinIO"
 
     return 0
 }
@@ -1879,22 +1878,8 @@ verificar_antes_se_tem_minio() {
 ## Verifica se existe rabbitMQ
 verificar_antes_se_tem_rabbitmq() {
 
-    ## Verifica se o Portainer está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "rabbitmq"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 14 ] - RabbitMQ${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
+    ## Verifica se o RabbitMQ está instalado
+    verifica_stack_instalada "rabbitmq" 1 "RabbitMQ"
 
     return 0
 }
@@ -1902,55 +1887,13 @@ verificar_antes_se_tem_rabbitmq() {
 ## Verifica se existe Minio RabbitMQ e Chatwoot 
 verificar_antes_se_tem_minio_e_rabbitmq_e_chatwoot() {
     ## Verifica se o minio está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "minio"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 4 ] - MinIO${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
+    verificar_antes_se_tem_minio
 
     ## Verifica se o rabbitmq está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "rabbitmq"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 14 ] - RabbitMQ${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
+    verificar_antes_se_tem_rabbitmq
 
     ## Verificar se o chatwoot está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "chatwoot"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 2 ] - Chatwoot${reset} ou  \e[32m[ 26 ] - Chatwoot Nestor (ft. Francis) ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
+    verificar_stack_instalada "chatwoot" 2 "Chatwoot"
 
     return 0
 }
@@ -1958,38 +1901,10 @@ verificar_antes_se_tem_minio_e_rabbitmq_e_chatwoot() {
 ## Verifica se existe Minio e Qdrant
 verificar_antes_se_tem_minio_e_qdrant() {
     ## Verifica se o minio está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "minio"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 4 ] - MinIO${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
+    verificar_antes_se_tem_minio
 
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
-
-    ## Verifica se o rabbitmq está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "qdrant"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 19 ] - Qdrant${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
+    ## Verifica se o qdrant está instalado
+    verificar_stack_instalada "qdrant" 19 "Qdrant"
 
     return 0
 }
@@ -1998,21 +1913,7 @@ verificar_antes_se_tem_minio_e_qdrant() {
 verificar_antes_se_tem_mongo() {
 
     ## Verifica se o Portainer está instalado
-    if ! docker ps -a --format "{{.Names}}" | grep -q "mongodb"; then
-        clear
-        erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 13 ] - MongoDB${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
-
-        nome_menu
-        menu_instalador
-
-        return 1
-    fi
+    verificar_stack_instalada "mongodb" 13 "MongoDB"
 
     return 0
 }
@@ -2028,45 +1929,35 @@ verificar_container_postgres() {
 }
 
 ## Verificar Container PgVector
+verificar_container(){
+  container_name=$1
+  if docker ps -q --filter "name=$container_name" | grep -q .; then
+      return 0
+  else
+      return 1
+  fi
+}
 
 verificar_container_pgvector() {
-    if docker ps -q --filter "name=pgvector" | grep -q .; then
-        return 0
-    else
-        return 1
-    fi
+    verificar_container "pgvector"
 }
 
 ## Verificar Container Mysql
 
 verificar_container_mysql() {
-    if docker ps -q --filter "name=mysql" | grep -q .; then
-        echo "Container MySQL está em execução."
-        return 0
-    else
-        echo "Container MySQL não está em execução."
-        return 1
-    fi
+    verificar_container "mysql"
 }
 
 ## Verificar Container Redis
 
 verificar_container_redis() {
-    if docker ps -q --filter "name=redis" | grep -q .; then
-        return 0
-    else
-        return 1
-    fi
+    verificar_container "redis"
 }
 
 ## Verificar Container Minio
 
 verificar_container_minio() {
-    if docker ps -q --filter "name=minio" | grep -q .; then
-        return 0
-    else
-        return 1
-    fi
+    verificar_container "minio"
 }
 
 ## Esperar Postgres estar pronto
@@ -2128,11 +2019,17 @@ requisitar_outra_instalacao(){
 
 
 ## Pegar senha Postgres
+pegar_senha() {
+    variavel_senha=$1
+    local_arquivo=$2
+    grep "$variavel_senha" "$local_arquivo" | awk -F '=' '{print $2}'
+}
+
 
 pegar_senha_postgres() {
     while :; do
         if [ -f /root/postgres.yaml ]; then
-            senha_postgres=$(grep "POSTGRES_PASSWORD" /root/postgres.yaml | awk -F '=' '{print $2}')
+            senha_postgres=$(pegar_senha "POSTGRES_PASSWORD" "/root/postgres.yaml")
             break
         else
             sleep 5
