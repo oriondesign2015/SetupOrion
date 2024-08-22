@@ -1511,9 +1511,7 @@ stack_editavel(){
     Maximo_de_tentativas=6
     
     while [ -z "$TOKEN" ] || [ "$TOKEN" == "null" ]; do
-        credentials="{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}"
-        portainer_auth_url="https://$PORTAINER_URL/api/auth"
-        TOKEN=$(curl -k -s -X POST -H "Content-Type: application/json" -d "$credentials" "$portainer_auth_url" | jq -r .jwt)
+        TOKEN=$(curl -k -s -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" https://$PORTAINER_URL/api/auth | jq -r .jwt)
     
         Tentativa_atual=$((Tentativa_atual + 1))
     
@@ -1544,19 +1542,10 @@ stack_editavel(){
     fi
 
     ## Salva dados no arquivo do portainer
-    echo -e "[ PORTAINER ]\n\
-    Dominio do portainer: $PORTAINER_URL\n\
-    \n\
-    Usuario: $USUARIO\n\
-    \n\
-    Senha: $SENHA\n\
-    \n\
-    Token: $TOKEN" > "/root/dados_vps/dados_portainer"
+    echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
 
     ## Pegando o id do portainer
-    portainer_endpoints="https://$PORTAINER_URL/api/endpoints"
-    auth_header="Authorization: Bearer $TOKEN"
-    ENDPOINT_ID=$(curl -k -s -X GET -H $auth_header $portainer_endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
+    ENDPOINT_ID=$(curl -k -s -X GET -H "Authorization: Bearer $TOKEN" https://$PORTAINER_URL/api/endpoints | jq -r '.[] | select(.Name == "primary") | .Id')
     if [ $? -eq 0 ]; then
         echo -e "8/10 - [ OK ] - Pegando ID do Portainer: $bege$ENDPOINT_ID$reset"
     else
@@ -1587,15 +1576,13 @@ stack_editavel(){
     response_output=$(mktemp)
 
     ## Fazendo deploy da stack pelo portainer
-    portainer_swarm_file_url="https://$PORTAINER_URL/api/stacks/create/swarm/file"
-    
     http_code=$(curl -s -o "$response_output" -w "%{http_code}" -k -X POST \
     -H "Authorization: Bearer $TOKEN" \
     -F "Name=$STACK_NAME" \
     -F "file=@$(pwd)/$STACK_NAME.yaml" \
     -F "SwarmID=$SWARM_ID" \
     -F "endpointId=$ENDPOINT_ID" \
-    $portainer_swarm_file_url 2> "$erro_output")
+    "https://$PORTAINER_URL/api/stacks/create/swarm/file" 2> "$erro_output")
 
     response_body=$(cat "$response_output")
 
@@ -1729,7 +1716,8 @@ verificar_token() {
         credentials="{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}"
         content_type_header="Content-Type: application/json"
         portainer_auth_url="https://$PORTAINER_URL/api/auth"
-        RESPONSE=$(curl -s -w "\n%{http_code}" -k -X POST -H "$content_type_header" -d "$credentials" "$portainer_auth_url")
+        RESPONSE=$(curl -s -w "\n%{http_code}" -k -X POST -H "Content-Type: application/json" -d "{\"username\":\"$USUARIO\",\"password\":\"$SENHA\"}" "https://$PORTAINER_URL/api/auth")
+        
         TOKEN=$(echo "$RESPONSE" | sed '$d' | jq -r '.jwt')
         HTTP_STATUS=$(echo "$RESPONSE" | tail -n1)
 
@@ -1793,11 +1781,7 @@ verificar_token() {
 
 ## Função para atualizar o arquivo de dados do Portainer com o novo usuário e senha
 atualizar_arquivo() {
-    echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\
-    \nUsuario: $USUARIO\n\n\
-    Senha: $SENHA\n\n\
-    Token: $TOKEN" > "/root/dados_vps/dados_portainer"
-    echo -e "\nArquivo de dados do Portainer atualizado com sucesso!"
+    echo -e "[ PORTAINER ]\nDominio do portainer: $PORTAINER_URL\n\nUsuario: $USUARIO\n\nSenha: $SENHA\n\nToken: $TOKEN" > "/root/dados_vps/dados_portainer"
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
