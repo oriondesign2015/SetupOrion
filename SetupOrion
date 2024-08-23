@@ -5032,7 +5032,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution:
-    image: atendai/evolution-api:v2.0.9
+    image: atendai/evolution-api:v2.0.10
 
     volumes:
       - evolution_instances:/evolution/instances
@@ -5051,7 +5051,7 @@ services:
       
       ## Configuração do Cliente
       ## Pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-      - CONFIG_SESSION_PHONE_VERSION=2.2413.51
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1015901307
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -5426,7 +5426,7 @@ services:
 
     ## Definir versão do Whatsapp Web
     ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-    #- CONFIG_SESSION_PHONE_VERSION=2.2413.51
+    - CONFIG_SESSION_PHONE_VERSION=2,3000,1015901307
 
     ## Sobre os QR-Codes
     - QRCODE_LIMIT=1902
@@ -5778,7 +5778,7 @@ services:
       
       ## Configuração do Cliente
       ## Pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-      - CONFIG_SESSION_PHONE_VERSION=2.2413.51
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1015901307
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
