@@ -20447,7 +20447,7 @@ guarde_os_dados_msg
 echo -e "\e[32m[ ZEP ]\e[0m"
 echo ""
 
-echo -e "\e[97mDominio:\e[33m https://$url_zep\e[0m"
+echo -e "\e[97mDominio:\e[33m https://$url_zep/admin\e[0m"
 echo ""
 
 echo -e "\e[97mApiKey do Zep:\e[33m $apikey_zep\e[0m"
