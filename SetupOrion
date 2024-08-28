@@ -1807,16 +1807,11 @@ verifica_stack_instalada(){
     ## Verifica se o Portainer está instalado
     stack_name="$1"
     menu_num=$2
-    menu_Name="$3"
+    menu_name="$3"
     if ! docker ps -a --format "{{.Names}}" | grep -q "$stack_name"; then
         clear
         erro_msg
-        echo -e "Ops, parece que você não instalou a opção ${verde}[$menu_num] $menu_name${reset} ${branco}do nosso instalador.${reset}"
-        echo "Instale antes de tentar instalar esta aplicação."
-
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
+        mostrar_mensagem_de_verificacao $menu_num "$menu_name"
 
         nome_menu
         menu_instalador
