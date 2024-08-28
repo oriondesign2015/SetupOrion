@@ -4204,9 +4204,9 @@ while true; do
     
     ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
     if [ "$porta_smtp_chatwoot" -eq 465 ]; then
-     sobre_ssl=true
+      sobre_ssl=true
     else
-     sobre_ssl=false
+      sobre_ssl=false
     fi
     
     ## Limpa o terminal
