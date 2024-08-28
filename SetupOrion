@@ -1822,10 +1822,6 @@ verificar_docker_e_portainer_traefik() {
         clear
         erro_msg
         mostrar_mensagem_de_verificacao 1 "Traefik e Portainer"
-        
-        echo ""
-        echo "Voltando ao menu em 5 segundos."
-        sleep 5
 
         nome_menu
         menu_instalador
