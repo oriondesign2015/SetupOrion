@@ -1551,9 +1551,6 @@ stack_editavel(){
     else
         echo "8/10 - [ OFF ] - Erro ao pegar ID do Portainer"
     fi
-
-    ## Definindo id 1 do Portainer
-    #ENDPOINT_ID=1
     
     ## Pegando o ID do Swarm
     portainer_swarm_endpoint="https://$PORTAINER_URL/api/endpoints/$ENDPOINT_ID/docker/swarm"
@@ -2573,7 +2570,6 @@ sleep 1
 ## Nesse passo vamos estar instalando docker no modo swarm
 
 
-#ip=$(curl -s ifconfig.me)
 read -r ip _ <<<$(hostname -I)
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Pegando IP $ip"
