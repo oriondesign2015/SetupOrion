@@ -2128,41 +2128,41 @@ criar_banco_postgres_da_stack() {
 }
 
 ## Criar banco do Zep
-criar_banco_pgvector_zep() {
+criar_banco_pgvector_da_stack () {
     while :; do
         if docker ps -q --filter "name=^pgvector_pgvector" | grep -q .; then
             CONTAINER_PGVECTOR_ID=$(docker ps -q --filter "name=^pgvector_pgvector")
 
             # Verificar se o banco de dados já existe
-            docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "zep"
+            docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$1"
 
 
             if [ $? -eq 0 ]; then
-                echo "O banco de dados zep já existe."
+                echo "O banco de dados $1 já existe."
 
                 read -p "Deseja apagar e criar um novo banco de dados? (Y/N): " resposta
                 if [ "$resposta" == "Y" ] || [ "$resposta" == "y" ]; then
                     # Apagar o banco de dados
-                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "DROP DATABASE IF EXISTS zep;"
-                    echo "Banco de dados zep apagado com sucesso."
+                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "DROP DATABASE IF EXISTS $1;"
+                    echo "Banco de dados $1 apagado com sucesso."
                     
                     # Criar o banco de dados novamente
-                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE zep;"
+                    docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE $1;"
                     
-                    echo "Banco de dados zep criado com sucesso."
+                    echo "Banco de dados $1 criado com sucesso."
                 else
                     echo "Usando o banco de dados existente."
                 fi
                 break
             else
                 # Criar o banco de dados
-                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE zep;"
+                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -c "CREATE DATABASE $1;"
                 
                 # Verificar novamente se o banco de dados foi criado com sucesso
-                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "zep"
+                docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$1"
 
                 if [ $? -eq 0 ]; then
-                    echo "Banco de dados zep criado com sucesso."
+                    echo "Banco de dados $1 criado com sucesso."
                     break
                 else
                     echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -2210,7 +2210,7 @@ criar_banco_mysql_da_stack() {
                     
                     # Verificar novamente se o banco de dados foi criado com sucesso
                     if docker exec -it "$CONTAINER_ID" mysql -u root -p"$senha_mysql" -e "SHOW DATABASES LIKE '$1';" | grep -qw "$1"; then
-                        echo "Banco de dados mautic criado com sucesso."
+                        echo "Banco de dados $1 criado com sucesso."
                         break
                     else
                         echo "Erro ao criar o banco de dados. Tentando novamente..."
@@ -4868,7 +4868,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution:
-    image: atendai/evolution-api:v2.0.9
+    image: atendai/evolution-api:v2.1.0
 
     volumes:
       - evolution_instances:/evolution/instances
@@ -4887,7 +4887,7 @@ services:
       
       ## Configuração do Cliente
       ## Pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-      - CONFIG_SESSION_PHONE_VERSION=2.2413.51
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1015901307
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -5262,7 +5262,7 @@ services:
 
     ## Definir versão do Whatsapp Web
     ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-    #- CONFIG_SESSION_PHONE_VERSION=2.2413.51
+    - CONFIG_SESSION_PHONE_VERSION=2,3000,1015901307
 
     ## Sobre os QR-Codes
     - QRCODE_LIMIT=1902
@@ -5595,7 +5595,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution:
-    image: atendai/evolution-api:v2.0.9
+    image: atendai/evolution-api:v2.1.0
 
     volumes:
       - evolution_instances:/evolution/instances
@@ -5614,7 +5614,7 @@ services:
       
       ## Configuração do Cliente
       ## Pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-      - CONFIG_SESSION_PHONE_VERSION=2.2413.51
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1015901307
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -10529,11 +10529,11 @@ verificar_container_pgvector
 if [ $? -eq 0 ]; then
     echo ""
     pegar_senha_pgvector > /dev/null 2>&1
-    criar_banco_pgvector_woofedcrm #> /dev/null 2>&1
+    criar_banco_pgvector_da_stack "woofedcrm" #> /dev/null 2>&1
 else
     ferramenta_pgvector #> /dev/null 2>&1
     pegar_senha_pgvector > /dev/null 2>&1
-    criar_banco_pgvector_woofedcrm #> /dev/null 2>&1
+    criar_banco_pgvector_da_stack "woofedcrm" #> /dev/null 2>&1
 fi
 
 sleep 5
@@ -10815,7 +10815,7 @@ echo ""
 sleep 1
 
 #MIGRANDO BANCO DE DADOS DO WOOFED CRM
-container_name="  woofedcrm_web_orion"
+container_name="woofedcrm_web_orion"
 
 max_wait_time=1200
 
@@ -20138,11 +20138,11 @@ verificar_container_pgvector
 if [ $? -eq 0 ]; then
     echo ""
     pegar_senha_pgvector > /dev/null 2>&1
-    criar_banco_pgvector_zep #> /dev/null 2>&1
+    criar_banco_pgvector_da_stack "zep" #> /dev/null 2>&1
 else
     ferramenta_pgvector #> /dev/null 2>&1
     pegar_senha_pgvector > /dev/null 2>&1
-    criar_banco_pgvector_zep #> /dev/null 2>&1
+    criar_banco_pgvector_da_stack "zep" #> /dev/null 2>&1
 fi
 
 sleep 5
