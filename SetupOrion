@@ -1572,8 +1572,6 @@ stack_editavel(){
     erro_output=$(mktemp)
     response_output=$(mktemp)
 
-    echo "curl -s -o \"$response_output\" -w "%{http_code}" -k -X POST -H \"Authorization: Bearer $TOKEN\" -F \"Name=$STACK_NAME\" -F \"file=@$(pwd)/$STACK_NAME.yaml\" -F \"SwarmID=$SWARM_ID\" -F \"endpointId=$ENDPOINT_ID\" \"https://$PORTAINER_URL/api/stacks/create/swarm/file\" 2> \"$erro_output\""
-
     ## Fazendo deploy da stack pelo portainer
     http_code=$(curl -s -o "$response_output" -w "%{http_code}" -k -X POST \
     -H "Authorization: Bearer $TOKEN" \
