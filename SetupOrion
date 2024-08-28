@@ -2955,14 +2955,7 @@ else
     echo "Não foi possivel criar a stack do Postgres"
 fi
 STACK_NAME="postgres"
-#stack_editavel #> /dev/null 2>&1
 docker stack deploy --prune --resolve-image always -c postgres.yaml postgres > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Ops, não foi possivel subir a stack do Postgres."
-#fi
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -3350,14 +3343,6 @@ fi
 sleep 1
 STACK_NAME="redis"
 stack_editavel
-#stack_editavel > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c redis.yaml redis
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Ops, não foi possivel subir a stack do Redis."
-#fi
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -3482,15 +3467,7 @@ else
 fi
 
 STACK_NAME="mysql"
-stack_editavel #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Ops, não foi possivel subir a stack do Postgres."
-#fi
-
-#docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
+stack_editavel
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -3589,14 +3566,6 @@ fi
 
 STACK_NAME="mysql"
 stack_editavel
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Ops, não foi possivel subir a stack do Postgres."
-#fi
-
-#docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -4062,15 +4031,7 @@ else
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot"
-stack_editavel #> /dev/null 2>&1
-
-#docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Chatwoot"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO ${amarelo}[4/6]$reset"
@@ -4597,15 +4558,7 @@ else
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Chatwoot"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO ${amarelo}[4/6]$reset"
@@ -5057,15 +5010,7 @@ else
     echo "Não foi possivel criar a stack da Evolution API"
 fi
 STACK_NAME="evolution"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da Evolution API"
-#fi
+stack_editavel
 
 sleep 10
 
@@ -5382,15 +5327,7 @@ else
     echo "Não foi possivel criar a stack da Evolution API"
 fi
 STACK_NAME="evolution_v1"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c evolution_v1.yaml evolution > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da Evolution API"
-#fi
+stack_editavel
 
 sleep 10
 
@@ -5784,15 +5721,7 @@ else
     echo "Não foi possivel criar a stack da Evolution API"
 fi
 STACK_NAME="evolution_v2"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c evolution_v2.yaml evolution > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da Evolution API"
-#fi
+stack_editavel
 
 sleep 10
 
@@ -6029,15 +5958,7 @@ else
 fi
 sleep 1
 STACK_NAME="minio"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c minio.yaml minio
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Minio"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -6473,15 +6394,7 @@ else
     echo "Não foi possivel criar a stack do Typebot"
 fi
 STACK_NAME="typebot"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c typebot.yaml typebot > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Typebot"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[5/5]$reset"
@@ -6960,14 +6873,7 @@ else
     echo "Não foi possivel criar a stack do N8N"
 fi
 STACK_NAME="n8n"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c n8n.yaml n8n > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do N8N"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -7218,14 +7124,7 @@ else
     echo "Não foi possivel criar a stack do Flowise"
 fi
 STACK_NAME="flowise"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c flowise.yaml flowise  > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Flowise"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -7448,14 +7347,7 @@ else
     echo "Não foi possivel criar a stack do PgAdmin 4"
 fi
 STACK_NAME="pgadmin"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c pgadmin.yaml pgadmin  > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do PgAdmin 4"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -7721,14 +7613,7 @@ else
     echo "Não foi possivel criar a stack do Nocobase"
 fi
 STACK_NAME="nocobase"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c nocobase.yaml nocobase > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Nocobase"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -7959,14 +7844,7 @@ else
     echo "Não foi possivel criar a stack do Botpress"
 fi
 STACK_NAME="botpress"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c botpress.yaml botpress > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Botpress"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -8243,14 +8121,7 @@ else
     echo "Não foi possivel criar a stack do Wordpress"
 fi
 STACK_NAME="$nome_da_stack_wordpress_subir"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Wordpress"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[5/7]$reset"
@@ -8279,8 +8150,7 @@ cd
 
 docker service update --force ${nome_do_servico_wordpress}_${nome_do_servico_wordpress} 
 STACK_NAME="$nome_da_stack_wordpress_subir"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c $nome_da_stack_wordpress $nome_da_stack_wordpress_subir
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[7/7]$reset"
@@ -8578,14 +8448,7 @@ else
 fi
 
 STACK_NAME="baserow"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c baserow.yaml baserow #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Baserow"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -8798,14 +8661,7 @@ else
     echo "Não foi possivel criar a stack do MongoDB"
 fi
 STACK_NAME="mongodb"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c mongodb.yaml mongodb > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do MongoDB"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -9027,14 +8883,7 @@ else
     echo "Não foi possivel criar a stack do RabbitMQ"
 fi
 STACK_NAME="rabbitmq"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c rabbitmq.yaml rabbitmq > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do RabbitMQ"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -9231,14 +9080,7 @@ else
     echo "Não foi possivel criar a stack do Uptime Kuma"
 fi
 STACK_NAME="uptimekuma"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c uptimekuma.yaml uptimekuma #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Uptime Kuma"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -9535,14 +9377,7 @@ else
     echo "Não foi possivel criar a stack do CalCom"
 fi
 STACK_NAME="calcom"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c calcom.yaml calcom  > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do CalCom"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -9912,14 +9747,7 @@ else
     echo "Não foi possivel criar a stack do Mautic"
 fi
 STACK_NAME="mautic"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c mautic.yaml mautic > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Mautic"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -10128,15 +9956,7 @@ else
     echo "Não foi possivel criar a stack do Appsmith"
 fi
 STACK_NAME="appsmith"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c appsmith.yaml appsmith  > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Appsmith"
-#fi
-
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -10355,14 +10175,7 @@ else
     echo "Não foi possivel criar a stack do Qdrant"
 fi
 STACK_NAME="qdrant"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c qdrant.yaml qdrant  > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Qdrant"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -10787,14 +10600,7 @@ else
     echo "Não foi possivel criar a stack do WoofedCRM"
 fi
 STACK_NAME="woofedcrm"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c woofedcrm.yaml woofedcrm #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do WoofedCRM"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[5/7]$reset"
@@ -11178,14 +10984,7 @@ else
     echo "Não foi possivel criar a stack do Formbricks"
 fi
 STACK_NAME="formbricks"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c formbricks.yaml formbricks > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Formbricks"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -11406,14 +11205,7 @@ else
     echo "Não foi possivel criar a stack do NocoDB"
 fi
 STACK_NAME="nocodb"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c nocodb.yaml nocodb > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do NocoDB"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -11645,14 +11437,7 @@ else
     echo "Não foi possivel criar a stack do langfuse"
 fi
 STACK_NAME="langfuse"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c langfuse.yaml langfuse > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do langfuse"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -11882,14 +11667,7 @@ else
     echo "Não foi possivel criar a stack do metabase"
 fi
 STACK_NAME="metabase"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c metabase.yaml metabase > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do metabase"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -12121,14 +11899,7 @@ else
     echo "Não foi possivel criar a stack do odoo"
 fi
 STACK_NAME="odoo"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c odoo.yaml odoo > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Odoo"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -12512,14 +12283,7 @@ else
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot_uno"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c chatwoot_uno.yaml chatwoot_uno > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Chatwoot"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO ${amarelo}[4/6]$reset"
@@ -13062,14 +12826,7 @@ else
     echo "Não foi possivel criar a stack do Chatwoot"
 fi
 STACK_NAME="chatwoot_nestor"
-stack_editavel # > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Chatwoot"
-#fi
-#docker stack deploy --prune --resolve-image always -c chatwoot_nestor.yaml chatwoot_nestor > /dev/null 2>&1
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• ESPERANDO SERVIÇO DO CHATWOOT ESTAR PRONTO ${amarelo}[4/5]$reset"
@@ -13452,14 +13209,7 @@ else
     echo "Não foi possivel criar a stack do Uno API"
 fi
 STACK_NAME="unoapi"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c unoapi.yaml unoapi > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Uno API"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -13960,14 +13710,7 @@ else
     echo "Não foi possivel criar a stack do N8N Quepasa"
 fi
 STACK_NAME="n8n_quepasa"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c n8n_quepasa.yaml n8n_quepasa > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do N8N Quepasa"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -14245,14 +13988,7 @@ else
 
 fi
 STACK_NAME="quepasa"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c quepasa.yaml quepasa > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Quepasa"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -14891,14 +14627,7 @@ else
     echo "Não foi possivel criar a stack do Dify Ai"
 fi
 STACK_NAME="dify"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c dify.yaml dify > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Dify Ai"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -15139,14 +14868,7 @@ else
     echo "Não foi possivel criar a stack do Ollama"
 fi
 STACK_NAME="ollama"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c ollama.yaml ollama > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Ollama"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -15490,14 +15212,7 @@ else
     echo "Não foi possivel criar a stack do Affine"
 fi
 STACK_NAME="affine"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c affine.yaml affine > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Affine"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -15783,14 +15498,7 @@ else
     echo "Não foi possivel criar a stack do docuseal"
 fi
 STACK_NAME="docuseal"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c docuseal.yaml docuseal > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do docuseal"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -16160,14 +15868,7 @@ else
     echo "Não foi possivel criar a stack do directus"
 fi
 STACK_NAME="directus"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c directus.yaml directus > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do directus"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -16425,14 +16126,7 @@ else
     echo "Não foi possivel criar a stack do vaultwarden"
 fi
 STACK_NAME="vaultwarden"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c vaultwarden.yaml vaultwarden > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do vaultwarden"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -16851,14 +16545,7 @@ else
     echo "Não foi possivel criar a stack do Monitor"
 fi
 STACK_NAME="monitor"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c monitor.yaml monitor > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do Monitor"
-#fi
+stack_editavel
 
 echo ""
 sleep 10
@@ -17152,14 +16839,8 @@ else
     echo "Não foi possivel criar a stack do nextcloud"
 fi
 STACK_NAME="nextcloud"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c nextcloud.yaml nextcloud > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do nextcloud"
-#fi
+stack_editavel
+
 echo ""
 
 ## Mensagem de Passo
@@ -17406,14 +17087,7 @@ else
     echo "Não foi possivel criar a stack do Strapi"
 fi
 STACK_NAME="strapi"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c strapi.yaml strapi #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Strapi"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -17640,14 +17314,7 @@ else
     echo "Não foi possivel criar a stack do phpmyadmin"
 fi
 STACK_NAME="phpmyadmin"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c phpmyadmin.yaml phpmyadmin #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do phpmyadmin"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -18649,14 +18316,7 @@ else
     echo "Não foi possivel criar a stack do supabase"
 fi
 STACK_NAME="supabase"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c supabase.yaml supabase > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do supabase"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -18898,15 +18558,7 @@ else
     echo "Não foi possivel criar a stack da Ntfy"
 fi
 STACK_NAME="ntfy"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c ntfy.yaml ntfy > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da Ntfy"
-#fi
+stack_editavel
 
 sleep 10
 
@@ -19291,15 +18943,7 @@ else
     echo "Não foi possivel criar a stack da Lowcoder"
 fi
 STACK_NAME="lowcoder"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c lowcoder.yaml lowcoder > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da lowcoder"
-#fi
+stack_editavel
 
 sleep 10
 
@@ -19675,14 +19319,7 @@ else
     echo "Não foi possivel criar a stack do HumHub"
 fi
 STACK_NAME="humhub"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c humhub.yaml humhub > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do humhub"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[5/5]$reset"
@@ -19954,15 +19591,7 @@ else
     echo "Não foi possivel criar a stack do langflow"
 fi
 STACK_NAME="langflow"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c langflow.yaml langflow > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do langflow"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -20232,14 +19861,7 @@ else
     echo "Não foi possivel criar a stack do Zep"
 fi
 STACK_NAME="zep"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c zep.yaml zep #> /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do zep"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -20495,14 +20117,7 @@ else
     echo "Não foi possivel criar a stack do OpenProject"
 fi
 STACK_NAME="openproject"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c openproject.yaml openproject > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do openproject"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -20729,14 +20344,7 @@ else
     echo "Não foi possivel criar a stack do Yourls"
 fi
 STACK_NAME="yourls"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c yourls.yaml yourls > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do yourls"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -21109,14 +20717,7 @@ else
     echo "Não foi possivel criar a stack do twentycrm"
 fi
 STACK_NAME="twentycrm"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c twentycrm.yaml twentycrm > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do twentycrm"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -21355,14 +20956,7 @@ else
     echo "Não foi possivel criar a stack do mattermost"
 fi
 STACK_NAME="mattermost"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c mattermost.yaml mattermost > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do mattermost"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -21671,14 +21265,7 @@ else
     echo "Não foi possivel criar a stack do Outline"
 fi
 STACK_NAME="outline"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c outline.yaml outline > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do outline"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[5/5]$reset"
@@ -21875,14 +21462,7 @@ else
     echo "Não foi possivel criar a stack do focalboard"
 fi
 STACK_NAME="focalboard"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c focalboard.yaml focalboard > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do focalboard"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -22097,14 +21677,7 @@ else
     echo "Não foi possivel criar a stack do GLPI"
 fi
 STACK_NAME="glpi"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c glpi.yaml glpi > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do glpi"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -22351,14 +21924,7 @@ else
     echo "Não foi possivel criar a stack do anythingllm"
 fi
 STACK_NAME="anythingllm"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c anythingllm.yaml anythingllm > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do anythingllm"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -22556,14 +22122,7 @@ else
     echo "Não foi possivel criar a stack do excalidraw"
 fi
 STACK_NAME="excalidraw"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c excalidraw.yaml excalidraw > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do excalidraw"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -22818,14 +22377,7 @@ else
     echo "Não foi possivel criar a stack do Easy!Appointments"
 fi
 STACK_NAME="easyappointments"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c easyappointments.yaml easyappointments > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do easyappointments"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[4/4]$reset"
@@ -23186,15 +22738,7 @@ else
     echo "Não foi possivel criar a stack do documenso"
 fi
 STACK_NAME="documenso"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c documenso.yaml documenso > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack do documenso"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[5/5]$reset"
@@ -23549,14 +23093,7 @@ else
     echo "Não foi possivel criar a stack do Moodle"
 fi
 STACK_NAME="moodle"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c moodle.yaml moodle > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do moodle"
-#fi
+stack_editavel
 
 ## Mensagem de Passo
 echo -e "${branco}• VERIFICANDO SERVIÇO ${amarelo}[3/3]$reset"
@@ -23931,15 +23468,7 @@ else
     echo "Não foi possivel criar a stack da TOOLJET"
 fi
 STACK_NAME="tooljet"
-stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c tooljet.yaml tooljet > /dev/null 2>&1
-
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel subir a stack da tooljet"
-#fi
+stack_editavel
 
 sleep 10
 
@@ -24364,8 +23893,6 @@ portainer.reset() {
     fi
 
     cd
-    #STACK_NAME="portainer"
-    #stack_editavel > /dev/null 2>&1
     docker stack deploy --prune --resolve-image always -c portainer.yaml portainer > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "4/7 - [ OK ]"
