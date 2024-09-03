@@ -17299,9 +17299,17 @@ services:
 
   cron:
     image: nextcloud:latest
+    entrypoint: /cron.sh
+
     volumes:
       - nextcloud_data:/var/www/html
-    entrypoint: /cron.sh
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -17336,15 +17344,20 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
+
 ## Usa o serviço wait_nextcloud para verificar se o serviço esta online
-wait_nextcloud
+wait_stack "nextcloud"
 
 cd dados_vps
 
 # Caminho do arquivo onde a substituição será feita
+
 arquivo_next_cloud="/var/lib/docker/volumes/nextcloud_data/_data/config/config.php"
 
 # Comando sed para substituir a linha, utilizando a variável
+sed -i "s/0 => 'localhost'/0 => '$url_nextcloud'/" "$arquivo_next_cloud"
+sleep 5
+## Só por garantia
 sed -i "s/0 => 'localhost'/0 => '$url_nextcloud'/" "$arquivo_next_cloud"
 
 sed -i "/'maintenance' => false,/a \  'overwriteprotocol' => 'https',\n  'trusted_proxies' => ['127.0.0.1']," "$arquivo_next_cloud"
