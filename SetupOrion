@@ -5124,7 +5124,7 @@ services:
 
       ## Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
-      - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/default
+      - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution
       - RABBITMQ_EXCHANGE_NAME=evolution
       - RABBITMQ_GLOBAL_ENABLED=false
       - RABBITMQ_EVENTS_APPLICATION_STARTUP=false
@@ -5851,7 +5851,7 @@ services:
 
       ## Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
-      - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/default
+      - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution
       - RABBITMQ_EXCHANGE_NAME=evolution
       - RABBITMQ_GLOBAL_ENABLED=false
       - RABBITMQ_EVENTS_APPLICATION_STARTUP=false
