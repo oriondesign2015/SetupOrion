@@ -1751,7 +1751,7 @@ wait_wordpress() {
     echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
 while true; do
     # Verifica se o serviço wordpress está ativo
-    if docker service ls --filter "name=$nome_do_servico_wordpress" | grep "1/1"; then
+    if docker service ls --filter "name=$nome_do_servico_wordpress_$nome_do_servico_wordpress" | grep "1/1"; then
         sleep 10
         break
     fi
@@ -8392,7 +8392,7 @@ cd dados_vps
 cat > $nome_do_servico_wordpress <<EOL
 [ WORDPRESS ]
 
-Dominio do Wordpress: https://$url_nocobase
+Dominio do Wordpress: https://$url_wordpress
 
 EOL
 
