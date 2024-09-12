@@ -22387,7 +22387,7 @@ while true; do
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 2/3\e[0m"
     read -r ip _ <<<$(hostname -I)
-    echo -en "\e[33mDigite o dominio do Qdrant (ex: http://$ip  ou http://qdrant.oriondesign.art.br): \e[0m" && read -r qdrant_anythingllm
+    echo -en "\e[33mDigite o dominio do Qdrant (ex: http://$ip:6333  ou http://qdrant.oriondesign.art.br:6333): \e[0m" && read -r qdrant_anythingllm
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
