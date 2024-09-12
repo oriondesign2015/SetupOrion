@@ -22487,8 +22487,6 @@ services:
       - QDRANT_ENDPOINT=$qdrant_anythingllm
       - QDRANT_API_KEY=$api_qdrant_anythingllm
 
-      - ENABLE_HTTPS=true
-
     deploy:
       mode: replicated
       replicas: 1
