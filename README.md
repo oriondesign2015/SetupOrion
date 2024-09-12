@@ -6,7 +6,8 @@
 </p>
 
 <p align="center">
-  <a href="https://chat.whatsapp.com/Ky7uW2hUIf7DfPbIDugKS5"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp"></a>    
+  <a href="https://oriondesign.art.br/whatsapp1"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp #01"></a>    
+  <a href="https://oriondesign.art.br/whatsapp2"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp #02"></a>    
   <a href="https://youtube.com/oriondesign_oficial"><img src="https://img.shields.io/badge/Playlist_do_Setup_Orion-FF0000?style=for-the-badge&labelColor=ffffff&logo=youtube&logoColor=FF0000" alt="Inscreva-se no meu canal"></a>
 </p>
 
@@ -32,12 +33,20 @@ bash <(curl -sSL setup.oriondesign.art.br)
 <p></p>
 <h3 align="center"><b>Ferramentas disponiveis</b></h3>
 <p align="center">
-  🔸 Traefik 🔸 Portainer 🔸 Chatwoot 🔸 Evolution API 🔸 MinIO 🔸 Typebot 🔸 N8N 🔸 Flowise 🔸 PgAdmin 4 🔸 Nocobase 🔸 Botpress 🔸 Wordpress 🔸 Baserow 🔸 MongoDB 🔸 RabbitMQ 🔸 Uptime Kuma 🔸 Calcom 🔸 Mautic 🔸 Appsmith 🔸 Qdrant 🔸 Woofed CRM 🔸 Formbricks 🔸 NocoDB 🔸 Langfuse 🔸 Metabase 🔸 Odoo 🔸 Uno API 🔸 Quepasa API 🔸 Docuseal 🔸 Grafana 🔸 Prometheus 🔸 cAdvisor 🔸 Dify AI 🔸 Ollama 🔸 Affine 🔸 Directus 🔸 VaultWarden 🔸 NextCloud 🔸Supabase
+  🔸 Traefik 🔸 Portainer 🔸 Chatwoot 🔸 Evolution API 🔸 MinIO 🔸 Typebot 🔸 N8N 🔸 Flowise 🔸 PgAdmin 4 🔸 Nocobase  🔸 Botpress  🔸 Wordpress 🔸 Baserow 🔸 MongoDB 🔸 RabbitMQ  🔸 Uptime Kuma 🔸 Cal.com 🔸 Mautic  🔸 Appsmith  🔸 Qdrant 🔸 Woofed CRM 🔸 Formbricks 🔸 NocoDB 🔸 Langfuse 🔸 Metabase 🔸 Odoo 🔸 Chatwoot Nestor 🔸 Uno API 🔸 N8N + Nodes Quepasa 🔸 Quepasa API 🔸 Docuseal 🔸 Grafana 🔸 Prometheus 🔸 cAdvisor 🔸 Dify AI 🔸 Ollama 🔸 Affine 🔸 Directus 🔸 VaultWarden 🔸 NextCloud 🔸 Strapi 🔸 PhpMyAdmin 🔸 Supabase 🔸 Ntfy 🔸 LowCoder  🔸 LangFlow 🔸 OpenProject 🔸 ZEP 🔸 HumHub  🔸 Yourls 🔸 TwentyCRM 🔸 Mattermost 🔸 Outline 🔸 Focalboard 🔸 GLPI 🔸 Anything LLM 🔸 Excalidraw 🔸 Easy!Apointments 🔸 Documeso 🔸 Moodle 🔸 ToolJet 🔸
 </p>
 
 <h1></h1>
 <h3 align="center">📌 Principais contribuidores</h3>
 <a align="center" href="https://github.com/oriondesign2015/setuporion/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=oriondesign2015/setuporion" />
+</a>
+
+<a href="https://star-history.com/#oriondesign2015/SetupOrion&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date" />
+ </picture>
 </a>
 

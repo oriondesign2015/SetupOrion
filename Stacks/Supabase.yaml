@@ -1,0 +1,546 @@
+version: "3.7"
+services:
+
+## Rode os seguintes comandos na sua VPS antes de fazer deploy desta stack:
+
+## Baixando github com os arquivos do Supabase
+## git clone --depth 1 https://github.com/supabase/supabase
+
+## Criando pasta "data" para os volumes
+## sudo mkdir -p /root/supabase/docker/volumes/db/data
+
+## Criando pasta "storage" para armazenamento de arquivos
+## sudo mkdir -p /root/supabase/docker/volumes/storage
+
+## Criando a pasta "postgresql/data" para o db
+## sudo mkdir -p /var/lib/postgresql/data
+
+## Crie suas credenciais ANON_KEY e SERVICE_KEY através do link: https://supabase.com/docs/guides/self-hosting/docker
+
+
+## APÓS ALTERAR, DELETE OS COMENTARIOS ABAIXO
+## 🟡🟡 ALTERE OS DADOS ABAIXO: 🟡🟡
+
+## Informações principais
+URL_DO_SUPABASE ## Url do Supabase
+NOME_DA_REDE_INTERNA ## Nome da Rede Interna
+SENHA_DO_POSTGRES ## Senha do Postgres
+
+## Dados de Usuario (não use caracteres especiais)
+USUARIO_SUPABASE ## Usuario para login no Supabase
+SENHA_SUPABASE ## Senha para login no Supabase
+
+## Key Aleatórias
+b6dd9bc0739e976e22f7c4edb5d0718f ## Key 32
+jqRoJQb1nx7MYVSQVYYFPngPcNfN3sl2xd7G7P7RBettYPG2AHgmOLv9EZenQSa4 ## Key 64
+
+## Gere em: https://supabase.com/docs/guides/self-hosting/docker
+KEY_DO_JWT ## JWT Secret
+KEY_DO_ANON ## ANON_KEY
+KEY_DO_SERVICE ## Key SERVICE_KEY
+
+## Dados S3 (MINIO)
+URL_DO_S3 ## URL do s3 (MINIO)
+SECRET_KEY_DO_S3 ## SECRET KEY
+ACCESS_KEY_DO_S3 ##  ACCESS KEY
+
+## 🟡🟡 ALTERE OS DADOS ACIMA: 🟡🟡
+## APÓS ALTERAR, DELETE OS COMENTARIOS ACIMA
+
+
+## --------------------------- ORION --------------------------- ##
+
+  studio:
+    image: supabase/studio:20240205-b145c86 ## Versão da imagem
+
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - '-e'
+        - "require('http').get('http://localhost:3000/api/profile', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
+      timeout: 5s
+      interval: 5s
+      retries: 3
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+    
+    environment:
+      ## Ativando Log Debug
+      - DEBUG=next:*
+
+      ## Configuração do Hostname
+      - HOSTNAME=0.0.0.0
+
+      ## Dados Postgres
+      - POSTGRES_PASSWORD=SENHA_DO_POSTGRES ## Senha do Postgres
+
+      ## Branding
+      - DEFAULT_ORGANIZATION_NAME=OrionDesign ## Nome da Empresa
+      - DEFAULT_PROJECT_NAME=SetupOrion ## Nome do Projeto
+
+      ## Urls
+      - SUPABASE_PUBLIC_URL=https://URL_DO_SUPABASE ## Link do supabase
+      - SUPABASE_URL=http://kong:8000
+      - STUDIO_PG_META_URL=http://meta:8080
+
+      ## Logflare
+      - LOGFLARE_API_KEY=b6dd9bc0739e976e22f7c4edb5d0718f ## Key aleatória
+      - LOGFLARE_URL=http://analytics:4000
+      - NEXT_PUBLIC_ENABLE_LOGS=true
+      - NEXT_ANALYTICS_BACKEND_PROVIDER=postgres
+
+      ## ANON_KEY & SERVICE_KEY
+      - SUPABASE_ANON_KEY=KEY_DO_ANON ## ANON_KEY
+      - SUPABASE_SERVICE_KEY=KEY_DO_SERVICE ## SERVICE_KEY
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+## --------------------------- ORION --------------------------- ##
+
+  kong:
+    image: kong:2.8.1 ## Versão da imagem
+    entrypoint: bash -c 'eval "echo \"$$(cat ~/temp.yml)\"" > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
+
+    volumes:
+      - /root/supabase/docker/volumes/api/kong.yml:/home/kong/temp.yml:ro
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+
+    environment:
+      ## Ativando Log Debug
+      - KONG_LOG_LEVEL=debug
+
+      ## Dados Login Supabase
+      - DASHBOARD_USERNAME=USUARIO_SUPABASE ## Usuario Kong
+      - DASHBOARD_PASSWORD=SENHA_SUPABASE ## Senha Kong
+
+      ## JWT_SECRET
+      - JWT_SECRET=KEY_DO_JWT 
+      
+      ## Dados Kong
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/home/kong/kong.yml
+      - KONG_DNS_ORDER=LAST,A,CNAME
+      - KONG_PLUGINS=request-transformer,cors,key-auth,acl,basic-auth
+      - KONG_NGINX_PROXY_PROXY_BUFFER_SIZE=160k
+      - KONG_NGINX_PROXY_PROXY_BUFFERS=64 160k
+
+      ## ANON_KEY & SERVICE_KEY
+      - SUPABASE_ANON_KEY=KEY_DO_ANON ## ANON_KEY
+      - SUPABASE_SERVICE_KEY=KEY_DO_SERVICE ## SERVICE_KEY
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager  
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.kong.rule=Host(`URL_DO_SUPABASE`) && PathPrefix(`/`) ## Url do Kong
+        - traefik.http.services.kong.loadbalancer.server.port=8000
+        - traefik.http.routers.kong.service=kong
+        - traefik.http.routers.kong.entrypoints=websecure
+        - traefik.http.routers.kong.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.kong.tls=true
+
+
+## --------------------------- ORION --------------------------- ##
+
+  auth:
+    image: supabase/gotrue:v2.132.3 ## Versão da imagem
+
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - '--no-verbose'
+        - '--tries=1'
+        - '--spider'
+        - 'http://localhost:9999/health'
+      timeout: 5s
+      interval: 5s
+      retries: 3
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+
+    ports:
+      - 9999:9999
+
+    environment:
+      - GOTRUE_API_HOST=0.0.0.0
+      - GOTRUE_API_PORT=9999
+      - API_EXTERNAL_URL=https://URL_DO_SUPABASE ## Url do Supabase
+      - GOTRUE_DB_DRIVER=postgres
+      - GOTRUE_DB_DATABASE_URL=postgres://supabase_auth_admin:SENHA_DO_POSTGRES@db:5344/supabase  ## Senha do Postgres
+      - GOTRUE_SITE_URL=https://URL_DO_SUPABASE ## link do Supabase
+      - GOTRUE_URI_ALLOW_LIST=
+      - GOTRUE_JWT_ADMIN_ROLES=service_role
+      - GOTRUE_JWT_AUD=authenticated
+      - GOTRUE_JWT_DEFAULT_GROUP_NAME=authenticated
+      - GOTRUE_JWT_EXP=3600
+      - GOTRUE_JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+
+      ## Dados SMTP
+      #- GOTRUE_DISABLE_SIGNUP=false ## Desativar inscrições
+      #- GOTRUE_EXTERNAL_EMAIL_ENABLED=true
+      #- GOTRUE_EXTERNAL_ANONYMOUS_USERS_ENABLE=false
+      #- GOTRUE_MAILER_AUTOCONFIRM=true ## Enviar email para autenticar
+      #- GOTRUE_SMTP_ADMIN_EMAIL=$email_supabase ## Email SMTP
+      #- GOTRUE_SMTP_HOST=$smtp_email_supabase ## Host SMTP
+      #- GOTRUE_SMTP_PORT=$porta_smtp_supabase ## Porta SMTP
+      #- GOTRUE_SMTP_USER=$usuario_email_supabase ## Usuario SMTP
+      #- GOTRUE_SMTP_PASS=$senha_email_supabase ## Senha SMTP
+      #- GOTRUE_SMTP_SENDER_NAME=$email_supabase ## Email SMTP
+
+      ## Paths SMTP
+      - GOTRUE_MAILER_URLPATHS_INVITE=/auth/v1/verify
+      - GOTRUE_MAILER_URLPATHS_CONFIRMATION=/auth/v1/verify
+      - GOTRUE_MAILER_URLPATHS_RECOVERY=/auth/v1/verify
+      - GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE=/auth/v1/verify
+
+      ## Autenticação por telefone
+      - GOTRUE_EXTERNAL_PHONE_ENABLED=false
+      - GOTRUE_SMS_AUTOCONFIRM=false
+
+## --------------------------- ORION --------------------------- ##
+
+  rest:
+    image: postgrest/postgrest:v12.0.3 ## Versão da imagem
+    command: "postgrest"
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+
+    environment:
+      ## Dados postgres
+      - PGRST_DB_URI=postgres://authenticator:SENHA_DO_POSTGRES@db:5344/supabase  ## Senha do Postgres
+      - PGRST_DB_SCHEMAS=public,storage,graphql_public
+      #- PGRST_DB_SCHEMAS=public
+      - PGRST_DB_ANON_ROLE=anon
+      - PGRST_DB_USE_LEGACY_GUCS=false
+
+      ## Dados JWT
+      - PGRST_JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+      - PGRST_APP_SETTINGS_JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+      - PGRST_APP_SETTINGS_JWT_EXP=3600
+
+## --------------------------- ORION --------------------------- ##
+
+  realtime:
+    image: supabase/realtime:v2.25.50 ## Versão da imagem
+    command: "sh -c \"/app/bin/migrate && /app/bin/realtime eval 'Realtime.Release.seeds(Realtime.Repo)' && /app/bin/server\"\n"
+
+    healthcheck:
+      test:
+        - CMD
+        - bash
+        - '-c'
+        - 'printf \0 > /dev/tcp/localhost/4000'
+      timeout: 5s
+      interval: 5s
+      retries: 3
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+  
+    environment:
+      ## Porta RealTime
+      - PORT=4000
+
+      ## Dados Postgres
+      - DB_HOST=db
+      - DB_PORT=5344 ## Porta do Postgres
+      - DB_USER=supabase_admin
+      - DB_PASSWORD=SENHA_DO_POSTGRES
+      - DB_NAME=supabase
+      - DB_AFTER_CONNECT_QUERY=SET search_path TO _realtime
+      - DB_ENC_KEY=supabaserealtime
+
+      ## Dados JWT
+      - API_JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+
+      ## Secret Key
+      - SECRET_KEY_BASE=jqRoJQb1nx7MYVSQVYYFPngPcNfN3sl2xd7G7P7RBettYPG2AHgmOLv9EZenQSa4
+
+      ## Ainda não procurei saber o que essas coisas fazem
+      - FLY_ALLOC_ID=fly123
+      - FLY_APP_NAME=realtime
+      - ERL_AFLAGS=-proto_dist inet_tcp
+      - ENABLE_TAILSCALE=false
+      - DNS_NODES="''"
+
+## --------------------------- ORION --------------------------- ##
+
+  storage:
+    image: supabase/storage-api:v0.46.4 ## Versão da imagem
+
+    volumes:
+      - /root/supabase/docker/volumes/storage:/var/lib/storage:z
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+  
+    environment:
+      ## Ativando Log Debug
+      - LOG_LEVEL=debug
+
+      ## Porta Storage
+      - SERVER_PORT=5000 
+      - SERVER_REGION=eu-south ## Localização
+      - MULTI_TENANT=false
+
+      ## Dados JWT
+      - PGRST_JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+      - AUTH_JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+
+      ## Dados Postgrest
+      - POSTGREST_URL=http://rest:3000
+      - DATABASE_URL=postgres://supabase_admin:SENHA_DO_POSTGRES@db:5344/supabase  ## Senha do Postgres
+      - DB_INSTALL_ROLES=false
+      - FILE_SIZE_LIMIT=52428800
+
+      ## Informações Storage
+      - STORAGE_BACKEND=s3 ## Coloque s3 para minio e descomente os outros campos
+      - STORAGE_S3_BUCKET=supabase
+      #- FILE_STORAGE_BACKEND_PATH=/var/lib/storage
+      - TENANT_ID=stub
+      - REGION=eu-south ## Região
+      - AWS_DEFAULT_REGION=eu-south ## Localização MinIO
+      - GLOBAL_S3_BUCKET=supabase ## Nome da bucket do MinIO
+      - GLOBAL_S3_ENDPOINT=https://URL_DO_S3
+      - GLOBAL_S3_PROTOCOL=https
+      - GLOBAL_S3_FORCE_PATH_STYLE=true
+      - AWS_ACCESS_KEY_ID=ACCESS_KEY_DO_S3 ## Access Key
+      - AWS_SECRET_ACCESS_KEY=SECRET_KEY_DO_S3 ## Secret Key
+      - UPLOAD_FILE_SIZE_LIMIT=524288000
+      - UPLOAD_FILE_SIZE_LIMIT_STANDARD=524288000
+      - UPLOAD_SIGNED_URL_EXPIRATION_TIME=120
+      - TUS_URL_PATH=/upload/resumable
+      - TUS_MAX_SIZE=3600000
+
+      ## Dados ImageProxy 
+      - IMAGE_TRANSFORMATION_ENABLED=true
+      #- ENABLE_IMAGE_TRANSFORMATION=true
+      - IMGPROXY_URL=http://imgproxy:5001
+      - IMGPROXY_REQUEST_TIMEOUT=15
+      - DATABASE_SEARCH_PATH=storage
+
+      ## ANON_KEY & SERVICE_KEY
+      - ANON_KEY=KEY_DO_ANON ## ANON_KEY
+      - SERVICE_KEY=KEY_DO_SERVICE ## SERVICE_KEY
+
+## --------------------------- ORION --------------------------- ##
+
+  imgproxy:
+    image: darthsim/imgproxy:v3.8.0 ## Versão da imagem
+
+    healthcheck:
+      test:
+        - CMD
+        - imgproxy
+        - health
+      timeout: 5s
+      interval: 5s
+      retries: 3
+
+    volumes:
+      - /root/supabase/docker/volumes/storage:/var/lib/storage:z
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+
+    environment:
+      ## Dados do ImgProxy
+      - IMGPROXY_BIND=:5001
+      - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/
+      - IMGPROXY_USE_ETAG=true
+      - IMGPROXY_ENABLE_WEBP_DETECTION=true
+
+
+## --------------------------- ORION --------------------------- ##
+
+  meta:
+    image: supabase/postgres-meta:v0.80.0 ## Versão da imagem
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+    ports:
+      - 8080:8080
+
+    environment:
+      ## Dados Meta
+      - PG_META_PORT=8080
+      - PG_META_HOST=0.0.0.0
+
+      ## Dados postgres
+      - PG_META_DB_HOST=db
+      - PG_META_DB_PORT=5344 ## Porta do Postgres
+      - PG_META_DB_NAME=supabase
+      - PG_META_DB_USER=supabase_admin
+      - PG_META_DB_PASSWORD=SENHA_DO_POSTGRES  ## Senha do Postgres
+
+## --------------------------- ORION --------------------------- ##
+
+  functions:
+    image: supabase/edge-runtime:v1.36.1 ## Versão da imagem
+    command:
+      - start
+      - '--main-service'
+      - /home/deno/functions/main
+
+    volumes:
+      - /root/supabase/docker/volumes/functions:/home/deno/functions:Z
+      - /root/supabase/docker/volumes/functions/main/index.ts:/home/deno/functions/main/index.ts:Z
+      - /root/supabase/docker/volumes/functions/hello/index.ts:/home/deno/functions/hello/index.ts:Z
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+      
+    environment:
+      ## Url Api Kong
+      - SUPABASE_URL=http://kong:8000
+
+      ## Dados Postgres
+      - SUPABASE_DB_URL=postgresql://postgres:SENHA_DO_POSTGRES@db:5344/supabase  ## Senha do Postgres
+      
+      ## ANON_KEY & SERVICE_KEY
+      - SUPABASE_ANON_KEY=KEY_DO_ANON ## ANON_KEY
+      - SUPABASE_SERVICE_ROLE_KEY=KEY_DO_SERVICE ## SERVICE_KEY
+      
+      ## Dados JWT
+      - JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+      - VERIFY_JWT=false
+
+## --------------------------- ORION --------------------------- ##
+
+  analytics:
+    image: supabase/logflare:1.4.0 ## Versão da imagem
+
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - 'http://localhost:4000/health'
+      timeout: 5s
+      interval: 5s
+      retries: 10
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+
+    ports:
+      - 4000:4000
+
+    environment:
+      - LOGFLARE_LOG_LEVEL=debug
+      - DB_USERNAME=supabase_admin
+      - DB_DATABASE=supabase
+      - DB_HOSTNAME=db
+      - DB_PORT=5344
+      - DB_PASSWORD=SENHA_DO_POSTGRES # OK
+      - DB_SCHEMA=_analytics
+      - POSTGRES_BACKEND_URL=postgresql://supabase_admin:SENHA_DO_POSTGRES@db:5344/supabase
+      - POSTGRES_BACKEND_SCHEMA=_analytics
+
+      ## Logflare
+      - LOGFLARE_SUPABASE=true
+      - LOGFLARE_SINGLE_TENANT=true
+      - LOGFLARE_SINGLE_TENANT_MODE=true
+      - LOGFLARE_SUPABASE_MODE=true
+      - LOGFLARE_NODE_HOST=127.0.0.1
+      - LOGFLARE_API_KEY=b6dd9bc0739e976e22f7c4edb5d0718f ## Key aleatória
+      - LOGFLARE_MIN_CLUSTER_SIZE=1
+      - LOGFLARE_FEATURE_FLAG_OVERRIDE=multibackend=true
+
+## --------------------------- ORION --------------------------- ##
+
+  db:
+    image: supabase/postgres:15.1.0.147 ## Versão da imagem
+
+    healthcheck:
+      test: 'pg_isready -U postgres -h localhost'
+      interval: 5s
+      timeout: 5s
+      retries: 10 
+
+    volumes:
+      - /root/supabase/docker/volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
+      - /root/supabase/docker/volumes/db/webhooks.sql:/docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql:Z
+      - /root/supabase/docker/volumes/db/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
+      - /root/supabase/docker/volumes/db/jwt.sql:/docker-entrypoint-initdb.d/init-scripts/99-jwt.sql:Z
+      - /root/supabase/docker/volumes/db/data:/var/lib/postgresql/data:Z ## Precisa de criar o diretório, use: sudo mkdir -p /var/lib/postgresql/data
+      - /root/supabase/docker/volumes/db/logs.sql:/docker-entrypoint-initdb.d/migrations/99-logs.sql:Z
+      - supabase_db_config:/etc/postgresql-custom
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+    ports:
+      - 5344:5344 ## Porta externas
+
+    command:
+      - postgres
+      - '-c'
+      - config_file=/etc/postgresql/postgresql.conf
+      - '-c'
+      - log_min_messages=fatal
+
+    environment:
+      ## Dados Postgres
+      - POSTGRES_HOST=/var/run/postgresql
+      - PGPORT=5344 ## Porta do Postgres
+      - POSTGRES_PORT=5344 ## Porta do Postgres
+      - PGPASSWORD=SENHA_DO_POSTGRES  ## Senha do Postgres #OK
+      - POSTGRES_PASSWORD=SENHA_DO_POSTGRES  ## Senha do Postgres
+      - PGDATABASE=supabase
+      - POSTGRES_DB=supabase
+
+      ## Dados JWT
+      - JWT_SECRET=KEY_DO_JWT ## JWT_SECRET
+      - JWT_EXP=3600
+
+## --------------------------- ORION --------------------------- ##
+
+  vector:
+    image: timberio/vector:0.28.1-alpine ## Versão da imagem
+    command:
+      - '--config'
+      - etc/vector/vector.yml
+
+    volumes:
+    - /root/supabase/docker/volumes/logs/vector.yml:/etc/vector/vector.yml:ro
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    networks:
+      - NOME_DA_REDE_INTERNA ## Nome da rede interna
+
+    ports:
+      - 9001:9001
+      
+    environment:
+      ## Ativando Log Debug
+      - VECTOR_LOG=debug
+      
+      ## Logflare key
+      - LOGFLARE_API_KEY=b6dd9bc0739e976e22f7c4edb5d0718f ## Key aleatória
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  supabase_db_config:
+    external: true
+    name: supabase_db_config
+
+networks:
+  NOME_DA_REDE_INTERNA: ## Nome da rede interna
+    external: true
+    name: NOME_DA_REDE_INTERNA ## Nome da rede interna
