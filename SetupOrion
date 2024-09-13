@@ -2279,6 +2279,18 @@ criar_banco_pgvector_da_stack () {
             # Verificar se o banco de dados já existe
             docker exec "$CONTAINER_PGVECTOR_ID" psql -U postgres -lqt | cut -d \| -f 1 | grep -qw "$1"
 
+wait_wordpress() {
+    echo "Este processo pode demorar um pouco, se passar de 5 minutos cancele... por que deu ruim..."
+while true; do
+    # Verifica se o serviço wordpress está ativo
+    if docker service ls --filter "name=$nome_do_servico_wordpress" | grep "$nome_do_servico_wordpress" | grep "1/1" > /dev/null; then
+        sleep 10
+        break
+    fi
+
+    sleep 5
+done
+}
 
             if [ $? -eq 0 ]; then
                 echo "O banco de dados $1 já existe."
