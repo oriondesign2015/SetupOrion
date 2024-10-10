@@ -5032,7 +5032,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution:
-    image: atendai/evolution-api:v2.1.2
+    image: atendai/evolution-api:v2.1.2 #atualizado
 
     volumes:
       - evolution_instances:/evolution/instances
