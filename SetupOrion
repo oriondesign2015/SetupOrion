@@ -26282,9 +26282,9 @@ krayin.fix(){
   
 
   if [ $? -eq 0 ]; then
-      echo "1/3 - [ OK ] - Pegando URL do Krayin CRM"
+      echo "1/4 - [ OK ] - Pegando URL do Krayin CRM"
   else
-      echo "1/3 - [ OFF ] - Pegando URL do Krayin CRM"
+      echo "1/4 - [ OFF ] - Pegando URL do Krayin CRM"
   fi
 
 docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "
@@ -26296,17 +26296,27 @@ FLUSH PRIVILEGES;" > /dev/null 2>&1
 
   docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
   if [ $? -eq 0 ]; then
-      echo "2/3 - [ OK ] - Migrando DB"
+      echo "2/4 - [ OK ] - Migrando DB"
   else
-      echo "2/3 - [ OFF ] - Migrando DB"
+      echo "2/4 - [ OFF ] - Migrando DB"
   fi
 
   docker exec -it   -e APP_NAME="Krayin CRM"   -e APP_URL="https://$URL_VAR"   -e APP_TIMEZONE="America/Sao_Paulo"   -e APP_LOCALE="en"   -e APP_CURRENCY="BRL"   -e DB_CONNECTION="mysql"   -e DB_HOST="mysql"   -e DB_PORT="3306"   -e DB_DATABASE="$DB_VAR"   -e DB_USERNAME="orion"   -e DB_PASSWORD="design"   "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)"   php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
   if [ $? -eq 0 ]; then
-      echo "3/3 - [ OK ] - Aplicando Seed"
+      echo "3/4 - [ OK ] - Aplicando Seed"
   else
-      echo "3/3 - [ OFF ] - Aplicando Seed"
+      echo "3/4 - [ OFF ] - Aplicando Seed"
   fi
+
+  #docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" bash -c 'cd /var/www/html/laravel-crm && ls -l artisan || (ls -l composer.json && composer install) && php artisan krayin-crm:install'
+  docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" php /var/www/html/laravel-crm/artisan migrate --seed --force
+  if [ $? -eq 0 ]; then
+      echo "4/4 - [ OK ] - Aplicando atualização"
+  else
+      echo "4/4 - [ OFF ] - Aplicando atualização"
+  fi
+  # docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" bash -c 'cd /var/www/html/laravel-crm && ls -l artisan || (ls -l composer.json && composer install) && php artisan krayin-crm:install'
+
 
   sleep 2
   echo ""
