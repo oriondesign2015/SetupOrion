@@ -26309,7 +26309,7 @@ FLUSH PRIVILEGES;" > /dev/null 2>&1
   fi
 
   #docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" bash -c 'cd /var/www/html/laravel-crm && ls -l artisan || (ls -l composer.json && composer install) && php artisan krayin-crm:install'
-  docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" php /var/www/html/laravel-crm/artisan migrate --seed --force
+  docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" php /var/www/html/laravel-crm/artisan migrate --seed --force > /dev/null 2>&1
   if [ $? -eq 0 ]; then
       echo "4/4 - [ OK ] - Aplicando atualização"
   else
@@ -26333,7 +26333,7 @@ krayin.br(){
       echo "1/2 - [ OFF ] - Traduzindo..."
   fi
   sleep 5
-  docker service update --force krayincrm${1:+_$1}_krayin_krayincrm${1:+_$1}_krayin > /dev/null 2>&1
+  docker service update --force krayincrm${1:+_$1}_krayin > /dev/null 2>&1
   if [ $? -eq 0 ]; then
       echo "2/2 - [ OK ] - Reiniciando..."
   else
