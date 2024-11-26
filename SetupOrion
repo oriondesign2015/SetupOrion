@@ -24101,7 +24101,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
@@ -24334,7 +24334,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
@@ -24710,6 +24710,7 @@ telemetria Traccar iniciado
 #cd
 #cd
 
+docker pull traccar/traccar:latest > /dev/null 2>&1
 
 mkdir -p /opt/traccar${1:+_$1}/logs
 
@@ -24827,7 +24828,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
@@ -25033,7 +25034,7 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.firecrawl${1:+_$1}_api.rule=Host(\`$url_firecrawl_api\`)
+        - traefik.http.routers.firecrawl${1:+_$1}_api.rule=Host(\`$url_firecrawl\`)
         - traefik.http.services.firecrawl${1:+_$1}_api.loadbalancer.server.port=3002
         - traefik.http.routers.firecrawl${1:+_$1}_api.service=firecrawl${1:+_$1}_api
         - traefik.http.routers.firecrawl${1:+_$1}_api.tls.certresolver=letsencryptresolver
@@ -25143,7 +25144,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
@@ -25592,10 +25593,10 @@ verificar_container_mysql
     else
         ferramenta_mysql
         pegar_senha_mysql > /dev/null 2>&1
-        criar_banco_mysql_da_stack "krayincrm${1:+_$1}"
+        #criar_banco_mysql_da_stack "krayincrm${1:+_$1}"
     fi
 
-sleep 10
+sleep 30
 docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "
 CREATE DATABASE krayin${1:+_$1} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE USER 'orion'@'%' IDENTIFIED BY 'design';
@@ -25603,7 +25604,7 @@ GRANT ALL PRIVILEGES ON krayin${1:+_$1}.* TO 'orion'@'%';
 FLUSH PRIVILEGES;" > /dev/null 2>&1
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO Krayin CRM \e[33m[3/4]\e[0m"
+echo -e "\e[97m• INSTALANDO KRAYIN CRM \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
