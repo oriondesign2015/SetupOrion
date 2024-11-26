@@ -26274,6 +26274,35 @@ traefik.fix() {
 
 }
 
+krayin.fix(){
+
+  URL_VAR=$(grep '\s*- APP_URL=' /root/krayincrm.yaml | cut -d '=' -f 2-)
+  if [ $? -eq 0 ]; then
+      echo "1/3 - [ OK ] - Pegando URL do Krayin CRM"
+  else
+      echo "1/3 - [ OFF ] - Pegando URL do Krayin CRM"
+  fi
+
+  docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+      echo "2/3 - [ OK ] - Migrando DB"
+  else
+      echo "2/3 - [ OFF ] - Migrando DB"
+  fi
+
+  docker exec -it   -e APP_NAME="Krayin CRM"   -e APP_URL="https://$URL_VAR"   -e APP_TIMEZONE="America/Sao_Paulo"   -e APP_LOCALE="en"   -e APP_CURRENCY="BRL"   -e DB_CONNECTION="mysql"   -e DB_HOST="mysql"   -e DB_PORT="3306"   -e DB_DATABASE="krayin${1:+_$1}"   -e DB_USERNAME="orion"   -e DB_PASSWORD="design"   "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)"   php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+      echo "3/3 - [ OK ] - Aplicando Seed"
+  else
+      echo "3/3 - [ OFF ] - Aplicando Seed"
+  fi
+  sleep 2
+  echo ""
+  echo "Finalizado..."
+  sleep 5
+
+}
+
 ctop() {
 
     echo ""
@@ -27799,6 +27828,11 @@ while true; do
         ## Corrigir imagem da stack do traefik para 2.11.2
         traefik.fix)
             traefik.fix    
+            ;;
+        
+        ## Corrigir instalação do Krayin
+        krayin.fix)
+            krayin.fix
             ;;
 
         ## Instalar CTOP
