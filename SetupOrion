@@ -26306,6 +26306,29 @@ krayin.fix(){
 
 }
 
+krayin.br(){
+  wget -O /var/lib/docker/volumes/krayin_data/_data/packages/Webkul/Admin/src/Resources/lang/es/app.php https://raw.githubusercontent.com/oriondesign2015/SetupOrion/refs/heads/main/Extras/Krayin/app.php > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+      echo "1/2 - [ OK ] - Traduzindo..."
+  else
+      echo "1/2 - [ OFF ] - Traduzindo..."
+  fi
+  sleep 5
+  docker service update --force krayincrm${1:+_$1}_krayin_krayincrm${1:+_$1}_krayin > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+      echo "2/2 - [ OK ] - Reiniciando..."
+  else
+      echo "2/2 - [ OFF ] - Reiniciando..."
+  fi
+  sleep 30
+  echo ""
+  echo "Tradução realizada com sucesso! Troque o idioma para espanhol para deixa-lo em português!"
+  echo ""
+  sleep 10
+}
+
+
+
 ctop() {
 
     echo ""
@@ -27836,6 +27859,10 @@ while true; do
         ## Corrigir instalação do Krayin
         krayin.fix)
             krayin.fix
+            ;;
+
+        krayin.br)
+            krayin.br
             ;;
 
         ## Instalar CTOP
