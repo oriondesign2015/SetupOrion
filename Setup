@@ -254,6 +254,8 @@ else
     echo "12/13 - [ OFF ] - Fazendo Upgrade"
 fi
 
+echo ""
+
 # Verifica se o arquivo SetupOrion já existe
 if [ -e "SetupOrion" ]; then
     echo ""
