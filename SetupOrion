@@ -25639,7 +25639,7 @@ services:
       - DB_CONNECTION=mysql
       - DB_HOST=mysql
       - DB_PORT=3306
-      - DB_DATABASE=krayincrm${1:+_$1}
+      - DB_DATABASE=krayin${1:+_$1}
       - DB_USERNAME=orion
       - DB_PASSWORD=design
       - DB_PREFIX=
@@ -25755,6 +25755,8 @@ rm /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServicePr
 mv AppServiceProvider.php /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
 
 docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
+
+docker exec -it   -e APP_NAME="Krayin CRM"   -e APP_URL="https://$url_krayincrm"   -e APP_TIMEZONE="America/Sao_Paulo"   -e APP_LOCALE="en"   -e APP_CURRENCY="BRL"   -e DB_CONNECTION="mysql"   -e DB_HOST="mysql"   -e DB_PORT="3306"   -e DB_DATABASE="krayin${1:+_$1}"   -e DB_USERNAME="orion"   -e DB_PASSWORD="design"   "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)"   php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
 
 telemetria "Krayin CRM" "finalizado"
 
