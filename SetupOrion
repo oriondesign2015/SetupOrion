@@ -5483,7 +5483,7 @@ services:
       - traefik.http.routers.evolution_oriondesign${1:+_$1}.entrypoints=websecure
       - traefik.http.routers.evolution_oriondesign${1:+_$1}.priority=1
       - traefik.http.routers.evolution_oriondesign${1:+_$1}.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution_oriondesign${1:+_$1}.service=evolution_oriondesign
+      - traefik.http.routers.evolution_oriondesign${1:+_$1}.service=evolution_oriondesign${1:+_$1}
       - traefik.http.services.evolution_oriondesign${1:+_$1}.loadbalancer.server.port=8080
       - traefik.http.services.evolution_oriondesign${1:+_$1}.loadbalancer.passHostHeader=1
 
