@@ -1976,7 +1976,7 @@ telemetria() {
   hora=$(date +"%H")
 
   ## Envia informação da Telemetria
-  curl "http://5.161.209.232:3030/metry?ferramenta=$1&ip=$ip&data=$data&hora=$hora&status=$2" > /dev/null 2>&1
+  curl "http://telemetria.oriondesign.art.br:3030/metry?ferramenta=$1&ip=$ip&data=$data&hora=$hora&status=$2" > /dev/null 2>&1
   #if [ $? -eq 0 ]; then
   #  echo "1/1 - [ OK ] - Telemetria"
   #else
