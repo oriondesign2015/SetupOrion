@@ -27805,10 +27805,10 @@ while true; do
 
                 ## INICIO TOKEN
 
-                STACK_NAME="evolution_v1"
+                STACK_NAME="evolution_v1${opcao2:+_$opcao2}"
 
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_evolution_v1
+                    ferramenta_evolution_v1 "$opcao2"
                 else
                     APP_ORION="ferramenta_evolution_v1"
                     ferramenta_evolution_v1
