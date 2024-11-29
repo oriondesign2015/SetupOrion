@@ -17988,7 +17988,7 @@ SECRET_KEY_BASE=$(openssl rand -hex 32)
 
 VAULT_ENC_KEY=$(openssl rand -hex 32)
 
-## Criando a stack
+## Criando a stack supabase.yaml
 cat > supabase${1:+_$1}.yaml <<EOL
 version: "3.7"
 services:
