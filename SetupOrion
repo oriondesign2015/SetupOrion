@@ -15301,6 +15301,8 @@ services:
         - traefik.http.routers.dify${1:+_$1}_api.tls.certresolver=letsencryptresolver
         - traefik.http.routers.dify${1:+_$1}_api.entrypoints=websecure
         - traefik.http.routers.dify${1:+_$1}_api.tls=true
+        - traefik.http.middlewares.corsMiddleware.headers.accessControlAllowMethods=GET,POST,PUT,DELETE,OPTIONS
+        - traefik.http.middlewares.corsMiddleware.headers.accessControlAllowHeaders=Content-Type,Authorization
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -15406,6 +15408,8 @@ services:
         - traefik.http.routers.dify${1:+_$1}_web.tls.certresolver=letsencryptresolver
         - traefik.http.routers.dify${1:+_$1}_web.entrypoints=websecure
         - traefik.http.routers.dify${1:+_$1}_web.tls=true
+        - traefik.http.middlewares.corsMiddleware.headers.accessControlAllowMethods=GET,POST,PUT,DELETE,OPTIONS
+        - traefik.http.middlewares.corsMiddleware.headers.accessControlAllowHeaders=Content-Type,Authorization
 
 ## --------------------------- ORION --------------------------- ##
 
