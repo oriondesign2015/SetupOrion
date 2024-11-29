@@ -9672,7 +9672,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   calcom${1:+_$1}_app:
-    image: calcom/cal.com:v4.6.14
+    image: calcom/cal.com:v4.7.8
 
     networks:
       - $nome_rede_interna
@@ -9698,6 +9698,7 @@ services:
 
     ## Dados Postgress
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/calcom${1:+_$1}
+      - CALENDSO_ENCRYPTION_KEY=postgresql://postgres:$senha_postgres@postgres:5432/calcom${1:+_$1}
 
     ## Configurações de Email e SMTP
       - EMAIL_FROM=$email_calcom
