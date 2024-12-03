@@ -15199,7 +15199,7 @@ services:
     image: langgenius/dify-api:0.11.2 ## Versão do Dify
 
     volumes:
-      - dify${1:+_$1}_storage:/app/api/storage
+      - dify${1:+_$1}_storage:/app/api/storage0.2.10
 
     networks:
       - $nome_rede_interna
@@ -15414,7 +15414,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_sandbox:
-    image: langgenius/dify-sandbox:0.11.2
+    image: langgenius/dify-sandbox:0.2.10
 
     networks:
       - $nome_rede_interna
