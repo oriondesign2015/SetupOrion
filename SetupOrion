@@ -15291,8 +15291,8 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "1"
-          memory: 1024M
+          cpus: "4"
+          memory: 4096M
       labels:
         - traefik.enable=true
         - traefik.http.routers.dify${1:+_$1}_api.rule=Host(\`$url_dify_api\`)
@@ -15368,8 +15368,8 @@ services:
           - node.role == manager       
       resources:
         limits:
-          cpus: "1"
-          memory: 1024M
+          cpus: "4"
+          memory: 4096M
 
 ## --------------------------- ORION --------------------------- ## 
 
@@ -15398,8 +15398,8 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "1"
-          memory: 1024M
+          cpus: "4"
+          memory: 4096M
       labels:
         - traefik.enable=true
         - traefik.http.routers.dify${1:+_$1}_web.rule=Host(\`$url_dify\`)
@@ -15432,8 +15432,8 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "1"
-          memory: 1024M
+          cpus: "4"
+          memory: 4096M
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -15472,8 +15472,8 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "1"
-          memory: 2048M
+          cpus: "4"
+          memory: 4096M
 
 ## --------------------------- ORION --------------------------- ##
 
