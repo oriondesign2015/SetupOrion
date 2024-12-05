@@ -25633,12 +25633,15 @@ verificar_container_mysql
         #criar_banco_mysql_da_stack "krayincrm${1:+_$1}"
     fi
 
-sleep 30
+sleep 40
 docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "
 CREATE DATABASE krayin${1:+_$1} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE USER 'orion'@'%' IDENTIFIED BY 'design';
 GRANT ALL PRIVILEGES ON krayin${1:+_$1}.* TO 'orion'@'%';
 FLUSH PRIVILEGES;" > /dev/null 2>&1
+
+sleep 5
+
 
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO KRAYIN CRM \e[33m[3/4]\e[0m"
@@ -25790,6 +25793,8 @@ class AppServiceProvider extends ServiceProvider
 EOL
 rm /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
 mv AppServiceProvider.php /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
+
+sleep 5
 
 docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
 
