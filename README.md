@@ -1,23 +1,27 @@
-<img src="https://github.com/oriondesign2015/SetupOrion/assets/139019565/2202b6a6-55ba-48ca-92df-7fcab5d20857" alt=”SetupOrion”>
+<img src="https://github.com/user-attachments/assets/f1381a28-79e2-4fea-984c-4440476cdcc2" alt=”SetupOrion”>
+
+
+ 
 <p align="center">
   Este Auto instalador é uma solução <b>100% gratuita</b>, com o intuido de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing em seu servidor.
   <b>Você não precisa instalar todos os programas contidos no mesmo, pois você poderá escolher qual das ferramentas você quer instalar.</b>
   Desenvolvido por <b>OrionDesign</b>. Ao utilizar o mesmo, <b>de os créditos</b>!
 </p>
-
+ 
 <p align="center">
-  <a href="https://oriondesign.art.br/whatsapp1"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp #01"></a>    
-  <a href="https://oriondesign.art.br/whatsapp2"><img src="https://img.shields.io/badge/Comunidade_no_Whatsapp-4EA94B?style=for-the-badge&labelColor=black&logo=whatsapp&logoColor=4EA94B" alt="Comunidade no Whatsapp #02"></a>    
-  <a href="https://youtube.com/oriondesign_oficial"><img src="https://img.shields.io/badge/Playlist_do_Setup_Orion-FF0000?style=for-the-badge&labelColor=ffffff&logo=youtube&logoColor=FF0000" alt="Inscreva-se no meu canal"></a>
+  <a href="https://oriondesign.art.br/whatsapp1"><img src="https://github.com/user-attachments/assets/d0f7867f-5890-4fbc-a76a-47e22bdfed0c" alt=”SetupOrion” ></a>     
+  <a href="https://oriondesign.art.br/whatsapp1"><img src="https://github.com/user-attachments/assets/f2e217a1-ffc5-4c7d-98a9-bab5e98bb0c3" alt=”SetupOrion” ></a>     
+  <a href="https://oriondesign.art.br/whatsapp2"><img src="https://github.com/user-attachments/assets/1609b3ef-4b35-4daa-9124-24d74edab49a" alt=”SetupOrion” ></a>
 </p>
+
+
 
 <h1></h1>
 <h3>📌 Observações e Recomendações</h3>
 
-- Recomendo usar a VPS da Contabo, Hetzner, Digital Ocean ou AWS. Não recomendamos e nem encorajamos usar outras VPS.
-- O Servidor precisa estar "zerado" para efetuar a instalação das ferramentas. Executar o Setup com outras ferramentas em andamento pode acarretar na perca de dados.
-- Recomenda-se utilizar Ubuntu 20.04, com minimo de 4Gb e 2vCPU. Sendo o recomendado 16Gb+, e 6vCPU+.
-- Antes de tentar efetuar a instalação de novas ferramentas, ou até mesmo atualizar algo, é extremamente recomendado.
+- Recomendo usar a VPS da **Hostinger**, **Hetzner**, **Digital Ocean** ou **AWS**. NÃO recomendamos e nem encorajamos usar outras VPS.
+- **O Servidor precisa estar vazio** para efetuar a instalação das ferramentas. Executar o Setup com outras ferramentas pode acarretar na perca dos dados.
+- Recomenda-se utilizar **Ubuntu 20.04**, com **minimo de 4Gb e 2vCPU**. É necessario analisar os requisitos de cada aplicação que for instalar.
 
 <h1></h1>
 <h3>💿 Como executar o instalador</h3>
