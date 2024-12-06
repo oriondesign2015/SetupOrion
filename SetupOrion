@@ -6950,7 +6950,7 @@ services:
         - traefik.http.routers.n8n${1:+_$1}_editor.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_editor.priority=1
         - traefik.http.routers.n8n${1:+_$1}_editor.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.n8n${1:+_$1}_editor.service=n8n_editor${1:+_$1}
+        - traefik.http.routers.n8n${1:+_$1}_editor.service=n8n${1:+_$1}_editor
         - traefik.http.services.n8n${1:+_$1}_editor.loadbalancer.server.port=5678
         - traefik.http.services.n8n${1:+_$1}_editor.loadbalancer.passHostHeader=1
 
@@ -7028,7 +7028,7 @@ services:
         - traefik.http.routers.n8n${1:+_$1}_webhook.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_webhook.priority=1
         - traefik.http.routers.n8n${1:+_$1}_webhook.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.n8n${1:+_$1}_webhook.service=n8n_webhook${1:+_$1}
+        - traefik.http.routers.n8n${1:+_$1}_webhook.service=n8n${1:+_$1}_webhook
         - traefik.http.services.n8n${1:+_$1}_webhook.loadbalancer.server.port=5678
         - traefik.http.services.n8n${1:+_$1}_webhook.loadbalancer.passHostHeader=1
 
