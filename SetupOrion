@@ -1968,20 +1968,20 @@ atualizar_arquivo() {
 }
 
 telemetria() {
-  ## Pega o IP da máquina
-  read -r ip _ <<< "$(hostname -I)"
+    ## Pega o IP da máquina
+    read -r ip _ <<< "$(hostname -I)"
 
-  ## Pega data e hora
-  data=$(date +"%Y-%m-%d")
-  hora=$(date +"%H")
+    ip="$ip"
+    ferramenta="$1"
+    status="$2"
 
-  ## Envia informação da Telemetria
-  curl "http://telemetria.oriondesign.art.br:3030/metry?ferramenta=$1&ip=$ip&data=$data&hora=$hora&status=$2" > /dev/null 2>&1
-  #if [ $? -eq 0 ]; then
-  #  echo "1/1 - [ OK ] - Telemetria"
-  #else
-  #    echo "1/1- [ OFF ] - Telemetria"
-  #fi
+    curl -X POST 'https://telemetria.oriondesign.art.br/api/telemetria' \
+    -H "Content-Type: application/json" \
+    -d '{
+      "ip": "'"$ip"'",
+      "ferramenta": "'"$ferramenta"'",
+      "status": "'"$status"'"
+    }' > /dev/null 2>&1
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
