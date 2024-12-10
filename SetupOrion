@@ -5,7 +5,7 @@
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 versao() {
-echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.6.0\e[0m                                  "
+echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.6.1\e[0m                                  "
 echo -e "\e[32moriondesign.art.br/whatsapp1      \e[97m<----- Grupos no WhatsApp ----->     \e[32moriondesign.art.br/whatsapp2\e[0m"
 }
 
@@ -279,23 +279,23 @@ nome_credenciais() {
 
 ## Nome do instalador
 
-nome_instalador() {
+nome_instalador() { 
     clear
     echo ""
-    echo -e "$branco       ███████╗███████╗████████╗██╗   ██╗██████╗      ██████╗ ██████╗ ██╗ ██████╗ ███╗   ██╗\e[0m"
-    echo -e "$branco       ██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔══██╗    ██╔═══██╗██╔══██╗██║██╔═══██╗████╗  ██║\e[0m"
-    echo -e "$branco       ███████╗█████╗     ██║   ██║   ██║██████╔╝    ██║   ██║██████╔╝██║██║   ██║██╔██╗ ██║\e[0m"
-    echo -e "$branco       ╚════██║██╔══╝     ██║   ██║   ██║██╔═══╝     ██║   ██║██╔══██╗██║██║   ██║██║╚██╗██║\e[0m"
-    echo -e "$branco       ███████║███████╗   ██║   ╚██████╔╝██║         ╚██████╔╝██║  ██║██║╚██████╔╝██║ ╚████║\e[0m"
-    echo -e "$branco       ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝          ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝\e[0m"
-    echo -e "$branco                                                                                            \e[0m"
-    echo -e "$branco                                 ██████╗     ██████╗     ██████╗                           \e[0m"
-    echo -e "$branco                                 ╚════██╗   ██╔════╝    ██╔═████╗                          \e[0m"
-    echo -e "$branco                       █████╗     █████╔╝   ███████╗    ██║██╔██║    █████╗                \e[0m"
-    echo -e "$branco                       ╚════╝    ██╔═══╝    ██╔═══██╗   ████╔╝██║    ╚════╝                \e[0m"
-    echo -e "$branco                                 ███████╗██╗╚██████╔╝██╗╚██████╔╝                          \e[0m"
-    echo -e "$branco                                 ╚══════╝╚═╝ ╚═════╝ ╚═╝ ╚═════╝                           \e[0m"
-    echo ""     
+    echo -e "$branco    ███████╗███████╗████████╗██╗   ██╗██████╗      ██████╗ ██████╗ ██╗ ██████╗ ███╗   ██╗\e[0m"
+    echo -e "$branco    ██╔════╝██╔════╝╚══██╔══╝██║   ██║██╔══██╗    ██╔═══██╗██╔══██╗██║██╔═══██╗████╗  ██║\e[0m"
+    echo -e "$branco    ███████╗█████╗     ██║   ██║   ██║██████╔╝    ██║   ██║██████╔╝██║██║   ██║██╔██╗ ██║\e[0m"
+    echo -e "$branco    ╚════██║██╔══╝     ██║   ██║   ██║██╔═══╝     ██║   ██║██╔══██╗██║██║   ██║██║╚██╗██║\e[0m"
+    echo -e "$branco    ███████║███████╗   ██║   ╚██████╔╝██║         ╚██████╔╝██║  ██║██║╚██████╔╝██║ ╚████║\e[0m"
+    echo -e "$branco    ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝          ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝\e[0m"
+    echo -e "$branco                                                                                        \e[0m"                      
+    echo -e "$branco                                    ██████╗     ██████╗    ██╗                          \e[0m"                      
+    echo -e "$branco                                    ╚════██╗   ██╔════╝   ███║                          \e[0m"                      
+    echo -e "$branco                          █████╗     █████╔╝   ███████╗   ╚██║    █████╗                \e[0m"                      
+    echo -e "$branco                          ╚════╝    ██╔═══╝    ██╔═══██╗   ██║    ╚════╝                \e[0m"                      
+    echo -e "$branco                                    ███████╗██╗╚██████╔╝██╗██║                          \e[0m"                      
+    echo -e "$branco                                    ╚══════╝╚═╝ ╚═════╝ ╚═╝╚═╝                          \e[0m"
+    echo ""                      
 }
 
 ## Menu de ferramentas
@@ -395,6 +395,27 @@ nome_evolution() {
     echo -e "$branco ╚══════╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝     ╚═╝\e[0m"
     echo ""
     echo ""                                                                                        
+}
+
+nome_evolution_lite() {
+    clear
+    echo ""
+    echo ""
+    echo -e "$branco ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗\e[0m"
+    echo -e "$branco ██╔════╝██║   ██║██╔═══██╗██║     ██║   ██║╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔══██╗██║\e[0m"
+    echo -e "$branco █████╗  ██║   ██║██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ███████║██████╔╝██║\e[0m"
+    echo -e "$branco ██╔══╝  ╚██╗ ██╔╝██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██║╚██╗██║    ██╔══██║██╔═══╝ ██║\e[0m"
+    echo -e "$branco ███████╗ ╚████╔╝ ╚██████╔╝███████╗╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ██║  ██║██║     ██║\e[0m"
+    echo -e "$branco ╚══════╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝     ╚═╝\e[0m"
+    echo -e "$branco                                                                                                  \e[0m"
+    echo -e "$branco                                   ██╗     ██╗████████╗███████╗                                   \e[0m"                                  
+    echo -e "$branco                                   ██║     ██║╚══██╔══╝██╔════╝                                   \e[0m"                                  
+    echo -e "$branco                                   ██║     ██║   ██║   █████╗                                     \e[0m"                                  
+    echo -e "$branco                                   ██║     ██║   ██║   ██╔══╝                                     \e[0m"                                  
+    echo -e "$branco                                   ███████╗██║   ██║   ███████╗                                   \e[0m"                                  
+    echo -e "$branco                                   ╚══════╝╚═╝   ╚═╝   ╚══════╝                                   \e[0m"  
+    echo ""
+    echo ""
 }
 
 ## Titulo Evolution [2.beta]
@@ -1437,6 +1458,8 @@ nome_remover_stack() {
     echo""                                                                                             
 }
 nome_portainer.reset() {
+    clear
+    echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
     echo ""
     echo -e "$branco           ██████╗ ███████╗███████╗███████╗████████╗ █████╗ ███╗   ██╗██████╗  ██████╗ \e[0m"
@@ -1452,6 +1475,28 @@ nome_portainer.reset() {
     echo -e "$branco                           ╚════██║██╔══╝  ██║╚██╗██║██╔══██║██╔══██║                  \e[0m"
     echo -e "$branco                           ███████║███████╗██║ ╚████║██║  ██║██║  ██║                  \e[0m"
     echo -e "$branco                           ╚══════╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝                  \e[0m"
+    echo ""
+    echo ""
+    echo -e "$amarelo===================================================================================================\e[0m"
+}
+
+nome_verificar_stack() {
+    clear
+    echo ""
+    echo ""
+    echo -e "$branco                 ███████╗████████╗ █████╗  ██████╗██╗  ██╗         ██╗ █████╗      \e[0m"
+    echo -e "$branco                 ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝         ██║██╔══██╗     \e[0m"
+    echo -e "$branco                 ███████╗   ██║   ███████║██║     █████╔╝          ██║███████║     \e[0m"
+    echo -e "$branco                 ╚════██║   ██║   ██╔══██║██║     ██╔═██╗     ██   ██║██╔══██║     \e[0m"
+    echo -e "$branco                 ███████║   ██║   ██║  ██║╚██████╗██║  ██╗    ╚█████╔╝██║  ██║     \e[0m"
+    echo -e "$branco                 ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝     ╚════╝ ╚═╝  ╚═╝     \e[0m"
+    echo -e "$branco                                                                                   \e[0m"
+    echo -e "$branco             ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗      █████╗ ██████╗  █████╗ \e[0m"
+    echo -e "$branco             ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██╔══██╗██╔══██╗██╔══██╗\e[0m"
+    echo -e "$branco             ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ███████║██║  ██║███████║\e[0m"
+    echo -e "$branco             ██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██╔══██║██║  ██║██╔══██║\e[0m"
+    echo -e "$branco             ██║██║ ╚████║███████║   ██║   ██║  ██║███████╗██║  ██║██████╔╝██║  ██║\e[0m"
+    echo -e "$branco             ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝\e[0m"
     echo ""
     echo ""
 }
@@ -1621,6 +1666,32 @@ menu_instalador_pg_2(){
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
+## Verificar se stack já existe
+verificar_stack() {
+    clear
+    local nome_stack="$1"
+
+    if docker stack ls --format "{{.Name}}" | grep -q "^${nome_stack}$"; then
+        nome_verificar_stack
+        echo -e "A stack '$amarelo${nome_stack}\e[0m' existe."
+        echo -e "Caso deseje refazer a instalação, por favor, remova a stack $amarelo${nome_stack}\e[0m do"
+        echo -e "seu Portainer e tente novamente..."
+        echo -e ""
+        echo -e "Voltando ao menu principal em 10 segundos"
+        sleep 10
+
+        clear 
+
+        return 0
+    else
+        return 1
+    fi
+}
+
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 stack_editavel(){
 
@@ -5234,6 +5305,393 @@ echo -e "\e[32m[ EVOLUTION API ]\e[0m"
 echo ""
 
 echo -e "\e[97mLink do Manager:\e[33m https://$url_evolution/manager\e[0m"
+echo ""
+
+echo -e "\e[97mAPI URL:\e[33m https://$url_evolution\e[0m"
+echo ""
+
+echo -e "\e[97mGLOBAL API KEY:\e[33m $apikeyglobal\e[0m"
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+requisitar_outra_instalacao
+}
+
+## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗
+## ██╔════╝██║   ██║██╔═══██╗██║     ██║   ██║╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔══██╗██║
+## █████╗  ██║   ██║██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ███████║██████╔╝██║
+## ██╔══╝  ╚██╗ ██╔╝██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██║╚██╗██║    ██╔══██║██╔═══╝ ██║
+## ███████╗ ╚████╔╝ ╚██████╔╝███████╗╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ██║  ██║██║     ██║
+## ╚══════╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝     ╚═╝
+##                                                                                                  
+## ██╗     ██╗████████╗███████╗                                                                     
+## ██║     ██║╚══██╔══╝██╔════╝                                                                     
+## ██║     ██║   ██║   █████╗                                                                       
+## ██║     ██║   ██║   ██╔══╝                                                                       
+## ███████╗██║   ██║   ███████╗                                                                     
+## ╚══════╝╚═╝   ╚═╝   ╚══════╝                                                                     
+                                                                                                 
+ferramenta_evolution_lite() {
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_evolution_lite
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o Dominio para a Evolution API Lite (ex: api.oriondesign.art.br): \e[0m" && read -r url_evolution
+    echo ""
+
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_evolution_lite
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio da Evolution API:\e[97m $url_evolution\e[0m"
+    echo ""
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_evolution_lite
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API LITE \e[33m[1/5]\e[0m"
+echo ""
+sleep 1
+
+telemetria "Evolution API" "iniciado"
+
+## Literalmente nada, apenas um espaço vazio caso precisar de adicionar alguma coisa
+## Antes..
+## E claro, para aparecer a mensagem do passo..
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo ""
+sleep 1
+
+## Aqui vamos fazer uma verificação se já existe Postgres Instalado
+## Se tiver ele vai criar um banco de dados no postgres ou perguntar se deseja apagar o que já existe e criar outro
+
+## Verifica container postgres e cria banco no postgres
+
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+    echo "1/3 - [ OK ] - Postgres já instalado"
+    pegar_senha_postgres > /dev/null 2>&1
+    echo "2/3 - [ OK ] - Copiando senha do Postgres"
+    criar_banco_postgres_da_stack "evolution${1:+_$1}_lite"
+    echo "3/3 - [ OK ] - Criando banco de dados"
+    echo ""
+else
+    ferramenta_postgres
+    pegar_senha_postgres > /dev/null 2>&1
+    criar_banco_postgres_da_stack "evolution${1:+_$1}_lite"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
+echo ""
+sleep 1
+
+## Verifica/instala o Redis
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    echo "1/1 - [ OK ] - Redis já instalado"
+    echo ""
+else
+    ferramenta_redis
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[4/5]\e[0m"
+echo ""
+sleep 1
+
+## Aqui de fato vamos iniciar a instalação da Evolution API
+
+## Criando uma Global Key Aleatória
+apikeyglobal=$(openssl rand -hex 16)
+
+## Criando a stack evolution.yaml
+cat > evolution${1:+_$1}_lite.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  evolution${1:+_$1}_lite:
+    image: atendai/evolution-api-lite:latest ## Versão da Evolution API
+
+    volumes:
+      - evolution${1:+_$1}_lite_instances:/evolution/instances
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+      ## Configurações Gerais
+      - SERVER_URL=https://$url_evolution
+      - AUTHENTICATION_API_KEY=$apikeyglobal
+      - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+      - DEL_INSTANCE=false
+      - QRCODE_LIMIT=1902
+      - LANGUAGE=pt-BR
+      
+      ## Configuração do Cliente
+      ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1015901307
+      - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
+      - CONFIG_SESSION_PHONE_NAME=Chrome
+      
+      ## Configuração do Banco de Dados
+      - DATABASE_ENABLED=true
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution${1:+_$1}_lite
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution${1:+_$1}_lite
+      - DATABASE_SAVE_DATA_INSTANCE=true
+      - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+      - DATABASE_SAVE_MESSAGE_UPDATE=true
+      - DATABASE_SAVE_DATA_CONTACTS=true
+      - DATABASE_SAVE_DATA_CHATS=true
+      - DATABASE_SAVE_DATA_LABELS=true
+      - DATABASE_SAVE_DATA_HISTORIC=true
+      
+      ## Configuração do Cache
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://redis:6379/8
+      - CACHE_REDIS_PREFIX_KEY=evolution
+      - CACHE_REDIS_SAVE_INSTANCES=false
+      - CACHE_LOCAL_ENABLED=false
+      
+      ## Configuração do S3
+      - S3_ENABLED=false
+      - S3_ACCESS_KEY=
+      - S3_SECRET_KEY=
+      - S3_BUCKET=evolution
+      - S3_PORT=443
+      - S3_ENDPOINT=
+      - S3_USE_SSL=true
+      #- S3_REGION=eu-south
+
+      ## Configuração do WhatsApp Business
+      - WA_BUSINESS_TOKEN_WEBHOOK=evolution
+      - WA_BUSINESS_URL=https://graph.facebook.com
+      - WA_BUSINESS_VERSION=v20.0
+      - WA_BUSINESS_LANGUAGE=pt_BR
+
+      ## Telemetria
+      - TELEMETRY=false
+      - TELEMETRY_URL=
+
+      ## Configuração do WebSocket
+      - WEBSOCKET_ENABLED=false
+      - WEBSOCKET_GLOBAL_EVENTS=false
+
+      ## Configuração do SQS
+      - SQS_ENABLED=false
+      - SQS_ACCESS_KEY_ID=
+      - SQS_SECRET_ACCESS_KEY=
+      - SQS_ACCOUNT_ID=
+      - SQS_REGION=
+
+      ## Configuração do RabbitMQ
+      - RABBITMQ_ENABLED=false
+      - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution${1:+_$1}
+      - RABBITMQ_EXCHANGE_NAME=evolution
+      - RABBITMQ_GLOBAL_ENABLED=false
+      - RABBITMQ_EVENTS_APPLICATION_STARTUP=false
+      - RABBITMQ_EVENTS_INSTANCE_CREATE=false
+      - RABBITMQ_EVENTS_INSTANCE_DELETE=false
+      - RABBITMQ_EVENTS_QRCODE_UPDATED=false
+      - RABBITMQ_EVENTS_MESSAGES_SET=false
+      - RABBITMQ_EVENTS_MESSAGES_UPSERT=true
+      - RABBITMQ_EVENTS_MESSAGES_EDITED=false
+      - RABBITMQ_EVENTS_MESSAGES_UPDATE=false
+      - RABBITMQ_EVENTS_MESSAGES_DELETE=false
+      - RABBITMQ_EVENTS_SEND_MESSAGE=false
+      - RABBITMQ_EVENTS_CONTACTS_SET=false
+      - RABBITMQ_EVENTS_CONTACTS_UPSERT=false
+      - RABBITMQ_EVENTS_CONTACTS_UPDATE=false
+      - RABBITMQ_EVENTS_PRESENCE_UPDATE=false
+      - RABBITMQ_EVENTS_CHATS_SET=false
+      - RABBITMQ_EVENTS_CHATS_UPSERT=false
+      - RABBITMQ_EVENTS_CHATS_UPDATE=false
+      - RABBITMQ_EVENTS_CHATS_DELETE=false
+      - RABBITMQ_EVENTS_GROUPS_UPSERT=false
+      - RABBITMQ_EVENTS_GROUP_UPDATE=false
+      - RABBITMQ_EVENTS_GROUP_PARTICIPANTS_UPDATE=false
+      - RABBITMQ_EVENTS_CONNECTION_UPDATE=true
+      - RABBITMQ_EVENTS_CALL=false
+      - RABBITMQ_EVENTS_TYPEBOT_START=false
+      - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
+
+      ## Configuração do Webhook
+      - WEBHOOK_GLOBAL_ENABLED=false
+      - WEBHOOK_GLOBAL_URL=
+      - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
+      - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
+      - WEBHOOK_EVENTS_QRCODE_UPDATED=false
+      - WEBHOOK_EVENTS_MESSAGES_SET=false
+      - WEBHOOK_EVENTS_MESSAGES_UPSERT=false
+      - WEBHOOK_EVENTS_MESSAGES_EDITED=false
+      - WEBHOOK_EVENTS_MESSAGES_UPDATE=false
+      - WEBHOOK_EVENTS_MESSAGES_DELETE=false
+      - WEBHOOK_EVENTS_SEND_MESSAGE=false
+      - WEBHOOK_EVENTS_CONTACTS_SET=false
+      - WEBHOOK_EVENTS_CONTACTS_UPSERT=false
+      - WEBHOOK_EVENTS_CONTACTS_UPDATE=false
+      - WEBHOOK_EVENTS_PRESENCE_UPDATE=false
+      - WEBHOOK_EVENTS_CHATS_SET=false
+      - WEBHOOK_EVENTS_CHATS_UPSERT=false
+      - WEBHOOK_EVENTS_CHATS_UPDATE=false
+      - WEBHOOK_EVENTS_CHATS_DELETE=false
+      - WEBHOOK_EVENTS_GROUPS_UPSERT=false
+      - WEBHOOK_EVENTS_GROUPS_UPDATE=false
+      - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=false
+      - WEBHOOK_EVENTS_CONNECTION_UPDATE=false
+      - WEBHOOK_EVENTS_LABELS_EDIT=false
+      - WEBHOOK_EVENTS_LABELS_ASSOCIATION=false
+      - WEBHOOK_EVENTS_CALL=false
+      - WEBHOOK_EVENTS_TYPEBOT_START=false
+      - WEBHOOK_EVENTS_TYPEBOT_CHANGE_STATUS=false
+      - WEBHOOK_EVENTS_ERRORS=false
+      - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
+
+      ## Configuração do Provider
+      - PROVIDER_ENABLED=false
+      - PROVIDER_HOST=127.0.0.1
+      - PROVIDER_PORT=5656
+      - PROVIDER_PREFIX=evolution${1:+_$1}
+      
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+        - node.role == manager
+      labels:
+      - traefik.enable=1
+      - traefik.http.routers.evolution${1:+_$1}_lite.rule=Host(\`$url_evolution\`) ## Url da Evolution API
+      - traefik.http.routers.evolution${1:+_$1}_lite.entrypoints=websecure
+      - traefik.http.routers.evolution${1:+_$1}_lite.priority=1
+      - traefik.http.routers.evolution${1:+_$1}_lite.tls.certresolver=letsencryptresolver
+      - traefik.http.routers.evolution${1:+_$1}_lite.service=evolution${1:+_$1}_lite
+      - traefik.http.services.evolution${1:+_$1}_lite.loadbalancer.server.port=8080
+      - traefik.http.services.evolution${1:+_$1}_lite.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  evolution${1:+_$1}_lite_instances:
+    external: true
+    name: evolution${1:+_$1}_lite_instances
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack da Evolution API"
+fi
+STACK_NAME="evolution${1:+_$1}_lite"
+stack_editavel # > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c evolution.yaml evolution > /dev/null 2>&1
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack da Evolution API"
+#fi
+
+sleep 10
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo ""
+sleep 1
+
+## Usa o serviço wait_evolution para verificar se o serviço esta online
+wait_stack "evolution${1:+_$1}_lite"
+
+telemetria "Evolution API" "finalizado"
+
+cd dados_vps
+
+cat > dados_evolution${1:+_$1}_lite <<EOL
+[ EVOLUTION API LITE ]
+
+Manager Evolution: https://$url_evolution/manager
+
+URL: https://$url_evolution
+
+Global API Key: $apikeyglobal
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ EVOLUTION API LITE ]\e[0m"
 echo ""
 
 echo -e "\e[97mAPI URL:\e[33m https://$url_evolution\e[0m"
@@ -17988,6 +18446,254 @@ else
     echo "Não foi criar o diretório"
 fi
 
+cat > kong.yml <<EOL
+_format_version: '2.1'
+_transform: true
+
+###
+### O Consumers / Users
+###
+consumers:
+  - username: DASHBOARD
+  - username: anon
+    keyauth_credentials:
+      - key: \$SUPABASE_ANON_KEY
+  - username: service_role
+    keyauth_credentials:
+      - key: \$SUPABASE_SERVICE_KEY
+
+###
+### R Access Control List
+###
+acls:
+  - consumer: anon
+    group: anon
+  - consumer: service_role
+    group: admin
+
+###
+### I Dashboard credentials
+###
+basicauth_credentials:
+  - consumer: DASHBOARD
+    username: \$DASHBOARD_USERNAME
+    password: \$DASHBOARD_PASSWORD
+
+###
+### O API Routes
+###
+services:
+  ## Open Auth routes
+  - name: auth-v1-open
+    url: http://auth${1:+_$1}:9999/verify
+    routes:
+      - name: auth-v1-open
+        strip_path: true
+        paths:
+          - /auth/v1/verify
+    plugins:
+      - name: cors
+  - name: auth-v1-open-callback
+    url: http://auth${1:+_$1}:9999/callback
+    routes:
+      - name: auth-v1-open-callback
+        strip_path: true
+        paths:
+          - /auth/v1/callback
+    plugins:
+      - name: cors
+  - name: auth-v1-open-authorize
+    url: http://auth${1:+_$1}:9999/authorize
+    routes:
+      - name: auth-v1-open-authorize
+        strip_path: true
+        paths:
+          - /auth/v1/authorize
+    plugins:
+      - name: cors
+
+  ## Secure Auth routes
+  - name: auth-v1
+    _comment: 'GoTrue: /auth/v1/* -> http://auth${1:+_$1}:9999/*'
+    url: http://auth${1:+_$1}:9999/
+    routes:
+      - name: auth-v1-all
+        strip_path: true
+        paths:
+          - /auth/v1/
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: false
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - admin
+            - anon
+
+  ## N Secure REST routes
+  - name: rest-v1
+    _comment: 'PostgREST: /rest/v1/* -> http://rest${1:+_$1}:3000/*'
+    url: http://rest${1:+_$1}:3000/
+    routes:
+      - name: rest-v1-all
+        strip_path: true
+        paths:
+          - /rest/v1/
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: true
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - admin
+            - anon
+
+  ## Secure GraphQL routes
+  - name: graphql-v1
+    _comment: 'PostgREST: /graphql/v1/* -> http://rest${1:+_$1}:3000/rpc/graphql'
+    url: http://rest${1:+_$1}:3000/rpc/graphql
+    routes:
+      - name: graphql-v1-all
+        strip_path: true
+        paths:
+          - /graphql/v1
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: true
+      - name: request-transformer
+        config:
+          add:
+            headers:
+              - Content-Profile:graphql_public
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - admin
+            - anon
+
+  ## Secure Realtime routes
+  - name: realtime-v1-ws
+    _comment: 'Realtime: /realtime/v1/* -> ws://realtime${1:+_$1}:4000/socket/*'
+    url: http://realtime${1:+_$1}-dev.supabase-realtime:4000/socket
+    protocol: ws
+    routes:
+      - name: realtime-v1-ws
+        strip_path: true
+        paths:
+          - /realtime/v1/
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: false
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - admin
+            - anon
+  - name: realtime-v1-rest
+    _comment: 'Realtime: /realtime/v1/* -> ws://realtime${1:+_$1}:4000/socket/*'
+    url: http://realtime${1:+_$1}-dev.supabase-realtime:4000/api
+    protocol: http
+    routes:
+      - name: realtime-v1-rest
+        strip_path: true
+        paths:
+          - /realtime/v1/api
+    plugins:
+      - name: cors
+      - name: key-auth
+        config:
+          hide_credentials: false
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - admin
+            - anon
+  ## Storage routes: the storage server manages its own auth
+  - name: storage-v1
+    _comment: 'Storage: /storage/v1/* -> http://storage${1:+_$1}:5000/*'
+    url: http://storage${1:+_$1}:5000/
+    routes:
+      - name: storage-v1-all
+        strip_path: true
+        paths:
+          - /storage/v1/
+    plugins:
+      - name: cors
+
+  ## Edge Functions routes
+  - name: functions-v1
+    _comment: 'Edge Functions: /functions/v1/* -> http://functions${1:+_$1}:9000/*'
+    url: http://functions${1:+_$1}:9000/
+    routes:
+      - name: functions-v1-all
+        strip_path: true
+        paths:
+          - /functions/v1/
+    plugins:
+      - name: cors
+
+  ## Analytics routes
+  - name: analytics-v1
+    _comment: 'Analytics: /analytics/v1/* -> http://logflare${1:+_$1}:4000/*'
+    url: http://analytics${1:+_$1}:4000/
+    routes:
+      - name: analytics-v1-all
+        strip_path: true
+        paths:
+          - /analytics/v1/
+
+  ## Secure Database routes
+  - name: meta
+    _comment: 'pg-meta: /pg/* -> http://pg-meta${1:+_$1}:8080/*'
+    url: http://meta${1:+_$1}:8080/
+    routes:
+      - name: meta-all
+        strip_path: true
+        paths:
+          - /pg/
+    plugins:
+      - name: key-auth
+        config:
+          hide_credentials: false
+      - name: acl
+        config:
+          hide_groups_header: true
+          allow:
+            - admin
+
+  ## Protected Dashboard - catch all remaining routes
+  - name: dashboard
+    _comment: 'Studio: /* -> http://studio${1:+_$1}:3000/*'
+    url: http://studio${1:+_$1}:3000/
+    routes:
+      - name: dashboard-all
+        strip_path: true
+        paths:
+          - /
+    plugins:
+      - name: cors
+      - name: basic-auth
+        config:
+          hide_credentials: true
+EOL
+
+rm /root/supabase${1:+_$1}/docker/volumes/api/kong.yml
+
+mv kong.yml /root/supabase${1:+_$1}/docker/volumes/api/kong.yml
+
 echo ""
 
 ## Mensagem de Passo
@@ -26534,6 +27240,9 @@ while true; do
             ;;
 
         2|02|chatwoot|CHATWOOT)
+
+            verificar_stack "chatwoot${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
                 ## INICIO TOKEN
                 STACK_NAME="chatwoot${opcao2:+_$opcao2}"
@@ -26548,6 +27257,9 @@ while true; do
             ;;
 
         3|03|evolution|evo|EVO)
+
+            verificar_stack "evolution${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
                 ## INICIO TOKEN
                 STACK_NAME="evolution${opcao2:+_$opcao2}"
@@ -26560,291 +27272,232 @@ while true; do
                 ## FIM TOKEN 
             fi
             ;;
-
-        #.1)
-        #   if verificar_docker_e_portainer_traefik; then
-
-        #       ## INICIO TOKEN
-
-        #       STACK_NAME="evolution"
-
-        #       if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-        #           ferramenta_evolution_arm
-        #       else
-        #           APP_ORION="ferramenta_evolution_arm"
-        #           verificar_arquivo
-        #       fi
-
-        #       ## FIM TOKEN 
-        #   
-        #   fi
-        #   ;;
         4|04|minio|MINIO)
+
+            verificar_stack "minio${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="minio${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_minio "$opcao2"
                 else
                     APP_ORION="ferramenta_minio"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         5|05|typebot|TYPEBOT)
+
+            verificar_stack "typebot${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="typebot${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_typebot "$opcao2"
                 else
                     APP_ORION="ferramenta_typebot"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-            
             fi
             ;;
         6|06|n8n|N8N)
+
+            verificar_stack "n8n${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="n8n${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_n8n "$opcao2"
                 else
                     APP_ORION="ferramenta_n8n"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         7|07|flowise|FLOWISE)
+
+            verificar_stack "flowise${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="flowise${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_flowise "$opcao2"
                 else
                     APP_ORION="ferramenta_flowise"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-            
             fi
             ;;
         8|08|pgadmin|PGADMIN)
+
+            verificar_stack "pgadmin${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="pgadmin${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_pgAdmin_4 "$opcao2"
                 else
                     APP_ORION="ferramenta_pgAdmin_4"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         9|09|nocobase|NOCOBASE)
+
+            verificar_stack "nocobase${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="nocobase${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_nocobase "$opcao2"
                 else
                     APP_ORION="ferramenta_nocobase"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         10|botpress|BOTPRESS)
+
+            verificar_stack "botpress${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="botpress${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_botpress "$opcao2"
                 else
                     APP_ORION="ferramenta_botpress"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         11|wordpress|WORDPRESS)
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_wordpress
                 else
                     APP_ORION="ferramenta_wordpress"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
             fi
             ;;
         12|baserow|BASEROW)
+
+            verificar_stack "baserow${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="baserow${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_baserow "$opcao2"
                 else
                     APP_ORION="ferramenta_baserow" 
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         13|mongodb|MONGODB)
+
+            verificar_stack "mongodb${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="mongodb${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_mongodb "$opcao2"
                 else
                     APP_ORION="ferramenta_mongodb"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         14|rabbitmq|RABBITMQ)
+
+            verificar_stack "rabbitmq${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="rabbitmq${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_rabbitmq "$opcao2"
                 else
                     APP_ORION="ferramenta_rabbitmq"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         15|uptimekuma|UPTIMEKUMA)
+
+            verificar_stack "uptimekuma${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="uptimekuma${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_uptimekuma "$opcao2"
                 else
                     APP_ORION="ferramenta_uptimekuma"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         16|calcom|CALCOM)
+
+            verificar_stack "calcom${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="calcom${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_calcom "$opcao2"
                 else
                     APP_ORION="ferramenta_calcom"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         17|mautic|MAUTIC)
+
+            verificar_stack "mautic${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="mautic${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_mautic "$opcao2"
                 else
                     APP_ORION="ferramenta_mautic"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         18|appsmith|APPSMITH)
+
+            verificar_stack "appsmith${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="appsmith${opcao2:+_$opcao2}"
 
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
@@ -26853,895 +27506,777 @@ while true; do
                     APP_ORION="ferramenta_appsmith"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         19|qdrant|QDRANT)
+
+            verificar_stack "qdrant${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="qdrant${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_qdrant "$opcao2"
                 else
                     APP_ORION="ferramenta_qdrant"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         20|woofedcrm|WOOFEDCRM)
+
+            verificar_stack "woofedcrm${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="woofedcrm${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_woofed "$opcao2"
                 else
                     APP_ORION="ferramenta_woofed"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         21|formbricks|FORMBRICKS)
+
+            verificar_stack "formbricks${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="formbricks${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_formbricks "$opcao2"
                 else
                     APP_ORION="ferramenta_formbricks"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         22|nocodb|NOCODB)
+
+            verificar_stack "nocodb${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="nocodb${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_nocodb "$opcao2"
                 else
                     APP_ORION="ferramenta_nocodb"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         23|langfuse|LANGFUSE)
+
+            verificar_stack "langfuse${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="langfuse${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_langfuse "$opcao2"
                 else
                     APP_ORION="ferramenta_langfuse"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         24|metabase|METABASE)
+
+            verificar_stack "metabase${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="metabase${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_metabase "$opcao2"
                 else
                     APP_ORION="ferramenta_metabase"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         25|odoo|ODOO)
+
+            verificar_stack "odoo${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="odoo${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_odoo "$opcao2"
                 else
                     APP_ORION="ferramenta_odoo"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         26|chatwoot_nestor|CHATWOOT_NETOR)
+
+            verificar_stack "chatwoot_nestor${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="chatwoot_nestor${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_chatwoot_nestor "$opcao2"
                 else
                     APP_ORION="ferramenta_chatwoot_nestor"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         27|unoapi|UNOAPI)
+
+            verificar_stack "unoapi${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio_e_rabbitmq_e_chatwoot; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="unoapi${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_unoapi "$opcao2"
                 else
                     APP_ORION="ferramenta_unoapi"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         28|n8n_quepasa|N8N_QUEPASA)
+
+            verificar_stack "n8n_quepasa${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="n8n_quepasa${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_n8n_quepasa "$opcao2"
                 else
                     APP_ORION="ferramenta_n8n_quepasa"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         29|quepasa|QUEPASA)
+
+            verificar_stack "quepasa${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="quepasa${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_quepasa "$opcao2"
                 else
                     APP_ORION="ferramenta_quepasa"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         30|docuseal|DOCUSEAL)
+
+            verificar_stack "docuseal${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="docuseal${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_docuseal "$opcao2"
                 else
                     APP_ORION="ferramenta_docuseal"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         31|monitor|grafana|MONITOR|GRAFANA)
+
+            verificar_stack "monitor${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="monitor${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_monitor "$opcao2"
                 else
                     APP_ORION="ferramenta_monitor"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         32|dify|DIFY)
+
+            verificar_stack "dify${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="dify${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_dify "$opcao2"
                 else
                     APP_ORION="ferramenta_dify"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         33|ollama|OLLAMA)
+
+            verificar_stack "ollama${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="ollama${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_ollama "$opcao2"
                 else
                     APP_ORION="ferramenta_ollama"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         34|affine|AFFINE)
+
+            verificar_stack "affine${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="affine${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_affine "$opcao2"
                 else
                     APP_ORION="ferramenta_affine"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         35|directus|DIRECTUS)
+
+            verificar_stack "directus${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="directus${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_directus "$opcao2"
                 else
                     APP_ORION="ferramenta_directus"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         36|vaultwarden|VAULTWARDEN)
+
+            verificar_stack "vaultwarden${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="vaultwarden${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_vaultwarden "$opcao2"
                 else
                     APP_ORION="ferramenta_vaultwarden"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         37|nextcloud|NEXTCLOUD)
+
+            verificar_stack "nextcloud${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="nextcloud${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_nextcloud "$opcao2"
                 else
                     APP_ORION="ferramenta_nextcloud"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-            
             fi
             ;;
         38|strapi|STRAPI)
+
+            verificar_stack "strapi${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="strapi${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_strapi "$opcao2"
                 else
                     APP_ORION="ferramenta_strapi"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         39|phpmyadmin|pma|PHPMYADMIN|PMA)
+
+            verificar_stack "phpmyadmin${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="phpmyadmin${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_phpmyadmin "$opcao2"
                 else
                     APP_ORION="ferramenta_phpmyadmin"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
-            
             fi
             ;;
         40|supabase|supa|SUPABASE|SUPA)
+
+            verificar_stack "supabase${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="supabase${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_supabase "$opcao2"
                 else
                     APP_ORION="ferramenta_supabase"
                     verificar_arquivo
                 fi
-
-                ## FIM TOKEN
-
-            
+                ## FIM TOKEN            
             fi
             ;;
         41|ntfy|NTFY)
+
+            verificar_stack "ntfy${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="ntfy${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_ntfy "$opcao2"
                 else
                     APP_ORION="ferramenta_ntfy"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
         42|lowcoder|LOWCODER)
+
+            verificar_stack "lowcoder${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_mongo; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="lowcoder${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_lowcoder "$opcao2"
                 else
                     APP_ORION="ferramenta_lowcoder"
                     verificar_arquivo
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
         43|langflow|LANGFLOW)
+
+            verificar_stack "langflow${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="langflow${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_langflow "$opcao2"
                 else
                     APP_ORION="ferramenta_langflow"
                     ferramenta_langflow
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
         44|openproject|OPENPROJECT)
+
+            verificar_stack "openproject${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="openproject${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_openproject "$opcao2"
                 else
                     APP_ORION="ferramenta_openproject"
                     ferramenta_openproject
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
         45|zep|ZEP)
+
+            verificar_stack "zep${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="zep${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_zep "$opcao2"
                 else
                     APP_ORION="ferramenta_zep"
                     ferramenta_zep
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
-        46|humhub|HUMHUB) 
+        46|humhub|HUMHUB)
+
+            verificar_stack "humhub${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="humhub${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_humhub "$opcao2"
                 else
                     APP_ORION="ferramenta_humhub"
                     ferramenta_humhub
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
-        47|yourls|YOURLS) 
+        47|yourls|YOURLS)
+
+            verificar_stack "yourls${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="yourls${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_yourls "$opcao2"
                 else
                     APP_ORION="ferramenta_yourls"
                     ferramenta_yourls
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
-        48|twentycrm|TWENTYCRM) 
+        48|twentycrm|TWENTYCRM)
+
+            verificar_stack "twentycrm${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="twentycrm${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_twentycrm "$opcao2"
                 else
                     APP_ORION="ferramenta_twentycrm"
                     ferramenta_twentycrm
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         49|mattermost|MATTERMOST) 
+
+            verificar_stack "mattermost${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="mattermost${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_mattermost "$opcao2"
                 else
                     APP_ORION="ferramenta_mattermost"
                     ferramenta_mattermost
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
-        50|outline|OUTLINE) 
+        50|outline|OUTLINE)
+
+            verificar_stack "outline${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="outline${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_outline "$opcao2"
                 else
                     APP_ORION="ferramenta_outline"
                     ferramenta_outline
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         51|focalboard|FOCALBOARD) 
+
+            verificar_stack "focalboard${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="focalboard${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_focalboard "$opcao2"
                 else
                     APP_ORION="ferramenta_focalboard"
                     ferramenta_focalboard
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         52|glpi|GLPI) 
+
+            verificar_stack "glpi${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="glpi${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_glpi "$opcao2"
                 else
                     APP_ORION="ferramenta_glpi"
                     ferramenta_glpi
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         53|anythingllm|anything|AnythingLLM|Anything) 
+
+            verificar_stack "anythingllm${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_qdrant; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="anythingllm${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_anythingllm "$opcao2"
                 else
                     APP_ORION="ferramenta_anythingllm"
                     ferramenta_anythingllm
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
         
         54|excalidraw|Excalidraw) 
+
+            verificar_stack "excalidraw${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="excalidraw${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_excalidraw "$opcao2"
                 else
                     APP_ORION="ferramenta_excalidraw"
                     ferramenta_excalidraw
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         55|easyappointments|EasyAppointments|Easy!Appointments|easy!appointments) 
+
+            verificar_stack "easyappointments${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="easyappointments${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_easyappointments "$opcao2"
                 else
                     APP_ORION="ferramenta_easyappointments"
                     ferramenta_easyappointments
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         56|documenso|Documenso) 
+
+            verificar_stack "documenso${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik && verificar_antes_se_tem_minio; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="documenso${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_documenso "$opcao2"
                 else
                     APP_ORION="ferramenta_documenso"
                     ferramenta_documenso
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         57|moodle|MOODLE) 
+
+            verificar_stack "moodle${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="moodle${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_moodle "$opcao2"
                 else
                     APP_ORION="ferramenta_moodle"
                     ferramenta_moodle
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
-        58|tooljet|TOOLJET) 
+        58|tooljet|TOOLJET)
+
+            verificar_stack "tooljet${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="tooljet${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_tooljet "$opcao2"
                 else
                     APP_ORION="ferramenta_tooljet"
                     ferramenta_tooljet
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         59|StirlingPDF|Stirling|stirling) 
+
+            verificar_stack "stirlingpdf${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="stirlingpdf${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_stirlingpdf "$opcao2"
                 else
                     APP_ORION="ferramenta_stirlingpdf"
                     ferramenta_stirlingpdf
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
         
-        60|ClickHouse|clickhouse|CLICKHOUSE) 
+        60|ClickHouse|clickhouse|CLICKHOUSE)
+
+            verificar_stack "clickhouse${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="clickhouse${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_clickhouse "$opcao2"
                 else
                     APP_ORION="ferramenta_clickhouse"
                     ferramenta_clickhouse
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
         
         61|RedisInsight|redisinsight|REDISINSIGHT) 
+
+            verificar_stack "redisinsight${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="redisinsight${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_redisinsight "$opcao2"
                 else
                     APP_ORION="ferramenta_redisinsight"
                     ferramenta_redisinsight
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         62|Traccar|traccar|TRACCAR) 
+
+            verificar_stack "traccar${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="traccar${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_traccar "$opcao2"
                 else
                     APP_ORION="ferramenta_traccar"
                     ferramenta_traccar
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         63|Firecrawl|firecrawl|FIRECRAWL) 
+
+            verificar_stack "firecrawl${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="firecrawl${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_firecrawl "$opcao2"
                 else
                     APP_ORION="ferramenta_firecrawl"
                     ferramenta_firecrawl
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         64|Wuzapi|wuzapi|WUZAPI) 
+
+            verificar_stack "wuzapi${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="wuzapi${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_wuzapi "$opcao2"
                 else
                     APP_ORION="ferramenta_wuzapi"
                     ferramenta_wuzapi
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
         65|KrayinCRM|krayincrm|KRAYINCRM) 
+
+            verificar_stack "krayincrm${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
-
                 ## INICIO TOKEN
-
                 STACK_NAME="krayincrm${opcao2:+_$opcao2}"
-
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_krayincrm "$opcao2"
                 else
                     APP_ORION="ferramenta_krayincrm"
                     ferramenta_krayincrm
                 fi
-
                 ## FIM TOKEN
-
             fi   
             ;;
 
@@ -27766,6 +28301,9 @@ while true; do
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
         postgres)
+
+            verificar_stack "postgres${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -27785,6 +28323,9 @@ while true; do
             ;;
 
         mysql)
+
+            verificar_stack "mysql${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -27804,6 +28345,9 @@ while true; do
             ;;
 
         redis)
+
+            verificar_stack "redis${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -27822,6 +28366,9 @@ while true; do
             fi   
             ;;
         pgvector)
+
+            verificar_stack "pgvector${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -27846,6 +28393,9 @@ while true; do
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
         
         evolution.v1)
+
+            verificar_stack "evolution_v1${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
@@ -27865,23 +28415,49 @@ while true; do
             ;;
 
         evolution.v2)
+
+            verificar_stack "evolution_v2${opcao2:+_$opcao2}" && continue || echo ""
+
             if verificar_docker_e_portainer_traefik; then
 
                 ## INICIO TOKEN
 
-                STACK_NAME="evolution_v2"
+                STACK_NAME="evolution_v2${opcao2:+_$opcao2}"
 
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_evolution_v2
+                    ferramenta_evolution_v2$
                 else
-                    APP_ORION="ferramenta_evolution_v2"
-                    ferramenta_evolution_v2
+                    APP_ORION="ferramenta_evolution_v2${opcao2:+_$opcao2}"
+                    ferramenta_evolution_v2$
                 fi
 
                 ## FIM TOKEN
 
             fi   
             ;;
+
+        evolution.lite)
+
+            verificar_stack "evolution_lite${opcao2:+_$opcao2}" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="evolution_lite${opcao2:+_$opcao2}"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_evolution_lite
+                else
+                    APP_ORION="ferramenta_evolution_lite${opcao2:+_$opcao2}"
+                    ferramenta_evolution_lite
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
