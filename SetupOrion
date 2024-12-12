@@ -5467,6 +5467,7 @@ services:
 
   evolution${1:+_$1}_lite:
     image: atendai/evolution-api-lite:latest ## Versão da Evolution API
+    entrypoint: ["/bin/bash", "-c", ". ./Docker/scripts/deploy_database.sh && npm run start:prod" ]
 
     volumes:
       - evolution${1:+_$1}_lite_instances:/evolution/instances
