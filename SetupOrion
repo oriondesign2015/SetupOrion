@@ -8489,7 +8489,7 @@ telemetria Botpress iniciado
 ## Nadaaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES E REDIS \e[33m[2/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
 echo ""
 sleep 1
 
@@ -13962,7 +13962,7 @@ telemetria "N8N & Quepasa" "iniciado"
 ## NADA
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES E REDIS \e[33m[2/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES\e[33m[2/5]\e[0m"
 echo ""
 sleep 1
 
