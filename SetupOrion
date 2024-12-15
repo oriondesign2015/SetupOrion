@@ -15967,11 +15967,22 @@ services:
 
       ## Logs
       - LOG_LEVEL=INFO
-      
+
       ## Secret Key
       - SECRET_KEY=$secret_key
 
+      ## Outras Url (vazio = mesmo do APP_WEB_URL)
+      - CONSOLE_WEB_URL=https://$url_dify ## Url Dify Web
+      - INIT_PASSWORD=
+      - CONSOLE_API_URL=https://$url_dify_api ## Url Dify API
+      - SERVICE_API_URL=https://$url_dify_api ## Url Dify API
+      - FILES_URL=https://$url_dify_api
+
+      ## Url Dify
+      - APP_WEB_URL=https://$url_dify ## Url Dify Web
+
       ## Dados Postgres
+      - MIGRATION_ENABLED=true
       - DB_USERNAME=postgres
       - DB_PASSWORD=$senha_postgres
       - DB_HOST=postgres
@@ -15987,9 +15998,30 @@ services:
       - REDIS_DB=0
       - CELERY_BROKER_URL=redis://redis:6379/1
 
-      ## Dados Weaviate
-      - STORAGE_TYPE=local
+      ## Liberar acesso a todos os ip
+      - WEB_API_CORS_ALLOW_ORIGINS=*
+      - CONSOLE_CORS_ALLOW_ORIGINS=*
+
+      ## Dados sobre armazenamento s3
+      - STORAGE_TYPE=s3
       - STORAGE_LOCAL_PATH=storage
+      - S3_ENDPOINT=https://$url_s3
+      - S3_BUCKET_NAME=dify${1:+-$1}
+      - S3_ACCESS_KEY=$S3_ACCESS_KEY
+      - S3_SECRET_KEY=$S3_SECRET_KEY
+
+      ## Configurações do Sandbox
+      - CODE_EXECUTION_ENDPOINT=http://dify${1:+_$1}_sandbox:8194
+      - CODE_EXECUTION_API_KEY=$sandbox_key
+      - CODE_MAX_NUMBER=9223372036854775807
+      - CODE_MIN_NUMBER=-9223372036854775808
+      - CODE_MAX_STRING_LENGTH=80000
+      - TEMPLATE_TRANSFORM_MAX_LENGTH=80000
+      - CODE_MAX_STRING_ARRAY_LENGTH=30
+      - CODE_MAX_OBJECT_ARRAY_LENGTH=30
+      - CODE_MAX_NUMBER_ARRAY_LENGTH=1000
+
+      ## Dados Weaviate
       - VECTOR_STORE=weaviate
       - WEAVIATE_ENDPOINT=http://dify${1:+_$1}_weaviate:8080
       - WEAVIATE_API_KEY=$token_weaviate
@@ -16002,6 +16034,11 @@ services:
       - SMTP_PORT=$porta_smtp_dify
       - SMTP_USERNAME=$user_email_dify
       - SMTP_PASSWORD=$senha_email_dify
+
+      ## Sentry
+      - SENTRY_DSN=
+      - SENTRY_TRACES_SAMPLE_RATE=1.0
+      - SENTRY_PROFILES_SAMPLE_RATE=1.0
 
     depends_on:
       - postgres
