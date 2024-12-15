@@ -26861,7 +26861,7 @@ services:
       - UVICORN_WORKERS=1
 
       ## Configurações do Redis
-      - REDIS_HOST=redis_transcrevezap
+      - REDIS_HOST=redis_transcrevezap${1:+_$1}
       - REDIS_PORT=6380
 
       ## Configurações de Debug
