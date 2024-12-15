@@ -6,7 +6,7 @@
 
 versao() {
 echo -e "                                   \e[97mVersão do SetupOrion: \e[32mv. 2.6.1\e[0m                                  "
-echo -e "\e[32moriondesign.art.br/whatsapp1      \e[97m<----- Grupos no WhatsApp ----->     \e[32moriondesign.art.br/whatsapp2\e[0m"
+echo -e "\e[32moriondesign.art.br/whatsapp2      \e[97m<----- Grupos no WhatsApp ----->     \e[32moriondesign.art.br/whatsapp3\e[0m"
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -135,7 +135,7 @@ creditos_msg() {
     echo -e "$amarelo=                       $branco Nossa comunidade:$amarelo https://join.oriondesign.art.br                        $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
     echo -e "$amarelo=                                   $branco Nossos grupos no WhatsApp                                    $amarelo=\e[0m"
-    echo -e "$amarelo=      $amarelo https://oriondesign.art.br/whatsapp1 $branco<-- ou -->$amarelo https://oriondesign.art.br/whatsapp2      $amarelo=\e[0m"
+    echo -e "$amarelo=      $amarelo https://oriondesign.art.br/whatsapp2 $branco<-- ou -->$amarelo https://oriondesign.art.br/whatsapp3      $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
@@ -289,13 +289,13 @@ nome_instalador() {
     echo -e "$branco    ███████║███████╗   ██║   ╚██████╔╝██║         ╚██████╔╝██║  ██║██║╚██████╔╝██║ ╚████║\e[0m"
     echo -e "$branco    ╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝          ╚═════╝ ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝\e[0m"
     echo -e "$branco                                                                                        \e[0m"                      
-    echo -e "$branco                                    ██████╗     ██████╗    ██╗                          \e[0m"                      
-    echo -e "$branco                                    ╚════██╗   ██╔════╝   ███║                          \e[0m"                      
-    echo -e "$branco                          █████╗     █████╔╝   ███████╗   ╚██║    █████╗                \e[0m"                      
-    echo -e "$branco                          ╚════╝    ██╔═══╝    ██╔═══██╗   ██║    ╚════╝                \e[0m"                      
-    echo -e "$branco                                    ███████╗██╗╚██████╔╝██╗██║                          \e[0m"                      
-    echo -e "$branco                                    ╚══════╝╚═╝ ╚═════╝ ╚═╝╚═╝                          \e[0m"
-    echo ""                      
+    echo -e "$branco                                  ██████╗     ██████╗    ██████╗                         \e[0m"
+    echo -e "$branco                                  ╚════██╗   ██╔════╝    ╚════██╗                        \e[0m"
+    echo -e "$branco                        █████╗     █████╔╝   ███████╗     █████╔╝    █████╗              \e[0m"
+    echo -e "$branco                        ╚════╝    ██╔═══╝    ██╔═══██╗   ██╔═══╝     ╚════╝              \e[0m"
+    echo -e "$branco                                  ███████╗██╗╚██████╔╝██╗███████╗                        \e[0m"
+    echo -e "$branco                                  ╚══════╝╚═╝ ╚═════╝ ╚═╝╚══════╝                        \e[0m"
+    echo "" 
 }
 
 ## Menu de ferramentas
@@ -2656,6 +2656,61 @@ um novo banco de dados? (Y/N): " resposta
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
+validar_senha() { 
+    senha=$1
+    tamanho_minimo=$2
+    tem_erro=0
+    mensagem_erro=""
+
+    # Verifica comprimento mínimo
+    if [ ${#senha} -lt $tamanho_minimo ]; then
+        mensagem_erro+="\n- Senha precisa ter no mínimo $tamanho_minimo caracteres"
+        tem_erro=1
+    fi
+
+    # Verifica letra maiúscula
+    if ! [[ $senha =~ [A-Z] ]]; then
+        mensagem_erro+="\n- Falta pelo menos uma letra maiúscula"
+        tem_erro=1
+    fi
+
+    # Verifica letra minúscula
+    if ! [[ $senha =~ [a-z] ]]; then
+        mensagem_erro+="\n- Falta pelo menos uma letra minúscula"
+        tem_erro=1
+    fi
+
+    # Verifica número
+    if ! [[ $senha =~ [0-9] ]]; then
+        mensagem_erro+="\n- Falta pelo menos um número"
+        tem_erro=1
+    fi
+
+    # Verifica caracteres especiais permitidos
+    if ! [[ $senha =~ [@_] ]]; then
+        mensagem_erro+="\n- Falta pelo menos um caractere especial (@ ou _)"
+        tem_erro=1
+    fi
+
+    # Verifica caracteres não permitidos
+    if [[ $senha =~ [^A-Za-z0-9@_] ]]; then
+        mensagem_erro+="\n- Contém caracteres especiais não permitidos (use apenas @ ou _)"
+        tem_erro=1
+    fi
+
+    # Se houver erro, mostra as mensagens
+    if [ $tem_erro -eq 1 ]; then
+        echo -e "Senha inválida! Corrija os seguintes problemas:$mensagem_erro"
+        return 1
+    fi
+
+    return 0
+}
+
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+##                                         ORION DESIGN                                        ##
+## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
+
 ## Instalação das Ferramentas
 
 ## ████████╗███████╗███████╗████████╗███████╗    ███████╗███╗   ███╗████████╗██████╗ 
@@ -2794,24 +2849,43 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para aplicação
-    echo -e "\e[97mPasso$amarelo 1/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o Dominio para o Portainer (ex: portainer.oriondesign.art.br): \e[0m" && read -r url_portainer
     echo ""
 
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
+    echo -en "\e[33mDigite um usuario para o Portainer (ex: admin): \e[0m" && read -r user_portainer
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    while true; do
+      echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+      echo -e "$amarelo--> Minimo 12 caracteres. Use Letras MAIUSCULAS e minusculas, numero e um caractere especial @ ou _"
+      echo -e "$amarelo--> Evite os caracteres especiais como: \!#$"
+      echo -en "\e[33mDigite uma senha para o Portainer (ex: @Senha123456_): \e[0m" && read -r pass_portainer
+      echo ""
+
+      if validar_senha "$pass_portainer" 12; then
+          break
+      fi
+      echo ""
+    done
+
     ## Pergunta o Nome do Servidor
-    echo -e "\e[97mPasso$amarelo 2/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -e "$amarelo--> Não pode conter Espaços e/ou cartacteres especiais"
     echo -en "\e[33mEscolha um nome para o seu servidor (ex: OrionDesign): \e[0m" && read -r nome_servidor
     echo ""
     
     ## Pergunta o nome da Rede Interna
-    echo -e "\e[97mPasso$amarelo 3/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -e "$amarelo--> Não pode conter Espaços e/ou cartacteres especiais."
     echo -en "\e[33mDigite um nome para sua rede interna (ex: OrionNet): \e[0m" && read -r nome_rede_interna
     echo ""
     
     ## Pergunta o Email para informações sobre o certificado
-    echo -e "\e[97mPasso$amarelo 4/4\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
     echo -en "\e[33mDigite um endereço de Email válido (ex: contato@oriondesign.art.br): \e[0m" && read -r email_ssl
     echo ""
 
@@ -2826,6 +2900,14 @@ while true; do
 
     ## Informação sobre URL
     echo -e "\e[33mLink do Portainer:\e[97m $url_portainer\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mUsuario do Portainer:\e[97m $user_portainer\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mSenha do Portainer:\e[97m $pass_portainer\e[0m"
     echo ""
 
     ## Informação sobre Nome do Servidor
@@ -2873,7 +2955,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO TRAEFIK \e[33m[1/8]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO TRAEFIK \e[33m[1/9]\e[0m"
 echo ""
 sleep 1
 
@@ -2926,7 +3008,7 @@ cd
 dados
 
 ## Mensagem de Passo
-echo -e "\e[97m• ATUALIZANDO E CONFIGURANDO A VPS \e[33m[2/8]\e[0m"
+echo -e "\e[97m• ATUALIZANDO E CONFIGURANDO A VPS \e[33m[2/9]\e[0m"
 echo ""
 sleep 1
 
@@ -2995,7 +3077,7 @@ fi
 echo ""
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO DOCKER SWARM \e[33m[3/8]\e[0m"
+echo -e "\e[97m• INSTALANDO DOCKER SWARM \e[33m[3/9]\e[0m"
 echo ""
 sleep 1
 
@@ -3049,7 +3131,7 @@ echo ""
 telemetria Docker finalizado
 
 ## Mensagem de Passo
-echo -e "\e[97m• CRIANDO REDE INTERNA \e[33m[4/8]\e[0m"
+echo -e "\e[97m• CRIANDO REDE INTERNA \e[33m[4/9]\e[0m"
 echo ""
 sleep 1
 
@@ -3064,7 +3146,7 @@ fi
 echo ""
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO TRAEFIK \e[33m[5/8]\e[0m"
+echo -e "\e[97m• INSTALANDO TRAEFIK \e[33m[5/9]\e[0m"
 echo ""
 sleep 1
 
@@ -3167,7 +3249,7 @@ fi
 
 echo ""
 ## Mensagem de Passo
-echo -e "\e[97m• ESPERANDO O TRAEFIK ESTAR ONLINE \e[33m[6/8]\e[0m"
+echo -e "\e[97m• ESPERANDO O TRAEFIK ESTAR ONLINE \e[33m[6/9]\e[0m"
 echo ""
 sleep 1
 
@@ -3179,7 +3261,7 @@ telemetria Traefik finalizado
 wait_30_sec
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO PORTAINER \e[33m[7/8]\e[0m"
+echo -e "\e[97m• INSTALANDO PORTAINER \e[33m[7/9]\e[0m"
 echo ""
 sleep 1
 
@@ -3271,14 +3353,64 @@ fi
 
 echo ""
 ## Mensagem de Passo
-echo -e "\e[97m• ESPERANDO O PORTAINER ESTAR ONLINE \e[33m[8/8]\e[0m"
+echo -e "\e[97m• ESPERANDO O PORTAINER ESTAR ONLINE \e[33m[8/9]\e[0m"
 echo ""
 sleep 1
 
 ## Usa o serviço wait_portainer para verificar se o serviço esta online
 wait_stack "portainer"
 
+sleep 5
+
 telemetria Portainer finalizado
+
+echo ""
+## Mensagem de Passo
+echo -e "\e[97m• CRIANDO CONTA NO PORTAINER \e[33m[9/9]\e[0m"
+echo ""
+sleep 1
+
+## Tenta criar usuário no Portainer até 4 vezes
+MAX_RETRIES=4
+DELAY=15  # Delay de 15 segundos entre as tentativas
+
+for i in $(seq 1 $MAX_RETRIES); do
+
+  RESPONSE=$(curl -k -s -X POST "https://$url_portainer/api/users/admin/init" \
+    -H "Content-Type: application/json" \
+    -d "{\"Username\": \"$user_portainer\", \"Password\": \"$pass_portainer\"}")
+
+  # Verificar se o campo "Username" existe na resposta
+  if echo "$RESPONSE" | grep -q "\"Username\":\"$user_portainer\""; then
+    echo "1/2 - [ OK ] - Conta de administrador criada com sucesso!"
+    break  # Sai do loop se a criação for bem-sucedida
+  else
+    echo "Falha ao criar a conta de administrador na tentativa $i/4."
+    # Se for a última tentativa, exibe mensagem de erro final
+    if [ $i -eq $MAX_RETRIES ]; then
+      echo "1/2 - [ OFF ] - Não foi possível criar a conta de administrador após $MAX_RETRIES tentativas."
+      exit 1  # Sai do script em caso de falha final
+    fi
+    sleep $DELAY  # Aguarda 15 segundos antes da próxima tentativa
+  fi
+done
+
+sleep 5
+
+## Cria primeiro token do Portainer
+token=$(curl -k -s -X POST "https://$url_portainer/api/auth" \
+  -H "Content-Type: application/json" \
+  -d "{\"username\":\"$user_portainer\",\"password\":\"$pass_portainer\"}" | jq -r .jwt)
+# Verifica se o token foi gerado com sucesso
+if [ -n "$token" ] && [ "$token" != "null" ]; then
+  echo "2/2 - [ OK ] - Gerando primeiro token"
+else
+  echo "2/2 - [ OFF ] - Falha ao gerar o token"
+  exit 1  # Sai do script em caso de falha
+fi
+
+
+sleep 5
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
 
@@ -3287,9 +3419,11 @@ cat > dados_portainer <<EOL
 
 Dominio do portainer: https://$url_portainer
 
-Usuario: Precisa criar dentro do portainer
+Usuario: $user_portainer
 
-Senha: Precisa criar dentro do portainer
+Senha: $pass_portainer
+
+Token: $token
 EOL
 
 cd
@@ -3311,15 +3445,15 @@ echo ""
 echo -e "\e[97mDominio do portainer:\e[33m https://$url_portainer\e[0m"
 echo ""
 
-echo -e "\e[97mUsuario:\e[33m Precisa criar dentro do portainer\e[0m"
+echo -e "\e[97mUsuario:\e[33m $user_portainer\e[0m"
 echo ""
 
-echo -e "\e[97mSenha:\e[33m Precisa criar dentro do portainer\e[0m"
-echo ""
+echo -e "\e[97mSenha:\e[33m $pass_portainer\e[0m"
+#echo ""
 
-echo -e "\e[97mObservação:\e[33m Você tem menos de 5 minutos para criar uma conta no Portainer, caso\e[0m"
-echo -e "\e[33mexceda esse tempo, você precisara de voltar no menu anterior (digitando: Y)\e[0m"
-echo -e "\e[33me no menu de ferramentas digitar: \e[97mportainer.restart\e[0m"
+#echo -e "\e[97mObservação:\e[33m Você tem menos de 5 minutos para criar uma conta no Portainer, caso\e[0m"
+#echo -e "\e[33mexceda esse tempo, você precisara de voltar no menu anterior (digitando: Y)\e[0m"
+#echo -e "\e[33me no menu de ferramentas digitar: \e[97mportainer.restart\e[0m"
 
 ## Creditos do instalador
 creditos_msg
@@ -15708,10 +15842,10 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_api:
-    image: langgenius/dify-api:0.11.2 ## Versão do Dify
+    image: langgenius/dify-api:0.13.2 ## Versão do Dify
 
     volumes:
-      - dify${1:+_$1}_storage:/app/api/storage0.2.10
+      - dify${1:+_$1}_storage:/app/api/storage
 
     networks:
       - $nome_rede_interna
@@ -15731,7 +15865,7 @@ services:
       - INIT_PASSWORD=
       - CONSOLE_API_URL=https://$url_dify_api ## Url Dify API
       - SERVICE_API_URL=https://$url_dify_api ## Url Dify API
-      - FILES_URL=
+      - FILES_URL=https://$url_dify_api
 
       ## Url Dify
       - APP_WEB_URL=https://$url_dify ## Url Dify Web
@@ -15758,9 +15892,9 @@ services:
       - CONSOLE_CORS_ALLOW_ORIGINS=*
 
       ## Dados sobre armazenamento s3
-      - STORAGE_TYPE=local
+      - STORAGE_TYPE=s3
       - STORAGE_LOCAL_PATH=storage
-      - S3_ENDPOINT=$url_s3
+      - S3_ENDPOINT=https://$url_s3
       - S3_BUCKET_NAME=dify${1:+-$1}
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
       - S3_SECRET_KEY=$S3_SECRET_KEY
@@ -15803,7 +15937,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "4"
+          cpus: "2"
           memory: 4096M
       labels:
         - traefik.enable=true
@@ -15819,7 +15953,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_worker:
-    image: langgenius/dify-api:0.11.2 ## Versão do Dify
+    image: langgenius/dify-api:0.13.2 ## Versão do Dify
 
     volumes:
       - dify${1:+_$1}_storage:/app/api/storage
@@ -15880,13 +16014,13 @@ services:
           - node.role == manager       
       resources:
         limits:
-          cpus: "4"
+          cpus: "2"
           memory: 4096M
 
 ## --------------------------- ORION --------------------------- ## 
 
   dify${1:+_$1}_web:
-    image: langgenius/dify-web:0.11.2 ## Versão do Dify
+    image: langgenius/dify-web:0.13.2 ## Versão do Dify
 
     networks:
       - $nome_rede_interna
@@ -15910,7 +16044,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "4"
+          cpus: "2"
           memory: 4096M
       labels:
         - traefik.enable=true
@@ -15944,7 +16078,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "4"
+          cpus: "2"
           memory: 4096M
 
 ## --------------------------- ORION --------------------------- ##
@@ -15984,7 +16118,7 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "4"
+          cpus: "2"
           memory: 4096M
 
 ## --------------------------- ORION --------------------------- ##
