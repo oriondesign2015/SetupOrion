@@ -3373,9 +3373,9 @@ sleep 1
 ## Tenta criar usuário no Portainer até 4 vezes
 MAX_RETRIES=4
 DELAY=15  # Delay de 15 segundos entre as tentativas
+CONTA_CRIADA=false
 
 for i in $(seq 1 $MAX_RETRIES); do
-
   RESPONSE=$(curl -k -s -X POST "https://$url_portainer/api/users/admin/init" \
     -H "Content-Type: application/json" \
     -d "{\"Username\": \"$user_portainer\", \"Password\": \"$pass_portainer\"}")
@@ -3383,38 +3383,44 @@ for i in $(seq 1 $MAX_RETRIES); do
   # Verificar se o campo "Username" existe na resposta
   if echo "$RESPONSE" | grep -q "\"Username\":\"$user_portainer\""; then
     echo "1/2 - [ OK ] - Conta de administrador criada com sucesso!"
-    break  # Sai do loop se a criação for bem-sucedida
+    CONTA_CRIADA=true
+    break
   else
     echo "Falha ao criar a conta de administrador na tentativa $i/4."
     # Se for a última tentativa, exibe mensagem de erro final
     if [ $i -eq $MAX_RETRIES ]; then
       echo "1/2 - [ OFF ] - Não foi possível criar a conta de administrador após $MAX_RETRIES tentativas."
-      exit 1  # Sai do script em caso de falha final
+      echo "Erro retornado: $RESPONSE"
+      echo -e "\e[33mApós a conclusão da instalação, por favor, crie uma conta acessando o link do seu Portainer"
+      CONTA_CRIADA=false
     fi
-    sleep $DELAY  # Aguarda 15 segundos antes da próxima tentativa
+    sleep $DELAY
   fi
 done
 
-sleep 5
-
-## Cria primeiro token do Portainer
-token=$(curl -k -s -X POST "https://$url_portainer/api/auth" \
-  -H "Content-Type: application/json" \
-  -d "{\"username\":\"$user_portainer\",\"password\":\"$pass_portainer\"}" | jq -r .jwt)
-# Verifica se o token foi gerado com sucesso
-if [ -n "$token" ] && [ "$token" != "null" ]; then
-  echo "2/2 - [ OK ] - Gerando primeiro token"
-else
-  echo "2/2 - [ OFF ] - Falha ao gerar o token"
-  exit 1  # Sai do script em caso de falha
+# Só tenta criar o token se a conta foi criada com sucesso
+if [ "$CONTA_CRIADA" = true ]; then
+  sleep 5
+  ## Cria primeiro token do Portainer
+  token=$(curl -k -s -X POST "https://$url_portainer/api/auth" \
+    -H "Content-Type: application/json" \
+    -d "{\"username\":\"$user_portainer\",\"password\":\"$pass_portainer\"}" | jq -r .jwt)
+  
+  # Verifica se o token foi gerado com sucesso
+  if [ -n "$token" ] && [ "$token" != "null" ]; then
+    echo "2/2 - [ OK ] - Gerando primeiro token"
+  else
+    echo "2/2 - [ OFF ] - Falha ao gerar o token"
+    exit 1
+  fi
 fi
-
 
 sleep 5
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
 
-cat > dados_portainer <<EOL
+if [ "$CONTA_CRIADA" = true ]; then
+  cat > dados_portainer <<EOL
 [ PORTAINER ]
 
 Dominio do portainer: https://$url_portainer
@@ -3425,6 +3431,17 @@ Senha: $pass_portainer
 
 Token: $token
 EOL
+else
+  cat > dados_portainer <<EOL
+[ PORTAINER ]
+
+Dominio do portainer: https://$url_portainer
+
+Usuario: Precisa criar dentro do portainer
+
+Senha: Precisa criar dentro do portainer
+EOL
+fi
 
 cd
 cd
@@ -3445,10 +3462,19 @@ echo ""
 echo -e "\e[97mDominio do portainer:\e[33m https://$url_portainer\e[0m"
 echo ""
 
-echo -e "\e[97mUsuario:\e[33m $user_portainer\e[0m"
-echo ""
-
-echo -e "\e[97mSenha:\e[33m $pass_portainer\e[0m"
+if [ "$CONTA_CRIADA" = true ]; then
+  echo -e "\e[97mUsuario:\e[33m $user_portainer\e[0m"
+  echo ""
+  echo -e "\e[97mSenha:\e[33m $pass_portainer\e[0m"
+else
+  echo -e "\e[97mUsuario:\e[33m Precisa criar dentro do portainer\e[0m"
+  echo ""
+  echo -e "\e[97mSenha:\e[33m Precisa criar dentro do portainer\e[0m"
+  echo ""
+  echo -e "\e[97mObservação:\e[33m Você tem menos de 5 minutos para criar uma conta no Portainer, caso\e[0m"
+  echo -e "\e[33mexceda esse tempo, você precisara de voltar no menu anterior (digitando: Y)\e[0m"
+  echo -e "\e[33me no menu de ferramentas digitar: \e[97mportainer.restart\e[0m"
+fi
 #echo ""
 
 #echo -e "\e[97mObservação:\e[33m Você tem menos de 5 minutos para criar uma conta no Portainer, caso\e[0m"
