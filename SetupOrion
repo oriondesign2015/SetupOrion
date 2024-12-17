@@ -26636,7 +26636,7 @@ services:
   ## --------------------------- ORION --------------------------- ##
 
   krayin${1:+_$1}:
-    image: webkul/krayin:2.0.1
+    image: webkul/krayin:2.0.4
 
     volumes:
       - krayin${1:+_$1}_data:/var/www/html/laravel-crm
