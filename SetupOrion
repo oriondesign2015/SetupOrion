@@ -17139,12 +17139,11 @@ services:
       labels:
         - traefik.enable=true
         - traefik.http.routers.directus${1:+_$1}.rule=Host(\`$url_directus\`)
-        - traefik.http.routers.directus${1:+_$1}.entrypoints=web,websecure
-        - traefik.http.routers.directus${1:+_$1}.tls.certresolver=letsencryptresolve
+        - traefik.http.services.directus${1:+_$1}.loadbalancer.server.port=3000
         - traefik.http.routers.directus${1:+_$1}.service=directus${1:+_$1}
+        - traefik.http.routers.directus${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.directus${1:+_$1}.entrypoints=websecure
         - traefik.http.routers.directus${1:+_$1}.tls=true
-        - traefik.http.services.directus${1:+_$1}.loadbalancer.server.port=8055
-        - traefik.docker.network=proxy
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -26121,6 +26120,8 @@ cat > dados_firecrawl${1:+_$1} <<EOL
 [ FIRECRAWL ]
 
 Dominio do firecrawl: https://$url_firecrawl
+
+API Key: $apikey_firecrawl
 EOL
 
 cd
