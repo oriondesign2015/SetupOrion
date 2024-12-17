@@ -4356,6 +4356,8 @@ stack_editavel #> /dev/null 2>&1
 #    echo "Ops, não foi possivel subir a stack do Postgres."
 #fi
 
+wait_stack "mysql${1:+_$1}"
+
 #docker stack deploy --prune --resolve-image always -c mysql.yaml mysql #> /dev/null 2>&1
 
 ## Salvando informações da instalação dentro de /dados_vps/
@@ -4366,10 +4368,9 @@ cat > dados_mysql <<EOL
 
 Dominio do mysql: mysql
 
-Usuario: mysql ou root
+Usuario: root
 
 Senha: $senha_mysql
-
 EOL
 
 cd
@@ -4483,7 +4484,8 @@ else
     echo "Ops, não foi criar a stack do Mysql."
 fi
 
-STACK_NAME="mysql${1:+_$1}"
+STACK_NAME="mysql"
+
 stack_editavel
 
 ## Mensagem de Passo
@@ -4491,7 +4493,7 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-wait_stack "mysql${1:+_$1}"
+wait_stack "mysql" > /dev/null 2>&1
 
 telemetria MySQL finalizado
 #if [ $? -eq 0 ]; then
@@ -25922,7 +25924,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO FIRECRAWL \e[33m[1/3]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO FIRECRAWL \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
 
@@ -25931,7 +25933,21 @@ telemetria Firecrawl iniciado
 ## Nadaaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO FIRECRAWL \e[33m[2/3]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+## Verifica/instala o Redis
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    echo "1/1 - [ OK ] - Redis já instalado"
+    echo ""
+else
+    ferramenta_redis
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO FIRECRAWL \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
@@ -26105,7 +26121,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
@@ -26529,7 +26545,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO KRAYIN CRM \e[33m[1/4]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO KRAYIN CRM \e[33m[1/6]\e[0m"
 echo ""
 sleep 1
 
@@ -26538,7 +26554,7 @@ telemetria "Krayin CRM" "iniciado"
 ## Nadaaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/4]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/6]\e[0m"
 echo ""
 sleep 1
 
@@ -26550,27 +26566,64 @@ verificar_container_mysql
         echo "1/3 - [ OK ] - MySQL já instalado"
         pegar_senha_mysql > /dev/null 2>&1
         echo "2/3 - [ OK ] - Copiando senha do MySQL"
-        #criar_banco_mysql_da_stack "krayincrm${1:+_$1}"
+        criar_banco_mysql_da_stack "krayin${1:+_$1}"
         echo "3/3 - [ OK ] - Criando banco de dados"
-        echo ""
     else
         ferramenta_mysql
         pegar_senha_mysql > /dev/null 2>&1
-        #criar_banco_mysql_da_stack "krayincrm${1:+_$1}"
+        criar_banco_mysql_da_stack "krayin${1:+_$1}"
     fi
-
-sleep 40
-docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "
-CREATE DATABASE krayin${1:+_$1} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-CREATE USER 'orion'@'%' IDENTIFIED BY 'design';
-GRANT ALL PRIVILEGES ON krayin${1:+_$1}.* TO 'orion'@'%';
-FLUSH PRIVILEGES;" > /dev/null 2>&1
 
 sleep 5
 
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/6]\e[0m"
+echo ""
+sleep 1
+
+## Verifica/instala o Redis
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    echo "1/1 - [ OK ] - Redis já instalado"
+    echo ""
+else
+    ferramenta_redis
+fi
+
+# Criação do banco de dados
+#docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "CREATE DATABASE krayin${1:+_$1} CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;" > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "1/4 - [ OK ] - Criação do banco de dados"
+#else
+#    echo "1/10 - [ OFF ] - Criação do banco de dados"
+#fi
+#
+## Criação do usuário
+#docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "CREATE USER 'orion'@'%' IDENTIFIED BY 'design';" > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "2/4 - [ OK ] - Criação do usuário"
+#else
+#    echo "2/4 - [ OFF ] - Criação do usuário"
+#fi
+## Concessão de privilégios ao usuário
+#docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "GRANT ALL PRIVILEGES ON krayin${1:+_$1}.* TO 'orion'@'%';" > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "3/4 - [ OK ] - Concessão de privilégios ao usuário"
+#else
+#    echo "3/4 - [ OFF ] - Concessão de privilégios ao usuário"
+#fi
+## Atualização dos privilégios
+#docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "FLUSH PRIVILEGES;" > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "4/4 - [ OK ] - Atualização dos privilégios"
+#else
+#    echo "4/4 - [ OFF ] - Atualização dos privilégios"
+#fi
+#sleep 5
+
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO KRAYIN CRM \e[33m[3/4]\e[0m"
+echo -e "\e[97m• INSTALANDO KRAYIN CRM \e[33m[4/6]\e[0m"
 echo ""
 sleep 1
 
@@ -26600,14 +26653,15 @@ services:
       - APP_TIMEZONE=America/Sao_Paulo
       - APP_LOCALE=pt_BR
       - APP_CURRENCY=BRL
+      - SANCTUM_STATEFUL_DOMAINS=https://$url_krayincrm/public
 
       ## Configuração do Banco de Dados
       - DB_CONNECTION=mysql
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_DATABASE=krayin${1:+_$1}
-      - DB_USERNAME=orion
-      - DB_PASSWORD=design
+      - DB_USERNAME=root
+      - DB_PASSWORD=$senha_mysql
       - DB_PREFIX=
 
       ## Configurações de e-mail
@@ -26627,6 +26681,7 @@ services:
 
       ## Configurações de Redis
       - REDIS_HOST=redis
+      - REDIS_PASSWORD=null
       - REDIS_PORT=6379
 
     deploy:
@@ -26677,13 +26732,29 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/6]\e[0m"
 echo ""
 sleep 1
 
 ## Usa o serviço wait_krayincrm para verificar se o serviço esta online
 wait_stack "krayincrm${1:+_$1}"
 
+## Mensagem de Passo
+echo -e "\e[97m• APLICANDO CONFIGURAÇÕES \e[33m[6/6]\e[0m"
+echo ""
+sleep 1
+
+## Executa o comando artisan krayin-crm:install
+docker exec -it -e APP_NAME="Krayin CRM" -e APP_URL="https://$url_krayincrm" -e APP_TIMEZONE="America/Sao_Paulo" -e APP_LOCALE="en" -e APP_CURRENCY="BRL" -e DB_CONNECTION="mysql" -e DB_HOST="mysql" -e DB_PORT="3306" -e DB_DATABASE="krayin${1:+_$1}" -e DB_USERNAME="root" -e DB_PASSWORD="$senha_mysql" "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "1/11 - [ OK ] - Execurando: artisan krayin-crm:install"
+else
+    echo "1/11 - [ OFF ] - Execurando: artisan krayin-crm:install"
+fi
+
+sleep 5
+
+## Cria o arquivo AppServiceProvider.php
 cat > AppServiceProvider.php <<EOL
 <?php
 
@@ -26717,16 +26788,152 @@ class AppServiceProvider extends ServiceProvider
     }
 }
 EOL
-rm /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
-mv AppServiceProvider.php /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
 
+## Remove o arquivo AppServiceProvider.php errado do dir
+rm /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
+if [ $? -eq 0 ]; then
+    echo "2/11 - [ OK ] - Removendo AppServiceProvider"
+else
+    echo "2/11 - [ OFF ] - Removendo AppServiceProvider"
+fi
+
+## Move o arquivo AppServiceProvider.php certo para o dir correspondente
+mv AppServiceProvider.php /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
+if [ $? -eq 0 ]; then
+    echo "3/11 - [ OK ] - Adicionando novo AppServiceProvider"
+else
+    echo "3/11 - [ OFF ] - Adicionando novo AppServiceProvider"
+fi
 sleep 5
 
 docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "4/11 - [ OK ] - Forçando Migração"
+else
+    echo "4/11 - [ OFF ] - Forçando Migração"
+fi
 
-docker exec -it   -e APP_NAME="Krayin CRM"   -e APP_URL="https://$url_krayincrm"   -e APP_TIMEZONE="America/Sao_Paulo"   -e APP_LOCALE="en"   -e APP_CURRENCY="BRL"   -e DB_CONNECTION="mysql"   -e DB_HOST="mysql"   -e DB_PORT="3306"   -e DB_DATABASE="krayin${1:+_$1}"   -e DB_USERNAME="orion"   -e DB_PASSWORD="design"   "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)"   php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
+#docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" php /var/www/html/laravel-crm/artisan migrate --seed --force > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "1/11 - [ OK ] - Forçando Migração"
+#else
+#    echo "1/11 - [ OFF ] - Forçando Migração"
+#fi
 
-docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" php /var/www/html/laravel-crm/artisan migrate --seed --force > /dev/null 2>&1
+## Adicionado a linha SANCTUM_STATEFUL_DOMAINS
+echo "SANCTUM_STATEFUL_DOMAINS=https://$url_krayincrm/public" >> \
+  /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/.env
+
+# Altera DB_CONNECTION
+sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=mysql/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera DB_HOST
+sed -i 's/^DB_HOST=.*/DB_HOST=mysql/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera DB_PORT
+sed -i 's/^DB_PORT=.*/DB_PORT=3306/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera DB_DATABASE
+sed -i "s/^DB_DATABASE=.*/DB_DATABASE=krayin${1:+_$1}/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera DB_USERNAME
+sed -i 's/^DB_USERNAME=.*/DB_USERNAME=root/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera DB_PASSWORD
+sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=$senha_mysql/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera DB_PREFIX
+sed -i 's/^DB_PREFIX=.*/DB_PREFIX=/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera REDIS_HOST
+sed -i 's/^REDIS_HOST=.*/REDIS_HOST=redis/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera REDIS_PASSWORD
+sed -i 's/^REDIS_PASSWORD=.*/REDIS_PASSWORD=/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera REDIS_PORT
+sed -i 's/^REDIS_PORT=.*/REDIS_PORT=6379/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_MAILER
+sed -i 's/^MAIL_MAILER=.*/MAIL_MAILER=smtp/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_FROM_ADDRESS
+sed -i "s/^MAIL_FROM_ADDRESS=.*/MAIL_FROM_ADDRESS=$email_krayincrm/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_USERNAME
+sed -i "s/^MAIL_USERNAME=.*/MAIL_USERNAME=$usuario_email_krayincrm/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_PASSWORD
+sed -i "s/^MAIL_PASSWORD=.*/MAIL_PASSWORD=$senha_email_krayincrm/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_HOST
+sed -i "s/^MAIL_HOST=.*/MAIL_HOST=$smtp_email_krayincrm/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_PORT
+sed -i "s/^MAIL_PORT=.*/MAIL_PORT=$porta_smtp_krayincrm/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_ENCRYPTION
+sed -i "s/^MAIL_ENCRYPTION=.*/MAIL_ENCRYPTION=$smtp_secure_krayincrm/" /var/lib/docker/volumes/krayin_data/_data/.env
+
+# Altera MAIL_FROM_NAME
+sed -i 's/^MAIL_FROM_NAME=.*/MAIL_FROM_NAME="Krayin CRM"/' /var/lib/docker/volumes/krayin_data/_data/.env
+
+if [ $? -eq 0 ]; then
+    echo "5/11 - [ OK ] - Preenchendo arquivo .env do Krayin CRM"
+else
+    echo "5/11 - [ OFF ] - Preenchendo arquivo .env do Krayin CRM"
+fi
+
+docker exec $(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q) php /var/www/html/laravel-crm/artisan krayin-crm:install > /dev/null 2>&1
+
+## Ativando API
+docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /usr/local/bin/composer require krayin/rest-api --working-dir=/var/www/html/laravel-crm > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "6/11 - [ OK ] - Instalando API"
+else
+    echo "6/11 - [ OFF ] - Instalando API"
+fi
+
+## Ativando API
+docker exec -it --workdir /var/www/html/laravel-crm "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php artisan krayin-rest-api:install > /dev/null 2>&1
+
+if [ $? -eq 0 ]; then
+    echo "7/11 - [ OK ] - Ativando API"
+else
+    echo "7/11 - [ OFF ] - Ativando API"
+fi
+
+## Ativando API
+wget -O /var/lib/docker/volumes/krayin_data/_data/packages/Webkul/Admin/src/Resources/lang/en/app.php https://raw.githubusercontent.com/oriondesign2015/SetupOrion/refs/heads/main/Extras/Krayin/app.php > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "8/11 - [ OK ] - Baixando Tradução"
+else
+    echo "8/11 - [ OFF ] - Baixando Tradução"
+fi
+
+docker service update --force krayincrm${1:+_$1}_krayin > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "9/11 - [ OK ] - Aplicando Tradução"
+else
+    echo "9/11 - [ OFF ] - Aplicando Tradução"
+fi
+sleep 30
+
+## Limpando Cache
+docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan config:clear > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "10/11 - [ OK ] - Limpando Cache"
+else
+    echo "10/11 - [ OFF ] - Limpando Cache"
+fi
+
+## Criando arquivo de cache
+docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan config:cache > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "11/11 - [ OK ] - Criando novo arquivo de Cache"
+else
+    echo "11/11 - [ OFF ] - Criando novo arquivo de Cache"
+fi
 
 telemetria "Krayin CRM" "finalizado"
 
@@ -26741,7 +26948,7 @@ Usuario: admin@example.com
 
 Senha: admin123
 
-Apikey: $apikey_krayincrm
+Documentação: https://$url_krayincrm/api/documentation
 EOL
 
 cd
@@ -26767,6 +26974,9 @@ echo -e "\e[33mUsuario:\e[97m admin@example.com\e[0m"
 echo ""
 
 echo -e "\e[33mSenha:\e[97m admin123\e[0m"
+echo ""
+
+echo -e "\e[33mDocumentação:\e[97m https://$url_krayincrm/api/documentation\e[0m"
 
 ## Creditos do instalador
 creditos_msg
@@ -27542,11 +27752,11 @@ krayin.fix(){
       echo "1/4 - [ OFF ] - Pegando URL do Krayin CRM"
   fi
 
-docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "
-CREATE DATABASE $DB_VAR CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-CREATE USER 'orion'@'%' IDENTIFIED BY 'design';
-GRANT ALL PRIVILEGES ON $DB_VAR.* TO 'orion'@'%';
-FLUSH PRIVILEGES;" > /dev/null 2>&1
+#docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "
+#CREATE DATABASE $DB_VAR CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+#CREATE USER 'orion'@'%' IDENTIFIED BY 'design';
+#GRANT ALL PRIVILEGES ON $DB_VAR.* TO 'orion'@'%';
+#FLUSH PRIVILEGES;" > /dev/null 2>&1
 
 
   docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
