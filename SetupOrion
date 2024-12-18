@@ -26747,9 +26747,9 @@ sleep 1
 ## Executa o comando artisan krayin-crm:install
 docker exec -it -e APP_NAME="Krayin CRM" -e APP_URL="https://$url_krayincrm" -e APP_TIMEZONE="America/Sao_Paulo" -e APP_LOCALE="pt_BR" -e APP_CURRENCY="BRL" -e DB_CONNECTION="mysql" -e DB_HOST="mysql" -e DB_PORT="3306" -e DB_DATABASE="krayin${1:+_$1}" -e DB_USERNAME="root" -e DB_PASSWORD="$senha_mysql" "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/11 - [ OK ] - Executando: artisan krayin-crm:install"
+    echo "1/10 - [ OK ] - Executando: artisan krayin-crm:install"
 else
-    echo "1/11 - [ OFF ] - Executando: artisan krayin-crm:install"
+    echo "1/10 - [ OFF ] - Executando: artisan krayin-crm:install"
 fi
 
 sleep 5
@@ -26792,32 +26792,32 @@ EOL
 ## Remove o arquivo AppServiceProvider.php errado do dir
 rm /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
 if [ $? -eq 0 ]; then
-    echo "2/11 - [ OK ] - Removendo AppServiceProvider"
+    echo "2/10 - [ OK ] - Removendo AppServiceProvider"
 else
-    echo "2/11 - [ OFF ] - Removendo AppServiceProvider"
+    echo "2/10 - [ OFF ] - Removendo AppServiceProvider"
 fi
 
 ## Move o arquivo AppServiceProvider.php certo para o dir correspondente
 mv AppServiceProvider.php /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/app/Providers/AppServiceProvider.php
 if [ $? -eq 0 ]; then
-    echo "3/11 - [ OK ] - Adicionando novo AppServiceProvider"
+    echo "3/10 - [ OK ] - Adicionando novo AppServiceProvider"
 else
-    echo "3/11 - [ OFF ] - Adicionando novo AppServiceProvider"
+    echo "3/10 - [ OFF ] - Adicionando novo AppServiceProvider"
 fi
 sleep 5
 
 docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "4/11 - [ OK ] - Forçando Migração"
+    echo "4/10 - [ OK ] - Forçando Migração"
 else
-    echo "4/11 - [ OFF ] - Forçando Migração"
+    echo "4/10 - [ OFF ] - Forçando Migração"
 fi
 
 #docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" php /var/www/html/laravel-crm/artisan migrate --seed --force > /dev/null 2>&1
 #if [ $? -eq 0 ]; then
-#    echo "1/11 - [ OK ] - Forçando Migração"
+#    echo "1/10 - [ OK ] - Forçando Migração"
 #else
-#    echo "1/11 - [ OFF ] - Forçando Migração"
+#    echo "1/10 - [ OFF ] - Forçando Migração"
 #fi
 
 ## Adicionado a linha SANCTUM_STATEFUL_DOMAINS
@@ -26879,9 +26879,9 @@ sed -i "s/^MAIL_ENCRYPTION=.*/MAIL_ENCRYPTION=$smtp_secure_krayincrm/" /var/lib/
 sed -i 's/^MAIL_FROM_NAME=.*/MAIL_FROM_NAME="Krayin CRM"/' /var/lib/docker/volumes/krayin_data/_data/.env
 
 if [ $? -eq 0 ]; then
-    echo "5/11 - [ OK ] - Preenchendo arquivo .env do Krayin CRM"
+    echo "5/10 - [ OK ] - Preenchendo arquivo .env do Krayin CRM"
 else
-    echo "5/11 - [ OFF ] - Preenchendo arquivo .env do Krayin CRM"
+    echo "5/10 - [ OFF ] - Preenchendo arquivo .env do Krayin CRM"
 fi
 
 docker exec $(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q) php /var/www/html/laravel-crm/artisan krayin-crm:install > /dev/null 2>&1
@@ -26889,50 +26889,50 @@ docker exec $(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q) php /var/w
 ## Ativando API
 docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /usr/local/bin/composer require krayin/rest-api --working-dir=/var/www/html/laravel-crm > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "6/11 - [ OK ] - Instalando API"
+    echo "6/10 - [ OK ] - Instalando API"
 else
-    echo "6/11 - [ OFF ] - Instalando API"
+    echo "6/10 - [ OFF ] - Instalando API"
 fi
 
 ## Ativando API
 docker exec -it --workdir /var/www/html/laravel-crm "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php artisan krayin-rest-api:install > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
-    echo "7/11 - [ OK ] - Ativando API"
+    echo "7/10 - [ OK ] - Ativando API"
 else
-    echo "7/11 - [ OFF ] - Ativando API"
+    echo "7/10 - [ OFF ] - Ativando API"
 fi
 
 ## Ativando API
 wget -O /var/lib/docker/volumes/krayin${1:+_$1}_data/_data/packages/Webkul/Admin/src/Resources/lang/en/app.php https://raw.githubusercontent.com/oriondesign2015/SetupOrion/refs/heads/main/Extras/Krayin/app.php > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "8/11 - [ OK ] - Baixando Tradução"
+    echo "8/10 - [ OK ] - Baixando Tradução"
 else
-    echo "8/11 - [ OFF ] - Baixando Tradução"
+    echo "8/10 - [ OFF ] - Baixando Tradução"
 fi
 
-docker service update --force krayincrm${1:+_$1}_krayin > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "9/11 - [ OK ] - Aplicando Tradução"
-else
-    echo "9/11 - [ OFF ] - Aplicando Tradução"
-fi
-sleep 30
+#docker service update --force krayincrm${1:+_$1}_krayin > /dev/null 2>&1
+#if [ $? -eq 0 ]; then
+#    echo "9/10 - [ OK ] - Aplicando Tradução"
+#else
+#    echo "9/10 - [ OFF ] - Aplicando Tradução"
+#fi
+#sleep 30
 
 ## Limpando Cache
 docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan config:clear > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "10/11 - [ OK ] - Limpando Cache"
+    echo "9/10 - [ OK ] - Limpando Cache"
 else
-    echo "10/11 - [ OFF ] - Limpando Cache"
+    echo "10/10 - [ OFF ] - Limpando Cache"
 fi
 
 ## Criando arquivo de cache
 docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan config:cache > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "11/11 - [ OK ] - Criando novo arquivo de Cache"
+    echo "10/10 - [ OK ] - Criando novo arquivo de Cache"
 else
-    echo "11/11 - [ OFF ] - Criando novo arquivo de Cache"
+    echo "10/10 - [ OFF ] - Criando novo arquivo de Cache"
 fi
 
 telemetria "Krayin CRM" "finalizado"
