@@ -26745,11 +26745,11 @@ echo ""
 sleep 1
 
 ## Executa o comando artisan krayin-crm:install
-docker exec -it -e APP_NAME="Krayin CRM" -e APP_URL="https://$url_krayincrm" -e APP_TIMEZONE="America/Sao_Paulo" -e APP_LOCALE="en" -e APP_CURRENCY="BRL" -e DB_CONNECTION="mysql" -e DB_HOST="mysql" -e DB_PORT="3306" -e DB_DATABASE="krayin${1:+_$1}" -e DB_USERNAME="root" -e DB_PASSWORD="$senha_mysql" "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
+docker exec -it -e APP_NAME="Krayin CRM" -e APP_URL="https://$url_krayincrm" -e APP_TIMEZONE="America/Sao_Paulo" -e APP_LOCALE="pt_BR" -e APP_CURRENCY="BRL" -e DB_CONNECTION="mysql" -e DB_HOST="mysql" -e DB_PORT="3306" -e DB_DATABASE="krayin${1:+_$1}" -e DB_USERNAME="root" -e DB_PASSWORD="$senha_mysql" "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/11 - [ OK ] - Execurando: artisan krayin-crm:install"
+    echo "1/11 - [ OK ] - Executando: artisan krayin-crm:install"
 else
-    echo "1/11 - [ OFF ] - Execurando: artisan krayin-crm:install"
+    echo "1/11 - [ OFF ] - Executando: artisan krayin-crm:install"
 fi
 
 sleep 5
