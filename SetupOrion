@@ -26646,7 +26646,9 @@ services:
       
     environment:
       ## Dados de acesso
+      - krayin_PUBLIC_URL=https://$url_krayincrm
       - APP_URL=https://$url_krayincrm
+      - krayin_CADDY_ADDRESSES=:80
       - APP_ENV=production
       - APP_KEY=$secret_key
       - APP_DEBUG=false
