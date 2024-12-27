@@ -3087,7 +3087,7 @@ telemetria Docker iniciado
 
 
 #ip=$(curl -s ifconfig.me)
-read -r ip _ <<<$(hostname -I)
+read -r ip _ <<<$(hostname -I | tr ' ' '\n' | grep -v '^127\.0\.0\.1' | tr '\n' ' ')
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Pegando IP $ip"
 else
@@ -18535,7 +18535,7 @@ while true; do
     echo ""
 
     ## Informação sobre URL do Viewer
-    echo -e "\e[33mUsuaraio:\e[97m $user_supabase\e[0m"
+    echo -e "\e[33mUsuario:\e[97m $user_supabase\e[0m"
     echo ""
 
     ## Informação sobre a versão da ferramenta
