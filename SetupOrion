@@ -27919,7 +27919,7 @@ limpar() {
 deploy_stack() {
     local nome_stack="$1"
     local opcao_stack="$2"
-    local eh_setup="${$3:-false}"
+    local eh_setup="${3:-false}"
 
     # Verify if stack exists; exit if it does
     if verificar_stack "$nome_stack${opcao_stack:+_$opcao_stack}"; then
