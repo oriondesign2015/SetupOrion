@@ -27915,7 +27915,55 @@ limpar() {
     sleep 10
 }
 
+# Função para deploy de stack
+deploy_stack() {
+    local nome_stack="$1"
+    local opcao_stack="$2"
+    local eh_setup="${$3:-false}"
 
+    # Verify if stack exists; exit if it does
+    if verificar_stack "$nome_stack${opcao_stack:+_$opcao_stack}"; then
+        echo "Stack $nome_stack${opcao_stack:+_$opcao_stack} já existe. Evitando deployment." >&2
+        return 0
+    fi
+
+    # Check Docker, Portainer, and Traefik setup
+    if verificar_docker_e_portainer_traefik; then
+        # Setup stack name and command
+        local STACK_NAME="$nome_stack${opcao_stack:+_$opcao_stack}"
+        local comando_stack="ferramenta_$nome_stack"
+
+        if $eh_setup; then
+          comando_stack="${nome_stack}_setup"
+        fi
+
+        # Verify token presence
+        if [[ -f /root/dados_vps/dados_portainer ]] && \
+          grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+            echo "Token encontrado. Executando comando com opções..." >&2
+            $comando_stack "$opcao_stack"
+        else
+            echo "Token não encontrado. Executando comando padrão..."
+            verificar_arquivo
+            $comando_stack
+        fi
+    else
+        echo "Requisitos \"Docker\", \"Portainer\", and \"Traefik\" não encontrados." >&2
+        return 1
+    fi
+}
+
+# Função para resolver o deployment
+resolver_deploy_stack(){
+  local nome_stack="$1"
+  local opcao_stack="$2"
+
+  if deploy_stack "$stack_name" "$opcao2"; then
+      echo "Instalação de $stack_name com sucesso!" >&2
+  else
+      echo "Deployment falhou! Saindo..." >&2
+  fi
+}
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
