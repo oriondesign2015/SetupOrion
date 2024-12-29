@@ -28399,6 +28399,12 @@ while true; do
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
+        sair|fechar|exit|close|x)
+            clear
+            nome_saindo
+            echo ""
+            break
+            ;;
 
         *)
 
