@@ -14076,6 +14076,16 @@ while true; do
     echo -e "\e[97mPasso$amarelo 5/5\e[0m"
     echo -en "\e[33mDigite o email do Quepasa (ex: contato@oriondesign.art.br): \e[0m" && read -r email_quepasa
     echo ""
+
+     ## Nome usuario padrão para criação do qrcode (utoken)
+    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -en "\e[33mNome do usuario padrão (Crie um usuario Admin no Chatwoot) (ex: Bot): \e[0m" && read -r user_padrao
+    echo ""
+
+     ## Token do usuario criado Admin
+    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -en "\e[33mToken do seu usuario criado (ex: cv1dNNkgiXLvqKl6LSj0V4yu6Eqd77N): \e[0m" && read -r user_padrao_token
+    echo ""
     
     ## Limpa o terminal
     clear
@@ -14110,7 +14120,7 @@ while true; do
     echo -e "\e[33mNome do User Padrão:\e[97m $user_padrao\e[0m"
     echo ""
 
-    ## Informação Email do Quepasa
+     ## Token usuario padrão para criação do qrcode (utoken)
     echo -e "\e[33mToken User Padrão:\e[97m $user_padrao_token\e[0m"
     echo ""
 
@@ -14276,6 +14286,7 @@ services:
 
       ## Modo do Node
       - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -14389,6 +14400,7 @@ services:
 
       ## Modo do Node
       - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -14502,6 +14514,7 @@ services:
 
       ## Modo do Node
       - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -14646,16 +14659,6 @@ while true; do
     echo -e "\e[97mPasso$amarelo 2/2\e[0m"
     echo -en "\e[33mDigite o email para o Quepasa (ex: contato@oriondesign.art.br): \e[0m" && read -r email_quepasa
     echo ""
-
-    ##Pergunta o Dominio do Editor N8N Quepasa
-    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
-    echo -en "\e[33mDigite o dominio do N8N Quepasa (ex: n8n.oriondesign.art.br): \e[0m" && read -r url_n8n
-    echo ""
-
-    ##Pergunta o Dominio do webhook do N8N Quepasa
-    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
-    echo -en "\e[33mDigite o dominio do Webhook N8N Quepasa (ex: webhook.oriondesign.art.br): \e[0m" && read -r url_webhook
-    echo ""
     
     ## Limpa o terminal
     clear
@@ -14777,7 +14780,7 @@ services:
       ## Banco de dados
       - DBDRIVER=postgres
       - DBHOST=postgres
-      - DBDATABASE=$quepasa${1:+_$1}
+      - DBDATABASE=quepasa${1:+_$1}
       - DBPORT=5432
       - DBUSER=postgres
       - DBPASSWORD=$senha_postgres
@@ -27632,25 +27635,25 @@ while true; do
 
             # Baixando workflows
 
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/ChatwootExtra.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/ChatwootProfileUpdate.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/ChatwootToQuepasa.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/GetChatwootContacts.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/GetValidConversation.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/MsgRejectCall.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/PostToChatwoot.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/PostToWebCallBack.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaAutomatic.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaChatControl.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaContactsImport.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaInboxControl.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaInboxControl+soc.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaInboxControl+typebot.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaInboxControl+webhook.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaQrcode.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/QuepasaToChatwoot.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/ToChatwootTranscriptViaOpenAI.json"
-            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/updating-2/ToTypeBot.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootExtra.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootProfileUpdate.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootToQuepasa.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/GetChatwootContacts.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/GetValidConversation.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/MsgRejectCall.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/PostToChatwoot.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/PostToWebCallBack.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaAutomatic.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaChatControl.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaContactsImport.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl+soc.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl+typebot.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl+webhook.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaQrcode.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaToChatwoot.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ToChatwootTranscriptViaOpenAI.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ToTypeBot.json"
 
             # Subindo workflows
             n8n import:workflow --input="$temp_dir" --separate
