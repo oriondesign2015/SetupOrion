@@ -1674,7 +1674,7 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 63 ]${reset} - ${branco}Firecrawl ${verde}[NOVO]                       ${verde}| ${reset}  ${amarelo}[ 86 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 64 ]${reset} - ${branco}Wuzapi ${verde}[NOVO]                          ${verde}| ${reset}  ${amarelo}[ 87 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 65 ]${reset} - ${branco}krayin CRM ${verde}[NOVO]                      ${verde}| ${reset}  ${amarelo}[ 88 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 66 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 89 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 66 ]${reset} - ${branco}Bolt.diy ${verde}[NOVO]                        ${verde}| ${reset}  ${amarelo}[ 89 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 67 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 90 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 68 ]${reset} - ${branco}EM BREVE...                            ${verde}| ${reset}  ${amarelo}[ 91 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e ""
@@ -27271,6 +27271,171 @@ creditos_msg
 requisitar_outra_instalacao
 }
 
+## 
+## 
+##          ░▒█▀▀▄░▒█▀▀▀█░▒█░░░░▀▀█▀▀░░░░▒█▀▀▄░▀█▀░▒█░░▒█
+##          ░▒█▀▀▄░▒█░░▒█░▒█░░░░░▒█░░░▄▄░▒█░▒█░▒█░░▒▀▄▄▄▀
+##          ░▒█▄▄█░▒█▄▄▄█░▒█▄▄█░░▒█░░░▀▀░▒█▄▄█░▄█▄░░░▒█░░
+## 
+ferramenta_boltai() {
+
+    # Limpa o terminal
+    clear
+
+    ## Ativa a função de coleta de dados da VPS (supondo que esta função já exista)
+    dados
+
+    ## Mostra o nome da aplicação
+    nome_boltai
+
+    ## Solicita ao usuário que preencha as informações
+    preencha_as_info
+
+    ## Inicia um loop até que os dados estejam corretos
+    while true; do
+        echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+        echo -en "\e[33mDigite o domínio para o Bolt AI (ex: boltai.exemplo.com): \e[0m" && read -r url_boltai
+        echo ""
+
+        clear
+        nome_boltai
+        conferindo_as_info
+
+        echo -e "\e[33mDomínio do Bolt AI:\e[97m $url_boltai\e[0m"
+        echo ""
+        read -p "As informações estão corretas? (Y/N): " confirmacao
+        if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+            clear
+            instalando_msg
+            break
+        else
+            clear
+            nome_boltai
+            preencha_as_info
+        fi
+    done
+
+    ## Início da instalação
+    echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO BOLT AI \e[33m[1/3]\e[0m"
+    echo ""
+    sleep 1
+
+    telemetria "Bolt AI" "iniciado"
+
+    ## Gerando o arquivo de configuração do Docker Stack para Bolt AI
+    echo -e "\e[97m• GERANDO CONFIGURAÇÃO PARA BOLT AI \e[33m[2/3]\e[0m"
+    echo ""
+    sleep 1
+
+    cat > boltai${1:+_$1}.yaml <<EOL
+version: "3.7"
+services:
+
+  boltai${1:+_$1}:
+    image: hipnologo/bolt.diy:latest
+    # Alternative image: ghcr.io/stackblitz-labs/bolt.diy:latest
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - VITE_HMR_PROTOCOL=ws
+      - VITE_HMR_HOST=localhost
+      - VITE_HMR_PORT=5173
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - PORT=5173
+      - VITE_LOG_LEVEL=${VITE_LOG_LEVEL:-debug}
+      - DEFAULT_NUM_CTX=${DEFAULT_NUM_CTX:-32768}
+      - RUNNING_IN_DOCKER=true
+      - NODE_OPTIONS="--max-old-space-size=4096"
+    volumes:
+      - boltai${1:+_$1}_data:/app/data
+    networks:
+      - $nome_rede_interna
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.boltai${1:+_$1}.rule=Host(\`$url_boltai\`)
+        - traefik.http.routers.boltai${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.boltai${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.services.boltai${1:+_$1}.loadBalancer.server.port=5173
+        - traefik.http.routers.boltai${1:+_$1}.service=boltai${1:+_$1}
+        - traefik.http.routers.boltai${1:+_$1}.tls=true
+
+volumes:
+  boltai${1:+_$1}_data:
+    external: true
+    name: boltai${1:+_$1}_data
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+
+    if [ $? -eq 0 ]; then
+        echo "1/10 - [ OK ] - Arquivo de configuração criado"
+    else
+        echo "1/10 - [ OFF ] - Não foi possível criar o arquivo de configuração do Bolt AI"
+    fi
+
+    STACK_NAME="boltai${1:+_$1}"
+    stack_editavel  # Função para edição/validação do arquivo, se aplicável
+
+    # Caso queira realizar o deploy imediatamente, descomente a linha abaixo:
+    # docker stack deploy --prune --resolve-image always -c boltai${1:+_$1}.yaml \$STACK_NAME
+
+    echo -e "\e[97m• VERIFICANDO O SERVIÇO \e[33m[3/3]\e[0m"
+    echo ""
+    sleep 1
+
+    ## Verifica se o serviço está online (supondo que wait_stack exista)
+    wait_stack "boltai${1:+_$1}"
+
+    telemetria "Bolt AI" "finalizado"
+
+    ## Registra os dados de acesso em um arquivo
+    cd dados_vps
+
+    cat > dados_boltai${1:+_$1} <<EOL
+[ BOLT AI ]
+
+Domínio do Bolt AI: $url_boltai
+
+Usuário: Configure conforme as instruções da aplicação
+
+Senha: Configure conforme as instruções da aplicação
+EOL
+    cd
+
+    ## Aguarda 30 segundos para estabilização do serviço
+    wait_30_sec
+
+    instalado_msg
+    guarde_os_dados_msg
+
+    ## Exibe os dados finais para o usuário
+    echo -e "\e[32m[ BOLT AI ] \e[0m"
+    echo ""
+    echo -e "\e[33mDomínio:\e[97m https://$url_boltai\e[0m"
+    echo ""
+    echo -e "\e[33mUsuário:\e[97m Configure conforme as instruções\e[0m"
+    echo ""
+    echo -e "\e[33mSenha:\e[97m Configure conforme as instruções\e[0m"
+
+    creditos_msg
+    requisitar_outra_instalacao
+}
+
 ## Ignore esta parte, só para facilitar minha identificação com esta parte "XXOOXX"
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -28993,6 +29158,23 @@ while true; do
                 fi
                 ## FIM TOKEN
             fi   
+            ;;
+
+        66|boltai|BOLTAI)
+ 
+            verificar_stack "boltai${opcao2:+_$opcao2}" && continue || echo ""
+ 
+            if verificar_docker_e_portainer_traefik; then
+                ## INICIO TOKEN
+                STACK_NAME="boltai${opcao2:+_$opcao2}"
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_boltai "$opcao2"
+                else
+                    APP_ORION="ferramenta_boltai"
+                    verificar_arquivo
+                fi
+                ## FIM TOKEN
+            fi
             ;;
 
         ##remover.stack)
