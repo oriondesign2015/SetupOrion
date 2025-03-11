@@ -28025,14 +28025,14 @@ services:
       - ALLOW_ALL_TO_CREATE_PROJECTS=true ## true = Permite que qualquer usuário crie projetos
 
       ## Dados SMTP
-       - SMTP_NAME=Planka
-       - SMTP_FROM=Planka <$email_planka>
-       - SMTP_USER=$usuario_email_planka
-       - SMTP_PASSWORD=$senha_email_planka
-       - SMTP_HOST=$smtp_email_planka
-       - SMTP_PORT=$porta_smtp_planka
-       - SMTP_SECURE=$smtp_secure_planka
-       - SMTP_TLS_REJECT_UNAUTHORIZED=$tls_reject
+      - SMTP_NAME=Planka
+      - SMTP_FROM=Planka <$email_planka>
+      - SMTP_USER=$usuario_email_planka
+      - SMTP_PASSWORD=$senha_email_planka
+      - SMTP_HOST=$smtp_email_planka
+      - SMTP_PORT=$porta_smtp_planka
+      - SMTP_SECURE=$smtp_secure_planka
+      - SMTP_TLS_REJECT_UNAUTHORIZED=$tls_reject
 
       ## Configurar Webhook Global
       #- WEBHOOKS=[{
