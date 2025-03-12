@@ -28949,7 +28949,7 @@ services:
       - BACKEND=erpnext${1:+_$1}_backend:8000
       - FRAPPE_SITE_NAME_HEADER=$url_frappe
       - FRAPPE_SITE=$url_frappe
-      - SOCKETIO=erpnext_websocket:9000
+      - SOCKETIO=erpnext${1:+_$1}_websocket:9000
       - UPSTREAM_REAL_IP_ADDRESS=127.0.0.1
       - UPSTREAM_REAL_IP_HEADER=X-Forwarded-For
       - UPSTREAM_REAL_IP_RECURSIVE=off
@@ -29230,18 +29230,18 @@ sleep 1
 ## Baixando imagens:
 pull frappe/erpnext:v15.49.3 mariadb:10.6 redis:latest
 
-sleep 30
+sleep 45
 
-echo '{
-  "db_host": "erpnext${1:+_$1}_db",
-  "db_port": "3306",
-  "redis_cache": "redis://erpnext${1:+_$1}_cache:6379",
-  "redis_queue": "redis://erpnext${1:+_$1}_queue:6379",
-  "redis_socketio": "redis://erpnext${1:+_$1}_socketio:6379",
-  "auto_update": false,
-  "disable_website_cache": true,
-  "domains": ["$url_frappe"]
-}' > /var/lib/docker/volumes/erpnext${1:+_$1}_sites/_data/common_site_config.json
+echo "{
+  \"db_host\": \"erpnext${1:+_$1}_db\",
+  \"db_port\": \"3306\",
+  \"redis_cache\": \"redis://erpnext${1:+_$1}_cache:6379\",
+  \"redis_queue\": \"redis://erpnext${1:+_$1}_queue:6379\",
+  \"redis_socketio\": \"redis://erpnext${1:+_$1}_socketio:6379\",
+  \"auto_update\": false,
+  \"disable_website_cache\": true,
+  \"domains\": [\"$url_frappe\"]
+}" > /var/lib/docker/volumes/erpnext${1:+_$1}_sites/_data/common_site_config.json
 
 ## Usa o serviço wait_frappe para verificar se o serviço esta online
 wait_stack erpnext${1:+_$1}_erpnext${1:+_$1}_frontend erpnext${1:+_$1}_erpnext${1:+_$1}_backend erpnext${1:+_$1}_erpnext${1:+_$1}_configurator erpnext${1:+_$1}_erpnext${1:+_$1}_websocket erpnext${1:+_$1}_erpnext${1:+_$1}_db erpnext${1:+_$1}_erpnext${1:+_$1}_cache erpnext${1:+_$1}_erpnext${1:+_$1}_queue erpnext${1:+_$1}_erpnext${1:+_$1}_socketio
@@ -29253,7 +29253,7 @@ echo -e "\e[97m• INSTALANDO APLICATIVO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
-docker exec -it $(docker ps -qf "name=frappe_backend") bash -c "bench new-site 72.ryze.chat --mariadb-root-password=$DB_PASSWORD --admin-password=$senha_frappe --install-app erpnext"
+docker exec -it $(docker ps -qf "name=erpnext${1:+_$1}_backend") bash -c "bench new-site \"$url_frappe\" --mariadb-root-password=\"$DB_PASSWORD\" --admin-password=\"$senha_frappe\" --install-app erpnext"
 
 telemetria ERPNext finalizado
 
@@ -31775,11 +31775,11 @@ while true; do
 
         69|Frappe|frappe|FRAPPE) 
 
-            verificar_stack "frappe${opcao2:+_$opcao2}" && continue || echo ""
+            verificar_stack "erpnext${opcao2:+_$opcao2}" && continue || echo ""
 
             if verificar_docker_e_portainer_traefik; then
                 ## INICIO TOKEN
-                STACK_NAME="frappe${opcao2:+_$opcao2}"
+                STACK_NAME="erpnext${opcao2:+_$opcao2}"
                 if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
                     ferramenta_frappe "$opcao2"
                 else
