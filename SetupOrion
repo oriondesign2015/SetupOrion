@@ -1753,7 +1753,7 @@ menu_instalador_pg_1(){
 
 menu_instalador_pg_2(){
     echo -e "${amarelo}[ 46 ]${reset} - ${branco}HumHub ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}Frappe ${verde}[2/4]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 47 ]${reset} - ${branco}Yourls ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}Bolt ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 47 ]${reset} - ${branco}Yourls ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}Bolt ${verde}[2/4]${reset} ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 48 ]${reset} - ${branco}TwentyCRM${vermelho} ${verde}[1/4]${reset}                        ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}WiseMapping ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}EM BREVE...${reset}"
@@ -29328,7 +29328,7 @@ requisitar_outra_instalacao
 ferramenta_bolt() {
 
 ## Verifica os recursos
-recursos 1 1 && continue || return
+recursos 2 4 && continue || return
 
 ## Limpa o terminal
 clear
