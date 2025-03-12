@@ -19179,7 +19179,7 @@ while true; do
     ##Pergunta a versão da ferramenta
     echo -e "\e[97mPasso$amarelo 3/5\e[0m"
     echo -e "$amarelo--> Sem NENHUM caracteres especiais, tais como: @\!#$ entre outros"
-    echo -en "\e[33mDigite a Senha do usuario para o Supabase (ex: Senha123_): \e[0m" && read -r pass_supabase
+    echo -en "\e[33mDigite a Senha do usuario para o Supabase (ex: Senha123): \e[0m" && read -r pass_supabase
     echo ""
 
     ###Pergunta o Email SMTP
