@@ -1829,18 +1829,23 @@ recursos() {
     else
         clear
         erro_msg
-        echo -e "Ops, parece que o seu servidor não atende os requisitos minimos dessa aplicação."
-        echo -e "Esse serviço precisa de \e[32m$vcpu_requerido vCPU${reset} e \e[32m$ram_requerido Gb Ram${reset}."
-        echo -e "Atualmente seu servidor possui apenas: \e[32m$vcpu_disponivel vCPU${reset} com \e[32m$ram_disponivel GbRam${reset}."
-        echo -e "Realize um upgrade no seu servidor para poder instalar esse recurso."
+        echo -e "Ops, parece que o seu servidor não atende os requisitos mínimos dessa aplicação."
+        echo -e "Esse serviço precisa de \e[32m$vcpu_requerido vCPU${reset} e \e[32m$ram_requerido Gb RAM${reset}."
+        echo -e "Atualmente, seu servidor possui apenas: \e[32m$vcpu_disponivel vCPU${reset} com \e[32m$ram_disponivel Gb RAM${reset}."
+        echo -e "Você pode ter problemas de desempenho, falhas na execução ou problemas na instalação."
 
         echo ""
-        echo "Voltando ao menu em 10 segundos."
-        sleep 10
-
-        nome_menu
-        menu_instalador
-        return 1
+        read -p "Deseja continuar mesmo assim? (y/n): " escolha
+        if [[ "$escolha" =~ ^[Yy]$ ]]; then
+            return 0
+        else
+            echo ""
+            echo "Voltando ao menu em 10 segundos."
+            sleep 10
+            nome_menu
+            menu_instalador
+            return 1
+        fi
     fi
 }
 
@@ -2204,7 +2209,7 @@ telemetria() {
     ferramenta="$1"
     status="$2"
 
-    curl -X POST 'https://telemetria.oriondesign.art.br/api/telemetria' \
+    curl --max-time 30 -X POST 'https://telemetria.oriondesign.art.br/api/telemetria' \
     -H "Content-Type: application/json" \
     -d '{
       "ip": "'"$ip"'",
