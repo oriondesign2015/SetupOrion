@@ -28024,10 +28024,9 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     volumes:
-      - planka_geral:/app
-      #- planka${1:+_$1}_avatars:/app/public/user-avatars
-      #- planka${1:+_$1}_backgrounds:/app/public/project-background-images
-      #- planka${1:+_$1}_attachments:/app/private/attachments
+      - planka${1:+_$1}_avatars:/app/public/user-avatars
+      - planka${1:+_$1}_backgrounds:/app/public/project-background-images
+      - planka${1:+_$1}_attachments:/app/private/attachments
 
     environment:
       ## Dados de acesso
