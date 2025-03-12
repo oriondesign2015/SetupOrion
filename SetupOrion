@@ -27989,6 +27989,8 @@ echo -e "\e[97m• INSTALANDO PLANKA \e[33m[4/5]\e[0m"
 echo ""
 sleep 1
 
+secret_key=$(openssl rand -hex 16)
+
 ## Criando a stack planka.yaml
 cat > planka${1:+_$1}.yaml <<EOL
 version: "3.7"
