@@ -22564,7 +22564,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO TWENTYCRM \e[33m[1/3]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO TWENTYCRM \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
 
@@ -22573,7 +22573,21 @@ telemetria TwentyCRM iniciado
 ## Nadaaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO TWENTYCRM \e[33m[2/3]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+## Verifica/instala o Redis
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    echo "1/1 - [ OK ] - Redis já instalado"
+    echo ""
+else
+    ferramenta_redis
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO TWENTYCRM \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
@@ -22739,7 +22753,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
@@ -30433,120 +30447,6 @@ portainer.reset() {
         exit 1
     fi
 }
-
-traefik.fix() {
-
-    echo ""
-    echo ""
-    echo "Trocando a versão da Stack do traefik..."
-    ## Trocando a versão na stack
-    sed -i 's/image: traefik:latest/image: traefik:v2.11.2/' /root/traefik.yaml
-    if [ $? -eq 0 ]; then
-        echo "1/3 - [ OK ] - Alterando versão na Stack"
-    else
-        echo "1/3 - [ OFF ] - Alterando versão na Stack"
-        echo "Ops, não foi possivel alterar a versão na stack do Traefik"
-    fi
-    echo ""
-    
-    docker stack deploy --prune --resolve-image always -c traefik.yaml traefik > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        echo "2/3 - [ OK ] - Fazendo Deploy da stack"
-    else
-        echo "2/3 - [ OFF ] - Fazendo Deploy da stack"
-        echo "Ops, não foi possivel fazer o deploy da stack do Traefik"
-    fi
-    echo ""
-    
-    echo "Verificando stack do Traefik"
-    wait_stack "traefik"
-
-    if [ $? -eq 0 ]; then
-        echo "3/3 - [ OK ] - Verificando Stack"
-    else
-        echo "3/3 - [ OFF ] - Verificando Stack"
-        echo "Ops, não foi possivel Verificar a stack do Traefik"
-    fi
-    echo ""
-    echo "Finalizado, já fixamos a imagem do seu traefik =D"
-    echo ""
-    sleep 5
-
-}
-
-krayin.fix(){
-
-  URL_VAR=$(grep '\s*- APP_URL=' /root/krayincrm.yaml | cut -d '=' -f 2-)
-  DB_VAR=$(grep '\s*- DB_DATABASE=' /root/krayincrm.yaml | cut -d '=' -f 2-)
-  pegar_senha_mysql > /dev/null 2>&1
-  
-
-  if [ $? -eq 0 ]; then
-      echo "1/4 - [ OK ] - Pegando URL do Krayin CRM"
-  else
-      echo "1/4 - [ OFF ] - Pegando URL do Krayin CRM"
-  fi
-
-#docker exec -it "$(docker ps --filter "name=^mysql_mysql" -q)" mysql -u root -p"$senha_mysql" -e "
-#CREATE DATABASE $DB_VAR CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-#CREATE USER 'orion'@'%' IDENTIFIED BY 'design';
-#GRANT ALL PRIVILEGES ON $DB_VAR.* TO 'orion'@'%';
-#FLUSH PRIVILEGES;" > /dev/null 2>&1
-
-
-  docker exec -it "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)" php /var/www/html/laravel-crm/artisan migrate --force > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-      echo "2/4 - [ OK ] - Migrando DB"
-  else
-      echo "2/4 - [ OFF ] - Migrando DB"
-  fi
-
-  docker exec -it   -e APP_NAME="Krayin CRM"   -e APP_URL="https://$URL_VAR"   -e APP_TIMEZONE="America/Sao_Paulo"   -e APP_LOCALE="en"   -e APP_CURRENCY="BRL"   -e DB_CONNECTION="mysql"   -e DB_HOST="mysql"   -e DB_PORT="3306"   -e DB_DATABASE="$DB_VAR"   -e DB_USERNAME="orion"   -e DB_PASSWORD="design"   "$(docker ps --filter "name=krayincrm${1:+_$1}_krayin" -q)"   php /var/www/html/laravel-crm/artisan krayin-crm:install --no-interaction > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-      echo "3/4 - [ OK ] - Aplicando Seed"
-  else
-      echo "3/4 - [ OFF ] - Aplicando Seed"
-  fi
-
-  #docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" bash -c 'cd /var/www/html/laravel-crm && ls -l artisan || (ls -l composer.json && composer install) && php artisan krayin-crm:install'
-  docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" php /var/www/html/laravel-crm/artisan migrate --seed --force > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-      echo "4/4 - [ OK ] - Aplicando atualização"
-  else
-      echo "4/4 - [ OFF ] - Aplicando atualização"
-  fi
-  # docker exec -it "$(docker ps --filter 'name=krayincrm_krayin' -q)" bash -c 'cd /var/www/html/laravel-crm && ls -l artisan || (ls -l composer.json && composer install) && php artisan krayin-crm:install'
-
-
-  sleep 2
-  echo ""
-  echo "Finalizado..."
-  sleep 5
-
-}
-
-krayin.br(){
-  wget -O /var/lib/docker/volumes/krayin_data/_data/packages/Webkul/Admin/src/Resources/lang/es/app.php https://raw.githubusercontent.com/oriondesign2015/SetupOrion/refs/heads/main/Extras/Krayin/app.php > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-      echo "1/2 - [ OK ] - Traduzindo..."
-  else
-      echo "1/2 - [ OFF ] - Traduzindo..."
-  fi
-  sleep 5
-  docker service update --force krayincrm${1:+_$1}_krayin > /dev/null 2>&1
-  if [ $? -eq 0 ]; then
-      echo "2/2 - [ OK ] - Reiniciando..."
-  else
-      echo "2/2 - [ OFF ] - Reiniciando..."
-  fi
-  sleep 30
-  echo ""
-  echo "Tradução realizada com sucesso! Troque o idioma para espanhol para deixa-lo em português!"
-  echo ""
-  sleep 10
-}
-
-
 
 ctop() {
 
