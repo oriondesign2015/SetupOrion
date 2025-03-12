@@ -29623,7 +29623,7 @@ telemetria WiseMapping iniciado
 ## Nadaaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO WISEMAPPING \e[33m[4/5]\e[0m"
+echo -e "\e[97m• INSTALANDO WISEMAPPING \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
@@ -29686,7 +29686,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
