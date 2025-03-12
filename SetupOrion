@@ -5470,7 +5470,7 @@ else
     criar_banco_postgres_da_stack "evolution${1:+_$1}"
 fi
 
-pegar_senha_pgvector > /dev/null 2>&1
+pegar_senha_postgres > /dev/null 2>&1
 
 ## Mensagem de Passo
 echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
@@ -27807,7 +27807,7 @@ while true; do
   
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 2/10\e[0m"
-    echo -en "\e[33mDigite o nome do usuario administrador (ex: Orion): \e[0m" && read -r nome_adm_planka
+    echo -en "\e[33mDigite o nome do usuario administrador (ex: Willian): \e[0m" && read -r nome_adm_planka
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
@@ -28005,9 +28005,10 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     volumes:
-      - planka${1:+_$1}_avatars:/app/public/user-avatars
-      - planka${1:+_$1}_backgrounds:/app/public/project-background-images
-      - planka${1:+_$1}_attachments:/app/private/attachments
+      - planka_geral:/app
+      #- planka${1:+_$1}_avatars:/app/public/user-avatars
+      #- planka${1:+_$1}_backgrounds:/app/public/project-background-images
+      #- planka${1:+_$1}_attachments:/app/private/attachments
 
     environment:
       ## Dados de acesso
@@ -28188,13 +28189,8 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/2\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
     echo -en "\e[33mDigite o dominio para o Front do WPPConnect (ex: wppconnect.oriondesign.art.br): \e[0m" && read -r url_wppconnect_front
-    echo ""
-  
-    ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
-    echo -en "\e[33mDigite o dominio para a API do WPPConnect (ex: wpp.oriondesign.art.br): \e[0m" && read -r url_wppconnect_api
     echo ""
 
     ## Limpa o terminal
@@ -28207,11 +28203,7 @@ while true; do
     conferindo_as_info
     
     ## Informação sobre URL do wppconnect
-    echo -e "\e[33mDominio do wppconnect:\e[97m $url_wppconnect_front\e[0m"
-    echo ""
-
-    ## Informação sobre URL do wppconnect
-    echo -e "\e[33mNome do usuario:\e[97m $url_wppconnect_api\e[0m"
+    echo -e "\e[33mDominio do WppConnect:\e[97m $url_wppconnect_front\e[0m"
     echo ""
 
     
@@ -28256,7 +28248,7 @@ telemetria WPPConnect iniciado
 ## Nadaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO wppconnect \e[33m[2/3]\e[0m"
+echo -e "\e[97m• INSTALANDO WPPCONNECT \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
@@ -28284,38 +28276,13 @@ services:
         - node.role == manager
       labels:
       - traefik.enable=1
-      - traefik.http.routers.wppconnect${1:+_$1}_api.rule=Host(\`$url_wppconnect_api\`) ## Url do wppconnect API
+      - traefik.http.routers.wppconnect${1:+_$1}_api.rule=Host(\`$url_wppconnect_api\`) && PathPrefix(\`/\`) ## Url do wppconnect API
       - traefik.http.routers.wppconnect${1:+_$1}_api.entrypoints=websecure
       - traefik.http.routers.wppconnect${1:+_$1}_api.priority=1
       - traefik.http.routers.wppconnect${1:+_$1}_api.tls.certresolver=letsencryptresolver
       - traefik.http.routers.wppconnect${1:+_$1}_api.service=wppconnect${1:+_$1}_api
       - traefik.http.services.wppconnect${1:+_$1}_api.loadbalancer.server.port=21465
       - traefik.http.services.wppconnect${1:+_$1}_api.loadbalancer.passHostHeader=true
-
-## --------------------------- ORION --------------------------- ##
-
-  wppconnect${1:+_$1}_front:
-    image: wppconnect-front:latest
-
-    networks:
-      - $nome_rede_interna ## Nome da rede interna
-    
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-        - node.role == manager
-      labels:
-      - traefik.enable=1
-      - traefik.http.routers.wppconnect${1:+_$1}_front.rule=Host(\`$url_wppconnect_front\`) ## Url do wppconnect API
-      - traefik.http.routers.wppconnect${1:+_$1}_front.entrypoints=websecure
-      - traefik.http.routers.wppconnect${1:+_$1}_front.priority=1
-      - traefik.http.routers.wppconnect${1:+_$1}_front.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.wppconnect${1:+_$1}_front.service=wppconnect${1:+_$1}_front
-      - traefik.http.services.wppconnect${1:+_$1}_front.loadbalancer.server.port=3000
-      - traefik.http.services.wppconnect${1:+_$1}_front.loadbalancer.passHostHeader=true
-
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -28351,10 +28318,10 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull wppconnect/server-cli:latest wppconnect-front:latest
+pull wppconnect/server-cli:latest
 
 ## Usa o serviço wait_wppconnect para verificar se o serviço esta online
-wait_stack wppconnect${1:+_$1}_wppconnect${1:+_$1}_api wppconnect${1:+_$1}_wppconnect${1:+_$1}_front
+wait_stack wppconnect${1:+_$1}_wppconnect${1:+_$1}_api
 
 telemetria WPPConnect finalizado
 
@@ -28365,8 +28332,7 @@ cat > dados_wppconnect${1:+_$1} <<EOL
 
 Dominio Front: https://$url_wppconnect_front
 
-Dominio API: https://$url_wppconnect_api
-
+Documentação: https://$url_wppconnect_front/api-docs
 EOL
 
 cd
@@ -28385,10 +28351,10 @@ guarde_os_dados_msg
 echo -e "\e[32m[ WPPCONNECT ]\e[0m"
 echo ""
 
-echo -e "\e[33mDominio Front:\e[97m https://$url_wppconnect_front\e[0m"
+echo -e "\e[33mDominio API:\e[97m https://$url_wppconnect_api\e[0m"
 echo ""
 
-echo -e "\e[33mDominio API:\e[97m https://$url_wppconnect_api\e[0m"
+echo -e "\e[33mDocumentação: \e[97m https://$url_wppconnect_api/api-docs\e[0m"
 
 ## Creditos do instalador
 creditos_msg
@@ -28983,7 +28949,7 @@ services:
       - BACKEND=erpnext${1:+_$1}_backend:8000
       - FRAPPE_SITE_NAME_HEADER=$url_frappe
       - FRAPPE_SITE=$url_frappe
-      - SOCKETIO=frappe_websocket:9000
+      - SOCKETIO=erpnext_websocket:9000
       - UPSTREAM_REAL_IP_ADDRESS=127.0.0.1
       - UPSTREAM_REAL_IP_HEADER=X-Forwarded-For
       - UPSTREAM_REAL_IP_RECURSIVE=off
@@ -29246,7 +29212,7 @@ else
     echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do frappe"
 fi
-STACK_NAME="erpnext${1:+_$1}${1:+_$1}"
+STACK_NAME="erpnext${1:+_$1}"
 stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c frappe.yaml frappe > /dev/null 2>&1
 #if [ $? -eq 0 ]; then
@@ -29362,7 +29328,7 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
     echo -en "\e[33mDigite o dominio para o Bolt (ex: bolt.oriondesign.art.br): \e[0m" && read -r url_bolt
     echo ""
 
@@ -29545,7 +29511,6 @@ echo -e "\e[32m[ BOLT ]\e[0m"
 echo ""
 
 echo -e "\e[33mDominio:\e[97m https://$url_bolt\e[0m"
-echo ""
 
 ## Creditos do instalador
 creditos_msg
