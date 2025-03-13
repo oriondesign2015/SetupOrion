@@ -30069,62 +30069,6 @@ portainer.restart() {
     clear
 }
 
-chatwoot.nulled() {
-
-    echo ""
-    echo "Aguarde..."
-    echo ""
-    while :; do
-    if docker ps -q --filter "name=postgres" | grep -q .; then
-        CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-        docker exec -i "$CONTAINER_ID" psql -U postgres -d chatwoot -c \
-        "UPDATE public.installation_configs SET serialized_value = '\"--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nvalue: enterprise\n\"' WHERE name = 'INSTALLATION_PRICING_PLAN'; \
-        UPDATE public.installation_configs SET serialized_value = '\"--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nvalue: 200\n\"' WHERE name = 'INSTALLATION_PRICING_PLAN_QUANTITY';"
-        
-        if [ $? -eq 0 ]; then
-        echo "1/1 - [ OK ]"
-        else
-            echo "1/1 - [ OFF ]"
-            echo "Não foi possivel fazer isso, mude através do pgadmin."
-        fi
-
-        sleep 2
-        
-        break
-    else
-        sleep 5
-    fi
-done
-}
-
-chatwoot.uno.nulled() {
-
-    echo ""
-    echo "Aguarde..."
-    echo ""
-    while :; do
-    if docker ps -q --filter "name=postgres" | grep -q .; then
-        CONTAINER_ID=$(docker ps -q --filter "name=postgres")
-        docker exec -i "$CONTAINER_ID" psql -U postgres -d chatwoot_uno -c \
-        "UPDATE public.installation_configs SET serialized_value = '\"--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nvalue: enterprise\n\"' WHERE name = 'INSTALLATION_PRICING_PLAN'; \
-        UPDATE public.installation_configs SET serialized_value = '\"--- !ruby/hash:ActiveSupport::HashWithIndifferentAccess\nvalue: 200\n\"' WHERE name = 'INSTALLATION_PRICING_PLAN_QUANTITY';"
-        
-        if [ $? -eq 0 ]; then
-        echo "1/1 - [ OK ]"
-        else
-            echo "1/1 - [ OFF ]"
-            echo "Não foi possivel fazer isso, mude através do pgadmin."
-        fi
-
-        sleep 2
-        
-        break
-    else
-        sleep 5
-    fi
-done
-}
-
 chatwoot.mail() {
 
     echo ""
@@ -31973,11 +31917,6 @@ while true; do
         ## Traduzir emails do Chatwoot N
         chatwoot.n.mail)
             chatwoot.n.mail
-            ;;
-
-        ## Desbloquear funções do Chatwoot
-        chatwoot.nulled)
-            chatwoot.nulled
             ;;
 
         ## Importar Workflows do Quepasa no N8N
