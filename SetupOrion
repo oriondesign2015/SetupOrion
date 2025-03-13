@@ -31928,15 +31928,6 @@ while true; do
         traefik.fix)
             traefik.fix    
             ;;
-        
-        ## Corrigir instalação do Krayin
-        krayin.fix)
-            krayin.fix
-            ;;
-
-        krayin.br)
-            krayin.br
-            ;;
 
         ## Instalar CTOP
         ctop)
