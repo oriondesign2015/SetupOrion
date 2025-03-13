@@ -2629,15 +2629,37 @@ wait_stack() {
     done
 }
 
-pull() {
+#pull() {
+#
+#    for image in "$@"; do     
+#        if docker pull "$image" > /dev/null 2>&1; then
+#            sleep 1
+#        else
+#            echo "*"
+#            sleep 1
+#        fi
+#    done
+#}
 
-    for image in "$@"; do     
-        if docker pull "$image" > /dev/null 2>&1; then
-            sleep 1
-        else
-            echo "*"
-            sleep 1
-        fi
+pull() {
+    for image in "$@"; do
+        while true; do
+            if docker pull "$image" > /dev/null 2>&1; then
+                sleep 1
+                break
+            else
+                echo "Erro ao baixar $image. Tentando novamente..."
+                
+                # Verifica se o erro é relacionado a limite de taxa
+                if docker pull "$image" 2>&1 | grep -q "toomanyrequests"; then
+                    echo "Limite de taxa atingido no Docker Hub. Faça login para continuar."
+                    docker login
+                else
+                    echo "Erro desconhecido. Tentando novamente em 5s..."
+                    sleep 5
+                fi
+            fi
+        done
     done
 }
 
