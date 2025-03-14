@@ -3854,7 +3854,7 @@ cd
 wait_stack "postgres_postgres"
 
 telemetria Postgres finalizado
-
+echo ""
 }
 
 ## ██████╗  ██████╗ ███████╗████████╗ ██████╗ ██████╗ ███████╗███████╗
@@ -4119,7 +4119,7 @@ wait_stack "pgvector_pgvector"
 sleep 20
 
 telemetria PgVector finalizado
-
+echo ""
 }
 
 ## ██████╗  ██████╗     ██╗   ██╗███████╗ ██████╗████████╗ ██████╗ ██████╗ 
@@ -4381,7 +4381,7 @@ cd
 wait_stack "redis_redis"
 
 telemetria Redis finalizado
-
+echo ""
 }
 
 ## ██████╗ ███████╗██████╗ ██╗███████╗
@@ -4655,7 +4655,7 @@ cd
 wait_30_sec
 
 telemetria MySQL finalizado
-
+echo ""
 }
 
 ## ███╗   ███╗██╗   ██╗███████╗ ██████╗ ██╗     
