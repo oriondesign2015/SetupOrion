@@ -14735,6 +14735,16 @@ while true; do
     echo -e "\e[97mPasso$amarelo 5/5\e[0m"
     echo -en "\e[33mDigite o email do Quepasa (ex: contato@oriondesign.art.br): \e[0m" && read -r email_quepasa
     echo ""
+
+     ## Nome usuario padrão para criação do qrcode (utoken)
+    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -en "\e[33mNome do usuario padrão (Crie um usuario Admin no Chatwoot) (ex: Bot): \e[0m" && read -r user_padrao
+    echo ""
+
+     ## Token do usuario criado Admin
+    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -en "\e[33mToken do seu usuario criado (ex: cv1dNNkgiXLvqKl6LSj0V4yu6Eqd77N): \e[0m" && read -r user_padrao_token
+    echo ""
     
     ## Limpa o terminal
     clear
@@ -14763,6 +14773,14 @@ while true; do
 
     ## Informação Email do Quepasa
     echo -e "\e[33mEmail do Quepasa:\e[97m $email_quepasa\e[0m"
+    echo ""
+
+    ## Usuário padrão para criação do qrcode (utoken)
+    echo -e "\e[33mNome do User Padrão:\e[97m $user_padrao\e[0m"
+    echo ""
+
+     ## Token usuario padrão para criação do qrcode (utoken)
+    echo -e "\e[33mToken User Padrão:\e[97m $user_padrao_token\e[0m"
     echo ""
 
     read -p "As respostas estão corretas? (Y/N): " confirmacao
@@ -14872,7 +14890,7 @@ services:
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
       ## Dados do Quepasa
-      - C8Q_SINGLETHREAD=false
+      ### Fluxos IDS
       - C8Q_QUEPASAINBOXCONTROL=1001
       - C8Q_GETCHATWOOTCONTACTS=1002
       - C8Q_QUEPASACHATCONTROL=1003
@@ -14882,26 +14900,39 @@ services:
       - C8Q_CHATWOOTTOQUEPASAGREETINGS=1007
       - C8Q_TOCHATWOOTTRANSCRIPT=pi4APHD9F05Dv6FR
       - C8Q_TOCHATWOOTTRANSCRIPTRESUME=true
-      - C8Q_CHATWOOTEXTRA=iiEsUj7ybtzEZAFj
+      - C8Q_GETVALIDCONVERSATION=qjdP01sHPfaPFUq1
+      - C8Q_WF_CHATWOOTEXTRA=t1o1WDo9E7C5EmJC
+      - C8Q_WF_TOTYPEBOT=JSpCXQiF7TT1zUgp
+      - C8Q_WF_QUEPASAINBOXCONTROL_TYPEBOT=BvfU3kc7i0j68IpZ
+      - C8Q_WF_QUEPASAINBOXCONTROL_SOC=wtn1ZvAUTFwKCHfK 
+      - C8Q_WF_QUEPASAINBOXCONTROL_WEBHOOK=Zj197aISsaIkZP2Z
 
-      - C8Q_QP_BOTTITLE=$nome_servidor
-      - C8Q_QP_DEFAULT_USER=$email_quepasa
+      ### Config Gerais
+      - C8Q_SINGLETHREAD=false
+      - C8Q_MSGFOR_NO_CSAT=
+      - C8Q_SUPERUSER_NAME=$user_padrao
+      - C8Q_SUPERUSER_TOKEN=$user_padrao_token
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
-      - C8Q_CW_HOST=https://$dominio_chatwoot
+      - C8Q_QP_DEFAULT_USER=$email_quepasa
+      - C8Q_QP_BOTTITLE=$nome_servidor
       - C8Q_QP_CONTACT=$email_quepasa
-      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_CW_HOST=https://$dominio_chatwoot
       - C8Q_N8N_HOST=https://$url_editorn8n
       - C8Q_N8N_WEBHOOK=https://$url_webhookn8n
-
+      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_QP_HOST=https://$dominio_quepasa
       - C8Q_MSGFOR_UNKNOWN_CONTENT=! "Algum EMOJI" ou "Alguma Reação que o sistema não entende ainda ..."
       - C8Q_MSGFOR_EDITED_CONTENT=⚠️ **Essa mensagem foi editada !**
       - C8Q_MSGFOR_ATTACHERROR_CONTENT=** Falha ao baixar anexo !
       - C8Q_MSGFOR_LOCALIZATION_CONTENT=* Localização *
       - C8Q_MSGFOR_REVOKED_CONTENT=❌ Essa mensagem foi apagada !!!
       - C8Q_MSGFOR_CALL_CONTENT=⚠️ O usuário requisitou uma chamada de voz !
-      - C8Q_MSGFOR_REJECT_CALL=Não aceitamos Ligação
-      - C8Q_MSGFOR_NO_CSAT=
+      - C8Q_MSGFOR_REJECT_CALL=Não aceitamos Ligação - MSG configurada na Stack
       - C8Q_QP_DEFAULT_CALL=true
+
+      ### Typebot
+      # - C8Q_TYPEBOT_HOST=url_web_typebot
+      # - C8Q_TYPEBOT_TOKEN=API-Token
 
       ## Encryption Key
       - N8N_ENCRYPTION_KEY=$encryption_key
@@ -14914,6 +14945,7 @@ services:
 
       ## Modo do Node
       - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -14972,7 +15004,7 @@ services:
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
       ## Dados do Quepasa
-      - C8Q_SINGLETHREAD=false
+      ### Fluxos IDS
       - C8Q_QUEPASAINBOXCONTROL=1001
       - C8Q_GETCHATWOOTCONTACTS=1002
       - C8Q_QUEPASACHATCONTROL=1003
@@ -14982,26 +15014,39 @@ services:
       - C8Q_CHATWOOTTOQUEPASAGREETINGS=1007
       - C8Q_TOCHATWOOTTRANSCRIPT=pi4APHD9F05Dv6FR
       - C8Q_TOCHATWOOTTRANSCRIPTRESUME=true
-      - C8Q_CHATWOOTEXTRA=iiEsUj7ybtzEZAFj
+      - C8Q_GETVALIDCONVERSATION=qjdP01sHPfaPFUq1
+      - C8Q_WF_CHATWOOTEXTRA=t1o1WDo9E7C5EmJC
+      - C8Q_WF_TOTYPEBOT=JSpCXQiF7TT1zUgp
+      - C8Q_WF_QUEPASAINBOXCONTROL_TYPEBOT=BvfU3kc7i0j68IpZ
+      - C8Q_WF_QUEPASAINBOXCONTROL_SOC=wtn1ZvAUTFwKCHfK 
+      - C8Q_WF_QUEPASAINBOXCONTROL_WEBHOOK=Zj197aISsaIkZP2Z
 
-      - C8Q_QP_BOTTITLE=$nome_servidor
-      - C8Q_QP_DEFAULT_USER=$email_quepasa
+      ### Config Gerais
+      - C8Q_SINGLETHREAD=false
+      - C8Q_MSGFOR_NO_CSAT=
+      - C8Q_SUPERUSER_NAME=$user_padrao
+      - C8Q_SUPERUSER_TOKEN=$user_padrao_token
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
-      - C8Q_CW_HOST=https://$dominio_chatwoot
+      - C8Q_QP_DEFAULT_USER=$email_quepasa
+      - C8Q_QP_BOTTITLE=$nome_servidor
       - C8Q_QP_CONTACT=$email_quepasa
-      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_CW_HOST=https://$dominio_chatwoot
       - C8Q_N8N_HOST=https://$url_editorn8n
       - C8Q_N8N_WEBHOOK=https://$url_webhookn8n
-
+      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_QP_HOST=https://$dominio_quepasa
       - C8Q_MSGFOR_UNKNOWN_CONTENT=! "Algum EMOJI" ou "Alguma Reação que o sistema não entende ainda ..."
       - C8Q_MSGFOR_EDITED_CONTENT=⚠️ **Essa mensagem foi editada !**
       - C8Q_MSGFOR_ATTACHERROR_CONTENT=** Falha ao baixar anexo !
       - C8Q_MSGFOR_LOCALIZATION_CONTENT=* Localização *
       - C8Q_MSGFOR_REVOKED_CONTENT=❌ Essa mensagem foi apagada !!!
       - C8Q_MSGFOR_CALL_CONTENT=⚠️ O usuário requisitou uma chamada de voz !
-      - C8Q_MSGFOR_REJECT_CALL=Não aceitamos Ligação
-      - C8Q_MSGFOR_NO_CSAT=
+      - C8Q_MSGFOR_REJECT_CALL=Não aceitamos Ligação - MSG configurada na Stack
       - C8Q_QP_DEFAULT_CALL=true
+
+      ### Typebot
+      # - C8Q_TYPEBOT_HOST=url_web_typebot
+      # - C8Q_TYPEBOT_TOKEN=API-Token
 
       ## Encryption Key
       - N8N_ENCRYPTION_KEY=$encryption_key
@@ -15014,6 +15059,7 @@ services:
 
       ## Modo do Node
       - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -15021,7 +15067,7 @@ services:
       ## Dados do Redis
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
-      - QUEUE_BULL_REDIS_DB=3
+      - QUEUE_BULL_REDIS_DB=2
       - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash,moment-with-locales
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
@@ -15072,7 +15118,7 @@ services:
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
       ## Dados do Quepasa
-      - C8Q_SINGLETHREAD=false
+      ### Fluxos IDS
       - C8Q_QUEPASAINBOXCONTROL=1001
       - C8Q_GETCHATWOOTCONTACTS=1002
       - C8Q_QUEPASACHATCONTROL=1003
@@ -15082,26 +15128,39 @@ services:
       - C8Q_CHATWOOTTOQUEPASAGREETINGS=1007
       - C8Q_TOCHATWOOTTRANSCRIPT=pi4APHD9F05Dv6FR
       - C8Q_TOCHATWOOTTRANSCRIPTRESUME=true
-      - C8Q_CHATWOOTEXTRA=iiEsUj7ybtzEZAFj
+      - C8Q_GETVALIDCONVERSATION=qjdP01sHPfaPFUq1
+      - C8Q_WF_CHATWOOTEXTRA=t1o1WDo9E7C5EmJC
+      - C8Q_WF_TOTYPEBOT=JSpCXQiF7TT1zUgp
+      - C8Q_WF_QUEPASAINBOXCONTROL_TYPEBOT=BvfU3kc7i0j68IpZ
+      - C8Q_WF_QUEPASAINBOXCONTROL_SOC=wtn1ZvAUTFwKCHfK 
+      - C8Q_WF_QUEPASAINBOXCONTROL_WEBHOOK=Zj197aISsaIkZP2Z
 
-      - C8Q_QP_BOTTITLE=$nome_servidor
-      - C8Q_QP_DEFAULT_USER=$email_quepasa
+      ### Config Gerais
+      - C8Q_SINGLETHREAD=false
+      - C8Q_MSGFOR_NO_CSAT=
+      - C8Q_SUPERUSER_NAME=$user_padrao
+      - C8Q_SUPERUSER_TOKEN=$user_padrao_token
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
-      - C8Q_CW_HOST=https://$dominio_chatwoot
+      - C8Q_QP_DEFAULT_USER=$email_quepasa
+      - C8Q_QP_BOTTITLE=$nome_servidor
       - C8Q_QP_CONTACT=$email_quepasa
-      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_CW_HOST=https://$dominio_chatwoot
       - C8Q_N8N_HOST=https://$url_editorn8n
       - C8Q_N8N_WEBHOOK=https://$url_webhookn8n
-
+      - C8Q_QUEPASA_HOST=https://$dominio_quepasa
+      - C8Q_QP_HOST=https://$dominio_quepasa
       - C8Q_MSGFOR_UNKNOWN_CONTENT=! "Algum EMOJI" ou "Alguma Reação que o sistema não entende ainda ..."
       - C8Q_MSGFOR_EDITED_CONTENT=⚠️ **Essa mensagem foi editada !**
       - C8Q_MSGFOR_ATTACHERROR_CONTENT=** Falha ao baixar anexo !
       - C8Q_MSGFOR_LOCALIZATION_CONTENT=* Localização *
       - C8Q_MSGFOR_REVOKED_CONTENT=❌ Essa mensagem foi apagada !!!
       - C8Q_MSGFOR_CALL_CONTENT=⚠️ O usuário requisitou uma chamada de voz !
-      - C8Q_MSGFOR_REJECT_CALL=Não aceitamos Ligação
-      - C8Q_MSGFOR_NO_CSAT=
+      - C8Q_MSGFOR_REJECT_CALL=Não aceitamos Ligação - MSG configurada na Stack
       - C8Q_QP_DEFAULT_CALL=true
+
+      ### Typebot
+      # - C8Q_TYPEBOT_HOST=url_web_typebot
+      # - C8Q_TYPEBOT_TOKEN=API-Token
 
       ## Encryption Key
       - N8N_ENCRYPTION_KEY=$encryption_key
@@ -15114,6 +15173,7 @@ services:
 
       ## Modo do Node
       - NODE_ENV=production
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -15264,16 +15324,6 @@ while true; do
     echo -e "\e[97mPasso$amarelo 2/2\e[0m"
     echo -en "\e[33mDigite o email para o Quepasa (ex: contato@oriondesign.art.br): \e[0m" && read -r email_quepasa
     echo ""
-
-    ##Pergunta o Dominio do Editor N8N Quepasa
-    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
-    echo -en "\e[33mDigite o dominio do N8N Quepasa (ex: n8n.oriondesign.art.br): \e[0m" && read -r url_n8n
-    echo ""
-
-    ##Pergunta o Dominio do webhook do N8N Quepasa
-    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
-    echo -en "\e[33mDigite o dominio do Webhook N8N Quepasa (ex: webhook.oriondesign.art.br): \e[0m" && read -r url_webhook
-    echo ""
     
     ## Limpa o terminal
     clear
@@ -15290,14 +15340,6 @@ while true; do
 
     ## Informação sobre email do quepasa
     echo -e "\e[33mEmail do Quepasa:\e[97m $email_quepasa\e[0m"
-    echo ""
-
-    ## Informação sobre dominio do n8n
-    echo -e "\e[33mDomínio do N8N:\e[97m $url_n8n\e[0m"
-    echo ""
-
-    ## Informação sobre webhook do n8n
-    echo -e "\e[33mDomínio do Webhook:\e[97m $url_webhook\e[0m"
     echo ""
     
     ## Pergunta se as respostas estão corretas
@@ -15340,6 +15382,27 @@ telemetria Quepasa iniciado
 
 ## NADA
 
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES\e[33m[2/5]\e[0m"
+echo ""
+sleep 1
+
+## Verifica se tem postgres, se sim pega a senha e cria um banco nele, se não instala, pega a senha e cria o banco
+if [ $? -eq 0 ]; then
+    echo "1/3 - [ OK ] - Postgres já instalado"
+    pegar_senha_postgres > /dev/null 2>&1
+    echo "2/3 - [ OK ] - Copiando senha do Postgres"
+    criar_banco_postgres_da_stack "quepasa${1:+_$1}"
+    echo "3/3 - [ OK ] - Criando banco de dados"
+    echo ""
+else
+    ferramenta_postgres
+    pegar_senha_postgres > /dev/null 2>&1
+    criar_banco_postgres_da_stack "quepasa${1:+_$1}"
+fi
+
+
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO QUEPASA \e[33m[2/3]\e[0m"
 echo ""
@@ -15379,6 +15442,16 @@ services:
       ## TimeZone
       - TZ=America/Sao_Paulo
 
+      ## Banco de dados
+      - DBDRIVER=postgres
+      - DBHOST=postgres
+      - DBDATABASE=quepasa${1:+_$1}
+      - DBPORT=5432
+      - DBUSER=postgres
+      - DBPASSWORD=$senha_postgres
+      - DBSSLMODE=disable
+
+
       ## Configurações para o WhatsApp
       - GROUPS=true
       - BROADCASTS=false
@@ -15395,8 +15468,8 @@ services:
       - SIGNING_SECRET=$key_quepasa
 
       ## Webhook
-      #- WEBHOOK_QUEPASA=$url_webhook/webhook/quepasa
-      #- WEBHOOK_TESTE_QUEPASA=$url_n8n/webhook-test/quepasa
+      - WEBHOOK_QUEPASA=$url_quepasa/webhook/quepasa
+      - WEBHOOK_TESTE_QUEPASA=$url_quepasa/webhook-test/quepasa
             
       ## Portas
       - QUEPASA_EXTERNAL_PORT=31000
@@ -30277,15 +30350,21 @@ while true; do
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootProfileUpdate.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ChatwootToQuepasa.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/GetChatwootContacts.json"
-	          wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/MsgRejectCall.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/GetValidConversation.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/MsgRejectCall.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/PostToChatwoot.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/PostToWebCallBack.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaAutomatic.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaChatControl.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaContactsImport.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl+soc.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl+typebot.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaInboxControl+webhook.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaQrcode.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/QuepasaToChatwoot.json"
             wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ToChatwootTranscriptViaOpenAI.json"
+            wget "https://raw.githubusercontent.com/DeividMs/QP_Setup_Orion/main/workflows/latest/ToTypeBot.json"
 
             # Subindo workflows
             n8n import:workflow --input="$temp_dir" --separate
@@ -30299,11 +30378,14 @@ while true; do
             fi
 
             # Ativando os workflows
+            
             n8n update:workflow --id 1008 --active=true && echo "Fluxo 1008 ativado" || echo "Erro ao ativar fluxo 1008"
             n8n update:workflow --id 1009 --active=true && echo "Fluxo 1009 ativado" || echo "Erro ao ativar fluxo 1009"
-            n8n update:workflow --id 1010 --active=true && echo "Fluxo 1010 ativado" || echo "Erro ao ativar fluxo 1010"
             n8n update:workflow --id 1011 --active=true && echo "Fluxo 1011 ativado" || echo "Erro ao ativar fluxo 1011"
+            n8n update:workflow --id z7iqKYC8r5nPRRHt --active=true && echo "Fluxo z7iqKYC8r5nPRRHt ativado" || echo "Erro ao ativar fluxo z7iqKYC8r5nPRRHt"
             n8n update:workflow --id GIPTrjgdT9vuOSlN --active=true && echo "Fluxo GIPTrjgdT9vuOSlN ativado" || echo "Erro ao ativar fluxo GIPTrjgdT9vuOSlN"
+
+
         '
         break
     else
