@@ -28230,7 +28230,7 @@ while true; do
 
     ##Pergunta o Dominio para a ferramenta
     echo -e "\e[97mPasso$amarelo 1/1\e[0m"
-    echo -en "\e[33mDigite o dominio para o Front do WPPConnect (ex: wppconnect.oriondesign.art.br): \e[0m" && read -r url_wppconnect_front
+    echo -en "\e[33mDigite o dominio do WPPConnect (ex: wppconnect.oriondesign.art.br): \e[0m" && read -r url_wppconnect
     echo ""
 
     ## Limpa o terminal
@@ -28316,7 +28316,7 @@ services:
         - node.role == manager
       labels:
       - traefik.enable=1
-      - traefik.http.routers.wppconnect${1:+_$1}_api.rule=Host(\`$url_wppconnect_api\`) && PathPrefix(\`/\`) ## Url do wppconnect API
+      - traefik.http.routers.wppconnect${1:+_$1}_api.rule=Host(\`$url_wppconnect\`) && PathPrefix(\`/\`) ## Url do wppconnect API
       - traefik.http.routers.wppconnect${1:+_$1}_api.entrypoints=websecure
       - traefik.http.routers.wppconnect${1:+_$1}_api.priority=1
       - traefik.http.routers.wppconnect${1:+_$1}_api.tls.certresolver=letsencryptresolver
@@ -28370,9 +28370,9 @@ cd dados_vps
 cat > dados_wppconnect${1:+_$1} <<EOL
 [ WPPCONNECT ]
 
-Dominio Front: https://$url_wppconnect_front
+Dominio Front: https://$url_wppconnect
 
-Documentação: https://$url_wppconnect_front/api-docs
+Documentação: https://$url_wppconnect/api-docs
 EOL
 
 cd
@@ -28391,10 +28391,10 @@ guarde_os_dados_msg
 echo -e "\e[32m[ WPPCONNECT ]\e[0m"
 echo ""
 
-echo -e "\e[33mDominio API:\e[97m https://$url_wppconnect_api\e[0m"
+echo -e "\e[33mDominio API:\e[97m https://$url_wppconnect\e[0m"
 echo ""
 
-echo -e "\e[33mDocumentação: \e[97m https://$url_wppconnect_api/api-docs\e[0m"
+echo -e "\e[33mDocumentação: \e[97m https://$url_wppconnect/api-docs\e[0m"
 
 ## Creditos do instalador
 creditos_msg
