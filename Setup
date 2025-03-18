@@ -69,7 +69,7 @@ nome_iniciando(){
     echo -e "$amarelo=                  $branco ██║██║╚██╗██║██║██║     ██║██╔══██║██║╚██╗██║██║  ██║██║   ██║                $amarelo=$reset"
     echo -e "$amarelo=                  $branco ██║██║ ╚████║██║╚██████╗██║██║  ██║██║ ╚████║██████╔╝╚██████╔╝                $amarelo=$reset"
     echo -e "$amarelo=                  $branco ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝                 $amarelo=$reset"
-    echo -e "$amarelo=                                              v. 2.6.2                                           $amarelo=$reset"
+    echo -e "$amarelo=                                              v. 2.6.3                                           $amarelo=$reset"
     echo -e "$amarelo===================================================================================================$reset"
     echo ""
     echo ""
@@ -141,9 +141,9 @@ nome_iniciando
 ## Fazendo upgrade
 sudo apt upgrade -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/13 - [ OK ] - Fazendo Upgrade"
+    echo "1/14 - [ OK ] - Fazendo Upgrade"
 else
-    echo "1/13 - [ OFF ] - Fazendo Upgrade"
+    echo "1/14 - [ OFF ] - Fazendo Upgrade"
 fi
 
 echo ""
@@ -151,9 +151,9 @@ echo ""
 ## Instalando Sudo
 apt install sudo -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/13 - [ OK ] - Verificando/Instalando sudo"
+    echo "2/14 - [ OK ] - Verificando/Instalando sudo"
 else
-    echo "2/13 - [ OFF ] - Verificando/Instalando sudo"
+    echo "2/14 - [ OFF ] - Verificando/Instalando sudo"
 fi
 
 echo ""
@@ -161,9 +161,9 @@ echo ""
 ## Instalando apt-utils
 sudo apt-get install -y apt-utils > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "3/13 - [ OK ] - Verificando/Instalando apt-utils"
+    echo "3/14 - [ OK ] - Verificando/Instalando apt-utils"
 else
-    echo "3/13 - [ OFF ] - Verificando/Instalando apt-utils"
+    echo "3/14 - [ OFF ] - Verificando/Instalando apt-utils"
 fi
 
 echo ""
@@ -171,9 +171,9 @@ echo ""
 ## Instalando dialog
 sudo apt-get install -y dialog > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "4/13 - [ OK ] - Verificando/Instalando dialog"
+    echo "4/14 - [ OK ] - Verificando/Instalando dialog"
 else
-    echo "4/13 - [ OFF ] - Verificando/Instalando dialog"
+    echo "4/14 - [ OFF ] - Verificando/Instalando dialog"
 fi
 
 echo ""
@@ -181,9 +181,9 @@ echo ""
 ## Instalando jq
 sudo apt-get install -y jq > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "5/13 - [ OK ] - Verificando/Instalando jq 1/2"
+    echo "5/14 - [ OK ] - Verificando/Instalando jq 1/2"
 else
-    echo "5/13 - [ OFF ] - Verificando/Instalando jq 1/2"
+    echo "5/14 - [ OFF ] - Verificando/Instalando jq 1/2"
 fi
 
 echo ""
@@ -191,9 +191,9 @@ echo ""
 ## Instalando jq
 sudo apt install jq -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "6/13 - [ OK ] - Verificando/Instalando jq 2/2"
+    echo "6/14 - [ OK ] - Verificando/Instalando jq 2/2"
 else
-    echo "6/13 - [ OFF ] - Verificando/Instalando jq 2/2"
+    echo "6/14 - [ OFF ] - Verificando/Instalando jq 2/2"
 fi
 
 echo ""
@@ -201,9 +201,9 @@ echo ""
 ## Instalando apache2-utils
 sudo apt install apache2-utils -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "7/13 - [ OK ] - Verificando/Instalando apache2-utils 1/2"
+    echo "7/14 - [ OK ] - Verificando/Instalando apache2-utils 1/2"
 else
-    echo "7/13 - [ OFF ] - Verificando/Instalando apache2-utils1/2"
+    echo "7/14 - [ OFF ] - Verificando/Instalando apache2-utils1/2"
 fi
 
 echo ""
@@ -211,9 +211,9 @@ echo ""
 ## Instalando apache2-utils
 apt install apache2-utils -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "8/13 - [ OK ] - Verificando/Instalando apache2-utils 2/2"
+    echo "8/14 - [ OK ] - Verificando/Instalando apache2-utils 2/2"
 else
-    echo "8/13 - [ OFF ] - Verificando/Instalando apache2-utils 2/2"
+    echo "8/14 - [ OFF ] - Verificando/Instalando apache2-utils 2/2"
 fi
 
 echo ""
@@ -221,9 +221,9 @@ echo ""
 ## Instalando git
 apt install git -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "9/13 - [ OK ] - Verificando/Instalando Git"
+    echo "9/14 - [ OK ] - Verificando/Instalando Git"
 else
-    echo "9/13 - [ OFF ] - Verificando/Instalando Git"
+    echo "9/14 - [ OFF ] - Verificando/Instalando Git"
 fi
 
 echo ""
@@ -231,9 +231,9 @@ echo ""
 ## Instalando python3
 apt install python3 -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "10/13 - [ OK ] - Verificando/Instalando python3"
+    echo "10/14 - [ OK ] - Verificando/Instalando python3"
 else
-    echo "10/13 - [ OFF ] - Verificando/Instalando python3"
+    echo "10/14 - [ OFF ] - Verificando/Instalando python3"
 fi
 
 echo ""
@@ -241,9 +241,9 @@ echo ""
 ## Fazendo update
 sudo apt update > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "11/13 - [ OK ] - Fazendo Update"
+    echo "11/14 - [ OK ] - Fazendo Update"
 else
-    echo "11/13 - [ OFF ] - Fazendo Update"
+    echo "11/14 - [ OFF ] - Fazendo Update"
 fi
 
 echo ""
@@ -251,9 +251,19 @@ echo ""
 ## Fazendo upgrade
 sudo apt upgrade -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "12/13 - [ OK ] - Fazendo Upgrade"
+    echo "12/14 - [ OK ] - Fazendo Upgrade"
 else
-    echo "12/13 - [ OFF ] - Fazendo Upgrade"
+    echo "12/14 - [ OFF ] - Fazendo Upgrade"
+fi
+
+echo ""
+
+## Instalando neofetch
+apt install neofetch -y > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "13/14 - [ OK ] - Verificando/Instalando neofetch"
+else
+    echo "13/14 - [ OFF ] - Verificando/Instalando neofetch"
 fi
 
 echo ""
@@ -267,12 +277,12 @@ fi
 # Baixa o script
 curl -sSL https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/SetupOrion -o SetupOrion
 if [ $? -eq 0 ]; then
-    echo "13/13 - [ OK ] - Baixando o script"
+    echo "14/14 - [ OK ] - Baixando o script"
     # Executa o script baixado
     chmod +x SetupOrion
     ./SetupOrion
 else
-    echo "13/13 - [ OFF ] - Baixando o script"
+    echo "14/14 - [ OFF ] - Baixando o script"
     echo "Encerrando o setup"
     sleep 5
 fi
