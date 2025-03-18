@@ -14115,13 +14115,17 @@ while true; do
     ## Informação Email do Quepasa
     echo -e "\e[33mEmail do Quepasa:\e[97m $email_quepasa\e[0m"
     echo ""
-
-    ## Usuário padrão para criação do qrcode (utoken)
+    ## Crie um novo usuario no Chatwoot e adicione as informações abaixo (Esse usuario sera vinculado ao qrcode, adicione ele em todas as accounts)
+    ## Nome do usuario padrão para vincular ao qrcode (utoken)
     echo -e "\e[33mNome do User Padrão:\e[97m $user_padrao\e[0m"
     echo ""
 
-     ## Token usuario padrão para criação do qrcode (utoken)
+     ## Token do usuario padrão para vincular ao qrcode (utoken)
     echo -e "\e[33mToken User Padrão:\e[97m $user_padrao_token\e[0m"
+    echo ""
+    
+     ## ID do usuario padrão para vincular ao qrcode (utoken)
+    echo -e "\e[33mToken User Padrão:\e[97m $$user_padrao_id\e[0m"
     echo ""
 
     read -p "As respostas estão corretas? (Y/N): " confirmacao
@@ -14253,6 +14257,7 @@ services:
       - C8Q_MSGFOR_NO_CSAT=
       - C8Q_SUPERUSER_NAME=$user_padrao
       - C8Q_SUPERUSER_TOKEN=$user_padrao_token
+      - C8Q_SUPERUSER_ID=$user_padrao_id
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
       - C8Q_QP_DEFAULT_USER=$email_quepasa
       - C8Q_QP_BOTTITLE=$nome_servidor
@@ -14367,6 +14372,7 @@ services:
       - C8Q_MSGFOR_NO_CSAT=
       - C8Q_SUPERUSER_NAME=$user_padrao
       - C8Q_SUPERUSER_TOKEN=$user_padrao_token
+      - C8Q_SUPERUSER_ID=$user_padrao_id
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
       - C8Q_QP_DEFAULT_USER=$email_quepasa
       - C8Q_QP_BOTTITLE=$nome_servidor
@@ -14481,6 +14487,7 @@ services:
       - C8Q_MSGFOR_NO_CSAT=
       - C8Q_SUPERUSER_NAME=$user_padrao
       - C8Q_SUPERUSER_TOKEN=$user_padrao_token
+      - C8Q_SUPERUSER_ID=$user_padrao_id
       - C8Q_CW_PUBLIC_URL=$dominio_chatwoot
       - C8Q_QP_DEFAULT_USER=$email_quepasa
       - C8Q_QP_BOTTITLE=$nome_servidor
