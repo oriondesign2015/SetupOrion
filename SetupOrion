@@ -14712,38 +14712,43 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do N8N
-    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o dominio para o N8N (ex: n8n.oriondesign.art.br): \e[0m" && read -r url_editorn8n
     echo ""
     
     ##Pergunta o Dominio do Webhook
-    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
     echo -en "\e[33mDigite o dominio para o Webhook do N8N (ex: webhook.oriondesign.art.br): \e[0m" && read -r url_webhookn8n
     echo ""
 
     ##Pergunta Dominio do Chatwoot
-    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
     echo -en "\e[33mDigite o dominio do Chatwoot (ex: chatwoot.oriondesign.art.br): \e[0m" && read -r dominio_chatwoot
     echo ""
 
     ##Pergunta Dominio do Quepasa
-    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -en "\e[33mDigite o dominio do Quepasa (ex: quepasa.oriondesign.art.br): \e[0m" && read -r dominio_quepasa
     echo ""
 
     ##Pergunta Email do Quepasa
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mDigite o email do Quepasa (ex: contato@oriondesign.art.br): \e[0m" && read -r email_quepasa
     echo ""
 
      ## Nome usuario padrão para criação do qrcode (utoken)
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mNome do usuario padrão (Crie um usuario Admin no Chatwoot) (ex: Bot): \e[0m" && read -r user_padrao
     echo ""
 
      ## Token do usuario criado Admin
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mToken do seu usuario criado (ex: cv1dNNkgiXLvqKl6LSj0V4yu6Eqd77N): \e[0m" && read -r user_padrao_token
+    echo ""
+
+     ## ID do usuario criado Admin
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
+    echo -en "\e[33mID do seu usuario criado (ex: 2): \e[0m" && read -r user_padrao_id
     echo ""
     
     ## Limpa o terminal
@@ -14774,7 +14779,6 @@ while true; do
     ## Informação Email do Quepasa
     echo -e "\e[33mEmail do Quepasa:\e[97m $email_quepasa\e[0m"
     echo ""
-    ## Crie um novo usuario no Chatwoot e adicione as informações abaixo (Esse usuario sera vinculado ao qrcode, adicione ele em todas as accounts)
     ## Nome do usuario padrão para vincular ao qrcode (utoken)
     echo -e "\e[33mNome do User Padrão:\e[97m $user_padrao\e[0m"
     echo ""
@@ -14784,7 +14788,7 @@ while true; do
     echo ""
     
      ## ID do usuario padrão para vincular ao qrcode (utoken)
-    echo -e "\e[33mToken User Padrão:\e[97m $$user_padrao_id\e[0m"
+    echo -e "\e[33mToken User Padrão:\e[97m $user_padrao_id\e[0m"
     echo ""
 
     read -p "As respostas estão corretas? (Y/N): " confirmacao
@@ -14878,9 +14882,6 @@ services:
     image: deividms/n8n-quepasa:latest ## Versão do N8N
     command: start
 
-    volumes:
-      - n8n_quepasa${1:+_$1}_data:/home/node/.n8n/nodes
-
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
@@ -14951,6 +14952,8 @@ services:
       ## Modo do Node
       - NODE_ENV=production
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
+      - N8N_RUNNERS_ENABLED=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -14959,7 +14962,7 @@ services:
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=2
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash,moment-with-locales
+      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
 
@@ -14993,9 +14996,6 @@ services:
     image: deividms/n8n-quepasa:latest ## Versão do N8N
     command: webhook
 
-    volumes:
-      - n8n_quepasa${1:+_$1}_data:/home/node/.n8n/nodes
-
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
@@ -15066,6 +15066,8 @@ services:
       ## Modo do Node
       - NODE_ENV=production
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
+      - N8N_RUNNERS_ENABLED=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -15074,7 +15076,7 @@ services:
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=2
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash,moment-with-locales
+      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
 
@@ -15108,9 +15110,6 @@ services:
     image: deividms/n8n-quepasa:latest ## Versão do N8N
     command: worker --concurrency=10
 
-    volumes:
-      - n8n_quepasa${1:+_$1}_data:/home/node/.n8n/nodes
-
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
@@ -15181,6 +15180,8 @@ services:
       ## Modo do Node
       - NODE_ENV=production
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
+      - N8N_RUNNERS_ENABLED=true
 
       ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
@@ -15189,7 +15190,7 @@ services:
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=2
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash,moment-with-locales
+      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
 
@@ -15210,10 +15211,6 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-volumes:
-  n8n_quepasa${1:+_$1}_data:
-    external: true
-    name: n8n_quepasa${1:+_$1}_data
 
 networks:
   $nome_rede_interna:
@@ -30386,11 +30383,11 @@ while true; do
 
             # Ativando os workflows
             
-            n8n update:workflow --id 1008 --active=true && echo "Fluxo 1008 ativado" || echo "Erro ao ativar fluxo 1008"
-            n8n update:workflow --id 1009 --active=true && echo "Fluxo 1009 ativado" || echo "Erro ao ativar fluxo 1009"
-            n8n update:workflow --id 1011 --active=true && echo "Fluxo 1011 ativado" || echo "Erro ao ativar fluxo 1011"
-            n8n update:workflow --id z7iqKYC8r5nPRRHt --active=true && echo "Fluxo z7iqKYC8r5nPRRHt ativado" || echo "Erro ao ativar fluxo z7iqKYC8r5nPRRHt"
-            n8n update:workflow --id GIPTrjgdT9vuOSlN --active=true && echo "Fluxo GIPTrjgdT9vuOSlN ativado" || echo "Erro ao ativar fluxo GIPTrjgdT9vuOSlN"
+            n8n update:workflow --id 1008 --active=true && echo "Fluxo ChatwootToQuepasa ativado" || echo "Erro ao ativar fluxo ChatwootToQuepasa"
+            n8n update:workflow --id 1009 --active=true && echo "Fluxo QuepasaToChatwoot ativado" || echo "Erro ao ativar fluxo QuepasaToChatwoot"
+            n8n update:workflow --id 1011 --active=true && echo "Fluxo QuepasaAutomatic ativado" || echo "Erro ao ativar QuepasaAutomatic 1011"
+            n8n update:workflow --id z7iqKYC8r5nPRRHt --active=true && echo "Fluxo QuepasaQrcode ativado" || echo "Erro ao ativar fluxo QuepasaQrcode"
+            n8n update:workflow --id GIPTrjgdT9vuOSlN --active=true && echo "Fluxo MsgRejectCall ativado" || echo "Erro ao ativar fluxo MsgRejectCall"
 
 
         '
