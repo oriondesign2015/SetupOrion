@@ -11662,7 +11662,7 @@ echo ""
 sleep 1
 
 ## Usa o serviço wait_stack "qdrant" para verificar se o serviço esta online
-wait_stack "qdrant"
+wait_stack "qdrant_qdrant_node_0"
 
 telemetria QDrant finalizado
 
@@ -14715,42 +14715,42 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do N8N
-    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/8\e[0m"
     echo -en "\e[33mDigite o dominio para o N8N (ex: n8n.oriondesign.art.br): \e[0m" && read -r url_editorn8n
     echo ""
     
     ##Pergunta o Dominio do Webhook
-    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/8\e[0m"
     echo -en "\e[33mDigite o dominio para o Webhook do N8N (ex: webhook.oriondesign.art.br): \e[0m" && read -r url_webhookn8n
     echo ""
 
     ##Pergunta Dominio do Chatwoot
-    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/8\e[0m"
     echo -en "\e[33mDigite o dominio do Chatwoot (ex: chatwoot.oriondesign.art.br): \e[0m" && read -r dominio_chatwoot
     echo ""
 
     ##Pergunta Dominio do Quepasa
-    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/8\e[0m"
     echo -en "\e[33mDigite o dominio do Quepasa (ex: quepasa.oriondesign.art.br): \e[0m" && read -r dominio_quepasa
     echo ""
 
     ##Pergunta Email do Quepasa
-    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/8\e[0m"
     echo -en "\e[33mDigite o email do Quepasa (ex: contato@oriondesign.art.br): \e[0m" && read -r email_quepasa
     echo ""
 
      ## Nome usuario padrão para criação do qrcode (utoken)
-    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/8\e[0m"
     echo -en "\e[33mNome do usuario padrão (Crie um usuario Admin no Chatwoot) (ex: Bot): \e[0m" && read -r user_padrao
     echo ""
 
      ## Token do usuario criado Admin
-    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/8\e[0m"
     echo -en "\e[33mToken do seu usuario criado (ex: cv1dNNkgiXLvqKl6LSj0V4yu6Eqd77N): \e[0m" && read -r user_padrao_token
     echo ""
 
      ## ID do usuario criado Admin
-    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
+    echo -e "\e[97mPasso$amarelo 8/8\e[0m"
     echo -en "\e[33mID do seu usuario criado (ex: 2): \e[0m" && read -r user_padrao_id
     echo ""
     
