@@ -7850,7 +7850,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Dados do postgres
+      ## 🗄️ Banco de Dados (PostgreSQL)
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -7858,28 +7858,31 @@ services:
       - DB_POSTGRESDB_USER=postgres
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
-      ## Encryption Key
+      ## 🔐 Criptografia
       - N8N_ENCRYPTION_KEY=$encryption_key
 
-      ## Url do N8N
+      ## 🌐 URLs e Configurações de Acesso
       - N8N_HOST=$url_editorn8n
       - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
       - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
 
-      ## Modo do Node
+      ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
-
-      ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
+      - EXECUTIONS_TIMEOUT=3600
+      - EXECUTIONS_TIMEOUT_MAX=7200
+      - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_RUNNERS_MODE=internal
 
-      ## Community Nodes
+      ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
       - N8N_NODE_PATH=/home/node/.n8n/nodes
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
-      ## Dados SMTP
+      ## 📧 SMTP (Envio de E-mails)
       - N8N_SMTP_SENDER=$email_smtp_n8n
       - N8N_SMTP_USER=$usuario_smtp_n8n
       - N8N_SMTP_PASS=$senha_smtp_n8n
@@ -7887,16 +7890,28 @@ services:
       - N8N_SMTP_PORT=$porta_smtp_n8n
       - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
-      ## Dados do Redis
+      ## 🔁 Redis (Fila de Execução)
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=2
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
-      - N8N_RUNNERS_ENABLED=true
+
+      ## 📊 Métricas
+      - N8N_METRICS=true
+
+      ## ⏱️ Execuções e Limpeza
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
 
-      ## Timezone
+      ## 🧠 Recursos de IA
+      - N8N_AI_ENABLED=false
+      - N8N_AI_PROVIDER=openai
+      - N8N_AI_OPENAI_API_KEY=
+
+      ## 🧰 Permissões em Funções Personalizadas
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
+
+      ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
 
@@ -7930,7 +7945,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Dados do postgres
+      ## 🗄️ Banco de Dados (PostgreSQL)
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -7938,28 +7953,31 @@ services:
       - DB_POSTGRESDB_USER=postgres
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
-      ## Encryption Key
+      ## 🔐 Criptografia
       - N8N_ENCRYPTION_KEY=$encryption_key
 
-      ## Url do N8N
+      ## 🌐 URLs e Configurações de Acesso
       - N8N_HOST=$url_editorn8n
       - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
       - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
 
-      ## Modo do Node
+      ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
-
-      ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
+      - EXECUTIONS_TIMEOUT=3600
+      - EXECUTIONS_TIMEOUT_MAX=7200
+      - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_RUNNERS_MODE=internal
 
-      ## Community Nodes
+      ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
       - N8N_NODE_PATH=/home/node/.n8n/nodes
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
-      ## Dados SMTP
+      ## 📧 SMTP (Envio de E-mails)
       - N8N_SMTP_SENDER=$email_smtp_n8n
       - N8N_SMTP_USER=$usuario_smtp_n8n
       - N8N_SMTP_PASS=$senha_smtp_n8n
@@ -7967,16 +7985,28 @@ services:
       - N8N_SMTP_PORT=$porta_smtp_n8n
       - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
-      ## Dados do Redis
+      ## 🔁 Redis (Fila de Execução)
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=2
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
-      - N8N_RUNNERS_ENABLED=true
+
+      ## 📊 Métricas
+      - N8N_METRICS=true
+
+      ## ⏱️ Execuções e Limpeza
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
 
-      ## Timezone
+      ## 🧠 Recursos de IA
+      - N8N_AI_ENABLED=false
+      - N8N_AI_PROVIDER=openai
+      - N8N_AI_OPENAI_API_KEY=
+
+      ## 🧰 Permissões em Funções Personalizadas
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
+
+      ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
       
@@ -8010,7 +8040,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Dados do postgres
+      ## 🗄️ Banco de Dados (PostgreSQL)
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -8018,28 +8048,31 @@ services:
       - DB_POSTGRESDB_USER=postgres
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
-      ## Encryption Key
+      ## 🔐 Criptografia
       - N8N_ENCRYPTION_KEY=$encryption_key
 
-      ## Url do N8N
+      ## 🌐 URLs e Configurações de Acesso
       - N8N_HOST=$url_editorn8n
       - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
       - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
 
-      ## Modo do Node
+      ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
-
-      ## Modo de execução (deletar caso deseje em modo regular)
       - EXECUTIONS_MODE=queue
+      - EXECUTIONS_TIMEOUT=3600
+      - EXECUTIONS_TIMEOUT_MAX=7200
+      - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_RUNNERS_MODE=internal
 
-      ## Community Nodes
+      ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
       - N8N_NODE_PATH=/home/node/.n8n/nodes
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
-      ## Dados SMTP
+      ## 📧 SMTP (Envio de E-mails)
       - N8N_SMTP_SENDER=$email_smtp_n8n
       - N8N_SMTP_USER=$usuario_smtp_n8n
       - N8N_SMTP_PASS=$senha_smtp_n8n
@@ -8047,16 +8080,28 @@ services:
       - N8N_SMTP_PORT=$porta_smtp_n8n
       - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
-      ## Dados do Redis
+      ## 🔁 Redis (Fila de Execução)
       - QUEUE_BULL_REDIS_HOST=redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=2
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
-      - N8N_RUNNERS_ENABLED=true
+
+      ## 📊 Métricas
+      - N8N_METRICS=true
+
+      ## ⏱️ Execuções e Limpeza
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
 
-      ## Timezone
+      ## 🧠 Recursos de IA
+      - N8N_AI_ENABLED=false
+      - N8N_AI_PROVIDER=openai
+      - N8N_AI_OPENAI_API_KEY=
+
+      ## 🧰 Permissões em Funções Personalizadas
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
+
+      ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
       
@@ -30118,6 +30163,251 @@ creditos_msg
 requisitar_outra_instalacao
 }
 
+
+## ███╗   ███╗ ██████╗██████╗     ███╗   ██╗ █████╗ ███╗   ██╗
+## ████╗ ████║██╔════╝██╔══██╗    ████╗  ██║██╔══██╗████╗  ██║
+## ██╔████╔██║██║     ██████╔╝    ██╔██╗ ██║╚█████╔╝██╔██╗ ██║
+## ██║╚██╔╝██║██║     ██╔═══╝     ██║╚██╗██║██╔══██╗██║╚██╗██║
+## ██║ ╚═╝ ██║╚██████╗██║         ██║ ╚████║╚█████╔╝██║ ╚████║
+## ╚═╝     ╚═╝ ╚═════╝╚═╝         ╚═╝  ╚═══╝ ╚════╝ ╚═╝  ╚═══╝
+
+n8n.mcp() {
+
+## Verifica os recursos
+recursos 2 2 && continue || return
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostrar mensagem de Instalando
+instalando_msg
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO MCP DO N8N \e[33m[1/4]\e[0m"
+echo ""
+sleep 1
+
+telemetria MCP iniciado
+
+## NADA
+
+# Mensagem de Passo
+echo -e "\e[97m• PEGANDO INFORMAÇÕES DA STACK DO N8N \e[33m[2/4]\e[0m"
+echo ""
+sleep 1
+
+local_da_stack="/root/n8n${1:+_$1}.yaml"
+
+if [ ! -f "$local_da_stack" ]; then
+    echo -e "\e[91mArquivo $local_da_stack não encontrado!\e[0m"
+    exit 1
+fi
+
+# Função para extrair valores
+get_var() {
+  grep "$1" "$local_da_stack" | head -n1 | awk -F '=' '{gsub(/"/, "", $2); print $2}' | xargs
+}
+
+# Variáveis extraídas
+DB_PASSWORD=$(get_var "DB_POSTGRESDB_PASSWORD")
+ENCRYPTION_KEY=$(get_var "N8N_ENCRYPTION_KEY")
+N8N_HOST=$(get_var "N8N_HOST")
+EDITOR_BASE_URL=$(get_var "N8N_EDITOR_BASE_URL")
+WEBHOOK_URL=$(get_var "WEBHOOK_URL")
+SMTP_SENDER=$(get_var "N8N_SMTP_SENDER")
+SMTP_USER=$(get_var "N8N_SMTP_USER")
+SMTP_PASS=$(get_var "N8N_SMTP_PASS")
+SMTP_HOST=$(get_var "N8N_SMTP_HOST")
+SMTP_PORT=$(get_var "N8N_SMTP_PORT")
+SMTP_SSL=$(get_var "N8N_SMTP_SSL")
+WEBHOOK_URL_FORMATADO=$(echo "$WEBHOOK_URL" | sed -E 's|https?://([^/]+)/?.*|\1|')
+
+# Exibir uma vez só
+echo -e "• DB_PASSWORD=$DB_PASSWORD"
+echo -e "• ENCRYPTION_KEY=$ENCRYPTION_KEY"
+echo -e "• N8N_HOST=$N8N_HOST"
+echo -e "• EDITOR_BASE_URL=$EDITOR_BASE_URL"
+echo -e "• WEBHOOK_URL=$WEBHOOK_URL"
+echo -e "• WEBHOOK_URL_FORMATADO=$WEBHOOK_URL_FORMATADO"
+echo -e "• SMTP_SENDER=$SMTP_SENDER"
+echo -e "• SMTP_USER=$SMTP_USER"
+echo -e "• SMTP_PASS=$SMTP_PASS"
+echo -e "• SMTP_HOST=$SMTP_HOST"
+echo -e "• SMTP_PORT=$SMTP_PORT"
+echo -e "• SMTP_SSL=$SMTP_SSL"
+
+echo ""
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO MCP DO N8N \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
+
+## Criando a stack n8n.yaml
+cat > n8n${1:+_$1}_mcp.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  n8n${1:+_$1}_mcp:
+    image: n8nio/n8n:latest ## Versão do N8N
+    command: webhook
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+      ## 🗄️ Banco de Dados (PostgreSQL)
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_USER=postgres
+      - DB_POSTGRESDB_PASSWORD=$DB_PASSWORD
+
+      ## 🔐 Criptografia
+      - N8N_ENCRYPTION_KEY=$ENCRYPTION_KEY
+
+      ## 🌐 URLs e Configurações de Acesso
+      - N8N_HOST=$N8N_HOST
+      - N8N_EDITOR_BASE_URL=$EDITOR_BASE_URL
+      - WEBHOOK_URL=$WEBHOOK_URL
+      - N8N_PROTOCOL=https
+
+      ## ⚙️ Ambiente de Execução
+      - NODE_ENV=production
+      - EXECUTIONS_MODE=queue
+      - EXECUTIONS_TIMEOUT=3600
+      - EXECUTIONS_TIMEOUT_MAX=7200
+      - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_RUNNERS_MODE=internal
+
+      ## 📦 Pacotes e Nós Comunitários
+      - N8N_REINSTALL_MISSING_PACKAGES=true
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      - N8N_NODE_PATH=/home/node/.n8n/nodes
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+
+      ## 📧 SMTP (Envio de E-mails)
+      - N8N_SMTP_SENDER=$SMTP_SENDER
+      - N8N_SMTP_USER=$SMTP_USER
+      - N8N_SMTP_PASS=$SMTP_PASS
+      - N8N_SMTP_HOST=$SMTP_HOST
+      - N8N_SMTP_PORT=$SMTP_PORT
+      - N8N_SMTP_SSL=$SMTP_SSL
+
+      ## 🔁 Redis (Fila de Execução)
+      - QUEUE_BULL_REDIS_HOST=redis
+      - QUEUE_BULL_REDIS_PORT=6379
+      - QUEUE_BULL_REDIS_DB=2
+
+      ## 📊 Métricas
+      - N8N_METRICS=true
+
+      ## ⏱️ Execuções e Limpeza
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=336
+
+      ## 🧠 Recursos de IA
+      - N8N_AI_ENABLED=false
+      - N8N_AI_PROVIDER=openai
+      - N8N_AI_OPENAI_API_KEY=
+
+      ## 🧰 Permissões em Funções Personalizadas
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
+
+      ## 🕒 Fuso Horário
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - TZ=America/Sao_Paulo
+      
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2048M
+      labels:
+        - traefik.enable=true
+        - traefik.http.middlewares.nogzip.headers.customResponseHeaders.Content-Encoding=""
+        - traefik.http.routers.n8n${1:+_$1}_mcp.rule=(Host(\`$WEBHOOK_URL_FORMATADO\`) && PathPrefix(\`/mcp\`)) ## Url do Webhook do N8N
+        - traefik.http.routers.n8n${1:+_$1}_mcp.entrypoints=websecure
+        - traefik.http.routers.n8n${1:+_$1}_mcp.priority=1
+        - traefik.http.routers.n8n${1:+_$1}_mcp.middlewares=nogzip
+        - traefik.http.routers.n8n${1:+_$1}_mcp.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.n8n${1:+_$1}_mcp.service=n8n${1:+_$1}_mcp
+        - traefik.http.services.n8n${1:+_$1}_mcp.loadbalancer.server.port=5678
+        - traefik.http.services.n8n${1:+_$1}_mcp.loadbalancer.passHostHeader=1
+
+## --------------------------- ORION --------------------------- ##
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack do MCP do N8N"
+fi
+STACK_NAME="n8n${1:+_$1}_mcp"
+stack_editavel
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo ""
+sleep 1
+
+## Baixando imagens:
+pull n8nio/n8n:latest
+
+wait_stack n8n${1:+_$1}_mcp_n8n${1:+_$1}_mcp
+
+telemetria MCP finalizado
+
+cd dados_vps
+
+cat > dados_n8n${1:+_$1}_mpc <<EOL
+[ MCP DO N8N ]
+
+Dominio do Webhook do MCP: $WEBHOOK_URL/mcp
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ MCP DO N8N ]\e[0m"
+echo ""
+
+echo -e "\e[33mDominio Webhook:\e[97m $WEBHOOK_URL/mcp\e[0m"
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+requisitar_outra_instalacao
+}
+
 ## Ignore esta parte, só para facilitar minha identificação com esta parte "XXOOXX"
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -31976,6 +32266,27 @@ while true; do
                 else
                     APP_ORION="transcrevezap${opcao2:+_$opcao2}"
                     ferramenta_transcrevezap "$opcao2"
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+        n8n.mcp)
+
+            verificar_stack "n8n${opcao2:+_$opcao2}_mcp" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="n8n${opcao2:+_$opcao2}_mcp"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    n8n.mcp "$opcao2"
+                else
+                    APP_ORION="n8n${opcao2:+_$opcao2}_mcp"
+                    n8n.mcp "$opcao2"
                 fi
 
                 ## FIM TOKEN
