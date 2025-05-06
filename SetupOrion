@@ -7438,6 +7438,7 @@ services:
 
       ## Encryption key
       - ENCRYPTION_SECRET=$key_typebot
+      - AUTH_TRUST_HOST=https://$url_typebot
 
       ## Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED
@@ -7445,7 +7446,7 @@ services:
       ## Urls do typebot
       - NEXTAUTH_URL=https://$url_typebot ## URL Builder
       - NEXT_PUBLIC_VIEWER_URL=https://$url_viewer ## URL Viewer
-      - NEXTAUTH_URL_INTERNAL=https://$url_typebot
+      - NEXTAUTH_URL_INTERNAL=http://localhost:3000
 
       ## Desativer/ativar novos cadastros
       - DISABLE_SIGNUP=false
@@ -7507,6 +7508,7 @@ services:
 
       ## Encryption key
       - ENCRYPTION_SECRET=$key_typebot
+      - AUTH_TRUST_HOST=https://$url_typebot
 
       ## Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED
@@ -7514,7 +7516,7 @@ services:
       ## Urls do typebot
       - NEXTAUTH_URL=https://$url_typebot ## URL Builder
       - NEXT_PUBLIC_VIEWER_URL=https://$url_viewer ## URL Viewer
-      - NEXTAUTH_URL_INTERNAL=https://$url_typebot
+      - NEXTAUTH_URL_INTERNAL=http://localhost:3000
 
       ## Desativer/ativar novos cadastros
       - DISABLE_SIGNUP=false
