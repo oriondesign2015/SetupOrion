@@ -7438,6 +7438,7 @@ services:
 
       ## Encryption key
       - ENCRYPTION_SECRET=$key_typebot
+      - AUTH_TRUST_HOST=https://$url_typebot
 
       ## Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED
@@ -7507,6 +7508,7 @@ services:
 
       ## Encryption key
       - ENCRYPTION_SECRET=$key_typebot
+      - AUTH_TRUST_HOST=https://$url_typebot
 
       ## Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED
