@@ -6453,7 +6453,7 @@ else
     echo "1/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack da Evolution API"
 fi
-STACK_NAME="evolution_oriondesign${1:+_$1}"
+STACK_NAME="evolution_v1${1:+_$1}"
 stack_editavel # > /dev/null 2>&1
 #docker stack deploy --prune --resolve-image always -c evolution_v1.yaml evolution > /dev/null 2>&1
 
@@ -6474,7 +6474,7 @@ sleep 1
 pull atendai/evolution-api:v1.8.3
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
-wait_stack "evolution_v1${1:+_$1}"
+wait_stack "evolution_v1${1:+_$1}_evolution_oriondesign${1:+_$1}"
 
 telemetria "Evolution API (v1)" "finalizado"
 
