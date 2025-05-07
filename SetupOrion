@@ -5550,7 +5550,7 @@ services:
       
       ## Configuração do Cliente
       ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1019673114
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -5964,7 +5964,7 @@ services:
       
       ## Configuração do Cliente
       ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1019673114
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -6684,7 +6684,7 @@ services:
       
       ## Configuração do Cliente
       ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1019673114
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
