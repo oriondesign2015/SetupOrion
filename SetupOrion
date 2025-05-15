@@ -1504,6 +1504,21 @@ nome_wisemapping() {
     echo ""
 }
 
+## Titulo Evo AI [72]
+
+nome_evoai() {
+    clear
+    echo ""
+    echo ""
+    echo -e "$branco                             ███████╗██╗   ██╗ ██████╗      █████╗ ██╗\e[0m"
+    echo -e "$branco                             ██╔════╝██║   ██║██╔═══██╗    ██╔══██╗██║\e[0m"
+    echo -e "$branco                             █████╗  ██║   ██║██║   ██║    ███████║██║\e[0m"
+    echo -e "$branco                             ██╔══╝  ╚██╗ ██╔╝██║   ██║    ██╔══██║██║\e[0m"
+    echo -e "$branco                             ███████╗ ╚████╔╝ ╚██████╔╝    ██║  ██║██║\e[0m"
+    echo -e "$branco                             ╚══════╝  ╚═══╝   ╚═════╝     ╚═╝  ╚═╝╚═╝\e[0m"
+    echo ""
+    echo ""
+}
 
 nome_transcrevezap(){
     clear
@@ -1755,7 +1770,7 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 46 ]${reset} - ${branco}HumHub ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}Frappe ${verde}[2/4]${reset} ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 47 ]${reset} - ${branco}Yourls ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}Bolt ${verde}[2/4]${reset} ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 48 ]${reset} - ${branco}TwentyCRM${vermelho} ${verde}[1/4]${reset}                        ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}WiseMapping ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}Evo AI [1/1]${reset}"
     echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 51 ]${reset} - ${branco}Focalboard ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 52 ]${reset} - ${branco}GLPI ${verde}[1/1]${reset}                             ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}EM BREVE...${reset}"
