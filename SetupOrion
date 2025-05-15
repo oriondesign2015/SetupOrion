@@ -3598,7 +3598,6 @@ networks:
     external: true
     attachable: true
     name: $nome_rede_interna ## Nome da rede interna
-
 EOL
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Criando Stack"
@@ -5045,38 +5044,38 @@ services:
       - $nome_rede_interna ## Nome da rede interna
     
     environment:
-      ## Qualquer Url com # no final
+      ## 🌐 Qualquer Url com # no final
       #- CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
 
-      ## Nome da Empresa
+      ## 🏢 Nome da Empresa
       - INSTALLATION_NAME=$nome_empresa_chatwoot
 
-      ## Secret key
+      ## 🔐 Secret key
       - SECRET_KEY_BASE=$encryption_key
 
-      ## Url Chatwoot
+      ## 💬 Url Chatwoot
       - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
 
-      ## Idioma/Localização padrão
+      ## 🌍 Idioma/Localização padrão
       - DEFAULT_LOCALE=pt_BR
       - TZ=America/Sao_Paulo
 
-      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      ## ☁️ Google Cloud - Modifique de acordo com os seus dados
       #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
       #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
-      ## Dados do Redis
+      ## 🧑‍💻 Dados do Redis
       - REDIS_URL=redis://redis:6379
 
-      ## Dados do Postgres
+      ## 🗄️ Dados do Postgres
       - POSTGRES_HOST=pgvector
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_pgvector ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot${1:+_$1}
 
-      ## Armazenamento
+      ## 🏠 Armazenamento
       - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
       #- STORAGE_BUCKET_NAME=chatwoot${1:+_$1}
       #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
@@ -5085,7 +5084,7 @@ services:
       #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
       #- STORAGE_FORCE_PATH_STYLE=true
 
-      ## Dados do SMTP
+      ## 📧 Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -5098,14 +5097,14 @@ services:
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
 
-      ## Melhorias
+      ## ⚙️ Melhorias
       - SIDEKIQ_CONCURRENCY=10
       - RACK_TIMEOUT_SERVICE_TIMEOUT=0
       - RAILS_MAX_THREADS=5
       - WEB_CONCURRENCY=2
       - ENABLE_RACK_ATTACK=false
 
-      ## Outras configurações
+      ## ⚡ Outras configurações
       - NODE_ENV=production
       - RAILS_ENV=production
       - INSTALLATION_ENV=docker
@@ -5151,38 +5150,38 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Qualquer Url com # no final
+      ## 🌐 Qualquer Url com # no final
       #- CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
 
-      ## Nome da Empresa
+      ## 🏢 Nome da Empresa
       - INSTALLATION_NAME=$nome_empresa_chatwoot
 
-      ## Secret key
+      ## 🔐 Secret key
       - SECRET_KEY_BASE=$encryption_key
 
-      ## Url Chatwoot
+      ## 💬 Url Chatwoot
       - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
 
-      ## Idioma/Localização padrão
+      ## 🌍 Idioma/Localização padrão
       - DEFAULT_LOCALE=pt_BR
-      - TZ=America/Brasil
+      - TZ=America/Sao_Paulo
 
-      ## Google Cloud - Modifique de acordo com os seus dados (lembre-se de mudar no chatwoot_sidekiq)
+      ## ☁️ Google Cloud - Modifique de acordo com os seus dados
       #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
       #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
-      ## Dados do Redis
+      ## 🧑‍💻 Dados do Redis
       - REDIS_URL=redis://redis:6379
 
-      ## Dados do Postgres
+      ## 🗄️ Dados do Postgres
       - POSTGRES_HOST=pgvector
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_pgvector ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot${1:+_$1}
 
-      ## Armazenamento
+      ## 🏠 Armazenamento
       - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
       #- STORAGE_BUCKET_NAME=chatwoot${1:+_$1}
       #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
@@ -5191,7 +5190,7 @@ services:
       #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
       #- STORAGE_FORCE_PATH_STYLE=true
 
-      ## Dados do SMTP
+      ## 📧 Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -5204,14 +5203,14 @@ services:
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
 
-      ## Melhorias
+      ## ⚙️ Melhorias
       - SIDEKIQ_CONCURRENCY=10
       - RACK_TIMEOUT_SERVICE_TIMEOUT=0
       - RAILS_MAX_THREADS=5
       - WEB_CONCURRENCY=2
       - ENABLE_RACK_ATTACK=false
 
-      ## Outras configurações
+      ## ⚡ Outras configurações
       - NODE_ENV=production
       - RAILS_ENV=production
       - INSTALLATION_ENV=docker
@@ -5540,7 +5539,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Configurações Gerais
+      ## ⚙️ Configurações Gerais
       - SERVER_URL=https://$url_evolution
       - AUTHENTICATION_API_KEY=$apikeyglobal
       - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
@@ -5548,13 +5547,13 @@ services:
       - QRCODE_LIMIT=1902
       - LANGUAGE=pt-BR
       
-      ## Configuração do Cliente
+      ## 📱 Configuração do Cliente
       ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
       - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
-      ## Configuração do Banco de Dados
+      ## 🗄️ Configuração do Banco de Dados
       - DATABASE_ENABLED=true
       - DATABASE_PROVIDER=postgresql
       - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution${1:+_$1}
@@ -5567,31 +5566,31 @@ services:
       - DATABASE_SAVE_DATA_LABELS=true
       - DATABASE_SAVE_DATA_HISTORIC=true
       
-      ## Integração com OpenAI
+      ## 🤖 Integração com OpenAI
       - OPENAI_ENABLED=true
       
-      ## Integração com Dify
+      ## 🌐 Integração com Dify
       - DIFY_ENABLED=true
       
-      ## Integração com Typebot
+      ## 💬 Integração com Typebot
       - TYPEBOT_ENABLED=true
       - TYPEBOT_API_VERSION=latest
       
-      ## Integração com Chatwoot
+      ## 🗣️ Integração com Chatwoot
       - CHATWOOT_ENABLED=true
       - CHATWOOT_MESSAGE_READ=true
       - CHATWOOT_MESSAGE_DELETE=true
       - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:${senha_pgvector:-SENHA_DO_PGVECTOR}@pgvector:5432/chatwoot?sslmode=disable
       - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false
       
-      ## Configuração do Cache
+      ## 🧊 Configuração do Cache
       - CACHE_REDIS_ENABLED=true
       - CACHE_REDIS_URI=redis://redis:6379/8
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
       - CACHE_LOCAL_ENABLED=false
       
-      ## Configuração do S3
+      ## ☁️ Configuração do S3
       - S3_ENABLED=false
       - S3_ACCESS_KEY=
       - S3_SECRET_KEY=
@@ -5601,28 +5600,28 @@ services:
       - S3_USE_SSL=true
       #- S3_REGION=eu-south
 
-      ## Configuração do WhatsApp Business
+      ## 💼 Configuração do WhatsApp Business
       - WA_BUSINESS_TOKEN_WEBHOOK=evolution
       - WA_BUSINESS_URL=https://graph.facebook.com
       - WA_BUSINESS_VERSION=v20.0
       - WA_BUSINESS_LANGUAGE=pt_BR
 
-      ## Telemetria
+      ## 📊 Telemetria
       - TELEMETRY=false
       - TELEMETRY_URL=
 
-      ## Configuração do WebSocket
+      ## 🌐 Configuração do WebSocket
       - WEBSOCKET_ENABLED=false
       - WEBSOCKET_GLOBAL_EVENTS=false
 
-      ## Configuração do SQS
+      ## 📨 Configuração do SQS
       - SQS_ENABLED=false
       - SQS_ACCESS_KEY_ID=
       - SQS_SECRET_ACCESS_KEY=
       - SQS_ACCOUNT_ID=
       - SQS_REGION=
 
-      ## Configuração do RabbitMQ
+      ## 🐇 Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
       - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution${1:+_$1}
       - RABBITMQ_EXCHANGE_NAME=evolution
@@ -5653,7 +5652,7 @@ services:
       - RABBITMQ_EVENTS_TYPEBOT_START=false
       - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
 
-      ## Configuração do Webhook
+      ## 🌐 Configuração do Webhook
       - WEBHOOK_GLOBAL_ENABLED=false
       - WEBHOOK_GLOBAL_URL=
       - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
@@ -5685,7 +5684,7 @@ services:
       - WEBHOOK_EVENTS_ERRORS=false
       - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
 
-      ## Configuração do Provider
+      ## 🔌 Configuração do Provider
       - PROVIDER_ENABLED=false
       - PROVIDER_HOST=127.0.0.1
       - PROVIDER_PORT=5656
@@ -5698,14 +5697,14 @@ services:
         constraints:
         - node.role == manager
       labels:
-      - traefik.enable=1
-      - traefik.http.routers.evolution${1:+_$1}.rule=Host(\`$url_evolution\`) ## Url da Evolution API
-      - traefik.http.routers.evolution${1:+_$1}.entrypoints=websecure
-      - traefik.http.routers.evolution${1:+_$1}.priority=1
-      - traefik.http.routers.evolution${1:+_$1}.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution${1:+_$1}.service=evolution${1:+_$1}
-      - traefik.http.services.evolution${1:+_$1}.loadbalancer.server.port=8080
-      - traefik.http.services.evolution${1:+_$1}.loadbalancer.passHostHeader=true
+        - traefik.enable=1
+        - traefik.http.routers.evolution${1:+_$1}.rule=Host(\`$url_evolution\`) ## Url da Evolution API
+        - traefik.http.routers.evolution${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.evolution${1:+_$1}.priority=1
+        - traefik.http.routers.evolution${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evolution${1:+_$1}.service=evolution${1:+_$1}
+        - traefik.http.services.evolution${1:+_$1}.loadbalancer.server.port=8080
+        - traefik.http.services.evolution${1:+_$1}.loadbalancer.passHostHeader=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -5954,7 +5953,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Configurações Gerais
+      ## ⚙️ Configurações Gerais
       - SERVER_URL=https://$url_evolution
       - AUTHENTICATION_API_KEY=$apikeyglobal
       - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
@@ -5962,13 +5961,13 @@ services:
       - QRCODE_LIMIT=1902
       - LANGUAGE=pt-BR
       
-      ## Configuração do Cliente
+      ## 📱 Configuração do Cliente
       ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
       - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
-      ## Configuração do Banco de Dados
+      ## 🗄️ Configuração do Banco de Dados
       - DATABASE_ENABLED=true
       - DATABASE_PROVIDER=postgresql
       - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution${1:+_$1}_lite
@@ -5981,14 +5980,14 @@ services:
       - DATABASE_SAVE_DATA_LABELS=true
       - DATABASE_SAVE_DATA_HISTORIC=true
       
-      ## Configuração do Cache
+      ## 🧊 Configuração do Cache
       - CACHE_REDIS_ENABLED=true
       - CACHE_REDIS_URI=redis://redis:6379/8
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
       - CACHE_LOCAL_ENABLED=false
       
-      ## Configuração do S3
+      ## ☁️ Configuração do S3
       - S3_ENABLED=false
       - S3_ACCESS_KEY=
       - S3_SECRET_KEY=
@@ -5998,28 +5997,28 @@ services:
       - S3_USE_SSL=true
       #- S3_REGION=eu-south
 
-      ## Configuração do WhatsApp Business
+      ## 💼 Configuração do WhatsApp Business
       - WA_BUSINESS_TOKEN_WEBHOOK=evolution
       - WA_BUSINESS_URL=https://graph.facebook.com
       - WA_BUSINESS_VERSION=v20.0
       - WA_BUSINESS_LANGUAGE=pt_BR
 
-      ## Telemetria
+      ## 📊 Telemetria
       - TELEMETRY=false
       - TELEMETRY_URL=
 
-      ## Configuração do WebSocket
+      ## 🌐 Configuração do WebSocket
       - WEBSOCKET_ENABLED=false
       - WEBSOCKET_GLOBAL_EVENTS=false
 
-      ## Configuração do SQS
+      ## 📨 Configuração do SQS
       - SQS_ENABLED=false
       - SQS_ACCESS_KEY_ID=
       - SQS_SECRET_ACCESS_KEY=
       - SQS_ACCOUNT_ID=
       - SQS_REGION=
 
-      ## Configuração do RabbitMQ
+      ## 🐇 Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
       - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution${1:+_$1}
       - RABBITMQ_EXCHANGE_NAME=evolution
@@ -6050,7 +6049,7 @@ services:
       - RABBITMQ_EVENTS_TYPEBOT_START=false
       - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
 
-      ## Configuração do Webhook
+      ## 🌐 Configuração do Webhook
       - WEBHOOK_GLOBAL_ENABLED=false
       - WEBHOOK_GLOBAL_URL=
       - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
@@ -6082,7 +6081,7 @@ services:
       - WEBHOOK_EVENTS_ERRORS=false
       - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
 
-      ## Configuração do Provider
+      ## 🔌 Configuração do Provider
       - PROVIDER_ENABLED=false
       - PROVIDER_HOST=127.0.0.1
       - PROVIDER_PORT=5656
@@ -6095,14 +6094,14 @@ services:
         constraints:
         - node.role == manager
       labels:
-      - traefik.enable=1
-      - traefik.http.routers.evolution${1:+_$1}_lite.rule=Host(\`$url_evolution\`) ## Url da Evolution API
-      - traefik.http.routers.evolution${1:+_$1}_lite.entrypoints=websecure
-      - traefik.http.routers.evolution${1:+_$1}_lite.priority=1
-      - traefik.http.routers.evolution${1:+_$1}_lite.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution${1:+_$1}_lite.service=evolution${1:+_$1}_lite
-      - traefik.http.services.evolution${1:+_$1}_lite.loadbalancer.server.port=8080
-      - traefik.http.services.evolution${1:+_$1}_lite.loadbalancer.passHostHeader=true
+        - traefik.enable=1
+        - traefik.http.routers.evolution${1:+_$1}_lite.rule=Host(\`$url_evolution\`) ## Url da Evolution API
+        - traefik.http.routers.evolution${1:+_$1}_lite.entrypoints=websecure
+        - traefik.http.routers.evolution${1:+_$1}_lite.priority=1
+        - traefik.http.routers.evolution${1:+_$1}_lite.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evolution${1:+_$1}_lite.service=evolution${1:+_$1}_lite
+        - traefik.http.services.evolution${1:+_$1}_lite.loadbalancer.server.port=8080
+        - traefik.http.services.evolution${1:+_$1}_lite.loadbalancer.passHostHeader=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -6307,112 +6306,112 @@ services:
     command: ["node", "./dist/src/main.js"]
 
     volumes:
-    - evolution_oriondesign${1:+_$1}_instances:/evolution/instances
-    - evolution_oriondesign${1:+_$1}_store:/evolution/store
-    - evolution_oriondesign${1:+_$1}_views:/evolution/views
+      - evolution_oriondesign${1:+_$1}_instances:/evolution/instances
+      - evolution_oriondesign${1:+_$1}_store:/evolution/store
+      - evolution_oriondesign${1:+_$1}_views:/evolution/views
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-    ## Url da Evolution API
-    - SERVER_URL=https://$url_evolution ## Url da aplicação
+    ## 🌐 Url da Evolution API
+      - SERVER_URL=https://$url_evolution ## Url da aplicação
 
-    ## Dados de Autenticação
-    - AUTHENTICATION_TYPE=apikey
-    - AUTHENTICATION_API_KEY=$apikeyglobal ## GLOBAL API KEY
-    - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+    ## 🔐 Dados de Autenticação
+      - AUTHENTICATION_TYPE=apikey
+      - AUTHENTICATION_API_KEY=$apikeyglobal ## GLOBAL API KEY
+      - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
 
-    ## Configurações
-    - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
-    - CONFIG_SESSION_PHONE_NAME=chrome
+    ## ⚙️ Configurações
+      - CONFIG_SESSION_PHONE_CLIENT=OrionDesign ## Nome que aparece no celular
+      - CONFIG_SESSION_PHONE_NAME=chrome
 
-    ## Definir versão do Whatsapp Web
+    ## 📱 Definir versão do Whatsapp Web
     ## pegue a versão em: https://web.whatsapp.com/check-update?version=0&platform=web
-    - CONFIG_SESSION_PHONE_VERSION=2,3000,1015901307
+      - CONFIG_SESSION_PHONE_VERSION=2,3000,1015901307
 
-    ## Sobre os QR-Codes
-    - QRCODE_LIMIT=1902
-    - QRCODE_COLOR=#000000
+    ## 🖼️ Sobre os QR-Codes
+      - QRCODE_LIMIT=1902
+      - QRCODE_COLOR=#000000
 
-    # Ativer o RabbitMQ
-    - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar RabbitMQ antes
-    - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672
+    ## 🐰 Ativar o RabbitMQ
+      - RABBITMQ_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessário instalar RabbitMQ antes
+      - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672
 
-    # Aivar Banco de Dados MongoDB
-    - DATABASE_ENABLED=false ## Colocar true se quiser usar | Recomendado | Necessario instalar MongoDB antes
-    - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
-    - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution${1:+_$1}
-    - DATABASE_SAVE_DATA_INSTANCE=true
-    - DATABASE_SAVE_DATA_NEW_MESSAGE=true
-    - DATABASE_SAVE_MESSAGE_UPDATE=true
-    - DATABASE_SAVE_DATA_CONTACTS=true
-    - DATABASE_SAVE_DATA_CHATS=true
+    ## 🗄️ Ativar Banco de Dados MongoDB
+      - DATABASE_ENABLED=false ## Colocar true se quiser usar | Necessário instalar MongoDB antes
+      - DATABASE_CONNECTION_URI=mongodb://USUARIO:SENHA@IP_VPS:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true ## Colocar a URL do MongoDB
+      - DATABASE_CONNECTION_DB_PREFIX_NAME=evolution${1:+_$1}
+      - DATABASE_SAVE_DATA_INSTANCE=true
+      - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+      - DATABASE_SAVE_MESSAGE_UPDATE=true
+      - DATABASE_SAVE_DATA_CONTACTS=true
+      - DATABASE_SAVE_DATA_CHATS=true
 
-    ## Ativar o Redis
-    - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
-    - REDIS_URI=redis://redis:6379
+    ## 🧑‍💻 Ativar o Redis
+      - REDIS_ENABLED=false ## Colocar true se quiser usar | Não recomendado
+      - REDIS_URI=redis://redis:6379
 
-    ## Ativar o Cache Redis (Em testes)
-    - CACHE_REDIS_ENABLED=false
-    - CACHE_REDIS_URI=redis://redis:6379
-    - CACHE_REDIS_PREFIX_KEY=evolution${1:+_$1}
-    - CACHE_REDIS_TTL=604800
-    - CACHE_REDIS_SAVE_INSTANCES=false
-    - CACHE_LOCAL_ENABLED=false
-    - CACHE_LOCAL_TTL=604800
+    ## 💾 Ativar o Cache Redis (Em testes)
+      - CACHE_REDIS_ENABLED=false
+      - CACHE_REDIS_URI=redis://redis:6379
+      - CACHE_REDIS_PREFIX_KEY=evolution${1:+_$1}
+      - CACHE_REDIS_TTL=604800
+      - CACHE_REDIS_SAVE_INSTANCES=false
+      - CACHE_LOCAL_ENABLED=false
+      - CACHE_LOCAL_TTL=604800
 
-    ## Novas variaveis para o Typebot
-    - TYPEBOT_KEEP_OPEN=true
-    - TYPEBOT_API_VERSION=latest
+    ## 🤖 Novas variáveis para o Typebot
+      - TYPEBOT_KEEP_OPEN=true
+      - TYPEBOT_API_VERSION=latest
 
-    ## Novas variaveis para o Chatwoot
-    - CHATWOOT_MESSAGE_DELETE=true
-    - CHATWOOT_MESSAGE_READ=true
+    ## 💬 Novas variáveis para o Chatwoot
+      - CHATWOOT_MESSAGE_DELETE=true
+      - CHATWOOT_MESSAGE_READ=true
 
-    ## Importar mensagens para o Chawoot | Descomente para usar
+    ## 📨 Importar mensagens para o Chatwoot | Descomente para usar
     ## Se estiver usando Chatwoot do Nestor mude o a parte "chatwoot" para "chatwoot_nestor"
-    #- CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
-    #- CHATWOOT_IMPORT_DATABASE_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar midia | false = Não importar midia 
+      #- CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_do_postgres@postgres:5432/chatwoot?sslmode=disable
+      #- CHATWOOT_IMPORT_DATABASE_PLACEHOLDER_MEDIA_MESSAGE=false ## true = Importar mídia | false = Não importar mídia 
 
-    ## Informações do Webhook
-    - WEBHOOK_GLOBAL_ENABLED=false
-    - WEBHOOK_GLOBAL_URL=
-    - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
-    - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
-    - WEBHOOK_EVENTS_QRCODE_UPDATED=true
-    - WEBHOOK_EVENTS_MESSAGES_SET=false
-    - WEBHOOK_EVENTS_MESSAGES_UPSERT=true
-    - WEBHOOK_EVENTS_MESSAGES_UPDATE=true
-    - WEBHOOK_EVENTS_CONTACTS_SET=true
-    - WEBHOOK_EVENTS_CONTACTS_UPSERT=true
-    - WEBHOOK_EVENTS_CONTACTS_UPDATE=true
-    - WEBHOOK_EVENTS_PRESENCE_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_SET=true
-    - WEBHOOK_EVENTS_CHATS_UPSERT=true
-    - WEBHOOK_EVENTS_CHATS_UPDATE=true
-    - WEBHOOK_EVENTS_CHATS_DELETE=true
-    - WEBHOOK_EVENTS_GROUPS_UPSERT=true
-    - WEBHOOK_EVENTS_GROUPS_UPDATE=true
-    - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
-    - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
+    ## 🔔 Informações do Webhook
+      - WEBHOOK_GLOBAL_ENABLED=false
+      - WEBHOOK_GLOBAL_URL=
+      - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
+      - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
+      - WEBHOOK_EVENTS_QRCODE_UPDATED=true
+      - WEBHOOK_EVENTS_MESSAGES_SET=false
+      - WEBHOOK_EVENTS_MESSAGES_UPSERT=true
+      - WEBHOOK_EVENTS_MESSAGES_UPDATE=true
+      - WEBHOOK_EVENTS_CONTACTS_SET=true
+      - WEBHOOK_EVENTS_CONTACTS_UPSERT=true
+      - WEBHOOK_EVENTS_CONTACTS_UPDATE=true
+      - WEBHOOK_EVENTS_PRESENCE_UPDATE=true
+      - WEBHOOK_EVENTS_CHATS_SET=true
+      - WEBHOOK_EVENTS_CHATS_UPSERT=true
+      - WEBHOOK_EVENTS_CHATS_UPDATE=true
+      - WEBHOOK_EVENTS_CHATS_DELETE=true
+      - WEBHOOK_EVENTS_GROUPS_UPSERT=true
+      - WEBHOOK_EVENTS_GROUPS_UPDATE=true
+      - WEBHOOK_EVENTS_GROUP_PARTICIPANTS_UPDATE=true
+      - WEBHOOK_EVENTS_CONNECTION_UPDATE=true
 
-    ## Sobre as instancias
-    - DEL_INSTANCE=false
-    - DEL_TEMP_INSTANCES=false
-    - STORE_MESSAGES=true
-    - STORE_MESSAGE_UP=true
-    - STORE_CONTACTS=true
-    - STORE_CHATS=true
-    - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
-    - CLEAN_STORE_MESSAGES=true
-    - CLEAN_STORE_MESSAGE_UP=true
-    - CLEAN_STORE_CONTACTS=true
-    - CLEAN_STORE_CHATS=true
+    ## ⚙️ Sobre as instâncias
+      - DEL_INSTANCE=false
+      - DEL_TEMP_INSTANCES=false
+      - STORE_MESSAGES=true
+      - STORE_MESSAGE_UP=true
+      - STORE_CONTACTS=true
+      - STORE_CHATS=true
+      - CLEAN_STORE_CLEANING_INTERVAL=7200 # seconds === 2h
+      - CLEAN_STORE_MESSAGES=true
+      - CLEAN_STORE_MESSAGE_UP=true
+      - CLEAN_STORE_CONTACTS=true
+      - CLEAN_STORE_CHATS=true
 
-    ## Outros dados
-    - DOCKER_ENV=true
-    - LOG_LEVEL=ERROR
+    ## 🗃️ Outros dados
+      - DOCKER_ENV=true
+      - LOG_LEVEL=ERROR
 
     deploy:
       mode: replicated
@@ -6421,14 +6420,14 @@ services:
         constraints:
         - node.role == manager
       labels:
-      - traefik.enable=1
-      - traefik.http.routers.evolution_oriondesign${1:+_$1}.rule=Host(\`$url_evolution\`) ## Url da Evolution API
-      - traefik.http.routers.evolution_oriondesign${1:+_$1}.entrypoints=websecure
-      - traefik.http.routers.evolution_oriondesign${1:+_$1}.priority=1
-      - traefik.http.routers.evolution_oriondesign${1:+_$1}.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution_oriondesign${1:+_$1}.service=evolution_oriondesign${1:+_$1}
-      - traefik.http.services.evolution_oriondesign${1:+_$1}.loadbalancer.server.port=8080
-      - traefik.http.services.evolution_oriondesign${1:+_$1}.loadbalancer.passHostHeader=1
+        - traefik.enable=1
+        - traefik.http.routers.evolution_oriondesign${1:+_$1}.rule=Host(\`$url_evolution\`) ## Url da Evolution API
+        - traefik.http.routers.evolution_oriondesign${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.evolution_oriondesign${1:+_$1}.priority=1
+        - traefik.http.routers.evolution_oriondesign${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evolution_oriondesign${1:+_$1}.service=evolution_oriondesign${1:+_$1}
+        - traefik.http.services.evolution_oriondesign${1:+_$1}.loadbalancer.server.port=8080
+        - traefik.http.services.evolution_oriondesign${1:+_$1}.loadbalancer.passHostHeader=1
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -6832,14 +6831,14 @@ services:
         constraints:
         - node.role == manager
       labels:
-      - traefik.enable=1
-      - traefik.http.routers.evolution_v2${1:+_$1}.rule=Host(\`$url_evolution\`) ## Url da Evolution API
-      - traefik.http.routers.evolution_v2${1:+_$1}.entrypoints=websecure
-      - traefik.http.routers.evolution_v2${1:+_$1}.priority=1
-      - traefik.http.routers.evolution_v2${1:+_$1}.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.evolution_v2${1:+_$1}.service=evolution_v2${1:+_$1}
-      - traefik.http.services.evolution_v2${1:+_$1}.loadbalancer.server.port=8080
-      - traefik.http.services.evolution_v2${1:+_$1}.loadbalancer.passHostHeader=true
+        - traefik.enable=1
+        - traefik.http.routers.evolution_v2${1:+_$1}.rule=Host(\`$url_evolution\`) ## Url da Evolution API
+        - traefik.http.routers.evolution_v2${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.evolution_v2${1:+_$1}.priority=1
+        - traefik.http.routers.evolution_v2${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evolution_v2${1:+_$1}.service=evolution_v2${1:+_$1}
+        - traefik.http.services.evolution_v2${1:+_$1}.loadbalancer.server.port=8080
+        - traefik.http.services.evolution_v2${1:+_$1}.loadbalancer.passHostHeader=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -8604,20 +8603,20 @@ services:
       mode: replicated
       replicas: 1
       placement:
-          constraints:
-            - node.role == manager
+        constraints:
+          - node.role == manager
       resources:
-          limits:
-            cpus: '1'
-            memory: 1024M
+        limits:
+          cpus: '1'
+          memory: 1024M
       labels:
-          - traefik.enable=true
-          - traefik.http.routers.pgadmin${1:+_$1}.rule=Host(\`$url_PgAdmin_4\`) ## Url da Ferramenta
-          - traefik.http.services.pgadmin${1:+_$1}.loadbalancer.server.port=80
-          - traefik.http.routers.pgadmin${1:+_$1}.service=pgadmin${1:+_$1}
-          - traefik.http.routers.pgadmin${1:+_$1}.tls.certresolver=letsencryptresolver
-          - traefik.http.routers.pgadmin${1:+_$1}.entrypoints=websecure
-          - traefik.http.routers.pgadmin${1:+_$1}.tls=true
+        - traefik.enable=true
+        - traefik.http.routers.pgadmin${1:+_$1}.rule=Host(\`$url_PgAdmin_4\`) ## Url da Ferramenta
+        - traefik.http.services.pgadmin${1:+_$1}.loadbalancer.server.port=80
+        - traefik.http.routers.pgadmin${1:+_$1}.service=pgadmin${1:+_$1}
+        - traefik.http.routers.pgadmin${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.pgadmin${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.pgadmin${1:+_$1}.tls=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -10817,14 +10816,14 @@ services:
         constraints:
         - node.role == manager
       labels:
-      - traefik.enable=true
-      - traefik.http.routers.calcom${1:+_$1}_app.rule=Host(\`$url_calcom\`)
-      - traefik.http.routers.calcom${1:+_$1}_app.entrypoints=websecure
-      - traefik.http.routers.calcom${1:+_$1}_app.priority=1
-      - traefik.http.routers.calcom${1:+_$1}_app.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.calcom${1:+_$1}_app.service=calcom${1:+_$1}_app
-      - traefik.http.services.calcom${1:+_$1}_app.loadbalancer.server.port=3000
-      - traefik.http.services.calcom${1:+_$1}_app.loadbalancer.passHostHeader=1
+        - traefik.enable=true
+        - traefik.http.routers.calcom${1:+_$1}_app.rule=Host(\`$url_calcom\`)
+        - traefik.http.routers.calcom${1:+_$1}_app.entrypoints=websecure
+        - traefik.http.routers.calcom${1:+_$1}_app.priority=1
+        - traefik.http.routers.calcom${1:+_$1}_app.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.calcom${1:+_$1}_app.service=calcom${1:+_$1}_app
+        - traefik.http.services.calcom${1:+_$1}_app.loadbalancer.server.port=3000
+        - traefik.http.services.calcom${1:+_$1}_app.loadbalancer.passHostHeader=1
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -14635,14 +14634,14 @@ services:
           cpus: "1"
           memory: 1024M
       labels:
-      - traefik.enable=true
-      - traefik.http.routers.unoapi${1:+_$1}.rule=Host(\`$url_unoapi\`)
-      - traefik.http.routers.unoapi${1:+_$1}.entrypoints=websecure
-      - traefik.http.routers.unoapi${1:+_$1}.tls.certresolver=letsencryptresolver
-      - traefik.http.services.unoapi${1:+_$1}.loadbalancer.server.port=9876
-      - traefik.http.routers.unoapi${1:+_$1}.priority=1
-      - traefik.http.services.unoapi${1:+_$1}.loadbalancer.passHostHeader=true
-      - traefik.http.routers.unoapi${1:+_$1}.service=unoapi${1:+_$1}
+        - traefik.enable=true
+        - traefik.http.routers.unoapi${1:+_$1}.rule=Host(\`$url_unoapi\`)
+        - traefik.http.routers.unoapi${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.unoapi${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.services.unoapi${1:+_$1}.loadbalancer.server.port=9876
+        - traefik.http.routers.unoapi${1:+_$1}.priority=1
+        - traefik.http.services.unoapi${1:+_$1}.loadbalancer.passHostHeader=true
+        - traefik.http.routers.unoapi${1:+_$1}.service=unoapi${1:+_$1}
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -28442,14 +28441,14 @@ services:
         constraints:
         - node.role == manager
       labels:
-      - traefik.enable=1
-      - traefik.http.routers.wppconnect${1:+_$1}_api.rule=Host(\`$url_wppconnect\`) && PathPrefix(\`/\`) ## Url do wppconnect API
-      - traefik.http.routers.wppconnect${1:+_$1}_api.entrypoints=websecure
-      - traefik.http.routers.wppconnect${1:+_$1}_api.priority=1
-      - traefik.http.routers.wppconnect${1:+_$1}_api.tls.certresolver=letsencryptresolver
-      - traefik.http.routers.wppconnect${1:+_$1}_api.service=wppconnect${1:+_$1}_api
-      - traefik.http.services.wppconnect${1:+_$1}_api.loadbalancer.server.port=21465
-      - traefik.http.services.wppconnect${1:+_$1}_api.loadbalancer.passHostHeader=true
+        - traefik.enable=1
+        - traefik.http.routers.wppconnect${1:+_$1}_api.rule=Host(\`$url_wppconnect\`) && PathPrefix(\`/\`) ## Url do wppconnect API
+        - traefik.http.routers.wppconnect${1:+_$1}_api.entrypoints=websecure
+        - traefik.http.routers.wppconnect${1:+_$1}_api.priority=1
+        - traefik.http.routers.wppconnect${1:+_$1}_api.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.wppconnect${1:+_$1}_api.service=wppconnect${1:+_$1}_api
+        - traefik.http.services.wppconnect${1:+_$1}_api.loadbalancer.server.port=21465
+        - traefik.http.services.wppconnect${1:+_$1}_api.loadbalancer.passHostHeader=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -29873,6 +29872,420 @@ echo ""
 
 echo -e "\e[33mDominio:\e[97m https://$url_wisemapping\e[0m"
 echo ""
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+requisitar_outra_instalacao
+}
+
+## ███████╗██╗   ██╗ ██████╗      █████╗ ██╗
+## ██╔════╝██║   ██║██╔═══██╗    ██╔══██╗██║
+## █████╗  ██║   ██║██║   ██║    ███████║██║
+## ██╔══╝  ╚██╗ ██╔╝██║   ██║    ██╔══██║██║
+## ███████╗ ╚████╔╝ ╚██████╔╝    ██║  ██║██║
+## ╚══════╝  ╚═══╝   ╚═════╝     ╚═╝  ╚═╝╚═╝
+##                                          
+                                         
+ferramenta_evoai() {
+
+## Verifica os recursos
+recursos 1 1 && continue || return
+
+## Limpa o terminal
+clear
+
+## Ativa a função dados para pegar os dados da vps
+dados
+
+## Mostra o nome da aplicação
+nome_evoai
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 1/9\e[0m"
+    echo -en "\e[33mDigite o Dominio para o painel da EvoAI (ex: evoai.oriondesign.art.br): \e[0m" && read -r url_evoai_front
+    echo ""
+
+    ##Pergunta o Dominio para aplicação
+    echo -e "\e[97mPasso$amarelo 2/9\e[0m"
+    echo -en "\e[33mDigite o Dominio para a API da EvoAI (ex: evoapi.oriondesign.art.br): \e[0m" && read -r url_evoai_api
+    echo ""
+
+    ##Pergunta o Usuario para a ferramenta
+    echo -e "\e[97mPasso$amarelo 3/9\e[0m"
+    echo -en "\e[33mDigite um email para o usuario admin (ex: contato@oriondesign.art.br): \e[0m" && read -r email_evoai
+    echo ""
+    
+    ##Pergunta a Senha para a ferramenta
+    echo -e "\e[97mPasso$amarelo 4/9\e[0m"
+    echo -e "$amarelo--> Minimo 8 caracteres. Use Letras MAIUSCULAS e minusculas, numero e um caractere especial @ ou _"
+    echo -e "$amarelo--> Evite os caracteres especiais: \!#$"
+    echo -en "\e[33mDigite uma senha para o usuario (ex: @Senha123_): \e[0m" && read -r pass_evoai
+    echo ""
+
+    ##Pergunta o Email SMTP
+    echo -e "\e[97mPasso$amarelo 5/9\e[0m"
+    echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r smtp_email_evoai
+    echo ""
+
+    ##Pergunta o usuário do Email SMTP
+    echo -e "\e[97mPasso$amarelo 6/9\e[0m"
+    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r smtp_user_evoai
+    echo ""
+    
+    ## Pergunta a senha do SMTP
+    echo -e "\e[97mPasso$amarelo 7/9\e[0m"
+    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r smtp_pass_evoai
+    echo ""
+
+    ## Pergunta o Host SMTP do email
+    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
+    echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_host_evoai
+    echo ""
+
+    ## Pergunta a porta SMTP do email
+    echo -e "\e[97mPasso$amarelo 9/9\e[0m"
+    echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r smtp_port_evoai
+    echo ""
+
+    ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
+    if [ "$smtp_port_evoai" -eq 465 ]; then
+    SMTP_USE_TLS=false
+    SMTP_USE_SSL=true
+    else
+    SMTP_USE_TLS=true
+    SMTP_USE_SSL=false
+    fi
+
+    ## Limpa o terminal
+    clear
+    
+    ## Mostra o nome da aplicação
+    nome_evoai
+    
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio do painel:\e[97m $url_evoai_front\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mDominio da api:\e[97m $url_evoai_api\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mEmail do usuario:\e[97m $email_evoai\e[0m"
+    echo ""
+
+    ## Informação sobre URL
+    echo -e "\e[33mSenha do usuario:\e[97m $pass_evoai\e[0m"
+    echo ""
+
+    ## Informação sobre Email SMTP
+    echo -e "\e[33mEmail SMTP:\e[97m $smtp_email_evoai\e[0m"
+    echo ""
+
+    ## Informação sobre Email SMTP
+    echo -e "\e[33mUser SMTP:\e[97m $smtp_user_evoai\e[0m"
+    echo ""    
+    
+    ## Informação sobre Senha SMTP
+    echo -e "\e[33mSenha SMTP:\e[97m $smtp_pass_evoai\e[0m"
+    echo ""
+    
+    ## Informação sobre Host SMTP
+    echo -e "\e[33mHost SMTP:\e[97m $smtp_host_evoai\e[0m"
+    echo ""
+    
+    ## Informação sobre Porta SMTP
+    echo -e "\e[33mPorta SMTP:\e[97m $smtp_port_evoai\e[0m"
+    echo ""
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que as informações estão corretas
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostrar mensagem de Instalando
+        instalando_msg
+
+        ## Sai do Loop
+        break
+    else
+
+        ## Digitou N para dizer que as informações não estão corretas.
+
+        ## Limpar o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_evoai
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    ## Volta para o inicio do loop com as perguntas
+    fi
+done
+
+## Mensagem de Passo
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVO AI \e[33m[1/5]\e[0m"
+echo ""
+sleep 1
+
+telemetria EvoAI iniciado
+
+## Literalmente nada, apenas um espaço vazio caso precisar de adicionar alguma coisa
+## Antes..
+## E claro, para aparecer a mensagem do passo..
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo ""
+sleep 1
+
+## Aqui vamos fazer uma verificação se já existe Postgres Instalado
+## Se tiver ele vai criar um banco de dados no postgres ou perguntar se deseja apagar o que já existe e criar outro
+
+## Verifica container postgres e cria banco no postgres
+
+verificar_container_postgres
+if [ $? -eq 0 ]; then
+    echo "1/3 - [ OK ] - Postgres já instalado"
+    pegar_senha_postgres > /dev/null 2>&1
+    echo "2/3 - [ OK ] - Copiando senha do Postgres"
+    criar_banco_postgres_da_stack "evoai${1:+_$1}"
+    echo "3/3 - [ OK ] - Criando banco de dados"
+    echo ""
+else
+    ferramenta_postgres
+    pegar_senha_postgres > /dev/null 2>&1
+    criar_banco_postgres_da_stack "evoai${1:+_$1}"
+fi
+
+pegar_senha_postgres > /dev/null 2>&1
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
+echo ""
+sleep 1
+
+## Verifica/instala o Redis
+verificar_container_redis
+if [ $? -eq 0 ]; then
+    echo "1/1 - [ OK ] - Redis já instalado"
+    echo ""
+else
+    ferramenta_redis
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO A EVO AI \e[33m[4/5]\e[0m"
+echo ""
+sleep 1
+
+## Aqui de fato vamos iniciar a instalação da Evolution API
+
+## Criando uma Global Key Aleatória
+EVO_AI_ENCRYPTION_KEY=$(python3 -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())")
+EVO_AI_JWT_SECRET_KEY=$(openssl rand -base64 32)
+
+## Criando a stack evoai.yaml
+cat > evoai${1:+_$1}.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  evoai${1:+_$1}_api:
+    image: atendai/evoai-api:latest ## Versão da imagem
+
+    volumes:
+      - evoai${1:+_$1}_logs:/app/logs
+      - evoai${1:+_$1}_static:/app/static
+    
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+  
+    ## 🔗 Informações da API
+      - API_URL=https://$url_evoai_api
+
+    ## 🔗 Informações do Front
+      - APP_URL=https://$url_evoai_front
+      
+    ## 🧪 Dados do Admin
+      - ADMIN_EMAIL=$email_evoai
+      - ADMIN_INITIAL_PASSWORD=$pass_evoai
+
+    ## 📧 Configuração de SMTP
+      - EMAIL_PROVIDER=smtp
+      - SMTP_FROM=$smtp_email_evoai
+      - SMTP_USER=$smtp_user_evoai
+      - SMTP_PASSWORD=$smtp_pass_evoai
+      - SMTP_HOST=$smtp_host_evoai
+      - SMTP_PORT=$smtp_port_evoai
+      - SMTP_USE_TLS=$SMTP_USE_TLS
+      - SMTP_USE_SSL=$SMTP_USE_SSL
+
+    ## 🛢️ Configuração do Postgres
+      - POSTGRES_CONNECTION_STRING=postgresql://postgres:$senha_postgres@postgres:5432/evoai${1:+_$1}
+
+    ## ⚡ Configuração do Redis
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=9
+      - REDIS_KEY_PREFIX=a2a${1:+_$1}
+      - REDIS_SSL=false
+      - REDIS_TTL=3600
+      - TOOLS_CACHE_TTL=3600
+
+    ## 🔐 Encriptação e JWT
+      - ENCRYPTION_KEY=$EVO_AI_ENCRYPTION_KEY
+      - JWT_SECRET_KEY=$EVO_AI_JWT_SECRET_KEY
+      - JWT_ALGORITHM=HS256
+      - JWT_EXPIRATION_TIME=3600
+
+    ## 🧾 Logs
+      - LOG_LEVEL=INFO
+      - LOG_DIR=logs
+    
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+        - node.role == manager
+      labels:
+        - traefik.enable=1
+        - traefik.http.routers.evoai${1:+_$1}_api.rule=Host(\`$url_evoai_api\`) ## Url da Evolution API
+        - traefik.http.routers.evoai${1:+_$1}_api.entrypoints=websecure
+        - traefik.http.routers.evoai${1:+_$1}_api.priority=1
+        - traefik.http.routers.evoai${1:+_$1}_api.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evoai${1:+_$1}_api.service=evoai${1:+_$1}_api
+        - traefik.http.services.evoai${1:+_$1}_api.loadbalancer.server.port=8000
+        - traefik.http.services.evoai${1:+_$1}_api.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
+  evoai${1:+_$1}_frontend:
+    image: atendai/evoai-api-front:latest ## Versão da imagem
+    
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+      - NEXT_PUBLIC_API_URL=https://$url_evoai_api
+    
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+        - node.role == manager
+      labels:
+        - traefik.enable=1
+        - traefik.http.routers.evoai${1:+_$1}_frontend.rule=Host(\`$url_evoai_front\`) ## Url da Evolution API
+        - traefik.http.routers.evoai${1:+_$1}_frontend.entrypoints=websecure
+        - traefik.http.routers.evoai${1:+_$1}_frontend.priority=1
+        - traefik.http.routers.evoai${1:+_$1}_frontend.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evoai${1:+_$1}_frontend.service=evoai${1:+_$1}_frontend
+        - traefik.http.services.evoai${1:+_$1}_frontend.loadbalancer.server.port=3000
+        - traefik.http.services.evoai${1:+_$1}_frontend.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  evoai${1:+_$1}_logs:
+    external: true
+    name: evoai${1:+_$1}_logs
+  evoai${1:+_$1}_static:
+    external: true
+    name: evoai${1:+_$1}_static
+
+networks:
+  $nome_rede_interna: ## Nome da rede interna
+    external: true
+    name: $nome_rede_interna ## Nome da rede interna
+
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando Stack"
+else
+    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "Não foi possivel criar a stack da Evolution API"
+fi
+STACK_NAME="evoai${1:+_$1}"
+stack_editavel # > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c evoai.yaml evoai > /dev/null 2>&1
+
+#if [ $? -eq 0 ]; then
+#    echo "2/2 - [ OK ] - Deploy Stack"
+#else
+#    echo "2/2 - [ OFF ] - Deploy Stack"
+#    echo "Não foi possivel subir a stack da Evolution API"
+#fi
+
+sleep 10
+
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo ""
+sleep 1
+
+## Baixando imagens:
+pull atendai/evoai-api:latest atendai/evoai-api-front:latest
+
+## Usa o serviço wait_evoai para verificar se o serviço esta online
+wait_stack "evoai${1:+_$1}_evoai${1:+_$1}_api evoai${1:+_$1}_evoai${1:+_$1}_frontend"
+
+telemetria EvoAI finalizado
+
+cd dados_vps
+
+cat > dados_evoai${1:+_$1} <<EOL
+[ EVO AI ]
+
+Painel: https://$url_evoai_front
+
+API: https://$url_evoai_api
+EOL
+
+cd
+cd
+
+## Espera 30 segundos
+wait_30_sec
+
+## Mensagem de finalizado
+instalado_msg
+
+## Mensagem de Guarde os Dados
+guarde_os_dados_msg
+
+## Dados da Aplicação:
+echo -e "\e[32m[ EVO AI ]\e[0m"
+echo ""
+
+echo -e "\e[97mLink do Painel:\e[33m https://$url_evoai_front\e[0m"
+echo ""
+
+echo -e "\e[97mAPI URL:\e[33m https://$url_evoai_api\e[0m"
+
 ## Creditos do instalador
 creditos_msg
 
@@ -32070,6 +32483,23 @@ while true; do
                 else
                     APP_ORION="ferramenta_wisemapping"
                     ferramenta_wisemapping
+                fi
+                ## FIM TOKEN
+            fi   
+            ;;
+        
+        72|EvoAPI|evoapi|EVOAPI) 
+
+            verificar_stack "evoai${opcao2:+_$opcao2}" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+                ## INICIO TOKEN
+                STACK_NAME="evoai${opcao2:+_$opcao2}"
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_evoai "$opcao2"
+                else
+                    APP_ORION="ferramenta_evoai"
+                    ferramenta_evoai
                 fi
                 ## FIM TOKEN
             fi   
