@@ -16665,12 +16665,14 @@ if [ $? -eq 0 ]; then
     pegar_senha_postgres > /dev/null 2>&1
     echo "2/3 - [ OK ] - Copiando senha do Postgres"
     criar_banco_postgres_da_stack "dify${1:+_$1}"
+    criar_banco_postgres_da_stack "dify${1:+_$1}_plugin"
     echo "3/3 - [ OK ] - Criando banco de dados"
     echo ""
 else
     ferramenta_postgres
     pegar_senha_postgres > /dev/null 2>&1
     criar_banco_postgres_da_stack "dify${1:+_$1}"
+    criar_banco_postgres_da_stack "dify${1:+_$1}_plugin"
 fi
 
 ## Mensagem de Passo
@@ -16686,7 +16688,6 @@ if [ $? -eq 0 ]; then
 else
     ferramenta_redis
 fi
-
 
 ## Mensagem de Passo
 echo -e "\e[97m• PEGANDO DADOS MINIO \e[33m[4/6]\e[0m"
@@ -16717,6 +16718,8 @@ sleep 1
 ## Criando key Aleatória
 secret_key=$(openssl rand -hex 16)
 token_weaviate=$(openssl rand -hex 16)
+token_apikey_plugins=$(openssl rand -hex 16)
+token_deamon=$(openssl rand -hex 16)
 sandbox_key=$(openssl rand -hex 16)
 
 ## Criando a stack dify.yaml
@@ -16727,7 +16730,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_api:
-    image: langgenius/dify-api:0.15.3 ## Versão do Dify
+    image: langgenius/dify-api:latest
 
     volumes:
       - dify${1:+_$1}_storage:/app/api/storage
@@ -16736,34 +16739,52 @@ services:
       - $nome_rede_interna
 
     environment:
-      ## Modo da execução
+    ## Modo da execução
       - MODE=api
-
-      ## Logs
-      - LOG_LEVEL=INFO
-
-      ## Secret Key
-      - SECRET_KEY=$secret_key
-
-      ## Outras Url (vazio = mesmo do APP_WEB_URL)
-      - CONSOLE_WEB_URL=https://$url_dify ## Url Dify Web
-      - INIT_PASSWORD=
-      - CONSOLE_API_URL=https://$url_dify_api ## Url Dify API
-      - SERVICE_API_URL=https://$url_dify_api ## Url Dify API
+      
+    ## URLs
+      - CONSOLE_WEB_URL=https://$url_dify
+      - APP_WEB_URL=https://$url_dify
+      - CONSOLE_API_URL=https://$url_dify_api
+      - SERVICE_API_URL=https://$url_dify_api
+      - APP_API_URL=https://$url_dify_api
       - FILES_URL=https://$url_dify_api
+    
+    ## Email
+      - MAIL_TYPE=smtp
+      - MAIL_DEFAULT_SEND_FROM=$email_dify (eg=no-reply $email_dify)
+      - SMTP_SERVER=$smtp_email_dify
+      - SMTP_PORT=$porta_smtp_dify
+      - SMTP_USERNAME=$user_email_dify
+      - SMTP_PASSWORD=$senha_email_dify
+      - SMTP_USE_TLS=true
+      - SMTP_OPPORTUNISTIC_TLS=false
+      - INVITE_EXPIRY_HOURS=24
+      - RESET_PASSWORD_TOKEN_EXPIRY_MINUTES=5
+      
+    ## Configurações servidor
+      - DIFY_BIND_ADDRESS=0.0.0.0
+      - DIFY_PORT=5001
+      - SERVER_WORKER_AMOUNT=1
+      - SERVER_WORKER_CLASS=gevent
+      - SERVER_WORKER_CONNECTIONS=10
+      - API_TOOL_DEFAULT_CONNECT_TIMEOUT=10
+      - API_TOOL_DEFAULT_READ_TIMEOUT=60
+      - WEB_API_CORS_ALLOW_ORIGINS=*
+      - CONSOLE_CORS_ALLOW_ORIGINS=*
 
-      ## Url Dify
-      - APP_WEB_URL=https://$url_dify ## Url Dify Web
-
-      ## Dados Postgres
+    ## Dados Postgres
       - MIGRATION_ENABLED=true
       - DB_USERNAME=postgres
       - DB_PASSWORD=$senha_postgres
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_DATABASE=dify${1:+_$1}
+      - DB_DATABASE=dify${1:+-$1}
+      - SQLALCHEMY_POOL_SIZE=50
+      - SQLALCHEMY_POOL_RECYCLE=1800
+      - SQLALCHEMY_ECHO=false
 
-      ## Dados Redis
+    ## Dados Redis
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_USERNAME=
@@ -16771,49 +16792,119 @@ services:
       - REDIS_USE_SSL=false
       - REDIS_DB=0
       - CELERY_BROKER_URL=redis://redis:6379/1
+      - BROKER_USE_SSL=false
 
-      ## Liberar acesso a todos os ip
-      - WEB_API_CORS_ALLOW_ORIGINS=*
-      - CONSOLE_CORS_ALLOW_ORIGINS=*
-
-      ## Dados sobre armazenamento s3
+    ## Dados S3 Storage
       - STORAGE_TYPE=s3
-      - STORAGE_LOCAL_PATH=storage
       - S3_ENDPOINT=https://$url_s3
       - S3_BUCKET_NAME=dify${1:+-$1}
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
       - S3_SECRET_KEY=$S3_SECRET_KEY
+      - S3_REGION=us-east
+      - S3_USE_AWS_MANAGED_IAM=false
 
-      ## Configurações do Sandbox
+    ## Limites de upload de arquivos
+      - UPLOAD_FILE_SIZE_LIMIT=15
+      - UPLOAD_FILE_BATCH_LIMIT=5
+      - UPLOAD_IMAGE_FILE_SIZE_LIMIT=10
+      - UPLOAD_VIDEO_FILE_SIZE_LIMIT=100
+      - UPLOAD_AUDIO_FILE_SIZE_LIMIT=50
+
+    ## Dadis Weaviate
+      - VECTOR_STORE=weaviate
+      - WEAVIATE_ENDPOINT=http://dify${1:+_$1}_weaviate:8080
+      - WEAVIATE_API_KEY=$token_weaviate
+
+    ## Dados Sandbox
       - CODE_EXECUTION_ENDPOINT=http://dify${1:+_$1}_sandbox:8194
       - CODE_EXECUTION_API_KEY=$sandbox_key
       - CODE_MAX_NUMBER=9223372036854775807
       - CODE_MIN_NUMBER=-9223372036854775808
+      - CODE_MAX_DEPTH=5
+      - CODE_MAX_PRECISION=20
       - CODE_MAX_STRING_LENGTH=80000
-      - TEMPLATE_TRANSFORM_MAX_LENGTH=80000
       - CODE_MAX_STRING_ARRAY_LENGTH=30
       - CODE_MAX_OBJECT_ARRAY_LENGTH=30
       - CODE_MAX_NUMBER_ARRAY_LENGTH=1000
+      - CODE_EXECUTION_CONNECT_TIMEOUT=10
+      - CODE_EXECUTION_READ_TIMEOUT=60
+      - CODE_EXECUTION_WRITE_TIMEOUT=10
+      - TEMPLATE_TRANSFORM_MAX_LENGTH=80000
 
-      ## Dados Weaviate
-      - VECTOR_STORE=weaviate
-      - WEAVIATE_ENDPOINT=http://dify${1:+_$1}_weaviate:8080
-      - WEAVIATE_API_KEY=$token_weaviate
-      - WEAVIATE_CLIENT_TIMEOUT=20
+    ## Dados Plugin Daemon
+      - PLUGIN_DAEMON_URL=http://dify${1:+_$1}_plugin_daemon:5002
+      - PLUGIN_DAEMON_KEY=$token_deamon
+      - PLUGIN_MAX_PACKAGE_SIZE=52428800
+      - INNER_API_KEY_FOR_PLUGIN=$token_apikey_plugins
+      - PLUGIN_REMOTE_INSTALL_HOST=localhost
+      - PLUGIN_REMOTE_INSTALL_PORT=5003
+    
+    ## Dados Celery worker
+      - CELERY_WORKER_CLASS=
+      - CELERY_WORKER_AMOUNT=
+      - CELERY_AUTO_SCALE=false
+      - CELERY_MAX_WORKERS=
+      - CELERY_MIN_WORKERS= 
 
-      ## Dados do Email
-      - MAIL_TYPE=smtp
-      - MAIL_DEFAULT_SEND_FROM=$email_dify (eg=no-reply $email_dify)
-      - SMTP_SERVER=$smtp_email_dify
-      - SMTP_PORT=$porta_smtp_dify
-      - SMTP_USERNAME=$user_email_dify
-      - SMTP_PASSWORD=$senha_email_dify
-
-      ## Sentry
+    ## Limites de execução dos workflows
+      - WORKFLOW_MAX_EXECUTION_STEPS=500
+      - WORKFLOW_MAX_EXECUTION_TIME=1200
+      - WORKFLOW_CALL_MAX_DEPTH=5
+      - MAX_VARIABLE_SIZE=204800
+      - WORKFLOW_PARALLEL_DEPTH_LIMIT=3
+      - WORKFLOW_FILE_UPLOAD_LIMIT=10
+      - LOOP_NODE_MAX_COUNT=100
+      - MAX_TOOLS_NUM=10
+      - MAX_PARALLEL_LIMIT=10
+      - MAX_ITERATIONS_NUM=5
+      
+    ## Configurações do Node HTTP Request
+      - HTTP_REQUEST_NODE_MAX_BINARY_SIZE=10485760
+      - HTTP_REQUEST_NODE_MAX_TEXT_SIZE=1048576
+      - HTTP_REQUEST_NODE_SSL_VERIFY=True
+      
+    ## Configurações de geração de texto
+      - TEXT_GENERATION_TIMEOUT_MS=60000
+      - PROMPT_GENERATION_MAX_TOKENS=512
+      - CODE_GENERATION_MAX_TOKENS=1024
+      - MULTIMODAL_SEND_FORMAT=base64
+      
+    ## Dados Sentry
       - SENTRY_DSN=
-      - SENTRY_TRACES_SAMPLE_RATE=1.0
-      - SENTRY_PROFILES_SAMPLE_RATE=1.0
+      - API_SENTRY_DSN=
+      - API_SENTRY_TRACES_SAMPLE_RATE=1.0
+      - API_SENTRY_PROFILES_SAMPLE_RATE=1.0
+      
+    ## Dados ETL
+      - ETL_TYPE=dify
+      - INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH=4000
+    
+    ## Limites de rate limits e timeouts
+      - APP_MAX_ACTIVE_REQUESTS=0
+      - APP_MAX_EXECUTION_TIME=1200
+      - FILES_ACCESS_TIMEOUT=300
+      - GUNICORN_TIMEOUT=360
+    
+    ## Secret Key
+      - SECRET_KEY=$secret_key
 
+    ## Autenticação e tokens
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+      - REFRESH_TOKEN_EXPIRE_DAYS=30
+      - INIT_PASSWORD=
+    
+    ## Logs
+      - LOG_LEVEL=INFO
+      - LOG_FILE=/app/logs/server.log
+      - LOG_FILE_MAX_SIZE=20
+      - LOG_FILE_BACKUP_COUNT=5
+      - LOG_DATEFORMAT=%d-%m-%Y %H:%M:%S
+      - LOG_TZ=UTC
+
+    ## Debug
+      - DEBUG=false
+      - FLASK_DEBUG=false
+      
     deploy:
       mode: replicated
       replicas: 1
@@ -16838,43 +16929,61 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_worker:
-    image: langgenius/dify-api:0.15.3 ## Versão do Dify
+    image: langgenius/dify-api:latest
 
     volumes:
-      - dify${1:+_$1}_storage:/app/api/storage
+      - dify_storage:/app/api/storage
 
     networks:
       - $nome_rede_interna
 
     environment:
-      ## Modo da execução
+    ## Modo da execução
       - MODE=worker
-
-      ## Logs
-      - LOG_LEVEL=INFO
-
-      ## Secret Key
-      - SECRET_KEY=$secret_key
-
-      ## Outras Url (vazio = mesmo do APP_WEB_URL)
-      - CONSOLE_WEB_URL=https://$url_dify ## Url Dify Web
-      - INIT_PASSWORD=
-      - CONSOLE_API_URL=https://$url_dify_api ## Url Dify API
-      - SERVICE_API_URL=https://$url_dify_api ## Url Dify API
+      
+    ## URLs
+      - CONSOLE_WEB_URL=https://$url_dify
+      - APP_WEB_URL=https://$url_dify
+      - CONSOLE_API_URL=https://$url_dify_api
+      - SERVICE_API_URL=https://$url_dify_api
+      - APP_API_URL=https://$url_dify_api
       - FILES_URL=https://$url_dify_api
+    
+    ## Email
+      - MAIL_TYPE=smtp
+      - MAIL_DEFAULT_SEND_FROM=$email_dify (eg=no-reply $email_dify)
+      - SMTP_SERVER=$smtp_email_dify
+      - SMTP_PORT=$porta_smtp_dify
+      - SMTP_USERNAME=$user_email_dify
+      - SMTP_PASSWORD=$senha_email_dify
+      - SMTP_USE_TLS=true
+      - SMTP_OPPORTUNISTIC_TLS=false
+      - INVITE_EXPIRY_HOURS=24
+      - RESET_PASSWORD_TOKEN_EXPIRY_MINUTES=5
+      
+    ## Configurações servidor
+      - DIFY_BIND_ADDRESS=0.0.0.0
+      - DIFY_PORT=5001
+      - SERVER_WORKER_AMOUNT=1
+      - SERVER_WORKER_CLASS=gevent
+      - SERVER_WORKER_CONNECTIONS=10
+      - API_TOOL_DEFAULT_CONNECT_TIMEOUT=10
+      - API_TOOL_DEFAULT_READ_TIMEOUT=60
+      - WEB_API_CORS_ALLOW_ORIGINS=*
+      - CONSOLE_CORS_ALLOW_ORIGINS=*
 
-      ## Url Dify
-      - APP_WEB_URL=https://$url_dify ## Url Dify Web
-
-      ## Dados Postgres
+    ## Dados Postgres
       - MIGRATION_ENABLED=true
       - DB_USERNAME=postgres
       - DB_PASSWORD=$senha_postgres
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_DATABASE=dify${1:+_$1}
+      - DB_DATABASE=dify${1:+-$1}
+      - SQLALCHEMY_POOL_SIZE=50
+      - SQLALCHEMY_POOL_RECYCLE=1800
+      - SQLALCHEMY_ECHO=false
 
-      ## Dados Redis
+    ## Dados Redis
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - REDIS_USERNAME=
@@ -16882,52 +16991,115 @@ services:
       - REDIS_USE_SSL=false
       - REDIS_DB=0
       - CELERY_BROKER_URL=redis://redis:6379/1
+      - BROKER_USE_SSL=false
 
-      ## Liberar acesso a todos os ip
-      - WEB_API_CORS_ALLOW_ORIGINS=*
-      - CONSOLE_CORS_ALLOW_ORIGINS=*
-
-      ## Dados sobre armazenamento s3
+    ## Dados S3 Storage
       - STORAGE_TYPE=s3
-      - STORAGE_LOCAL_PATH=storage
       - S3_ENDPOINT=https://$url_s3
       - S3_BUCKET_NAME=dify${1:+-$1}
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
       - S3_SECRET_KEY=$S3_SECRET_KEY
+      - S3_REGION=us-east
+      - S3_USE_AWS_MANAGED_IAM=false
 
-      ## Configurações do Sandbox
+    ## Limites de upload de arquivos
+      - UPLOAD_FILE_SIZE_LIMIT=15
+      - UPLOAD_FILE_BATCH_LIMIT=5
+      - UPLOAD_IMAGE_FILE_SIZE_LIMIT=10
+      - UPLOAD_VIDEO_FILE_SIZE_LIMIT=100
+      - UPLOAD_AUDIO_FILE_SIZE_LIMIT=50
+
+    ## Dadis Weaviate
+      - VECTOR_STORE=weaviate
+      - WEAVIATE_ENDPOINT=http://dify${1:+_$1}_weaviate:8080
+      - WEAVIATE_API_KEY=$token_weaviate
+
+    ## Dados Sandbox
       - CODE_EXECUTION_ENDPOINT=http://dify${1:+_$1}_sandbox:8194
       - CODE_EXECUTION_API_KEY=$sandbox_key
       - CODE_MAX_NUMBER=9223372036854775807
       - CODE_MIN_NUMBER=-9223372036854775808
+      - CODE_MAX_DEPTH=5
+      - CODE_MAX_PRECISION=20
       - CODE_MAX_STRING_LENGTH=80000
-      - TEMPLATE_TRANSFORM_MAX_LENGTH=80000
       - CODE_MAX_STRING_ARRAY_LENGTH=30
       - CODE_MAX_OBJECT_ARRAY_LENGTH=30
       - CODE_MAX_NUMBER_ARRAY_LENGTH=1000
+      - CODE_EXECUTION_CONNECT_TIMEOUT=10
+      - CODE_EXECUTION_READ_TIMEOUT=60
+      - CODE_EXECUTION_WRITE_TIMEOUT=10
+      - TEMPLATE_TRANSFORM_MAX_LENGTH=80000
 
-      ## Dados Weaviate
-      - VECTOR_STORE=weaviate
-      - WEAVIATE_ENDPOINT=http://dify${1:+_$1}_weaviate:8080
-      - WEAVIATE_API_KEY=$token_weaviate
-      - WEAVIATE_CLIENT_TIMEOUT=20
+    ## Dados Plugin Daemon
+      - PLUGIN_DAEMON_URL=http://dify${1:+_$1}_plugin_daemon:5002
+      - PLUGIN_DAEMON_KEY=$token_deamon
+      - PLUGIN_MAX_PACKAGE_SIZE=52428800
+      - INNER_API_KEY_FOR_PLUGIN=$token_apikey_plugins
+      - PLUGIN_REMOTE_INSTALL_HOST=localhost
+      - PLUGIN_REMOTE_INSTALL_PORT=5003
+    
+    ## Dados Celery worker
+      - CELERY_WORKER_CLASS=
+      - CELERY_WORKER_AMOUNT=
+      - CELERY_AUTO_SCALE=false
+      - CELERY_MAX_WORKERS=
+      - CELERY_MIN_WORKERS= 
 
-      ## Dados do Email
-      - MAIL_TYPE=smtp
-      - MAIL_DEFAULT_SEND_FROM=$email_dify (eg=no-reply $email_dify)
-      - SMTP_SERVER=$smtp_email_dify
-      - SMTP_PORT=$porta_smtp_dify
-      - SMTP_USERNAME=$user_email_dify
-      - SMTP_PASSWORD=$senha_email_dify
-
-      ## Sentry
+    ## Limites de execução dos workflows
+      - WORKFLOW_MAX_EXECUTION_STEPS=500
+      - WORKFLOW_MAX_EXECUTION_TIME=1200
+      - WORKFLOW_CALL_MAX_DEPTH=5
+      - MAX_VARIABLE_SIZE=204800
+      - WORKFLOW_PARALLEL_DEPTH_LIMIT=3
+      - WORKFLOW_FILE_UPLOAD_LIMIT=10
+      - LOOP_NODE_MAX_COUNT=100
+      - MAX_TOOLS_NUM=10
+      - MAX_PARALLEL_LIMIT=10
+      - MAX_ITERATIONS_NUM=5
+      
+    ## Configurações do Node HTTP Request
+      - HTTP_REQUEST_NODE_MAX_BINARY_SIZE=10485760
+      - HTTP_REQUEST_NODE_MAX_TEXT_SIZE=1048576
+      - HTTP_REQUEST_NODE_SSL_VERIFY=True
+      
+    ## Configurações de geração de texto
+      - TEXT_GENERATION_TIMEOUT_MS=60000
+      - PROMPT_GENERATION_MAX_TOKENS=512
+      - CODE_GENERATION_MAX_TOKENS=1024
+      - MULTIMODAL_SEND_FORMAT=base64
+      
+    ## Dados Sentry
       - SENTRY_DSN=
-      - SENTRY_TRACES_SAMPLE_RATE=1.0
-      - SENTRY_PROFILES_SAMPLE_RATE=1.0
+      - API_SENTRY_DSN=
+      - API_SENTRY_TRACES_SAMPLE_RATE=1.0
+      - API_SENTRY_PROFILES_SAMPLE_RATE=1.0
+      
+    ## Dados ETL
+      - ETL_TYPE=dify
+      - INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH=4000
+    
+    ## Limites de rate limits e timeouts
+      - APP_MAX_ACTIVE_REQUESTS=0
+      - APP_MAX_EXECUTION_TIME=1200
+      - FILES_ACCESS_TIMEOUT=300
+      - GUNICORN_TIMEOUT=360
+    
+    ## Secret Key
+      - SECRET_KEY=$secret_key
 
-    depends_on:
-      - postgres
-      - redis          
+    ## Autenticação e tokens
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+      - REFRESH_TOKEN_EXPIRE_DAYS=30
+      - INIT_PASSWORD=
+    
+    ## Logs
+      - LOG_LEVEL=INFO
+      - LOG_FILE=/app/logs/server.log
+      - LOG_FILE_MAX_SIZE=20
+      - LOG_FILE_BACKUP_COUNT=5
+      - LOG_DATEFORMAT=%d-%m-%Y %H:%M:%S
+      - LOG_TZ=UTC      
+      
     deploy:
       mode: replicated
       replicas: 1
@@ -16939,24 +17111,41 @@ services:
           cpus: "2"
           memory: 4096M
 
-## --------------------------- ORION --------------------------- ## 
+## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_web:
-    image: langgenius/dify-web:0.15.3 ## Versão do Dify
+    image: langgenius/dify-web:latest
 
     networks:
       - $nome_rede_interna
 
     environment:
-      ## Tipo da Edição
-      - EDITION=SELF_HOSTED
-      - CONSOLE_API_URL=https://$url_dify_api ## Url Dify API
+    ## URLs
+      - CONSOLE_API_URL=https://$url_dify_api
+      - APP_API_URL=https://$url_dify_api
+      - MARKETPLACE_API_URL=https://marketplace.dify.ai
+      - MARKETPLACE_URL=https://marketplace.dify.ai
 
-      ## Url Dify
-      - APP_API_URL=https://$url_dify_api ## Url Dify API
-
-      ## Sentry
+    ## Sentry
       - SENTRY_DSN=
+
+    ## Telemetria
+      - NEXT_TELEMETRY_DISABLED=1
+
+    ## Geração de Texto
+      - TEXT_GENERATION_TIMEOUT_MS=60000
+      - TOP_K_MAX_VALUE=10
+
+    ## Configurações de Segurança
+      - CSP_WHITELIST=
+
+    ## Limites e Contadores
+      - INDEXING_MAX_SEGMENTATION_TOKENS_LENGTH=4000
+      - PM2_INSTANCES=2
+      - LOOP_NODE_MAX_COUNT=100
+      - MAX_TOOLS_NUM=10
+      - MAX_PARALLEL_LIMIT=10
+      - MAX_ITERATIONS_NUM=5
 
     deploy:
       mode: replicated
@@ -16982,15 +17171,20 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_sandbox:
-    image: langgenius/dify-sandbox:0.2.10
+    image: langgenius/dify-sandbox:0.2.11
 
     networks:
       - $nome_rede_interna
     
     environment:
+    ## API Key
       - API_KEY=$sandbox_key
+
+    ## Configurações
       - GIN_MODE=release
       - WORKER_TIMEOUT=15
+      - ENABLE_NETWORK=true
+      - SANDBOX_PORT=8194
 
     deploy:
       mode: replicated
@@ -17006,7 +17200,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   dify${1:+_$1}_weaviate:
-    image: semitechnologies/weaviate:latest ## Versão do Weaviate
+    image: semitechnologies/weaviate:1.19.0
 
     volumes:
       - dify${1:+_$1}_weaviate:/var/lib/weaviate
@@ -17015,22 +17209,87 @@ services:
       - $nome_rede_interna
 
     environment:
-      ## Configurações Gerais
-      - QUERY_DEFAULTS_LIMIT=25
-      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=false
+      ## Persistência de Dados
       - PERSISTENCE_DATA_PATH=/var/lib/weaviate
-      - DEFAULT_VECTORIZER_MODULE=none
-      - CLUSTER_HOSTNAME=node1
 
-      ## Dados de Autenticação
+    ## Consultas
+      - QUERY_DEFAULTS_LIMIT=25
+
+    ## Autenticação
+      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=false
       - AUTHENTICATION_APIKEY_ENABLED=true
       - AUTHENTICATION_APIKEY_ALLOWED_KEYS=$token_weaviate
       - AUTHENTICATION_APIKEY_USERS=contato@oriondesign.art.br
+
+    ## Autorização
       - AUTHORIZATION_ADMINLIST_ENABLED=true
       - AUTHORIZATION_ADMINLIST_USERS=contato@oriondesign.art.br
 
-      ## Telemetria
+    ## Configurações do Cluster
+      - CLUSTER_HOSTNAME=node1
+
+    ## Telemetria
       - DISABLE_TELEMETRY=true
+
+    ## Módulos
+      - DEFAULT_VECTORIZER_MODULE=none
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4096M
+
+## --------------------------- ORION --------------------------- ##
+
+  dify${1:+_$1}_plugin_daemon:
+    image: langgenius/dify-plugin-daemon:latest-local
+
+    networks:
+      - $nome_rede_interna
+    #ports:
+    #  - "5003:5003"
+
+    volumes:
+      - dify${1:+_$1}_plugin_daemon_storage:/app/storage
+
+    environment:
+    ## Banco de Dados
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=$senha_postgres
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=dify${1:+_$1}_plugin
+    
+    ## Servidor
+      - SERVER_PORT=5002
+      - SERVER_KEY=$token_deamon
+    
+    ## Plugins
+      - MAX_PLUGIN_PACKAGE_SIZE=52428800
+      - PPROF_ENABLED=false
+      - DIFY_INNER_API_URL=https://$url_dify_api
+      - DIFY_INNER_API_KEY=$token_apikey_plugins
+      - PLUGIN_REMOTE_INSTALLING_HOST=0.0.0.0
+      - PLUGIN_REMOTE_INSTALLING_PORT=5003
+      - PLUGIN_WORKING_PATH=/app/storage/cwd
+      - FORCE_VERIFYING_SIGNATURE=true
+      - PYTHON_ENV_INIT_TIMEOUT=120
+      - PLUGIN_MAX_EXECUTION_TIMEOUT=600
+      - PIP_MIRROR_URL=
+
+    ## Redis
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+    ## Logs
+      - LOG_LEVEL=DEBUG
+      - LOG_FILE=/app/storage/plugin_daemon.log
 
     deploy:
       mode: replicated
@@ -17052,6 +17311,9 @@ volumes:
   dify${1:+_$1}_weaviate:
     external: true
     name: dify${1:+_$1}_weaviate
+  dify${1:+_$1}_plugin_daemon_storage:
+    external: true
+    name: dify${1:+_$1}_plugin_daemon_storage
 
 networks:
   $nome_rede_interna:
@@ -17080,10 +17342,10 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull langgenius/dify-api:0.15.3 langgenius/dify-web:0.15.3 langgenius/dify-sandbox:0.2.10 semitechnologies/weaviate:latest
+pull langgenius/dify-api:latest langgenius/dify-web:latest langgenius/dify-sandbox:0.2.11 semitechnologies/weaviate:latest langgenius/dify-plugin-daemon:latest-local
 
 ## Usa o serviço wait_dify para verificar se o serviço esta online
-wait_stack dify${1:+_$1}_dify${1:+_$1}_api dify${1:+_$1}_dify${1:+_$1}_worker dify${1:+_$1}_dify${1:+_$1}_web dify${1:+_$1}_dify${1:+_$1}_sandbox dify${1:+_$1}_dify${1:+_$1}_weaviate
+wait_stack dify${1:+_$1}_dify${1:+_$1}_api dify${1:+_$1}_dify${1:+_$1}_worker dify${1:+_$1}_dify${1:+_$1}_web dify${1:+_$1}_dify${1:+_$1}_sandbox dify${1:+_$1}_dify${1:+_$1}_weaviate dify${1:+_$1}_dify${1:+_$1}_plugin_daemon
 
 telemetria Dify finalizado
 
