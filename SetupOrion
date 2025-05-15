@@ -1770,8 +1770,8 @@ menu_instalador_pg_2(){
     echo -e "${amarelo}[ 46 ]${reset} - ${branco}HumHub ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}Frappe ${verde}[2/4]${reset} ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 47 ]${reset} - ${branco}Yourls ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}Bolt ${verde}[2/4]${reset} ${verde}[NOVO]${reset}"
     echo -e "${amarelo}[ 48 ]${reset} - ${branco}TwentyCRM${vermelho} ${verde}[1/4]${reset}                        ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}WiseMapping ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}Evo AI [1/1]${reset}"
-    echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}Evo AI ${verde}[1/1]${reset}"
+    echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}Keycloak ${verde}[1/1]${reset}"
     echo -e "${amarelo}[ 51 ]${reset} - ${branco}Focalboard ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 52 ]${reset} - ${branco}GLPI ${verde}[1/1]${reset}                             ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e "${amarelo}[ 53 ]${reset} - ${branco}Anything LLM ${verde}[1/1]${reset}                     ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}EM BREVE...${reset}"
@@ -32515,6 +32515,23 @@ while true; do
                 else
                     APP_ORION="ferramenta_evoai"
                     ferramenta_evoai
+                fi
+                ## FIM TOKEN
+            fi   
+            ;;
+        
+        73|Keycloak|keycloak|KEYCLOAK) 
+
+            verificar_stack "keycloak${opcao2:+_$opcao2}" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+                ## INICIO TOKEN
+                STACK_NAME="keycloak${opcao2:+_$opcao2}"
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_keycloak "$opcao2"
+                else
+                    APP_ORION="ferramenta_keycloak"
+                    ferramenta_keycloak
                 fi
                 ## FIM TOKEN
             fi   
