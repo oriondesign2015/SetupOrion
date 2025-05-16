@@ -1765,6 +1765,7 @@ menu_instalador() {
   case $menu_instalador in
     1) menu_instalador_pg_1 ;;
     2) menu_instalador_pg_2 ;;
+    3) menu_comandos ;;
     *) echo "Erro ao listar menu..." ;;
   esac
 }
@@ -1826,6 +1827,48 @@ menu_instalador_pg_2(){
     echo -e ""
     echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
     echo -e ""
+}
+
+menu_comandos(){
+  ## Portainer
+  echo -e "> ${verde}Comandos do Portainer:${reset}"
+  echo -e "${branco} • ${amarelo}portainer.restart${reset} - ${branco}Reinicia o Portainer${reset}"
+  echo -e "${branco} • ${amarelo}portainer.reset${reset} - ${branco}Reseta a senha do Portainer${reset}"
+  echo -e "${branco} • ${amarelo}portainer.update${reset} - ${branco}Atualiza o Portainer${reset}"
+  echo ""
+
+  ## Monitoramento
+  echo -e "> ${verde}Comandos de Monitoramento:${reset}"
+  echo -e "${branco} • ${amarelo}ctop${reset} - ${branco}Instala o CTOP${reset}"
+  echo -e "${branco} • ${amarelo}htop${reset} - ${branco}Instala o HTOP${reset}"
+  echo ""
+
+  ## Chatwoot
+  echo -e "> ${verde}Comandos do Chatwoot:${reset}"
+  echo -e "${branco} • ${amarelo}chatwoot.mail${reset} - ${branco}Troca os Emails do Chatwoot pela versão do Orion${reset}"
+  echo -e "${branco} • ${amarelo}chatwoot.n.mail${reset} - ${branco}Troca os Emails do Chatwoot Mega pela versão do Orion${reset}"
+  echo ""
+
+  ## Ferramentas
+  echo -e "> ${verde}Comandos de Ferramentas:${reset}"
+  echo -e "${branco} • ${amarelo}evolution.v1${reset} - ${branco}Instala a Evolution v1.8+${reset}"
+  echo -e "${branco} • ${amarelo}evolution.lite${reset} - ${branco}Instala a Evolution Lite${reset}"
+  echo -e "${branco} • ${amarelo}transcrevezap${reset} - ${branco}Instala o Transcreve Zap${reset}"
+  echo ""
+
+  ## Quepasa
+  echo -e "> ${verde}Comandos do Quepasa:${reset}"
+  echo -e "${branco} • ${amarelo}quepasa.setup.off${reset} - ${branco}Desativa o Setup do Quepasa${reset}"
+  echo -e "${branco} • ${amarelo}quepasa.setup.on${reset} - ${branco}Ativa o Setup do Quepasa${reset}"
+  echo ""
+  ## Manutenção
+  echo -e "> ${verde}Comandos de Manutenção:${reset}"
+  echo -e "${branco} • ${amarelo}limpar${reset} - ${branco}Limpa Logs, volumes e imagens do Docker não usadas${reset}"
+
+
+  echo -e ""
+  echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
+  echo -e ""
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -29181,6 +29224,9 @@ services:
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
+    
+    volumes:
+      - keycloak${1:+_$1}_data:/opt/keycloak/data
 
     environment:
       ## Dados do Postgres
@@ -29192,8 +29238,8 @@ services:
       - KC_DB_SCHEMA=public
 
       ## Dados de acesso
-      - KEYCLOAK_ADMIN=$user_keycloak
-      - KEYCLOAK_ADMIN_PASSWORD=$senha_keycloak
+      - KC_BOOTSTRAP_ADMIN_USERNAME=$user_keycloak
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=$senha_keycloak
 
       ## Dados do Host
       - KC_HOSTNAME=$url_keycloak
@@ -29221,6 +29267,11 @@ services:
         - traefik.http.routers.keycloak${1:+_$1}.tls=true
 
 ## --------------------------- ORION --------------------------- ##
+
+volumes:
+  keycloak${1:+_$1}_data:
+    external: true
+    name: keycloak${1:+_$1}_data
 
 networks:
   $nome_rede_interna:
@@ -29273,6 +29324,7 @@ cd
 cd
 
 ## Espera 30 segundos
+wait_30_sec
 wait_30_sec
 
 ## Mensagem de finalizado
@@ -30420,7 +30472,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evoai${1:+_$1}_api:
-    image: atendai/evoai-api:latest ## Versão da imagem
+    image: evoapicloud/evo-ai:latest ## Versão da imagem
 
     volumes:
       - evoai${1:+_$1}_logs:/app/logs
@@ -30492,7 +30544,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evoai${1:+_$1}_frontend:
-    image: atendai/evoai-api-front:latest ## Versão da imagem
+    image: evoapicloud/evo-ai-frontend:latest ## Versão da imagem
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -30557,10 +30609,10 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull atendai/evoai-api:latest atendai/evoai-api-front:latest
+pull evoapicloud/evo-ai:latest evoapicloud/evo-ai-frontend:latest
 
 ## Usa o serviço wait_evoai para verificar se o serviço esta online
-wait_stack "evoai${1:+_$1}_evoai${1:+_$1}_api evoai${1:+_$1}_evoai${1:+_$1}_frontend"
+wait_stack evoai${1:+_$1}_evoai${1:+_$1}_api evoai${1:+_$1}_evoai${1:+_$1}_frontend
 
 telemetria EvoAI finalizado
 
@@ -30572,6 +30624,10 @@ cat > dados_evoai${1:+_$1} <<EOL
 Painel: https://$url_evoai_front
 
 API: https://$url_evoai_api
+
+Email Admin: $email_evoai
+
+Senha Admin: $pass_evoai
 EOL
 
 cd
@@ -30594,6 +30650,12 @@ echo -e "\e[97mLink do Painel:\e[33m https://$url_evoai_front\e[0m"
 echo ""
 
 echo -e "\e[97mAPI URL:\e[33m https://$url_evoai_api\e[0m"
+echo ""
+
+echo -e "\e[97mEmail Admin:\e[33m $email_evoai\e[0m"
+echo ""
+
+echo -e "\e[97mSenha Admin:\e[33m $pass_evoai\e[0m"
 
 ## Creditos do instalador
 creditos_msg
@@ -30883,6 +30945,8 @@ pull passbolt/passbolt:latest
 ## Usa o serviço wait_passbolt para verificar se o serviço esta online
 wait_stack "passbolt${1:+_$1}_passbolt${1:+_$1}"
 
+wait_30_sec
+wait_30_sec
 docker exec -u www-data $(docker ps --format "{{.Names}}" | grep "^passbolt${1:+_$1}") /usr/share/php/passbolt/bin/cake passbolt register_user -u "$email_user_passbolt" -f Administrador -l Master -r admin
 
 telemetria PassBolt finalizado
@@ -30892,7 +30956,7 @@ cd dados_vps
 cat > dados_passbolt${1:+_$1} <<EOL
 [ PassBolt ]
 
-Link do Passbolt: https://$url_passbolt_front
+Link do Passbolt: https://$url_passbolt
 
 Email Administrador: $email_user_passbolt
 
@@ -30915,10 +30979,7 @@ guarde_os_dados_msg
 echo -e "\e[32m[ PASSBOLT ]\e[0m"
 echo ""
 
-echo -e "\e[97mLink do Painel:\e[33m https://$url_passbolt_front\e[0m"
-echo ""
-
-echo -e "\e[97mAPI URL:\e[33m https://$url_passbolt_api\e[0m"
+echo -e "\e[97mLink do Painel:\e[33m https://$url_passbolt\e[0m"
 echo ""
 
 echo -e "\e[97mEmail Administrador:\e[33m $email_user_passbolt\e[0m"
@@ -31871,6 +31932,59 @@ ctop() {
     echo ""
     sleep 5
 
+}
+
+htop() {
+
+    echo ""
+    echo "Instalando HTOP"
+
+    # Atualiza o repositório e instala o htop
+    sudo apt-get update -y >/dev/null 2>&1
+    sudo apt-get install -y htop >/dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        echo "1/1 - [ OK ] - Instalando HTOP"
+        echo ""
+        echo "Instalado, digite HTOP fora do nosso Setup para executá-lo a qualquer momento."
+    else
+        echo "1/1 - [ OFF ] - Instalando HTOP"
+        echo "Ops, não foi possível instalar o HTOP"
+    fi
+
+    echo ""
+    sleep 5
+}
+
+portainer.update() {
+
+    echo ""
+    echo "Atualizando Portainer..."
+
+    # Passo 1: Executa o deploy com --prune e --resolve-image always
+    docker stack deploy --prune --resolve-image always -c portainer.yaml portainer
+    if [ $? -eq 0 ]; then
+        echo "1/2 - [ OK ] - Comando de atualização enviado"
+    else
+        echo "1/2 - [ OFF ] - Erro ao atualizar o Portainer"
+        echo "Verifique se o arquivo 'portainer.yaml' existe e está correto."
+        return 1
+    fi
+
+    # Passo 2: Espera a stack ficar online
+    if wait_stack "portainer"; then
+        sleep 20
+        echo "2/2 - [ OK ] - Portainer está online"
+    else
+        echo "2/2 - [ OFF ] - Portainer não ficou online"
+        echo "Verifique os logs para mais detalhes."
+        return 1
+    fi
+
+    echo ""
+    echo "Atualização concluída. Acesse o Portainer normalmente."
+    echo ""
+    sleep 3
 }
 
 quepasa.setup.off(){
@@ -33414,6 +33528,11 @@ while true; do
         portainer.reset)
             portainer.reset
             ;;
+        
+        ## Atualizar portainer
+        portainer.update)
+            portainer.update
+            ;;
 
         ## Traduzir emails do Chatwoot
         chatwoot.mail)
@@ -33439,6 +33558,11 @@ while true; do
         ctop)
             ctop
             ;;
+        
+        ## Instalar HTOP
+        htop)
+            htop
+            ;;
 
         ## Corrigir credenciais do portainer (para instalações)
         credencial.reset)
@@ -33458,6 +33582,8 @@ while true; do
             ;;
 
         p2|P2) menu_instalador="2"
+            ;;
+        comando|COMANDO|comandos|COMANDOS) menu_instalador="3"
             ;;
         
         limpar|clean|LIMPAR|CLEAN|expurgar|EXPURGAR)
