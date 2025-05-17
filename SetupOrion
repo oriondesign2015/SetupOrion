@@ -5620,7 +5620,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution${1:+_$1}:
-    image: atendai/evolution-api:latest ## Versão da Evolution API
+    image: evoapicloud/evolution-api:latest ## Versão da Evolution API
 
     volumes:
       - evolution${1:+_$1}_instances:/evolution/instances
@@ -5833,7 +5833,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull atendai/evolution-api:latest
+pull evoapicloud/evolution-api:latest
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
 wait_stack "evolution${1:+_$1}_evolution${1:+_$1}"
