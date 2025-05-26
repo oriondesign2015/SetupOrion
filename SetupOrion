@@ -27621,6 +27621,12 @@ services:
     - DB_PORT=5432
     - DB_DRIVER=postgres
 
+    ## Timezone
+    - TZ=America/Sao_Paulo
+
+    ## Formato do webhook
+    - WEBHOOK_FORMAT=json
+
   deploy:
       mode: replicated
       replicas: 1
