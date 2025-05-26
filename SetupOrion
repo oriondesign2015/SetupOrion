@@ -1774,7 +1774,7 @@ menu_instalador_pg_1(){
     echo -e "${amarelo}[ 00 ]${reset} - ${branco}Testar SMTP                            ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 01 ]${reset} - ${branco}Traefik & Portainer ${verde}[1/1]${reset}              ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 02 ]${reset} - ${branco}Chatwoot ${verde}[2/2]${reset}                         ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo ${verde}[2/2] ${reset}"
-    echo -e "${amarelo}[ 03 ]${reset} - ${branco}Evolution API ${verde}[1/1]${reset}                    ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Nestor ${verde}[2/2] ${reset}"
+    echo -e "${amarelo}[ 03 ]${reset} - ${branco}Evolution API ${verde}[1/1]${reset}                    ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Mega ${verde}[2/2] ${reset}"
     echo -e "${amarelo}[ 04 ]${reset} - ${branco}MinIO ${verde}[1/1]${reset}                            ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 05 ]${reset} - ${branco}Typebot ${verde}[2/2]${reset}                          ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa ${verde}[2/2] ${reset}"
     echo -e "${amarelo}[ 06 ]${reset} - ${branco}N8N ${verde}[2/2]${reset}                              ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API ${verde}[2/2] ${reset}"
