@@ -1854,6 +1854,7 @@ menu_comandos(){
   echo -e "${branco} • ${amarelo}evolution.v1${reset} - ${branco}Instala a Evolution v1.8+${reset}"
   echo -e "${branco} • ${amarelo}evolution.lite${reset} - ${branco}Instala a Evolution Lite${reset}"
   echo -e "${branco} • ${amarelo}transcrevezap${reset} - ${branco}Instala o Transcreve Zap${reset}"
+  echo -e "${branco} • ${amarelo}minio.bucket${reset} - ${branco}Cria Buckets Publicas no MinIO${reset}"
   echo ""
 
   ## Quepasa
@@ -1864,7 +1865,6 @@ menu_comandos(){
   ## Manutenção
   echo -e "> ${verde}Comandos de Manutenção:${reset}"
   echo -e "${branco} • ${amarelo}limpar${reset} - ${branco}Limpa Logs, volumes e imagens do Docker não usadas${reset}"
-
 
   echo -e ""
   echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
@@ -2838,16 +2838,15 @@ pegar_senha_mysql() {
 ## Pegar senha Minio
 
 pegar_senha_minio() {
-    user_minio=$(grep "MINIO_ROOT_USER" /root/minio.yaml | awk -F '=' '{print $2}')
-    senha_minio=$(grep "MINIO_ROOT_PASSWORD" /root/minio.yaml | awk -F '=' '{print $2}')
-    url_minio=$(grep "MINIO_BROWSER_REDIRECT_URL" /root/minio.yaml | awk -F '=' '{print $2}' | sed 's/https:\/\///')
-    url_s3=$(grep "MINIO_SERVER_URL" /root/minio.yaml | awk -F '=' '{print $2}' | sed 's/https:\/\///')
+    user_minio=$(grep -i "MINIO_ROOT_USER" /root/minio.yaml | head -1 | sed 's/#.*//' | sed 's/.*=//; s/^[[:space:]]*//; s/[[:space:]]*$//')
+    senha_minio=$(grep -i "MINIO_ROOT_PASSWORD" /root/minio.yaml | head -1 | sed 's/#.*//' | sed 's/.*=//; s/^[[:space:]]*//; s/[[:space:]]*$//')
+    url_minio=$(grep -i "MINIO_BROWSER_REDIRECT_URL" /root/minio.yaml | head -1 | sed 's/#.*//' | sed 's/.*=//; s/^[[:space:]]*//; s/[[:space:]]*$//' | sed 's|https://||')
+    url_s3=$(grep -i "MINIO_SERVER_URL" /root/minio.yaml | head -1 | sed 's/#.*//' | sed 's/.*=//; s/^[[:space:]]*//; s/[[:space:]]*$//' | sed 's|https://||')
 }
 
 ## Pegar link S3
-
 pegar_link_s3() {
-    url_s3=$(grep "MINIO_SERVER_URL" /root/minio.yaml | awk -F '=' '{print $2}' | sed 's/https:\/\///')
+    url_s3=$(grep -i "MINIO_SERVER_URL" /root/minio.yaml | head -1 | sed 's/#.*//' | sed 's/.*=//; s/^[[:space:]]*//; s/[[:space:]]*$//' | sed 's|https://||')
 }
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -5638,8 +5637,8 @@ services:
       - LANGUAGE=pt-BR
       
       ## 📱 Configuração do Cliente
-      ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
+      ## Pegue a versão em: https://web.whatsapp.com/sw.js
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -6052,8 +6051,8 @@ services:
       - LANGUAGE=pt-BR
       
       ## 📱 Configuração do Cliente
-      ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
+      ## Pegue a versão em: https://web.whatsapp.com/sw.js
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -6772,8 +6771,8 @@ services:
       - LANGUAGE=pt-BR
       
       ## Configuração do Cliente
-      ## Pegue a versão em: https://wppconnect.io/pt-BR/whatsapp-versions/
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1022594794
+      ## Pegue a versão em: https://web.whatsapp.com/sw.js
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -7161,6 +7160,9 @@ services:
       - MINIO_BROWSER_REDIRECT_URL=https://$url_minio ## Url do minio
       - MINIO_SERVER_URL=https://$url_s3 ## Url do s3 | Comente esta linha caso tiver erro ao fazer login
 
+      ## Região
+      - MINIO_REGION_NAME=eu-south
+
     deploy:
       mode: replicated
       replicas: 1
@@ -7303,44 +7305,44 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do Builder
-    echo -e "\e[97mPasso$amarelo 1/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/8\e[0m"
     echo -en "\e[33mDigite o Dominio para o Builder do Typebot (ex: typebot.oriondesign.art.br): \e[0m" && read -r url_typebot
     echo ""
 
     ##Pergunta o Dominio do Viewer
-    echo -e "\e[97mPasso$amarelo 2/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/8\e[0m"
     echo -en "\e[33mDigite o Dominio para o Viewer do Typebot (ex: bot.oriondesign.art.br): \e[0m" && read -r url_viewer
     echo ""
 
     ##Pergunta a versão da ferramenta
-    echo -e "\e[97mPasso$amarelo 3/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/8\e[0m"
     echo -en "\e[33mDigite a versão que deseja do Typebot (ex: 3.0.1 ou latest): \e[0m" && read -r versao_typebot
     echo ""
 
     ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 4/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/8\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_typebot
     echo ""
 
     ##Pergunta o usuário do Email SMTP
-    echo -e "\e[97mPasso$amarelo 5/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/8\e[0m"
     echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
     echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r usuario_email_typebot
     echo ""
     
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 6/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/8\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_typebot
     echo ""
 
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 7/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/8\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_typebot
     echo ""
 
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 8/10\e[0m"
+    echo -e "\e[97mPasso$amarelo 8/8\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_typebot
     echo ""
 
@@ -7350,16 +7352,6 @@ while true; do
     else
     smtp_secure_typebot=false
     fi
-
-    ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 9/10\e[0m"
-    echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
-    echo ""
-
-    ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 10/10\e[0m"
-    echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
-    echo ""
 
     ## Limpa o terminal
     clear
@@ -7404,14 +7396,6 @@ while true; do
 
     ## Informação sobre Secure SMTP
     echo -e "\e[33mSecure SMTP do Email:\e[97m $smtp_secure_typebot\e[0m"
-    echo ""
-
-    ## Informação sobre Access Key
-    echo -e "\e[33mAccess Key Minio:\e[97m $S3_ACCESS_KEY\e[0m"
-    echo ""
-
-    ## Informação sobre Secret Key
-    echo -e "\e[33mSecret Key Minio:\e[97m $S3_SECRET_KEY\e[0m"
     echo ""
 
     ## Pergunta se as respostas estão corretas
@@ -7478,25 +7462,16 @@ else
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• PEGANDO DADOS DO MINIO \e[33m[3/5]\e[0m"
+echo -e "\e[97m• CRIANDO BUCKET NO MINIO \e[33m[3/5]\e[0m"
 echo ""
 sleep 1
 
 pegar_senha_minio
+minio.bucket typebot${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Pegando Senha do MinIO"
+    echo -e "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
 else
-    echo "1/2 - [ OFF ] - Pegando Senha do MinIO"
-    echo "Não foi possivel pegar a senha do minio"
-    echo ""
-fi
-pegar_link_s3
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Pegando URL do S3"
-    echo ""
-else
-    echo "2/2 - [ OFF ] - Pegando URL do S3"
-    echo "Não foi possivel pegar o link do S3"
+    echo "1/1 - [ OFF ] - Erro ao criar Bucket"
     echo ""
 fi
 
@@ -12975,18 +12950,8 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
     echo -en "\e[33mDigite o dominio para o Langfuse (ex: langfuse.oriondesign.art.br): \e[0m" && read -r url_langfuse
-    echo ""
-
-    ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 2/3\e[0m"
-    echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
-    echo ""
-
-    ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
-    echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
     echo ""
     
     ## Limpa o terminal
@@ -13018,14 +12983,6 @@ while true; do
 
     ##Informação do Dominio
     echo -e "\e[33mSenha do ClickHouse:\e[97m $SENHA_CLICKHOUSE\e[0m"
-    echo ""
-
-    ## Informação sobre Access Key
-    echo -e "\e[33mAccess Key Minio:\e[97m $S3_ACCESS_KEY\e[0m"
-    echo ""
-
-    ## Informação sobre Secret Key
-    echo -e "\e[33mSecret Key Minio:\e[97m $S3_SECRET_KEY\e[0m"
     echo ""
     
      ## Pergunta se as respostas estão corretas
@@ -13103,25 +13060,16 @@ fi
 echo ""
 
 ## Mensagem de Passo
-echo -e "\e[97m• PEGANDO DADOS DO MINIO \e[33m[4/6]\e[0m"
+echo -e "\e[97m• CRIANDO BUCKET NO MINIO \e[33m[4/6]\e[0m"
 echo ""
 sleep 1
 
 pegar_senha_minio
+minio.bucket langfuse${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Pegando Senha do MinIO"
+    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
 else
-    echo "1/2 - [ OFF ] - Pegando Senha do MinIO"
-    echo "Não foi possivel pegar a senha do minio"
-    echo ""
-fi
-pegar_link_s3
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Pegando URL do S3"
-    echo ""
-else
-    echo "2/2 - [ OFF ] - Pegando URL do S3"
-    echo "Não foi possivel pegar o link do S3"
+    echo "1/1 - [ OFF ] - Erro ao criar Bucket"
     echo ""
 fi
 
@@ -16544,12 +16492,12 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do Dify AI
-    echo -e "\e[97mPasso$amarelo 1/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/7\e[0m"
     echo -en "\e[33mDigite o dominio para o Dify AI (ex: dify.oriondesign.art.br): \e[0m" && read -r url_dify
     echo ""
 
     ##Pergunta o Dominio do Dify AI
-    echo -e "\e[97mPasso$amarelo 2/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/7\e[0m"
     echo -en "\e[33mDigite o dominio para o API do Dify AI (ex: api-dify.oriondesign.art.br): \e[0m" && read -r url_dify_api
     echo ""
 
@@ -16566,41 +16514,31 @@ while true; do
     #echo ""
 
     ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 3/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/7\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_dify
     echo ""
     
 
     ##Pergunta o usuário do Email SMTP
-    echo -e "\e[97mPasso$amarelo 4/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/7\e[0m"
     echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
     echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_email_dify
     echo ""
 
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 5/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/7\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_dify
     echo ""
 
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 6/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/7\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_dify
     echo ""
 
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 7/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/7\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_dify
-    echo ""
-
-    ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
-    echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
-    echo ""
-
-    ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 9/9\e[0m"
-    echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
     echo ""
 
     ## Limpa o terminal
@@ -16642,14 +16580,6 @@ while true; do
 
     ## Informação sobre Porta SMTP
     echo -e "\e[33mPorta SMTP do Email:\e[97m $porta_smtp_dify\e[0m"
-    echo ""
-
-    ## Informação sobre Access Key
-    echo -e "\e[33mAccess Key Minio:\e[97m $S3_ACCESS_KEY\e[0m"
-    echo ""
-
-    ## Informação sobre Secret Key
-    echo -e "\e[33mSecret Key Minio:\e[97m $S3_SECRET_KEY\e[0m"
     echo ""
 
     ## Pergunta se as respostas estão corretas
@@ -16733,23 +16663,17 @@ else
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• PEGANDO DADOS MINIO \e[33m[4/6]\e[0m"
+echo -e "\e[97m• CRIANDO BUCKET NO MINIO \e[33m[4/6]\e[0m"
 echo ""
 sleep 1
 
 pegar_senha_minio
+minio.bucket dify${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Pegando senha do MinIO"
+    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
 else
-    echo "1/2 - [ OFF ] - Pegando senha do MinIO"
-    echo "Não foi possivel pegar a senha do minio"
-fi
-pegar_link_s3
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Pegando Url S3 do MinIO"
-else
-    echo "2/2 - [ OFF ] - Pegando Url S3 do MinIO"
-    echo "Não foi possivel pegar o link do S3"
+    echo "1/1 - [ OFF ] - Erro ao criar Bucket"
+    echo ""
 fi
 echo ""
 
@@ -18060,66 +17984,41 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/7\e[0m"
     echo -en "\e[33mDigite o dominio para o Directus (ex: directus.oriondesign.art.br): \e[0m" && read -r url_directus
     echo ""
 
      ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 2/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/7\e[0m"
     echo -en "\e[33mDigite a Email de Admin (ex: contato@oriondesign.art.br): \e[0m" && read -r email_directus
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 3/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/7\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$"
     echo -en "\e[33mDigite a Senha para o Admin (ex: @Senha123_): \e[0m" && read -r senha_directus
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 4/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/7\e[0m"
     echo -en "\e[33mDigite a Email SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_smtp_directus
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 5/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/7\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP (ex: @Senha123_): \e[0m" && read -r senha_smtp_directus
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 6/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/7\e[0m"
     echo -en "\e[33mDigite o Host SMTP (ex: smtp.hostinger.com): \e[0m" && read -r host_smtp_directus
     echo ""
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 7/9\e[0m"
+    echo -e "\e[97mPasso$amarelo 7/7\e[0m"
     echo -en "\e[33mDigite a Porta SMTP (ex: 465): \e[0m" && read -r porta_smtp_directus
     echo ""
-
-    ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 8/9\e[0m"
-    echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
-    echo ""
-
-    ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 9/9\e[0m"
-    echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
-    echo ""
-
-    pegar_senha_minio
-    if [ $? -eq 0 ]; then
-        echo "1/2 - [ OK ] - Pegando senha do MinIO"
-    else
-        echo "1/2 - [ OFF ] - Pegando senha do MinIO"
-        echo "Não foi possivel pegar a senha do minio"
-    fi
-    pegar_link_s3
-    if [ $? -eq 0 ]; then
-        echo "2/2 - [ OK ] - Pegando Url S3 do MinIO"
-    else
-        echo "2/2 - [ OFF ] - Pegando Url S3 do MinIO"
-        echo "Não foi possivel pegar o link do S3"
-    fi
     
     ## Limpa o terminal
     clear
@@ -18156,14 +18055,6 @@ while true; do
 
     ## Informação sobre URL do directus
     echo -e "\e[33mPorta SMTP:\e[97m $porta_smtp_directus\e[0m"
-    echo ""
-
-    ## Informação sobre URL do directus
-    echo -e "\e[33mAccess Key Minio:\e[97m $S3_ACCESS_KEY\e[0m"
-    echo ""
-
-    ## Informação sobre URL do directus
-    echo -e "\e[33mSecret Key Minio:\e[97m $S3_SECRET_KEY\e[0m"
     echo ""
 
     ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
@@ -18205,7 +18096,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO DIRECTUS \e[33m[1/5]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO DIRECTUS \e[33m[1/6]\e[0m"
 echo ""
 sleep 1
 
@@ -18213,7 +18104,7 @@ telemetria Directus iniciado
 ## Nadaaaaa
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/6]\e[0m"
 echo ""
 sleep 1
 
@@ -18236,7 +18127,7 @@ else
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/6]\e[0m"
 echo ""
 sleep 1
 
@@ -18248,8 +18139,17 @@ if [ $? -eq 0 ]; then
 else
     ferramenta_redis
 fi
+
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO DIRECTUS \e[33m[4/5]\e[0m"
+echo -e "\e[97m• CRIANDO BUCKET NO MINIO \e[33m[4/6]\e[0m"
+echo ""
+sleep 1
+
+pegar_senha_minio
+minio.bucket directus${1:+-$1} > /dev/null 2>&1
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO DIRECTUS \e[33m[5/6]\e[0m"
 echo ""
 sleep 1
 
@@ -18360,7 +18260,7 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[6/6]\e[0m"
 echo ""
 sleep 1
 
@@ -19563,7 +19463,6 @@ nome_supabase
 ## Mostra mensagem para preencher informações
 preencha_as_info
 
-
 generate_jwt_tokens() {
     # Verificar a disponibilidade dos comandos necessários e instalá-los se necessário
     if ! command -v openssl &> /dev/null; then
@@ -19667,17 +19566,17 @@ read secret token_service_key token_anon_key <<< "$result"
 while true; do
 
     ##Pergunta o Dominio do Builder
-    echo -e "\e[97mPasso$amarelo 1/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
     echo -en "\e[33mDigite o Dominio para o Supabase (ex: supabase.oriondesign.art.br): \e[0m" && read -r url_supabase
     echo ""
 
     ##Pergunta o Dominio do Viewer
-    echo -e "\e[97mPasso$amarelo 2/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/3\e[0m"
     echo -en "\e[33mDigite o Usuario para o Supabase (ex: OrionDesign): \e[0m" && read -r user_supabase
     echo ""
 
     ##Pergunta a versão da ferramenta
-    echo -e "\e[97mPasso$amarelo 3/5\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/3\e[0m"
     echo -e "$amarelo--> Sem NENHUM caracteres especiais, tais como: @\!#$ entre outros"
     echo -en "\e[33mDigite a Senha do usuario para o Supabase (ex: Senha123): \e[0m" && read -r pass_supabase
     echo ""
@@ -19724,16 +19623,6 @@ while true; do
 
     ## Gera o SERVICE_KEY
     SERVICE_KEY="$token_service_key"
-
-    ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 4/5\e[0m"
-    echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
-    echo ""
-
-    ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 5/5\e[0m"
-    echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
-    echo ""
 
     ## Limpa o terminal
     clear
@@ -19790,14 +19679,6 @@ while true; do
 
     ## Informação sobre SERVICE_KEY
     echo -e "\e[33mService Key:\e[97m $SERVICE_KEY\e[0m"
-    echo ""
-
-    ## Informação sobre Access Key
-    echo -e "\e[33mAccess Key Minio:\e[97m $S3_ACCESS_KEY\e[0m"
-    echo ""
-
-    ## Informação sobre Secret Key
-    echo -e "\e[33mSecret Key Minio:\e[97m $S3_SECRET_KEY\e[0m"
     echo ""
 
     ## Pergunta se as respostas estão corretas
@@ -20131,23 +20012,17 @@ mv kong.yml /root/supabase${1:+_$1}/docker/volumes/api/kong.yml
 echo ""
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO DADOS DO MINIO \e[33m[2/4]\e[0m"
+echo -e "\e[97m• CRIANDO BUCKET NO MINIO \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
 pegar_senha_minio
+minio.bucket supabase${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Pegando Senha do MinIO"
+    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
 else
-    echo "1/2 - [ OFF ] - Pegando Senha do MinIO"
-    echo "Não foi possivel pegar a senha do minio"
-fi
-pegar_link_s3
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Pegando URL do S3"
-else
-    echo "2/2 - [ OFF ] - Pegando URL do S3"
-    echo "Não foi possivel pegar o link do S3"
+    echo "1/1 - [ OFF ] - Erro ao criar Bucket"
+    echo ""
 fi
 
 echo ""
@@ -25159,34 +25034,34 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do Builder
-    echo -e "\e[97mPasso$amarelo 1/8\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/6\e[0m"
     echo -en "\e[33mDigite o Dominio para o Builder do Documenso (ex: documenso.oriondesign.art.br): \e[0m" && read -r url_documenso
     echo ""
 
     ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 2/8\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/6\e[0m"
     echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_documenso
     echo ""
 
     ##Pergunta o usuário do Email SMTP
-    echo -e "\e[97mPasso$amarelo 3/8\e[0m"
+    echo -e "\e[97mPasso$amarelo 3/6\e[0m"
     echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
     echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r usuario_email_documenso
     echo ""
     
     ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 4/8\e[0m"
+    echo -e "\e[97mPasso$amarelo 4/6\e[0m"
     echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
     echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_documenso
     echo ""
 
     ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 5/8\e[0m"
+    echo -e "\e[97mPasso$amarelo 5/6\e[0m"
     echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_documenso
     echo ""
 
     ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 6/8\e[0m"
+    echo -e "\e[97mPasso$amarelo 6/6\e[0m"
     echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_documenso
     echo ""
 
@@ -25196,16 +25071,6 @@ while true; do
     else
     smtp_secure_documenso=false
     fi
-
-    ## Pergunta qual é o Access Key do minio
-    echo -e "\e[97mPasso$amarelo 7/8\e[0m"
-    echo -en "\e[33mAccess Key Minio: \e[0m" && read -r S3_ACCESS_KEY
-    echo ""
-
-    ## Pergunta qual é a Secret Key do minio
-    echo -e "\e[97mPasso$amarelo 8/8\e[0m"
-    echo -en "\e[33mSecret Key Minio: \e[0m" && read -r S3_SECRET_KEY
-    echo ""
 
     ## Limpa o terminal
     clear
@@ -25242,14 +25107,6 @@ while true; do
 
     ## Informação sobre Secure SMTP
     echo -e "\e[33mSecure SMTP do Email:\e[97m $smtp_secure_documenso\e[0m"
-    echo ""
-
-    ## Informação sobre Access Key
-    echo -e "\e[33mAccess Key Minio:\e[97m $S3_ACCESS_KEY\e[0m"
-    echo ""
-
-    ## Informação sobre Secret Key
-    echo -e "\e[33mSecret Key Minio:\e[97m $S3_SECRET_KEY\e[0m"
     echo ""
 
     ## Pergunta se as respostas estão corretas
@@ -25318,23 +25175,17 @@ else
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• PEGANDO DADOS DO MINIO \e[33m[3/5]\e[0m"
+echo -e "\e[97m• CRIANDO BUCKET NO MINIO \e[33m[3/5]\e[0m"
 echo ""
 sleep 1
 
 pegar_senha_minio
+minio.bucket documenso${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/2 - [ OK ] - Pegando Senha do MinIO"
+    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
 else
-    echo "1/2 - [ OFF ] - Pegando Senha do MinIO"
-    echo "Não foi possivel pegar a senha do minio"
-fi
-pegar_link_s3
-if [ $? -eq 0 ]; then
-    echo "2/2 - [ OK ] - Pegando URL do S3"
-else
-    echo "2/2 - [ OFF ] - Pegando URL do S3"
-    echo "Não foi possivel pegar o link do S3"
+    echo "1/1 - [ OFF ] - Erro ao criar Bucket"
+    echo ""
 fi
 
 echo ""
@@ -27108,14 +26959,22 @@ sleep 1
 
 telemetria Traccar iniciado
 
-docker pull traccar/traccar:latest > /dev/null 2>&1
+cd
+cd
 
-cd
-cd
+gerar_senha_mysql=$(openssl rand -hex 16)
 
 mkdir -p /opt/traccar${1:+_$1}/logs
 
 cat > traccar.xml <<EOL
+<?xml version='1.0' encoding='UTF-8'?>
+<config>
+    <entry key='database.driver'>com.mysql.cj.jdbc.Driver</entry>
+    <entry key='database.url'>jdbc:mysql://traccar${1:+_$1}_db:3306/traccar?allowPublicKeyRetrieval=true&amp;useSSL=false</entry>
+    <entry key='database.user'>traccar</entry>
+    <entry key='database.password'>$gerar_senha_mysql</entry>
+    <entry key='web.port'>8082</entry>
+</config>
 EOL
 
 mv traccar.xml /opt/traccar${1:+_$1}/
@@ -32061,8 +31920,166 @@ limpar() {
     sleep 10
 }
 
+minio.bucket() {
 
+# Define as variáveis do ambiente MinIO a partir da extração
+S3_ENDPOINT="https://$url_s3"
+ADMIN_USER="$user_minio"
+ADMIN_PASS="$senha_minio"
+BUCKET="$1"
 
+POLICY_NAME="publicread-$BUCKET"
+POLICY_FILE="public-read-$BUCKET.json"
+S3_ACCESS_KEY=$(head /dev/urandom | tr -dc A-Z0-9 | head -c16)
+S3_SECRET_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
+if [ -z "$MINIO_CONTAINER" ]; then
+  echo "❌ Container MinIO não encontrado!"
+  exit 1
+fi
+MC_CMD="docker exec -i $MINIO_CONTAINER mc"
+$MC_CMD alias set admin "$S3_ENDPOINT" "$ADMIN_USER" "$ADMIN_PASS" || { echo "Erro ao criar alias"; exit 1; }
+if $MC_CMD ls admin/"$BUCKET" >/dev/null 2>&1; then
+  echo "⚠️ Bucket '$BUCKET' já existe, continuando..."
+else
+  $MC_CMD mb admin/"$BUCKET" || echo "⚠️ Falha ao criar bucket '$BUCKET', mas continuando..."
+fi
+docker exec -i "$MINIO_CONTAINER" bash -c "cat > /tmp/$POLICY_FILE <<EOF
+{
+  \"Version\": \"2012-10-17\",
+  \"Statement\": [
+    {
+      \"Effect\": \"Allow\",
+      \"Principal\": \"*\",
+      \"Action\": [
+        \"s3:GetBucketLocation\",
+        \"s3:ListBucket\"
+      ],
+      \"Resource\": [
+        \"arn:aws:s3:::$BUCKET\"
+      ]
+    },
+    {
+      \"Effect\": \"Allow\",
+      \"Principal\": \"*\",
+      \"Action\": [
+        \"s3:GetObject\",
+        \"s3:PutObject\",
+        \"s3:DeleteObject\"
+      ],
+      \"Resource\": [
+        \"arn:aws:s3:::$BUCKET/*\"
+      ]
+    }
+  ]
+}
+EOF" || { echo "Erro ao criar arquivo de política dentro do container"; exit 1; }
+
+$MC_CMD admin policy create admin "$POLICY_NAME" /tmp/"$POLICY_FILE" || { echo "Erro ao criar política"; exit 1; }
+
+$MC_CMD admin user add admin "$S3_ACCESS_KEY" "$S3_SECRET_KEY" || { echo "Erro ao criar usuário"; exit 1; }
+$MC_CMD admin policy attach admin "$POLICY_NAME" --user "$S3_ACCESS_KEY" || { echo "Erro ao associar política ao usuário"; exit 1; }
+
+$MC_CMD anonymous set-json /tmp/"$POLICY_FILE" admin/"$BUCKET" || { echo "Erro ao aplicar política pública"; exit 1; }
+
+$MC_CMD alias set myminio "$S3_ENDPOINT" "$S3_ACCESS_KEY" "$S3_SECRET_KEY"
+$MC_CMD ls myminio/"$BUCKET" || echo "Falha ao listar bucket"
+
+}
+
+minio.bucket.setup() {
+dados
+pegar_senha_minio
+
+# Define as variáveis do ambiente MinIO a partir da extração
+S3_ENDPOINT="https://$url_s3"
+ADMIN_USER="$user_minio"
+ADMIN_PASS="$senha_minio"
+
+## Pergunta o nome da Bucket
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o nome da Bucket (ex: arquivos): \e[0m" && read -r BUCKET
+    echo ""
+
+POLICY_NAME="publicread-$BUCKET"
+POLICY_FILE="public-read-$BUCKET.json"
+ACCESS_KEY=$(head /dev/urandom | tr -dc A-Z0-9 | head -c16)
+SECRET_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
+if [ -z "$MINIO_CONTAINER" ]; then
+  echo "❌ Container MinIO não encontrado!"
+  exit 1
+fi
+MC_CMD="docker exec -i $MINIO_CONTAINER mc"
+$MC_CMD alias set admin "$S3_ENDPOINT" "$ADMIN_USER" "$ADMIN_PASS" || { echo "Erro ao criar alias"; exit 1; }
+if $MC_CMD ls admin/"$BUCKET" >/dev/null 2>&1; then
+  echo "⚠️ Bucket '$BUCKET' já existe, continuando..."
+else
+  $MC_CMD mb admin/"$BUCKET" || echo "⚠️ Falha ao criar bucket '$BUCKET', mas continuando..."
+fi
+docker exec -i "$MINIO_CONTAINER" bash -c "cat > /tmp/$POLICY_FILE <<EOF
+{
+  \"Version\": \"2012-10-17\",
+  \"Statement\": [
+    {
+      \"Effect\": \"Allow\",
+      \"Principal\": \"*\",
+      \"Action\": [
+        \"s3:GetBucketLocation\",
+        \"s3:ListBucket\"
+      ],
+      \"Resource\": [
+        \"arn:aws:s3:::$BUCKET\"
+      ]
+    },
+    {
+      \"Effect\": \"Allow\",
+      \"Principal\": \"*\",
+      \"Action\": [
+        \"s3:GetObject\",
+        \"s3:PutObject\",
+        \"s3:DeleteObject\"
+      ],
+      \"Resource\": [
+        \"arn:aws:s3:::$BUCKET/*\"
+      ]
+    }
+  ]
+}
+EOF" || { echo "Erro ao criar arquivo de política dentro do container"; exit 1; }
+
+$MC_CMD admin policy create admin "$POLICY_NAME" /tmp/"$POLICY_FILE" || { echo "Erro ao criar política"; exit 1; }
+
+$MC_CMD admin user add admin "$ACCESS_KEY" "$SECRET_KEY" || { echo "Erro ao criar usuário"; exit 1; }
+$MC_CMD admin policy attach admin "$POLICY_NAME" --user "$ACCESS_KEY" || { echo "Erro ao associar política ao usuário"; exit 1; }
+
+$MC_CMD anonymous set-json /tmp/"$POLICY_FILE" admin/"$BUCKET" || { echo "Erro ao aplicar política pública"; exit 1; }
+
+$MC_CMD alias set myminio "$S3_ENDPOINT" "$ACCESS_KEY" "$SECRET_KEY"
+$MC_CMD ls myminio/"$BUCKET" || echo "Falha ao listar bucket"
+
+# Resultado final
+echo ""
+echo -e "\e[32m[ BUCKET $BUCKET ]\e[0m"
+echo ""
+
+echo -e "\e[33mS3 Endpoint:\e[97m $S3_ENDPOINT\e[0m"
+echo ""
+
+echo -e "\e[33mNome da Bucket:\e[97m $BUCKET\e[0m"
+echo ""
+
+echo -e "\e[33mAccess Key:\e[97m $ACCESS_KEY\e[0m"
+echo ""
+
+echo -e "\e[33mSecret Key:\e[97m $SECRET_KEY\e[0m"
+
+## Creditos do instalador
+creditos_msg
+
+## Pergunta se deseja instalar outra aplicação
+requisitar_outra_instalacao
+}
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -33564,6 +33581,10 @@ while true; do
             htop
             ;;
 
+        minio.bucket)
+            minio.bucket.setup
+            ;;
+        
         ## Corrigir credenciais do portainer (para instalações)
         credencial.reset)
             criar_arquivo
