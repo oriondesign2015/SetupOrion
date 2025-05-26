@@ -27719,6 +27719,9 @@ echo ""
 echo -e "\e[33mDominio:\e[97m https://$url_wuzapi\e[0m"
 echo ""
 
+echo -e "\e[33mDashboard:\e[97m https://$url_wuzapi/dashboard\e[0m"
+echo ""
+
 echo -e "\e[33mDocumentação:\e[97m https://$url_wuzapi/api\e[0m"
 echo ""
 
