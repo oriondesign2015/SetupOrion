@@ -31932,7 +31932,7 @@ limpar() {
 minio.bucket() {
 
 # Define as variáveis do ambiente MinIO a partir da extração
-S3_ENDPOINT="https://$url_s3"
+S3_ENDPOINT="http://minio:9000"
 ADMIN_USER="$user_minio"
 ADMIN_PASS="$senha_minio"
 BUCKET="$1"
@@ -32001,7 +32001,7 @@ dados
 pegar_senha_minio
 
 # Define as variáveis do ambiente MinIO a partir da extração
-S3_ENDPOINT="https://$url_s3"
+S3_ENDPOINT="http://minio:9000"
 ADMIN_USER="$user_minio"
 ADMIN_PASS="$senha_minio"
 
