@@ -7469,7 +7469,7 @@ sleep 1
 pegar_senha_minio
 minio.bucket typebot${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo -e "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
+    echo -e "1/1 - [ OK ] - Criando Bucket\e[33m $BUCKET\e[0m"
 else
     echo "1/1 - [ OFF ] - Erro ao criar Bucket"
     echo ""
@@ -13067,7 +13067,7 @@ sleep 1
 pegar_senha_minio
 minio.bucket langfuse${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
+    echo -e "1/1 - [ OK ] - Criando Bucket\e[33m $BUCKET\e[0m"
 else
     echo "1/1 - [ OFF ] - Erro ao criar Bucket"
     echo ""
@@ -16670,7 +16670,7 @@ sleep 1
 pegar_senha_minio
 minio.bucket dify${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
+    echo -e "1/1 - [ OK ] - Criando Bucket\e[33m $BUCKET\e[0m"
 else
     echo "1/1 - [ OFF ] - Erro ao criar Bucket"
     echo ""
@@ -19721,18 +19721,33 @@ sleep 1
 telemetria Supabase iniciado
 
 cd
+mkdir supabase${1:+_$1}
+
 mkdir temp${1:+_$1}
+
 cd temp${1:+_$1}
-git clone --depth 1 https://github.com/oriondesign2015/SetupOrion > /dev/null 2>&1
+
+#git clone --depth 1 https://github.com/oriondesign2015/SetupOrion > /dev/null 2>&1
+git clone --depth 1 https://github.com/supabase/supabase.git > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Baixando Repositório do Supabase"
 else
     echo "1/3 - [ OFF ] - Baixando Repositório do Supabase"
     echo "Não foi possivel Baixar."
 fi
+cd supabase
+git checkout 8aea2cd6c78e2c96f8243adb014336ff8cc7d838 > /dev/null 2>&1
 
-mv SetupOrion/Extras/Supabase /root/supabase${1:+_$1}
+#mv SetupOrion/Extras/Supabase /root/supabase${1:+_$1}
+cd docker
 
+rm -r dev .env.example .gitignore README.md docker-compose.s3.yml docker-compose.yml reset.sh
+
+cd ..
+
+mv docker /root/supabase${1:+_$1}/docker
+
+cd
 cd
 
 rm -r temp${1:+_$1}
@@ -19791,8 +19806,8 @@ acls:
 ###
 basicauth_credentials:
   - consumer: DASHBOARD
-    username: \$DASHBOARD_USERNAME
-    password: \$DASHBOARD_PASSWORD
+    username: '\$DASHBOARD_USERNAME'
+    password: '\$DASHBOARD_PASSWORD'
 
 ###
 ### O API Routes
@@ -20019,7 +20034,7 @@ sleep 1
 pegar_senha_minio
 minio.bucket supabase${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
+    echo -e "1/1 - [ OK ] - Criando Bucket\e[33m $BUCKET\e[0m"
 else
     echo "1/1 - [ OFF ] - Erro ao criar Bucket"
     echo ""
@@ -20038,7 +20053,7 @@ Logflare_key=$(openssl rand -hex 16)
 
 SECRET_KEY_BASE=$(openssl rand -hex 32)
 
-VAULT_ENC_KEY=$(openssl rand -hex 32)
+VAULT_ENC_KEY=$(openssl rand -base64 32 | tr -d '\n' | cut -c1-32)
 
 ## Criando a stack supabase.yaml
 cat > supabase${1:+_$1}.yaml <<EOL
@@ -20048,7 +20063,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   studio${1:+_$1}:
-    image: supabase/studio:20241014-c083b3b ## Versão do Supabase Studio
+    image: supabase/studio:2025.05.19-sha-3487831 ## Versão do Supabase Studio
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20147,7 +20162,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   auth${1:+_$1}:
-    image: supabase/gotrue:v2.158.1 ## Versão do Supabase Auth
+    image: supabase/gotrue:v2.172.1 ## Versão do Supabase Auth
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20205,7 +20220,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   rest${1:+_$1}:
-    image: postgrest/postgrest:v12.2.0 ## Versão do Supabase Rest
+    image: postgrest/postgrest:v12.2.12 ## Versão do Supabase Rest
     command: "postgrest"
     
     networks:
@@ -20235,7 +20250,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   realtime${1:+_$1}:
-    image: supabase/realtime:v2.30.34 ## Versão do Supabase Realtime
+    image: supabase/realtime:v2.34.47 ## Versão do Supabase Realtime
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20263,6 +20278,7 @@ services:
 
     ## Configuração do Ambiente
       - SEED_SELF_HOST=true
+      - RUN_JANITOR=true
     
     deploy:
       mode: replicated
@@ -20274,7 +20290,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   storage${1:+_$1}:
-    image: supabase/storage-api:v1.11.13 ## Versão do Supabase Storage
+    image: supabase/storage-api:v1.22.17 ## Versão do Supabase Storage
 
     volumes:
       - /root/supabase${1:+_$1}/docker/volumes/storage:/var/lib/storage:z
@@ -20345,7 +20361,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   meta${1:+_$1}:
-    image: supabase/postgres-meta:v0.84.2 ## Versão do Meta 
+    image: supabase/postgres-meta:v0.89.0 ## Versão do Meta 
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20369,7 +20385,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   functions${1:+_$1}:
-    image: supabase/edge-runtime:v1.59.0 ## Versão do Supabase Functions
+    image: supabase/edge-runtime:v1.67.4 ## Versão do Supabase Functions
     command:
       - start
       - --main-service
@@ -20400,7 +20416,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   analytics${1:+_$1}:
-    image: supabase/logflare:1.4.0 ## Versão do Supabase Analytics
+    image: supabase/logflare:1.12.0 ## Versão do Supabase Analytics
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20436,7 +20452,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   db${1:+_$1}:
-    image: supabase/postgres:15.1.1.78 ## Versão do Supabase Db
+    image: supabase/postgres:15.8.1.060 ## Versão do Supabase Db
     command:
       - postgres
       - '-c'
@@ -20463,6 +20479,7 @@ services:
       - POSTGRES_HOST=/var/run/postgresql
       - PGPORT=5432
       - POSTGRES_PORT=5432
+      - PGPASSWORD=$Senha_Postgres
       - POSTGRES_PASSWORD=$Senha_Postgres
       - POSTGRES_DB=postgres
       - PGDATABASE=postgres
@@ -20507,7 +20524,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   supavisor${1:+_$1}:
-    image: supabase/supavisor:1.1.56 ## Versão do Supabase Supavisor
+    image: supabase/supavisor:2.5.1 ## Versão do Supabase Supavisor
     command:
       - /bin/sh
       - -c
@@ -20525,7 +20542,7 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=$Senha_Postgres
-      - DATABASE_URL=ecto://postgres:$Senha_Postgres@db${1:+_$1}:5432/_supabase
+      - DATABASE_URL=ecto://supabase_admin:$Senha_Postgres@db${1:+_$1}:5432/_supabase
       - CLUSTER_POSTGRES=true
 
     ## Configuração de JWT
@@ -20534,7 +20551,7 @@ services:
 
     ## Configuração de Segurança
       - SECRET_KEY_BASE=$SECRET_KEY_BASE
-      - VAULT_ENC_KEY=your-encryption-key-32-chars-min
+      - VAULT_ENC_KEY=$VAULT_ENC_KEY
       ## O valor a cima era para ser: $VAULT_ENC_KEY
       ## Mas por algum motivo não funciona kkkk
 
@@ -20594,7 +20611,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull supabase/studio:20241014-c083b3b kong:2.8.1 supabase/gotrue:v2.158.1 postgrest/postgrest:v12.2.0 supabase/realtime:v2.30.34 supabase/storage-api:v1.11.13 darthsim/imgproxy:v3.8.0 supabase/postgres-meta:v0.84.2 supabase/edge-runtime:v1.59.0 supabase/logflare:1.4.0 supabase/postgres:15.1.1.78 timberio/vector:0.28.1-alpine supabase/supavisor:1.1.56 
+pull supabase/studio:2025.05.19-sha-3487831 kong:2.8.1 supabase/gotrue:v2.172.1 postgrest/postgrest:v12.2.12 supabase/realtime:v2.34.47 supabase/storage-api:v1.22.17 darthsim/imgproxy:v3.8.0 supabase/postgres-meta:v0.89.0 supabase/edge-runtime:v1.67.4 supabase/logflare:1.12.0 supabase/postgres:15.8.1.060 timberio/vector:0.28.1-alpine supabase/supavisor:2.5.1 
 
 ## Usa o serviço wait_stack "supabase" para verificar se o serviço esta online
 wait_stack supabase${1:+_$1}_studio${1:+_$1} supabase${1:+_$1}_kong${1:+_$1} supabase${1:+_$1}_auth${1:+_$1} supabase${1:+_$1}_rest${1:+_$1} supabase${1:+_$1}_realtime${1:+_$1} supabase${1:+_$1}_storage${1:+_$1} supabase${1:+_$1}_imgproxy${1:+_$1} supabase${1:+_$1}_meta${1:+_$1} supabase${1:+_$1}_functions${1:+_$1} supabase${1:+_$1}_analytics${1:+_$1} supabase${1:+_$1}_db${1:+_$1} supabase${1:+_$1}_vector${1:+_$1} supabase${1:+_$1}_supavisor${1:+_$1} 
@@ -25182,7 +25199,7 @@ sleep 1
 pegar_senha_minio
 minio.bucket documenso${1:+-$1} > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Criando Bucket \e[33m$BUCKET\e[0m"
+    echo -e "1/1 - [ OK ] - Criando Bucket\e[33m $BUCKET\e[0m"
 else
     echo "1/1 - [ OFF ] - Erro ao criar Bucket"
     echo ""
@@ -31939,8 +31956,8 @@ BUCKET="$1"
 
 POLICY_NAME="publicread-$BUCKET"
 POLICY_FILE="public-read-$BUCKET.json"
-S3_ACCESS_KEY=$(head /dev/urandom | tr -dc A-Z0-9 | head -c16)
-S3_SECRET_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+S3_ACCESS_KEY=$(openssl rand -base64 12 | tr -dc A-Z0-9 | head -c16)
+S3_SECRET_KEY=$(openssl rand -base64 32 | tr -dc A-Za-z0-9 | head -c32)
 MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
 if [ -z "$MINIO_CONTAINER" ]; then
   echo "❌ Container MinIO não encontrado!"
@@ -32012,8 +32029,8 @@ ADMIN_PASS="$senha_minio"
 
 POLICY_NAME="publicread-$BUCKET"
 POLICY_FILE="public-read-$BUCKET.json"
-ACCESS_KEY=$(head /dev/urandom | tr -dc A-Z0-9 | head -c16)
-SECRET_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32)
+S3_ACCESS_KEY=$(openssl rand -base64 12 | tr -dc A-Z0-9 | head -c16)
+S3_SECRET_KEY=$(openssl rand -base64 32 | tr -dc A-Za-z0-9 | head -c32)
 MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
 if [ -z "$MINIO_CONTAINER" ]; then
   echo "❌ Container MinIO não encontrado!"
