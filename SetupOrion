@@ -3867,6 +3867,10 @@ services:
 
   postgres:
     image: postgres:14 ## Versão do postgres
+    command: >
+      postgres
+      -c max_connections=500
+      -c shared_buffers=512MB
 
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -3881,7 +3885,9 @@ services:
     environment:
       ## Senha do postgres 
       - POSTGRES_PASSWORD=$senha_postgres
-      - PG_MAX_CONNECTIONS=500
+
+      ## Timezone
+      - TZ=America/Sao_Paulo
 
     deploy:
       mode: replicated
@@ -3994,23 +4000,29 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  postgres${1:+_$1}:
+  postgres:
     image: postgres:14 ## Versão do postgres
+    command: >
+      postgres
+      -c max_connections=500
+      -c shared_buffers=512MB
 
     volumes:
-      - postgres${1:+_$1}_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
     ## Descomente as linhas abaixo para uso externo
     #ports:
-    #  - 2587:5432
+    #  - 5432:5432
 
     environment:
       ## Senha do postgres 
       - POSTGRES_PASSWORD=$senha_postgres
-      #- PG_MAX_CONNECTIONS=500
+
+      ## Timezone
+      - TZ=America/Sao_Paulo
 
     deploy:
       mode: replicated
@@ -4129,6 +4141,10 @@ services:
 
   pgvector:
     image: pgvector/pgvector:pg16 ## Versão do PgVector
+    command: >
+      postgres
+      -c max_connections=500
+      -c shared_buffers=512MB
 
     volumes:
       - pgvector:/var/lib/postgresql/data
@@ -4144,8 +4160,8 @@ services:
       ## Senha do postgres 
       - POSTGRES_PASSWORD=$senha_pgvector
 
-      ## Maximo de Conexões
-      #- PG_MAX_CONNECTIONS=500
+      ## Timezone
+      - TZ=America/Sao_Paulo
 
     deploy:
       mode: replicated
@@ -4261,6 +4277,10 @@ services:
 
   pgvector${1:+_$1}:
     image: pgvector/pgvector:pg16 ## Versão do PgVector
+    command: >
+      postgres
+      -c max_connections=500
+      -c shared_buffers=512MB
 
     volumes:
       - pgvector${1:+_$1}:/var/lib/postgresql/data
@@ -4276,8 +4296,8 @@ services:
       ## Senha do postgres 
       - POSTGRES_PASSWORD=$senha_pgvector
 
-      ## Maximo de Conexões
-      #- PG_MAX_CONNECTIONS=500
+      ## Timezone
+      - TZ=America/Sao_Paulo
 
     deploy:
       mode: replicated
@@ -5669,7 +5689,7 @@ services:
       - CHATWOOT_ENABLED=true
       - CHATWOOT_MESSAGE_READ=true
       - CHATWOOT_MESSAGE_DELETE=true
-      - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:${senha_pgvector:-SENHA_DO_PGVECTOR}@pgvector:5432/chatwoot?sslmode=disable
+      - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:SENHA_DO_PGVECTOR@pgvector:5432/chatwoot?sslmode=disable
       - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false
       
       ## 🧊 Configuração do Cache
