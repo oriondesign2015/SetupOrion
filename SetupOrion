@@ -3521,11 +3521,11 @@ services:
     image: traefik:v3.4.0
     command:
       - "--api.dashboard=true"
-      - "--providers.swarm=true" # ✅ Novo nome a partir da v3 (substitui 'providers.docker.swarmMode')
-      # - "--providers.docker.swarmMode=true" # ❌ Obsoleto em Traefik v3.x
+      - "--providers.swarm=true"
+      - "--providers.docker.swarmMode=true"
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=$nome_rede_interna" # ✅ Rede usada pelo Traefik no Swarm
+      - "--providers.docker.network=$nome_rede_interna"  ## Nome da rede interna
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
@@ -3535,7 +3535,7 @@ services:
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
-      - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
+      - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl"
       - "--log.level=DEBUG"
       - "--log.format=common"
       - "--log.filePath=/var/log/traefik/traefik.log"
@@ -3655,7 +3655,6 @@ services:
     command: -H tcp://tasks.agent:9001 --tlsskipverify
 
     volumes:
-      #- /var/run/docker.sock:/var/run/docker.sock # não precisa pois ele já se comunica com o agent pela rede interna
       - portainer_data:/data
 
     networks:
