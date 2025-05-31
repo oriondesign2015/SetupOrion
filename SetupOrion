@@ -3522,10 +3522,9 @@ services:
     command:
       - "--api.dashboard=true"
       - "--providers.swarm=true"
-      - "--providers.docker.swarmMode=true"
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=$nome_rede_interna"  ## Nome da rede interna
+      - "--providers.docker.network=$nome_rede_interna" ## Nome da rede interna
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
@@ -3535,7 +3534,7 @@ services:
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
-      - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl"
+      - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
       - "--log.level=DEBUG"
       - "--log.format=common"
       - "--log.filePath=/var/log/traefik/traefik.log"
