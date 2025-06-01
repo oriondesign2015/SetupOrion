@@ -5237,8 +5237,8 @@ services:
         - traefik.http.routers.chatwoot${1:+_$1}_app.tls.certresolver=letsencryptresolver
         - traefik.http.routers.chatwoot${1:+_$1}_app.priority=1
         - traefik.http.routers.chatwoot${1:+_$1}_app.service=chatwoot${1:+_$1}_app
-        - traefik.http.services.chatwoot${1:+_$1}_app.loadbalancer.server.port=3000 
-        - traefik.http.services.chatwoot${1:+_$1}_app.loadbalancer.passHostHeader=true 
+        - traefik.http.services.chatwoot${1:+_$1}_app.loadbalancer.server.port=3000
+        - traefik.http.services.chatwoot${1:+_$1}_app.loadbalancer.passHostHeader=true
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
         - traefik.http.routers.chatwoot${1:+_$1}_app.middlewares=sslheader
 
