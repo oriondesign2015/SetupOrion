@@ -5238,9 +5238,9 @@ services:
         - traefik.http.routers.chatwoot${1:+_$1}_app.priority=1
         - traefik.http.routers.chatwoot${1:+_$1}_app.service=chatwoot${1:+_$1}_app
         - traefik.http.services.chatwoot${1:+_$1}_app.loadbalancer.server.port=3000 
-        - traefik.http.services.chatwoot${1:+_$1}_app.loadbalancer.passhostheader=true 
+        - traefik.http.services.chatwoot${1:+_$1}_app.loadbalancer.passHostHeader=true 
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
-        - traefik.http.routers.chatwoot${1:+_$1}_app.middlewares=sslheader@docker
+        - traefik.http.routers.chatwoot${1:+_$1}_app.middlewares=sslheader
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -12069,9 +12069,9 @@ services:
         - traefik.http.routers.woofedcrm${1:+_$1}.priority=1
         - traefik.http.routers.woofedcrm${1:+_$1}.service=woofedcrm${1:+_$1}
         - traefik.http.services.woofedcrm${1:+_$1}.loadbalancer.server.port=3000 
-        - traefik.http.services.woofedcrm${1:+_$1}.loadbalancer.passhostheader=true 
+        - traefik.http.services.woofedcrm${1:+_$1}.loadbalancer.passHostHeader=true 
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
-        - traefik.http.routers.woofedcrm${1:+_$1}.middlewares=sslheader@docker
+        - traefik.http.routers.woofedcrm${1:+_$1}.middlewares=sslheader
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -14168,9 +14168,9 @@ services:
         - traefik.http.routers.chatwoot_nestor${1:+_$1}_app.priority=1
         - traefik.http.routers.chatwoot_nestor${1:+_$1}_app.service=chatwoot_nestor${1:+_$1}_app
         - traefik.http.services.chatwoot_nestor${1:+_$1}_app.loadbalancer.server.port=3000 
-        - traefik.http.services.chatwoot_nestor${1:+_$1}_app.loadbalancer.passhostheader=true 
+        - traefik.http.services.chatwoot_nestor${1:+_$1}_app.loadbalancer.passHostHeader=true 
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
-        - traefik.http.routers.chatwoot_nestor${1:+_$1}_app.middlewares=sslheader@docker
+        - traefik.http.routers.chatwoot_nestor${1:+_$1}_app.middlewares=sslheader
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -18519,7 +18519,7 @@ services:
         - "traefik.http.services.vaultwarden${1:+_$1}.loadbalancer.server.port=80"
         - "traefik.http.routers.vaultwarden${1:+_$1}.tls=true"
         - "traefik.http.routers.vaultwarden${1:+_$1}.tls.certresolver=letsencryptresolver"
-        - "traefik.http.services.vaultwarden${1:+_$1}.loadbalancer.passhostheader=true"
+        - "traefik.http.services.vaultwarden${1:+_$1}.loadbalancer.passHostHeader=true"
         - "traefik.http.routers.vaultwarden${1:+_$1}.middlewares=compresstraefik"
         - "traefik.http.middlewares.compresstraefik.compress=true"
         - "traefik.docker.network=$nome_rede_interna"
@@ -23383,9 +23383,9 @@ services:
         - traefik.http.routers.mattermost${1:+_$1}.tls.certresolver=letsencryptresolver
         - traefik.http.routers.mattermost${1:+_$1}.service=mattermost${1:+_$1}
         - traefik.http.services.mattermost${1:+_$1}.loadbalancer.server.port=8065
-        - traefik.http.services.mattermost${1:+_$1}.loadbalancer.passhostheader=true
+        - traefik.http.services.mattermost${1:+_$1}.loadbalancer.passHostHeader=true
         - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
-        - traefik.http.routers.mattermost${1:+_$1}.middlewares=sslheader@docker
+        - traefik.http.routers.mattermost${1:+_$1}.middlewares=sslheader
 
 ## --------------------------- ORION --------------------------- ##
 
