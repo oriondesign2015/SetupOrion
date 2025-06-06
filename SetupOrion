@@ -32232,12 +32232,12 @@ EOF" || { echo "Erro ao criar arquivo de política dentro do container"; exit 1;
 
 $MC_CMD admin policy create admin "$POLICY_NAME" /tmp/"$POLICY_FILE" || { echo "Erro ao criar política"; exit 1; }
 
-$MC_CMD admin user add admin "$ACCESS_KEY" "$SECRET_KEY" || { echo "Erro ao criar usuário"; exit 1; }
-$MC_CMD admin policy attach admin "$POLICY_NAME" --user "$ACCESS_KEY" || { echo "Erro ao associar política ao usuário"; exit 1; }
+$MC_CMD admin user add admin "$S3_ACCESS_KEY" "$S3_SECRET_KEY" || { echo "Erro ao criar usuário"; exit 1; }
+$MC_CMD admin policy attach admin "$POLICY_NAME" --user "$S3_ACCESS_KEY" || { echo "Erro ao associar política ao usuário"; exit 1; }
 
 $MC_CMD anonymous set-json /tmp/"$POLICY_FILE" admin/"$BUCKET" || { echo "Erro ao aplicar política pública"; exit 1; }
 
-$MC_CMD alias set myminio "$S3_ENDPOINT" "$ACCESS_KEY" "$SECRET_KEY"
+$MC_CMD alias set myminio "$S3_ENDPOINT" "$S3_ACCESS_KEY" "$S3_SECRET_KEY"
 $MC_CMD ls myminio/"$BUCKET" || echo "Falha ao listar bucket"
 
 # Resultado final
@@ -32251,10 +32251,10 @@ echo ""
 echo -e "\e[33mNome da Bucket:\e[97m $BUCKET\e[0m"
 echo ""
 
-echo -e "\e[33mAccess Key:\e[97m $ACCESS_KEY\e[0m"
+echo -e "\e[33mAccess Key:\e[97m $S3_ACCESS_KEY\e[0m"
 echo ""
 
-echo -e "\e[33mSecret Key:\e[97m $SECRET_KEY\e[0m"
+echo -e "\e[33mSecret Key:\e[97m $S3_SECRET_KEY\e[0m"
 
 ## Creditos do instalador
 creditos_msg
