@@ -1868,7 +1868,7 @@ menu_instalador_pg_1(){
     echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma ${verde}[1/1]${reset}                      ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin ${verde}[1/2] ${reset}"
     echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic ${verde}[2/2]${reset}                           ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase ${verde}[2/4] ${reset}"
-    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith ${verde}[2/2]${reset}                         ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Ntfy ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith ${verde}[2/4]${reset}                         ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Ntfy ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}LowCoder ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 43 ]${reset} - ${branco}LangFlow ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 21 ]${reset} - ${branco}Formbricks ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 44 ]${reset} - ${branco}OpenProject ${verde}[1/1] ${reset}"
@@ -1941,6 +1941,7 @@ menu_comandos(){
   echo -e "${branco} • ${amarelo}quepasa.setup.off${reset} - ${branco}Desativa o Setup do Quepasa${reset}"
   echo -e "${branco} • ${amarelo}quepasa.setup.on${reset} - ${branco}Ativa o Setup do Quepasa${reset}"
   echo ""
+
   ## Manutenção
   echo -e "> ${verde}Comandos de Manutenção:${reset}"
   echo -e "${branco} • ${amarelo}limpar${reset} - ${branco}Limpa Logs, volumes e imagens do Docker não usadas${reset}"
@@ -3150,103 +3151,120 @@ validar_senha() {
 ##    ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝    ╚══════╝╚═╝     ╚═╝   ╚═╝   ╚═╝     
                                                                                   
 ferramenta_testeemail() {
-clear
-dados
-nome_testeemail
-preencha_as_info
-
-while true; do
-
-echo -e "\e[97mPasso$amarelo 1/5\e[0m"
-echo -en "\e[33mDigite o endereço de Email (ex: contato@oriondesign.art.br): \e[0m" && read -r email_teste
-echo ""
-
-echo -e "\e[97mPasso$amarelo 2/5\e[0m"
-echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
-echo -en "\e[33mDigite o usuário de Email (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_teste
-echo ""
-
-echo -e "\e[97mPasso$amarelo 3/5\e[0m"
-echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
-echo -en "\e[33mDigite a Senha do email (ex: @Senha123_): \e[0m" && read -r senha_teste
-echo ""
-
-echo -e "\e[97mPasso$amarelo 4/5\e[0m"
-echo -en "\e[33mDigite o Host Smtp (ex: smtp.hostinger.com): \e[0m" && read -r host_teste
-echo ""
-
-echo -e "\e[97mPasso$amarelo 5/5\e[0m"
-echo -en "\e[33mDigite a Porta Smtp (ex: 465): \e[0m" && read -r porta_teste
-echo ""
-
-clear
-nome_testeemail
-conferindo_as_info
-
-echo -e "\e[33mEmail:\e[97m $email_teste\e[0m"
-echo ""
-
-echo -e "\e[33mUsuário:\e[97m $user_teste\e[0m"
-echo ""
-
-echo -e "\e[33mSenha:\e[97m $senha_teste\e[0m"
-echo ""
-
-echo -e "\e[33mHost:\e[97m $host_teste\e[0m"
-echo ""
-
-echo -e "\e[33mPorta:\e[97m $porta_teste\e[0m"
-echo ""
-
-read -p "As respostas estão corretas? (Y/N): " confirmacao
-if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
     clear
-    nome_testando
-    break
-else
-    clear
+    dados
     nome_testeemail
     preencha_as_info
-fi
-done
 
-#MENSAGEM DE INICIANDO (PASSOS)
-echo -e "\e[97m• INICIANDO VERIFICAÇÃO \e[33m[1/3]\e[0m"
-echo ""
+    while true; do
+        echo -e "\e[97mPasso${amarelo} 1/5\e[0m"
+        echo -en "\e[33mDigite o endereço de Email (ex: contato@oriondesign.art.br): \e[0m"
+        read -r email_teste
+        echo ""
 
-sudo apt-get update > /dev/null 2>&1
-sudo apt-get install swaks -y > /dev/null 2>&1
+        echo -e "\e[97mPasso${amarelo} 2/5\e[0m"
+        echo -e "${amarelo}--> Caso não tiver um usuário do email, use o próprio email abaixo"
+        echo -en "\e[33mDigite o usuário de Email (ex: oriondesign ou contato@oriondesign.art.br): \e[0m"
+        read -r user_teste
+        echo ""
 
-msg="Se você está lendo isso, o seu SMTP está funcionando =D.
+        echo -e "\e[97mPasso${amarelo} 3/5\e[0m"
+        echo -e "${amarelo}--> Sem caracteres especiais: !#$ | Se estiver usando Gmail, use a senha de app"
+        echo -en "\e[33mDigite a Senha do email (ex: @Senha123_): \e[0m"
+        read -r senha_teste
+        echo ""
+
+        echo -e "\e[97mPasso${amarelo} 4/5\e[0m"
+        echo -en "\e[33mDigite o Host SMTP (ex: smtp.hostinger.com): \e[0m"
+        read -r host_teste
+        echo ""
+
+        echo -e "\e[97mPasso${amarelo} 5/5\e[0m"
+        echo -en "\e[33mDigite a Porta SMTP (ex: 465): \e[0m"
+        read -r porta_teste
+        echo ""
+
+        clear
+        nome_testeemail
+        conferindo_as_info
+
+        echo -e "\e[33mEmail SMTP: \e[97m$email_teste\e[0m"
+        echo ""
+        echo -e "\e[33mUsuário SMTP: \e[97m$user_teste\e[0m"
+        echo ""
+        echo -e "\e[33mSenha SMTP: \e[97m$senha_teste\e[0m"
+        echo ""
+        echo -e "\e[33mHost SMTP: \e[97m$host_teste\e[0m"
+        echo ""
+        echo -e "\e[33mPorta SMTP: \e[97m$porta_teste\e[0m"
+        echo ""
+
+        read -p "As respostas estão corretas? (Y/N): " confirmacao
+        if [[ "$confirmacao" =~ ^[Yy]$ ]]; then
+            clear
+            nome_testando
+            break
+        else
+            clear
+            nome_testeemail
+            preencha_as_info
+        fi
+    done
+
+    # Mensagem de Início
+    echo -e "\e[97m• INICIANDO VERIFICAÇÃO \e[33m[1/3]\e[0m"
+    echo ""
+
+    sudo apt-get update > /dev/null 2>&1
+    sudo apt-get install swaks -y > /dev/null 2>&1
+
+    msg="Se você está lendo isso, o seu SMTP está funcionando =D.
 By: OrionDesign"
 
-if swaks --to "$email_teste" --from "$email_teste" --server "$host_teste" --port "$porta_teste" --auth LOGIN --auth-user "$user_teste" --auth-password "$senha_teste" --tls --body "$msg"; then
-    sleep 2
-    clear
-    nome_testeemail
-    echo -e "\e[32m[Resultado do Teste SMTP]\e[0m"
-    echo ""
-    echo -e "\e[33mOs dados informados\e[92m estão funcionando corretamente\e[33m.\e[0m"
-else
-    sleep 2
-    clear
-    nome_testeemail
-    echo -e "\e[32m[Resultado do Teste SMTP]\e[0m"
-    echo ""
-    echo -e "\e[33mOs dados informados\e[91m NÃO estão funcionando corretamente.\e[33m Por favor, verifique os dados e tente novamente.\e[0m"
-fi
+    if swaks --to "$email_teste" --from "$email_teste" \
+             --server "$host_teste" --port "$porta_teste" \
+             --auth LOGIN --auth-user "$user_teste" \
+             --auth-password "$senha_teste" --tls \
+             --header "Subject: ✅ Teste de SMTP - OrionDesign" \
+             --header "Content-Type: text/plain; charset=UTF-8" \
+             --body "$msg"; then
 
-creditos_msg
+        sleep 2
+        clear
+        nome_testeemail
+        echo -e "\e[32m[Resultado do Teste SMTP]\e[0m"
+        echo ""
+        echo -e "\e[33mOs dados informados \e[92mestão funcionando corretamente\e[33m.\e[0m"
 
-read -p "Deseja instalar outra aplicação? (Y/N): " choice
-    if [ "$choice" = "Y" ] || [ "$choice" = "y" ]; then
+    else
+        sleep 2
+        clear
+        nome_testeemail
+        echo -e "\e[32m[Resultado do Teste SMTP]\e[0m"
+        echo ""
+        echo -e "\e[33mOs dados informados \e[91mNÃO estão funcionando corretamente\e[33m. Por favor, verifique os dados e tente novamente.\e[0m"
+    fi
+        echo ""
+        echo -e "\e[33mEmail SMTP: \e[97m$email_teste\e[0m"
+        echo ""
+        echo -e "\e[33mUsuário SMTP: \e[97m$user_teste\e[0m"
+        echo ""
+        echo -e "\e[33mSenha SMTP: \e[97m$senha_teste\e[0m"
+        echo ""
+        echo -e "\e[33mHost SMTP: \e[97m$host_teste\e[0m"
+        echo ""
+        echo -e "\e[33mPorta SMTP: \e[97m$porta_teste\e[0m"
+
+    creditos_msg
+
+    read -p "Deseja instalar outra aplicação? (Y/N): " choice
+    if [[ "$choice" =~ ^[Yy]$ ]]; then
         return
     else
-        cd
-        cd
+        cd || exit
         clear
         exit 1
-    fi   
+    fi
 }
 
 ##   ████████╗██████╗  █████╗ ███████╗███████╗██╗██╗  ██╗    ███████╗     
@@ -11478,7 +11496,7 @@ requisitar_outra_instalacao
 ferramenta_appsmith() {
 
 ## Verifica os recursos
-recursos 2 2 && continue || return
+recursos 2 4 && continue || return
 
 # Limpa o terminal
 clear
@@ -11591,7 +11609,7 @@ services:
       resources:
         limits:
           cpus: "2"
-          memory: 2048M
+          memory: 4096M
       labels:
         - traefik.enable=true
         - traefik.http.routers.appsmith${1:+_$1}.rule=Host(\`$url_appsmith\`)
@@ -19819,6 +19837,9 @@ sleep 1
 telemetria Supabase iniciado
 
 cd
+if [ -d "/root/supabase${1:+_$1}" ]; then
+  sudo rm -r /root/supabase${1:+_$1}
+fi
 mkdir supabase${1:+_$1}
 
 mkdir temp${1:+_$1}
@@ -32108,12 +32129,32 @@ sleep 1
 
 telemetria RustDesk iniciado
 
+## Gerando a chave do RustDesk
+rustdesk_api_key=$(openssl rand -hex 16)
+
+generate_rustdesk_string() {
+    local link_hbbs="$1"
+    local link_hbbr="$2"
+    local key="$3"
+    
+    # Criar o JSON com formatação específica
+    local json="{\"host\":\"$link_hbbs\",\"relay\":\"$link_hbbr\",\"api\":\"\",\"key\":\"$key\"}"
+    
+    # Converter para base64 e inverter
+    echo -n "$json" | base64 -w 0 | rev
+}
+
+link_hbbs="$url_hbbs"
+link_hbbr="$url_hbbr"
+key="$rustdesk_api_key"
+
+rustdesk_string=$(generate_rustdesk_string "$url_hbbs" "$url_hbbr" "$key")
+
 ## Mensagem de Passo
 echo -e "\e[97m• INSTALANDO RUSTDESK \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
-rustdesk_api_key=$(openssl rand -hex 16)
 
 ## Criando a stack rustdesk.yaml
 cat > rustdesk${1:+_$1}.yaml <<EOL
@@ -32131,6 +32172,11 @@ services:
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
+    ports:
+      - 21115:21115
+      - 21116:21116/udp
+      - 21118:21118/udp
+      #- 21119:21119  
     
     environment:
       - ALWAYS_USE_RELAY=N
@@ -32228,7 +32274,7 @@ sleep 1
 pull rustdesk/rustdesk-server:latest
 
 ## Usa o serviço wait_rustdesk para verificar se o serviço esta online
-wait_stack rustdesk${1:+_$1}_rustdesk${1:+_$1}_hbbs rustdesk${1:+_$1}_rustdesk${1:+_$1}_hbbs
+wait_stack rustdesk${1:+_$1}_rustdesk${1:+_$1}_hbbs rustdesk${1:+_$1}_rustdesk${1:+_$1}_hbbr
 
 telemetria RustDesk finalizado
 
@@ -32244,6 +32290,8 @@ Dominio do Servidor de Relay do RustDesk:$url_hbbr
 Dominio do Servidor da API do RustDesk: VAZIO
 
 ApiKey do RustDesk: $rustdesk_api_key
+
+Configurações do Servidor Rundesk: $rustdesk_string
 EOL
 
 cd
@@ -32271,7 +32319,10 @@ echo ""
 echo -e "\e[33mDominio do Servidor da API do RustDesk:\e[97m VAZIO\e[0m"
 echo ""
 
-echo -e "\e[33mApiKey do RustDesk:\e[97m $rustdesk_api_key\e[0m"
+echo -e "\e[33mKey do RustDesk:\e[97m $rustdesk_api_key\e[0m"
+echo ""
+
+echo -e "\e[33mConfigurações do Servidor Rundesk:\e[97m $rustdesk_string\e[0m"
 
 ## Creditos do instalador
 creditos_msg
