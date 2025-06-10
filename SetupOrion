@@ -27836,7 +27836,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull ruben18salazar/wuzapi:api
+pull asternic/wuzapi:latest
 
 ## Usa o serviço wait_wuzapi para verificar se o serviço esta online
 wait_stack wuzapi${1:+_$1}_wuzapi${1:+_$1}
