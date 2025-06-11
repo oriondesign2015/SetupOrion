@@ -14124,7 +14124,7 @@ telemetria "Chatwoot Nestor" "iniciado"
 dados
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO PGVECTOR \e[33m[2/7]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/7]\e[0m"
 echo ""
 sleep 1
 
@@ -16268,6 +16268,9 @@ cd blablabla
 
 git clone https://github.com/oriondesign2015/SetupOrion.git > /dev/null 2>&1
 
+if [ -d "/opt/monitor-orion" ]; then
+  sudo rm -r /opt/monitor-orion
+fi
 sudo mv /root/blablabla/SetupOrion/Extras/Grafana/monitor-orion /opt
 
 cd
@@ -34163,7 +34166,7 @@ echo ""
 echo -e "\e[32m[ BUCKET $BUCKET ]\e[0m"
 echo ""
 
-echo -e "\e[33mS3 Endpoint:\e[97m $S3_ENDPOINT\e[0m"
+echo -e "\e[33mS3 Endpoint:\e[97m https://$url_s3\e[0m"
 echo ""
 
 echo -e "\e[33mNome da Bucket:\e[97m $BUCKET\e[0m"
