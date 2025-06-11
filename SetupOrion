@@ -16400,15 +16400,16 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.role == manager
+          - node.role == manager    
       labels:
         - traefik.enable=true
-        - traefik.http.routers.prometheus.rule=Host(\`$url_prometheus\`)
-        - traefik.http.services.prometheus.loadbalancer.server.port=9090
-        - traefik.http.routers.prometheus.service=prometheus
-        - traefik.http.routers.prometheus.tls.certresolver=letsencryptresolver
+        - traefik.docker.network=$nome_rede_interna
+        - traefik.http.routers.prometheus.rule=Host(\`$url_prometheus\`) ## Dominio para aplicação
         - traefik.http.routers.prometheus.entrypoints=websecure
-        - traefik.http.routers.prometheus.tls=true
+        - traefik.http.routers.prometheus.priority=1
+        - traefik.http.routers.prometheus.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.prometheus.service=prometheus
+        - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -16437,12 +16438,13 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.grafana.rule=Host(\`$url_grafana\`)
-        - traefik.http.services.grafana.loadbalancer.server.port=3000
-        - traefik.http.routers.grafana.service=grafana
-        - traefik.http.routers.grafana.tls.certresolver=letsencryptresolver
+        - traefik.docker.network=$nome_rede_interna
+        - traefik.http.routers.grafana.rule=Host(\`$url_grafana\`) ## Dominio para aplicação
         - traefik.http.routers.grafana.entrypoints=websecure
-        - traefik.http.routers.grafana.tls=true
+        - traefik.http.routers.grafana.priority=1
+        - traefik.http.routers.grafana.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.grafana.service=grafana
+        - traefik.http.services.grafana.loadbalancer.server.port=3000
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -16464,12 +16466,13 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.node-exporter.rule=Host(\`$url_nodeexporter\`)
-        - traefik.http.services.node-exporter.loadbalancer.server.port=9100
-        - traefik.http.routers.node-exporter.service=node-exporter
-        - traefik.http.routers.node-exporter.tls.certresolver=letsencryptresolver
+        - traefik.docker.network=$nome_rede_interna
+        - traefik.http.routers.node-exporter.rule=Host(\`$url_nodeexporter\`) ## Dominio para aplicação
         - traefik.http.routers.node-exporter.entrypoints=websecure
-        - traefik.http.routers.node-exporter.tls=true
+        - traefik.http.routers.node-exporter.priority=1
+        - traefik.http.routers.node-exporter.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.node-exporter.service=node-exporter
+        - traefik.http.services.node-exporter.loadbalancer.server.port=9100
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -16495,15 +16498,16 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.role == manager
+          - node.role == manager     
       labels:
         - traefik.enable=true
-        - traefik.http.routers.cadvisor.rule=Host(\`$url_cadvisor\`)
-        - traefik.http.services.cadvisor.loadbalancer.server.port=8080
-        - traefik.http.routers.cadvisor.service=cadvisor
-        - traefik.http.routers.cadvisor.tls.certresolver=letsencryptresolver
+        - traefik.docker.network=$nome_rede_interna
+        - traefik.http.routers.cadvisor.rule=Host(\`$url_cadvisor\`) ## Dominio para aplicação
         - traefik.http.routers.cadvisor.entrypoints=websecure
-        - traefik.http.routers.cadvisor.tls=true
+        - traefik.http.routers.cadvisor.priority=1
+        - traefik.http.routers.cadvisor.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.cadvisor.service=cadvisor
+        - traefik.http.services.cadvisor.loadbalancer.server.port=8080
 
 ## --------------------------- ORION --------------------------- ##
 
