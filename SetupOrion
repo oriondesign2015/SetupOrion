@@ -1927,10 +1927,11 @@ menu_instalador_pg_2(){
 
 menu_comandos(){
   ## Portainer
-  echo -e "> ${verde}Comandos do Portainer:${reset}"
+  echo -e "> ${verde}Gerenciamento de Serviços:${reset}"
   echo -e "${branco} • ${amarelo}portainer.restart${reset} - ${branco}Reinicia o Portainer${reset}"
   echo -e "${branco} • ${amarelo}portainer.reset${reset} - ${branco}Reseta a senha do Portainer${reset}"
   echo -e "${branco} • ${amarelo}portainer.update${reset} - ${branco}Atualiza o Portainer${reset}"
+  echo -e "${branco} • ${amarelo}traefik.update${reset} - ${branco}Atualiza o Traefik${reset}"
   echo ""
 
   ## Monitoramento
@@ -5185,7 +5186,7 @@ done
 
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO CHATWOOT \e[33m[1/7]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO CHATWOOT \e[33m[1/6]\e[0m"
 echo ""
 sleep 1
 
@@ -5195,7 +5196,7 @@ telemetria Chatwoot iniciado
 dados
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO PGVECTOR \e[33m[2/7]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO PGVECTOR \e[33m[2/6]\e[0m"
 echo ""
 sleep 1
 
@@ -5218,21 +5219,7 @@ else
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/7]\e[0m"
-echo ""
-sleep 1
-
-## Verifica/instala o Redis
-verificar_container_redis
-if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Redis já instalado"
-    echo ""
-else
-    ferramenta_redis
-fi
-
-## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO CHATWOOT \e[33m[4/7]\e[0m"
+echo -e "\e[97m• INSTALANDO CHATWOOT \e[33m[3/6]\e[0m"
 echo ""
 sleep 1
 
@@ -5289,7 +5276,7 @@ services:
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
       ## 🧑‍💻 Dados do Redis
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=redis://chatwoot${1:+_$1}_redis:6379
 
       ## 🗄️ Dados do Postgres
       - POSTGRES_HOST=pgvector
@@ -5395,7 +5382,7 @@ services:
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
       ## 🧑‍💻 Dados do Redis
-      - REDIS_URL=redis://redis:6379
+      - REDIS_URL=redis://chatwoot${1:+_$1}_redis:6379
 
       ## 🗄️ Dados do Postgres
       - POSTGRES_HOST=pgvector
@@ -5453,6 +5440,37 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
+  chatwoot${1:+_$1}_redis:
+    image: redis:latest  ## Versão do Redis
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+
+    volumes:
+      - chatwoot${1:+_$1}_redis:/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    ## Descomente as linhas abaixo para uso externo
+    #ports:
+    #  - 6379:6379
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   chatwoot${1:+_$1}_storage:
     external: true
@@ -5466,6 +5484,10 @@ volumes:
   chatwoot${1:+_$1}_mailers:
     external: true
     name: chatwoot${1:+_$1}_mailers
+  volumes:
+  chatwoot${1:+_$1}_redis:
+    external: true
+    name: chatwoot${1:+_$1}_redis
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -5490,19 +5512,20 @@ stack_editavel #> /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/7]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/6]\e[0m"
 echo ""
 sleep 1
 
 ## Baixando imagens:
-pull chatwoot/chatwoot:latest
+pull redis:latest chatwoot/chatwoot:latest
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
-wait_stack chatwoot${1:+_$1}_chatwoot${1:+_$1}_app chatwoot${1:+_$1}_chatwoot${1:+_$1}_sidekiq
+wait_stack chatwoot${1:+_$1}_chatwoot${1:+_$1}_redis chatwoot${1:+_$1}_chatwoot${1:+_$1}_app chatwoot${1:+_$1}_chatwoot${1:+_$1}_sidekiq
 
-telemetria Chatwoot finalizado
+sleep 30
+echo ""
 ## Mensagem de Passo
-echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[6/7]\e[0m"
+echo -e "\e[97m• MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
 echo ""
 sleep 1
 
@@ -5542,7 +5565,7 @@ fi
 
 echo ""
 ## Mensagem de Passo
-echo -e "\e[97m• ATIVANDO FUNÇÕES DO SUPER ADMIN \e[33m[7/7]\e[0m"
+echo -e "\e[97m• ATIVANDO FUNÇÕES DO SUPER ADMIN \e[33m[6/6]\e[0m"
 echo ""
 sleep 1
 
@@ -5562,6 +5585,8 @@ else
 fi
 
 echo ""
+
+telemetria Chatwoot finalizado
 
 ## Salvando informações da instalação dentro de /dados_vps/
 cd dados_vps
@@ -14412,7 +14437,7 @@ fi
 STACK_NAME="chatwoot_nestor${1:+_$1}"
 stack_editavel #> /dev/null 2>&1
 
-#docker stack deploy --prune --resolve-image always -c chatwoot.yaml chatwoot > /dev/null 2>&1
+#docker stack deploy --prune --resolve-image always -c chatwoot_nestor.yaml chatwoot > /dev/null 2>&1
 #if [ $? -eq 0 ]; then
 #    echo "2/2 - [ OK ] - Deploy Stack"
 #else
