@@ -31437,7 +31437,7 @@ sleep 1
 pull requarks/wiki:latest postgres:15-alpine
 
 ## Usa o serviço wait_wiki para verificar se o serviço esta online
-wait_stack wiki${1:+_$1}_wiki${1:+_$1} wiki${1:+_$1}_db wiki${1:+_$1}_app
+wait_stack wiki${1:+_$1}_wiki${1:+_$1}_db wiki${1:+_$1}_wiki${1:+_$1}_app
 
 telemetria wiki finalizado
 
