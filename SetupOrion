@@ -20680,6 +20680,7 @@ services:
     environment:
     ## Configuração do Logflare
       - LOGFLARE_API_KEY=$Logflare_key
+      - LOGFLARE_PUBLIC_ACCESS_TOKEN=$Logflare_key
     
     deploy:
       mode: replicated
