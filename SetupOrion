@@ -31612,8 +31612,14 @@ services:
     networks:
       - $nome_rede_interna ## Nome da rede interna
     ports:
-      - 2022:2022
-      - 8005:8005
+      - target: 2022
+        published: 2022
+        protocol: tcp
+        mode: host
+      - target: 8005
+        published: 8005
+        protocol: tcp
+        mode: host
 
     environment:
       ## Identificação do Projeto
