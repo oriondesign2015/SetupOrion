@@ -14258,9 +14258,9 @@ services:
       - REDIS_PREFIX=chatwoot_nestor${1:+_$1}_
 
       ## Dados do Postgres
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=pgvector
       - POSTGRES_USERNAME=postgres
-      - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
+      - POSTGRES_PASSWORD=$senha_pgvector ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot_nestor${1:+_$1}
 
       ## Armazenamento
@@ -14365,9 +14365,9 @@ services:
       - REDIS_PREFIX=chatwoot_nestor${1:+_$1}_
 
       ## Dados do Postgres
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=pgvector
       - POSTGRES_USERNAME=postgres
-      - POSTGRES_PASSWORD=$senha_postgres ## Senha do postgres
+      - POSTGRES_PASSWORD=$senha_pgvector ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot_nestor${1:+_$1}
 
       ## Armazenamento
