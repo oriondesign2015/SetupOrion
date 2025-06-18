@@ -34303,12 +34303,18 @@ limpar() {
 minio.bucket() {
   ADMIN_USER="$user_minio"
   ADMIN_PASS="$senha_minio"
+  BUCKET_NAME="$1"
+
+  if [ -z "$BUCKET_NAME" ]; then
+    echo "❌ Você precisa informar o nome do bucket. Exemplo: minio.bucket dify"
+    return 1
+  fi
 
   # Descobre o container do MinIO
   MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
   if [ -z "$MINIO_CONTAINER" ]; then
     echo "❌ Container MinIO não encontrado!"
-    exit 1
+    return 1
   fi
 
   MC_CMD="docker exec -i $MINIO_CONTAINER mc"
@@ -34332,13 +34338,20 @@ minio.bucket() {
 
     $MC_CMD alias set admin "$S3_ENDPOINT" "$ADMIN_USER" "$ADMIN_PASS" || {
       echo "❌ Ainda não foi possível conectar. Verifique o endpoint e tente novamente."
-      exit 1
+      return 1
     }
 
     echo "✅ Conectado com sucesso ao MinIO via $S3_ENDPOINT"
   fi
 
-  # Exemplo de listagem ou comando adicional aqui
+  # Cria o bucket com o nome passado
+  if $MC_CMD mb admin/"$BUCKET_NAME"; then
+    echo "✅ Bucket '$BUCKET_NAME' criado com sucesso!"
+  else
+    echo "⚠️ Não foi possível criar o bucket '$BUCKET_NAME'. Ele já pode existir."
+  fi
+
+  # Lista os buckets
   $MC_CMD ls admin || echo "⚠️ Falha ao listar buckets no MinIO"
 
   # Retorna o endpoint para uso externo, se necessário
