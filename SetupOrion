@@ -17074,7 +17074,7 @@ services:
     image: langgenius/dify-api:latest
 
     volumes:
-      - dify_storage:/app/api/storage
+      - dify${1:+_$1}_storage:/app/api/storage
 
     networks:
       - $nome_rede_interna
