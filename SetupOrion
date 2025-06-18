@@ -5796,7 +5796,7 @@ services:
       
       ## 📱 Configuração do Cliente
       ## Pegue a versão em: https://web.whatsapp.com/sw.js
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
+      #- CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -5812,6 +5812,12 @@ services:
       - DATABASE_SAVE_DATA_CHATS=true
       - DATABASE_SAVE_DATA_LABELS=true
       - DATABASE_SAVE_DATA_HISTORIC=true
+
+      ## 🤖 Integração com N8N
+      - N8N_ENABLED=true
+
+      ## 🤖 Integração com EvoAI
+      - EVOAI_ENABLED=true
       
       ## 🤖 Integração com OpenAI
       - OPENAI_ENABLED=true
@@ -5870,6 +5876,7 @@ services:
 
       ## 🐇 Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
+      - RABBITMQ_FRAME_MAX=8192
       - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution${1:+_$1}
       - RABBITMQ_EXCHANGE_NAME=evolution
       - RABBITMQ_GLOBAL_ENABLED=false
@@ -5877,6 +5884,7 @@ services:
       - RABBITMQ_EVENTS_INSTANCE_CREATE=false
       - RABBITMQ_EVENTS_INSTANCE_DELETE=false
       - RABBITMQ_EVENTS_QRCODE_UPDATED=false
+      - RABBITMQ_EVENTS_SEND_MESSAGE_UPDATE=false
       - RABBITMQ_EVENTS_MESSAGES_SET=false
       - RABBITMQ_EVENTS_MESSAGES_UPSERT=true
       - RABBITMQ_EVENTS_MESSAGES_EDITED=false
@@ -5906,6 +5914,7 @@ services:
       - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
       - WEBHOOK_EVENTS_QRCODE_UPDATED=false
       - WEBHOOK_EVENTS_MESSAGES_SET=false
+      - WEBHOOK_EVENTS_SEND_MESSAGE_UPDATE=false
       - WEBHOOK_EVENTS_MESSAGES_UPSERT=false
       - WEBHOOK_EVENTS_MESSAGES_EDITED=false
       - WEBHOOK_EVENTS_MESSAGES_UPDATE=false
@@ -5930,6 +5939,13 @@ services:
       - WEBHOOK_EVENTS_TYPEBOT_CHANGE_STATUS=false
       - WEBHOOK_EVENTS_ERRORS=false
       - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
+      - WEBHOOK_REQUEST_TIMEOUT_MS=60000
+      - WEBHOOK_RETRY_MAX_ATTEMPTS=10
+      - WEBHOOK_RETRY_INITIAL_DELAY_SECONDS=5
+      - WEBHOOK_RETRY_USE_EXPONENTIAL_BACKOFF=true
+      - WEBHOOK_RETRY_MAX_DELAY_SECONDS=300
+      - WEBHOOK_RETRY_JITTER_FACTOR=0.2
+      - WEBHOOK_RETRY_NON_RETRYABLE_STATUS_CODES=400,401,403,404,422
 
       ## 🔌 Configuração do Provider
       - PROVIDER_ENABLED=false
