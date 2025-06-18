@@ -1869,56 +1869,55 @@ menu_instalador_pg_1(){
     echo -e "${amarelo}[ 00 ]${reset} - ${branco}Testar SMTP                            ${verde}| ${reset}  ${amarelo}[ 23 ]${reset} - ${branco}Langfuse ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 01 ]${reset} - ${branco}Traefik & Portainer ${verde}[1/1]${reset}              ${verde}| ${reset}  ${amarelo}[ 24 ]${reset} - ${branco}Metabase ${verde}[1/1] ${reset}"
     echo -e "${amarelo}[ 02 ]${reset} - ${branco}Chatwoot ${verde}[2/2]${reset}                         ${verde}| ${reset}  ${amarelo}[ 25 ]${reset} - ${branco}Odoo ${verde}[2/2] ${reset}"
-    echo -e "${amarelo}[ 03 ]${reset} - ${branco}Evolution API ${verde}[1/1]${reset}                    ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Chatwoot Mega ${verde}[2/2] ${reset}"
-    echo -e "${amarelo}[ 04 ]${reset} - ${branco}MinIO ${verde}[1/1]${reset}                            ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Uno API ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 05 ]${reset} - ${branco}Typebot ${verde}[2/2]${reset}                          ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}N8N + Nodes Quepasa ${verde}[2/2] ${reset}"
-    echo -e "${amarelo}[ 06 ]${reset} - ${branco}N8N ${verde}[2/2]${reset}                              ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Quepasa API ${verde}[2/2] ${reset}"
-    echo -e "${amarelo}[ 07 ]${reset} - ${branco}Flowise ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Docuseal ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 08 ]${reset} - ${branco}PgAdmin 4 ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor ${verde}[2/2] ${reset}"
-    echo -e "${amarelo}[ 09 ]${reset} - ${branco}Nocobase ${verde}[1/1]${reset}                         ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Dify AI ${verde}[2/4] ${reset}"
-    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress ${verde}[1/1]${reset}                         ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Ollama ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}Affine ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}Directus ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB ${verde}[1/2]${reset}                          ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}VaultWarden ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ ${verde}[1/1]${reset}                         ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}NextCloud ${verde}[2/2] ${reset}"
-    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma ${verde}[1/1]${reset}                      ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Strapi ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}PhpMyAdmin ${verde}[1/2] ${reset}"
-    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic ${verde}[2/2]${reset}                           ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}Supabase ${verde}[2/4] ${reset}"
-    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith ${verde}[2/4]${reset}                         ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}Ntfy ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}LowCoder ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 43 ]${reset} - ${branco}LangFlow ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 21 ]${reset} - ${branco}Formbricks ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 44 ]${reset} - ${branco}OpenProject ${verde}[1/1] ${reset}"
-    echo -e "${amarelo}[ 22 ]${reset} - ${branco}NocoDB ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 45 ]${reset} - ${branco}ZEP ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 03 ]${reset} - ${branco}Evolution API ${verde}[1/1]${reset}                    ${verde}| ${reset}  ${amarelo}[ 26 ]${reset} - ${branco}Uno API ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 04 ]${reset} - ${branco}MinIO ${verde}[1/1]${reset}                            ${verde}| ${reset}  ${amarelo}[ 27 ]${reset} - ${branco}Quepasa API ${verde}[2/2] ${reset}"
+    echo -e "${amarelo}[ 05 ]${reset} - ${branco}Typebot ${verde}[2/2]${reset}                          ${verde}| ${reset}  ${amarelo}[ 28 ]${reset} - ${branco}Docuseal ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 06 ]${reset} - ${branco}N8N ${verde}[2/2]${reset}                              ${verde}| ${reset}  ${amarelo}[ 29 ]${reset} - ${branco}Grafana + Prometheus + cAdvisor ${verde}[2/2] ${reset}"
+    echo -e "${amarelo}[ 07 ]${reset} - ${branco}Flowise ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 30 ]${reset} - ${branco}Dify AI ${verde}[2/4] ${reset}"
+    echo -e "${amarelo}[ 08 ]${reset} - ${branco}PgAdmin 4 ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 31 ]${reset} - ${branco}Ollama ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 09 ]${reset} - ${branco}Nocobase ${verde}[1/1]${reset}                         ${verde}| ${reset}  ${amarelo}[ 32 ]${reset} - ${branco}Affine ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 10 ]${reset} - ${branco}Botpress ${verde}[1/1]${reset}                         ${verde}| ${reset}  ${amarelo}[ 33 ]${reset} - ${branco}Directus ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 11 ]${reset} - ${branco}Wordpress ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 34 ]${reset} - ${branco}VaultWarden ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 12 ]${reset} - ${branco}Baserow ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 35 ]${reset} - ${branco}NextCloud ${verde}[2/2] ${reset}"
+    echo -e "${amarelo}[ 13 ]${reset} - ${branco}MongoDB ${verde}[1/2]${reset}                          ${verde}| ${reset}  ${amarelo}[ 36 ]${reset} - ${branco}Strapi ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 14 ]${reset} - ${branco}RabbitMQ ${verde}[1/1]${reset}                         ${verde}| ${reset}  ${amarelo}[ 37 ]${reset} - ${branco}PhpMyAdmin ${verde}[1/2] ${reset}"
+    echo -e "${amarelo}[ 15 ]${reset} - ${branco}Uptime Kuma ${verde}[1/1]${reset}                      ${verde}| ${reset}  ${amarelo}[ 38 ]${reset} - ${branco}Supabase ${verde}[2/4] ${reset}"
+    echo -e "${amarelo}[ 16 ]${reset} - ${branco}Cal.com ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 39 ]${reset} - ${branco}Ntfy ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 17 ]${reset} - ${branco}Mautic ${verde}[2/2]${reset}                           ${verde}| ${reset}  ${amarelo}[ 40 ]${reset} - ${branco}LowCoder ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 18 ]${reset} - ${branco}Appsmith ${verde}[2/4]${reset}                         ${verde}| ${reset}  ${amarelo}[ 41 ]${reset} - ${branco}LangFlow ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 19 ]${reset} - ${branco}Qdrant ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 42 ]${reset} - ${branco}OpenProject ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 20 ]${reset} - ${branco}Woofed CRM ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 43 ]${reset} - ${branco}ZEP ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 21 ]${reset} - ${branco}Formbricks ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 44 ]${reset} - ${branco}HumHub ${verde}[1/1] ${reset}"
+    echo -e "${amarelo}[ 22 ]${reset} - ${branco}NocoDB ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 45 ]${reset} - ${branco}Yourls ${verde}[1/1] ${reset}"
     echo -e ""
     echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
     echo -e ""
 }
 
 menu_instalador_pg_2(){
-    echo -e "${amarelo}[ 46 ]${reset} - ${branco}HumHub ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}Frappe ${verde}[2/4]${reset}"
-    echo -e "${amarelo}[ 47 ]${reset} - ${branco}Yourls ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}Bolt ${verde}[2/4]${reset}"
-    echo -e "${amarelo}[ 48 ]${reset} - ${branco}TwentyCRM${vermelho} ${verde}[1/4]${reset}                        ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}WiseMapping ${verde}[1/1]${reset}"
-    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Mattermost ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}Evo AI ${verde}[1/1]${reset}${reset}"
-    echo -e "${amarelo}[ 50 ]${reset} - ${branco}Outline ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}Keycloak ${verde}[1/1]${reset}${reset}"
-    echo -e "${amarelo}[ 51 ]${reset} - ${branco}Focalboard ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}Passbolt ${verde}[1/1]${reset}${reset}"
-    echo -e "${amarelo}[ 52 ]${reset} - ${branco}GLPI ${verde}[1/1]${reset}                             ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}Gotenberg ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 53 ]${reset} - ${branco}Anything LLM ${verde}[1/1]${reset}                     ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}Wiki.js ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 54 ]${reset} - ${branco}Excalidraw ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 77 ]${reset} - ${branco}AzuraCast ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 55 ]${reset} - ${branco}Easy!Apointments ${verde}[1/1]${reset}                 ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}Shlink ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 56 ]${reset} - ${branco}Documenso ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}RustDesk ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 57 ]${reset} - ${branco}Moodle ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 80 ]${reset} - ${branco}Hoppscotch ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
-    echo -e "${amarelo}[ 58 ]${reset} - ${branco}ToolJet ${verde}[2/4]${reset}                          ${verde}| ${reset}  ${amarelo}[ 81 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 59 ]${reset} - ${branco}Stirling PDF ${verde}[1/1]${reset}                     ${verde}| ${reset}  ${amarelo}[ 82 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 60 ]${reset} - ${branco}ClickHouse ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 83 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 61 ]${reset} - ${branco}RedisInsight ${verde}[1/1]${reset}                     ${verde}| ${reset}  ${amarelo}[ 84 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 62 ]${reset} - ${branco}Traccar ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 85 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 63 ]${reset} - ${branco}Firecrawl ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 86 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 64 ]${reset} - ${branco}Wuzapi ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 87 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 65 ]${reset} - ${branco}krayin CRM ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 88 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 66 ]${reset} - ${branco}Planka ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 89 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 67 ]${reset} - ${branco}WppConnect ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 90 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e "${amarelo}[ 68 ]${reset} - ${branco}Browserless ${verde}[2/4]${reset}                      ${verde}| ${reset}  ${amarelo}[ 91 ]${reset} - ${branco}EM BREVE...${reset}"
-    echo -e ""
+    echo -e "${amarelo}[ 46 ]${reset} - ${branco}TwentyCRM${vermelho} ${verde}[1/4]${reset}                        ${verde}| ${reset}  ${amarelo}[ 69 ]${reset} - ${branco}WiseMapping ${verde}[1/1]${reset}"
+    echo -e "${amarelo}[ 47 ]${reset} - ${branco}Mattermost ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 70 ]${reset} - ${branco}Evo AI ${verde}[1/1]${reset}${reset}"
+    echo -e "${amarelo}[ 48 ]${reset} - ${branco}Outline ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 71 ]${reset} - ${branco}Keycloak ${verde}[1/1]${reset}${reset}"
+    echo -e "${amarelo}[ 49 ]${reset} - ${branco}Focalboard ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 72 ]${reset} - ${branco}Passbolt ${verde}[1/1]${reset}${reset}"
+    echo -e "${amarelo}[ 50 ]${reset} - ${branco}GLPI ${verde}[1/1]${reset}                             ${verde}| ${reset}  ${amarelo}[ 73 ]${reset} - ${branco}Gotenberg ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 51 ]${reset} - ${branco}Anything LLM ${verde}[1/1]${reset}                     ${verde}| ${reset}  ${amarelo}[ 74 ]${reset} - ${branco}Wiki.js ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 52 ]${reset} - ${branco}Excalidraw ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 75 ]${reset} - ${branco}AzuraCast ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 53 ]${reset} - ${branco}Easy!Apointments ${verde}[1/1]${reset}                 ${verde}| ${reset}  ${amarelo}[ 76 ]${reset} - ${branco}Shlink ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 54 ]${reset} - ${branco}Documenso ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 77 ]${reset} - ${branco}RustDesk ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 55 ]${reset} - ${branco}Moodle ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 78 ]${reset} - ${branco}Hoppscotch ${verde}[1/1]${reset} ${verde}[NOVO]${reset}"
+    echo -e "${amarelo}[ 56 ]${reset} - ${branco}ToolJet ${verde}[2/4]${reset}                          ${verde}| ${reset}  ${amarelo}[ 79 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 57 ]${reset} - ${branco}Stirling PDF ${verde}[1/1]${reset}                     ${verde}| ${reset}  ${amarelo}[ 80 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 58 ]${reset} - ${branco}ClickHouse ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 81 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 59 ]${reset} - ${branco}RedisInsight ${verde}[1/1]${reset}                     ${verde}| ${reset}  ${amarelo}[ 82 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 60 ]${reset} - ${branco}Traccar ${verde}[1/1]${reset}                          ${verde}| ${reset}  ${amarelo}[ 83 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 61 ]${reset} - ${branco}Firecrawl ${verde}[1/1]${reset}                        ${verde}| ${reset}  ${amarelo}[ 84 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 62 ]${reset} - ${branco}Wuzapi ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 85 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 63 ]${reset} - ${branco}krayin CRM ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 86 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 64 ]${reset} - ${branco}Planka ${verde}[1/1]${reset}                           ${verde}| ${reset}  ${amarelo}[ 87 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 65 ]${reset} - ${branco}WppConnect ${verde}[1/1]${reset}                       ${verde}| ${reset}  ${amarelo}[ 88 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 66 ]${reset} - ${branco}Browserless ${verde}[2/4]${reset}                      ${verde}| ${reset}  ${amarelo}[ 89 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 67 ]${reset} - ${branco}Frappe ${verde}[2/4]${reset}                           ${verde}| ${reset}  ${amarelo}[ 90 ]${reset} - ${branco}EM BREVE...${reset}"
+    echo -e "${amarelo}[ 68 ]${reset} - ${branco}Bolt ${verde}[2/4]${reset}                             ${verde}| ${reset}  ${amarelo}[ 91 ]${reset} - ${branco}EM BREVE...${reset}"
     echo -e ""
     echo -e "${branco}<-- Digite ${amarelo}P1 ${branco}para ir para pagina 1             ${amarelo}|${branco}              Digite ${amarelo}P2${branco} para ir para pagina 2 -->${reset}"
     echo -e ""
@@ -34873,23 +34872,8 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        26|chatwoot_nestor|CHATWOOT_NETOR)
 
-            verificar_stack "chatwoot_nestor${opcao2:+_$opcao2}" && continue || echo ""
-
-            if verificar_docker_e_portainer_traefik; then
-                ## INICIO TOKEN
-                STACK_NAME="chatwoot_nestor${opcao2:+_$opcao2}"
-                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_chatwoot_nestor "$opcao2"
-                else
-                    APP_ORION="ferramenta_chatwoot_nestor"
-                    verificar_arquivo
-                fi
-                ## FIM TOKEN
-            fi
-            ;;
-        27|unoapi|UNOAPI)
+        26|unoapi|UNOAPI)
 
             verificar_stack "unoapi${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -34905,23 +34889,8 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        28|n8n_quepasa|N8N_QUEPASA)
 
-            verificar_stack "n8n_quepasa${opcao2:+_$opcao2}" && continue || echo ""
-
-            if verificar_docker_e_portainer_traefik; then
-                ## INICIO TOKEN
-                STACK_NAME="n8n_quepasa${opcao2:+_$opcao2}"
-                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_n8n_quepasa "$opcao2"
-                else
-                    APP_ORION="ferramenta_n8n_quepasa"
-                    verificar_arquivo
-                fi
-                ## FIM TOKEN
-            fi
-            ;;
-        29|quepasa|QUEPASA)
+        27|quepasa|QUEPASA)
 
             verificar_stack "quepasa${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -34937,7 +34906,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        30|docuseal|DOCUSEAL)
+        28|docuseal|DOCUSEAL)
 
             verificar_stack "docuseal${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -34953,7 +34922,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        31|monitor|grafana|MONITOR|GRAFANA)
+        29|monitor|grafana|MONITOR|GRAFANA)
 
             verificar_stack "monitor${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -34969,7 +34938,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        32|dify|DIFY)
+        30|dify|DIFY)
 
             verificar_stack "dify${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -34985,7 +34954,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        33|ollama|OLLAMA)
+        31|ollama|OLLAMA)
 
             verificar_stack "ollama${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35001,7 +34970,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        34|affine|AFFINE)
+        32|affine|AFFINE)
 
             verificar_stack "affine${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35017,7 +34986,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        35|directus|DIRECTUS)
+        33|directus|DIRECTUS)
 
             verificar_stack "directus${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35033,7 +35002,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        36|vaultwarden|VAULTWARDEN)
+        34|vaultwarden|VAULTWARDEN)
 
             verificar_stack "vaultwarden${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35049,7 +35018,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        37|nextcloud|NEXTCLOUD)
+        35|nextcloud|NEXTCLOUD)
 
             verificar_stack "nextcloud${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35065,7 +35034,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        38|strapi|STRAPI)
+        36|strapi|STRAPI)
 
             verificar_stack "strapi${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35081,7 +35050,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        39|phpmyadmin|pma|PHPMYADMIN|PMA)
+        37|phpmyadmin|pma|PHPMYADMIN|PMA)
 
             verificar_stack "phpmyadmin${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35097,7 +35066,7 @@ while true; do
                 ## FIM TOKEN
             fi
             ;;
-        40|supabase|supa|SUPABASE|SUPA)
+        38|supabase|supa|SUPABASE|SUPA)
 
             verificar_stack "supabase${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35113,7 +35082,7 @@ while true; do
                 ## FIM TOKEN            
             fi
             ;;
-        41|ntfy|NTFY)
+        39|ntfy|NTFY)
 
             verificar_stack "ntfy${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35129,7 +35098,7 @@ while true; do
                 ## FIM TOKEN
             fi   
             ;;
-        42|lowcoder|LOWCODER)
+        40|lowcoder|LOWCODER)
 
             verificar_stack "lowcoder${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35145,7 +35114,7 @@ while true; do
                 ## FIM TOKEN
             fi   
             ;;
-        43|langflow|LANGFLOW)
+        41|langflow|LANGFLOW)
 
             verificar_stack "langflow${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35161,7 +35130,7 @@ while true; do
                 ## FIM TOKEN
             fi   
             ;;
-        44|openproject|OPENPROJECT)
+        42|openproject|OPENPROJECT)
 
             verificar_stack "openproject${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35177,7 +35146,7 @@ while true; do
                 ## FIM TOKEN
             fi   
             ;;
-        45|zep|ZEP)
+        43|zep|ZEP)
 
             verificar_stack "zep${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35193,7 +35162,7 @@ while true; do
                 ## FIM TOKEN
             fi   
             ;;
-        46|humhub|HUMHUB)
+        44|humhub|HUMHUB)
 
             verificar_stack "humhub${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35209,7 +35178,7 @@ while true; do
                 ## FIM TOKEN
             fi   
             ;;
-        47|yourls|YOURLS)
+        45|yourls|YOURLS)
 
             verificar_stack "yourls${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35226,7 +35195,7 @@ while true; do
             fi   
             ;;
 
-        48|twentycrm|TWENTYCRM)
+        46|twentycrm|TWENTYCRM)
 
             verificar_stack "twentycrm${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35243,7 +35212,7 @@ while true; do
             fi   
             ;;
 
-        49|mattermost|MATTERMOST) 
+        47|mattermost|MATTERMOST) 
 
             verificar_stack "mattermost${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35260,7 +35229,7 @@ while true; do
             fi   
             ;;
 
-        50|outline|OUTLINE)
+        48|outline|OUTLINE)
 
             verificar_stack "outline${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35277,7 +35246,7 @@ while true; do
             fi   
             ;;
 
-        51|focalboard|FOCALBOARD) 
+        49|focalboard|FOCALBOARD) 
 
             verificar_stack "focalboard${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35294,7 +35263,7 @@ while true; do
             fi   
             ;;
 
-        52|glpi|GLPI) 
+        50|glpi|GLPI) 
 
             verificar_stack "glpi${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35311,7 +35280,7 @@ while true; do
             fi   
             ;;
 
-        53|anythingllm|anything|AnythingLLM|Anything) 
+        51|anythingllm|anything|AnythingLLM|Anything) 
 
             verificar_stack "anythingllm${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35328,7 +35297,7 @@ while true; do
             fi   
             ;;
         
-        54|excalidraw|Excalidraw) 
+        52|excalidraw|Excalidraw) 
 
             verificar_stack "excalidraw${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35345,7 +35314,7 @@ while true; do
             fi   
             ;;
 
-        55|easyappointments|EasyAppointments|Easy!Appointments|easy!appointments) 
+        53|easyappointments|EasyAppointments|Easy!Appointments|easy!appointments) 
 
             verificar_stack "easyappointments${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35362,7 +35331,7 @@ while true; do
             fi   
             ;;
 
-        56|documenso|Documenso) 
+        54|documenso|Documenso) 
 
             verificar_stack "documenso${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35379,7 +35348,7 @@ while true; do
             fi   
             ;;
 
-        57|moodle|MOODLE) 
+        55|moodle|MOODLE) 
 
             verificar_stack "moodle${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35396,7 +35365,7 @@ while true; do
             fi   
             ;;
 
-        58|tooljet|TOOLJET)
+        56|tooljet|TOOLJET)
 
             verificar_stack "tooljet${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35413,7 +35382,7 @@ while true; do
             fi   
             ;;
 
-        59|StirlingPDF|Stirling|stirling) 
+        57|StirlingPDF|Stirling|stirling) 
 
             verificar_stack "stirlingpdf${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35430,7 +35399,7 @@ while true; do
             fi   
             ;;
         
-        60|ClickHouse|clickhouse|CLICKHOUSE)
+        58|ClickHouse|clickhouse|CLICKHOUSE)
 
             verificar_stack "clickhouse${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35447,7 +35416,7 @@ while true; do
             fi   
             ;;
         
-        61|RedisInsight|redisinsight|REDISINSIGHT) 
+        59|RedisInsight|redisinsight|REDISINSIGHT) 
 
             verificar_stack "redisinsight${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35464,7 +35433,7 @@ while true; do
             fi   
             ;;
 
-        62|Traccar|traccar|TRACCAR) 
+        60|Traccar|traccar|TRACCAR) 
 
             verificar_stack "traccar${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35481,7 +35450,7 @@ while true; do
             fi   
             ;;
 
-        63|Firecrawl|firecrawl|FIRECRAWL) 
+        61|Firecrawl|firecrawl|FIRECRAWL) 
 
             verificar_stack "firecrawl${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35498,7 +35467,7 @@ while true; do
             fi   
             ;;
 
-        64|Wuzapi|wuzapi|WUZAPI) 
+        62|Wuzapi|wuzapi|WUZAPI) 
 
             verificar_stack "wuzapi${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35515,7 +35484,7 @@ while true; do
             fi   
             ;;
 
-        65|KrayinCRM|krayincrm|KRAYINCRM) 
+        63|KrayinCRM|krayincrm|KRAYINCRM) 
 
             verificar_stack "krayincrm${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35532,7 +35501,7 @@ while true; do
             fi   
             ;;
 
-        66|Planka|planka|PLANKA) 
+        64|Planka|planka|PLANKA) 
 
             verificar_stack "planka${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35549,7 +35518,7 @@ while true; do
             fi   
             ;;
 
-        67|WppConnect|wppconnect|WPPCONNECT) 
+        65|WppConnect|wppconnect|WPPCONNECT) 
 
             verificar_stack "wppconnect${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35566,7 +35535,7 @@ while true; do
             fi   
             ;;
 
-        68|Browserless|browserless|BROWSERLESS) 
+        66|Browserless|browserless|BROWSERLESS) 
 
             verificar_stack "browserless${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35583,7 +35552,7 @@ while true; do
             fi   
             ;;
 
-        69|Frappe|frappe|FRAPPE) 
+        67|Frappe|frappe|FRAPPE) 
 
             verificar_stack "erpnext${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35600,7 +35569,7 @@ while true; do
             fi   
             ;;
 
-        70|Bolt|bolt|BOLT) 
+        68|Bolt|bolt|BOLT) 
 
             verificar_stack "bolt${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35617,7 +35586,7 @@ while true; do
             fi   
             ;;
 
-        71|WiseMapping|wisemapping|WISEMAPPING) 
+        69|WiseMapping|wisemapping|WISEMAPPING) 
 
             verificar_stack "wisemapping${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35634,7 +35603,7 @@ while true; do
             fi   
             ;;
         
-        72|EvoAPI|evoapi|EVOAPI) 
+        70|EvoAPI|evoapi|EVOAPI) 
 
             verificar_stack "evoai${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35651,7 +35620,7 @@ while true; do
             fi   
             ;;
         
-        73|Keycloak|keycloak|KEYCLOAK) 
+        71|Keycloak|keycloak|KEYCLOAK) 
 
             verificar_stack "keycloak${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35668,7 +35637,7 @@ while true; do
             fi   
             ;;
 
-        74|Passbolt|passbolt|PASSBOLT) 
+        72|Passbolt|passbolt|PASSBOLT) 
 
             verificar_stack "passbolt${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35685,7 +35654,7 @@ while true; do
             fi   
             ;;
           
-        75|Gotenberg|gotenberg|GOTENBERG) 
+        73|Gotenberg|gotenberg|GOTENBERG) 
 
             verificar_stack "gotenberg${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35702,7 +35671,7 @@ while true; do
             fi   
             ;;
         
-        76|Wiki|wiki|WIKI) 
+        74|Wiki|wiki|WIKI) 
 
             verificar_stack "wiki${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35719,7 +35688,7 @@ while true; do
             fi   
             ;;
         
-        77|AzuraCast|azuracast|AZURACAST) 
+        75|AzuraCast|azuracast|AZURACAST) 
 
             verificar_stack "azuracast${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35736,7 +35705,7 @@ while true; do
             fi   
             ;;
         
-        78|Shlink|shlink|SHLINK) 
+        76|Shlink|shlink|SHLINK) 
 
             verificar_stack "shlink${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35753,7 +35722,7 @@ while true; do
             fi   
             ;;
         
-        79|RustDesk|rustdesk|RUSTDESK) 
+        77|RustDesk|rustdesk|RUSTDESK) 
 
             verificar_stack "rustdesk${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -35770,7 +35739,7 @@ while true; do
             fi   
             ;;
         
-        80|Hoppscotch|hoppscotch|HOPPSCOTCH) 
+        78|Hoppscotch|hoppscotch|HOPPSCOTCH) 
 
             verificar_stack "hoppscotch${opcao2:+_$opcao2}" && continue || echo ""
 
@@ -36007,7 +35976,40 @@ while true; do
 
             fi   
             ;;
+        
+        chatwoot.mega)
 
+            verificar_stack "chatwoot_nestor${opcao2:+_$opcao2}" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+                ## INICIO TOKEN
+                STACK_NAME="chatwoot_nestor${opcao2:+_$opcao2}"
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_chatwoot_nestor "$opcao2"
+                else
+                    APP_ORION="ferramenta_chatwoot_nestor"
+                    verificar_arquivo
+                fi
+                ## FIM TOKEN
+            fi
+            ;;
+        
+        n8n.quepasa)
+
+            verificar_stack "n8n_quepasa${opcao2:+_$opcao2}" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+                ## INICIO TOKEN
+                STACK_NAME="n8n_quepasa${opcao2:+_$opcao2}"
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_n8n_quepasa "$opcao2"
+                else
+                    APP_ORION="ferramenta_n8n_quepasa"
+                    verificar_arquivo
+                fi
+                ## FIM TOKEN
+            fi
+            ;;
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
