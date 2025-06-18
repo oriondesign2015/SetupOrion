@@ -14514,9 +14514,9 @@ echo ""
 sleep 1
 
 ##  Aqui vamos alterar um dado no postgres para liberar algumas funções ocultas no painel de super admin
-wait_for_postgres
+wait_for_pgvector
 
-CONTAINER_ID_NESTOR=$(docker ps -q --filter "name=postgres_postgres")
+CONTAINER_ID_NESTOR=$(docker ps -q --filter "name=pgvector_pgvector")
 
 docker exec -i $CONTAINER_ID_NESTOR psql -U postgres <<EOF > /dev/null 2>&1
 \c chatwoot_nestor${1:+_$1};
