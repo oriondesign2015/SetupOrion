@@ -5207,7 +5207,7 @@ verificar_container_pgvector
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Postgres já instalado"
     pegar_senha_pgvector > /dev/null 2>&1
-    echo "2/3 - [ OK ] - Copiando senha do Postgres"
+    echo "2/3 - [ OK ] - Copiando senha do PgVector"
     criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
     echo "3/3 - [ OK ] - Criando banco de dados"
     echo ""
@@ -34330,7 +34330,6 @@ minio.bucket() {
     return 1
   fi
 
-  # Descobre o container do MinIO
   MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
   if [ -z "$MINIO_CONTAINER" ]; then
     echo "❌ Container MinIO não encontrado!"
@@ -34341,7 +34340,6 @@ minio.bucket() {
   S3_ENDPOINT=""
   ENDPOINTS=("http://minio:9000" "http://localhost:9000")
 
-  # Testa os endpoints padrão
   for endpoint in "${ENDPOINTS[@]}"; do
     if $MC_CMD alias set admin "$endpoint" "$ADMIN_USER" "$ADMIN_PASS" >/dev/null 2>&1; then
       S3_ENDPOINT="$endpoint"
@@ -34350,7 +34348,6 @@ minio.bucket() {
     fi
   done
 
-  # Se falhou nos dois, pergunta manualmente
   if [ -z "$S3_ENDPOINT" ]; then
     echo -e "\n❌ Falha ao conectar com os endpoints padrão (minio, localhost)."
     echo -en "\e[33m👉 Digite manualmente o endpoint (ex: http://ip:9000): \e[0m"
@@ -34371,11 +34368,27 @@ minio.bucket() {
     echo "⚠️ Não foi possível criar o bucket '$BUCKET_NAME'. Ele já pode existir."
   fi
 
+  # Cria uma nova Access Key e Secret Key
+  S3_ACCESS_KEY=$(head /dev/urandom | tr -dc A-Z0-9 | head -c 12)
+  S3_SECRET_KEY=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
+
+  # Cria o usuário no MinIO
+  if $MC_CMD admin user add admin "$S3_ACCESS_KEY" "$S3_SECRET_KEY"; then
+    echo "✅ Usuário criado com sucesso:"
+    echo "Access Key: $S3_ACCESS_KEY"
+    echo "Secret Key: $S3_SECRET_KEY"
+  else
+    echo "❌ Falha ao criar usuário no MinIO"
+    return 1
+  fi
+
   # Lista os buckets
   $MC_CMD ls admin || echo "⚠️ Falha ao listar buckets no MinIO"
 
-  # Retorna o endpoint para uso externo, se necessário
+  # Exporta as variáveis
   export S3_ENDPOINT
+  export S3_ACCESS_KEY
+  export S3_SECRET_KEY
 }
 
 
@@ -34507,6 +34520,52 @@ EOF" || {
 
   creditos_msg
   requisitar_outra_instalacao
+}
+
+
+minio.bucket.delete() {
+  echo -en "\e[33m👉 Digite o nome da Bucket que deseja remover (ex: arquivos): \e[0m"
+  read -r BUCKET
+
+  POLICY_NAME="publicread-$BUCKET"
+
+  # Descobre o container do MinIO
+  MINIO_CONTAINER=$(docker ps --filter "name=minio" -q | head -n1)
+  if [ -z "$MINIO_CONTAINER" ]; then
+    echo "❌ Container MinIO não encontrado!"
+    exit 1
+  fi
+
+  MC_CMD="docker exec -i $MINIO_CONTAINER mc"
+
+  echo -e "\n🔍 Buscando usuário vinculado à política $POLICY_NAME..."
+  USER_ACCESS_KEY=$($MC_CMD admin policy entities admin "$POLICY_NAME" 2>/dev/null | grep -oP '(?<=user\s)[^\s]+')
+
+  if [ -z "$USER_ACCESS_KEY" ]; then
+    echo "❌ Não foi possível encontrar o usuário com a política '$POLICY_NAME'."
+    exit 1
+  fi
+
+  echo "🔸 Usuário identificado: $USER_ACCESS_KEY"
+
+  echo -e "\n🧹 Limpando bucket, política e usuário..."
+
+  # Remove acesso anônimo
+  $MC_CMD anonymous set download admin/"$BUCKET" >/dev/null 2>&1 || echo "⚠️ Falha ao remover acesso anônimo"
+
+  # Remove o usuário
+  $MC_CMD admin user remove admin "$USER_ACCESS_KEY" >/dev/null 2>&1 || echo "⚠️ Falha ao remover usuário"
+
+  # Remove a política
+  $MC_CMD admin policy remove admin "$POLICY_NAME" >/dev/null 2>&1 || echo "⚠️ Falha ao remover política"
+
+  # Remove a bucket com todos os objetos
+  $MC_CMD rb --force admin/"$BUCKET" >/dev/null 2>&1 || {
+    echo "❌ Falha ao remover a bucket. Verifique se ela existe e está vazia."
+    exit 1
+  }
+
+  echo -e "\n✅ \e[32mBucket '$BUCKET' e recursos associados removidos com sucesso!\e[0m"
 }
 
 
@@ -36128,6 +36187,10 @@ while true; do
 
         minio.bucket)
             minio.bucket.setup
+            ;;
+          
+        minio.bucket.delete)
+            minio.bucket.delete
             ;;
         
         ## Corrigir credenciais do portainer (para instalações)
