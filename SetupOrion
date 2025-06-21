@@ -2497,7 +2497,7 @@ verificar_antes_se_tem_clickhouse() {
     if ! docker ps -a --format "{{.Names}}" | grep -q "clickhouse"; then
         clear
         erro_msg
-        echo -e "Ops, parece que você não instalou a opção \e[32m[ 60 ] - ClickHouse${reset} ${branco}do nosso instalador.${reset}"
+        echo -e "Ops, parece que você não instalou a opção \e[32m[ 58 ] - ClickHouse${reset} ${branco}do nosso instalador.${reset}"
         echo "Instale antes de tentar instalar esta aplicação."
 
         echo ""
