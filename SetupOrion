@@ -5239,7 +5239,8 @@ services:
 
   chatwoot${1:+_$1}_app:
     image: chatwoot/chatwoot:v4.1.0 ## Versão do Chatwoot
-    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    command: >
+      sh -c "echo 'Rails.application.config.active_storage.variant_processor = :mini_magick' > /app/config/initializers/active_storage.rb && bundle exec rails s -p 3000 -b 0.0.0.0"
     entrypoint: docker/entrypoints/rails.sh
 
     volumes:
