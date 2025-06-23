@@ -27184,13 +27184,14 @@ mkdir -p /opt/traccar${1:+_$1}/logs
 
 cat > traccar.xml <<EOL
 <?xml version='1.0' encoding='UTF-8'?>
-<config>
-    <entry key='database.driver'>com.mysql.cj.jdbc.Driver</entry>
-    <entry key='database.url'>jdbc:mysql://traccar${1:+_$1}_db:3306/traccar?allowPublicKeyRetrieval=true&amp;useSSL=false</entry>
-    <entry key='database.user'>traccar</entry>
-    <entry key='database.password'>$gerar_senha_mysql</entry>
-    <entry key='web.port'>8082</entry>
-</config>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="database.driver">com.mysql.cj.jdbc.Driver</entry>
+    <entry key="database.url">jdbc:mysql://traccar${1:+_$1}_db:3306/traccar?allowPublicKeyRetrieval=true&amp;useSSL=false</entry>
+    <entry key="database.user">traccar</entry>
+    <entry key="database.password">$gerar_senha_mysql</entry>
+    <entry key="web.port">8082</entry>
+</properties>
 EOL
 
 mv traccar.xml /opt/traccar${1:+_$1}/
