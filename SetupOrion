@@ -5238,7 +5238,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot${1:+_$1}_app:
-    image: chatwoot/chatwoot:v4.3.0 ## Versão do Chatwoot
+    image: chatwoot/chatwoot:v4.1.0 ## Versão do Chatwoot
     command: >
       sh -c "echo 'Rails.application.config.active_storage.variant_processor = :mini_magick' > /app/config/initializers/active_storage.rb && bundle exec rails s -p 3000 -b 0.0.0.0"
     entrypoint: docker/entrypoints/rails.sh
@@ -5346,7 +5346,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot${1:+_$1}_sidekiq:
-    image: chatwoot/chatwoot:v4.3.0 ## Versão do Chatwoot
+    image: chatwoot/chatwoot:v4.1.0 ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
@@ -5517,7 +5517,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull redis:latest chatwoot/chatwoot:v4.3.0
+pull redis:latest chatwoot/chatwoot:v4.1.0
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
 wait_stack chatwoot${1:+_$1}_chatwoot${1:+_$1}_redis chatwoot${1:+_$1}_chatwoot${1:+_$1}_app chatwoot${1:+_$1}_chatwoot${1:+_$1}_sidekiq
