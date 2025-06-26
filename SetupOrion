@@ -33370,7 +33370,7 @@ services:
           memory: 2048M
       labels:
         - traefik.enable=true
-        - traefik.http.middlewares.nogzip.headers.customResponseHeaders.Content-Encoding=""
+        - traefik.http.middlewares.nogzip.headers.customResponseHeaders.Content-Encoding=
         - traefik.http.routers.n8n${1:+_$1}_mcp.rule=(Host(\`$WEBHOOK_URL_FORMATADO\`) && PathPrefix(\`/mcp\`)) ## Url do Webhook do N8N
         - traefik.http.routers.n8n${1:+_$1}_mcp.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_mcp.priority=1
