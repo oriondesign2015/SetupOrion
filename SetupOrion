@@ -6160,7 +6160,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API LITE \e[33m[1/5]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API LITE \e[33m[1/4\e[0m"
 echo ""
 sleep 1
 
@@ -6171,7 +6171,7 @@ telemetria "Evolution API" "iniciado"
 ## E claro, para aparecer a mensagem do passo..
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
@@ -6195,21 +6195,7 @@ else
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
-echo ""
-sleep 1
-
-## Verifica/instala o Redis
-verificar_container_redis
-if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Redis já instalado"
-    echo ""
-else
-    ferramenta_redis
-fi
-
-## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[4/5]\e[0m"
+echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
@@ -6265,7 +6251,7 @@ services:
       
       ## 🧊 Configuração do Cache
       - CACHE_REDIS_ENABLED=true
-      - CACHE_REDIS_URI=redis://redis:6379/8
+      - CACHE_REDIS_URI=redis://evolution${1:+_$1}_lite_redis:6379/8
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
       - CACHE_LOCAL_ENABLED=false
@@ -6388,10 +6374,44 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
+  evolution${1:+_$1}_lite_redis:
+    image: redis:latest  ## Versão do Redis
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+
+    volumes:
+      - evolution${1:+_$1}_lite_redis:/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    ## Descomente as linhas abaixo para uso externo
+    #ports:
+    #  - 6379:6379
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 2048M
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   evolution${1:+_$1}_lite_instances:
     external: true
     name: evolution${1:+_$1}_lite_instances
+  evolution${1:+_$1}_lite_redis:
+    external: true
+    name: evolution${1:+_$1}_lite_redis
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -6418,12 +6438,12 @@ stack_editavel # > /dev/null 2>&1
 sleep 10
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
 ## Baixando imagens:
-pull atendai/evolution-api-lite:latest
+pull redis:latest atendai/evolution-api-lite:latest
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
 wait_stack "evolution${1:+_$1}_lite_evolution${1:+_$1}_lite"
