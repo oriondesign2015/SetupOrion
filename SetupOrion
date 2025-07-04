@@ -19935,7 +19935,7 @@ else
     echo "Não foi possivel Baixar."
 fi
 cd supabase
-git checkout 8aea2cd6c78e2c96f8243adb014336ff8cc7d838 > /dev/null 2>&1
+git checkout a3c77cd0609fd4524114f69dd3ef8ea36156f023 > /dev/null 2>&1
 
 #mv SetupOrion/Extras/Supabase /root/supabase${1:+_$1}
 cd docker
@@ -20112,7 +20112,7 @@ services:
   ## Secure Realtime routes
   - name: realtime-v1-ws
     _comment: 'Realtime: /realtime/v1/* -> ws://realtime${1:+_$1}:4000/socket/*'
-    url: http://realtime${1:+_$1}-dev.supabase-realtime:4000/socket
+    url: http://realtime${1:+_$1}:4000/socket
     protocol: ws
     routes:
       - name: realtime-v1-ws
@@ -20132,7 +20132,7 @@ services:
             - anon
   - name: realtime-v1-rest
     _comment: 'Realtime: /realtime/v1/* -> ws://realtime${1:+_$1}:4000/socket/*'
-    url: http://realtime${1:+_$1}-dev.supabase-realtime:4000/api
+    url: http://realtime${1:+_$1}:4000/api
     protocol: http
     routes:
       - name: realtime-v1-rest
@@ -20186,7 +20186,7 @@ services:
 
   ## Secure Database routes
   - name: meta
-    _comment: 'pg-meta: /pg/* -> http://pg-meta${1:+_$1}:8080/*'
+    _comment: 'pg-meta: /pg/* -> http://meta${1:+_$1}:8080/*'
     url: http://meta${1:+_$1}:8080/
     routes:
       - name: meta-all
@@ -20250,6 +20250,8 @@ Senha_Postgres=$(openssl rand -hex 16)
 
 Logflare_key=$(openssl rand -hex 16)
 
+Logflare_key_public=$(openssl rand -hex 16)
+
 SECRET_KEY_BASE=$(openssl rand -hex 32)
 
 VAULT_ENC_KEY=$(openssl rand -base64 32 | tr -d '\n' | cut -c1-32)
@@ -20262,7 +20264,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   studio${1:+_$1}:
-    image: supabase/studio:2025.05.19-sha-3487831 ## Versão do Supabase Studio
+    image: supabase/studio:2025.06.30-sha-6f5982d ## Versão do Supabase Studio
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20291,6 +20293,7 @@ services:
     ## Integração com Logflare
       - LOGFLARE_API_KEY=$Logflare_key
       - LOGFLARE_URL=http://analytics${1:+_$1}:4000
+      - LOGFLARE_PRIVATE_ACCESS_TOKEN=$Logflare_key
 
     ## Configurações de Autenticação
       - SUPABASE_ANON_KEY=$ANON_KEY
@@ -20361,7 +20364,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   auth${1:+_$1}:
-    image: supabase/gotrue:v2.172.1 ## Versão do Supabase Auth
+    image: supabase/gotrue:v2.176.1 ## Versão do Supabase Auth
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20547,7 +20550,7 @@ services:
     ## Configuração do IMGPROXY
       - IMGPROXY_BIND=:5001
       - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/
-      - IMGPROXY_USE_ETAG="true"
+      - IMGPROXY_USE_ETAG=true
       - IMGPROXY_ENABLE_WEBP_DETECTION=true
     
     deploy:
@@ -20560,7 +20563,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   meta${1:+_$1}:
-    image: supabase/postgres-meta:v0.89.0 ## Versão do Meta 
+    image: supabase/postgres-meta:v0.89.3 ## Versão do Meta 
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20615,7 +20618,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   analytics${1:+_$1}:
-    image: supabase/logflare:1.12.0 ## Versão do Supabase Analytics
+    image: supabase/logflare:1.14.2 ## Versão do Supabase Analytics
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -20636,6 +20639,8 @@ services:
     ## Configuração do Logflare
       - LOGFLARE_NODE_HOST=127.0.0.1
       - LOGFLARE_API_KEY=$Logflare_key
+      - LOGFLARE_PUBLIC_ACCESS_TOKEN=$Logflare_key_public
+      - LOGFLARE_PRIVATE_ACCESS_TOKEN=$Logflare_key
       - LOGFLARE_SINGLE_TENANT=true
       - LOGFLARE_SUPABASE_MODE=true
       - LOGFLARE_MIN_CLUSTER_SIZE=1
@@ -20712,7 +20717,7 @@ services:
     environment:
     ## Configuração do Logflare
       - LOGFLARE_API_KEY=$Logflare_key
-      - LOGFLARE_PUBLIC_ACCESS_TOKEN=$Logflare_key
+      - LOGFLARE_PUBLIC_ACCESS_TOKEN=$Logflare_key_public
     
     deploy:
       mode: replicated
@@ -20766,6 +20771,7 @@ services:
       - POOLER_DEFAULT_POOL_SIZE=20
       - POOLER_MAX_CLIENT_CONN=100
       - POOLER_POOL_MODE=transaction
+      - DB_POOL_SIZE=5
 
     ## Configuração de Porta
       - PORT=4000
@@ -20811,7 +20817,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull supabase/studio:2025.05.19-sha-3487831 kong:2.8.1 supabase/gotrue:v2.172.1 postgrest/postgrest:v12.2.12 supabase/realtime:v2.34.47 supabase/storage-api:v1.22.17 darthsim/imgproxy:v3.8.0 supabase/postgres-meta:v0.89.0 supabase/edge-runtime:v1.67.4 supabase/logflare:1.12.0 supabase/postgres:15.8.1.060 timberio/vector:0.28.1-alpine supabase/supavisor:2.5.1 
+pull supabase/studio:2025.06.30-sha-6f5982d kong:2.8.1 supabase/gotrue:v2.176.1 postgrest/postgrest:v12.2.12 supabase/realtime:v2.34.47 supabase/storage-api:v1.22.17 darthsim/imgproxy:v3.8.0 supabase/postgres-meta:v0.89.3 supabase/edge-runtime:v1.67.4 supabase/logflare:1.14.2 supabase/postgres:15.8.1.060 timberio/vector:0.28.1-alpine supabase/supavisor:2.5.1
 
 ## Usa o serviço wait_stack "supabase" para verificar se o serviço esta online
 wait_stack supabase${1:+_$1}_studio${1:+_$1} supabase${1:+_$1}_kong${1:+_$1} supabase${1:+_$1}_auth${1:+_$1} supabase${1:+_$1}_rest${1:+_$1} supabase${1:+_$1}_realtime${1:+_$1} supabase${1:+_$1}_storage${1:+_$1} supabase${1:+_$1}_imgproxy${1:+_$1} supabase${1:+_$1}_meta${1:+_$1} supabase${1:+_$1}_functions${1:+_$1} supabase${1:+_$1}_analytics${1:+_$1} supabase${1:+_$1}_db${1:+_$1} supabase${1:+_$1}_vector${1:+_$1} supabase${1:+_$1}_supavisor${1:+_$1} 
