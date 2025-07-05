@@ -13338,7 +13338,7 @@ services:
       - CLICKHOUSE_DB=langfuse${1:+_$1}
 
       ## Dados Redis
-      - REDIS_CONNECTION_STRING=redis://redis:6379
+      - REDIS_CONNECTION_STRING=redis://langfuse${1:+_$1}_redis:6379
 
       ## Dados do S3 - Eventos
       - LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT=https://$url_s3
@@ -13418,7 +13418,7 @@ services:
       - CLICKHOUSE_DB=langfuse${1:+_$1}
 
       ## Dados Redis
-      - REDIS_CONNECTION_STRING=redis://redis:6379
+      - REDIS_CONNECTION_STRING=redis://langfuse${1:+_$1}_redis:6379
 
       ## Dados do S3 - Eventos
       - LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT=https://$url_s3
@@ -13459,6 +13459,42 @@ services:
             memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
+
+  langfuse${1:+_$1}_redis:
+    image: redis:latest  ## Versão do Redis
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+
+    volumes:
+      - langfuse${1:+_$1}_redis:/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    ## Descomente as linhas abaixo para uso externo
+    #ports:
+    #  - 6379:6379
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+   langfuse${1:+_$1}_redis:
+    external: true
+    name: langfuse${1:+_$1}_redis
 
 networks:
   $nome_rede_interna: ## Rede interna
