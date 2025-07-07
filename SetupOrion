@@ -30294,6 +30294,9 @@ services:
   wisemapping${1:+_$1}:
     image: wisemapping/wisemapping:latest
 
+    volumes:
+      - wisemapping${1:+_$1}_db:/var/lib/wisemapping/db
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
@@ -30321,6 +30324,11 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
+volumes:
+  wisemapping${1:+_$1}_db:
+    external: true
+    name: wisemapping${1:+_$1}_db
+    
 networks:
   $nome_rede_interna: ## Nome da rede interna
     external: true
