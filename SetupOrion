@@ -3569,8 +3569,8 @@ systemctl start docker > /dev/null 2>&1
 if docker --version > /dev/null 2>&1; then
     echo "2/4 - [ OK ] - Baixando e Instalando Docker"
 else
-    echo "2/4 - [ OFF ] - Falha ao instalar Docker"
-    echo "Tentando instalação manual do Docker..."
+    #echo "2/4 - [ OFF ] - Falha ao instalar Docker"
+    #echo "Tentando instalação manual do Docker..."
 
     ## Instala dependências
     sudo apt-get install -y ca-certificates curl gnupg lsb-release > /dev/null 2>&1
@@ -3594,9 +3594,9 @@ else
     systemctl start docker > /dev/null 2>&1
 
     if docker --version > /dev/null 2>&1; then
-        echo "2/4 - [ OK ] - Docker instalado"
+        echo "2/4 - [ OK ] - Baixando e Instalando Docker"
     else
-        echo "2/4 - [ FAIL ] - Falha total na instalação do Docker"
+        echo "2/4 - [ OFF ] - Falha ao instalar Docker"
         exit 1
     fi
 fi
