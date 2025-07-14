@@ -69,7 +69,7 @@ nome_iniciando(){
     echo -e "$amarelo=                  $branco ██║██║╚██╗██║██║██║     ██║██╔══██║██║╚██╗██║██║  ██║██║   ██║                $amarelo=$reset"
     echo -e "$amarelo=                  $branco ██║██║ ╚████║██║╚██████╗██║██║  ██║██║ ╚████║██████╔╝╚██████╔╝                $amarelo=$reset"
     echo -e "$amarelo=                  $branco ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝                 $amarelo=$reset"
-    echo -e "$amarelo=                                              v. 2.7.0                                           $amarelo=$reset"
+    echo -e "$amarelo=                                              v. 2.7.1                                           $amarelo=$reset"
     echo -e "$amarelo===================================================================================================$reset"
     echo ""
     echo ""
@@ -96,7 +96,7 @@ nome_verificando(){
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 desc_ver(){
-echo -e "                            Este script recomenda o uso do Ubuntu$amarelo 20.04$branco.$reset"
+echo -e "                            Este script recomenda o uso do$amarelo Debian 11$branco.$reset"
 echo ""
 } 
 
@@ -110,10 +110,10 @@ echo "Aguarde enquanto verificamos algumas informações."
 sleep 1
 
 # Verifica se está usando Ubuntu 20.04
-if ! grep -q 'Ubuntu 20.04' /etc/os-release; then
+if ! grep -q 'PRETTY_NAME="Debian GNU/Linux 11' /etc/os-release; then
     nome_aviso
     desc_ver
-    #echo "Este script recomenda o uso do Ubuntu 20.04."
+    #echo "Este script recomenda o uso do Debian 11."
     sleep 5
     clear
     nome_verificando
