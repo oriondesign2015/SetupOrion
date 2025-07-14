@@ -3556,43 +3556,80 @@ telemetria Docker iniciado
 #ip=$(curl -s ifconfig.me)
 read -r ip _ <<<$(hostname -I | tr ' ' '\n' | grep -v '^127\.0\.0\.1' | grep -v '^10\.0\.0\.' | tr '\n' ' ')
 if [ $? -eq 0 ]; then
-    echo "1/3 - [ OK ] - Pegando IP $ip"
+    echo "1/4 - [ OK ] - Pegando IP $ip"
 else
-    echo "1/3 - [ OFF ] - Pegando IP $ip"
+    echo "1/4 - [ OFF ] - Pegando IP $ip"
 fi
+
+## Tentando instalar Docker com get.docker.com
 curl -fsSL https://get.docker.com | bash > /dev/null 2>&1
 systemctl enable docker > /dev/null 2>&1
 systemctl start docker > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/3 - [ OK ] - Baixando e Instalando Docker"
+
+if docker --version > /dev/null 2>&1; then
+    echo "2/4 - [ OK ] - Baixando e Instalando Docker"
 else
-    echo "2/3 - [ OFF ] - Baixando e Instalando Docker"
+    echo "2/4 - [ OFF ] - Falha ao instalar Docker"
+    echo "Tentando instalação manual do Docker..."
+
+    ## Instala dependências
+    sudo apt-get install -y ca-certificates curl gnupg lsb-release > /dev/null 2>&1
+
+    ## Adiciona chave GPG
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/keyrings/docker.asc > /dev/null
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    ## Adiciona repositório do Docker
+    echo \
+      "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      focal stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    ## Atualiza pacotes
+    sudo apt-get update > /dev/null 2>&1
+
+    ## Instala Docker
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin > /dev/null 2>&1
+    systemctl enable docker > /dev/null 2>&1
+    systemctl start docker > /dev/null 2>&1
+
+    if docker --version > /dev/null 2>&1; then
+        echo "2/4 - [ OK ] - Docker instalado"
+    else
+        echo "2/4 - [ FAIL ] - Falha total na instalação do Docker"
+        exit 1
+    fi
 fi
+
 sleep 5
 
+## Inicializando Docker Swarm
 max_attempts=3
 attempt=0
 
 while [ $attempt -le $max_attempts ]; do
     docker swarm init --advertise-addr $ip > /dev/null 2>&1
     if [ $? -eq 0 ]; then
-        echo "3/3 - [ OK ] - Iniciando Swarm"
+        echo "3/4 - [ OK ] - Iniciando Swarm"
         break
     else
-        echo "3/3 - [ OFF ] - Iniciando Swarm"
-        echo "Ops não foi possivel iniciar o swarm, tentativa $attempt de $max_attempts"
+        echo "3/4 - [ OFF ] - Iniciando Swarm"
+        echo "Ops, não foi possível iniciar o Swarm, tentativa $attempt de $max_attempts"
         attempt=$((attempt + 1))
         sleep 5
     fi
 done
 
 if [ $attempt -gt $max_attempts ]; then
-    echo "Não foi possível iniciar o Swarm após $max_attempts tentativas..."
+    echo "4/4 - [ FAIL ] - Não foi possível iniciar o Swarm após $max_attempts tentativas..."
     echo "Recomendo formatar a VPS e tentar novamente"
     echo "Lembre-se que o primeiro requisito é estar usando uma VPS Vazia."
     sleep 10
     exit 1
+else
+    echo "4/4 - [ OK ] - Docker e Swarm configurados com sucesso!"
 fi
+
 echo ""
 
 telemetria Docker finalizado
