@@ -8169,6 +8169,7 @@ services:
 
     environment:
       ## 🗄️ Banco de Dados (PostgreSQL)
+      - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -8264,6 +8265,7 @@ services:
 
     environment:
       ## 🗄️ Banco de Dados (PostgreSQL)
+      - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -8359,6 +8361,7 @@ services:
 
     environment:
       ## 🗄️ Banco de Dados (PostgreSQL)
+      - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -33402,6 +33405,7 @@ services:
 
     environment:
       ## 🗄️ Banco de Dados (PostgreSQL)
+      - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
