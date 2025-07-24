@@ -3865,6 +3865,8 @@ echo -e "\e[97m• ESPERANDO O PORTAINER ESTAR ONLINE \e[33m[8/9]\e[0m"
 echo ""
 sleep 1
 
+pull portainer/portainer-ce:latest
+
 ## Usa o serviço wait_portainer para verificar se o serviço esta online
 wait_stack "portainer"
 
