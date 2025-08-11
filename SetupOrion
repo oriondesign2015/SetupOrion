@@ -5252,14 +5252,14 @@ verificar_container_pgvector
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Postgres já instalado"
     pegar_senha_pgvector > /dev/null 2>&1
-    echo "2/3 - [ OK ] - Copiando senha do PgVector"
-    criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
-    echo "3/3 - [ OK ] - Criando banco de dados"
+    #echo "2/3 - [ OK ] - Copiando senha do PgVector"
+    #criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
+    #echo "3/3 - [ OK ] - Criando banco de dados"
     echo ""
 else
     ferramenta_pgvector
-    pegar_senha_pgvector > /dev/null 2>&1
-    criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
+    #pegar_senha_pgvector > /dev/null 2>&1
+    #criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
 fi
 
 ## Mensagem de Passo
@@ -5283,7 +5283,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot${1:+_$1}_app:
-    image: chatwoot/chatwoot:v4.1.0 ## Versão do Chatwoot
+    image: chatwoot/chatwoot:latest ## Versão do Chatwoot
     command: >
       sh -c "echo 'Rails.application.config.active_storage.variant_processor = :mini_magick' > /app/config/initializers/active_storage.rb && bundle exec rails s -p 3000 -b 0.0.0.0"
     entrypoint: docker/entrypoints/rails.sh
@@ -5319,6 +5319,12 @@ services:
       #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
       #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
+
+      ## 🔐 Facebook e Instagram
+      #- IG_VERIFY_TOKEN=
+      #- FB_VERIFY_TOKEN=
+      #- FB_APP_SECRET=
+      #- FB_APP_ID=
 
       ## 🧑‍💻 Dados do Redis
       - REDIS_URL=redis://chatwoot${1:+_$1}_redis:6379
@@ -5391,7 +5397,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot${1:+_$1}_sidekiq:
-    image: chatwoot/chatwoot:v4.1.0 ## Versão do Chatwoot
+    image: chatwoot/chatwoot:latest ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
@@ -5425,6 +5431,12 @@ services:
       #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
       #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
+
+      ## 🔐 Facebook e Instagram
+      #- IG_VERIFY_TOKEN=
+      #- FB_VERIFY_TOKEN=
+      #- FB_APP_SECRET=
+      #- FB_APP_ID=
 
       ## 🧑‍💻 Dados do Redis
       - REDIS_URL=redis://chatwoot${1:+_$1}_redis:6379
@@ -5512,7 +5524,7 @@ services:
       resources:
         limits:
           cpus: "1"
-          memory: 2048M
+          memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
 
