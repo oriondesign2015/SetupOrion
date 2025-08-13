@@ -7451,7 +7451,8 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   minio${1:+_$1}:
-    image: quay.io/minio/minio:latest ## Versão do Minio
+    image: quay.io/minio/minio:latest ## Versão do MinIO
+    #image: quay.io/minio/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1 ## Versão antiga do MinIO
     command: server /data --console-address ":9001"
 
     volumes:
@@ -7461,15 +7462,15 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Dados de acesso
+    ## 🔑 Dados de acesso
       - MINIO_ROOT_USER=$user_minio
-      - MINIO_ROOT_PASSWORD=$senha_minio ## Precisa conter no minimo 8 caracteres
+      - MINIO_ROOT_PASSWORD=$senha_minio
 
-      ## Url do minio
+    ## 🌐 URL do MinIO
       - MINIO_BROWSER_REDIRECT_URL=https://$url_minio ## Url do minio
       - MINIO_SERVER_URL=https://$url_s3 ## Url do s3 | Comente esta linha caso tiver erro ao fazer login
 
-      ## Região
+    ## 📍 Região
       - MINIO_REGION_NAME=eu-south
 
     deploy:
@@ -7480,12 +7481,14 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
+        ## Console
         - traefik.http.routers.minio_public${1:+_$1}.rule=Host(\`$url_s3\`) ## Url do s3
         - traefik.http.routers.minio_public${1:+_$1}.entrypoints=websecure
         - traefik.http.routers.minio_public${1:+_$1}.tls.certresolver=letsencryptresolver
         - traefik.http.services.minio_public${1:+_$1}.loadbalancer.server.port=9000
         - traefik.http.services.minio_public${1:+_$1}.loadbalancer.passHostHeader=true
         - traefik.http.routers.minio_public${1:+_$1}.service=minio_public${1:+_$1}
+        ## API S3
         - traefik.http.routers.minio_console${1:+_$1}.rule=Host(\`$url_minio\`) ## Url do minio
         - traefik.http.routers.minio_console${1:+_$1}.entrypoints=websecure
         - traefik.http.routers.minio_console${1:+_$1}.tls.certresolver=letsencryptresolver
