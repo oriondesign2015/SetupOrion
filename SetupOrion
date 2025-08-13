@@ -7809,25 +7809,25 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Dados do Postgres
+    ## 🗄️ Dados do Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/typebot${1:+_$1}
 
-      ## Encryption key
+    ## 🔐 Encryption key
       - ENCRYPTION_SECRET=$key_typebot
       - AUTH_TRUST_HOST=https://$url_typebot
 
-      ## Plano Padrão (das novas contas)
+    ## 📦 Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED ## FREE, STARTER, PRO, LIFETIME ou UNLIMITED
 
-      ## Urls do typebot
+    ## 🌐 Urls do typebot
       - NEXTAUTH_URL=https://$url_typebot ## URL Builder
       - NEXT_PUBLIC_VIEWER_URL=https://$url_viewer ## URL Viewer
       - NEXTAUTH_URL_INTERNAL=http://localhost:3000
 
-      ## Desativer/ativar novos cadastros
+    ## 🚫 Desativar/ativar novos cadastros
       - DISABLE_SIGNUP=false
 
-      ## Dados do SMTP
+    ## 📧 Dados do SMTP
       - ADMIN_EMAIL=$email_typebot ## Email SMTP
       - NEXT_PUBLIC_SMTP_FROM='Suporte' <$email_typebot>
       - SMTP_AUTH_DISABLED=false
@@ -7837,14 +7837,14 @@ services:
       - SMTP_PORT=$porta_smtp_typebot
       - SMTP_SECURE=$smtp_secure_typebot
 
-      ## Dados Google Cloud
+    ## ☁️ Dados Google Cloud
       #- GOOGLE_AUTH_CLIENT_ID=
       #- GOOGLE_SHEETS_CLIENT_ID=
       #- GOOGLE_AUTH_CLIENT_SECRET=
       #- GOOGLE_SHEETS_CLIENT_SECRET=
       #- NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY=
 
-      ## Dados do Minio/S3
+    ## 🗃️ Dados do Minio/S3
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
       - S3_SECRET_KEY=$S3_SECRET_KEY
       - S3_BUCKET=typebot${1:+-$1}
@@ -7881,25 +7881,25 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Dados do Postgres
+    ## 🗄️ Dados do Postgres
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/typebot${1:+_$1}
 
-      ## Encryption key
+    ## 🔐 Encryption key
       - ENCRYPTION_SECRET=$key_typebot
       - AUTH_TRUST_HOST=https://$url_typebot
 
-      ## Plano Padrão (das novas contas)
+    ## 📦 Plano Padrão (das novas contas)
       - DEFAULT_WORKSPACE_PLAN=UNLIMITED ## FREE, STARTER, PRO, LIFETIME ou UNLIMITED
 
-      ## Urls do typebot
+    ## 🌐 Urls do typebot
       - NEXTAUTH_URL=https://$url_typebot ## URL Builder
       - NEXT_PUBLIC_VIEWER_URL=https://$url_viewer ## URL Viewer
       - NEXTAUTH_URL_INTERNAL=http://localhost:3000
 
-      ## Desativer/ativar novos cadastros
+    ## 🚫 Desativar/ativar novos cadastros
       - DISABLE_SIGNUP=false
 
-      ## Dados do SMTP
+    ## 📧 Dados do SMTP
       - ADMIN_EMAIL=$email_typebot ## Email SMTP
       - NEXT_PUBLIC_SMTP_FROM='Suporte' <$email_typebot>
       - SMTP_AUTH_DISABLED=false
@@ -7909,14 +7909,14 @@ services:
       - SMTP_PORT=$porta_smtp_typebot
       - SMTP_SECURE=$smtp_secure_typebot
 
-      ## Dados Google Cloud
+    ## ☁️ Dados Google Cloud
       #- GOOGLE_AUTH_CLIENT_ID=
       #- GOOGLE_SHEETS_CLIENT_ID=
       #- GOOGLE_AUTH_CLIENT_SECRET=
       #- GOOGLE_SHEETS_CLIENT_SECRET=
       #- NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY=
 
-      ## Dados do Minio/S3
+    ## 🗃️ Dados do Minio/S3
       - S3_ACCESS_KEY=$S3_ACCESS_KEY
       - S3_SECRET_KEY=$S3_SECRET_KEY
       - S3_BUCKET=typebot${1:+-$1}
@@ -8167,7 +8167,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO N8N \e[33m[1/5]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO N8N \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
 
@@ -8176,7 +8176,7 @@ telemetria N8N iniciado
 ## NADA
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
@@ -8196,21 +8196,7 @@ else
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
-echo ""
-sleep 1
-
-## Verifica/instala o Redis
-verificar_container_redis
-if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Redis já instalado"
-    echo ""
-else
-    ferramenta_redis
-fi
-
-## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO N8N \e[33m[4/5]\e[0m"
+echo -e "\e[97m• INSTALANDO N8N \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
@@ -8232,7 +8218,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## 🗄️ Banco de Dados (PostgreSQL)
+    ## 🗄️ Banco de Dados (PostgreSQL)
       - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
@@ -8241,16 +8227,17 @@ services:
       - DB_POSTGRESDB_USER=postgres
       - DB_POSTGRESDB_PASSWORD=$senha_postgres
 
-      ## 🔐 Criptografia
+    ## 🔐 Criptografia
       - N8N_ENCRYPTION_KEY=$encryption_key
 
-      ## 🌐 URLs e Configurações de Acesso
+    ## 🌐 URLs e Configurações de Acesso
       - N8N_HOST=$url_editorn8n
       - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
       - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
+      - N8N_ONBOARDING_FLOW_DISABLED=true
 
-      ## ⚙️ Ambiente de Execução
+    ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
       - EXECUTIONS_MODE=queue
       - EXECUTIONS_TIMEOUT=3600
@@ -8258,14 +8245,15 @@ services:
       - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
       - N8N_RUNNERS_ENABLED=true
       - N8N_RUNNERS_MODE=internal
+      - N8N_RUNNERS_MAX_CONCURRENCY=5
 
-      ## 📦 Pacotes e Nós Comunitários
+    ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
       - N8N_NODE_PATH=/home/node/.n8n/nodes
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
-      ## 📧 SMTP (Envio de E-mails)
+    ## 📧 SMTP (Envio de E-mails)
       - N8N_SMTP_SENDER=$email_smtp_n8n
       - N8N_SMTP_USER=$usuario_smtp_n8n
       - N8N_SMTP_PASS=$senha_smtp_n8n
@@ -8273,30 +8261,31 @@ services:
       - N8N_SMTP_PORT=$porta_smtp_n8n
       - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
-      ## 🔁 Redis (Fila de Execução)
-      - QUEUE_BULL_REDIS_HOST=redis
+    ## 🔁 Redis (Fila de Execução)
+      - QUEUE_BULL_REDIS_HOST=n8n${1:+_$1}_redis
       - QUEUE_BULL_REDIS_PORT=6379
-      - QUEUE_BULL_REDIS_DB=2
+      - QUEUE_BULL_REDIS_DB=1
 
-      ## 📊 Métricas
+    ## 📊 Métricas
       - N8N_METRICS=true
 
-      ## ⏱️ Execuções e Limpeza
+    ## ⏱️ Execuções e Limpeza
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=336
 
-      ## 🧠 Recursos de IA
+    ## 🧠 Recursos de IA
       - N8N_AI_ENABLED=false
       - N8N_AI_PROVIDER=openai
       - N8N_AI_OPENAI_API_KEY=
 
-      ## 🧰 Permissões em Funções Personalizadas
+    ## 🧰 Permissões em Funções Personalizadas
       - NODE_FUNCTION_ALLOW_BUILTIN=*
       - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
 
-      ## 🕒 Fuso Horário
+    ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
+      - N8N_DEFAULT_LOCALE=pt-BR
 
     deploy:
       mode: replicated
@@ -8345,6 +8334,7 @@ services:
       - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
       - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
+      - N8N_ONBOARDING_FLOW_DISABLED=true
 
       ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
@@ -8370,9 +8360,9 @@ services:
       - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
       ## 🔁 Redis (Fila de Execução)
-      - QUEUE_BULL_REDIS_HOST=redis
+      - QUEUE_BULL_REDIS_HOST=n8n${1:+_$1}_redis
       - QUEUE_BULL_REDIS_PORT=6379
-      - QUEUE_BULL_REDIS_DB=2
+      - QUEUE_BULL_REDIS_DB=1
 
       ## 📊 Métricas
       - N8N_METRICS=true
@@ -8393,6 +8383,7 @@ services:
       ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
+      - N8N_DEFAULT_LOCALE=pt-BR
       
     deploy:
       mode: replicated
@@ -8441,6 +8432,7 @@ services:
       - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
       - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
+      - N8N_ONBOARDING_FLOW_DISABLED=true
 
       ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
@@ -8466,9 +8458,9 @@ services:
       - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
       ## 🔁 Redis (Fila de Execução)
-      - QUEUE_BULL_REDIS_HOST=redis
+      - QUEUE_BULL_REDIS_HOST=n8n${1:+_$1}_redis
       - QUEUE_BULL_REDIS_PORT=6379
-      - QUEUE_BULL_REDIS_DB=2
+      - QUEUE_BULL_REDIS_DB=1
 
       ## 📊 Métricas
       - N8N_METRICS=true
@@ -8489,6 +8481,7 @@ services:
       ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
+      - N8N_DEFAULT_LOCALE=pt-BR
       
     deploy:
       mode: replicated
@@ -8502,6 +8495,42 @@ services:
           memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
+
+  n8n${1:+_$1}_redis:
+    image: redis:latest  ## Versão do Redis
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+
+    volumes:
+      - n8n${1:+_$1}_redis:/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    ## Descomente as linhas abaixo para uso externo
+    #ports:
+    #  - 6379:6379
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  n8n${1:+_$1}_redis:
+    external: true
+    name: n8n${1:+_$1}_redis
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -8525,15 +8554,15 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
 ## Baixando imagens:
-pull n8nio/n8n:latest
+pull redis:latest n8nio/n8n:latest
 
 ## Usa o serviço wait_n8n para verificar se o serviço esta online
-wait_stack n8n${1:+_$1}_n8n${1:+_$1}_editor n8n${1:+_$1}_n8n${1:+_$1}_webhook n8n${1:+_$1}_n8n${1:+_$1}_worker
+wait_stack n8n${1:+_$1}_redis n8n${1:+_$1}_n8n${1:+_$1}_editor n8n${1:+_$1}_n8n${1:+_$1}_webhook n8n${1:+_$1}_n8n${1:+_$1}_worker
 
 telemetria N8N finalizado
 
