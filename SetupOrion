@@ -7817,7 +7817,7 @@ services:
       - AUTH_TRUST_HOST=https://$url_typebot
 
       ## Plano Padrão (das novas contas)
-      - DEFAULT_WORKSPACE_PLAN=UNLIMITED
+      - DEFAULT_WORKSPACE_PLAN=UNLIMITED ## FREE, STARTER, PRO, LIFETIME ou UNLIMITED
 
       ## Urls do typebot
       - NEXTAUTH_URL=https://$url_typebot ## URL Builder
@@ -7849,6 +7849,8 @@ services:
       - S3_SECRET_KEY=$S3_SECRET_KEY
       - S3_BUCKET=typebot${1:+-$1}
       - S3_ENDPOINT=$url_s3
+      - S3_REGION=eu-south
+      - NEXT_PUBLIC_BOT_FILE_UPLOAD_MAX_SIZE=250
 
     deploy:
       mode: replicated
@@ -7887,7 +7889,7 @@ services:
       - AUTH_TRUST_HOST=https://$url_typebot
 
       ## Plano Padrão (das novas contas)
-      - DEFAULT_WORKSPACE_PLAN=UNLIMITED
+      - DEFAULT_WORKSPACE_PLAN=UNLIMITED ## FREE, STARTER, PRO, LIFETIME ou UNLIMITED
 
       ## Urls do typebot
       - NEXTAUTH_URL=https://$url_typebot ## URL Builder
@@ -7919,6 +7921,8 @@ services:
       - S3_SECRET_KEY=$S3_SECRET_KEY
       - S3_BUCKET=typebot${1:+-$1}
       - S3_ENDPOINT=$url_s3
+      - S3_REGION=eu-south
+      - NEXT_PUBLIC_BOT_FILE_UPLOAD_MAX_SIZE=250
 
     deploy:
       mode: replicated
