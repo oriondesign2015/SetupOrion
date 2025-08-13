@@ -4041,10 +4041,10 @@ services:
     #  - 5432:5432
 
     environment:
-      ## Senha do postgres 
+      ## 🔑 Senha do Postgres 
       - POSTGRES_PASSWORD=$senha_postgres
 
-      ## Timezone
+      ## 🌎 Timezone
       - TZ=America/Sao_Paulo
 
     deploy:
@@ -4176,10 +4176,10 @@ services:
     #  - 5432:5432
 
     environment:
-      ## Senha do postgres 
+      ## 🔑 Senha do Postgres 
       - POSTGRES_PASSWORD=$senha_postgres
 
-      ## Timezone
+      ## 🌎 Timezone
       - TZ=America/Sao_Paulo
 
     deploy:
@@ -4315,10 +4315,10 @@ services:
     #  - 5433:5432
 
     environment:
-      ## Senha do postgres 
+      ## 🔑 Senha do Postgres 
       - POSTGRES_PASSWORD=$senha_pgvector
 
-      ## Timezone
+      ## 🌎 Timezone
       - TZ=America/Sao_Paulo
 
     deploy:
@@ -4451,10 +4451,10 @@ services:
     #  - 5433:5432
 
     environment:
-      ## Senha do postgres 
+      ## 🔑 Senha do Postgres 
       - POSTGRES_PASSWORD=$senha_pgvector
 
-      ## Timezone
+      ## 🌎 Timezone
       - TZ=America/Sao_Paulo
 
     deploy:
@@ -4638,6 +4638,7 @@ Dominio do Redis: redis://redis:6379
 
 Usuario: redis
 
+Senha: Não tem
 EOL
 
 cd
@@ -4774,6 +4775,7 @@ Dominio do Redis: redis://redis${1:+_$1}:6379
 
 Usuario: redis
 
+Senha: Não tem
 EOL
 
 cd
@@ -4854,10 +4856,10 @@ services:
     #  - 3306:3306
 
     environment:
-      ## Senha do MYSQL
+    ## 🔑 Senha do MYSQL
       - MYSQL_ROOT_PASSWORD=$senha_mysql
 
-      ## TimeZone
+    ## 🌎 TimeZone
       - TZ=America/Sao_Paulo
 
     deploy:
@@ -4994,10 +4996,10 @@ services:
     #  - 3306:3306
 
     environment:
-      ## Senha do MYSQL
+    ## 🔑 Senha do MYSQL
       - MYSQL_ROOT_PASSWORD=$senha_mysql
 
-      ## TimeZone
+    ## 🌎 TimeZone
       - TZ=America/Sao_Paulo
 
     deploy:
@@ -5250,7 +5252,7 @@ sleep 1
 ## Verifica container postgres e cria banco no postgres
 verificar_container_pgvector
 if [ $? -eq 0 ]; then
-    echo "1/3 - [ OK ] - Postgres já instalado"
+    echo "1/1 - [ OK ] - Postgres já instalado"
     pegar_senha_pgvector > /dev/null 2>&1
     #echo "2/3 - [ OK ] - Copiando senha do PgVector"
     #criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
@@ -5258,7 +5260,7 @@ if [ $? -eq 0 ]; then
     echo ""
 else
     ferramenta_pgvector
-    #pegar_senha_pgvector > /dev/null 2>&1
+    pegar_senha_pgvector > /dev/null 2>&1
     #criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
 fi
 
@@ -5298,44 +5300,44 @@ services:
       - $nome_rede_interna ## Nome da rede interna
     
     environment:
-      ## 🌐 Qualquer Url com # no final
+    ## 🌐 Qualquer Url com # no final
       #- CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
 
-      ## 🏢 Nome da Empresa
+    ## 🏢 Nome da Empresa
       - INSTALLATION_NAME=$nome_empresa_chatwoot
 
-      ## 🔐 Secret key
+    ## 🔐 Secret key
       - SECRET_KEY_BASE=$encryption_key
 
-      ## 💬 Url Chatwoot
+    ## 💬 Url Chatwoot
       - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
 
-      ## 🌍 Idioma/Localização padrão
+    ## 🌍 Idioma/Localização padrão
       - DEFAULT_LOCALE=pt_BR
       - TZ=America/Sao_Paulo
 
-      ## ☁️ Google Cloud - Modifique de acordo com os seus dados
+    ## ☁️ Google Cloud - Modifique de acordo com os seus dados
       #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
       #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
-      ## 🔐 Facebook e Instagram
+    ## 🔐 Facebook e Instagram
       #- IG_VERIFY_TOKEN=
       #- FB_VERIFY_TOKEN=
       #- FB_APP_SECRET=
       #- FB_APP_ID=
 
-      ## 🧑‍💻 Dados do Redis
+    ## 🧑‍💻 Dados do Redis
       - REDIS_URL=redis://chatwoot${1:+_$1}_redis:6379
 
-      ## 🗄️ Dados do Postgres
+    ## 🗄️ Dados do Postgres
       - POSTGRES_HOST=pgvector
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_pgvector ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot${1:+_$1}
 
-      ## 🏠 Armazenamento
+    ## 🏠 Armazenamento
       - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
       #- STORAGE_BUCKET_NAME=chatwoot${1:+_$1}
       #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
@@ -5344,7 +5346,7 @@ services:
       #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
       #- STORAGE_FORCE_PATH_STYLE=true
 
-      ## 📧 Dados do SMTP
+    ## 📧 Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -5357,14 +5359,14 @@ services:
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
 
-      ## ⚙️ Melhorias
+    ## ⚙️ Melhorias
       - SIDEKIQ_CONCURRENCY=10
       - RACK_TIMEOUT_SERVICE_TIMEOUT=0
       - RAILS_MAX_THREADS=5
       - WEB_CONCURRENCY=2
       - ENABLE_RACK_ATTACK=false
 
-      ## ⚡ Outras configurações
+    ## ⚡ Outras configurações
       - NODE_ENV=production
       - RAILS_ENV=production
       - INSTALLATION_ENV=docker
@@ -5410,44 +5412,44 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## 🌐 Qualquer Url com # no final
+    ## 🌐 Qualquer Url com # no final
       #- CHATWOOT_HUB_URL=https://oriondesign.art.br/setup#
 
-      ## 🏢 Nome da Empresa
+    ## 🏢 Nome da Empresa
       - INSTALLATION_NAME=$nome_empresa_chatwoot
 
-      ## 🔐 Secret key
+    ## 🔐 Secret key
       - SECRET_KEY_BASE=$encryption_key
 
-      ## 💬 Url Chatwoot
+    ## 💬 Url Chatwoot
       - FRONTEND_URL=https://$url_chatwoot
       - FORCE_SSL=true
 
-      ## 🌍 Idioma/Localização padrão
+    ## 🌍 Idioma/Localização padrão
       - DEFAULT_LOCALE=pt_BR
       - TZ=America/Sao_Paulo
 
-      ## ☁️ Google Cloud - Modifique de acordo com os seus dados
+    ## ☁️ Google Cloud - Modifique de acordo com os seus dados
       #- GOOGLE_OAUTH_CLIENT_ID=369777777777-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com
       #- GOOGLE_OAUTH_CLIENT_SECRET=ABCDEF-GHijklmnoPqrstuvwX-yz1234567
       #- GOOGLE_OAUTH_CALLBACK_URL=https://<your-server-domain>/omniauth/google_oauth2/callback
 
-      ## 🔐 Facebook e Instagram
+    ## 🔐 Facebook e Instagram
       #- IG_VERIFY_TOKEN=
       #- FB_VERIFY_TOKEN=
       #- FB_APP_SECRET=
       #- FB_APP_ID=
 
-      ## 🧑‍💻 Dados do Redis
+    ## 🧑‍💻 Dados do Redis
       - REDIS_URL=redis://chatwoot${1:+_$1}_redis:6379
 
-      ## 🗄️ Dados do Postgres
+    ## 🗄️ Dados do Postgres
       - POSTGRES_HOST=pgvector
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=$senha_pgvector ## Senha do postgres
       - POSTGRES_DATABASE=chatwoot${1:+_$1}
 
-      ## 🏠 Armazenamento
+    ## 🏠 Armazenamento
       - ACTIVE_STORAGE_SERVICE=local ## use s3_compatible para MinIO
       #- STORAGE_BUCKET_NAME=chatwoot${1:+_$1}
       #- STORAGE_ACCESS_KEY_ID=ACCESS_KEY_MINIO
@@ -5456,7 +5458,7 @@ services:
       #- STORAGE_ENDPOINT=https://s3.DOMINIO.COM
       #- STORAGE_FORCE_PATH_STYLE=true
 
-      ## 📧 Dados do SMTP
+    ## 📧 Dados do SMTP
       - MAILER_SENDER_EMAIL=$email_admin_chatwoot <$email_admin_chatwoot> ## Email SMTP
       - SMTP_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
       - SMTP_ADDRESS=$smtp_email_chatwoot ## Host SMTP
@@ -5469,14 +5471,14 @@ services:
       - SMTP_OPENSSL_VERIFY_MODE=peer
       - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
 
-      ## ⚙️ Melhorias
+    ## ⚙️ Melhorias
       - SIDEKIQ_CONCURRENCY=10
       - RACK_TIMEOUT_SERVICE_TIMEOUT=0
       - RAILS_MAX_THREADS=5
       - WEB_CONCURRENCY=2
       - ENABLE_RACK_ATTACK=false
 
-      ## ⚡ Outras configurações
+    ## ⚡ Outras configurações
       - NODE_ENV=production
       - RAILS_ENV=production
       - INSTALLATION_ENV=docker
@@ -5574,7 +5576,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull redis:latest chatwoot/chatwoot:v4.1.0
+pull redis:latest chatwoot/chatwoot:latest
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
 wait_stack chatwoot${1:+_$1}_chatwoot${1:+_$1}_redis chatwoot${1:+_$1}_chatwoot${1:+_$1}_app chatwoot${1:+_$1}_chatwoot${1:+_$1}_sidekiq
@@ -5829,7 +5831,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## ⚙️ Configurações Gerais
+    ## ⚙️ Configurações Gerais
       - SERVER_URL=https://$url_evolution
       - AUTHENTICATION_API_KEY=$apikeyglobal
       - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
@@ -5837,13 +5839,13 @@ services:
       - QRCODE_LIMIT=1902
       - LANGUAGE=pt-BR
       
-      ## 📱 Configuração do Cliente
-      ## Pegue a versão em: https://web.whatsapp.com/sw.js
+    ## 📱 Configuração do Cliente
+    ## Pegue a versão em: https://web.whatsapp.com/sw.js
       #- CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
-      ## 🗄️ Configuração do Banco de Dados
+    ## 🗄️ Configuração do Banco de Dados
       - DATABASE_ENABLED=true
       - DATABASE_PROVIDER=postgresql
       - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution${1:+_$1}
@@ -5856,37 +5858,37 @@ services:
       - DATABASE_SAVE_DATA_LABELS=true
       - DATABASE_SAVE_DATA_HISTORIC=true
 
-      ## 🤖 Integração com N8N
+    ## 🤖 Integração com N8N
       - N8N_ENABLED=true
 
-      ## 🤖 Integração com EvoAI
+    ## 🤖 Integração com EvoAI
       - EVOAI_ENABLED=true
       
-      ## 🤖 Integração com OpenAI
+    ## 🤖 Integração com OpenAI
       - OPENAI_ENABLED=true
       
-      ## 🌐 Integração com Dify
+    ## 🌐 Integração com Dify
       - DIFY_ENABLED=true
       
-      ## 💬 Integração com Typebot
+    ## 💬 Integração com Typebot
       - TYPEBOT_ENABLED=true
       - TYPEBOT_API_VERSION=latest
       
-      ## 🗣️ Integração com Chatwoot
+    ## 🗣️ Integração com Chatwoot
       - CHATWOOT_ENABLED=true
       - CHATWOOT_MESSAGE_READ=true
       - CHATWOOT_MESSAGE_DELETE=true
       - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:SENHA_DO_PGVECTOR@pgvector:5432/chatwoot?sslmode=disable
       - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false
       
-      ## 🧊 Configuração do Cache
+    ## 🧊 Configuração do Cache
       - CACHE_REDIS_ENABLED=true
       - CACHE_REDIS_URI=redis://evolution${1:+_$1}_redis:6379/1
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
       - CACHE_LOCAL_ENABLED=false
       
-      ## ☁️ Configuração do S3
+    ## ☁️ Configuração do S3
       - S3_ENABLED=false
       - S3_ACCESS_KEY=
       - S3_SECRET_KEY=
@@ -5896,28 +5898,28 @@ services:
       - S3_USE_SSL=true
       #- S3_REGION=eu-south
 
-      ## 💼 Configuração do WhatsApp Business
+    ## 💼 Configuração do WhatsApp Business
       - WA_BUSINESS_TOKEN_WEBHOOK=evolution
       - WA_BUSINESS_URL=https://graph.facebook.com
       - WA_BUSINESS_VERSION=v21.0
       - WA_BUSINESS_LANGUAGE=pt_BR
 
-      ## 📊 Telemetria
+    ## 📊 Telemetria
       - TELEMETRY=false
       - TELEMETRY_URL=
 
-      ## 🌐 Configuração do WebSocket
+    ## 🌐 Configuração do WebSocket
       - WEBSOCKET_ENABLED=false
       - WEBSOCKET_GLOBAL_EVENTS=false
 
-      ## 📨 Configuração do SQS
+    ## 📨 Configuração do SQS
       - SQS_ENABLED=false
       - SQS_ACCESS_KEY_ID=
       - SQS_SECRET_ACCESS_KEY=
       - SQS_ACCOUNT_ID=
       - SQS_REGION=
 
-      ## 🐇 Configuração do RabbitMQ
+    ## 🐇 Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
       - RABBITMQ_FRAME_MAX=8192
       - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution${1:+_$1}
@@ -5950,7 +5952,7 @@ services:
       - RABBITMQ_EVENTS_TYPEBOT_START=false
       - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
 
-      ## 🌐 Configuração do Webhook
+    ## 🌐 Configuração do Webhook
       - WEBHOOK_GLOBAL_ENABLED=false
       - WEBHOOK_GLOBAL_URL=
       - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
@@ -5990,12 +5992,12 @@ services:
       - WEBHOOK_RETRY_JITTER_FACTOR=0.2
       - WEBHOOK_RETRY_NON_RETRYABLE_STATUS_CODES=400,401,403,404,422
 
-      ## 🔌 Configuração do Provider
+    ## 🔌 Configuração do Provider
       - PROVIDER_ENABLED=false
       - PROVIDER_HOST=127.0.0.1
       - PROVIDER_PORT=5656
       - PROVIDER_PREFIX=evolution${1:+_$1}
-      
+
     deploy:
       mode: replicated
       replicas: 1
@@ -34706,6 +34708,9 @@ while true; do
             ;;
 
         1|01|portainer|traefik|PORTAINER|TRAEFIK)
+            verificar_stack "traefik" && continue || echo ""
+            verificar_stack "portainer" && continue || echo ""
+
             ferramenta_traefik_e_portainer
             ;;
 
