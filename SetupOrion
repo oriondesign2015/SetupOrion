@@ -8562,7 +8562,7 @@ sleep 1
 pull redis:latest n8nio/n8n:latest
 
 ## Usa o serviço wait_n8n para verificar se o serviço esta online
-wait_stack n8n${1:+_$1}_redis n8n${1:+_$1}_n8n${1:+_$1}_editor n8n${1:+_$1}_n8n${1:+_$1}_webhook n8n${1:+_$1}_n8n${1:+_$1}_worker
+wait_stack n8n${1:+_$1}_n8n${1:+_$1}_redis n8n${1:+_$1}_n8n${1:+_$1}_editor n8n${1:+_$1}_n8n${1:+_$1}_webhook n8n${1:+_$1}_n8n${1:+_$1}_worker
 
 telemetria N8N finalizado
 
