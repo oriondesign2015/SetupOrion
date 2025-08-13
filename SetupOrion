@@ -6281,7 +6281,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## ⚙️ Configurações Gerais
+    ## ⚙️ Configurações Gerais
       - SERVER_URL=https://$url_evolution
       - AUTHENTICATION_API_KEY=$apikeyglobal
       - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
@@ -6289,13 +6289,13 @@ services:
       - QRCODE_LIMIT=1902
       - LANGUAGE=pt-BR
       
-      ## 📱 Configuração do Cliente
-      ## Pegue a versão em: https://web.whatsapp.com/sw.js
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
+    ## 📱 Configuração do Cliente
+    ## Pegue a versão em: https://web.whatsapp.com/sw.js
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1025815458
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
-      ## 🗄️ Configuração do Banco de Dados
+    ## 🗄️ Configuração do Banco de Dados
       - DATABASE_ENABLED=true
       - DATABASE_PROVIDER=postgresql
       - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution${1:+_$1}_lite
@@ -6308,14 +6308,14 @@ services:
       - DATABASE_SAVE_DATA_LABELS=true
       - DATABASE_SAVE_DATA_HISTORIC=true
       
-      ## 🧊 Configuração do Cache
+    ## 🧊 Configuração do Cache
       - CACHE_REDIS_ENABLED=true
       - CACHE_REDIS_URI=redis://evolution${1:+_$1}_lite_redis:6379/8
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
       - CACHE_LOCAL_ENABLED=false
       
-      ## ☁️ Configuração do S3
+    ## ☁️ Configuração do S3
       - S3_ENABLED=false
       - S3_ACCESS_KEY=
       - S3_SECRET_KEY=
@@ -6325,28 +6325,28 @@ services:
       - S3_USE_SSL=true
       #- S3_REGION=eu-south
 
-      ## 💼 Configuração do WhatsApp Business
+    ## 💼 Configuração do WhatsApp Business
       - WA_BUSINESS_TOKEN_WEBHOOK=evolution
       - WA_BUSINESS_URL=https://graph.facebook.com
       - WA_BUSINESS_VERSION=v20.0
       - WA_BUSINESS_LANGUAGE=pt_BR
 
-      ## 📊 Telemetria
+    ## 📊 Telemetria
       - TELEMETRY=false
       - TELEMETRY_URL=
 
-      ## 🌐 Configuração do WebSocket
+    ## 🌐 Configuração do WebSocket
       - WEBSOCKET_ENABLED=false
       - WEBSOCKET_GLOBAL_EVENTS=false
 
-      ## 📨 Configuração do SQS
+    ## 📨 Configuração do SQS
       - SQS_ENABLED=false
       - SQS_ACCESS_KEY_ID=
       - SQS_SECRET_ACCESS_KEY=
       - SQS_ACCOUNT_ID=
       - SQS_REGION=
 
-      ## 🐇 Configuração do RabbitMQ
+    ## 🐇 Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
       - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution${1:+_$1}
       - RABBITMQ_EXCHANGE_NAME=evolution
@@ -6377,7 +6377,7 @@ services:
       - RABBITMQ_EVENTS_TYPEBOT_START=false
       - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
 
-      ## 🌐 Configuração do Webhook
+    ## 🌐 Configuração do Webhook
       - WEBHOOK_GLOBAL_ENABLED=false
       - WEBHOOK_GLOBAL_URL=
       - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
@@ -6409,7 +6409,7 @@ services:
       - WEBHOOK_EVENTS_ERRORS=false
       - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
 
-      ## 🔌 Configuração do Provider
+    ## 🔌 Configuração do Provider
       - PROVIDER_ENABLED=false
       - PROVIDER_HOST=127.0.0.1
       - PROVIDER_PORT=5656
@@ -6664,7 +6664,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evolution_oriondesign${1:+_$1}:
-    image: atendai/evolution-api:v1.8.3 ## Versão da Evolution API
+    image: evoapicloud/evolution-api:v1.8.5 ## Versão da Evolution API
     command: ["node", "./dist/src/main.js"]
 
     volumes:
@@ -6832,7 +6832,7 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/3]\e[0m"
 echo ""
 sleep 1
 
-pull atendai/evolution-api:v1.8.3
+pull evoapicloud/evolution-api:v1.8.5
 
 ## Usa o serviço wait_evolution para verificar se o serviço esta online
 wait_stack "evolution_v1${1:+_$1}_evolution_oriondesign${1:+_$1}"
@@ -6960,7 +6960,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API \e[33m[1/5]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DA EVOLUTION API \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
 
@@ -6971,7 +6971,7 @@ telemetria "Evolution API" "iniciado"
 ## E claro, para aparecer a mensagem do passo..
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
@@ -6985,31 +6985,17 @@ if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Postgres já instalado"
     pegar_senha_postgres > /dev/null 2>&1
     echo "2/3 - [ OK ] - Copiando senha do Postgres"
-    criar_banco_postgres_da_stack "evolution${1:+_$1}"
+    criar_banco_postgres_da_stack "evolution${1:+_$1}_v2"
     echo "3/3 - [ OK ] - Criando banco de dados"
     echo ""
 else
     ferramenta_postgres
     pegar_senha_postgres > /dev/null 2>&1
-    criar_banco_postgres_da_stack "evolution${1:+_$1}"
+    criar_banco_postgres_da_stack "evolution${1:+_$1}_v2"
 fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO REDIS \e[33m[3/5]\e[0m"
-echo ""
-sleep 1
-
-## Verifica/instala o Redis
-verificar_container_redis
-if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Redis já instalado"
-    echo ""
-else
-    ferramenta_redis
-fi
-
-## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[4/5]\e[0m"
+echo -e "\e[97m• INSTALANDO A EVOLUTION API \e[33m[3/4]\e[0m"
 echo ""
 sleep 1
 
@@ -7035,7 +7021,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Configurações Gerais
+    ## ⚙️ Configurações Gerais
       - SERVER_URL=https://$url_evolution
       - AUTHENTICATION_API_KEY=$apikeyglobal
       - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
@@ -7043,17 +7029,17 @@ services:
       - QRCODE_LIMIT=1902
       - LANGUAGE=pt-BR
       
-      ## Configuração do Cliente
-      ## Pegue a versão em: https://web.whatsapp.com/sw.js
-      - CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
+    ## 📱 Configuração do Cliente
+    ## Pegue a versão em: https://web.whatsapp.com/sw.js
+      #- CONFIG_SESSION_PHONE_VERSION=2.3000.1025815458
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
-      ## Configuração do Banco de Dados
+    ## 🗄️ Configuração do Banco de Dados
       - DATABASE_ENABLED=true
       - DATABASE_PROVIDER=postgresql
-      - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution${1:+_$1}
-      - DATABASE_CONNECTION_CLIENT_NAME=evolution${1:+_$1}
+      - DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/evolution${1:+_$1}_v2
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution${1:+_$1}_v2
       - DATABASE_SAVE_DATA_INSTANCE=true
       - DATABASE_SAVE_DATA_NEW_MESSAGE=true
       - DATABASE_SAVE_MESSAGE_UPDATE=true
@@ -7061,32 +7047,38 @@ services:
       - DATABASE_SAVE_DATA_CHATS=true
       - DATABASE_SAVE_DATA_LABELS=true
       - DATABASE_SAVE_DATA_HISTORIC=true
+
+    ## 🤖 Integração com N8N
+      - N8N_ENABLED=true
+
+    ## 🤖 Integração com EvoAI
+      - EVOAI_ENABLED=true
       
-      ## Integração com OpenAI
+    ## 🤖 Integração com OpenAI
       - OPENAI_ENABLED=true
       
-      ## Integração com Dify
+    ## 🌐 Integração com Dify
       - DIFY_ENABLED=true
       
-      ## Integração com Typebot
+    ## 💬 Integração com Typebot
       - TYPEBOT_ENABLED=true
       - TYPEBOT_API_VERSION=latest
       
-      ## Integração com Chatwoot
+    ## 🗣️ Integração com Chatwoot
       - CHATWOOT_ENABLED=true
       - CHATWOOT_MESSAGE_READ=true
       - CHATWOOT_MESSAGE_DELETE=true
-      - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:$senha_postgres@postgres:5432/chatwoot?sslmode=disable
+      - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:SENHA_DO_PGVECTOR@pgvector:5432/chatwoot?sslmode=disable
       - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=false
       
-      ## Configuração do Cache
+    ## 🧊 Configuração do Cache
       - CACHE_REDIS_ENABLED=true
-      - CACHE_REDIS_URI=redis://redis:6379/8
+      - CACHE_REDIS_URI=redis://evolution${1:+_$1}_v2_redis:6379/1
       - CACHE_REDIS_PREFIX_KEY=evolution
       - CACHE_REDIS_SAVE_INSTANCES=false
       - CACHE_LOCAL_ENABLED=false
       
-      ## Configuração do S3
+    ## ☁️ Configuração do S3
       - S3_ENABLED=false
       - S3_ACCESS_KEY=
       - S3_SECRET_KEY=
@@ -7096,29 +7088,30 @@ services:
       - S3_USE_SSL=true
       #- S3_REGION=eu-south
 
-      ## Configuração do WhatsApp Business
-      - WA_BUSINESS_TOKEN_WEBHOOK=evolution
+    ## 💼 Configuração do WhatsApp Business
+      - WA_BUSINESS_TOKEN_WEBHOOK=evolution${1:+_$1}
       - WA_BUSINESS_URL=https://graph.facebook.com
-      - WA_BUSINESS_VERSION=v20.0
+      - WA_BUSINESS_VERSION=v23.0
       - WA_BUSINESS_LANGUAGE=pt_BR
 
-      ## Telemetria
+    ## 📊 Telemetria
       - TELEMETRY=false
       - TELEMETRY_URL=
 
-      ## Configuração do WebSocket
+    ## 🌐 Configuração do WebSocket
       - WEBSOCKET_ENABLED=false
       - WEBSOCKET_GLOBAL_EVENTS=false
 
-      ## Configuração do SQS
+    ## 📨 Configuração do SQS
       - SQS_ENABLED=false
       - SQS_ACCESS_KEY_ID=
       - SQS_SECRET_ACCESS_KEY=
       - SQS_ACCOUNT_ID=
       - SQS_REGION=
 
-      ## Configuração do RabbitMQ
+    ## 🐇 Configuração do RabbitMQ
       - RABBITMQ_ENABLED=false
+      - RABBITMQ_FRAME_MAX=8192
       - RABBITMQ_URI=amqp://USER:PASS@rabbitmq:5672/evolution${1:+_$1}
       - RABBITMQ_EXCHANGE_NAME=evolution
       - RABBITMQ_GLOBAL_ENABLED=false
@@ -7126,6 +7119,7 @@ services:
       - RABBITMQ_EVENTS_INSTANCE_CREATE=false
       - RABBITMQ_EVENTS_INSTANCE_DELETE=false
       - RABBITMQ_EVENTS_QRCODE_UPDATED=false
+      - RABBITMQ_EVENTS_SEND_MESSAGE_UPDATE=false
       - RABBITMQ_EVENTS_MESSAGES_SET=false
       - RABBITMQ_EVENTS_MESSAGES_UPSERT=true
       - RABBITMQ_EVENTS_MESSAGES_EDITED=false
@@ -7148,13 +7142,14 @@ services:
       - RABBITMQ_EVENTS_TYPEBOT_START=false
       - RABBITMQ_EVENTS_TYPEBOT_CHANGE_STATUS=false
 
-      ## Configuração do Webhook
+    ## 🌐 Configuração do Webhook
       - WEBHOOK_GLOBAL_ENABLED=false
       - WEBHOOK_GLOBAL_URL=
       - WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS=false
       - WEBHOOK_EVENTS_APPLICATION_STARTUP=false
       - WEBHOOK_EVENTS_QRCODE_UPDATED=false
       - WEBHOOK_EVENTS_MESSAGES_SET=false
+      - WEBHOOK_EVENTS_SEND_MESSAGE_UPDATE=false
       - WEBHOOK_EVENTS_MESSAGES_UPSERT=false
       - WEBHOOK_EVENTS_MESSAGES_EDITED=false
       - WEBHOOK_EVENTS_MESSAGES_UPDATE=false
@@ -7179,8 +7174,15 @@ services:
       - WEBHOOK_EVENTS_TYPEBOT_CHANGE_STATUS=false
       - WEBHOOK_EVENTS_ERRORS=false
       - WEBHOOK_EVENTS_ERRORS_WEBHOOK=
+      - WEBHOOK_REQUEST_TIMEOUT_MS=60000
+      - WEBHOOK_RETRY_MAX_ATTEMPTS=10
+      - WEBHOOK_RETRY_INITIAL_DELAY_SECONDS=5
+      - WEBHOOK_RETRY_USE_EXPONENTIAL_BACKOFF=true
+      - WEBHOOK_RETRY_MAX_DELAY_SECONDS=300
+      - WEBHOOK_RETRY_JITTER_FACTOR=0.2
+      - WEBHOOK_RETRY_NON_RETRYABLE_STATUS_CODES=400,401,403,404,422
 
-      ## Configuração do Provider
+    ## 🔌 Configuração do Provider
       - PROVIDER_ENABLED=false
       - PROVIDER_HOST=127.0.0.1
       - PROVIDER_PORT=5656
@@ -7204,10 +7206,44 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
+  evolution${1:+_$1}_v2_redis:
+    image: redis:latest  ## Versão do Redis
+    command: [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--port",
+        "6379"
+      ]
+
+    volumes:
+      - evolution${1:+_$1}_v2_redis:/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    ## Descomente as linhas abaixo para uso externo
+    #ports:
+    #  - 6379:6379
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   evolution${1:+_$1}_instances:
     external: true
     name: evolution${1:+_$1}_instances
+  evolution${1:+_$1}_v2_redis:
+    external: true
+    name: evolution${1:+_$1}_v2_redis
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -7234,7 +7270,7 @@ stack_editavel # > /dev/null 2>&1
 sleep 10
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
