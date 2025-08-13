@@ -5841,7 +5841,7 @@ services:
       
     ## 📱 Configuração do Cliente
     ## Pegue a versão em: https://web.whatsapp.com/sw.js
-      #- CONFIG_SESSION_PHONE_VERSION=2.3000.1023015479
+      #- CONFIG_SESSION_PHONE_VERSION=2.3000.1025815458
       - CONFIG_SESSION_PHONE_CLIENT=OrionDesign
       - CONFIG_SESSION_PHONE_NAME=Chrome
       
@@ -5899,9 +5899,9 @@ services:
       #- S3_REGION=eu-south
 
     ## 💼 Configuração do WhatsApp Business
-      - WA_BUSINESS_TOKEN_WEBHOOK=evolution
+      - WA_BUSINESS_TOKEN_WEBHOOK=evolution${1:+_$1}
       - WA_BUSINESS_URL=https://graph.facebook.com
-      - WA_BUSINESS_VERSION=v21.0
+      - WA_BUSINESS_VERSION=v23.0
       - WA_BUSINESS_LANGUAGE=pt_BR
 
     ## 📊 Telemetria
