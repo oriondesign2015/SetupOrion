@@ -5252,16 +5252,16 @@ sleep 1
 ## Verifica container postgres e cria banco no postgres
 verificar_container_pgvector
 if [ $? -eq 0 ]; then
-    echo "1/1 - [ OK ] - Postgres já instalado"
+    echo "1/3 - [ OK ] - Postgres já instalado"
     pegar_senha_pgvector > /dev/null 2>&1
-    #echo "2/3 - [ OK ] - Copiando senha do PgVector"
-    #criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
-    #echo "3/3 - [ OK ] - Criando banco de dados"
+    echo "2/3 - [ OK ] - Copiando senha do PgVector"
+    criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
+    echo "3/3 - [ OK ] - Criando banco de dados"
     echo ""
 else
     ferramenta_pgvector
     pegar_senha_pgvector > /dev/null 2>&1
-    #criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
+    criar_banco_pgvector_da_stack "chatwoot${1:+_$1}"
 fi
 
 ## Mensagem de Passo
@@ -5285,7 +5285,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot${1:+_$1}_app:
-    image: chatwoot/chatwoot:latest ## Versão do Chatwoot
+    image: chatwoot/chatwoot:v4.1.0 ## Versão do Chatwoot
     command: >
       sh -c "echo 'Rails.application.config.active_storage.variant_processor = :mini_magick' > /app/config/initializers/active_storage.rb && bundle exec rails s -p 3000 -b 0.0.0.0"
     entrypoint: docker/entrypoints/rails.sh
@@ -5399,7 +5399,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   chatwoot${1:+_$1}_sidekiq:
-    image: chatwoot/chatwoot:latest ## Versão do Chatwoot
+    image: chatwoot/chatwoot:v4.1.0 ## Versão do Chatwoot
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
@@ -5575,7 +5575,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull redis:latest chatwoot/chatwoot:latest
+pull redis:latest chatwoot/chatwoot:v4.1.0
 
 ## Usa o serviço wait_chatwoot para verificar se o serviço esta online
 wait_stack chatwoot${1:+_$1}_chatwoot${1:+_$1}_redis chatwoot${1:+_$1}_chatwoot${1:+_$1}_app chatwoot${1:+_$1}_chatwoot${1:+_$1}_sidekiq
