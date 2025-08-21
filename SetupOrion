@@ -12853,7 +12853,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   formbricks${1:+_$1}:
-    image: formbricks/formbricks:latest
+    image: ghcr.io/formbricks/formbricks:latest
 
     volumes:
       - formbricks${1:+_$1}_data:/home/nextjs/apps/web/uploads/
@@ -12977,7 +12977,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull formbricks/formbricks:latest
+pull ghcr.io/formbricks/formbricks:latest
 
 ## Usa o serviço wait_stack "formbricks" para verificar se o serviço esta online
 wait_stack formbricks${1:+_$1}_formbricks${1:+_$1}
