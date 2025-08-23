@@ -33792,7 +33792,7 @@ services:
           - node.role == manager
       labels:
         - traefik.enable=true
-        - traefik.http.routers.openwebui${1:+_$1}_app.rule=Host(\`$url_ollama\`)
+        - traefik.http.routers.openwebui${1:+_$1}_app.rule=Host(\`$url_openwebui\`)
         - traefik.http.routers.openwebui${1:+_$1}_app.entrypoints=websecure
         - traefik.http.routers.openwebui${1:+_$1}_app.priority=1
         - traefik.http.routers.openwebui${1:+_$1}_app.tls.certresolver=letsencryptresolver
