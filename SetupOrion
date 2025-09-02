@@ -2020,8 +2020,18 @@ recursos() {
     ram_requerido=$2
 
     # Obtendo a quantidade de vCPUs e GB de RAM disponíveis
-    vcpu_disponivel=$(neofetch --stdout | grep "CPU" | grep -oP '\(\d+\)' | tr -d '()')
-    ram_disponivel=$(neofetch --stdout | grep "Memory" | awk '{print $4}' | tr -d 'MiB' | awk '{print int($1/1024 + 0.5)}')
+    if command -v neofetch >/dev/null 2>&1; then
+        # Debian 11
+        vcpu_disponivel=$(neofetch --stdout | grep "CPU" | grep -oP '\(\d+\)' | tr -d '()')
+        ram_disponivel=$(neofetch --stdout | grep "Memory" | awk '{print $4}' | tr -d 'MiB' | awk '{print int($1/1024 + 0.5)}')
+    elif command -v fastfetch >/dev/null 2>&1; then
+        # Debian 13 (usa saída JSON do fastfetch)
+        vcpu_disponivel=$(fastfetch --json | jq '.cpu.cores')
+        ram_disponivel=$(fastfetch --json | jq '.memory.total / 1024 / 1024' | awk '{print int($1+0.5)}')
+    else
+        echo "Erro: nem neofetch nem fastfetch encontrados. Instale um deles para continuar."
+        return 1
+    fi
 
     # Comparando os recursos
     if [[ $vcpu_disponivel -ge $vcpu_requerido && $ram_disponivel -ge $ram_requerido ]]; then
@@ -2050,6 +2060,7 @@ recursos() {
         fi
     fi
 }
+
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
