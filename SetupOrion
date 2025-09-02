@@ -27697,7 +27697,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   firecrawl${1:+_$1}_api:
-    image: oriondesign/firecrawl-api:latest
+    image: oriondesign/firecrawl-api:v2.1.0
     command: [ "pnpm", "run", "start:production" ]
 
     networks:
@@ -27734,7 +27734,7 @@ services:
       - PORT=3002
       - NUM_WORKERS_PER_QUEUE=8 
       - FLY_PROCESS_GROUP=app
-      - PLAYWRIGHT_MICROSERVICE_URL=http://firecrawl${1:+_$1}_playwright:3000
+      - PLAYWRIGHT_MICROSERVICE_URL=http://firecrawl${1:+_$1}_playwright:3000/scrape
 
     deploy:
       mode: replicated
@@ -27758,7 +27758,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   firecrawl${1:+_$1}_worker:
-    image: oriondesign/firecrawl-api:latest
+    image: oriondesign/firecrawl-api:v2.1.0
     command: [ "pnpm", "run", "workers" ]
 
     networks:
@@ -27795,7 +27795,7 @@ services:
       - PORT=3002
       - NUM_WORKERS_PER_QUEUE=8 
       - FLY_PROCESS_GROUP=worker
-      - PLAYWRIGHT_MICROSERVICE_URL=http://firecrawl${1:+_$1}_playwright:3000
+      - PLAYWRIGHT_MICROSERVICE_URL=http://firecrawl${1:+_$1}_playwright:3000/scrape
 
     deploy:
       mode: replicated
@@ -27811,7 +27811,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   firecrawl${1:+_$1}_playwright:
-    image: oriondesign/firecrawl-playwright-service:latest
+    image: oriondesign/firecrawl-playwright-service:v2.1.0
 
     networks:
      - $nome_rede_interna ## Nome da rede interna
