@@ -4184,7 +4184,7 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  postgres:
+  postgres${1:+_$1}:
     image: postgres:14 ## Versão do postgres
     command: >
       postgres
