@@ -4193,7 +4193,7 @@ services:
       -c timezone=America/Sao_Paulo
 
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres${1:+_$1}_data:/var/lib/postgresql/data
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
