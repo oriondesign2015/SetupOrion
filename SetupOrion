@@ -11493,7 +11493,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   mautic_web${1:+_$1}:
-    image: mautic/mautic:latest ## Versão do Mautic
+    image: mautic/mautic:5-apache ## Versão do Mautic
 
     volumes:
       - mautic${1:+_$1}_config:/var/www/html/config
@@ -11548,7 +11548,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   mautic_worker${1:+_$1}:
-    image: mautic/mautic:latest ## Versão do Mautic
+    image: mautic/mautic:5-apache ## Versão do Mautic
 
     volumes:
       - mautic${1:+_$1}_config:/var/www/html/config
@@ -11595,7 +11595,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   mautic_cron${1:+_$1}:
-    image: mautic/mautic:latest ## Versão do Mautic
+    image: mautic/mautic:5-apache ## Versão do Mautic
 
     volumes:
       - mautic${1:+_$1}_config:/var/www/html/config
@@ -11685,7 +11685,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull mautic/mautic:latest
+pull mautic/mautic:5-apache
 
 ## Usa o serviço wait_stack "mautic" para verificar se o serviço esta online
 wait_stack mautic${1:+_$1}_mautic_web${1:+_$1} mautic${1:+_$1}_mautic_worker${1:+_$1} mautic${1:+_$1}_mautic_cron${1:+_$1}
