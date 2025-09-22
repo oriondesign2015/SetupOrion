@@ -8425,7 +8425,7 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=(Host(\`$url_webhookn8n\`)) ## Url do Webhook do N8N
+        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=(Host(\`$url_webhookn8n\`) && PathPrefix(`/webhook)) ## Url do Webhook do N8N
         - traefik.http.routers.n8n${1:+_$1}_webhook.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_webhook.priority=1
         - traefik.http.routers.n8n${1:+_$1}_webhook.tls.certresolver=letsencryptresolver
@@ -31124,7 +31124,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO PASSBOLT \e[33m[1/5]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO PASSBOLT \e[33m[1/7]\e[0m"
 echo ""
 sleep 1
 
@@ -31136,7 +31136,7 @@ telemetria PassBolt iniciado
 
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/4]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO MYSQL \e[33m[2/7]\e[0m"
 echo ""
 sleep 1
 
@@ -31156,12 +31156,12 @@ verificar_container_mysql
         pegar_senha_mysql > /dev/null 2>&1
         criar_banco_mysql_da_stack "passbolt${1:+_$1}"
     fi
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[2/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES \e[33m[3/7]\e[0m"
 echo ""
 sleep 1
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO A PASSBOLT \e[33m[4/5]\e[0m"
+echo -e "\e[97m• INSTALANDO A PASSBOLT \e[33m[4/7]\e[0m"
 echo ""
 sleep 1
 
@@ -31179,6 +31179,7 @@ services:
 
     volumes:
       - passbolt${1:+_$1}_data:/var/www/passbolt/webroot
+      - passbolt${1:+_$1}_config:/etc/passbolt/
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -31187,6 +31188,13 @@ services:
       ## Configurações Gerais
       - APP_FULL_BASE_URL=https://$url_passbolt
       - PASSBOLT_REGISTRATION_PUBLIC=false ## false = Não permite registro de novos usuários
+      - PASSBOLT_SSL_FORCE=false
+      - PASSBOLT_FORCE_SSL=false
+
+      ## JWT Authentication
+      - PASSBOLT_PLUGINS_JWT_AUTHENTICATION_ENABLED=true
+      - PASSBOLT_JWT_SERVER_KEY=
+      - PASSBOLT_JWT_SERVER_PEM=
 
       ## Banco do MySQL
       - DATASOURCES_DEFAULT_HOST=mysql
@@ -31222,6 +31230,25 @@ services:
         - traefik.http.routers.passbolt${1:+_$1}.tls.certresolver=letsencryptresolver
         - traefik.http.routers.passbolt${1:+_$1}.entrypoints=websecure
         - traefik.http.routers.passbolt${1:+_$1}.tls=true
+        ## Mobile APP
+        - traefik.http.routers.passbolt${1:+_$1}.middlewares=passbolt${1:+_$1}_mobile
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.customrequestheaders.X-Forwarded-Proto=https
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.customrequestheaders.X-Forwarded-Port=443
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.customrequestheaders.X-Forwarded-Host=$url_passbolt
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.customrequestheaders.X-Real-IP=
+        - traefik.http.routers.passbolt${1:+_$1}_mobile.rule=Host(\`$url_passbolt\`) && (PathPrefix(\`/auth/jwt/\`) || PathPrefix(\`/mobile/\`) || PathPrefix(\`/auth/verify\`))
+        - traefik.http.routers.passbolt${1:+_$1}_mobile.entrypoints=websecure
+        - traefik.http.routers.passbolt${1:+_$1}_mobile.tls=true
+        - traefik.http.routers.passbolt${1:+_$1}_mobile.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.passbolt${1:+_$1}_mobile.service=passbolt${1:+_$1}
+        - traefik.http.routers.passbolt${1:+_$1}_mobile.middlewares=passbolt${1:+_$1}_mobile
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.framedeny=false
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.sslredirect=false
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.stsincludesubdomains=true
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.stspreload=true
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.stsseconds=31536000
+        - "traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.contentsecuritypolicy=default-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:; connect-src 'self'"
+        - traefik.http.middlewares.passbolt${1:+_$1}_mobile.headers.referrerpolicy=strict-origin-when-cross-origin
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -31229,6 +31256,9 @@ volumes:
   passbolt${1:+_$1}_data:
     external: true
     name: passbolt${1:+_$1}_data
+  passbolt${1:+_$1}_config:
+    external: true
+    name: passbolt${1:+_$1}_config
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -31255,7 +31285,7 @@ stack_editavel # > /dev/null 2>&1
 sleep 10
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/7]\e[0m"
 echo ""
 sleep 1
 
@@ -31267,20 +31297,118 @@ wait_stack "passbolt${1:+_$1}_passbolt${1:+_$1}"
 
 wait_30_sec
 wait_30_sec
-docker exec -u www-data $(docker ps --format "{{.Names}}" | grep "^passbolt${1:+_$1}") /usr/share/php/passbolt/bin/cake passbolt register_user -u "$email_user_passbolt" -f Administrador -l Master -r admin
+
+## Mensagem de Passo
+echo ""
+echo -e "\e[97m• CADASTRANDO EMAIL COMO ADMINISTRADOR \e[33m[6/7]\e[0m"
+echo ""
+sleep 1
+
+#docker exec -u www-data $(docker ps --format "{{.Names}}" | grep "^passbolt${1:+_$1}") /usr/share/php/passbolt/bin/cake passbolt register_user -u "$email_user_passbolt" -f Administrador -l Master -r admin
+
+url_setup=$(docker exec -u www-data $(docker ps --format "{{.Names}}" | grep "^passbolt${1:+_$1}") \
+/usr/share/php/passbolt/bin/cake passbolt register_user \
+-u "$email_user_passbolt" -f Administrador -l Master -r admin | grep -o 'https://.*')
+
+echo "1/1 - [ OK ] - Usuário administrador criado no email: $email_user_passbolt"
+echo ""
+## Mensagem de Passo
+echo -e "\e[97m• CONFIGURANDO PASSBOLT.PHP \e[33m[7/7]\e[0m"
+echo ""
+sleep 1
+
+PASSBOLT_FILE="/var/lib/docker/volumes/passbolt${1:+_$1}_config/_data/passbolt.php"
+echo "1/5 - [ OK ] - Verificando diretório"
+
+# Captura o fingerprint do servidor GPG (substitua "server@passbolt" pelo seu email/keyid)
+FINGERPRINT=$(gpg --show-keys --with-fingerprint /var/lib/docker/volumes/passbolt${1:+_$1}_config/_data/gpg/serverkey.asc | grep -A1 "pub" | tail -1 | tr -d ' ')
+
+echo "2/5 - [ OK ] - Pegando Fingerprint"
+
+cat > "$PASSBOLT_FILE" << EOF
+<?php
+return [
+
+    'App' => [
+        'fullBaseUrl' => env('APP_FULL_BASE_URL', 'https://$url_passbolt'),
+    ],
+
+    'Datasources' => [
+        'default' => [
+            'host' => env('DATASOURCES_DEFAULT_HOST', 'mysql'),
+            'port' => env('DATASOURCES_DEFAULT_PORT', 3306),
+            'username' => env('DATASOURCES_DEFAULT_USERNAME', 'root'),
+            'password' => env('DATASOURCES_DEFAULT_PASSWORD', '$senha_mysql'),
+            'database' => env('DATASOURCES_DEFAULT_DATABASE', 'passbolt${1:+_$1}'),
+        ],
+    ],
+
+    'EmailTransport' => [
+        'default' => [
+            'host' => env('EMAIL_TRANSPORT_DEFAULT_HOST', '$smtp_host_passbolt'),
+            'port' => env('EMAIL_TRANSPORT_DEFAULT_PORT', $smtp_port_passbolt),
+            'timeout' => env('EMAIL_TRANSPORT_DEFAULT_TIMEOUT', 30),
+            'username' => env('EMAIL_TRANSPORT_DEFAULT_USERNAME', '$smtp_user_passbolt'),
+            'password' => env('EMAIL_TRANSPORT_DEFAULT_PASSWORD', '$smtp_pass_passbolt'),
+            'client' => env('EMAIL_TRANSPORT_DEFAULT_CLIENT', null),
+            'tls' => env('EMAIL_TRANSPORT_DEFAULT_TLS', '$smtp_ssltls_passbolt'),
+            'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+        ],
+    ],
+
+    'Email' => [
+        'default' => [
+            'transport' => env('EMAIL_DEFAULT_TRANSPORT', 'default'),
+            'from' => [
+                '$smtp_email_passbolt' => 'Suporte'
+            ],
+        ],
+    ],
+
+    'passbolt' => [
+        'gpg' => [
+            'serverKey' => [
+                'fingerprint' => env('PASSBOLT_GPG_SERVER_KEY_FINGERPRINT', '$FINGERPRINT'),
+                'public' => env('PASSBOLT_GPG_SERVER_KEY_PUBLIC', CONFIG . 'gpg' . DS . 'serverkey.asc'),
+                'private' => env('PASSBOLT_GPG_SERVER_KEY_PRIVATE', CONFIG . 'gpg' . DS . 'serverkey_private.asc'),
+            ],
+        ],
+        'security' => [
+            'checkDomainMismatch' => false,
+        ],
+    ],
+];
+EOF
+
+echo "3/5 - [ OK ] - Criando passbolt.php"
+
+chmod 640 "$PASSBOLT_FILE"
+chown www-data:www-data "$PASSBOLT_FILE"
+echo "4/5 - [ OK ] - Dando permissão ao arquivo"
+
+sleep 5
+
+echo "5/5 - [ OK ] - Reiniciando o serviço..."
+docker service update --force passbolt${1:+_$1}_passbolt${1:+_$1} >/dev/null 2>&1
+
+sleep 15
+docker ps -a --filter "name=passbolt" --filter "status=exited" -q | xargs -r docker rm > /dev/null 2>&1
+
 
 telemetria PassBolt finalizado
 
 cd dados_vps
 
 cat > dados_passbolt${1:+_$1} <<EOL
-[ PassBolt ]
+[ PASSBOLT ]
 
 Link do Passbolt: https://$url_passbolt
 
 Email Administrador: $email_user_passbolt
 
 Senha Administrador: Via link magico no email
+
+Link de Setup: $url_setup
 EOL
 
 cd
@@ -31306,6 +31434,9 @@ echo -e "\e[97mEmail Administrador:\e[33m $email_user_passbolt\e[0m"
 echo ""
 
 echo -e "\e[97mSenha Administrador:\e[33m Via link magico no email\e[0m"
+echo ""
+
+echo -e "\e[97mLink de Setup:\e[33m $url_setup\e[0m"
 
 ## Creditos do instalador
 creditos_msg
