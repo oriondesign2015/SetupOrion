@@ -8425,7 +8425,7 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=(Host(\`$url_webhookn8n\`) && PathPrefix(`/webhook)) ## Url do Webhook do N8N
+        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=(Host(\`$url_webhookn8n\`) && PathPrefix(\`/webhook\`)) ## Url do Webhook do N8N
         - traefik.http.routers.n8n${1:+_$1}_webhook.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_webhook.priority=1
         - traefik.http.routers.n8n${1:+_$1}_webhook.tls.certresolver=letsencryptresolver
