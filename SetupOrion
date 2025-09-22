@@ -32651,15 +32651,14 @@ services:
       - $nome_rede_interna ## Nome da rede interna
     ports:
       - 21115:21115
+      - 21116:21116
       - 21116:21116/udp
-      - 21118:21118/udp
-      #- 21119:21119  
+      - 21118:21118  
     
     environment:
       - ALWAYS_USE_RELAY=N
       - RELAY=$url_hbbr
       - KEY=$rustdesk_api_key
-      - PORT=21116
       - RUST_LOG=info
 
     deploy:
@@ -32689,10 +32688,12 @@ services:
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
+    ports:
+      - 21117:21117
+      - 21119:21119      
 
     environment:
       - KEY=$rustdesk_api_key
-      - PORT=21117
       - LIMIT_SPEED=200
       - SINGLE_BANDWIDTH=50
       - TOTAL_BANDWIDTH=500
