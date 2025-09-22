@@ -258,12 +258,13 @@ fi
 
 echo ""
 
-## Instalando neofetch
-apt install neofetch -y > /dev/null 2>&1
-if [ $? -eq 0 ]; then
+## Instalando neofetch ou fastfetch
+if apt install neofetch -y > /dev/null 2>&1; then
     echo "13/14 - [ OK ] - Verificando/Instalando neofetch"
+elif apt install fastfetch -y > /dev/null 2>&1; then
+    echo "13/14 - [ OK ] - Verificando/Instalando fastfetch"
 else
-    echo "13/14 - [ OFF ] - Verificando/Instalando neofetch"
+    echo "13/14 - [ OFF ] - Não foi possível instalar neofetch nem fastfetch"
 fi
 
 echo ""
