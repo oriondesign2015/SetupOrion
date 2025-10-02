@@ -34911,6 +34911,8 @@ limpar() {
 
 # Função completa com ajustes de política para o bucket
 minio.bucket() {
+  dados
+  pegar_senha_minio
   ADMIN_USER="$user_minio"
   ADMIN_PASS="$senha_minio"
   BUCKET_NAME="$1"
