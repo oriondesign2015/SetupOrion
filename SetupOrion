@@ -12882,7 +12882,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   formbricks${1:+_$1}:
-    image: ghcr.io/formbricks/formbricks:latest
+    image: ghcr.io/formbricks/formbricks:3.17.2
 
     volumes:
       - formbricks${1:+_$1}_data:/home/nextjs/apps/web/uploads/
