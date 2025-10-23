@@ -12360,10 +12360,10 @@ services:
 
   woofedcrm${1:+_$1}_web:
     image: douglara/woofedcrm:latest
-    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    command: bash -c "bundle exec rails db:prepare && bundle exec puma -C config/puma.rb"
 
     volumes:
-      - woofedcrm${1:+_$1}_data:/app/public/assets
+      - woofedcrm${1:+_$1}_data:/app/storage
 
     networks:
       - $nome_rede_interna
@@ -12437,7 +12437,7 @@ services:
     command: bundle exec sidekiq -C config/sidekiq.yml
 
     volumes:
-      - woofedcrm${1:+_$1}_data:/app/public/assets
+      - woofedcrm${1:+_$1}_data:/app/storage
 
     networks:
       - $nome_rede_interna
@@ -12500,7 +12500,7 @@ services:
     command: bundle exec good_job
 
     volumes:
-      - woofedcrm${1:+_$1}_data:/app/public/assets
+      - woofedcrm${1:+_$1}_data:/app/storage
 
     networks:
       - $nome_rede_interna
