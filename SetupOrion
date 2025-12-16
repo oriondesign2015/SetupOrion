@@ -17790,8 +17790,69 @@ requisitar_outra_instalacao
 
 ferramenta_ollama() {
 
+## Verifica os recursos
+recursos 2 4 && continue || return
+
+## Limpa o terminal
+clear
+
 ## Ativa a função dados para pegar os dados da vps
 dados
+
+## Mostra o nome da aplicação
+nome_ollama
+
+## Mostra mensagem para preencher informações
+preencha_as_info
+
+## Inicia um Loop até os dados estarem certos
+while true; do
+
+    ## Pergunta o Dominio do LiteLLM
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
+    echo -en "\e[33mDigite o dominio para o LiteLLM (ex: litellm.oriondesign.art.br): \e[0m" && read -r url_litellm
+    echo ""
+
+    ## Limpa o terminal
+    clear
+
+    ## Mostra o nome da aplicação
+    nome_ollama
+
+    ## Mostra mensagem para verificar as informações
+    conferindo_as_info
+
+    ## Informação sobre URL do LiteLLM
+    echo -e "\e[33mDominio do LiteLLM:\e[97m $url_litellm\e[0m"
+    echo ""
+
+    ## Pergunta se as respostas estão corretas
+    read -p "As respostas estão corretas? (Y/N): " confirmacao
+    if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
+
+        ## Digitou Y para confirmar que está tudo certo
+        break
+    else
+
+        ## Digitou N para dizer que não está tudo certo
+        echo ""
+        ## Limpa o terminal
+        clear
+
+        ## Mostra o nome da ferramenta
+        nome_ollama
+
+        ## Mostra mensagem para preencher informações
+        preencha_as_info
+
+    fi
+done
+
+## Mensagem de Passo
+echo ""
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OLLAMA + LITELLM \e[33m[1/1]\e[0m"
+echo ""
+sleep 1
 
 telemetria "Ollama + LiteLLM" iniciado
 
@@ -17960,10 +18021,6 @@ services:
       - LITELLM_LOG=INFO
       - TZ=America/Sao_Paulo
 
-    ## Descomente as linhas abaixo para uso externo
-    #ports:
-    #  - 4000:4000
-
     deploy:
       mode: replicated
       replicas: 1
@@ -17974,6 +18031,15 @@ services:
         limits:
           cpus: "1"
           memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.litellm.rule=Host(\`$url_litellm\`)
+        - traefik.http.routers.litellm.entrypoints=websecure
+        - traefik.http.routers.litellm.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.litellm.priority=1
+        - traefik.http.routers.litellm.service=litellm
+        - traefik.http.services.litellm.loadbalancer.server.port=4000
+        - traefik.http.services.litellm.loadbalancer.passhostheader=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -18005,7 +18071,8 @@ cd dados_vps
 cat > dados_ollama <<EOL
 [ OLLAMA + LITELLM ]
 
-API Base URL: http://litellm:4000
+URL Pública: https://$url_litellm
+API Base URL (Interna): http://litellm:4000
 Compatível com: OpenAI SDK
 
 Chave Mestra LiteLLM: $litellm_master_key
@@ -18026,8 +18093,8 @@ Modelos Disponíveis:
   - codellama (Chat, Code)
   - llava (Chat, Vision)
 
-Uso:
-  curl http://litellm:4000/v1/chat/completions \\
+Uso Externo:
+  curl https://$url_litellm/v1/chat/completions \\
     -H "Content-Type: application/json" \\
     -H "Authorization: Bearer $litellm_master_key" \\
     -d '{
@@ -18035,7 +18102,7 @@ Uso:
       "messages": [{"role": "user", "content": "Hello!"}]
     }'
 
-Integração OpenWebUI:
+Uso Interno (OpenWebUI):
   1. Acesse Configurações > Conexões
   2. URL da API OpenAI: http://litellm:4000/v1
   3. Chave da API OpenAI: $litellm_master_key
@@ -18055,9 +18122,17 @@ telemetria "Ollama + LiteLLM" finalizado
 echo ""
 echo -e "\e[92m✓ Ollama + LiteLLM instalado com sucesso!\e[0m"
 echo ""
+echo -e "\e[97mURL de Acesso:\e[0m"
+echo -e "  https://$url_litellm"
+echo ""
+echo -e "\e[97mChave da API:\e[0m"
+echo -e "  $litellm_master_key"
+echo ""
 echo -e "\e[97mPróximos passos:\e[0m"
 echo -e "  1. Baixe os modelos: docker exec -it \$(docker ps -qf name=ollama_ollama) ollama pull llama3.2"
-echo -e "  2. Configure no OpenWebUI usando a chave: $litellm_master_key"
+echo -e "  2. Configure no OpenWebUI:"
+echo -e "     - URL da API: http://litellm:4000/v1"
+echo -e "     - Chave da API: $litellm_master_key"
 echo ""
 echo -e "\e[97mInformações salvas em: /root/dados_vps/dados_ollama\e[0m"
 echo ""
