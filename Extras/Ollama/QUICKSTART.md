@@ -1,16 +1,24 @@
 # 🚀 Guia de Início Rápido - Ollama + LiteLLM
 
+**✨ Instalação Standalone**: Este stack é completamente independente e pode ser instalado sem o SetupOrion.
+
 ## Instalação em 3 Passos
 
-### 1️⃣ Execute o instalador
+### 1️⃣ Baixe e execute o instalador
 
 ```bash
-cd Extras/Ollama
+# Clone o repositório (ou baixe apenas a pasta Ollama)
+git clone https://github.com/oriondesign2015/SetupOrion.git
+cd SetupOrion/Extras/Ollama
+
+# Execute o instalador
 bash install.sh
 ```
 
 O instalador irá:
 - ✅ Verificar dependências (Docker, Docker Compose)
+- ✅ Criar diretório de instalação em `~/ollama-litellm`
+- ✅ Copiar todos os arquivos necessários
 - ✅ Detectar PostgreSQL existente no sistema
 - ✅ Configurar variáveis de ambiente com chaves seguras
 - ✅ Iniciar os serviços
@@ -19,6 +27,9 @@ O instalador irá:
 ### 2️⃣ Aguarde os serviços iniciarem
 
 ```bash
+# Vá para o diretório de instalação
+cd ~/ollama-litellm
+
 # Verificar status
 docker-compose ps
 

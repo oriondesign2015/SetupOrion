@@ -47,17 +47,45 @@ if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/
 fi
 echo -e "${verde}✓ Docker Compose encontrado${reset}"
 
+## Detectar diretório de origem (onde está o install.sh)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 ## Criar diretório de instalação
 INSTALL_DIR="$HOME/ollama-litellm"
 echo -e "${amarelo}[3/7]${reset} Criando diretório de instalação..."
 mkdir -p "$INSTALL_DIR"
-cd "$INSTALL_DIR" || exit 1
 echo -e "${verde}✓ Diretório criado: $INSTALL_DIR${reset}"
 
 ## Copiar arquivos de configuração
 echo -e "${amarelo}[4/7]${reset} Copiando arquivos de configuração..."
-# Aqui você copiaria os arquivos do repositório
-# Por enquanto, vamos criar os arquivos necessários
+
+# Lista de arquivos necessários
+REQUIRED_FILES=(
+    "docker-compose.yml"
+    "docker-compose.no-postgres.yml"
+    "litellm_config.yaml"
+    "check-postgres.sh"
+    "README.md"
+    "QUICKSTART.md"
+    ".env.example"
+)
+
+# Copiar arquivos do diretório de origem para o diretório de instalação
+for file in "${REQUIRED_FILES[@]}"; do
+    if [ -f "$SCRIPT_DIR/$file" ]; then
+        cp "$SCRIPT_DIR/$file" "$INSTALL_DIR/"
+        echo -e "${verde}  ✓${reset} $file copiado"
+    else
+        echo -e "${vermelho}  ✗${reset} $file não encontrado em $SCRIPT_DIR"
+    fi
+done
+
+# Tornar check-postgres.sh executável
+chmod +x "$INSTALL_DIR/check-postgres.sh" 2>/dev/null
+
+# Mudar para o diretório de instalação
+cd "$INSTALL_DIR" || exit 1
+echo -e "${verde}✓ Arquivos de configuração copiados${reset}"
 
 ## Configurar variáveis de ambiente
 echo -e "${amarelo}[5/7]${reset} Configurando variáveis de ambiente..."

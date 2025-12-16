@@ -4,6 +4,11 @@
 
 Este stack combina **Ollama** (runtime local para LLMs) com **LiteLLM** (gateway de API compatível com OpenAI) para fornecer uma solução completa de IA local com interface padronizada.
 
+**✨ Instalação Standalone**: Este stack pode ser instalado e usado **independentemente** de qualquer outro sistema. Não requer o SetupOrion ou qualquer outra ferramenta.
+
+> ⚠️ **IMPORTANTE**: O SetupOrion possui sua própria implementação integrada do Ollama + LiteLLM.
+> Este diretório `Extras/Ollama` é um **projeto standalone separado** que pode ser usado de forma independente.
+
 ### O que está incluído:
 
 - **Ollama**: Execute modelos de linguagem localmente (Llama, Mistral, Phi, etc.)
@@ -20,6 +25,7 @@ Este stack combina **Ollama** (runtime local para LLMs) com **LiteLLM** (gateway
 - ✅ Interface web de administração
 - ✅ Suporte para GPU (NVIDIA)
 - ✅ Totalmente local e privado
+- ✅ **Instalação standalone** - não depende de outros sistemas
 
 ## 📦 Pré-requisitos
 
@@ -34,17 +40,44 @@ Este stack combina **Ollama** (runtime local para LLMs) com **LiteLLM** (gateway
 - **GPU NVIDIA** com suporte CUDA
 - **NVIDIA Container Toolkit** instalado
 
-## 🚀 Instalação Rápida
+## 🚀 Instalação
 
-### 1. Clone ou copie os arquivos
+### Método 1: Instalação Automática (Recomendado)
 
 ```bash
-cd Extras/Ollama
+# 1. Clone ou baixe os arquivos
+git clone https://github.com/oriondesign2015/SetupOrion.git
+cd SetupOrion/Extras/Ollama
+
+# 2. Execute o instalador
+bash install.sh
 ```
 
-### 2. Configure as variáveis de ambiente
+O instalador irá:
+- ✅ Verificar dependências (Docker, Docker Compose)
+- ✅ Criar diretório de instalação em `~/ollama-litellm`
+- ✅ Copiar todos os arquivos necessários
+- ✅ Gerar chaves de segurança automaticamente
+- ✅ Detectar PostgreSQL existente (se houver)
+- ✅ Configurar GPU NVIDIA (se disponível)
+- ✅ Iniciar os serviços
+- ✅ Opcionalmente baixar um modelo LLM
+
+### Método 2: Instalação Manual
 
 ```bash
+# 1. Crie um diretório para a instalação
+mkdir -p ~/ollama-litellm
+cd ~/ollama-litellm
+
+# 2. Baixe os arquivos necessários
+# Copie os seguintes arquivos para este diretório:
+# - docker-compose.yml
+# - docker-compose.no-postgres.yml
+# - litellm_config.yaml
+# - .env.example
+
+# 3. Configure as variáveis de ambiente
 cp .env.example .env
 nano .env  # Edite e altere as senhas e chaves
 ```
@@ -54,9 +87,8 @@ nano .env  # Edite e altere as senhas e chaves
 - `LITELLM_SALT_KEY`: Chave para criptografia (NÃO MUDE após primeira configuração!)
 - `POSTGRES_PASSWORD`: Senha do banco de dados
 
-### 3. Inicie os serviços
-
 ```bash
+# 4. Inicie os serviços
 docker-compose up -d
 ```
 
@@ -260,11 +292,23 @@ docker-compose logs postgres
 sudo chown -R 999:999 ./postgres_data  # Se necessário
 ```
 
+## 🔗 Integração com SetupOrion (Opcional)
+
+Este stack também está disponível como **opção [31]** no menu do SetupOrion para instalação automatizada.
+
+Se você estiver usando o SetupOrion:
+1. Execute o SetupOrion
+2. Escolha a opção **[31]** - Ollama + LiteLLM
+3. O instalador será executado automaticamente
+
+**Nota**: A instalação via SetupOrion usa exatamente os mesmos arquivos e processo descrito neste README. O SetupOrion apenas facilita o acesso ao instalador.
+
 ## 📚 Recursos Adicionais
 
 - [Documentação Ollama](https://github.com/ollama/ollama)
 - [Documentação LiteLLM](https://docs.litellm.ai/)
 - [Modelos disponíveis no Ollama](https://ollama.com/library)
+- [SetupOrion](https://github.com/oriondesign2015/SetupOrion) - Instalador automatizado de aplicações
 - [API Reference LiteLLM](https://docs.litellm.ai/docs/proxy/endpoints)
 
 ## 🔐 Segurança

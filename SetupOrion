@@ -17790,39 +17790,277 @@ requisitar_outra_instalacao
 
 ferramenta_ollama() {
 
-## Verifica os recursos
-recursos 1 1 && continue || return
-
-## Limpa o terminal
-clear
-
-## Mostra o nome da aplicação
-nome_ollama
-
-## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OLLAMA + LITELLM \e[33m[1/1]\e[0m"
-echo ""
-sleep 1
+## Ativa a função dados para pegar os dados da vps
+dados
 
 telemetria "Ollama + LiteLLM" iniciado
 
-## Navega para o diretório Extras/Ollama
-cd /root/Extras/Ollama || {
-    echo -e "\e[91m[ ERRO ]\e[0m - Diretório Extras/Ollama não encontrado"
-    echo ""
-    echo "Certifique-se de que os arquivos de instalação estão em /root/Extras/Ollama/"
-    echo ""
-    read -p "Pressione ENTER para voltar ao menu..."
-    return 1
-}
+## Gerando chaves aleatórias
+litellm_master_key="sk-$(openssl rand -hex 16)"
+litellm_salt_key="sk-salt-$(openssl rand -hex 16)"
+senha_postgres=$(openssl rand -hex 16)
 
-## Executa o script de instalação
-bash install.sh
+## Criando o arquivo de configuração do LiteLLM
+cat > litellm_config.yaml <<EOL
+model_list:
+  - model_name: llama3.2
+    litellm_params:
+      model: ollama_chat/llama3.2
+      api_base: http://ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
 
-## Retorna ao diretório raiz
-cd /root
+  - model_name: llama3.1
+    litellm_params:
+      model: ollama_chat/llama3.1
+      api_base: http://ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: mistral
+    litellm_params:
+      model: ollama_chat/mistral
+      api_base: http://ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: phi3
+    litellm_params:
+      model: ollama_chat/phi3
+      api_base: http://ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: gemma2
+    litellm_params:
+      model: ollama_chat/gemma2
+      api_base: http://ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: codellama
+    litellm_params:
+      model: ollama_chat/codellama
+      api_base: http://ollama:11434
+      stream: true
+      supports_function_calling: false
+      supports_vision: false
+
+  - model_name: llava
+    litellm_params:
+      model: ollama_chat/llava
+      api_base: http://ollama:11434
+      stream: true
+      supports_function_calling: false
+      supports_vision: true
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL
+  ui_access_mode: "admin_only"
+
+litellm_settings:
+  drop_params: true
+  set_verbose: false
+  json_logs: true
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando configuração LiteLLM"
+else
+    echo "1/10 - [ OFF ] - Criando configuração LiteLLM"
+fi
+
+## Criando a stack ollama.yaml
+cat > ollama.yaml <<EOL
+version: "3.7"
+services:
+
+## --------------------------- ORION --------------------------- ##
+
+  postgres:
+    image: postgres:16-alpine
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - POSTGRES_DB=litellm
+      - POSTGRES_USER=litellm
+      - POSTGRES_PASSWORD=$senha_postgres
+      - TZ=America/Sao_Paulo
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+
+## --------------------------- ORION --------------------------- ##
+
+  ollama:
+    image: ollama/ollama:latest
+
+    volumes:
+      - ollama_data:/root/.ollama
+
+    networks:
+      - $nome_rede_interna
+
+    ## Descomente para usar GPU NVIDIA
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: 1
+    #          capabilities: [gpu]
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4096M
+
+## --------------------------- ORION --------------------------- ##
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+
+    command: --config /app/config.yaml --port 4000
+
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml:ro
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - LITELLM_MASTER_KEY=$litellm_master_key
+      - LITELLM_SALT_KEY=$litellm_salt_key
+      - DATABASE_URL=postgresql://litellm:$senha_postgres@postgres:5432/litellm
+      - OLLAMA_API_BASE=http://ollama:11434
+      - LITELLM_LOG=INFO
+      - TZ=America/Sao_Paulo
+
+    ## Descomente as linhas abaixo para uso externo
+    #ports:
+    #  - 4000:4000
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  postgres_data:
+    external: true
+    name: ollama_postgres_data
+  ollama_data:
+    external: true
+    name: ollama_data
+
+networks:
+  $nome_rede_interna:
+    external: true
+    name: $nome_rede_interna
+EOL
+if [ $? -eq 0 ]; then
+    echo "2/10 - [ OK ] - Criando Stack"
+else
+    echo "2/10 - [ OFF ] - Criando Stack"
+fi
+
+STACK_NAME="ollama"
+stack_editavel
+
+## Salvando informações da instalação dentro de /dados_vps/
+cd dados_vps
+
+cat > dados_ollama <<EOL
+[ OLLAMA + LITELLM ]
+
+API Base URL: http://litellm:4000
+Compatível com: OpenAI SDK
+
+Chave Mestra LiteLLM: $litellm_master_key
+Salt Key: $litellm_salt_key
+
+PostgreSQL:
+  Host: postgres:5432
+  Database: litellm
+  User: litellm
+  Password: $senha_postgres
+
+Modelos Disponíveis:
+  - llama3.2 (Chat, Function Calling)
+  - llama3.1 (Chat, Function Calling)
+  - mistral (Chat, Function Calling)
+  - phi3 (Chat, Function Calling)
+  - gemma2 (Chat, Function Calling)
+  - codellama (Chat, Code)
+  - llava (Chat, Vision)
+
+Uso:
+  curl http://litellm:4000/v1/chat/completions \\
+    -H "Content-Type: application/json" \\
+    -H "Authorization: Bearer $litellm_master_key" \\
+    -d '{
+      "model": "llama3.2",
+      "messages": [{"role": "user", "content": "Hello!"}]
+    }'
+
+Integração OpenWebUI:
+  1. Acesse Configurações > Conexões
+  2. URL da API OpenAI: http://litellm:4000/v1
+  3. Chave da API OpenAI: $litellm_master_key
+
+NOTA: Baixe os modelos com: docker exec -it \$(docker ps -qf name=ollama_ollama) ollama pull llama3.2
+EOL
+
+cd
+cd
+
+## Espera a stack subir
+wait_stack "ollama_litellm"
 
 telemetria "Ollama + LiteLLM" finalizado
+
+## Mensagem de sucesso
+echo ""
+echo -e "\e[92m✓ Ollama + LiteLLM instalado com sucesso!\e[0m"
+echo ""
+echo -e "\e[97mPróximos passos:\e[0m"
+echo -e "  1. Baixe os modelos: docker exec -it \$(docker ps -qf name=ollama_ollama) ollama pull llama3.2"
+echo -e "  2. Configure no OpenWebUI usando a chave: $litellm_master_key"
+echo ""
+echo -e "\e[97mInformações salvas em: /root/dados_vps/dados_ollama\e[0m"
+echo ""
 
 ## Pergunta se deseja instalar outra aplicação
 requisitar_outra_instalacao
