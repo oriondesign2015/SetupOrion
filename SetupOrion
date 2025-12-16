@@ -33930,7 +33930,7 @@ requisitar_outra_instalacao
 ferramenta_openwebui() {
 
 ## Verifica os recursos
-recursos 1 1 && continue || return
+recursos 2 4 && continue || return
 
 ## Limpa o terminal
 clear
@@ -33951,20 +33951,20 @@ while true; do
     echo -e "\e[97mPasso$amarelo 1/1\e[0m"
     echo -en "\e[33mDigite o dominio para o OpenWebUI (ex: openwebui.oriondesign.art.br): \e[0m" && read -r url_openwebui
     echo ""
-    
+
     ## Limpa o terminal
     clear
-    
+
     ## Mostra o nome da aplicação
     nome_openwebui
-    
+
     ## Mostra mensagem para verificar as informações
     conferindo_as_info
-    
+
     ##Informação do Dominio
     echo -e "\e[33mDominio para o OpenWebUI:\e[97m $url_openwebui\e[0m"
     echo ""
-    
+
      ## Pergunta se as respostas estão corretas
     read -p "As respostas estão corretas? (Y/N): " confirmacao
     if [ "$confirmacao" = "Y" ] || [ "$confirmacao" = "y" ]; then
@@ -33997,25 +33997,189 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OPENWEBUI \e[33m[1/4]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OPENWEBUI + OLLAMA + LITELLM \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
 
 telemetria OpenWebUI iniciado
 
-## NADA
+## Gerando chaves aleatórias
+WEBUI_SECRET_KEY=$(openssl rand -hex 16)
+litellm_master_key="sk-$(openssl rand -hex 16)"
+litellm_salt_key="sk-salt-$(openssl rand -hex 16)"
+senha_postgres=$(openssl rand -hex 16)
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO OPENWEBUI \e[33m[3/4]\e[0m"
+echo -e "\e[97m• CRIANDO CONFIGURAÇÃO DO LITELLM \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
-WEBUI_SECRET_KEY=$(openssl rand -hex 16)
+## Criando o arquivo de configuração do LiteLLM
+cat > litellm_config${1:+_$1}.yaml <<EOL
+model_list:
+  - model_name: llama3.2
+    litellm_params:
+      model: ollama_chat/llama3.2
+      api_base: http://openwebui${1:+_$1}_ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: llama3.1
+    litellm_params:
+      model: ollama_chat/llama3.1
+      api_base: http://openwebui${1:+_$1}_ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: mistral
+    litellm_params:
+      model: ollama_chat/mistral
+      api_base: http://openwebui${1:+_$1}_ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: phi3
+    litellm_params:
+      model: ollama_chat/phi3
+      api_base: http://openwebui${1:+_$1}_ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: gemma2
+    litellm_params:
+      model: ollama_chat/gemma2
+      api_base: http://openwebui${1:+_$1}_ollama:11434
+      stream: true
+      supports_function_calling: true
+      supports_vision: false
+
+  - model_name: codellama
+    litellm_params:
+      model: ollama_chat/codellama
+      api_base: http://openwebui${1:+_$1}_ollama:11434
+      stream: true
+      supports_function_calling: false
+      supports_vision: false
+
+  - model_name: llava
+    litellm_params:
+      model: ollama_chat/llava
+      api_base: http://openwebui${1:+_$1}_ollama:11434
+      stream: true
+      supports_function_calling: false
+      supports_vision: true
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL
+  ui_access_mode: "admin_only"
+
+litellm_settings:
+  drop_params: true
+  set_verbose: false
+  json_logs: true
+EOL
+if [ $? -eq 0 ]; then
+    echo "1/10 - [ OK ] - Criando configuração LiteLLM"
+else
+    echo "1/10 - [ OFF ] - Criando configuração LiteLLM"
+fi
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO OPENWEBUI + OLLAMA + LITELLM \e[33m[3/4]\e[0m"
+echo ""
+sleep 1
 
 ## Criando a stack openwebui.yaml
 cat > openwebui${1:+_$1}.yaml <<EOL
 version: "3.7"
 services:
+
+## --------------------------- ORION --------------------------- ##
+
+  postgres:
+    image: postgres:16-alpine
+
+    volumes:
+      - openwebui${1:+_$1}_postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - POSTGRES_DB=litellm
+      - POSTGRES_USER=litellm
+      - POSTGRES_PASSWORD=$senha_postgres
+      - TZ=America/Sao_Paulo
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+
+## --------------------------- ORION --------------------------- ##
+
+  openwebui${1:+_$1}_ollama:
+    image: ollama/ollama:latest
+
+    volumes:
+      - openwebui${1:+_$1}_ollama_data:/root/.ollama
+
+    networks:
+      - $nome_rede_interna
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4096M
+
+## --------------------------- ORION --------------------------- ##
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+
+    command: --config /app/config.yaml --port 4000
+
+    volumes:
+      - ./litellm_config${1:+_$1}.yaml:/app/config.yaml:ro
+
+    networks:
+      - $nome_rede_interna
+
+    environment:
+      - LITELLM_MASTER_KEY=$litellm_master_key
+      - LITELLM_SALT_KEY=$litellm_salt_key
+      - DATABASE_URL=postgresql://litellm:$senha_postgres@postgres:5432/litellm
+      - OLLAMA_API_BASE=http://openwebui${1:+_$1}_ollama:11434
+      - LITELLM_LOG=INFO
+      - TZ=America/Sao_Paulo
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -34028,13 +34192,10 @@ services:
     networks:
       - $nome_rede_interna
 
-    #ports:
-    #  - 8085:8080
-
     environment:
-
-      ## Base URL API
-      #- OLLAMA_BASE_URL=https://
+      ## Conecta automaticamente ao LiteLLM
+      - OPENAI_API_BASE_URL=http://litellm:4000/v1
+      - OPENAI_API_KEY=$litellm_master_key
 
       ## Secret Key
       - WEBUI_SECRET_KEY=$WEBUI_SECRET_KEY
@@ -34061,16 +34222,22 @@ volumes:
   openwebui${1:+_$1}_data:
     external: true
     name: openwebui${1:+_$1}_data
-  
+  openwebui${1:+_$1}_postgres_data:
+    external: true
+    name: openwebui${1:+_$1}_postgres_data
+  openwebui${1:+_$1}_ollama_data:
+    external: true
+    name: openwebui${1:+_$1}_ollama_data
+
 networks:
   $nome_rede_interna:
     external: true
     name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
-    echo "1/10 - [ OK ] - Criando Stack"
+    echo "2/10 - [ OK ] - Criando Stack"
 else
-    echo "1/10 - [ OFF ] - Criando Stack"
+    echo "2/10 - [ OFF ] - Criando Stack"
     echo "Não foi possivel criar a stack do openwebui"
 fi
 STACK_NAME="openwebui${1:+_$1}"
@@ -34099,13 +34266,50 @@ telemetria OpenWebUI finalizado
 cd dados_vps
 
 cat > dados_openwebui${1:+_$1} <<EOL
-[ OPENWEBUI ]
+[ OPENWEBUI + OLLAMA + LITELLM ]
 
 Dominio do Open WebUI: https://$url_openwebui
 
 Usuario: Precisa de criar ao fazer o primeiro login
-
 Senha: Precisa de criar ao fazer o primeiro login
+
+---
+
+[ LITELLM API ]
+
+Chave Mestra LiteLLM: $litellm_master_key
+Salt Key: $litellm_salt_key
+API Base URL (Interna): http://litellm:4000/v1
+
+---
+
+[ POSTGRESQL ]
+
+Host: postgres:5432
+Database: litellm
+User: litellm
+Password: $senha_postgres
+
+---
+
+[ MODELOS DISPONÍVEIS ]
+
+- llama3.2 (Chat, Function Calling)
+- llama3.1 (Chat, Function Calling)
+- mistral (Chat, Function Calling)
+- phi3 (Chat, Function Calling)
+- gemma2 (Chat, Function Calling)
+- codellama (Chat, Code)
+- llava (Chat, Vision)
+
+---
+
+[ BAIXAR MODELOS ]
+
+Para baixar modelos no Ollama, execute:
+
+docker exec -it \$(docker ps -qf name=openwebui${1:+_$1}_openwebui${1:+_$1}_ollama) ollama pull llama3.2
+docker exec -it \$(docker ps -qf name=openwebui${1:+_$1}_openwebui${1:+_$1}_ollama) ollama pull mistral
 
 EOL
 
@@ -34122,16 +34326,26 @@ instalado_msg
 guarde_os_dados_msg
 
 ## Dados da Aplicação:
-echo -e "\e[32m[ OPENWEBUI ]\e[0m"
+echo -e "\e[32m[ OPENWEBUI + OLLAMA + LITELLM ]\e[0m"
 echo ""
 
-echo -e "\e[33mOpen OpenWebUI:\e[97m https://$url_openwebui\e[0m"
+echo -e "\e[33mURL do OpenWebUI:\e[97m https://$url_openwebui\e[0m"
 echo ""
 
 echo -e "\e[33mUsuario:\e[97m Precisa de criar ao fazer o primeiro login\e[0m"
 echo ""
 
 echo -e "\e[33mSenha:\e[97m Precisa de criar ao fazer o primeiro login\e[0m"
+echo ""
+
+echo -e "\e[33mChave da API LiteLLM:\e[97m $litellm_master_key\e[0m"
+echo ""
+
+echo -e "\e[97mPróximos passos:\e[0m"
+echo -e "  1. Acesse https://$url_openwebui e crie sua conta"
+echo -e "  2. Baixe modelos: docker exec -it \$(docker ps -qf name=openwebui${1:+_$1}_ollama) ollama pull llama3.2"
+echo -e "  3. Os modelos aparecerão automaticamente no OpenWebUI"
+echo ""
 
 ## Creditos do instalador
 creditos_msg
