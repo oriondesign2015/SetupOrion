@@ -17881,16 +17881,39 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OLLAMA \e[33m[1/4]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO OLLAMA \e[33m[1/5]\e[0m"
 echo ""
 sleep 1
 
 telemetria Ollama iniciado
 
-## NADA
+## Mensagem de Passo
+echo -e "\e[97m• VERIFICANDO/INSTALANDO PGVECTOR \e[33m[2/5]\e[0m"
+echo ""
+sleep 1
+
+## Verifica se já existe pgvector instalado
+verificar_container_pgvector
+if [ $? -eq 0 ]; then
+    echo "1/3 - [ OK ] - PgVector já instalado"
+    pegar_senha_pgvector > /dev/null 2>&1
+    echo "2/3 - [ OK ] - Copiando senha do PgVector"
+    criar_banco_pgvector_da_stack "litellm"
+    echo "3/3 - [ OK ] - Criando banco de dados litellm"
+    echo ""
+    usar_pgvector_existente=true
+    postgres_password=$senha_pgvector
+    postgres_host="pgvector"
+else
+    echo "1/1 - [ INFO ] - PgVector não encontrado, será criado na stack"
+    echo ""
+    usar_pgvector_existente=false
+    postgres_password=$(openssl rand -hex 16)
+    postgres_host="postgres"
+fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO OLLAMA + LITELLM \e[33m[3/4]\e[0m"
+echo -e "\e[97m• GERANDO CHAVES DE SEGURANÇA \e[33m[3/5]\e[0m"
 echo ""
 sleep 1
 
@@ -17901,7 +17924,11 @@ if [ -z "$litellm_master_key" ]; then
     litellm_master_key="sk-$(openssl rand -hex 16)"
 fi
 litellm_salt_key="sk-salt-$(openssl rand -hex 16)"
-postgres_password=$(openssl rand -hex 16)
+
+## Mensagem de Passo
+echo -e "\e[97m• INSTALANDO OLLAMA + LITELLM \e[33m[4/5]\e[0m"
+echo ""
+sleep 1
 
 ## Criando a stack ollama.yaml
 cat > ollama${1:+_$1}.yaml <<EOL
@@ -17976,6 +18003,11 @@ services:
         - traefik.http.services.openwebui${1:+_$1}.loadbalancer.passHostHeader=true
 
 ## --------------------------- ORION --------------------------- ##
+EOL
+
+## Adiciona PostgreSQL apenas se não estiver usando pgvector existente
+if [ "$usar_pgvector_existente" = false ]; then
+cat >> ollama${1:+_$1}.yaml <<EOL
 
   postgres${1:+_$1}:
     image: postgres:16-alpine
@@ -17988,8 +18020,9 @@ services:
 
     environment:
       - POSTGRES_DB=litellm
-      - POSTGRES_USER=litellm_user
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=$postgres_password
+      - TZ=America/Sao_Paulo
 
     deploy:
       mode: replicated
@@ -17997,8 +18030,17 @@ services:
       placement:
         constraints:
           - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
 
 ## --------------------------- ORION --------------------------- ##
+EOL
+fi
+
+## Continua com o LiteLLM
+cat >> ollama${1:+_$1}.yaml <<EOL
 
   litellm${1:+_$1}:
     image: docker.litellm.ai/berriai/litellm:main-latest
@@ -18015,8 +18057,9 @@ services:
     environment:
       - LITELLM_MASTER_KEY=$litellm_master_key
       - LITELLM_SALT_KEY=$litellm_salt_key
-      - DATABASE_URL=postgresql://litellm_user:$postgres_password@postgres${1:+_$1}:5432/litellm
+      - DATABASE_URL=postgresql://postgres:$postgres_password@$postgres_host:5432/litellm
       - OLLAMA_BASE_URL=http://ollama${1:+_$1}:11434
+      - TZ=America/Sao_Paulo
 
     command: --config /app/config/litellm_config.yaml --port 4000 --detailed_debug
 
@@ -18045,9 +18088,19 @@ volumes:
   open${1:+_$1}_webui:
     external: true
     name: open${1:+_$1}_webui
+EOL
+
+## Adiciona volume do PostgreSQL apenas se não estiver usando pgvector existente
+if [ "$usar_pgvector_existente" = false ]; then
+cat >> ollama${1:+_$1}.yaml <<EOL
   postgres${1:+_$1}_data:
     external: true
     name: postgres${1:+_$1}_data
+EOL
+fi
+
+## Continua com volumes restantes
+cat >> ollama${1:+_$1}.yaml <<EOL
   litellm${1:+_$1}_config:
     external: true
     name: litellm${1:+_$1}_config
@@ -18094,7 +18147,7 @@ model_list:
 
 general_settings:
   master_key: $litellm_master_key
-  database_url: postgresql://litellm_user:$postgres_password@postgres${1:+_$1}:5432/litellm
+  database_url: postgresql://postgres:$postgres_password@$postgres_host:5432/litellm
 
 litellm_settings:
   drop_params: true
@@ -18113,16 +18166,9 @@ LITELLM_CONFIG
 
 STACK_NAME="ollama${1:+_$1}"
 stack_editavel # > /dev/null 2>&1
-#docker stack deploy --prune --resolve-image always -c ollama.yaml ollama > /dev/null 2>&1
-#if [ $? -eq 0 ]; then
-#    echo "2/2 - [ OK ] - Deploy Stack"
-#else
-#    echo "2/2 - [ OFF ] - Deploy Stack"
-#    echo "Não foi possivel Subir a stack do Ollama"
-#fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[5/5]\e[0m"
 echo ""
 sleep 1
 
@@ -18134,8 +18180,12 @@ echo "Copiando configuração do LiteLLM..."
 docker run --rm -v litellm${1:+_$1}_config:/config -v /tmp:/source alpine cp /source/litellm_config.yaml /config/litellm_config.yaml > /dev/null 2>&1
 rm -f /tmp/litellm_config.yaml
 
-## Usa o serviço wait_nocodb para verificar se o serviço esta online
-wait_stack ollama${1:+_$1}_openwebui${1:+_$1} ollama${1:+_$1}_ollama${1:+_$1} ollama${1:+_$1}_litellm${1:+_$1} ollama${1:+_$1}_postgres${1:+_$1}
+## Usa o serviço wait_stack para verificar se os serviços estão online
+if [ "$usar_pgvector_existente" = false ]; then
+    wait_stack ollama${1:+_$1}_openwebui${1:+_$1} ollama${1:+_$1}_ollama${1:+_$1} ollama${1:+_$1}_litellm${1:+_$1} ollama${1:+_$1}_postgres${1:+_$1}
+else
+    wait_stack ollama${1:+_$1}_openwebui${1:+_$1} ollama${1:+_$1}_ollama${1:+_$1} ollama${1:+_$1}_litellm${1:+_$1}
+fi
 
 telemetria Ollama finalizado
 
@@ -18152,9 +18202,12 @@ Dominio do LiteLLM: https://$url_litellm
 
 LiteLLM Master Key: $litellm_master_key
 
-PostgreSQL Database: litellm
-PostgreSQL User: litellm_user
-PostgreSQL Password: $postgres_password
+PostgreSQL:
+  Host: $postgres_host:5432
+  Database: litellm
+  User: postgres
+  Password: $postgres_password
+  $(if [ "$usar_pgvector_existente" = true ]; then echo "Tipo: PgVector Existente (Compartilhado)"; else echo "Tipo: PostgreSQL Dedicado"; fi)
 
 EOL
 
