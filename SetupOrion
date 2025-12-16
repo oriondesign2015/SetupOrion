@@ -18189,7 +18189,7 @@ fi
 
 telemetria Ollama finalizado
 
-cd dados_vps
+cd /root/dados_vps
 
 cat > dados_ollama${1:+_$1} <<EOL
 [ OLLAMA + LITELLM ]
@@ -18211,8 +18211,7 @@ PostgreSQL:
 
 EOL
 
-cd
-cd
+cd /root
 
 ## Espera 30 segundos
 wait_30_sec
