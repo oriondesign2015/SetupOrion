@@ -40979,6 +40979,7 @@ SMTP_HOST=$(get_var "N8N_SMTP_HOST")
 SMTP_PORT=$(get_var "N8N_SMTP_PORT")
 SMTP_SSL=$(get_var "N8N_SMTP_SSL")
 WEBHOOK_URL_FORMATADO=$(echo "$WEBHOOK_URL" | sed -E 's|https?://([^/]+)/?.*|\1|')
+QUEUE_BULL_REDIS_HOST=$(get_var "QUEUE_BULL_REDIS_HOST")
 
 # Exibir uma vez só
 echo -e "• DB_PASSWORD=$DB_PASSWORD"
@@ -40993,6 +40994,7 @@ echo -e "• SMTP_PASS=$SMTP_PASS"
 echo -e "• SMTP_HOST=$SMTP_HOST"
 echo -e "• SMTP_PORT=$SMTP_PORT"
 echo -e "• SMTP_SSL=$SMTP_SSL"
+echo -e "• QUEUE_BULL_REDIS_HOST=$QUEUE_BULL_REDIS_HOST"
 
 echo ""
 ## Mensagem de Passo
@@ -41032,6 +41034,10 @@ services:
       - N8N_EDITOR_BASE_URL=$EDITOR_BASE_URL
       - WEBHOOK_URL=$WEBHOOK_URL
       - N8N_PROTOCOL=https
+      - N8N_PROXY_HOPS=1
+      - N8N_ONBOARDING_FLOW_DISABLED=true
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      - N8N_SKIP_AUTH_ON_OAUTH_CALLBACK=false
 
       ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
@@ -41041,6 +41047,8 @@ services:
       - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
       - N8N_RUNNERS_ENABLED=true
       - N8N_RUNNERS_MODE=internal
+      - N8N_RESTRICT_FILE_ACCESS_TO="~/.n8n-files"
+      - NODES_EXCLUDE="[]"
 
       ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
@@ -41057,7 +41065,7 @@ services:
       - N8N_SMTP_SSL=$SMTP_SSL
 
       ## 🔁 Redis (Fila de Execução)
-      - QUEUE_BULL_REDIS_HOST=redis
+      - QUEUE_BULL_REDIS_HOST=$QUEUE_BULL_REDIS_HOST
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=2
 
@@ -41131,12 +41139,14 @@ wait_stack n8n${1:+_$1}_mcp_n8n${1:+_$1}_mcp
 
 telemetria MCP finalizado
 
+fix_webhook_url_mcp="${WEBHOOK_URL%/}"
+
 cd dados_vps
 
 cat > dados_n8n${1:+_$1}_mpc <<EOL
 [ MCP DO N8N ]
 
-Dominio do Webhook do MCP: $WEBHOOK_URL/mcp
+Dominio do Webhook do MCP: $fix_webhook_url_mcp/mcp
 EOL
 
 cd
@@ -41155,7 +41165,7 @@ guarde_os_dados_msg
 echo -e "\e[32m[ MCP DO N8N ]\e[0m"
 echo ""
 
-echo -e "\e[33mDominio Webhook:\e[97m $WEBHOOK_URL/mcp\e[0m"
+echo -e "\e[33mDominio Webhook:\e[97m $fix_webhook_url_mcp/mcp\e[0m"
 
 ## Creditos do instalador
 creditos_msg
