@@ -8703,7 +8703,7 @@ services:
       - N8N_RUNNERS_ENABLED=true
       - N8N_RUNNERS_MODE=internal
       - N8N_RESTRICT_FILE_ACCESS_TO="~/.n8n-files"
-      - NODES_EXCLUDEUDE="[]"
+      - NODES_EXCLUDE="[]"
 
     ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
@@ -8806,7 +8806,7 @@ services:
       - N8N_RUNNERS_ENABLED=true
       - N8N_RUNNERS_MODE=internal
       - N8N_RESTRICT_FILE_ACCESS_TO="~/.n8n-files"
-      - NODES_EXCLUDEUDE="[]"
+      - NODES_EXCLUDE="[]"
 
     ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
@@ -8860,7 +8860,7 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=(Host(\`$url_webhookn8n\`) ## Url do Webhook do N8N
+        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=Host(\`$url_webhookn8n\`) ## Url do Webhook do N8N
         - traefik.http.routers.n8n${1:+_$1}_webhook.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_webhook.priority=5
         - traefik.http.routers.n8n${1:+_$1}_webhook.tls.certresolver=letsencryptresolver
@@ -8909,7 +8909,7 @@ services:
       - N8N_RUNNERS_ENABLED=true
       - N8N_RUNNERS_MODE=internal
       - N8N_RESTRICT_FILE_ACCESS_TO="~/.n8n-files"
-      - NODES_EXCLUDEUDE="[]"
+      - NODES_EXCLUDE="[]"
 
     ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
