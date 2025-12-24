@@ -35790,6 +35790,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
     
     #environments:
+    ## 🌐 Integração com Locize
       #- LOCIZE_API_KEY=
 
     deploy:
@@ -36005,14 +36006,14 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Url do Frontend
+      ## 🌐 Url do Frontend
       - NEXT_PUBLIC_APP_URL=https://$url_serpbear
 
-      ## Dados de acesso
+      ## 🔐 Dados de acesso
       - USER=$user_serpbear
       - PASSWORD=$pass_serpbear
 
-      ## SecretKey e APIKey
+      ## 🧾 SecretKey e APIKey
       - SECRET=$secret_key_serpbear
       - APIKEY=$apikey_serpbear
 
@@ -36568,21 +36569,21 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-    ## Dados de acesso
+    ## 🔐 Dados de acesso
       - AUTHENTIK_BOOTSTRAP_EMAIL=$email_authentik
       - AUTHENTIK_BOOTSTRAP_PASSWORD=$senha_authentik
 
-    ## Configuração do PostgreSQL
+    ## 🐘 Configuração do PostgreSQL
       - AUTHENTIK_POSTGRESQL__HOST=postgres
       - AUTHENTIK_POSTGRESQL__NAME=authentik${1:+_$1}
       - AUTHENTIK_POSTGRESQL__PASSWORD=$senha_postgres
       - AUTHENTIK_POSTGRESQL__USER=postgres
     
-    ## Configuração do Redis
+    ## 🧠 Configuração do Redis
       - AUTHENTIK_REDIS__HOST=authentik${1:+_$1}_redis
       - AUTHENTIK_REDIS__PORT=6379
 
-    ## Secret Key
+    ## 🔑 Secret Key
       - AUTHENTIK_SECRET_KEY=$secretkey_authentik
     
     deploy:
@@ -36620,21 +36621,21 @@ services:
       - $nome_rede_interna
 
     environment:
-    ## Dados de acesso
+    ## 🔐 Dados de acesso
       - AUTHENTIK_BOOTSTRAP_EMAIL=$email_authentik
       - AUTHENTIK_BOOTSTRAP_PASSWORD=$senha_authentik
 
-    ## Configuração do PostgreSQL
+    ## 🐘 Configuração do PostgreSQL
       - AUTHENTIK_POSTGRESQL__HOST=postgres
       - AUTHENTIK_POSTGRESQL__NAME=authentik${1:+_$1}
       - AUTHENTIK_POSTGRESQL__PASSWORD=$senha_postgres
       - AUTHENTIK_POSTGRESQL__USER=postgres
     
-    ## Configuração do Redis
+    ## 🧠 Configuração do Redis
       - AUTHENTIK_REDIS__HOST=authentik${1:+_$1}_redis
       - AUTHENTIK_REDIS__PORT=6379
 
-    ## Secret Key
+    ## 🔑 Secret Key
       - AUTHENTIK_SECRET_KEY=$secretkey_authentik
     
     deploy:
@@ -36891,10 +36892,10 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Url do Frontend
+    ## 🌐 Url do Frontend
       - UPTIME_APP_CLIENT_HOST=https://$url_checkmate
 
-      ## Url do Backend
+    ## 🔗 Url do Backend
       - UPTIME_APP_API_BASE_URL=https://$url_checkmate_api/api/v1
     
     deploy:
@@ -36930,22 +36931,22 @@ services:
           - server 
 
     environment:
-      ## Configurações de URLs e Hosts
+    ## 🌐 Configurações de URLs e Hosts
       - VITE_APP_API_BASE_URL=https://$url_checkmate_api/api/v1
       - VITE_APP_CLIENT_HOST=https://$url_checkmate
       - UPTIME_APP_CLIENT_HOST=https://$url_checkmate
       - CLIENT_HOST=https://$url_checkmate
 
-      ## Configurações da Aplicação
+    ## ⚙️ Configurações da Aplicação
       - VITE_APP_LOG_LEVEL=info
 
-      ## Configurações do Banco de Dados
+    ## 🗄️ Configurações do Banco de Dados
       - DB_CONNECTION_STRING=mongodb://$user_mongo:$pass_mongo@mongodb:27017/checkmate${1:+_$1}?authSource=admin
 
-      ## Configurações do Redis
+    ## 🧠 Configurações do Redis
       - REDIS_URL=redis://checkmate${1:+_$1}_redis:6379
 
-      ## Configurações de Segurança
+    ## 🔐 Configurações de Segurança
       - JWT_SECRET=$secretkey_checkmate
 
     deploy:
@@ -37195,48 +37196,48 @@ services:
       - $nome_rede_interna
 
     environment:
-      # App Configuration
+    ## ⚙️ Configurações da Aplicação
       - NODE_ENV=production
       - APP_LISTEN_PORT=9157
       - APP_LISTEN_HOSTNAME=0.0.0.0
       - APP_HOMEPAGE_URL=https://$url_heyform
       - APP_DISABLE_REGISTRATION=false ## false = Permite registro de novos usuarios
       
-      # Cookie & Session
+    ## 🍪 Cookies e Sessões
       - COOKIE_MAX_AGE=1y
       - COOKIE_DOMAIN=
       - SESSION_KEY=$sessionkey_heyform
       - SESSION_MAX_AGE=15d
       
-      # Encryption
+    ## 🔐 Encryptation
       - FORM_ENCRYPTION_KEY=$encryptionkey_heyform
       
-      # MongoDB Configuration
+    ## 🗄️ Configuração do MongoDB
       - MONGO_URI=mongodb://mongodb:27017/heyform${1:+_$1}?authSource=admin
       - MONGO_USER=$user_mongo
       - MONGO_PASSWORD=$pass_mongo
       - MONGO_SSL_CA_PATH=
       
-      # Redis Configuration
+    ## 🧠 Configuração do Redis
       - REDIS_HOST=heyform${1:+_$1}_redis
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_DB=0
       
-      # Upload Configuration
+    ## 📤 Configurações de Upload de Arquivos
       - UPLOAD_FILE_SIZE=10485760
       - UPLOAD_FILE_TYPES=
       
-      # Bcrypt
+    ## 🔑 Segurança de Senhas (Bcrypt)
       - BCRYPT_SALT=10
       
-      # Bull Queue Configuration
+    ## 📦 Configuração da Fila de Processamento (Bull)
       - BULL_JOB_ATTEMPTS=3
       - BULL_JOB_TIMEOUT=1m
       - BULL_JOB_BACKOFF_DELAY=3000
       - BULL_JOB_BACKOFF_TYPE=fixed
       
-      # Other Configuration
+    ## 🧩 Outras Configurações da Aplicação
       - INVITE_CODE_EXPIRE_DAYS=7
       - FORM_REPORT_RATE=5s
       - VERIFICATION_CODE_EXPIRE=10m
@@ -37484,17 +37485,23 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## 🌐 Configuração da URL da Aplicação
       - ROOT_URL=https://$url_wekan
 
+    ## 📁 Caminhos e Armazenamento
       - WRITABLE_PATH=/data
 
+    ## 🐘 Configuração do MongoDB
       - MONGO_URL=mongodb://$user_mongo:$pass_mongo@mongodb:27017/wekan${1:+_$1}?authSource=admin
       
-      #- MAIL_URL=smtp://email@dominio.com:@Senha123_:587/?ignoreTLS=true&tls=false
-      #- MAIL_FROM=Wekan Notifications <email@dominio.com>
+    ## 📧 Configuração do SMTP
+      - MAIL_URL=smtp://email@dominio.com:@Senha123_@smtp.dominio.com:587
+      - MAIL_FROM=Wekan Notifications <email@dominio.com>
 
+    ## 🔗 Configuração da API
       - WITH_API=true
 
+    ## ⚙️ Comportamento e Recursos
       - RICHER_CARD_COMMENT_EDITOR=false
       - CARD_OPENED_WEBHOOK_ENABLED=false
       - BIGEVENTS_PATTERN=NONE
@@ -37735,6 +37742,7 @@ services:
       - opensign${1:+_$1}_files:/usr/src/app/files
 
     environment:
+    ## ⚙️ Configurações da Aplicação
       - NODE_ENV=production
       - SERVER_URL=https://$url_opensign/app
       - PUBLIC_URL=https://$url_opensign
@@ -37742,26 +37750,26 @@ services:
       - SERVER_HOST=0.0.0.0
       - PORT=8080
 
-      ## Banco de dados
+    ## 🗄️ Banco de Dados (MongoDB)
       - MONGODB_URI=mongodb://$user_mongo:$pass_mongo@mongodb:27017/OpenSignDB${1:+_$1}?authSource=admin
       - DATABASE_URI=mongodb://$user_mongo:$pass_mongo@mongodb:27017/OpenSignDB${1:+_$1}?authSource=admin
       - MONGO_URL=mongodb://$user_mongo:$pass_mongo@mongodb:27017/OpenSignDB${1:+_$1}?authSource=admin
 
-      ## Chaves de segurança
+    ## 🔐 Chaves de Segurança
       - MASTER_KEY=$keymaster_opensign
       - JWT_SECRET=$jwtsecret_opensign
       - APP_ID=opensign
 
-      ## Configurações de armazenamento
+    ## 📁 Configurações de Armazenamento
       - USE_LOCAL=true
 
-      ## Configurações de email (opcional - configure conforme necessário)
+    ## 📧 Configurações de SMTP
       - SMTP_ENABLE=false
 
-      ## Fuso horário
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
 
-      ## Certificado PFX para assinatura digital
+    ## 🪪 Certificado PFX para Assinatura Digital
       - PFX_BASE64=$PFX_BASE64
       - PASS_PHRASE=$senha_pfx_opensign
 
@@ -37796,11 +37804,14 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## ⚙️ Configurações da Aplicação
       - NODE_ENV=production
       - REACT_APP_SERVERURL=https://$url_opensign/app
       - PUBLIC_URL=https://$url_opensign
       - REACT_APP_APPID=opensign
       - GENERATE_SOURCEMAP=false
+    
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
 
     deploy:
@@ -38036,7 +38047,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Configurações da Aplicação:
+    ## ⚙️ Configurações da Aplicação
       - APP_URL=https://$url_docmost
       - PORT=3000
       - APP_SECRET=$secret_docmost
@@ -38044,13 +38055,13 @@ services:
       - DEBUG_MODE=false
       - DISABLE_TELEMETRY=true
       
-      ## Configurações do Banco de Dados:
+    ## 🗄️ Configurações do Banco de Dados
       - DATABASE_URL=postgresql://postgres:$senha_postgres@postgres:5432/docmost${1:+_$1}?schema=public
       
-      ## Configurações do Redis:
+    ## 🧠 Configurações do Redis
       - REDIS_URL=redis://docmost${1:+_$1}_redis:6379
       
-      ## Configurações de Armazenamento:
+    ## 📁 Configurações de Armazenamento
       - STORAGE_DRIVER=local ## local ou s3
       - FILE_UPLOAD_SIZE_LIMIT=50mb
       #- AWS_S3_ACCESS_KEY_ID=
@@ -38060,7 +38071,7 @@ services:
       #- AWS_S3_ENDPOINT=
       #- AWS_S3_FORCE_PATH_STYLE=
       
-      ## Configurações do SMTP:
+    ## 📧 Configurações do SMTP
       #- MAIL_DRIVER=smtp
       #- MAIL_FROM_NAME=Docmost
       #- MAIL_FROM_ADDRESS=email@dominio.com
@@ -38341,31 +38352,31 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      # Database Configuration
+    ## 🗄️ Configuração do Postgres
       - DB_HOST=netbox${1:+_$1}_db
       - DB_NAME=netbox${1:+_$1}
       - DB_PASSWORD=$postgres_netbox
       - DB_USER=postgres
 
-      # Redis Configuration
+    ## 🧠 Configuração do Redis
       - REDIS_HOST=netbox${1:+_$1}_redis
       - REDIS_PASSWORD=
       - REDIS_DATABASE=0
       - REDIS_SSL=false
       - REDIS_INSECURE_SKIP_TLS_VERIFY=false
 
-      # Redis Cache Configuration
+    ## 🚀 Configuração do Redis
       - REDIS_CACHE_HOST=netbox${1:+_$1}_redis_cache
       - REDIS_CACHE_PASSWORD=
       - REDIS_CACHE_DATABASE=1
       - REDIS_CACHE_SSL=false
       - REDIS_CACHE_INSECURE_SKIP_TLS_VERIFY=false
 
-      # Security
+    ## 🔐 Segurança e Chaves
       - SECRET_KEY=$secretkey_netbox
       - API_TOKEN_PEPPER_1=$tokenpepper_netbox
 
-      # Application Settings
+    ## ⚙️ Configurações da Aplicação
       - MEDIA_ROOT=/opt/netbox/netbox/media
       - CORS_ORIGIN_ALLOW_ALL=True
       - GRAPHQL_ENABLED=true
@@ -38373,7 +38384,7 @@ services:
       - METRICS_ENABLED=false
       - SKIP_SUPERUSER=false
 
-      # Email Configuration
+    ## 📧 Configuração de SMTP
       #- EMAIL_FROM=email@dominio.com
       #- EMAIL_USERNAME=email@dominio.com
       #- EMAIL_PASSWORD=@Senha123_
@@ -38385,7 +38396,7 @@ services:
       #- EMAIL_SSL_CERTFILE=
       #- EMAIL_SSL_KEYFILE=
 
-      # Release Check
+    ## 🔄 Verificação de Atualizações
       - RELEASE_CHECK_URL=https://api.github.com/repos/netbox-community/netbox/releases
 
     deploy:
@@ -38423,31 +38434,31 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      # Database Configuration
+    ## 🗄️ Configuração do Postgres
       - DB_HOST=netbox${1:+_$1}_db
       - DB_NAME=netbox${1:+_$1}
       - DB_PASSWORD=$postgres_netbox
       - DB_USER=postgres
 
-      # Redis Configuration
+    ## 🧠 Configuração do Redis
       - REDIS_HOST=netbox${1:+_$1}_redis
       - REDIS_PASSWORD=
       - REDIS_DATABASE=0
       - REDIS_SSL=false
       - REDIS_INSECURE_SKIP_TLS_VERIFY=false
 
-      # Redis Cache Configuration
+    ## 🚀 Configuração do Redis
       - REDIS_CACHE_HOST=netbox${1:+_$1}_redis_cache
       - REDIS_CACHE_PASSWORD=
       - REDIS_CACHE_DATABASE=1
       - REDIS_CACHE_SSL=false
       - REDIS_CACHE_INSECURE_SKIP_TLS_VERIFY=false
 
-      # Security
+    ## 🔐 Segurança e Chaves
       - SECRET_KEY=$secretkey_netbox
       - API_TOKEN_PEPPER_1=$tokenpepper_netbox
 
-      # Application Settings
+    ## ⚙️ Configurações da Aplicação
       - MEDIA_ROOT=/opt/netbox/netbox/media
       - CORS_ORIGIN_ALLOW_ALL=True
       - GRAPHQL_ENABLED=true
@@ -38455,7 +38466,7 @@ services:
       - METRICS_ENABLED=false
       - SKIP_SUPERUSER=false
 
-      # Email Configuration
+    ## 📧 Configuração de SMTP
       #- EMAIL_FROM=email@dominio.com
       #- EMAIL_USERNAME=email@dominio.com
       #- EMAIL_PASSWORD=@Senha123_
@@ -38467,7 +38478,7 @@ services:
       #- EMAIL_SSL_CERTFILE=
       #- EMAIL_SSL_KEYFILE=
 
-      # Release Check
+    ## 🔄 Verificação de Atualizações
       - RELEASE_CHECK_URL=https://api.github.com/repos/netbox-community/netbox/releases
 
     deploy:
@@ -38496,6 +38507,7 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## 🗄️ Configuração do Postgres
       - POSTGRES_DB=netbox${1:+_$1}
       - POSTGRES_PASSWORD=$postgres_netbox
 
@@ -38796,7 +38808,7 @@ services:
     #  - "19092:19092"  # JMX para monitoramento
 
     environment:
-      # Configurações básicas
+    ## ⚙️ Configurações do Kafka
       - KAFKA_BROKER_ID=1
       - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka${1:+_$1}_broker:9092
@@ -38809,36 +38821,35 @@ services:
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       - CLUSTER_ID=$cluster_kafka
 
-      # OTIMIZAÇÕES DE PERFORMANCE
-      # Threads para alta concorrência
+    ## 🚀 Otimizações de Performance
       - KAFKA_NUM_NETWORK_THREADS=8
       - KAFKA_NUM_IO_THREADS=16
       - KAFKA_NUM_REPLICA_FETCHERS=4
 
-      # Buffers de rede otimizados
+    ## 🌐 Buffers de Rede
       - KAFKA_SOCKET_SEND_BUFFER_BYTES=102400
       - KAFKA_SOCKET_RECEIVE_BUFFER_BYTES=102400
       - KAFKA_REPLICA_SOCKET_RECEIVE_BUFFER_BYTES=65536
 
-      # Logs e segmentos
+    ## 🧾 Logs e Segmentação
       - KAFKA_LOG_SEGMENT_BYTES=1073741824
       - KAFKA_LOG_RETENTION_HOURS=24
       - KAFKA_LOG_RETENTION_BYTES=1073741824
 
-      # Compressão e batching
+    ## 📦 Compressão e Batching
       - KAFKA_COMPRESSION_TYPE=lz4
       - KAFKA_BATCH_SIZE=200000
       - KAFKA_LINGER_MS=100
 
-      # Partições para paralelismo
+    ## 🧩 Partições e Paralelismo
       - KAFKA_NUM_PARTITIONS=12
       - KAFKA_DEFAULT_REPLICATION_FACTOR=1
 
-      # JVM otimizada
+    ## 🧠 JVM Otimizada
       - KAFKA_HEAP_OPTS=-Xms1G -Xmx1G
       - KAFKA_JVM_PERFORMANCE_OPTS=-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -Djava.awt.headless=true
 
-      # JMX para monitoramento
+    ## 📊 Monitoramento via JMX
       - KAFKA_JMX_PORT=19092
       - KAFKA_JMX_HOSTNAME=0.0.0.0
 
@@ -38862,10 +38873,13 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## 🧩 Configuração do Cluster Kafka
       - KAFKA_CLUSTERS_0_NAME=setuporion
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka${1:+_$1}_broker:9092
       - KAFKA_CLUSTERS_0_JMXPORT=19092
       - KAFKA_CLUSTERS_0_JMXHOST=kafka${1:+_$1}_broker
+    
+    ## ⚙️ Configurações Dinâmicas
       - DYNAMIC_CONFIG_ENABLED=true
 
     deploy:
@@ -39427,16 +39441,16 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      # Configuração básica do webservice
+    ## ⚙️ Configuração básica do webservice
       - DUPLICATI__WEBSERVICE_PORT=8200
       - DUPLICATI__WEBSERVICE_INTERFACE=any
       - XDG_CONFIG_HOME=/data
       
-      # Segurança e autenticação
+    ## 🔐 Segurança e Autenticação
       - DUPLICATI__WEBSERVICE_ALLOWED_HOSTNAMES=$url_duplicati
       - DUPLICATI__WEBSERVICE_PASSWORD=$pass_duplicati
       
-      # Criptografia do banco de dados
+    ## 🔐 Criptografia do Banco de Dados
       - DUPLICATI__DISABLE_DB_ENCRYPTION=false   
       - DUPLICATI__REQUIRE_DB_ENCRYPTION_KEY=true
       - SETTINGS_ENCRYPTION_KEY=$encryptionkey_duplicati
@@ -39671,8 +39685,13 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## 🔐 Criptografia e Segurança
       - PBW_ENCRYPTION_KEY=$encryptionkey_pgbackweb #Chave criptografia
+    
+    ## 🗄️ Configuração do PostgreSQL
       - PBW_POSTGRES_CONN_STRING=postgresql://postgres:$senha_postgres@postgres:5432/pgbackweb${1:+_$1}?sslmode=disable
+    
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo #Fuso horario
 
     deploy:
@@ -39913,45 +39932,45 @@ services:
       - jitsi${1:+_$1}_transcripts:/usr/share/jitsi-meet/transcripts:Z
 
     environment:
-       ## Configuração de TimeZone
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
 
-      ## Autenticação e Acesso
+    ## 🔐 Autenticação e Acesso
       - ENABLE_AUTH=1 ## Ativa autenticação (secure-domain)
       - AUTH_TYPE=internal ## Backend de auth do Prosody (interno)
       - ENABLE_GUESTS=1 ## Convidados entram após a sala existir
       - ENABLE_LOBBY=1 ## Lobby disponível
       - PUBLIC_URL=https://$url_jitsi ## URL pública de acesso
 
-      ## Páginas e Fluxo de Entrada/Saída
+    ## 📄 Páginas e Fluxo de Entrada/Saída
       - ENABLE_PREJOIN_PAGE=1 ## Tela de pré-entrada (checar áudio/vídeo, nome)
       - ENABLE_WELCOME_PAGE=1 ## Sem página inicial; "/" cria sala automaticamente
       - ENABLE_CLOSE_PAGE=1 ## Mostra página “reunião encerrada”
 
-      ## Recursos de Sala e Moderação
+    ## 📞 Recursos de Sala e Moderação
       - ENABLE_BREAKOUT_ROOMS=1 ## Salas paralelas
       - ENABLE_AV_MODERATION=1 ## Moderação de áudio/vídeo
       - ENABLE_END_CONFERENCE=1 ## Moderador pode encerrar reunião
       - ENABLE_REQUIRE_DISPLAY_NAME=1 ## Obriga digitar nome
 
-      ## Recursos de Gravação e Transcrição
+    ## 📹 Recursos de Gravação e Transcrição
       - ENABLE_RECORDING=0 ## Gravação via Jibri (infra extra) – deixe 0 se não tiver
       - ENABLE_FILE_RECORDING_SHARING=0 ## Compartilhar arquivo de gravação (se usar Jibri)
       - ENABLE_TRANSCRIPTIONS=0 ## Transcrições via Jigasi/STT (infra extra) – deixe 0
 
-      ## Interatividade e Engajamento
+    ## 💬 Interatividade e Engajamento
       - ENABLE_POLLS=1 ## Enquetes
       - ENABLE_REACTIONS=1 ## Reações
       - ENABLE_RAISE_HAND=1 ## Levantar mão
 
-      ## Conexão e Qualidade de Áudio/Vídeo
+    ## 🎧 Conexão e Qualidade de Áudio/Vídeo
       - ENABLE_P2P=1 ## P2P quando só 2 participantes
       - ENABLE_NOISE_SUPPRESSION=1 ## Supressão de ruído (client-side)
       - ENABLE_STEREO=0 ## Áudio estéreo (consome mais banda)
       - ENABLE_TALK_WHILE_MUTED=1 ## Aviso ao falar no mudo
       - ENABLE_NO_AUDIO_DETECTION=1      ## Aviso quando não há áudio
 
-      ## Configuração do XMPP/Prosody
+    ## 📄 Configuração do XMPP/Prosody
       - XMPP_SERVER=jitsi${1:+_$1}_prosody
       - XMPP_DOMAIN=meet.jitsi
       - XMPP_AUTH_DOMAIN=auth.meet.jitsi
@@ -39992,22 +40011,22 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Configuração de TimeZone
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
 
-      ## Autenticação e Acesso
+    ## 🔐 Autenticação e Acesso
       - ENABLE_AUTH=1
       - AUTH_TYPE=internal
       - ENABLE_GUESTS=1
 
-      ## Credenciais do Jicofo e JVB
+    ## 🔐 Credenciais do Jicofo e JVB
       - JICOFO_AUTH_USER=focus
       - JICOFO_AUTH_PASSWORD=$jicofo_secret_jitsi
       - JICOFO_COMPONENT_SECRET=$jicofo_component_jitsi
       - JVB_AUTH_USER=jvb
       - JVB_AUTH_PASSWORD=$jvb_auth_jitsi
 
-      ## Configuração do XMPP/Prosody
+    ## 📄 Configuração do XMPP/Prosody
       - XMPP_DOMAIN=meet.jitsi
       - XMPP_AUTH_DOMAIN=auth.meet.jitsi
       - XMPP_GUEST_DOMAIN=guest.meet.jitsi
@@ -40038,19 +40057,19 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-      ## Configuração de TimeZone
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
 
-      ## Autenticação e Acesso
+    ## 🔐 Autenticação e Acesso
       - ENABLE_AUTH=1
       - AUTH_TYPE=internal
 
-      ## Credenciais do Jicofo
+    ## 🔐 Credenciais do Jicofo
       - JICOFO_COMPONENT_SECRET=$jicofo_component_jitsi
       - JICOFO_AUTH_USER=focus
       - JICOFO_AUTH_PASSWORD=$jicofo_secret_jitsi
 
-      ## Configuração do XMPP/Prosody
+    ## 📄 Configuração do XMPP/Prosody
       - XMPP_DOMAIN=meet.jitsi
       - XMPP_SERVER=jitsi${1:+_$1}_prosody
       - XMPP_AUTH_DOMAIN=auth.meet.jitsi
@@ -40087,27 +40106,27 @@ services:
         mode: host
 
     environment:
-      ## Configuração de TimeZone
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
 
-      ## Credenciais do JVB
+    ## 🔐 Credenciais do JVB
       - JVB_AUTH_USER=jvb
       - JVB_AUTH_PASSWORD=$jvb_auth_jitsi
       - JVB_BREWERY_MUC=jvbbrewery
 
-      ## Portas de mídia
+    ## 📡 Portas de mídia
       - JVB_PORT=10000
       - JVB_TCP_PORT=4443
       - JVB_TCP_HARVESTER_DISABLED=false
 
-      ## Endereço público (para ICE / NAT)
+    ## 🌐 Endereço público (para ICE / NAT)
       - DOCKER_HOST_ADDRESS=$ip_jitsi
       - JVB_ADVERTISE_IPS=$ip_jitsi
 
-      ## Servidor STUN para candidatos reflexivos (ajuda NAT)
+    ## 📡 Servidor STUN para candidatos reflexivos (ajuda NAT)
       - JVB_STUN_SERVERS=stun.l.google.com:19302
 
-      ## Configuração do XMPP/Prosody
+    ## 📄 Configuração do XMPP/Prosody
       - XMPP_SERVER=jitsi${1:+_$1}_prosody
       - XMPP_DOMAIN=meet.jitsi
       - XMPP_AUTH_DOMAIN=auth.meet.jitsi
@@ -40358,14 +40377,27 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## 👤 Permissões e Identidade do Usuário
       - PUID=1000
       - PGID=1000
+    
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
+    
+    ## 🔐 Credenciais e Acesso
       - PASSWORD=$pass_admin_code_server
       - SUDO_PASSWORD=$pass_super_admin_code_server
+    
+    ## 🌐 Configurações de Rede e Proxy
       - PROXY_DOMAIN=$url_code_server
+    
+    ## 📁 Configurações de Workspace
       - DEFAULT_WORKSPACE=/config/workspace
+    
+    ## 🧩 Configurações da Aplicação
       - PWA_APPNAME=code-server
+    
+    ## 🧱 Extensões e Mods do Container
       - DOCKER_MODS=linuxserver/mods:code-server-nodejs|linuxserver/mods:code-server-npmglobal ## Outros Mods: https://mods.linuxserver.io/?mod=code-server
     
     deploy:
@@ -40579,14 +40611,21 @@ services:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## 🌐 Configurações da Aplicação
       - APP_BASE_URL=https://$url_papra
       - PORT=1221
       - SERVER_HOSTNAME=0.0.0.0
       - SERVER_SERVE_PUBLIC_DIR=true
       - NODE_ENV=production
+    
+    ## 🗄️ Configuração do Banco de Dados
       - DATABASE_URL=file:./app-data/db/db.sqlite
+    
+    ## 📁 Armazenamento de Documentos
       - DOCUMENT_STORAGE_DRIVER=filesystem
       - DOCUMENT_STORAGE_FILESYSTEM_ROOT=./app-data/documents
+    
+    ## 🔐 Configurações de Autenticação e Segurança
       - AUTH_SECRET=$auth_secret_papra 
       - AUTH_IS_REGISTRATION_ENABLED=true
       - AUTH_IS_PASSWORD_RESET_ENABLED=true
@@ -40812,7 +40851,10 @@ services:
       - $nome_rede_interna ## Nome da rede interna
     
     environment:
+    ## ⚙️ Ambiente da Aplicação
       - NODE_ENV=production
+    
+    ## 🕒 Fuso Horário
       - TZ=America/Sao_Paulo
 
     deploy:
