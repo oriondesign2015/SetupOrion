@@ -18860,7 +18860,7 @@ services:
        - OLLAMA_BASE_URL=https://$url_apiollama
     
     ## 🔒 Secret Key
-      - WEBUI_SECRET_KEY=$WEBUI_SECRET_KEY
+       - WEBUI_SECRET_KEY=$WEBUI_SECRET_KEY
 
     deploy:
       mode: replicated
