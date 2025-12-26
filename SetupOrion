@@ -10023,7 +10023,6 @@ services:
         - traefik.http.routers.botpress${1:+_$1}.entrypoints=websecure
         - traefik.http.routers.botpress${1:+_$1}.tls=true
 
-
 ## --------------------------- ORION --------------------------- ##
 
   botpress${1:+_$1}_redis:
@@ -16507,7 +16506,7 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio para a ferramenta
-    echo -e "\e[97mPasso$amarelo 1/3\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/1\e[0m"
     echo -en "\e[33mDigite o dominio para o Quepasa (ex: quepasa.oriondesign.art.br): \e[0m" && read -r url_quepasa
     echo ""
     
@@ -16632,7 +16631,7 @@ services:
       - DBDATABASE=quepasa${1:+_$1}
       - DBPORT=5432
       - DBUSER=postgres
-      - DBPASSWORD=a5faa69ab819fd0951d5cccec64aaa29
+      - DBPASSWORD=$senha_postgres
       - DBSSLMODE=disable
 
     ## 📱 Configurações para o WhatsApp
@@ -16645,7 +16644,7 @@ services:
     ## 🔐 Configurações quepasa
       - WEBSOCKETSSL=true
       - REMOVEDIGIT9=true
-      - SIGNING_SECRET=83089c7496346f4b8746557ccfede5bd
+      - SIGNING_SECRET=$masterkey_quepasa
 
     ## 🔄 Logging
       - LOGLEVEL=DEBUG
@@ -16733,7 +16732,7 @@ cd dados_vps
 cat > dados_quepasa${1:+_$1} <<EOL
 [ QUEPASA ]
 
-Dominio do quepasa: https://$url_quepasa
+Dominio do Quepasa: https://$url_quepasa
 
 Email: $email_quepasa
 
