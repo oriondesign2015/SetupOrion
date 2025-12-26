@@ -16022,6 +16022,7 @@ echo ""
 sleep 1
 
 ## Verifica se tem postgres, se sim pega a senha e cria um banco nele, se não instala, pega a senha e cria o banco
+verificar_container_postgres
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Postgres já instalado"
     pegar_senha_postgres > /dev/null 2>&1
@@ -16570,6 +16571,7 @@ echo ""
 sleep 1
 
 ## Verifica se tem postgres, se sim pega a senha e cria um banco nele, se não instala, pega a senha e cria o banco
+verificar_container_postgres
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Postgres já instalado"
     pegar_senha_postgres > /dev/null 2>&1
