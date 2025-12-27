@@ -38639,7 +38639,9 @@ cat > dados_netbox${1:+_$1} <<EOL
 
 Dominio do NetBox: https://$url_netbox
 
+Usuario: admin
 
+Senha: admin
 EOL
 cd
 cd
@@ -38660,10 +38662,10 @@ echo ""
 echo -e "\e[33mDominio do NetBox:\e[97m https://$url_netbox\e[0m"
 echo ""
 
-echo -e "\e[33mUsuario:\e[97m Precisa criar no NetBox\e[0m"
+echo -e "\e[33mUsuario:\e[97m admin\e[0m"
 echo ""
 
-echo -e "\e[33mSenha:\e[97m Precisa criar no NetBox\e[0m"
+echo -e "\e[33mSenha:\e[97m admin\e[0m"
 echo ""
 
 echo -e "\e[33mBiblioteca de Modelos de Dispositivos (BONUS):\e[97m https://github.com/netbox-community/devicetype-library\e[0m"
