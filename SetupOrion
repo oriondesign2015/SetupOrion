@@ -14741,16 +14741,16 @@ while true; do
     echo -en "\e[33mDigite a versão desejada para o Odoo (ex: 1): \e[0m" && read -r versao_odoo
     echo ""+
     if [ "$versao_odoo" = "1" ]; then
-        minio_version="19.0"
+        odoo_version_selected="19.0"
     elif [ "$versao_odoo" = "2" ]; then
-        minio_version="18.0"
+        odoo_version_selected="18.0"
     elif [ "$versao_odoo" = "4" ]; then
-        minio_version="17.0"
+        odoo_version_selected="17.0"
     elif [ "$versao_odoo" = "5" ]; then
-        minio_version="16.0"
+        odoo_version_selected="16.0"
     else
         echo -e "\e[31mOpção inválida. Usando versão '19.0' por padrão.\e[0m"
-        minio_version="19.0"
+        odoo_version_selected="19.0"
     fi
     
     ## Limpa o terminal
@@ -14767,7 +14767,7 @@ while true; do
     echo ""
 
     ##Informação do Dominio
-    echo -e "\e[33mVersão do Odoo:\e[97m $versao_odoo\e[0m"
+    echo -e "\e[33mVersão do Odoo:\e[97m $odoo_version_selected\e[0m"
     echo ""
     
      ## Pergunta se as respostas estão corretas
@@ -14826,7 +14826,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   odoo${1:+_$1}_app:
-    image: odoo:$versao_odoo
+    image: odoo:$odoo_version_selected
 
     volumes:
       - odoo${1:+_$1}_app_data:/var/lib/odoo
@@ -14923,7 +14923,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull postgres:15 odoo:$versao_odoo
+pull postgres:15 odoo:$odoo_version_selected
 
 ## Usa o serviço wait_odoo para verificar se o serviço esta online
 wait_stack odoo${1:+_$1}_odoo${1:+_$1}_app odoo${1:+_$1}_odoo${1:+_$1}_db
