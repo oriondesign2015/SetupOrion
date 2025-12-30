@@ -17918,11 +17918,12 @@ services:
           memory: 4096M
       labels:
         - traefik.enable=true
-        - traefik.docker.network=$nome_rede_interna
-        - traefik.http.routers.dify-api.rule=Host(\`$url_dify\`) && (PathPrefix(\`/console/api\`) || PathPrefix(\`/v1\`) || PathPrefix(\`/api\`) || PathPrefix(\`/files\`) || PathPrefix(\`/mcp\`) || PathPrefix(\`/triggers\`))
-        - traefik.http.routers.dify-api.entrypoints=websecure
-        - traefik.http.routers.dify-api.tls.certresolver=letsencryptresolver
-        - traefik.http.services.dify-api.loadbalancer.server.port=5001
+        - traefik.http.routers.dify${1:+_$1}_api.rule=Host(\`$url_dify\`) && (PathPrefix(\`/console/api\`) || PathPrefix(\`/v1\`) || PathPrefix(\`/api\`) || PathPrefix(\`/files\`) || PathPrefix(\`/mcp\`) || PathPrefix(\`/triggers\`))
+        - traefik.http.services.dify${1:+_$1}_api.loadbalancer.server.port=5001
+        - traefik.http.routers.dify${1:+_$1}_api.service=dify${1:+_$1}_api
+        - traefik.http.routers.dify${1:+_$1}_api.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.dify${1:+_$1}_api.entrypoints=websecure
+        - traefik.http.routers.dify${1:+_$1}_api.tls=true
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -18275,14 +18276,14 @@ services:
           cpus: "2"
           memory: 4096M
       labels:
-        # Traefik labels para o frontend
         - traefik.enable=true
-        - traefik.docker.network=$nome_rede_interna
-        - traefik.http.routers.dify-web.rule=Host(\`$url_dify\`)
-        - traefik.http.routers.dify-web.entrypoints=websecure
-        - traefik.http.routers.dify-web.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.dify-web.priority=10
-        - traefik.http.services.dify-web.loadbalancer.server.port=3000
+        - traefik.http.routers.dify${1:+_$1}_web.rule=Host(\`$url_dify\`)
+        - traefik.http.services.dify${1:+_$1}_web.loadbalancer.server.port=3000
+        - traefik.http.routers.dify${1:+_$1}_web.service=dify${1:+_$1}_web
+        - traefik.http.routers.dify${1:+_$1}_web.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.dify${1:+_$1}_web.entrypoints=websecure
+        - traefik.http.routers.dify${1:+_$1}_web.tls=true
+        - traefik.http.routers.dify${1:+_$1}_web.priority=10
 
 ## --------------------------- ORION --------------------------- ##
 
@@ -18398,7 +18399,6 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  # Plugin Daemon
   dify${1:+_$1}_plugin_daemon:
     image: langgenius/dify-plugin-daemon:latest-local
 
@@ -18559,11 +18559,12 @@ services:
           memory: 4096M
       labels:
         - traefik.enable=true
-        - traefik.docker.network=$nome_rede_interna
-        - traefik.http.routers.dify-plugin.rule=Host(\`$url_dify\`) && PathPrefix(\`/e/\`)
-        - traefik.http.routers.dify-plugin.entrypoints=websecure
-        - traefik.http.routers.dify-plugin.tls.certresolver=letsencryptresolver
-        - traefik.http.services.dify-plugin.loadbalancer.server.port=5002
+        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.rule=Host(\`$url_dify\`) && PathPrefix(\`/e/\`)
+        - traefik.http.services.dify${1:+_$1}_plugin_daemon.loadbalancer.server.port=5002
+        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.service=dify${1:+_$1}_plugin_daemon
+        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.entrypoints=websecure
+        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.tls=true
 
 ## --------------------------- ORION --------------------------- ##
 
