@@ -3047,7 +3047,7 @@ verificar_antes_se_tem_qdrant() {
 ## Verificar Container Postgres
 
 verificar_container_postgres() {
-    if docker ps -q --filter "name=postgres_postgres" | grep -q .; then
+    if docker ps -q --filter "name=postgres_postgres.1" | grep -q .; then
         return 0
     else
         return 1
@@ -3057,7 +3057,7 @@ verificar_container_postgres() {
 ## Verificar Container PgVector
 
 verificar_container_pgvector() {
-    if docker ps -q --filter "name=pgvector_pgvector" | grep -q .; then
+    if docker ps -q --filter "name=pgvector_pgvector.1" | grep -q .; then
         return 0
     else
         return 1
@@ -3067,7 +3067,7 @@ verificar_container_pgvector() {
 ## Verificar Container Mysql
 
 verificar_container_mysql() {
-    if docker ps -q --filter "name=mysql_mysql" | grep -q .; then
+    if docker ps -q --filter "name=mysql_mysql.1" | grep -q .; then
         return 0
     else
         return 1
@@ -3077,7 +3077,7 @@ verificar_container_mysql() {
 ## Verificar Container Redis
 
 verificar_container_redis() {
-    if docker ps -q --filter "name=redis_redis" | grep -q .; then
+    if docker ps -q --filter "name=redis_redis.1" | grep -q .; then
         return 0
     else
         return 1
@@ -3087,7 +3087,7 @@ verificar_container_redis() {
 ## Verificar Container Minio
 
 verificar_container_minio() {
-    if docker ps -q --filter "name=minio_minio" | grep -q .; then
+    if docker ps -q --filter "name=minio_minio.1" | grep -q .; then
         return 0
     else
         return 1
@@ -3114,7 +3114,7 @@ wait_for_postgres() {
 
 wait_for_pgvector() {
     dados
-    local container_name="pgvector_pgvector"
+    local container_name="pgvector_pgvector.1"
 
     while true; do
         CONTAINER_ID=$(docker ps -q --filter "name=.*$container_name.*")
@@ -17803,7 +17803,7 @@ services:
 
       ## 🔐 Segurança e Autenticação
       - SECRET_KEY=$secret_key
-      - INIT_PASSWORD=@SetupOrion123_
+      #- INIT_PASSWORD=@SetupOrion123_
       - ACCESS_TOKEN_EXPIRE_MINUTES=60
       - REFRESH_TOKEN_EXPIRE_DAYS=30
 
@@ -17968,7 +17968,7 @@ services:
 
       ## 🔐 Segurança e Autenticação
       - SECRET_KEY=$secret_key
-      - INIT_PASSWORD=@SetupOrion123_
+      #- INIT_PASSWORD=@SetupOrion123_
       - ACCESS_TOKEN_EXPIRE_MINUTES=60
       - REFRESH_TOKEN_EXPIRE_DAYS=30
 
@@ -18117,7 +18117,7 @@ services:
 
       ## 🔐 Segurança e Autenticação
       - SECRET_KEY=$secret_key
-      - INIT_PASSWORD=@SetupOrion123_
+      #- INIT_PASSWORD=@SetupOrion123_
       - ACCESS_TOKEN_EXPIRE_MINUTES=60
       - REFRESH_TOKEN_EXPIRE_DAYS=30
 
