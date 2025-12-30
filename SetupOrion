@@ -17570,12 +17570,12 @@ preencha_as_info
 while true; do
 
     ##Pergunta o Dominio do Dify AI
-    echo -e "\e[97mPasso$amarelo 1/7\e[0m"
+    echo -e "\e[97mPasso$amarelo 1/2\e[0m"
     echo -en "\e[33mDigite o dominio para o Dify AI (ex: dify.oriondesign.art.br): \e[0m" && read -r url_dify
     echo ""
 
     ##Pergunta o Dominio do Dify AI
-    echo -e "\e[97mPasso$amarelo 2/7\e[0m"
+    echo -e "\e[97mPasso$amarelo 2/2\e[0m"
     echo -en "\e[33mDigite o dominio para o API do Dify AI (ex: api-dify.oriondesign.art.br): \e[0m" && read -r url_dify_api
     echo ""
 
@@ -17591,33 +17591,33 @@ while true; do
     #echo -en "\e[33mDigite a Api Key do Qdrant (ex: $key_dify_rand): \e[0m" && read -r apikey_qdrant
     #echo ""
 
-    ##Pergunta o Email SMTP
-    echo -e "\e[97mPasso$amarelo 3/7\e[0m"
-    echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_dify
-    echo ""
+   ###Pergunta o Email SMTP
+   #echo -e "\e[97mPasso$amarelo 3/7\e[0m"
+   #echo -en "\e[33mDigite o Email para SMTP (ex: contato@oriondesign.art.br): \e[0m" && read -r email_dify
+   #echo ""
     
 
-    ##Pergunta o usuário do Email SMTP
-    echo -e "\e[97mPasso$amarelo 4/7\e[0m"
-    echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
-    echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_email_dify
-    echo ""
-
-    ## Pergunta a senha do SMTP
-    echo -e "\e[97mPasso$amarelo 5/7\e[0m"
-    echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
-    echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_dify
-    echo ""
-
-    ## Pergunta o Host SMTP do email
-    echo -e "\e[97mPasso$amarelo 6/7\e[0m"
-    echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_dify
-    echo ""
-
-    ## Pergunta a porta SMTP do email
-    echo -e "\e[97mPasso$amarelo 7/7\e[0m"
-    echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_dify
-    echo ""
+    ###Pergunta o usuário do Email SMTP
+    #echo -e "\e[97mPasso$amarelo 4/7\e[0m"
+    #echo -e "$amarelo--> Caso não tiver um usuario do email, use o proprio email abaixo"
+    #echo -en "\e[33mDigite o Usuário para SMTP (ex: oriondesign ou contato@oriondesign.art.br): \e[0m" && read -r user_email_dify
+    #echo ""
+#
+    ### Pergunta a senha do SMTP
+    #echo -e "\e[97mPasso$amarelo 5/7\e[0m"
+    #echo -e "$amarelo--> Sem caracteres especiais: \!#$ | Se estiver usando gmail use a senha de app"
+    #echo -en "\e[33mDigite a Senha SMTP do Email (ex: @Senha123_): \e[0m" && read -r senha_email_dify
+    #echo ""
+#
+    ### Pergunta o Host SMTP do email
+    #echo -e "\e[97mPasso$amarelo 6/7\e[0m"
+    #echo -en "\e[33mDigite o Host SMTP do Email (ex: smtp.hostinger.com): \e[0m" && read -r smtp_email_dify
+    #echo ""
+#
+    ### Pergunta a porta SMTP do email
+    #echo -e "\e[97mPasso$amarelo 7/7\e[0m"
+    #echo -en "\e[33mDigite a porta SMTP do Email (ex: 465): \e[0m" && read -r porta_smtp_dify
+    #echo ""
 
     ## Limpa o terminal
     clear
@@ -17632,6 +17632,10 @@ while true; do
     echo -e "\e[33mDominio do Dify AI:\e[97m $url_dify\e[0m"
     echo ""
 
+    ## Informação sobre URL do API do Dify AI
+    echo -e "\e[33mDominio do API do Dify AI:\e[97m $url_dify_api\e[0m"
+    echo ""
+
     ## Informação sobre URL do Viewer
     #echo -e "\e[33mDominio do Qdrant:\e[97m $url_quedrant\e[0m"
     #echo ""
@@ -17640,25 +17644,25 @@ while true; do
     #echo -e "\e[33mApi Key Qdrant:\e[97m $apikey_qdrant\e[0m"
     #echo ""    
 
-    ## Informação sobre Email
-    echo -e "\e[33mEmail do SMTP:\e[97m $email_dify\e[0m"
-    echo ""
-
-    ## Informação sobre UserSMTP
-    echo -e "\e[33mUser do SMTP:\e[97m $user_email_dify\e[0m"
-    echo ""
-
-    ## Informação sobre Senha do Email
-    echo -e "\e[33mSenha do Email:\e[97m $senha_email_dify\e[0m"
-    echo ""
-
-    ## Informação sobre Host SMTP
-    echo -e "\e[33mHost SMTP do Email:\e[97m $smtp_email_dify\e[0m"
-    echo ""
-
-    ## Informação sobre Porta SMTP
-    echo -e "\e[33mPorta SMTP do Email:\e[97m $porta_smtp_dify\e[0m"
-    echo ""
+    ### Informação sobre Email
+    #echo -e "\e[33mEmail do SMTP:\e[97m $email_dify\e[0m"
+    #echo ""
+#
+    ### Informação sobre UserSMTP
+    #echo -e "\e[33mUser do SMTP:\e[97m $user_email_dify\e[0m"
+    #echo ""
+#
+    ### Informação sobre Senha do Email
+    #echo -e "\e[33mSenha do Email:\e[97m $senha_email_dify\e[0m"
+    #echo ""
+#
+    ### Informação sobre Host SMTP
+    #echo -e "\e[33mHost SMTP do Email:\e[97m $smtp_email_dify\e[0m"
+    #echo ""
+#
+    ### Informação sobre Porta SMTP
+    #echo -e "\e[33mPorta SMTP do Email:\e[97m $porta_smtp_dify\e[0m"
+    #echo ""
 
     ## Pergunta se as respostas estão corretas
     read -p "As respostas estão corretas? (Y/N): " confirmacao
