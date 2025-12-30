@@ -17778,13 +17778,13 @@ services:
 
     environment:
       ## 🌐 URLs e Endpoints
-      - CONSOLE_API_URL=https://$url_dify/console/api
+      - CONSOLE_API_URL=https://$url_dify_api/console/api
       - CONSOLE_WEB_URL=https://$url_dify
-      - SERVICE_API_URL=https://$url_dify/service/api
-      - TRIGGER_URL=https://$url_dify/triggers
-      - APP_API_URL=https://$url_dify/api
+      - SERVICE_API_URL=https://$url_dify_api/service/api
+      - TRIGGER_URL=https://$url_dify_api/triggers
+      - APP_API_URL=https://$url_dify_api/api
       - APP_WEB_URL=https://$url_dify
-      - FILES_URL=https://$url_dify/files
+      - FILES_URL=https://$url_dify_api/files
       - INTERNAL_FILES_URL=http://dify${1:+_$1}_api:5001/files
       - CHECK_UPDATE_URL=https://updates.dify.ai
       - OPENAI_API_BASE=https://api.openai.com/v1
@@ -17922,7 +17922,7 @@ services:
           memory: 4096M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.dify${1:+_$1}_api.rule=Host(\`$url_dify\`) && (PathPrefix(\`/console/api\`) || PathPrefix(\`/v1\`) || PathPrefix(\`/api\`) || PathPrefix(\`/files\`) || PathPrefix(\`/mcp\`) || PathPrefix(\`/triggers\`))
+        - traefik.http.routers.dify${1:+_$1}_api.rule=Host(\`$url_dify_api\`) && (PathPrefix(\`/console/api\`) || PathPrefix(\`/v1\`) || PathPrefix(\`/api\`) || PathPrefix(\`/files\`) || PathPrefix(\`/mcp\`) || PathPrefix(\`/triggers\`))
         - traefik.http.services.dify${1:+_$1}_api.loadbalancer.server.port=5001
         - traefik.http.routers.dify${1:+_$1}_api.service=dify${1:+_$1}_api
         - traefik.http.routers.dify${1:+_$1}_api.tls.certresolver=letsencryptresolver
@@ -17944,13 +17944,13 @@ services:
 
     environment:
       ## 🌐 URLs e Endpoints
-      - CONSOLE_API_URL=https://$url_dify/console/api
+      - CONSOLE_API_URL=https://$url_dify_api/console/api
       - CONSOLE_WEB_URL=https://$url_dify
-      - SERVICE_API_URL=https://$url_dify/service/api
-      - TRIGGER_URL=https://$url_dify/triggers
-      - APP_API_URL=https://$url_dify/api
+      - SERVICE_API_URL=https://$url_dify_api/service/api
+      - TRIGGER_URL=https://$url_dify_api/triggers
+      - APP_API_URL=https://$url_dify_api/api
       - APP_WEB_URL=https://$url_dify
-      - FILES_URL=https://$url_dify/files
+      - FILES_URL=https://$url_dify_api/files
       - INTERNAL_FILES_URL=http://dify${1:+_$1}_api:5001/files
       - CHECK_UPDATE_URL=https://updates.dify.ai
       - OPENAI_API_BASE=https://api.openai.com/v1
@@ -18093,13 +18093,13 @@ services:
 
     environment:
       ## 🌐 URLs e Endpoints
-      - CONSOLE_API_URL=https://$url_dify/console/api
+      - CONSOLE_API_URL=https://$url_dify_api/console/api
       - CONSOLE_WEB_URL=https://$url_dify
-      - SERVICE_API_URL=https://$url_dify/service/api
-      - TRIGGER_URL=https://$url_dify/triggers
-      - APP_API_URL=https://$url_dify/api
+      - SERVICE_API_URL=https://$url_dify_api/service/api
+      - TRIGGER_URL=https://$url_dify_api/triggers
+      - APP_API_URL=https://$url_dify_api/api
       - APP_WEB_URL=https://$url_dify
-      - FILES_URL=https://$url_dify/files
+      - FILES_URL=https://$url_dify_api/files
       - INTERNAL_FILES_URL=http://dify${1:+_$1}_api:5001/files
       - CHECK_UPDATE_URL=https://updates.dify.ai
       - OPENAI_API_BASE=https://api.openai.com/v1
@@ -18234,8 +18234,8 @@ services:
     environment:
       ## 🌐 URLs e Endpoints
       - TRAEFIK_DOMAIN=$url_dify
-      - CONSOLE_API_URL=https://$url_dify
-      - APP_API_URL=https://$url_dify
+      - CONSOLE_API_URL=https://$url_dify_api
+      - APP_API_URL=https://$url_dify_api
       - MARKETPLACE_API_URL=https://marketplace.dify.ai
       - MARKETPLACE_URL=https://marketplace.dify.ai
 
@@ -18414,13 +18414,13 @@ services:
 
     environment:
       ## 🌐 URLs e Endpoints
-      - CONSOLE_API_URL=https://$url_dify/console/api
+      - CONSOLE_API_URL=https://$url_dify_api/console/api
       - CONSOLE_WEB_URL=https://$url_dify
-      - SERVICE_API_URL=https://$url_dify/service/api
-      - TRIGGER_URL=https://$url_dify/triggers
-      - APP_API_URL=https://$url_dify/api
+      - SERVICE_API_URL=https://$url_dify_api/service/api
+      - TRIGGER_URL=https://$url_dify_api/triggers
+      - APP_API_URL=https://$url_dify_api/api
       - APP_WEB_URL=https://$url_dify
-      - FILES_URL=https://$url_dify/files
+      - FILES_URL=https://$url_dify_api/files
       - INTERNAL_FILES_URL=http://dify${1:+_$1}_api:5001/files
       - CHECK_UPDATE_URL=https://updates.dify.ai
       - OPENAI_API_BASE=https://api.openai.com/v1
