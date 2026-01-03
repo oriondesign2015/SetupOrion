@@ -4,7 +4,7 @@
 ##                                         ORION DESIGN                                        ##
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
-## Cores
+## Colores
 amarelo="\e[33m"
 verde="\e[32m"
 branco="\e[97m"
@@ -19,6 +19,9 @@ reset="\e[0m"
 sudo apt update
 
 sudo apt upgrade -y
+
+## Configurar Zona Horaria Bogota
+sudo timedatectl set-timezone America/Bogota
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 ##                                         ORION DESIGN                                        ##
@@ -97,7 +100,7 @@ nome_verificando(){
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
 
 desc_ver(){
-echo -e "                            Este script recomenda o uso do$amarelo Debian 11$branco.$reset"
+echo -e "                            Este script recomienda el uso de$amarelo Ubuntu 24.04$branco.$reset"
 echo ""
 } 
 
@@ -107,28 +110,28 @@ echo ""
 
 clear
 nome_verificando
-echo "Aguarde enquanto verificamos algumas informações."
+echo "Por favor espere mientras verificamos algunas informaciones."
 sleep 1
 
-# Verifica se está usando Ubuntu 20.04
-if ! grep -q 'PRETTY_NAME="Debian GNU/Linux 11' /etc/os-release; then
+# Verifica si está usando Ubuntu 24.04
+if ! grep -q 'PRETTY_NAME="Ubuntu 24.04' /etc/os-release; then
     nome_aviso
     desc_ver
-    #echo "Este script recomenda o uso do Debian 11."
+    #echo "Este script recomienda el uso de Ubuntu 24.04."
     sleep 5
     clear
     nome_verificando
 fi
 
-# Verifica se o usuário é root
+# Verifica si el usuario es root
 if [ "$(id -u)" -ne 0 ]; then
-    echo "Este script precisa ser executado como root. Executando sudo su..."
+    echo "Este script debe ser ejecutado como root. Ejecutando sudo su..."
     sudo su
 fi
 
-# Verifica se o usuário está no diretório /root/
+# Verifica si el usuario está en el directorio /root/
 if [ "$PWD" != "/root" ]; then
-    echo "Mudando para o diretório /root/"
+    echo "Cambiando al directorio /root/"
     cd /root || exit
 fi
 
@@ -140,13 +143,13 @@ fi
 nome_iniciando 
 
 if ! command -v docker &> /dev/null; then
-    echo "1/15 - [ OFF ] - Docker não está instalado"
+    echo "1/15 - [ OFF ] - Docker no está instalado"
     sleep 5
 else
     ENV_VALUE=$(systemctl show --property=Environment docker 2>/dev/null | grep -o "DOCKER_MIN_API_VERSION=1.24" || true)
 
     if [ "$ENV_VALUE" == "DOCKER_MIN_API_VERSION=1.24" ]; then
-        echo "1/15 - [ OK ] - Docker está instalado e configurado corretamente"
+        echo "1/15 - [ OK ] - Docker está instalado y configurado correctamente"
         sleep 5
     else      
         sudo mkdir -p /etc/systemd/system/docker.service.d >/dev/null 2>&1
@@ -165,9 +168,9 @@ EOF' >/dev/null 2>&1
         # Recheca se foi corrigido
         ENV_VALUE=$(systemctl show --property=Environment docker 2>/dev/null | grep -o "DOCKER_MIN_API_VERSION=1.24" || true)
         if [ "$ENV_VALUE" == "DOCKER_MIN_API_VERSION=1.24" ]; then
-            echo "1/15 - [ OK ] - Docker configurado corretamente"
+            echo "1/15 - [ OK ] - Docker configurado correctamente"
         else
-            echo "1/15 - [ FAIL ] - Erro ao corrigir o Docker"
+            echo "1/15 - [ FAIL ] - Error al corregir Docker"
         fi
         sleep 5
     fi
@@ -178,9 +181,9 @@ echo ""
 ## Fazendo upgrade
 sudo apt upgrade -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "2/15 - [ OK ] - Fazendo Upgrade"
+    echo "2/15 - [ OK ] - Realizando Upgrade"
 else
-    echo "2/15 - [ OFF ] - Fazendo Upgrade"
+    echo "2/15 - [ OFF ] - Realizando Upgrade"
 fi
 
 echo ""
@@ -278,9 +281,9 @@ echo ""
 ## Fazendo update
 sudo apt update > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "12/15 - [ OK ] - Fazendo Update"
+    echo "12/15 - [ OK ] - Realizando Update"
 else
-    echo "12/15 - [ OFF ] - Fazendo Update"
+    echo "12/15 - [ OFF ] - Realizando Update"
 fi
 
 echo ""
@@ -288,9 +291,9 @@ echo ""
 ## Fazendo upgrade
 sudo apt upgrade -y > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "13/15 - [ OK ] - Fazendo Upgrade"
+    echo "13/15 - [ OK ] - Realizando Upgrade"
 else
-    echo "13/15 - [ OFF ] - Fazendo Upgrade"
+    echo "13/15 - [ OFF ] - Realizando Upgrade"
 fi
 
 echo ""
@@ -312,16 +315,15 @@ if [ -e "SetupOrion" ]; then
 fi
 
 # Baixa o script
-#curl -sSL https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/SetupOrion -o SetupOrion
-curl -sSL https://s3.setuporion.com.br/setuporion/SetupOrion -o SetupOrion
+curl -sSL https://raw.githubusercontent.com/jhonsu01/SetupOrionUB24/main/SetupOrion -o SetupOrion
 if [ $? -eq 0 ]; then
-    echo "15/15 - [ OK ] - Baixando o script"
+    echo "15/15 - [ OK ] - Descargando el script"
     # Executa o script baixado
     chmod +x SetupOrion
     ./SetupOrion
 else
-    echo "15/15 - [ OFF ] - Baixando o script"
-    echo "Encerrando o setup"
+    echo "15/15 - [ OFF ] - Descargando el script"
+    echo "Finalizando el setup"
     sleep 5
 fi
 

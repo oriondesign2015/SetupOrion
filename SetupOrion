@@ -50,12 +50,13 @@ dados() {
 direitos_setup() {
     echo -e "$amarelo===================================================================================================\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
-    echo -e "$amarelo=  $branco Este auto instalador foi desenvolvido para auxiliar na instalação das principais aplicações $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco  disponíveis no mercado open source. Já deixo todos os créditos aos desenvolvedores de cada $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco aplicação disponíveis aqui. Este Setup é licenciado sob a Licença MIT (MIT). Você pode usar, $amarelo =\e[0m"
-    echo -e "$amarelo=  $branco  copiar, modificar, integrar, publicar, distribuir e/ou vender cópias dos produtos finais,  $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco   mas deve sempre declarar que OrionDesign (contato@oriondesign.art.br) é o autor original  $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco           destes códigos e atribuir um link para https://oriondesign.art.br/setup           $amarelo  =\e[0m"
+    echo -e "$amarelo=  $branco Este auto instalador fue desarrollado para asistir en la instalación de las principales      $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco aplicaciones disponibles en el mercado open source. Dejo todos los créditos a los            $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco desarrolladores de cada aplicación aquí disponible. Este Setup está licenciado bajo la       $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco Licencia MIT (MIT). Puedes usar, copiar, modificar, integrar, publicar, distribuir y/o vender $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco  copias de los productos finales, pero siempre debes declarar que OrionDesign                $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco   (contato@oriondesign.art.br) es el autor original de estos códigos y atribuir un enlace a  $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco           https://oriondesign.art.br/setup                                                  $amarelo =\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
@@ -65,17 +66,18 @@ direitos_setup() {
 direitos_instalador() {
     echo -e "$amarelo===================================================================================================\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
-    echo -e "$amarelo=  $branco Este auto instalador foi desenvolvido para auxiliar na instalação das principais aplicações $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco  disponíveis no mercado open source. Já deixo todos os créditos aos desenvolvedores de cada $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco aplicação disponíveis aqui. Este Setup é licenciado sob a Licença MIT (MIT). Você pode usar, $amarelo =\e[0m"
-    echo -e "$amarelo=  $branco  copiar, modificar, integrar, publicar, distribuir e/ou vender cópias dos produtos finais,  $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco   mas deve sempre declarar que OrionDesign (contato@oriondesign.art.br) é o autor original  $amarelo  =\e[0m"
-    echo -e "$amarelo=  $branco           destes códigos e atribuir um link para https://oriondesign.art.br/setup           $amarelo  =\e[0m"
+    echo -e "$amarelo=  $branco Este auto instalador fue desarrollado para asistir en la instalación de las principales      $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco aplicaciones disponibles en el mercado open source. Dejo todos los créditos a los            $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco desarrolladores de cada aplicación aquí disponible. Este Setup está licenciado bajo la       $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco Licencia MIT (MIT). Puedes usar, copiar, modificar, integrar, publicar, distribuir y/o vender $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco  copias de los productos finales, pero siempre debes declarar que OrionDesign                $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco   (contato@oriondesign.art.br) es el autor original de estos códigos y atribuir un enlace a  $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco           https://oriondesign.art.br/setup                                                  $amarelo =\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
     echo ""
-    read -p "Ao digitar Y você aceita e concorda com as orientações passadas acima (Y/N): " choice
+    read -p "Al digitar Y aceptas y estás de acuerdo con las orientaciones anteriores (Y/N): " choice
     while true; do
         case $choice in
             Y|y)
@@ -84,7 +86,7 @@ direitos_instalador() {
             N|n)
                 clear
                 nome_finalizado
-                echo "Que pena que você não concorda, então estarei encerrando o instalador. Até mais."
+                echo "Qué pena que no estés de acuerdo, por lo tanto cerraré el instalador. Hasta luego."
                 sleep 2
                 clear
                 exit 1
@@ -94,14 +96,14 @@ direitos_instalador() {
                 erro_msg
                 echo ""
                 echo ""
-                echo "Por favor, digite apenas Y ou N."
+                echo "Por favor, ingrese solo Y o N."
                 sleep 2
                 clear
                 nome_instalador
                 direitos_setup
                 ;;
         esac
-        read -p "Ao digitar Y você aceita e concorda com as orientações passadas acima (Y/N): " choice
+        read -p "Al digitar Y aceptas y estás de acuerdo con las orientaciones anteriores (Y/N): " choice
     done
 }
 
@@ -109,9 +111,10 @@ direitos_instalador() {
 info_credenciais(){ 
     echo -e "$amarelo===================================================================================================\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
-    echo -e "$amarelo=  $branco A partir da versão 2.5.0 deste Setup foi implementado uma função para realizar deploy dentro $amarelo =\e[0m"
-    echo -e "$amarelo=  $branco   do proprio portainer através de uma requisição api. Para que esta nova função funcione em  $amarelo =\e[0m"
-    echo -e "$amarelo=  $branco suas proximas instalações, você precisará informar às credenciais de acesso do seu portainer $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco A partir de la versión 2.5.0 de este Setup se implementó una función para realizar        $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco   deploy dentro del propio portainer a través de una petición API. Para que esta nueva       $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco función funcione en tus próximas instalaciones, deberás informar las credenciales de acceso $amarelo =\e[0m"
+    echo -e "$amarelo=  $branco                                 de tu portainer                                         $amarelo =\e[0m"
     echo -e "$amarelo=                                                                                                 =\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
@@ -126,21 +129,22 @@ creditos_msg() {
     echo ""
     echo -e "$amarelo===================================================================================================\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=           $branco Gostaria de contribuir para continuarmos o desenvolvimento deste projeto?            $amarelo=\e[0m"
-    echo -e "$amarelo=                              $branco Você pode fazer uma doação via PIX:                               $amarelo=\e[0m"
+    echo -e "$amarelo=           $branco ¿Te gustaría contribuir para que continuemos el desarrollo de este proyecto?          $amarelo=\e[0m"
+    echo -e "$amarelo=                              $branco Puedes hacer una donación vía PIX:                               $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
     echo -e "$amarelo=                                     $amarelo pix@oriondesign.art.br                                     $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=          $branco Ou faça parte da nossa comunidade VIP no Discord e contribua com o projeto            $amarelo=\e[0m"
-    echo -e "$amarelo=                       $branco Nossa comunidade:$amarelo https://join.oriondesign.art.br                        $amarelo=\e[0m"
+    echo -e "$amarelo=          $branco O únete a nuestra comunidad VIP en Discord y contribuye al proyecto                   $amarelo=\e[0m"
+    echo -e "$amarelo=                       $branco Nuestra comunidad:$amarelo https://join.oriondesign.art.br                        $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
-    echo -e "$amarelo=                                   $branco Nossos grupos no WhatsApp                                    $amarelo=\e[0m"
-    echo -e "$amarelo=      $amarelo https://hub.setuporion.com.br/grupo3 $branco<-- ou -->$amarelo https://hub.setuporion.com.br/grupo4      $amarelo=\e[0m"
+    echo -e "$amarelo=                                   $branco Nuestros grupos de WhatsApp                                   $amarelo=\e[0m"
+    echo -e "$amarelo=      $amarelo https://hub.setuporion.com.br/grupo3 $branco<-- o -->$amarelo https://hub.setuporion.com.br/grupo4      $amarelo=\e[0m"
     echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
     echo -e "$amarelo===================================================================================================\e[0m"
     echo ""
     echo ""
 }
+
 
 
 ## // ## // ## // ## // ## // ## // ## // ## //## // ## // ## // ## // ## // ## // ## // ## // ##
@@ -17204,7 +17208,7 @@ sleep 1
 mkdir blablabla
 cd blablabla
 
-git clone https://github.com/oriondesign2015/SetupOrion.git > /dev/null 2>&1
+git clone https://github.com/jhonsu01/SetupOrionUB24.git > /dev/null 2>&1
 
 if [ -d "/opt/monitor-orion" ]; then
   sudo rm -r /opt/monitor-orion
@@ -21216,7 +21220,7 @@ mkdir temp${1:+_$1}
 
 cd temp${1:+_$1}
 
-#git clone --depth 1 https://github.com/oriondesign2015/SetupOrion > /dev/null 2>&1
+#git clone --depth 1 https://github.com/jhonsu01/SetupOrionUB24 > /dev/null 2>&1
 git clone --depth 1 https://github.com/supabase/supabase.git > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "1/3 - [ OK ] - Baixando Repositório do Supabase"
@@ -23755,7 +23759,7 @@ cd
 mkdir temp
 cd temp
 
-git clone --depth 1 https://github.com/oriondesign2015/setuporion > /dev/null 2>&1
+git clone --depth 1 https://github.com/jhonsu01/SetupOrionUB24 > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "1/1 - [ OK ] - Baixando Repositório do Zep"
 else
@@ -41514,28 +41518,28 @@ chatwoot.mail() {
     fi
     
     # Baixa os novos arquivos
-    wget -O confirmation_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/confirmation_instructions.html.erb > /dev/null 2>&1
+    wget -O confirmation_instructions.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/confirmation_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "5/9 - [ OK ]"
     else
         echo "5/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O password_change.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/password_change.html.erb > /dev/null 2>&1
+    wget -O password_change.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/password_change.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "6/9 - [ OK ]"
     else
         echo "6/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O reset_password_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/reset_password_instructions.html.erb > /dev/null 2>&1
+    wget -O reset_password_instructions.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/reset_password_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "7/9 - [ OK ]"
     else
         echo "7/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O unlock_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/unlock_instructions.html.erb > /dev/null 2>&1
+    wget -O unlock_instructions.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/unlock_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "8/9 - [ OK ]"
     else
@@ -41605,28 +41609,28 @@ chatwoot.n.mail() {
     fi
     
     # Baixa os novos arquivos
-    wget -O confirmation_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/confirmation_instructions.html.erb > /dev/null 2>&1
+    wget -O confirmation_instructions.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/confirmation_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "5/9 - [ OK ]"
     else
         echo "5/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O password_change.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/password_change.html.erb > /dev/null 2>&1
+    wget -O password_change.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/password_change.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "6/9 - [ OK ]"
     else
         echo "6/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O reset_password_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/reset_password_instructions.html.erb > /dev/null 2>&1
+    wget -O reset_password_instructions.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/reset_password_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "7/9 - [ OK ]"
     else
         echo "7/9 - [ OFF ]"
         echo "Não foi possivel baixar email."
     fi
-    wget -O unlock_instructions.html.erb https://github.com/oriondesign2015/SetupOrion/raw/main/Extras/Chatwoot/emails/unlock_instructions.html.erb > /dev/null 2>&1
+    wget -O unlock_instructions.html.erb https://github.com/jhonsu01/SetupOrionUB24/raw/main/Extras/Chatwoot/emails/unlock_instructions.html.erb > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         echo "8/9 - [ OK ]"
     else
