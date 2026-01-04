@@ -1,9 +1,9 @@
 <img src="https://github.com/user-attachments/assets/f1381a28-79e2-4fea-984c-4440476cdcc2" alt="SetupOrion">
 
 <p align="center">
-  Este Auto instalador é uma solução <b>100% gratuita</b>, com o intuito de ajudar toda a comunidade a instalar as principais ferramentas do mercado de Automações/Marketing em seu servidor.
-  <b>Você não precisa instalar todos os programas contidos no mesmo, pois você poderá escolher qual das ferramentas você quer instalar.</b>
-  Desenvolvido por <b>OrionDesign</b>. Ao utilizar o mesmo, <b>de os créditos</b>!
+  Este Auto instalador es una solución <b>100% gratuita</b>, con el fin de ayudar a toda la comunidad a instalar las principales herramientas del mercado de Automatizaciones/Marketing en su servidor.
+  <b>No es necesario instalar todos los programas contenidos en el mismo, ya que podrás elegir qué herramientas deseas instalar.</b>
+  Desarrollado por <b>OrionDesign</b> y adaptado por <b>jhonsu01</b>. ¡Al usarlo, <b>da los créditos</b>!
 </p>
  
 <p align="center">
@@ -14,43 +14,42 @@
 
 ---
 
-<h3>📌 Observações e Recomendações</h3>
+<h3>📌 Observaciones y Recomendaciones</h3>
 
-- Recomendo usar a VPS da **Hostinger**, **Hetzner**, **Digital Ocean** ou **AWS**. NÃO recomendamos e nem encorajamos usar outras VPS.
-- **O Servidor precisa estar vazio** para efetuar a instalação das ferramentas. Executar o Setup com outras ferramentas pode acarretar na perca dos dados.
-- Recomenda-se utilizar **Ubuntu 20.04**, com **minimo de 4Gb e 2vCPU**. É necessário analisar os requisitos de cada aplicação que for instalar.
-
----
-
-<h3>💿 Como executar o instalador</h3>
-<p>Pensando em deixar a instalação das ferramamentas o mais fácil possível, criamos um código curto que vai atualizar o seu servidor, baixar o script do setup e executar o mesmo. Tudo para que qualquer um consiga usá-lo.</p>
-
-<p>Basta executar esse código no terminal do seu servidor:</p>
-
-```
-bash <(curl -sSL setup.oriondesign.art.br)
-```
-<p>Após isso basta aguardar alguns instantes enquanto o script é iniciado e por fim, instalar as ferramentas que desejar.</p>
+- Recomiendo usar VPS de **Hostinger**, **Hetzner**, **Digital Ocean** o **AWS**. NO recomendamos ni alentamos el uso de otras VPS.
+- **El servidor debe estar vacío** para realizar la instalación de las herramientas. Ejecutar el Setup con otras herramientas puede resultar en la pérdida de datos.
+- Se recomienda utilizar **Ubuntu 24.04**, con un **mínimo de 4Gb de RAM y 2vCPU**. Es necesario analizar los requisitos de cada aplicación que vayas a instalar.
 
 ---
 
-<h3 align="center"><b>Ferramentas disponiveis</b></h3>
+<h3>💿 Cómo ejecutar el instalador</h3>
+<p>Pensando en facilitar al máximo la instalación de las herramientas, hemos creado un código corto que actualizará tu servidor, descargará el script de configuración y lo ejecutará. Todo para que cualquiera pueda usarlo.</p>
+
+<p>Simplemente ejecuta este código en la terminal de tu servidor:</p>
+
+```
+bash <(curl -sSL https://raw.githubusercontent.com/jhonsu01/SetupOrionUB24/main/Setup)
+```
+<p>Después de eso, solo espera unos instantes mientras se inicia el script y, finalmente, instala las herramientas que desees.</p>
+
+---
+
+<h3 align="center"><b>Herramientas disponibles</b></h3>
 <p align="center">
   🔸 Traefik 🔸 Portainer 🔸 Chatwoot 🔸 Evolution API 🔸 MinIO 🔸 Typebot 🔸 N8N 🔸 Flowise 🔸 PgAdmin 4 🔸 Nocobase  🔸 Botpress  🔸 Wordpress 🔸 Baserow 🔸 MongoDB 🔸 RabbitMQ  🔸 Uptime Kuma 🔸 Cal.com 🔸 Mautic  🔸 Appsmith  🔸 Qdrant 🔸 Woofed CRM 🔸 Formbricks 🔸 NocoDB 🔸 Langfuse 🔸 Metabase 🔸 Odoo 🔸 Chatwoot Mega 🔸 Uno API 🔸 N8N + Nodes Quepasa 🔸 Quepasa API 🔸 Docuseal 🔸 Grafana 🔸 Prometheus 🔸 cAdvisor 🔸 Dify AI 🔸 Ollama 🔸 Affine 🔸 Directus 🔸 VaultWarden 🔸 NextCloud 🔸 Strapi 🔸 PhpMyAdmin 🔸 Supabase 🔸 Ntfy 🔸 LowCoder  🔸 LangFlow 🔸 OpenProject 🔸 ZEP 🔸 HumHub  🔸 Yourls 🔸 TwentyCRM 🔸 Mattermost 🔸 Outline 🔸 Focalboard 🔸 GLPI 🔸 Anything LLM 🔸 Excalidraw 🔸 Easy!Apointments 🔸 Documeso 🔸 Moodle 🔸 ToolJet 🔸 Stirling PDF 🔸 ClickHouse 🔸 RedisInsight 🔸 Traccar 🔸 Firecrawl 🔸 Wuzapi 🔸 krayin CRM 🔸 Planka WppConnect 🔸 Browserless 🔸 Frappe 🔸 Bolt 🔸 WiseMapping 🔸 Evo AI 🔸 Keycloak 🔸 Passbolt 🔸 Gotenberg 🔸 Wiki.js 🔸 AzuraCast 🔸 Shlink 🔸 RustDesk 🔸 Hoppscotch 🔸
 </p> 
 
 ---
 
-<h3 align="center">📌 Principais contribuidores</h3>
-<a align="center" href="https://github.com/oriondesign2015/setuporion/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=oriondesign2015/setuporion" />
+<h3 align="center">📌 Principales colaboradores</h3>
+<a align="center" href="https://github.com/jhonsu01/SetupOrionUB24/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jhonsu01/SetupOrionUB24" />
 </a>
 
-<a href="https://star-history.com/#oriondesign2015/SetupOrion&Date">
+<a href="https://star-history.com/#jhonsu01/SetupOrionUB24&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=oriondesign2015/SetupOrion&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=jhonsu01/SetupOrionUB24&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=jhonsu01/SetupOrionUB24&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=jhonsu01/SetupOrionUB24&type=Date" />
  </picture>
 </a>
-
