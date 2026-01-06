@@ -17757,7 +17757,7 @@ token_weaviate=$(openssl rand -hex 16)
 token_apikey_plugins=$(openssl rand -hex 16)
 token_deamon=$(openssl rand -hex 16)
 sandbox_key=$(openssl rand -hex 16)
-dominio_dify="$(echo "$url_dify_api" | sed 's/^[^.]\+//')"
+cookie_domain="$(echo "$url_dify_api" | sed 's/^[^.]\+//')"
 
 ## Criando a stack dify.yaml
 cat > dify${1:+_$1}.yaml <<EOL
@@ -17807,7 +17807,6 @@ services:
 
       ## 🔐 Segurança e Autenticação
       - SECRET_KEY=$secret_key
-      #- INIT_PASSWORD=@SetupOrion123_
       - ACCESS_TOKEN_EXPIRE_MINUTES=60
       - REFRESH_TOKEN_EXPIRE_DAYS=30
 
@@ -17824,6 +17823,7 @@ services:
       - APP_DEFAULT_ACTIVE_REQUESTS=0
       - APP_MAX_ACTIVE_REQUESTS=0
       - APP_MAX_EXECUTION_TIME=1200
+      - RESPECT_XFORWARD_HEADERS_ENABLED=true
 
       ## 🔄 Celery e Workers
       - CELERY_WORKER_CLASS=
@@ -17870,10 +17870,10 @@ services:
       - CELERY_BACKEND=redis
 
       ## 🍪 Cookies e CORS
-      - WEB_API_CORS_ALLOW_ORIGINS=*
-      - CONSOLE_CORS_ALLOW_ORIGINS=*
-      - COOKIE_DOMAIN=
-      - NEXT_PUBLIC_COOKIE_DOMAIN=
+      - WEB_API_CORS_ALLOW_ORIGINS=https://$url_dify
+      - CONSOLE_CORS_ALLOW_ORIGINS=https://$url_dify
+      - COOKIE_DOMAIN=$cookie_domain
+      - NEXT_PUBLIC_COOKIE_DOMAIN=$cookie_domain
 
       ## 💾 Storage
       - STORAGE_TYPE=s3
@@ -17894,7 +17894,7 @@ services:
       - WEAVIATE_TOKENIZATION=word
 
       ## 🌐 Traefik
-      - TRAEFIK_DOMAIN=$url_dify
+      - TRAEFIK_DOMAIN=$url_dify_api
 
       ## 🎯 Modo e Sentry
       - MODE=api
@@ -17922,16 +17922,26 @@ services:
           memory: 4096M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.dify${1:+_$1}_api.rule=Host(\`$url_dify_api\`) && (PathPrefix(\`/console/api\`) || PathPrefix(\`/v1\`) || PathPrefix(\`/api\`) || PathPrefix(\`/files\`) || PathPrefix(\`/mcp\`) || PathPrefix(\`/triggers\`))
-        - traefik.http.services.dify${1:+_$1}_api.loadbalancer.server.port=5001
-        - traefik.http.routers.dify${1:+_$1}_api.service=dify${1:+_$1}_api
-        - traefik.http.routers.dify${1:+_$1}_api.tls.certresolver=letsencryptresolver
+        - traefik.docker.network=$nome_rede_interna
+        - traefik.http.routers.dify${1:+_$1}_api.rule=Host(\`$url_dify_api\`) && !PathPrefix(\`/service/api\`)
         - traefik.http.routers.dify${1:+_$1}_api.entrypoints=websecure
+        - traefik.http.routers.dify${1:+_$1}_api.tls.certresolver=letsencryptresolver
         - traefik.http.routers.dify${1:+_$1}_api.tls=true
+        - traefik.http.routers.dify${1:+_$1}_api.service=dify${1:+_$1}_api
+        - traefik.http.services.dify${1:+_$1}_api.loadbalancer.server.port=5001
+        - traefik.http.services.dify${1:+_$1}_api.loadbalancer.passHostHeader=true
+        - traefik.http.routers.dify${1:+_$1}_api_service.rule=Host(\`$url_dify_api\`) && PathPrefix(\`/service/api\`)
+        - traefik.http.routers.dify${1:+_$1}_api_service.entrypoints=websecure
+        - traefik.http.routers.dify${1:+_$1}_api_service.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.dify${1:+_$1}_api_service.tls=true
+        - traefik.http.routers.dify${1:+_$1}_api_service.service=dify${1:+_$1}_api
+        - traefik.http.routers.dify${1:+_$1}_api_service.priority=20
+        - traefik.http.middlewares.dify${1:+_$1}_api_stripprefix.stripprefix.prefixes=/service/api
+        - traefik.http.middlewares.dify${1:+_$1}_api_stripprefix.stripprefix.forceSlash=false
+        - traefik.http.routers.dify${1:+_$1}_api_service.middlewares=dify${1:+_$1}_api_stripprefix
 
 ## --------------------------- ORION --------------------------- ##
 
-  # Worker service
   dify${1:+_$1}_worker:
     image: langgenius/dify-api:latest
 
@@ -17973,7 +17983,6 @@ services:
 
       ## 🔐 Segurança e Autenticação
       - SECRET_KEY=$secret_key
-      #- INIT_PASSWORD=@SetupOrion123_
       - ACCESS_TOKEN_EXPIRE_MINUTES=60
       - REFRESH_TOKEN_EXPIRE_DAYS=30
 
@@ -18036,10 +18045,10 @@ services:
       - CELERY_BACKEND=redis
 
       ## 🍪 Cookies e CORS
-      - WEB_API_CORS_ALLOW_ORIGINS=*
-      - CONSOLE_CORS_ALLOW_ORIGINS=*
-      - COOKIE_DOMAIN=
-      - NEXT_PUBLIC_COOKIE_DOMAIN=
+      - WEB_API_CORS_ALLOW_ORIGINS=https://$url_dify
+      - CONSOLE_CORS_ALLOW_ORIGINS=https://$url_dify
+      - COOKIE_DOMAIN=$cookie_domain
+      - NEXT_PUBLIC_COOKIE_DOMAIN=$cookie_domain
 
       ## 💾 Storage
       - STORAGE_TYPE=s3
@@ -18083,7 +18092,6 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  # Worker Beat service
   dify${1:+_$1}_worker_beat:
     image: langgenius/dify-api:latest
 
@@ -18122,7 +18130,6 @@ services:
 
       ## 🔐 Segurança e Autenticação
       - SECRET_KEY=$secret_key
-      #- INIT_PASSWORD=@SetupOrion123_
       - ACCESS_TOKEN_EXPIRE_MINUTES=60
       - REFRESH_TOKEN_EXPIRE_DAYS=30
 
@@ -18185,10 +18192,10 @@ services:
       - CELERY_BACKEND=redis
 
       ## 🍪 Cookies e CORS
-      - WEB_API_CORS_ALLOW_ORIGINS=*
-      - CONSOLE_CORS_ALLOW_ORIGINS=*
-      - COOKIE_DOMAIN=
-      - NEXT_PUBLIC_COOKIE_DOMAIN=
+      - WEB_API_CORS_ALLOW_ORIGINS=https://$url_dify
+      - CONSOLE_CORS_ALLOW_ORIGINS=https://$url_dify
+      - COOKIE_DOMAIN=$cookie_domain
+      - NEXT_PUBLIC_COOKIE_DOMAIN=$cookie_domain
 
       ## 💾 Storage
       - STORAGE_TYPE=s3
@@ -18224,7 +18231,6 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  # Frontend Web application
   dify${1:+_$1}_web:
     image: langgenius/dify-web:latest
 
@@ -18236,11 +18242,13 @@ services:
       - TRAEFIK_DOMAIN=$url_dify
       - CONSOLE_API_URL=https://$url_dify_api
       - APP_API_URL=https://$url_dify_api
+      - NEXT_PUBLIC_API_PREFIX=https://$url_dify_api/console/api
+      - NEXT_PUBLIC_PUBLIC_API_PREFIX=https://$url_dify_api/api
       - MARKETPLACE_API_URL=https://marketplace.dify.ai
       - MARKETPLACE_URL=https://marketplace.dify.ai
 
       ## 🍪 Cookies
-      - NEXT_PUBLIC_COOKIE_DOMAIN=
+      - NEXT_PUBLIC_COOKIE_DOMAIN=$cookie_domain
 
       ## 📊 Monitoramento e Observabilidade
       - SENTRY_DSN=
@@ -18280,18 +18288,17 @@ services:
           cpus: "2"
           memory: 4096M
       labels:
+        # Traefik labels para o frontend
         - traefik.enable=true
+        - traefik.docker.network=$nome_rede_interna
         - traefik.http.routers.dify${1:+_$1}_web.rule=Host(\`$url_dify\`)
-        - traefik.http.services.dify${1:+_$1}_web.loadbalancer.server.port=3000
-        - traefik.http.routers.dify${1:+_$1}_web.service=dify${1:+_$1}_web
-        - traefik.http.routers.dify${1:+_$1}_web.tls.certresolver=letsencryptresolver
         - traefik.http.routers.dify${1:+_$1}_web.entrypoints=websecure
-        - traefik.http.routers.dify${1:+_$1}_web.tls=true
+        - traefik.http.routers.dify${1:+_$1}_web.tls.certresolver=letsencryptresolver
         - traefik.http.routers.dify${1:+_$1}_web.priority=10
+        - traefik.http.services.dify${1:+_$1}_web.loadbalancer.server.port=3000
 
 ## --------------------------- ORION --------------------------- ##
 
-  # Redis Cache
   dify${1:+_$1}_redis:
     image: redis:latest
     command: [
@@ -18325,7 +18332,6 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  # Weaviate Vector Store
   dify${1:+_$1}_weaviate:
     image: semitechnologies/weaviate:latest
 
@@ -18364,7 +18370,6 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  # Dify Sandbox
   dify${1:+_$1}_sandbox:
     image: langgenius/dify-sandbox:latest
 
@@ -18506,10 +18511,10 @@ services:
       - CELERY_BACKEND=redis
 
       ## 🍪 Cookies e CORS
-      - WEB_API_CORS_ALLOW_ORIGINS=*
-      - CONSOLE_CORS_ALLOW_ORIGINS=*
-      - COOKIE_DOMAIN=
-      - NEXT_PUBLIC_COOKIE_DOMAIN=
+      - WEB_API_CORS_ALLOW_ORIGINS=https://$url_dify
+      - CONSOLE_CORS_ALLOW_ORIGINS=https://$url_dify
+      - COOKIE_DOMAIN=$cookie_domain
+      - NEXT_PUBLIC_COOKIE_DOMAIN=$cookie_domain
 
       ## 💾 Storage
       - STORAGE_TYPE=s3
@@ -18563,16 +18568,14 @@ services:
           memory: 4096M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.rule=Host(\`$url_dify\`) && PathPrefix(\`/e/\`)
-        - traefik.http.services.dify${1:+_$1}_plugin_daemon.loadbalancer.server.port=5002
-        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.service=dify${1:+_$1}_plugin_daemon
-        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.entrypoints=websecure
-        - traefik.http.routers.dify${1:+_$1}_plugin_daemon.tls=true
+        - traefik.docker.network=$nome_rede_interna
+        - traefik.http.routers.dify${1:+_$1}_plugin.rule=Host(\`$url_dify\`) && PathPrefix(\`/e/\`)
+        - traefik.http.routers.dify${1:+_$1}_plugin.entrypoints=websecure
+        - traefik.http.routers.dify${1:+_$1}_plugin.tls.certresolver=letsencryptresolver
+        - traefik.http.services.dify${1:+_$1}_plugin.loadbalancer.server.port=5002
 
 ## --------------------------- ORION --------------------------- ##
 
-  # SSRF Proxy (Squid)
   dify${1:+_$1}_ssrf_proxy:
     image: ubuntu/squid:latest
 
