@@ -29269,6 +29269,9 @@ services:
      - $nome_rede_interna ## Nome da rede interna
 
     environment:
+    ## 🔐 API Key
+      - FIRECRAWL_API_KEY=$apikey_firecrawl
+
     ## 🐘 Configurações do PostgreSQL (NUQ)
       - POSTGRES_HOST=firecrawl${1:+_$1}_nuq_postgres
       - POSTGRES_PORT=5432
