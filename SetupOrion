@@ -21971,8 +21971,8 @@ services:
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    ports:
-      - 4000:4000
+    #ports:
+    #  - 4000:4000
 
     environment:
     ## 🗄️ Configuração de Banco de Dados
