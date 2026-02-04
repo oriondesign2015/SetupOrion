@@ -19185,7 +19185,7 @@ services:
       - affine${1:+_$1}_config:/root/.affine/config
     
     networks:
-      - internet
+      - $nome_rede_interna ## Nome da rede interna
     
     environment:
     ## 🌐 URL Externa (ajuste conforme seu domínio)
