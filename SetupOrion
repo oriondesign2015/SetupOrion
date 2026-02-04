@@ -19121,6 +19121,7 @@ services:
     environment:
     ## 🌐 URL Externa (ajuste conforme seu domínio)
       - AFFINE_SERVER_EXTERNAL_URL=https://$url_affine
+      - AFFINE_SERVER_HTTPS=true
 
     ## 🗄️ Banco do Postgres
       - DATABASE_URL=postgresql://postgres:$senha_pgvector@pgvector:5432/affine${1:+_$1}?sslmode=disable
@@ -19133,7 +19134,6 @@ services:
     # ⚙️ Configurações do Serviço
       - AFFINE_SERVER_HOST=0.0.0.0
       - AFFINE_SERVER_PORT=3010
-      - AFFINE_SERVER_SUB_PATH=""
       - NODE_ENV=production
       
     ## 💾 Armazenamento
@@ -19190,6 +19190,7 @@ services:
     environment:
     ## 🌐 URL Externa (ajuste conforme seu domínio)
       - AFFINE_SERVER_EXTERNAL_URL=https://$url_affine
+      - AFFINE_SERVER_HTTPS=true
 
     ## 🗄️ Banco do Postgres
       - DATABASE_URL=postgresql://postgres:$senha_pgvector@pgvector:5432/affine${1:+_$1}?sslmode=disable
@@ -19202,7 +19203,6 @@ services:
     # ⚙️ Configurações do Serviço
       - AFFINE_SERVER_HOST=0.0.0.0
       - AFFINE_SERVER_PORT=3010
-      - AFFINE_SERVER_SUB_PATH=""
       - NODE_ENV=production
       
     ## 💾 Armazenamento
