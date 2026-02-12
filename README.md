@@ -18,7 +18,7 @@
 
 - Recomendo usar a VPS da **Hostinger**, **Hetzner**, **Digital Ocean** ou **AWS**. NÃO recomendamos e nem encorajamos usar outras VPS.
 - **O Servidor precisa estar vazio** para efetuar a instalação das ferramentas. Executar o Setup com outras ferramentas pode acarretar na perca dos dados.
-- Recomenda-se utilizar **Ubuntu 20.04**, com **minimo de 4Gb e 2vCPU**. É necessário analisar os requisitos de cada aplicação que for instalar.
+- Recomenda-se utilizar **Debian 11**, com **minimo de 4Gb e 2vCPU**. É necessário analisar os requisitos de cada aplicação que for instalar.
 
 ---
 
