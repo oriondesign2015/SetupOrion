@@ -40839,6 +40839,8 @@ echo -e "\e[97m• INSTALANDO ZEROBYTE \e[33m[2/3]\e[0m"
 echo ""
 sleep 1
 
+key_zerobyte=$(openssl rand -hex 32)
+
 ## Criando a stack zerobyte.yaml
 cat > zerobyte${1:+_$1}.yaml <<EOL
 version: "3.7"
@@ -40865,6 +40867,12 @@ services:
       - $nome_rede_interna ## Nome da rede interna
     
     environment:
+    ## 🌐 Base URL
+      - BASE_URL=https://$url_zerobyte
+
+    ## 🔐 App Secret
+      - APP_SECRET=$key_zerobyte
+
     ## ⚙️ Ambiente da Aplicação
       - NODE_ENV=production
     
