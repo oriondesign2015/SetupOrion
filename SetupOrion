@@ -161,6 +161,16 @@ preencha_as_info() {
     echo ""
 }
 
+escolha_uma_ferramenta() {
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
+    echo -e "$amarelo=                           $branco Escolha uma ferramenta para instalar                                 $amarelo=\e[0m"
+    echo -e "$amarelo=                                                                                                 $amarelo=\e[0m"
+    echo -e "$amarelo===================================================================================================\e[0m"
+    echo ""
+    echo ""
+}
+
 ## Mensagem pedindo para verificar se as informações estão certas
 
 conferindo_as_info() {
@@ -6125,6 +6135,76 @@ creditos_msg
 requisitar_outra_instalacao
 }
 
+ferramenta_evolution() {
+    local opcao_evolution
+    clear
+    nome_evolution
+    escolha_uma_ferramenta
+    echo -e "\e[33m  1 - Evolution API\e[0m"
+    echo -e "\e[97m      API REST para integração com WhatsApp. Suporte a webhooks, múltiplas instâncias e integrações\e[0m"
+    echo ""
+    echo -e "\e[33m  2 - Evolution GO ${verde}[NOVO]${reset}\e[0m"
+    echo -e "\e[97m      Versão em Go, focada em desempenho e menor consumo de recursos\e[0m"
+    echo ""
+    echo -e "\e[33m  3 - Evolution CRM ${vermelho}[EM BREVE]${reset}\e[0m"
+    echo -e "\e[97m      Solução completa de CRM integrada ao WhatsApp. Em desenvolvimento\e[0m"
+    echo ""
+    echo ""
+    echo -en "\e[33mDigite a opção (1-3): \e[0m" && read -r opcao_evolution
+    echo ""
+
+    case "$opcao_evolution" in
+        1|01)
+            verificar_stack "ferramenta_evolution_api${opcao2:+_$opcao2}" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="ferramenta_evolution_api${opcao2:+_$opcao2}"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_evolution_api "$opcao2"
+                else
+                    APP_ORION="ferramenta_evolution_api"
+                    ferramenta_evolution_api
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        2|02)
+            verificar_stack "ferramenta_evolution_go${opcao2:+_$opcao2}" && continue || echo ""
+
+            if verificar_docker_e_portainer_traefik; then
+
+                ## INICIO TOKEN
+
+                STACK_NAME="ferramenta_evolution_go${opcao2:+_$opcao2}"
+
+                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+                    ferramenta_ferramenta_evolution_go "$opcao2"
+                else
+                    APP_ORION="ferramenta_ferramenta_evolution_go"
+                    ferramenta_ferramenta_evolution_go
+                fi
+
+                ## FIM TOKEN
+
+            fi   
+            ;;
+
+        3|03) echo -e "\e[33mEvolution CRM em breve. Volte depois!\e[0m"; echo ""; return ;;
+
+        *)
+
+            ;;
+    esac
+}
+
+
 ## ███████╗██╗   ██╗ ██████╗ ██╗     ██╗   ██╗████████╗██╗ ██████╗ ███╗   ██╗     █████╗ ██████╗ ██╗
 ## ██╔════╝██║   ██║██╔═══██╗██║     ██║   ██║╚══██╔══╝██║██╔═══██╗████╗  ██║    ██╔══██╗██╔══██╗██║
 ## █████╗  ██║   ██║██║   ██║██║     ██║   ██║   ██║   ██║██║   ██║██╔██╗ ██║    ███████║██████╔╝██║
@@ -6132,7 +6212,7 @@ requisitar_outra_instalacao
 ## ███████╗ ╚████╔╝ ╚██████╔╝███████╗╚██████╔╝   ██║   ██║╚██████╔╝██║ ╚████║    ██║  ██║██║     ██║
 ## ╚══════╝  ╚═══╝   ╚═════╝ ╚══════╝ ╚═════╝    ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝     ╚═╝
 
-ferramenta_evolution() {
+ferramenta_evolution_api() {
 
 ## Verifica os recursos
 recursos 1 1 && continue || return
@@ -42769,20 +42849,23 @@ while true; do
 
         3|03|evolution|evo|EVO)
 
-            verificar_stack "evolution${opcao2:+_$opcao2}" && continue || echo ""
-
-            if verificar_docker_e_portainer_traefik; then
-                ## INICIO TOKEN
-                STACK_NAME="evolution${opcao2:+_$opcao2}"
-                if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
-                    ferramenta_evolution "$opcao2"
-                else
-                    APP_ORION="ferramenta_evolution"
-                    verificar_arquivo
-                fi
-                ## FIM TOKEN 
-            fi
+            ferramenta_evolution "$opcao2"
             ;;
+
+            ##verificar_stack "evolution${opcao2:+_$opcao2}" && continue || echo ""
+##
+            ##if verificar_docker_e_portainer_traefik; then
+            ##    ## INICIO TOKEN
+            ##    STACK_NAME="evolution${opcao2:+_$opcao2}"
+            ##    if grep -q "Token: .\+" /root/dados_vps/dados_portainer; then
+            ##        ferramenta_evolution "$opcao2"
+            ##    else
+            ##        APP_ORION="ferramenta_evolution"
+            ##        verificar_arquivo
+            ##    fi
+            ##    ## FIM TOKEN 
+            ##fi
+            ##;;
         4|04|minio|MINIO)
 
             verificar_stack "minio${opcao2:+_$opcao2}" && continue || echo ""
