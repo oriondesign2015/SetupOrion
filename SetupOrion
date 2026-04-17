@@ -41498,6 +41498,7 @@ jwt_secret_evocrm=$(openssl rand -hex 32)
 evoai_crm_api_token=$(openssl rand -hex 32)
 doorkeeper_jwt_secret_key=$(openssl rand -hex 32)
 bot_runtime_secret=$(openssl rand -hex 32)
+apt install python3 -y > /dev/null 2>&1
 encryption_key=$(python3 -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())")
 
 ## Criando a stack evocrm.yaml
@@ -41508,7 +41509,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_gateway:
-    image: evoapicloud/evo-crm-gateway:develop
+    image: evoapicloud/evo-crm-gateway:latest
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
