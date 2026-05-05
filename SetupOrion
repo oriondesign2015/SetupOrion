@@ -41544,7 +41544,7 @@ services:
 
   evocrm${1:+_$1}_auth:
     image: evoapicloud/evo-auth-service-community:latest
-    command: bash -c "bundle exec rails db:migrate 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3001 -b 0.0.0.0"
+    command: bash -c "bundle exec rails db:prepare 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3001 -b 0.0.0.0"
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41586,7 +41586,7 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
 
     ## 🛂 Doorkeeper (OAuth / JWT)
-      - DOORKEEPER_JWT_SECRET_KEY=$doorkeeper_jwt_secret_key
+      - DOORKEEPER_JWT_SECRET_KEY=$jwt_secret_evocrm
       - DOORKEEPER_JWT_ALGORITHM=hs256
       - DOORKEEPER_JWT_ISS=evo-auth-service
 
@@ -41647,7 +41647,7 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
 
     ## 🛂 Doorkeeper (OAuth / JWT)
-      - DOORKEEPER_JWT_SECRET_KEY=$doorkeeper_jwt_secret_key
+      - DOORKEEPER_JWT_SECRET_KEY=$jwt_secret_evocrm
       - DOORKEEPER_JWT_ALGORITHM=hs256
       - DOORKEEPER_JWT_ISS=evo-auth-service
 
@@ -41672,7 +41672,7 @@ services:
 
   evocrm${1:+_$1}_crm:
     image: evoapicloud/evo-ai-crm-community:latest
-    command: sh -c "until wget -qO- http://evocrm${1:+_$1}_auth:3001/health >/dev/null 2>&1; do echo 'Waiting for auth...'; sleep 5; done; bundle exec rails db:migrate 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3000 -b 0.0.0.0"
+    command: sh -c "until wget -qO- http://evocrm${1:+_$1}_auth:3001/health >/dev/null 2>&1; do echo 'Waiting for auth...'; sleep 5; done; bundle exec rails db:prepare 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3000 -b 0.0.0.0"
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41861,6 +41861,7 @@ services:
       - DEBUG=false
       - SECRET_KEY_BASE=$secret_key_base_evocrm
       - ENCRYPTION_KEY=$encryption_key
+      - JWT_SECRET_KEY=$jwt_secret_evocrm
       - EVOAI_CRM_API_TOKEN=$evoai_crm_api_token
     
     ## 🔗 Integração CRM e Core
