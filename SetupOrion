@@ -41532,7 +41532,7 @@ services:
       labels:
         - traefik.enable=1
         - traefik.docker.network=$nome_rede_interna ## Nome da rede interna
-        - traefik.http.routers.evocrm${1:+_$1}_gateway.rule=Host(\`$url_evocrm_api\`) ## Domínio API (gateway)
+        - traefik.http.routers.evocrm${1:+_$1}_gateway.rule=Host(\`$url_evocrm_api\`) ##&& (PathPrefix(\`/api/v1/auth\`) || PathPrefix(\`/api\`) || PathPrefix(\`/rails\`) || PathPrefix(\`/setup\`) || PathPrefix(\`/oauth\`) || PathPrefix(\`/cable\`) || PathPrefix(\`/.well-known\`) || PathPrefix(\`/webhooks\`) || PathPrefix(\`/bot\`) || PathPrefix(\`/platform\`)) ## Domínio API (gateway)
         - traefik.http.routers.evocrm${1:+_$1}_gateway.entrypoints=websecure
         - traefik.http.routers.evocrm${1:+_$1}_gateway.priority=1
         - traefik.http.routers.evocrm${1:+_$1}_gateway.tls.certresolver=letsencryptresolver
@@ -41543,8 +41543,8 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_auth:
-    image: evoapicloud/evo-auth-service-community:1.0.0-rc1
-    command: bash -c "bundle exec rails db:prepare 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3001 -b 0.0.0.0"
+    image: evoapicloud/evo-auth-service-community:latest
+    command: bash -c "bundle exec rails db:migrate && bundle exec rails s -p 3001 -b 0.0.0.0"
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41607,7 +41607,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_auth_sidekiq:
-    image: evoapicloud/evo-auth-service-community:1.0.0-rc1
+    image: evoapicloud/evo-auth-service-community:latest
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
     
     networks:
@@ -41634,6 +41634,8 @@ services:
       - REDIS_URL=redis://evocrm${1:+_$1}_redis:6379/1
 
     ## 🌐 CORS
+      - FRONTEND_URL=https://$url_evocrm_frontend
+      - BACKEND_URL=https://$url_evocrm_api
       - CORS_ORIGINS=https://$url_evocrm_frontend,https://$url_evocrm_api
 
     ## ✉️ E-mail (Mailer + SMTP)
@@ -41672,7 +41674,7 @@ services:
 
   evocrm${1:+_$1}_crm:
     image: evoapicloud/evo-ai-crm-community:latest
-    command: sh -c "until wget -qO- http://evocrm${1:+_$1}_auth:3001/health >/dev/null 2>&1; do echo 'Waiting for auth...'; sleep 5; done; bundle exec rails db:prepare 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3000 -b 0.0.0.0"
+    command: sh -c "until wget -qO- http://evocrm${1:+_$1}_auth:3001/health >/dev/null 2>&1; do echo 'Waiting for auth...'; sleep 5; done; bundle exec rails db:migrate && bundle exec rails s -p 3000 -b 0.0.0.0"
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41765,6 +41767,8 @@ services:
       - EVO_AI_CORE_SERVICE_URL=http://evocrm${1:+_$1}_core:5555
     
     ## 🌐 CORS
+      - BACKEND_URL=https://$url_evocrm_api
+      - FRONTEND_URL=https://$url_evocrm_frontend
       - CORS_ORIGINS=https://$url_evocrm_frontend,https://$url_evocrm_api
     
     ## 🤖 Bot runtime
@@ -41937,7 +41941,8 @@ services:
       - VITE_AUTH_API_URL=https://$url_evocrm_api
       - VITE_EVOAI_API_URL=https://$url_evocrm_api
       - VITE_AGENT_PROCESSOR_URL=https://$url_evocrm_api
-    
+      - VITE_WS_URL=https://$url_evocrm_api
+      
     deploy:
       placement:
         constraints:
@@ -42024,7 +42029,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull redis:latest evoapicloud/evo-auth-service-community:1.0.0-rc1 evoapicloud/evo-ai-crm-community:latest evoapicloud/evo-ai-core-service-community:latest evoapicloud/evo-ai-processor-community:latest evoapicloud/evo-bot-runtime:latest evoapicloud/evo-crm-gateway:latest evoapicloud/evo-ai-frontend-community:latest
+pull redis:latest evoapicloud/evo-auth-service-community:latest evoapicloud/evo-ai-crm-community:latest evoapicloud/evo-ai-core-service-community:latest evoapicloud/evo-ai-processor-community:latest evoapicloud/evo-bot-runtime:latest evoapicloud/evo-crm-gateway:latest evoapicloud/evo-ai-frontend-community:latest
 
 ## Usa o serviço wait_EVOCRM para verificar se o serviço esta online
 wait_stack evocrm${1:+_$1}_evocrm${1:+_$1}_redis evocrm${1:+_$1}_evocrm${1:+_$1}_auth evocrm${1:+_$1}_evocrm${1:+_$1}_auth_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_crm evocrm${1:+_$1}_evocrm${1:+_$1}_crm_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_core evocrm${1:+_$1}_evocrm${1:+_$1}_processor evocrm${1:+_$1}_evocrm${1:+_$1}_bot_runtime evocrm${1:+_$1}_evocrm${1:+_$1}_gateway evocrm${1:+_$1}_evocrm${1:+_$1}_frontend 
