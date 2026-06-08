@@ -41509,7 +41509,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_gateway:
-    image: evoapicloud/evo-crm-gateway:latest
+    image: evoapicloud/evo-crm-gateway:develop
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41543,8 +41543,8 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_auth:
-    image: evoapicloud/evo-auth-service-community:latest
-    command: bash -c "bundle exec rails db:migrate && bundle exec rails s -p 3001 -b 0.0.0.0"
+    image: evoapicloud/evo-auth-service-community:develop
+    command: bash -c "bundle exec rails db:migrate 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3001 -b 0.0.0.0"
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41586,14 +41586,23 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
 
     ## 🛂 Doorkeeper (OAuth / JWT)
-      - DOORKEEPER_JWT_SECRET_KEY=$jwt_secret_evocrm
+      - DOORKEEPER_JWT_SECRET_KEY=$doorkeeper_jwt_secret_key
       - DOORKEEPER_JWT_ALGORITHM=hs256
       - DOORKEEPER_JWT_ISS=evo-auth-service
 
     ## 🔑 MFA e filas
       - MFA_ISSUER=EvoCRM
       - SIDEKIQ_CONCURRENCY=10
+      - OAUTH_TOKEN_EXPIRES_IN=28800
       - ACTIVE_STORAGE_SERVICE=local
+
+    ## 🗂️ Storage S3 (opcional) — descomente o bloco abaixo e comente o ACTIVE_STORAGE_SERVICE=local acima
+    #  - ACTIVE_STORAGE_SERVICE=s3_compatible
+    #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
+    #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
+    #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
+    #  - STORAGE_REGION=auto
+    #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
     
     deploy:
       placement:
@@ -41607,7 +41616,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_auth_sidekiq:
-    image: evoapicloud/evo-auth-service-community:latest
+    image: evoapicloud/evo-auth-service-community:develop
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
     
     networks:
@@ -41649,14 +41658,23 @@ services:
       - SMTP_ENABLE_STARTTLS_AUTO=true
 
     ## 🛂 Doorkeeper (OAuth / JWT)
-      - DOORKEEPER_JWT_SECRET_KEY=$jwt_secret_evocrm
+      - DOORKEEPER_JWT_SECRET_KEY=$doorkeeper_jwt_secret_key
       - DOORKEEPER_JWT_ALGORITHM=hs256
       - DOORKEEPER_JWT_ISS=evo-auth-service
 
     ## 🔑 MFA e filas
       - MFA_ISSUER=EvoCRM
       - SIDEKIQ_CONCURRENCY=10
+      - OAUTH_TOKEN_EXPIRES_IN=28800
       - ACTIVE_STORAGE_SERVICE=local
+
+    ## 🗂️ Storage S3 (opcional) — descomente o bloco abaixo e comente o ACTIVE_STORAGE_SERVICE=local acima
+    #  - ACTIVE_STORAGE_SERVICE=s3_compatible
+    #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
+    #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
+    #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
+    #  - STORAGE_REGION=auto
+    #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
     
     healthcheck:
       disable: true
@@ -41673,8 +41691,8 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_crm:
-    image: evoapicloud/evo-ai-crm-community:latest
-    command: sh -c "until wget -qO- http://evocrm${1:+_$1}_auth:3001/health >/dev/null 2>&1; do echo 'Waiting for auth...'; sleep 5; done; bundle exec rails db:migrate && bundle exec rails s -p 3000 -b 0.0.0.0"
+    image: evoapicloud/evo-ai-crm-community:develop
+    command: sh -c "until wget -qO- http://evocrm${1:+_$1}_auth:3001/health >/dev/null 2>&1; do echo 'Waiting for auth...'; sleep 5; done; bundle exec rails db:migrate 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3000 -b 0.0.0.0"
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41723,7 +41741,15 @@ services:
       - BOT_RUNTIME_URL=http://evocrm${1:+_$1}_bot_runtime:8080
       - BOT_RUNTIME_SECRET=$bot_runtime_secret
       - BOT_RUNTIME_POSTBACK_BASE_URL=http://evocrm${1:+_$1}_crm:3000
-    
+
+    ## 🗂️ Storage S3 (opcional) — descomente para usar storage S3 compatível
+    #  - ACTIVE_STORAGE_SERVICE=s3_compatible
+    #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
+    #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
+    #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
+    #  - STORAGE_REGION=auto
+    #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
+
     deploy:
       placement:
         constraints:
@@ -41736,7 +41762,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_crm_sidekiq:
-    image: evoapicloud/evo-ai-crm-community:latest
+    image: evoapicloud/evo-ai-crm-community:develop
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
     
     networks:
@@ -41775,7 +41801,15 @@ services:
       - BOT_RUNTIME_URL=http://evocrm${1:+_$1}_bot_runtime:8080
       - BOT_RUNTIME_SECRET=$bot_runtime_secret
       - BOT_RUNTIME_POSTBACK_BASE_URL=http://evocrm${1:+_$1}_crm:3000
-    
+
+    ## 🗂️ Storage S3 (opcional) — descomente para usar storage S3 compatível
+    #  - ACTIVE_STORAGE_SERVICE=s3_compatible
+    #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
+    #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
+    #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
+    #  - STORAGE_REGION=auto
+    #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
+
     deploy:
       placement:
         constraints:
@@ -41788,7 +41822,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_core:
-    image: evoapicloud/evo-ai-core-service-community:latest
+    image: evoapicloud/evo-ai-core-service-community:develop
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41835,7 +41869,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_processor:
-    image: evoapicloud/evo-ai-processor-community:latest
+    image: evoapicloud/evo-ai-processor-community:develop
     command: sh -c "alembic upgrade head 2>&1 || echo 'Alembic migration had errors, continuing...'; python -m scripts.run_seeders; uvicorn src.main:app --host \$\$HOST --port \$\$PORT"
     
     volumes:
@@ -41853,7 +41887,7 @@ services:
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_SSL=false
-      - REDIS_DB=0
+      - REDIS_DB=1
       - REDIS_KEY_PREFIX=a2a_
       - REDIS_TTL=3600
     
@@ -41899,7 +41933,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_bot_runtime:
-    image: evoapicloud/evo-bot-runtime:latest
+    image: evoapicloud/evo-bot-runtime:develop
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41928,7 +41962,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_frontend:
-    image: evoapicloud/evo-ai-frontend-community:latest
+    image: evoapicloud/evo-ai-frontend-community:develop
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -42030,7 +42064,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull redis:latest evoapicloud/evo-auth-service-community:latest evoapicloud/evo-ai-crm-community:latest evoapicloud/evo-ai-core-service-community:latest evoapicloud/evo-ai-processor-community:latest evoapicloud/evo-bot-runtime:latest evoapicloud/evo-crm-gateway:latest evoapicloud/evo-ai-frontend-community:latest
+pull redis:latest evoapicloud/evo-auth-service-community:develop evoapicloud/evo-ai-crm-community:develop evoapicloud/evo-ai-core-service-community:develop evoapicloud/evo-ai-processor-community:develop evoapicloud/evo-bot-runtime:develop evoapicloud/evo-crm-gateway:develop evoapicloud/evo-ai-frontend-community:develop
 
 ## Usa o serviço wait_EVOCRM para verificar se o serviço esta online
 wait_stack evocrm${1:+_$1}_evocrm${1:+_$1}_redis evocrm${1:+_$1}_evocrm${1:+_$1}_auth evocrm${1:+_$1}_evocrm${1:+_$1}_auth_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_crm evocrm${1:+_$1}_evocrm${1:+_$1}_crm_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_core evocrm${1:+_$1}_evocrm${1:+_$1}_processor evocrm${1:+_$1}_evocrm${1:+_$1}_bot_runtime evocrm${1:+_$1}_evocrm${1:+_$1}_gateway evocrm${1:+_$1}_evocrm${1:+_$1}_frontend 
