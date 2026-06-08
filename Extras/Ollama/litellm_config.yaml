@@ -1,0 +1,125 @@
+# LiteLLM Configuration for Ollama Integration
+# This file configures LiteLLM to work with Ollama models
+
+model_list:
+  # Llama 3.2 - Latest Llama model (3B parameters)
+  - model_name: llama3.2
+    litellm_params:
+      model: ollama_chat/llama3.2
+      api_base: http://ollama:11434
+    model_info:
+      supports_function_calling: true
+      supports_vision: false
+
+  # Llama 3.1 - Powerful general-purpose model (8B parameters)
+  - model_name: llama3.1
+    litellm_params:
+      model: ollama_chat/llama3.1
+      api_base: http://ollama:11434
+    model_info:
+      supports_function_calling: true
+      supports_vision: false
+
+  # Mistral - Fast and efficient model
+  - model_name: mistral
+    litellm_params:
+      model: ollama_chat/mistral
+      api_base: http://ollama:11434
+    model_info:
+      supports_function_calling: false
+      supports_vision: false
+
+  # Phi-3 - Microsoft's small but powerful model
+  - model_name: phi3
+    litellm_params:
+      model: ollama_chat/phi3
+      api_base: http://ollama:11434
+    model_info:
+      supports_function_calling: false
+      supports_vision: false
+
+  # Gemma 2 - Google's open model
+  - model_name: gemma2
+    litellm_params:
+      model: ollama_chat/gemma2
+      api_base: http://ollama:11434
+    model_info:
+      supports_function_calling: false
+      supports_vision: false
+
+  # CodeLlama - Specialized for code generation
+  - model_name: codellama
+    litellm_params:
+      model: ollama_chat/codellama
+      api_base: http://ollama:11434
+    model_info:
+      supports_function_calling: false
+      supports_vision: false
+
+  # Llava - Vision-capable model
+  - model_name: llava
+    litellm_params:
+      model: ollama_chat/llava
+      api_base: http://ollama:11434
+    model_info:
+      supports_function_calling: false
+      supports_vision: true
+
+# General settings for LiteLLM Proxy
+general_settings:
+  # Master key for admin access (set via environment variable)
+  master_key: os.environ/LITELLM_MASTER_KEY
+  
+  # Database URL for storing keys, users, and spend data
+  # Comment out if not using PostgreSQL
+  database_url: os.environ/DATABASE_URL
+  
+  # Enable the UI at /ui route
+  ui_access_mode: "admin_only"
+  
+  # Store model in database
+  store_model_in_db: true
+  
+  # Enable detailed debug logging (set to false in production)
+  # set_verbose: true
+
+# LiteLLM module settings
+litellm_settings:
+  # Timeout for LLM API calls (in seconds)
+  request_timeout: 600
+  
+  # Number of retries for failed requests
+  num_retries: 3
+  
+  # Enable caching (requires Redis or in-memory cache)
+  # cache: true
+  # cache_params:
+  #   type: "redis"
+  #   host: "redis"
+  #   port: 6379
+  
+  # Fallback models (optional)
+  # fallbacks: [{"llama3.1": ["mistral", "phi3"]}]
+  
+  # Enable success callbacks for logging
+  # success_callback: ["langfuse"]
+  
+  # Drop unmapped parameters
+  drop_params: true
+  
+  # Set default max tokens
+  # max_tokens: 4096
+
+# Router settings for load balancing (optional)
+# router_settings:
+#   routing_strategy: "least-busy"
+#   model_group_alias:
+#     gpt-3.5-turbo: llama3.2
+#     gpt-4: llama3.1
+
+# Environment variables (for reference - set these in .env file)
+# LITELLM_MASTER_KEY: Your master key for admin access
+# LITELLM_SALT_KEY: Salt key for encrypting API keys (DO NOT CHANGE after first use)
+# DATABASE_URL: PostgreSQL connection string
+# OLLAMA_API_BASE: Ollama API base URL (default: http://ollama:11434)
+
