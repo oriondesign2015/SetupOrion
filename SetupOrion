@@ -4214,7 +4214,7 @@ services:
 
   portainer:
     image: portainer/portainer-ce:latest ## Versão do Portainer
-    command: -H tcp://tasks.agent:9001 --tlsskipverify
+    command: -H tcp://tasks.agent:9001 --tlsskipverify --no-setup-token
 
     volumes:
       - portainer_data:/data
