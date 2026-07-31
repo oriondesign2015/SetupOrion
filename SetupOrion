@@ -41498,6 +41498,9 @@ jwt_secret_evocrm=$(openssl rand -hex 32)
 evoai_crm_api_token=$(openssl rand -hex 32)
 doorkeeper_jwt_secret_key=$(openssl rand -hex 32)
 bot_runtime_secret=$(openssl rand -hex 32)
+auth_apikey_integration_local=$(openssl rand -hex 32)
+clickhouse_password_evocrm=$(openssl rand -hex 16)
+rabbitmq_password_evocrm=$(openssl rand -hex 16)
 apt install python3 -y > /dev/null 2>&1
 encryption_key=$(python3 -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())")
 
@@ -41509,7 +41512,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_gateway:
-    image: evoapicloud/evo-crm-gateway:develop
+    image: evoapicloud/evo-crm-gateway:latest
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41543,7 +41546,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_auth:
-    image: evoapicloud/evo-auth-service-community:develop
+    image: evoapicloud/evo-auth-service-community:latest
     command: bash -c "bundle exec rails db:migrate 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3001 -b 0.0.0.0"
     
     networks:
@@ -41558,6 +41561,7 @@ services:
       - SECRET_KEY_BASE=$secret_key_base_evocrm
       - JWT_SECRET_KEY=$jwt_secret_evocrm
       - EVOAI_CRM_API_TOKEN=$evoai_crm_api_token
+      - ENCRYPTION_KEY=$encryption_key
 
     ## 🗄️ PostgreSQL
       - POSTGRES_HOST=pgvector
@@ -41594,15 +41598,20 @@ services:
       - MFA_ISSUER=EvoCRM
       - SIDEKIQ_CONCURRENCY=10
       - OAUTH_TOKEN_EXPIRES_IN=28800
-      - ACTIVE_STORAGE_SERVICE=local
 
-    ## 🗂️ Storage S3 (opcional) — descomente o bloco abaixo e comente o ACTIVE_STORAGE_SERVICE=local acima
+    ## 🗂️ Storage — 'local' por padrão: mídia gravada em disco (volume evocrm${1:+_$1}_auth_storage).
+    ## Para usar S3/R2/MinIO externo, troque para s3_compatible e descomente/preencha as STORAGE_* abaixo.
+      - ACTIVE_STORAGE_SERVICE=local
+      - ACTIVE_STORAGE_URL=https://$url_evocrm_api   # URL publica p/ midia local (browser) = BACKEND_URL
     #  - ACTIVE_STORAGE_SERVICE=s3_compatible
     #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
     #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
     #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
     #  - STORAGE_REGION=auto
     #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
+
+    volumes:
+      - evocrm${1:+_$1}_auth_storage:/app/storage
     
     deploy:
       placement:
@@ -41616,20 +41625,25 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_auth_sidekiq:
-    image: evoapicloud/evo-auth-service-community:develop
+    image: evoapicloud/evo-auth-service-community:latest
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
-    
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
     ## ⚙️ Rails (ambiente)
       - RAILS_ENV=production
+    ## 🚫 Sidekiq não roda migrations (quem migra é o serviço web evocrm_auth)
+      - RUN_MIGRATIONS=false
+    ## 🩺 Healthcheck em modo sidekiq (checa o processo, não HTTP)
+      - SERVICE_ROLE=sidekiq
 
     ## 🔐 Segredos e tokens
       - SECRET_KEY_BASE=$secret_key_base_evocrm
       - JWT_SECRET_KEY=$jwt_secret_evocrm
       - EVOAI_CRM_API_TOKEN=$evoai_crm_api_token
+      - ENCRYPTION_KEY=$encryption_key
 
     ## 🗄️ PostgreSQL
       - POSTGRES_HOST=pgvector
@@ -41666,15 +41680,20 @@ services:
       - MFA_ISSUER=EvoCRM
       - SIDEKIQ_CONCURRENCY=10
       - OAUTH_TOKEN_EXPIRES_IN=28800
-      - ACTIVE_STORAGE_SERVICE=local
 
-    ## 🗂️ Storage S3 (opcional) — descomente o bloco abaixo e comente o ACTIVE_STORAGE_SERVICE=local acima
+    ## 🗂️ Storage — 'local' por padrão: mídia gravada em disco (volume evocrm${1:+_$1}_auth_storage).
+    ## Para usar S3/R2/MinIO externo, troque para s3_compatible e descomente/preencha as STORAGE_* abaixo.
+      - ACTIVE_STORAGE_SERVICE=local
+      - ACTIVE_STORAGE_URL=https://$url_evocrm_api   # URL publica p/ midia local (browser) = BACKEND_URL
     #  - ACTIVE_STORAGE_SERVICE=s3_compatible
     #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
     #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
     #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
     #  - STORAGE_REGION=auto
     #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
+
+    volumes:
+      - evocrm${1:+_$1}_auth_storage:/app/storage
     
     healthcheck:
       disable: true
@@ -41691,7 +41710,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_crm:
-    image: evoapicloud/evo-ai-crm-community:develop
+    image: evoapicloud/evo-ai-crm-community:latest
     command: sh -c "until wget -qO- http://evocrm${1:+_$1}_auth:3001/health >/dev/null 2>&1; do echo 'Waiting for auth...'; sleep 5; done; bundle exec rails db:migrate 2>&1 || echo 'Migration had errors, continuing...'; bundle exec rails s -p 3000 -b 0.0.0.0"
     
     networks:
@@ -41707,6 +41726,7 @@ services:
       - SECRET_KEY_BASE=$secret_key_base_evocrm
       - JWT_SECRET_KEY=$jwt_secret_evocrm
       - EVOAI_CRM_API_TOKEN=$evoai_crm_api_token
+      - ENCRYPTION_KEY=$encryption_key
 
     ## 🗄️ PostgreSQL
       - POSTGRES_HOST=pgvector
@@ -41716,12 +41736,19 @@ services:
       - POSTGRES_DATABASE=evocrm${1:+_$1}
       - POSTGRES_SSLMODE=disable
 
-    ## 🧊 Redis
-      - REDIS_URL=redis://evocrm${1:+_$1}_redis:6379/1
+    ## 🧊 Redis (DB 2 dedicada ao CRM — Sidekiq + cache + ActionCable)
+      - REDIS_URL=redis://evocrm${1:+_$1}_redis:6379/2
 
     ## 🔗 Serviços internos (Auth + Core)
       - EVO_AUTH_SERVICE_URL=http://evocrm${1:+_$1}_auth:3001
       - EVO_AI_CORE_SERVICE_URL=http://evocrm${1:+_$1}_core:5555
+
+    ## 🔀 EvoFlow (tela de Segments + tracking de eventos do contato) — porta 3334
+    ## Sem estas 4 variáveis o CRM levanta EvoFlow::ConfigurationError e /api/v1/segments responde 500.
+      - EVO_FLOW_ENABLED=true
+      - EVO_FLOW_API_URL=http://evocrm${1:+_$1}_evoflow:3334/api/v1
+      - AUTH_APIKEY_INTEGRATION_LOCAL=$auth_apikey_integration_local
+      - EVO_FLOW_ALLOW_INSECURE=true
 
     ## 🌐 URLs públicas e CORS
       - BACKEND_URL=https://$url_evocrm_api
@@ -41742,13 +41769,19 @@ services:
       - BOT_RUNTIME_SECRET=$bot_runtime_secret
       - BOT_RUNTIME_POSTBACK_BASE_URL=http://evocrm${1:+_$1}_crm:3000
 
-    ## 🗂️ Storage S3 (opcional) — descomente para usar storage S3 compatível
+    ## 🗂️ Storage — 'local' por padrão: mídia gravada em disco (volume evocrm${1:+_$1}_storage).
+    ## Para usar S3/R2/MinIO externo, troque para s3_compatible e descomente/preencha as STORAGE_* abaixo.
+      - ACTIVE_STORAGE_SERVICE=local
+      - ACTIVE_STORAGE_URL=https://$url_evocrm_api   # URL publica p/ midia local (browser) = BACKEND_URL
     #  - ACTIVE_STORAGE_SERVICE=s3_compatible
     #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
     #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
     #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
     #  - STORAGE_REGION=auto
     #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
+
+    volumes:
+      - evocrm${1:+_$1}_storage:/app/storage
 
     deploy:
       placement:
@@ -41762,20 +41795,23 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_crm_sidekiq:
-    image: evoapicloud/evo-ai-crm-community:develop
+    image: evoapicloud/evo-ai-crm-community:latest
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
-    
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
     ## ⚙️ Rails (ambiente)
       - RAILS_ENV=production
+    ## 🚫 Sidekiq não roda migrations (quem migra é o serviço web evocrm_crm)
+      - RUN_MIGRATIONS=false
     
     ## 🔐 Segredos e tokens
       - SECRET_KEY_BASE=$secret_key_base_evocrm
       - JWT_SECRET_KEY=$jwt_secret_evocrm
       - EVOAI_CRM_API_TOKEN=$evoai_crm_api_token
+      - ENCRYPTION_KEY=$encryption_key
     
     ## 🗄️ PostgreSQL
       - POSTGRES_HOST=pgvector
@@ -41785,12 +41821,19 @@ services:
       - POSTGRES_DATABASE=evocrm${1:+_$1}
       - POSTGRES_SSLMODE=disable
     
-    ## 🧊 Redis
-      - REDIS_URL=redis://evocrm${1:+_$1}_redis:6379/1
-    
+    ## 🧊 Redis (DB 2 — mesma DB do evocrm_crm)
+      - REDIS_URL=redis://evocrm${1:+_$1}_redis:6379/2
+
     ## 🔗 Serviços internos (Auth + Core)
       - EVO_AUTH_SERVICE_URL=http://evocrm${1:+_$1}_auth:3001
       - EVO_AI_CORE_SERVICE_URL=http://evocrm${1:+_$1}_core:5555
+
+    ## 🔀 EvoFlow (tela de Segments + tracking de eventos do contato) — porta 3334
+    ## Sem estas 4 variáveis o CRM levanta EvoFlow::ConfigurationError e /api/v1/segments responde 500.
+      - EVO_FLOW_ENABLED=true
+      - EVO_FLOW_API_URL=http://evocrm${1:+_$1}_evoflow:3334/api/v1
+      - AUTH_APIKEY_INTEGRATION_LOCAL=$auth_apikey_integration_local
+      - EVO_FLOW_ALLOW_INSECURE=true
     
     ## 🌐 CORS
       - BACKEND_URL=https://$url_evocrm_api
@@ -41802,13 +41845,19 @@ services:
       - BOT_RUNTIME_SECRET=$bot_runtime_secret
       - BOT_RUNTIME_POSTBACK_BASE_URL=http://evocrm${1:+_$1}_crm:3000
 
-    ## 🗂️ Storage S3 (opcional) — descomente para usar storage S3 compatível
+    ## 🗂️ Storage — 'local' por padrão: mídia gravada em disco (volume evocrm${1:+_$1}_storage).
+    ## Para usar S3/R2/MinIO externo, troque para s3_compatible e descomente/preencha as STORAGE_* abaixo.
+      - ACTIVE_STORAGE_SERVICE=local
+      - ACTIVE_STORAGE_URL=https://$url_evocrm_api   # URL publica p/ midia local (browser) = BACKEND_URL
     #  - ACTIVE_STORAGE_SERVICE=s3_compatible
     #  - STORAGE_BUCKET_NAME=evoaicrm        # Nome do seu bucket
     #  - STORAGE_ACCESS_KEY_ID=              # Access key do seu S3
     #  - STORAGE_SECRET_ACCESS_KEY=          # Secret key do seu S3
     #  - STORAGE_REGION=auto
     #  - STORAGE_ENDPOINT=https://           # Endpoint do seu S3. Ex.: https://xxxx.r2.cloudflarestorage.com
+
+    volumes:
+      - evocrm${1:+_$1}_storage:/app/storage
 
     deploy:
       placement:
@@ -41822,7 +41871,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_core:
-    image: evoapicloud/evo-ai-core-service-community:develop
+    image: evoapicloud/evo-ai-core-service-community:latest
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41845,8 +41894,7 @@ services:
     ## 🌐 API (porta)
       - PORT=5555
     
-    ## 🔐 Segredos e JWT
-      - SECRET_KEY_BASE=$secret_key_base_evocrm
+    ## 🔐 Segredos e JWT — o core NÃO usa SECRET_KEY_BASE; valida JWT com JWT_SECRET_KEY
       - JWT_SECRET_KEY=$jwt_secret_evocrm
       - JWT_ALGORITHM=HS256
       - ENCRYPTION_KEY=$encryption_key
@@ -41869,7 +41917,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_processor:
-    image: evoapicloud/evo-ai-processor-community:develop
+    image: evoapicloud/evo-ai-processor-community:latest
     command: sh -c "alembic upgrade head 2>&1 || echo 'Alembic migration had errors, continuing...'; python -m scripts.run_seeders; uvicorn src.main:app --host \$\$HOST --port \$\$PORT"
     
     volumes:
@@ -41887,7 +41935,7 @@ services:
       - REDIS_PORT=6379
       - REDIS_PASSWORD=
       - REDIS_SSL=false
-      - REDIS_DB=1
+      - REDIS_DB=3
       - REDIS_KEY_PREFIX=a2a_
       - REDIS_TTL=3600
     
@@ -41897,7 +41945,6 @@ services:
     
     ## 🐛 Debug e segredos
       - DEBUG=false
-      - SECRET_KEY_BASE=$secret_key_base_evocrm
       - ENCRYPTION_KEY=$encryption_key
       - JWT_SECRET_KEY=$jwt_secret_evocrm
       - EVOAI_CRM_API_TOKEN=$evoai_crm_api_token
@@ -41933,7 +41980,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_bot_runtime:
-    image: evoapicloud/evo-bot-runtime:develop
+    image: evoapicloud/evo-bot-runtime:latest
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41942,13 +41989,18 @@ services:
     ## 🌐 Rede (listen)
       - LISTEN_ADDR=0.0.0.0:8080
     
-    ## 🧊 Redis
-      - REDIS_URL=redis://evocrm${1:+_$1}_redis:6379/1
-    
+    ## 🧊 Redis (DB 5 dedicada ao bot_runtime — estado das pipelines)
+      - REDIS_URL=redis://evocrm${1:+_$1}_redis:6379/5
+
     ## 🤖 Processor e segurança
       - AI_PROCESSOR_URL=http://evocrm${1:+_$1}_processor:8000
       - BOT_RUNTIME_SECRET=$bot_runtime_secret
       - AI_CALL_TIMEOUT_SECONDS=30
+      - AI_CALL_MAX_RETRIES=2
+      - AI_CALL_RETRY_BASE_MS=200
+
+    ## 🖼️ Mídia recebida pelo agente — host do BACKEND_URL (sem esquema/porta). Vazio = agente não recebe mídia.
+      - MEDIA_HOST_ALLOWLIST=$url_evocrm_api
     
     deploy:
       placement:
@@ -41962,7 +42014,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   evocrm${1:+_$1}_frontend:
-    image: evoapicloud/evo-ai-frontend-community:develop
+    image: evoapicloud/evo-ai-frontend-community:latest
     
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -41977,7 +42029,11 @@ services:
       - VITE_EVOAI_API_URL=https://$url_evocrm_api
       - VITE_AGENT_PROCESSOR_URL=https://$url_evocrm_api
       - VITE_WS_URL=https://$url_evocrm_api
-      
+    ## EvoFlow (Journeys/Campaigns): o Traefik expõe SÓ /api/v1/journeys e /api/v1/campaigns no
+    ## domínio da API (ver labels do serviço evoflow). VITE_EVOFLOW_API_URL = domínio da API,
+    ## mesma origem do frontend -> sem CORS.
+      - VITE_EVOFLOW_API_URL=https://$url_evocrm_api
+
     deploy:
       placement:
         constraints:
@@ -42028,6 +42084,143 @@ services:
           
 ## --------------------------- ORION --------------------------- ##
 
+  ## ClickHouse — storage dos eventos do EvoFlow (STORAGE_MODE=clickhouse).
+  ## Sem portas publicadas: só a rede interna alcança.
+  evocrm${1:+_$1}_clickhouse:
+    image: clickhouse/clickhouse-server:latest  ## Versão do ClickHouse
+
+    environment:
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=$clickhouse_password_evocrm
+      - CLICKHOUSE_DB=default
+
+    volumes:
+      - evocrm${1:+_$1}_clickhouse_data:/var/lib/clickhouse
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+  ## RabbitMQ — o EvoFlow exige um broker no boot, mesmo com QUEUE_MODE=direct.
+  evocrm${1:+_$1}_rabbitmq:
+    image: rabbitmq:3-alpine  ## Versão do RabbitMQ
+
+    environment:
+      - RABBITMQ_DEFAULT_USER=evoflow
+      - RABBITMQ_DEFAULT_PASS=$rabbitmq_password_evocrm
+
+    volumes:
+      - evocrm${1:+_$1}_rabbitmq_data:/var/lib/rabbitmq
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+  ## EvoFlow (NestJS) — serve /api/v1/segments ao CRM (que faz proxy) — porta 3334.
+  ## Postgres DEDICADO (evo_campaign) no mesmo pgvector: o boot cria o banco e roda as migrations.
+  ## O banco do CRM (evocrm) não é tocado. O swarm ignora depends_on → o boot espera o ClickHouse sozinho.
+  evocrm${1:+_$1}_evoflow:
+    image: evoapicloud/evo-flow-community:latest
+    command:
+      - sh
+      - -c
+      - |
+        until node -e 'require("http").get("http://evocrm${1:+_$1}_clickhouse:8123/ping",r=>process.exit(r.statusCode===200?0:1)).on("error",()=>process.exit(1))'; do echo 'Waiting for clickhouse...'; sleep 5; done
+        node -e 'const{Client}=require("pg");const db=process.env.POSTGRES_DB_DATABASE;const c=new Client({host:process.env.POSTGRES_DB_HOST,port:+(process.env.POSTGRES_DB_PORT||5432),user:process.env.POSTGRES_DB_USERNAME,password:process.env.POSTGRES_DB_PASSWORD,database:"postgres"});c.connect().then(()=>c.query("CREATE DATABASE "+db)).then(()=>console.log("[init] created "+db)).catch(e=>console.log("[init] "+(e.code==="42P04"?"db already exists":e.message))).finally(()=>c.end());'
+        node_modules/.bin/typeorm migration:run -d dist/database/ormconfig.js || echo "[init] migration:run failed (continuing)"
+        exec node dist/main.js
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+    ## ⚙️ Modo de execução (single-node: API + escrita direta no ClickHouse)
+      - NODE_ENV=production
+      - RUN_MODE=api
+      - QUEUE_MODE=direct
+      - STORAGE_MODE=clickhouse
+      - WRITE_MODE=ch-sync
+      - PORT=3334
+      - LOG_LEVEL=log
+
+    ## 🔐 Chave compartilhada com o CRM (idêntica em crm e crm_sidekiq)
+      - AUTH_APIKEY_INTEGRATION_LOCAL=$auth_apikey_integration_local
+
+    ## 🔗 Serviços internos (Auth + CRM)
+      - EVO_AUTH_SERVICE_URL=http://evocrm${1:+_$1}_auth:3001
+      - EVO_AUTH_VALIDATE_TOKEN_ENDPOINT=/api/v1/auth/validate
+      - EVOAI_CRM_BASE_URL=http://evocrm${1:+_$1}_crm:3000
+      - EVOAI_CRM_API_TOKEN=$evoai_crm_api_token
+
+    ## 🐇 Broker (exigido no boot mesmo em QUEUE_MODE=direct)
+      - BROKER_TYPE=rabbitmq
+      - RABBITMQ_URL=amqp://evoflow:$rabbitmq_password_evocrm@evocrm${1:+_$1}_rabbitmq:5672
+
+    ## 🧊 ClickHouse (eventos)
+      - CLICKHOUSE_HOST=evocrm${1:+_$1}_clickhouse
+      - CLICKHOUSE_PORT=8123
+      - CLICKHOUSE_DATABASE=evo_campaign
+      - CLICKHOUSE_USERNAME=default
+      - CLICKHOUSE_PASSWORD=$clickhouse_password_evocrm
+      - CLICKHOUSE_TABLE=contact_events
+
+    ## 🗄️ PostgreSQL — banco dedicado no MESMO Postgres (não toca o evocrm)
+      - POSTGRES_DB_HOST=pgvector
+      - POSTGRES_DB_PORT=5432
+      - POSTGRES_DB_USERNAME=postgres
+      - POSTGRES_DB_PASSWORD=$senha_pgvector
+      - POSTGRES_DB_DATABASE=evo_campaign${1:+_$1}
+
+    ## 🧊 Redis (cache de token/sessão) — DB 4 para não colidir com o CRM (1)
+      - REDIS_HOST=evocrm${1:+_$1}_redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=4
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+      labels:
+        - traefik.enable=1
+        - traefik.docker.network=$nome_rede_interna ## Nome da rede interna
+        ## Expõe SOMENTE /api/v1/journeys e /api/v1/campaigns no domínio da API (mesma origem do
+        ## frontend, sem CORS). priority=10 > 1 do gateway: estes 2 prefixos vão pro evo-flow;
+        ## todo o resto do /api/v1 continua indo pro gateway/CRM.
+        - traefik.http.routers.evocrm${1:+_$1}_evoflow.rule=Host(\`$url_evocrm_api\`) && (PathPrefix(\`/api/v1/journeys\`) || PathPrefix(\`/api/v1/campaigns\`))
+        - traefik.http.routers.evocrm${1:+_$1}_evoflow.entrypoints=websecure
+        - traefik.http.routers.evocrm${1:+_$1}_evoflow.priority=10
+        - traefik.http.routers.evocrm${1:+_$1}_evoflow.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.evocrm${1:+_$1}_evoflow.service=evocrm${1:+_$1}_evoflow
+        - traefik.http.services.evocrm${1:+_$1}_evoflow.loadbalancer.server.port=3334
+        - traefik.http.services.evocrm${1:+_$1}_evoflow.loadbalancer.passHostHeader=true
+
+## --------------------------- ORION --------------------------- ##
+
 volumes:
   evocrm${1:+_$1}_processor_logs:
     external: true
@@ -42035,6 +42228,18 @@ volumes:
   evocrm${1:+_$1}_redis:
     external: true
     name: evocrm${1:+_$1}_redis
+  evocrm${1:+_$1}_storage:
+    external: true
+    name: evocrm${1:+_$1}_storage
+  evocrm${1:+_$1}_auth_storage:
+    external: true
+    name: evocrm${1:+_$1}_auth_storage
+  evocrm${1:+_$1}_clickhouse_data:
+    external: true
+    name: evocrm${1:+_$1}_clickhouse_data
+  evocrm${1:+_$1}_rabbitmq_data:
+    external: true
+    name: evocrm${1:+_$1}_rabbitmq_data
 
 networks:
   $nome_rede_interna: ## Nome da rede interna
@@ -42063,11 +42268,17 @@ echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
 
+## Avisa que o download das imagens pode demorar (evita a sensação de tela travada)
+echo -e "\e[97m• BAIXANDO AS IMAGENS DOCKER DO EVO CRM\e[0m"
+echo -e "\e[33m--> São várias imagens (Rails, ClickHouse, RabbitMQ, EvoFlow...) e o download pode levar alguns minutos, dependendo da sua conexão e do servidor.\e[0m"
+echo -e "\e[33m--> A tela pode parecer travada durante o download. Isso é normal, aguarde.\e[0m"
+echo ""
+
 ## Baixando imagens:
-pull redis:latest evoapicloud/evo-auth-service-community:develop evoapicloud/evo-ai-crm-community:develop evoapicloud/evo-ai-core-service-community:develop evoapicloud/evo-ai-processor-community:develop evoapicloud/evo-bot-runtime:develop evoapicloud/evo-crm-gateway:develop evoapicloud/evo-ai-frontend-community:develop
+pull redis:latest clickhouse/clickhouse-server:latest rabbitmq:3-alpine evoapicloud/evo-auth-service-community:latest evoapicloud/evo-ai-core-service-community:latest evoapicloud/evo-ai-processor-community:latest evoapicloud/evo-bot-runtime:latest evoapicloud/evo-ai-crm-community:latest evoapicloud/evo-flow-community:latest evoapicloud/evo-crm-gateway:latest evoapicloud/evo-ai-frontend-community:latest
 
 ## Usa o serviço wait_EVOCRM para verificar se o serviço esta online
-wait_stack evocrm${1:+_$1}_evocrm${1:+_$1}_redis evocrm${1:+_$1}_evocrm${1:+_$1}_auth evocrm${1:+_$1}_evocrm${1:+_$1}_auth_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_crm evocrm${1:+_$1}_evocrm${1:+_$1}_crm_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_core evocrm${1:+_$1}_evocrm${1:+_$1}_processor evocrm${1:+_$1}_evocrm${1:+_$1}_bot_runtime evocrm${1:+_$1}_evocrm${1:+_$1}_gateway evocrm${1:+_$1}_evocrm${1:+_$1}_frontend 
+wait_stack evocrm${1:+_$1}_evocrm${1:+_$1}_redis evocrm${1:+_$1}_evocrm${1:+_$1}_clickhouse evocrm${1:+_$1}_evocrm${1:+_$1}_rabbitmq evocrm${1:+_$1}_evocrm${1:+_$1}_auth evocrm${1:+_$1}_evocrm${1:+_$1}_auth_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_core evocrm${1:+_$1}_evocrm${1:+_$1}_processor evocrm${1:+_$1}_evocrm${1:+_$1}_bot_runtime evocrm${1:+_$1}_evocrm${1:+_$1}_crm evocrm${1:+_$1}_evocrm${1:+_$1}_crm_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_evoflow evocrm${1:+_$1}_evocrm${1:+_$1}_gateway evocrm${1:+_$1}_evocrm${1:+_$1}_frontend
 
 telemetria EvoCRM finalizado
 
