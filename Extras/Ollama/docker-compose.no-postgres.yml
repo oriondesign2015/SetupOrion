@@ -1,0 +1,66 @@
+services:
+  # Ollama - Local LLM Runtime
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ollama-network
+    # Uncomment for GPU support (NVIDIA)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+    ports:
+      - "${OLLAMA_PORT:-11434}:11434"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # LiteLLM Proxy - OpenAI-compatible API Gateway (without PostgreSQL)
+  litellm:
+    image: ghcr.io/berriai/litellm:main-stable
+    container_name: litellm
+    restart: unless-stopped
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      # Master key for LiteLLM proxy (change this!)
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-sk-1234}
+      # Ollama API base URL
+      OLLAMA_API_BASE: http://ollama:11434
+      # Optional: Set log level
+      LITELLM_LOG: ${LITELLM_LOG:-INFO}
+      # Disable database features
+      STORE_MODEL_IN_DB: "False"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml
+    networks:
+      - ollama-network
+    ports:
+      - "${LITELLM_PORT:-4000}:4000"
+    command: ["--config", "/app/config.yaml", "--port", "4000", "--num_workers", "8"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 45s
+
+networks:
+  ollama-network:
+    driver: bridge
+
+volumes:
+  ollama_data:
+    driver: local
+
