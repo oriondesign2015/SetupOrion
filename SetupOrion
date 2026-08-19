@@ -13502,6 +13502,9 @@ else
     criar_banco_pgvector_da_stack "formbricks${1:+_$1}"
 fi
 
+## v5: banco separado para o Hub (evita colisão com as migrations do Prisma no Swarm)
+criar_banco_pgvector_da_stack "formbricks_hub${1:+_$1}"
+
 ## Mensagem de Passo
 echo -e "\e[97m• CRIANDO BUCKET NO MINIO \e[33m[3/5]\e[0m"
 echo ""
@@ -13536,9 +13539,9 @@ hub_key_form=$(openssl rand -hex 32)
 cube_dir="/opt/formbricks${1:+_$1}/cube"
 mkdir -p "$cube_dir/schema"
 curl -fsSL -o "$cube_dir/cube.js" \
-    https://raw.githubusercontent.com/formbricks/formbricks/v5.3.4/docker/cube/cube.js
+    https://raw.githubusercontent.com/formbricks/formbricks/5.3.4/docker/cube/cube.js
 curl -fsSL -o "$cube_dir/schema/FeedbackRecords.js" \
-    https://raw.githubusercontent.com/formbricks/formbricks/v5.3.4/docker/cube/schema/FeedbackRecords.js
+    https://raw.githubusercontent.com/formbricks/formbricks/5.3.4/docker/cube/schema/FeedbackRecords.js
 
 ## Criando a stack formbricks.yaml
 cat > formbricks${1:+_$1}.yaml <<-EOF
@@ -13608,6 +13611,9 @@ services:
     ## Dados do Redis
       - REDIS_URL=redis://formbricks${1:+_$1}_redis:6379
 
+      ## v5: heap do Node (evita OOM do Next.js). Mantenha < limite de memoria do container.
+      - NODE_OPTIONS=--max-old-space-size=1536
+
       ## Dados do Formbricks (para pesquisa)
       - NEXT_PUBLIC_FORMBRICKS_API_HOST=
       - NEXT_PUBLIC_FORMBRICKS_ENVIRONMENT_ID=
@@ -13648,8 +13654,8 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "1"
-          memory: 1024M
+          cpus: "2"
+          memory: 2048M
       labels:
         - traefik.enable=true
         - traefik.http.routers.formbricks${1:+_$1}_app.rule=Host(\`$url_formbricks\`)
@@ -13708,7 +13714,7 @@ services:
     environment:
       - CUBEJS_DB_TYPE=postgres
       - CUBEJS_DB_HOST=pgvector
-      - CUBEJS_DB_NAME=formbricks${1:+_$1}
+      - CUBEJS_DB_NAME=formbricks_hub${1:+_$1}
       - CUBEJS_DB_USER=postgres
       - CUBEJS_DB_PASS=$senha_pgvector
       - CUBEJS_DB_PORT=5432
@@ -13747,7 +13753,7 @@ services:
     image: ghcr.io/formbricks/hub:0.8.4
     entrypoint: ["sh", "-c"]
     command:
-      - 'if [ -x /usr/local/bin/goose ] && [ -x /usr/local/bin/river ]; then /usr/local/bin/goose -dir /app/migrations postgres "postgresql://postgres:$senha_pgvector@pgvector:5432/formbricks${1:+_$1}?sslmode=disable" up && /usr/local/bin/river migrate-up --database-url "postgresql://postgres:$senha_pgvector@pgvector:5432/formbricks${1:+_$1}?sslmode=disable"; else echo "Migration tools nao encontrados na imagem"; exit 1; fi'
+      - 'if [ -x /usr/local/bin/goose ] && [ -x /usr/local/bin/river ]; then /usr/local/bin/goose -dir /app/migrations postgres "postgresql://postgres:$senha_pgvector@pgvector:5432/formbricks_hub${1:+_$1}?sslmode=disable" up && /usr/local/bin/river migrate-up --database-url "postgresql://postgres:$senha_pgvector@pgvector:5432/formbricks_hub${1:+_$1}?sslmode=disable"; else echo "Migration tools nao encontrados na imagem"; exit 1; fi'
 
     networks:
       - $nome_rede_interna
@@ -13777,7 +13783,7 @@ services:
 
     environment:
       - API_KEY=$hub_key_form
-      - DATABASE_URL=postgresql://postgres:$senha_pgvector@pgvector:5432/formbricks${1:+_$1}?sslmode=disable
+      - DATABASE_URL=postgresql://postgres:$senha_pgvector@pgvector:5432/formbricks_hub${1:+_$1}?sslmode=disable
       - TAXONOMY_SERVICE_URL=
       - TAXONOMY_SERVICE_TOKEN=
       - HUB_INTERNAL_API_TOKEN=
