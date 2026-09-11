@@ -313,7 +313,8 @@ fi
 
 # Baixa o script
 #curl -sSL https://raw.githubusercontent.com/oriondesign2015/SetupOrion/main/SetupOrion -o SetupOrion
-curl -sSL https://s3.setuporion.com.br/setuporion/SetupOrion -o SetupOrion
+#curl -sSL https://s3.setuporion.com.br/setuporion/SetupOrion -o SetupOrion
+curl -sSL https://cdn.jsdelivr.net/gh/oriondesign2015/SetupOrion@main/Setup -o SetupOrion
 if [ $? -eq 0 ]; then
     echo "15/15 - [ OK ] - Baixando o script"
     # Executa o script baixado
