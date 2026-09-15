@@ -42251,7 +42251,10 @@ services:
   ## ClickHouse — storage dos eventos do EvoFlow (STORAGE_MODE=clickhouse).
   ## Sem portas publicadas: só a rede interna alcança.
   evocrm${1:+_$1}_clickhouse:
-    image: clickhouse/clickhouse-server:latest  ## Versão do ClickHouse
+    ## PINADO: desde a 26.6 o build padrao do ClickHouse exige AVX2 (x86-64-v3)
+    ## e morre com "Illegal instruction" em CPUs antigas (ex: Xeon E3 v2/Ivy Bridge).
+    ## 26.3 LTS e a ultima linha compativel com x86-64-v2 (SSE4.2).
+    image: clickhouse/clickhouse-server:26.3.20.7  ## Versão do ClickHouse
 
     environment:
       - CLICKHOUSE_USER=default
@@ -42439,7 +42442,7 @@ echo -e "\e[33m--> A tela pode parecer travada durante o download. Isso é norma
 echo ""
 
 ## Baixando imagens:
-pull redis:latest clickhouse/clickhouse-server:latest rabbitmq:3-alpine evoapicloud/evo-auth-service-community:latest evoapicloud/evo-ai-core-service-community:latest evoapicloud/evo-ai-processor-community:latest evoapicloud/evo-bot-runtime:latest evoapicloud/evo-ai-crm-community:latest evoapicloud/evo-flow-community:latest evoapicloud/evo-crm-gateway:latest evoapicloud/evo-ai-frontend-community:latest
+pull redis:latest clickhouse/clickhouse-server:26.3.20.7 rabbitmq:3-alpine evoapicloud/evo-auth-service-community:latest evoapicloud/evo-ai-core-service-community:latest evoapicloud/evo-ai-processor-community:latest evoapicloud/evo-bot-runtime:latest evoapicloud/evo-ai-crm-community:latest evoapicloud/evo-flow-community:latest evoapicloud/evo-crm-gateway:latest evoapicloud/evo-ai-frontend-community:latest
 
 ## Usa o serviço wait_EVOCRM para verificar se o serviço esta online
 wait_stack evocrm${1:+_$1}_evocrm${1:+_$1}_redis evocrm${1:+_$1}_evocrm${1:+_$1}_clickhouse evocrm${1:+_$1}_evocrm${1:+_$1}_rabbitmq evocrm${1:+_$1}_evocrm${1:+_$1}_auth evocrm${1:+_$1}_evocrm${1:+_$1}_auth_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_core evocrm${1:+_$1}_evocrm${1:+_$1}_processor evocrm${1:+_$1}_evocrm${1:+_$1}_bot_runtime evocrm${1:+_$1}_evocrm${1:+_$1}_crm evocrm${1:+_$1}_evocrm${1:+_$1}_crm_sidekiq evocrm${1:+_$1}_evocrm${1:+_$1}_evoflow evocrm${1:+_$1}_evocrm${1:+_$1}_gateway evocrm${1:+_$1}_evocrm${1:+_$1}_frontend
