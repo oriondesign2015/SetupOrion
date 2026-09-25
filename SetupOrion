@@ -7845,9 +7845,9 @@ while true; do
     echo -en "\e[33mDigite o numero da versão que deseja instalar (1 ou 2): \e[0m" && read -r minio_version_op
     echo ""
     if [ "$minio_version_op" = "1" ]; then
-        minio_version="latest"
+        minio_version="ghcr.io/coollabsio/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1"
     elif [ "$minio_version_op" = "2" ]; then
-        minio_version="RELEASE.2024-01-13T07-53-03Z-cpuv1"
+        minio_version="edkaba/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1-amd64"
     else
         echo -e "\e[31mOpção inválida. Usando versão 'latest' por padrão.\e[0m"
         minio_version="latest"
@@ -7935,7 +7935,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   minio${1:+_$1}:
-    image: quay.io/minio/minio:$minio_version ## Versão do MinIO
+    image: $minio_version ## Versão do MinIO
     command: server /data --console-address ":9001"
 
     volumes:
@@ -8015,7 +8015,7 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull quay.io/minio/minio:$minio_version
+pull $minio_version
 
 ## Usa o serviço wait_minio para verificar se o serviço esta online
 wait_stack minio${1:+_$1}_minio${1:+_$1}
