@@ -7845,12 +7845,12 @@ while true; do
     echo -en "\e[33mDigite o numero da versão que deseja instalar (1 ou 2): \e[0m" && read -r minio_version_op
     echo ""
     if [ "$minio_version_op" = "1" ]; then
-        minio_version="docker pull edkaba/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1-amd64"
+        minio_version="quay.io/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z"
     elif [ "$minio_version_op" = "2" ]; then
         minio_version="edkaba/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1-amd64"
     else
         echo -e "\e[31mOpção inválida. Usando versão 'latest' por padrão.\e[0m"
-        minio_version="latest"
+        minio_version="quay.io/minio/aistor/minio:RELEASE.2026-03-26T21-24-40Z"
     fi
 
     ## Limpa o terminal
