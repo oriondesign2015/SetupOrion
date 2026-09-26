@@ -7845,7 +7845,7 @@ while true; do
     echo -en "\e[33mDigite o numero da versão que deseja instalar (1 ou 2): \e[0m" && read -r minio_version_op
     echo ""
     if [ "$minio_version_op" = "1" ]; then
-        minio_version="ghcr.io/coollabsio/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1"
+        minio_version="docker pull edkaba/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1-amd64"
     elif [ "$minio_version_op" = "2" ]; then
         minio_version="edkaba/minio:RELEASE.2024-01-13T07-53-03Z-cpuv1-amd64"
     else
