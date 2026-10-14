@@ -30180,8 +30180,11 @@ echo -e "\e[97m• INSTALANDO KRAYIN CRM \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
+## Criando as chaves e senhas aleatórias (hexadecimal evita caracteres especiais no .env que o instalador do Krayin le)
 secret_key="base64:$(openssl rand -base64 32)"
-senha_percona_krayin=$(openssl rand -hex 16)
+senha_mysql_krayin=$(openssl rand -hex 16)
+senha_mysql_root_krayin=$(openssl rand -hex 16)
+senha_redis_krayin=$(openssl rand -hex 16)
 
 ## Criando a stack krayincrm.yaml
 cat > krayincrm${1:+_$1}.yaml <<EOL
@@ -30191,76 +30194,59 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   krayin${1:+_$1}_app:
-    image: webkul/krayin:v2.1.2-https
+    image: setuporion/krayincrm:latest ## Versão da aplicação
 
     volumes:
-      - krayin${1:+_$1}_app:/var/www/html/
-    
+      - krayin${1:+_$1}_storage:/var/www/html/storage
+
     networks:
       - $nome_rede_interna ## Nome da rede interna
-    
+
     environment:
-      ## 🔑 Configurações básicas da aplicação
-      - APP_URL=https://$url_krayincrm
-      - APP_NAME=Krayin CRM
-      - APP_ENV=local
-      - APP_KEY=$secret_key
-      - APP_TIMEZONE=America/Sao_Paulo
-      - APP_LOCALE=pt_BR
-      - APP_CURRENCY=BRL
-      
-      ## ⚙️ Configurações do Frontend (Vite)
-      - VITE_HOST=0.0.0.0
-      - VITE_PORT=5173
-      
-      ## 🧾 Logs da aplicação
-      - LOG_CHANNEL=stack
-      - LOG_LEVEL=debug
-      - APP_DEBUG=true
-      
-      ## 🗄️ Banco de Dados
-      - DB_CONNECTION=mysql
+    ## 🐬 Dados do MySQL
       - DB_HOST=krayin${1:+_$1}_db
       - DB_PORT=3306
-      - DB_DATABASE=krayincrm${1:+_$1}
-      - DB_USERNAME=root
-      - DB_PASSWORD=$senha_percona_krayin
-      - DB_PREFIX=
-      
-      ## ⚙️ Drivers da aplicação
-      - BROADCAST_DRIVER=log
-      - CACHE_DRIVER=file
-      - QUEUE_CONNECTION=sync
-      - SESSION_DRIVER=file
-      - SESSION_LIFETIME=120
-      
-      ## ⚡ Redis (opcional)
+      - DB_DATABASE=krayin
+      - DB_USERNAME=krayin
+      - DB_PASSWORD=$senha_mysql_krayin
+
+    ## 🟥 Dados do Redis (cache e sessão)
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
       - REDIS_HOST=krayin${1:+_$1}_redis
-      - REDIS_PASSWORD=null
       - REDIS_PORT=6379
-      
-      ## ✉️ E-mail (SMTP)
+      - REDIS_PASSWORD=$senha_redis_krayin
+
+    ## ⚙️ Configurações gerais
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_URL=https://$url_krayincrm
+      - APP_LOCALE=pt_BR
+      - APP_CURRENCY=BRL
+      - APP_TIMEZONE=America/Sao_Paulo
+      - TZ=America/Sao_Paulo
+      - RUN_INSTALL=true ## Instala o Krayin sozinho se o banco estiver vazio
+
+    ## 🔌 API REST (krayin/rest-api): endpoints em /api/v1 e Swagger em /api/documentation
+      - REST_API_DOCS=true ## false = não gera a documentação Swagger
+      - L5_SWAGGER_UI_PERSIST_AUTHORIZATION=true
+
+    ## 🔐 Encryption Key
+      - APP_KEY=$secret_key
+
+    ## 📧 Dados do SMTP
       - MAIL_MAILER=smtp
-      - MAIL_FROM_ADDRESS=$email_krayincrm
-      - MAIL_DOMAIN=$dominio_smtp
-      - MAIL_USERNAME=$usuario_email_krayincrm
-      - MAIL_PASSWORD=$senha_email_krayincrm
       - MAIL_HOST=$smtp_email_krayincrm
       - MAIL_PORT=$porta_smtp_krayincrm
+      - MAIL_USERNAME=$usuario_email_krayincrm
+      - MAIL_PASSWORD=$senha_email_krayincrm
       - MAIL_ENCRYPTION=$smtp_secure_krayincrm
+      - MAIL_FROM_ADDRESS=$email_krayincrm
       - MAIL_FROM_NAME=Krayin CRM
-      
-      ## ☁️ AWS (armazenamento em nuvem - opcional)
-      #- AWS_ACCESS_KEY_ID=
-      #- AWS_SECRET_ACCESS_KEY=
-      #- AWS_DEFAULT_REGION=eu-south
-      #- AWS_BUCKET=
 
     deploy:
       mode: replicated
       replicas: 1
-      restart_policy:
-        condition: on-failure
       placement:
         constraints:
           - node.role == manager
@@ -30270,41 +30256,101 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.krayin${1:+_$1}_app.rule=Host(\`$url_krayincrm\`)
-        - traefik.http.services.krayin${1:+_$1}_app.loadbalancer.server.port=80
-        - traefik.http.routers.krayin${1:+_$1}_app.service=krayin${1:+_$1}_app
-        - traefik.http.routers.krayin${1:+_$1}_app.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.krayin${1:+_$1}_app.entrypoints=websecure
-        - traefik.http.routers.krayin${1:+_$1}_app.tls=true
-        - traefik.http.middlewares.headers.headers.customrequestheaders.X-Forwarded-Proto=https
-        - traefik.http.routers.krayin.middlewares=headers
+        - traefik.http.routers.krayin${1:+_$1}.rule=Host(\`$url_krayincrm\`) ## Url da aplicação
+        - traefik.http.services.krayin${1:+_$1}.loadbalancer.server.port=80
+        - traefik.http.routers.krayin${1:+_$1}.service=krayin${1:+_$1}
+        - traefik.http.routers.krayin${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.krayin${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.krayin${1:+_$1}.tls=true
 
 ## --------------------------- ORION --------------------------- ##
 
-  krayin${1:+_$1}_db:
-    image: percona/percona-server:latest
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_general_ci
-      - --sql-mode=
-      - --default-authentication-plugin=mysql_native_password
-      - --max-allowed-packet=512MB
-      - --expire_logs_days=7
-      - --max_binlog_size=100M
+  krayin${1:+_$1}_scheduler:
+    image: setuporion/krayincrm:latest ## Mesma versão da aplicação
+    command: ["php", "artisan", "schedule:work"]
 
     volumes:
-      - krayin${1:+_$1}_db:/var/lib/mysql
+      - krayin${1:+_$1}_storage:/var/www/html/storage
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
     environment:
-     ## 🗄️ Configurações do MySQL
-      - MYSQL_ROOT_PASSWORD=$senha_percona_krayin
-      - MYSQL_DATABASE=krayincrm${1:+_$1}
-    
-    ## 🌐 TimeZone
+    ## 🐬 Dados do MySQL
+      - DB_HOST=krayin${1:+_$1}_db
+      - DB_PORT=3306
+      - DB_DATABASE=krayin
+      - DB_USERNAME=krayin
+      - DB_PASSWORD=$senha_mysql_krayin
+
+    ## 🟥 Dados do Redis (iguais aos do app)
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+      - REDIS_HOST=krayin${1:+_$1}_redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=$senha_redis_krayin
+
+    ## ⚙️ Configurações gerais (iguais às do app)
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_URL=https://$url_krayincrm
+      - APP_LOCALE=pt_BR
+      - APP_CURRENCY=BRL
+      - APP_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
+
+    ## 🔐 Encryption Key (igual à do app)
+      - APP_KEY=$secret_key
+
+    ## 📧 Dados do SMTP (iguais aos do app)
+      - MAIL_MAILER=smtp
+      - MAIL_HOST=$smtp_email_krayincrm
+      - MAIL_PORT=$porta_smtp_krayincrm
+      - MAIL_USERNAME=$usuario_email_krayincrm
+      - MAIL_PASSWORD=$senha_email_krayincrm
+      - MAIL_ENCRYPTION=$smtp_secure_krayincrm
+      - MAIL_FROM_ADDRESS=$email_krayincrm
+      - MAIL_FROM_NAME=Krayin CRM
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+
+## --------------------------- ORION --------------------------- ##
+
+  krayin${1:+_$1}_db:
+    image: mysql:8.0
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
+    volumes:
+      - krayin${1:+_$1}_mysql_data:/var/lib/mysql
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+    ## 🐬 Dados do MySQL
+      - MYSQL_ROOT_PASSWORD=$senha_mysql_root_krayin
+      - MYSQL_DATABASE=krayin
+      - MYSQL_USER=krayin
+      - MYSQL_PASSWORD=$senha_mysql_krayin ## Mesma senha usada em DB_PASSWORD
+      - TZ=America/Sao_Paulo
+
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\$\$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
 
     deploy:
       mode: replicated
@@ -30320,17 +30366,11 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   krayin${1:+_$1}_redis:
-    image: redis:latest
-    command: [
-        "redis-server",
-        "--appendonly",
-        "yes",
-        "--port",
-        "6379"
-      ]
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "$senha_redis_krayin"]
 
     volumes:
-      - krayin${1:+_$1}_redis:/data
+      - krayin${1:+_$1}_redis_data:/data
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
@@ -30343,27 +30383,26 @@ services:
           - node.role == manager
       resources:
         limits:
-          cpus: "1"
-          memory: 1024M
+          cpus: "0.5"
+          memory: 256M
 
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  krayin${1:+_$1}_app:
+  krayin${1:+_$1}_storage:
     external: true
-    name: krayin${1:+_$1}_app
-  krayin${1:+_$1}_db:
+    name: krayin${1:+_$1}_storage
+  krayin${1:+_$1}_mysql_data:
     external: true
-    name: krayin${1:+_$1}_db
-  krayin${1:+_$1}_redis:
+    name: krayin${1:+_$1}_mysql_data
+  krayin${1:+_$1}_redis_data:
     external: true
-    name: krayin${1:+_$1}_redis
-
+    name: krayin${1:+_$1}_redis_data
 
 networks:
-  $nome_rede_interna:
+  $nome_rede_interna: ## Nome da rede interna
+    name: $nome_rede_interna ## Nome da rede interna
     external: true
-    name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
     echo "1/10 - [ OK ] - Criando Stack"
@@ -30387,48 +30426,19 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull percona/percona-server:latest redis:latest webkul/krayin:v2.1.2-https
+pull setuporion/krayincrm:latest mysql:8.0 redis:7-alpine
 
-## Usa o serviço wait_krayincrm para verificar se o serviço esta online
-wait_stack krayincrm${1:+_$1}_krayin${1:+_$1}_db krayincrm${1:+_$1}_krayin${1:+_$1}_redis krayincrm${1:+_$1}_krayin${1:+_$1}_app 
+## Usa o serviço wait_stack para verificar se o serviço esta online
+## (o app instala o Krayin sozinho no 1º boot com RUN_INSTALL=true, por isso não existe mais passo manual de migrate/seed)
+wait_stack krayincrm${1:+_$1}_krayin${1:+_$1}_db krayincrm${1:+_$1}_krayin${1:+_$1}_redis krayincrm${1:+_$1}_krayin${1:+_$1}_app krayincrm${1:+_$1}_krayin${1:+_$1}_scheduler
 
-sleep 30
+telemetria "Krayin CRM" "finalizado"
 
 ## Mensagem de Passo
 echo ""
-echo -e "\e[97m• MIGRANDO BANCO E ATIVANDO API \e[33m[4/4]\e[0m"
+echo -e "\e[97m• FINALIZANDO A INSTALAÇÃO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
-
-docker exec -it $(docker ps --filter "name=krayincrm_krayin_app" -q) sh -c "cd laravel-crm && php artisan migrate" > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "1/4 - [ OK ] - Migrações Executadas"
-else
-    echo "1/4 - [ OFF ] - Falha ao executar migrações"
-fi
-
-docker exec -it $(docker ps --filter "name=krayincrm_krayin_app" -q) sh -c "cd laravel-crm && php artisan db:seed" > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "2/4 - [ OK ] - Seeds Executados"
-else
-    echo "2/4 - [ OFF ] - Falha ao executar Seeds"
-fi
-
-docker exec -it $(docker ps --filter "name=krayincrm_krayin_app" -q) sh -c "cd laravel-crm && composer require krayin/rest-api" > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "3/4 - [ OK ] - Pacote Rest-API instalado"
-else
-    echo "3/4 - [ OFF ] - Falha ao instalar pacote Rest-API"
-fi
-
-docker exec -it $(docker ps --filter "name=krayincrm_krayin_app" -q) sh -c "cd laravel-crm && php artisan krayin-rest-api:install" > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    echo "4/4 - [ OK ] - Rest-API configurado"
-else
-    echo "4/4 - [ OFF ] - Falha ao configurar Rest-API"
-fi
-
-telemetria "Krayin CRM" "finalizado"
 
 cd dados_vps
 
@@ -30441,7 +30451,16 @@ Usuario: admin@example.com
 
 Senha: admin123
 
-Documentação: https://$url_krayincrm/api/documentation
+(Troque a senha ao entrar)
+
+----
+
+API REST: https://$url_krayincrm/api/v1
+
+Documentação (Swagger): https://$url_krayincrm/api/documentation
+
+Autenticação por token Bearer. Cada login REVOGA os tokens anteriores do usuário:
+crie um usuário só para a integração (n8n, scripts) e não use a conta do painel.
 
 ----
 
@@ -30449,11 +30468,21 @@ Host Mysql: krayin${1:+_$1}_db
 
 Porta Mysql: 3306
 
-Usuario Mysql: root
+Usuario Mysql: krayin
 
-Senha Mysql: $senha_percona_krayin
+Senha Mysql: $senha_mysql_krayin
 
-Database Mysql: krayincrm${1:+_$1}
+Senha Mysql Root: $senha_mysql_root_krayin
+
+Database Mysql: krayin
+
+----
+
+Host Redis: krayin${1:+_$1}_redis
+
+Senha Redis: $senha_redis_krayin
+
+APP_KEY (nao troque depois do 1o deploy): $secret_key
 
 EOL
 
@@ -30482,7 +30511,10 @@ echo ""
 echo -e "\e[33mSenha:\e[97m admin123\e[0m"
 echo ""
 
-echo -e "\e[33mDocumentação:\e[97m https://$url_krayincrm/api/documentation\e[0m"
+echo -e "\e[33mTroque a senha ao entrar no CRM.\e[97m\e[0m"
+echo ""
+
+echo -e "\e[33mDocumentação API:\e[97m https://$url_krayincrm/api/documentation\e[0m"
 
 ## Creditos do instalador
 creditos_msg
