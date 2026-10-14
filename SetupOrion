@@ -12823,7 +12823,7 @@ requisitar_outra_instalacao
 ferramenta_woofed() {
 
 ## Verifica os recursos
-recursos 1 1 && continue || return
+recursos 2 4 && continue || return
 
 # Limpa o terminal
 clear
@@ -12848,13 +12848,13 @@ while true; do
     ## Pergunta o nome do Usuario do Motor
     echo -e "\e[97mPasso$amarelo 2/3\e[0m"
     echo -e "$amarelo--> Evite os caracteres especiais: @\!#$ e/ou espaço"
-    echo -en "\e[33mDigite o User do MOTOR (ex: oriondesign): \e[0m" && read -r email_admin_woofed
+    echo -en "\e[33mDigite o User dos Painéis /good_job e /sidekiq (ex: oriondesign): \e[0m" && read -r email_admin_woofed
     echo ""
 
     ## Pergunta o nome do Senha do Motor
     echo -e "\e[97mPasso$amarelo 3/3\e[0m"
     echo -e "$amarelo--> Evite os caracteres especiais: \!#$ e/ou espaço"
-    echo -en "\e[33mDigite a Senha do MOTOR (ex: @Senha123_): \e[0m" && read -r senha_email_woofed
+    echo -en "\e[33mDigite a Senha dos Painéis /good_job e /sidekiq (ex: Senha123): \e[0m" && read -r senha_email_woofed
     echo ""
     
     ## Limpa o terminal
@@ -12871,11 +12871,11 @@ while true; do
     echo ""
 
     ## Informação sobre o usuario
-    echo -e "\e[33mUser MOTOR:\e[97m $email_admin_woofed\e[0m"
+    echo -e "\e[33mUser Painéis:\e[97m $email_admin_woofed\e[0m"
     echo ""
 
     ## Informação sobre a senha
-    echo -e "\e[33mSenha MOTOR:\e[97m $senha_email_woofed\e[0m"
+    echo -e "\e[33mSenha Painéis:\e[97m $senha_email_woofed\e[0m"
     echo ""
 
     ## Pergunta se as respostas estão corretas
@@ -12910,7 +12910,7 @@ while true; do
 done
 
 ## Mensagem de Passo
-echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO WOOFED CRM \e[33m[1/6]\e[0m"
+echo -e "\e[97m• INICIANDO A INSTALAÇÃO DO WOOFED CRM \e[33m[1/4]\e[0m"
 echo ""
 sleep 1
 
@@ -12918,37 +12918,30 @@ telemetria WoofedCRM iniciado
 dados
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO/INSTALANDO POSTGRES VECTOR \e[33m[2/6]\e[0m"
+echo -e "\e[97m• INSTALANDO WOOFED CRM \e[33m[2/4]\e[0m"
 echo ""
 sleep 1
 
-verificar_container_pgvector
-if [ $? -eq 0 ]; then
-    echo "1/3 - [ OK ] - PgVector já instalado"
-    pegar_senha_pgvector > /dev/null 2>&1
-    echo "2/3 - [ OK ] - Copiando senha do PgVector"
-    criar_banco_pgvector_da_stack "woofedcrm${1:+_$1}"
-    echo "3/3 - [ OK ] - Criando banco de dados"
-    echo ""
-else
-    ferramenta_pgvector
-    pegar_senha_pgvector > /dev/null 2>&1
-    criar_banco_pgvector_da_stack "woofedcrm${1:+_$1}"
-fi
+## Criando as chaves aleatórias (SECRET_KEY_BASE não pode ser trocada após o 1º deploy)
+encryption_key_woofed=$(openssl rand -hex 64)
+os_security_key_woofed=$(openssl rand -hex 32)
 
-## Mensagem de Passo
-echo -e "\e[97m• INSTALANDO WOOFED CRM \e[33m[3/6]\e[0m"
-echo ""
-sleep 1
+## Criando a senha do Postgres (somente letras e números, pois vai dentro de URLs)
+senha_postgres_woofed=$(openssl rand -hex 16)
 
-## Criando uma Encryption Key Aleatória
-encryption_key_woofed=$(openssl rand -hex 32)
+## Procura o arquivo da stack da Evolution API (v2, lite ou v1) para reaproveitar URL e API Key
+arquivo_evolution=""
+for arq in /root/evolution.yaml /root/evolution_v2.yaml /root/evolution_lite.yaml /root/evolution_v1.yaml; do
+    if [ -f "$arq" ]; then
+        arquivo_evolution="$arq"
+        break
+    fi
+done
 
-# Verifica se o arquivo evolution.yaml existe
-if [ -f "/root/evolution_v1.yaml" ]; then
-    # Extrai os valores do arquivo evolution.yaml e formata no estilo desejado
-    EVOLUTION_API_ENDPOINT="- EVOLUTION_API_ENDPOINT=$(grep -oP '(?<=- SERVER_URL=)[^#]*' /root/evolution.yaml | sed 's/ //g')"
-    EVOLUTION_API_ENDPOINT_TOKEN="- EVOLUTION_API_ENDPOINT_TOKEN=$(grep -oP '(?<=- AUTHENTICATION_API_KEY=)[^#]*' /root/evolution.yaml | sed 's/ //g')"
+if [ -n "$arquivo_evolution" ]; then
+    # Extrai os valores do arquivo da Evolution e formata no estilo desejado
+    EVOLUTION_API_ENDPOINT="- EVOLUTION_API_ENDPOINT=$(grep -oP '(?<=- SERVER_URL=)[^#]*' "$arquivo_evolution" | head -n 1 | sed 's/ //g')"
+    EVOLUTION_API_ENDPOINT_TOKEN="- EVOLUTION_API_ENDPOINT_TOKEN=$(grep -oP '(?<=- AUTHENTICATION_API_KEY=)[^#]*' "$arquivo_evolution" | head -n 1 | sed 's/ //g')"
 else
     # Define os valores padrão se o arquivo não existir
     EVOLUTION_API_ENDPOINT="#- EVOLUTION_API_ENDPOINT="
@@ -12962,227 +12955,112 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-  woofedcrm${1:+_$1}_web:
-    image: douglara/woofedcrm:latest
-    command: bash -c "bundle exec rails db:prepare && bundle exec puma -C config/puma.rb"
+  woofedcrm${1:+_$1}_app:
+    image: douglara/woofedcrm:latest ## Versão da aplicação
 
     volumes:
-      - woofedcrm${1:+_$1}_data:/app/storage
-
-    networks:
-      - $nome_rede_interna
-
-    environment:
-    ## 🌐 Url WoofedCRM
-      - FRONTEND_URL=https://$url_woofed
-      - SECRET_KEY_BASE=$encryption_key_woofed
-
-    ## 🗣️ Idioma
-      - LANGUAGE=pt-BR
-
-    ## 🚫✅ Permitir/Bloquear novas Inscrições
-      - ENABLE_USER_SIGNUP=true
-
-    ## 🔑 Credenciais Motor
-      - MOTOR_AUTH_USERNAME=$email_admin_woofed
-      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
-
-    ## 🔗 Endpoints Evolution API
-      $EVOLUTION_API_ENDPOINT ## BaseUrl
-      $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
-
-    ## 🕒 Timezone
-      - DEFAULT_TIMEZONE=Brasilia
-
-    ## 🤖 Dados OpenAI
-      #- OPENAI_API_KEY=
-
-    ## 🧠 Dados PgVector
-      - DATABASE_URL=postgres://postgres:$senha_pgvector@pgvector:5432/woofedcrm${1:+_$1}
-
-    ## 🔁 Dados Redis
-      - REDIS_URL=redis://redis:6379/0
-
-    ## 💾 Dados Storage
-      - ACTIVE_STORAGE_SERVICE=local
-
-    ## 🚀 Modo de Produção
-      - RAILS_ENV=production
-      - RACK_ENV=production
-      - NODE_ENV=production
-      - RAILS_LOG_LEVEL=debug
-
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1024M
-      labels:
-        - traefik.enable=true
-        - traefik.http.routers.woofedcrm${1:+_$1}.rule=Host(\`$url_woofed\`)
-        - traefik.http.routers.woofedcrm${1:+_$1}.entrypoints=websecure
-        - traefik.http.routers.woofedcrm${1:+_$1}.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.woofedcrm${1:+_$1}.priority=1
-        - traefik.http.routers.woofedcrm${1:+_$1}.service=woofedcrm${1:+_$1}
-        - traefik.http.services.woofedcrm${1:+_$1}.loadbalancer.server.port=3000 
-        - traefik.http.services.woofedcrm${1:+_$1}.loadbalancer.passHostHeader=true 
-        - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
-        - traefik.http.routers.woofedcrm${1:+_$1}.middlewares=sslheader
-
-## --------------------------- ORION --------------------------- ##
-
-  woofedcrm${1:+_$1}_sidekiq:
-    image: douglara/woofedcrm:latest
-    command: bundle exec sidekiq -C config/sidekiq.yml
-
-    volumes:
-      - woofedcrm${1:+_$1}_data:/app/storage
-
-    networks:
-      - $nome_rede_interna
-
-    environment:
-    ## 🌐 Url WoofedCRM
-      - FRONTEND_URL=https://$url_woofed
-      - SECRET_KEY_BASE=$encryption_key_woofed
-
-    ## 🗣️ Idioma
-      - LANGUAGE=pt-BR
-
-    ## 🚫✅ Permitir/Bloquear novas Inscrições
-      - ENABLE_USER_SIGNUP=true
-
-    ## 🔑 Credenciais Motor
-      - MOTOR_AUTH_USERNAME=$email_admin_woofed
-      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
-
-    ## 🔗 Endpoints Evolution API
-      $EVOLUTION_API_ENDPOINT ## BaseUrl
-      $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
-
-    ## 🕒 Timezone
-      - DEFAULT_TIMEZONE=Brasilia
-
-    ## 🤖 Dados OpenAI
-      #- OPENAI_API_KEY=
-
-    ## 🧠 Dados PgVector
-      - DATABASE_URL=postgres://postgres:$senha_pgvector@pgvector:5432/woofedcrm${1:+_$1}
-
-    ## 🔁 Dados Redis
-      - REDIS_URL=redis://redis:6379/0
-
-    ## 💾 Dados Storage
-      - ACTIVE_STORAGE_SERVICE=local
-
-    ## 🚀 Modo de Produção
-      - RAILS_ENV=production
-      - RACK_ENV=production
-      - NODE_ENV=production
-      - RAILS_LOG_LEVEL=debug
-      
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1024M
-
-## --------------------------- ORION --------------------------- ##
-
-  woofedcrm${1:+_$1}_job:
-    image: douglara/woofedcrm:latest
-    command: bundle exec good_job
-
-    volumes:
-      - woofedcrm${1:+_$1}_data:/app/storage
-
-    networks:
-      - $nome_rede_interna
-
-    environment:
-    ## 🌐 Url WoofedCRM
-      - FRONTEND_URL=https://$url_woofed
-      - SECRET_KEY_BASE=$encryption_key_woofed
-
-    ## 🗣️ Idioma
-      - LANGUAGE=pt-BR
-
-    ## 🚫✅ Permitir/Bloquear novas Inscrições
-      - ENABLE_USER_SIGNUP=true
-
-    ## 🔑 Credenciais Motor
-      - MOTOR_AUTH_USERNAME=$email_admin_woofed
-      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
-
-    ## 🔗 Endpoints Evolution API
-      $EVOLUTION_API_ENDPOINT ## BaseUrl
-      $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key
-
-    ## 🕒 Timezone
-      - DEFAULT_TIMEZONE=Brasilia
-
-    ## 🤖 Dados OpenAI
-      #- OPENAI_API_KEY=
-
-    ## 🧠 Dados PgVector
-      - DATABASE_URL=postgres://postgres:$senha_pgvector@pgvector:5432/woofedcrm${1:+_$1}
-
-    ## 🔁 Dados Redis
-      - REDIS_URL=redis://redis:6379/0
-
-    ## 💾 Dados Storage
-      - ACTIVE_STORAGE_SERVICE=local
-
-    ## 🚀 Modo de Produção
-      - RAILS_ENV=production
-      - RACK_ENV=production
-      - NODE_ENV=production
-      - RAILS_LOG_LEVEL=debug
-
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.role == manager
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1024M
-
-## --------------------------- ORION --------------------------- ##
-
-  woofedcrm${1:+_$1}_redis:
-    image: redis:latest  ## Versão do Redis
-    command: [
-        "redis-server",
-        "--appendonly",
-        "yes",
-        "--port",
-        "6379"
-      ]
-
-    volumes:
-      - woofedcrm${1:+_$1}_redis:/data
+      - woofedcrm${1:+_$1}_storage_data:/app/storage
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
-    ## Descomente as linhas abaixo para uso externo
-    #ports:
-    #  - 6379:6379
+    environment: &woofed_env
+    ## 🐘 Dados do Postgres (o Rails cria woofed_crm_production e woofed_ai_production)
+      - DATABASE_URL=postgres://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/
+      - AI_AGENT_DATABASE_URL=postgres://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/
+
+    ## 🧠 Redis
+      - REDIS_URL=redis://woofedcrm${1:+_$1}_redis:6379/0
+
+    ## ⚙️ Configurações gerais
+      - RAILS_ENV=production
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_LOG_TO_STDOUT=true
+      - RAILS_MAX_THREADS=5
+      - PORT=80
+      - FRONTEND_URL=https://$url_woofed
+      - FORCE_SSL=false
+      - LANGUAGE=pt-BR
+      - DEFAULT_TIMEZONE=Brasilia
+      - TZ=America/Sao_Paulo
+      - ENABLE_USER_SIGNUP=false
+      - GOOD_JOB_EXECUTION_MODE=external
+
+    ## 🔐 Encryption Key
+      - SECRET_KEY_BASE=$encryption_key_woofed
+
+    ## 🤖 Agente de IA
+      - WOOFED_AI_DATABASE_URL=postgresql+psycopg://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/woofed_ai_production
+      - WOOFED_AI_URL=http://woofedcrm${1:+_$1}_agent:7777
+      - OS_SECURITY_KEY=$os_security_key_woofed
+
+    ## 🛠️ Painéis /good_job e /sidekiq
+      - MOTOR_AUTH_USERNAME=$email_admin_woofed
+      - MOTOR_AUTH_PASSWORD=$senha_email_woofed
+
+    ## 🔌 Integrações (opcional)
+      #- OPENAI_API_KEY=
+      $EVOLUTION_API_ENDPOINT ## BaseUrl Evolution API
+      $EVOLUTION_API_ENDPOINT_TOKEN ## Global Api Key Evolution API
+      #- VAPID_PUBLIC_KEY=
+      #- VAPID_PRIVATE_KEY=
+
+    ## 📧 Dados do SMTP (opcional)
+      #- SMTP_ADDRESS=
+      #- SMTP_PORT=587
+      #- SMTP_DOMAIN=
+      #- SMTP_USERNAME=
+      #- SMTP_PASSWORD=
+      #- SMTP_AUTHENTICATION=plain
+      #- SMTP_ENABLE_STARTTLS_AUTO=true
+      #- MAILER_SENDER_EMAIL=WoofedCRM <email@dominio.com>
+
+    ## ☁️ Storage S3 (opcional - sem isso os uploads ficam no volume woofedcrm${1:+_$1}_storage_data)
+      #- ACTIVE_STORAGE_SERVICE=amazon
+      #- S3_BUCKET_NAME=
+      #- AWS_ACCESS_KEY_ID=
+      #- AWS_SECRET_ACCESS_KEY=
+      #- AWS_REGION=
 
     deploy:
+      mode: replicated
+      replicas: 1 ## Não escalar: o db:migrate roda no boot e o storage é em disco
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        order: stop-first
+        failure_action: rollback
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1536M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.woofedcrm${1:+_$1}.rule=Host(\`$url_woofed\`) ## Url da aplicação
+        - traefik.http.services.woofedcrm${1:+_$1}.loadbalancer.server.port=80
+        - traefik.http.routers.woofedcrm${1:+_$1}.service=woofedcrm${1:+_$1}
+        - traefik.http.routers.woofedcrm${1:+_$1}.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.woofedcrm${1:+_$1}.entrypoints=websecure
+        - traefik.http.routers.woofedcrm${1:+_$1}.tls=true
+
+## --------------------------- ORION --------------------------- ##
+
+  woofedcrm${1:+_$1}_sidekiq:
+    image: douglara/woofedcrm:latest ## Mesma versão da aplicação
+    command: bundle exec sidekiq -C config/sidekiq.yml
+
+    volumes:
+      - woofedcrm${1:+_$1}_storage_data:/app/storage
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment: *woofed_env ## Mesmas variáveis do woofedcrm${1:+_$1}_app
+
+    deploy:
+      mode: replicated
+      replicas: 1
       placement:
         constraints:
           - node.role == manager
@@ -13193,18 +13071,133 @@ services:
 
 ## --------------------------- ORION --------------------------- ##
 
-volumes:
-  woofedcrm${1:+_$1}_data:
-    external: true
-    name: woofedcrm${1:+_$1}_data
+  woofedcrm${1:+_$1}_goodjob:
+    image: douglara/woofedcrm:latest ## Mesma versão da aplicação
+    command: bundle exec good_job
+
+    volumes:
+      - woofedcrm${1:+_$1}_storage_data:/app/storage
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment: *woofed_env ## Mesmas variáveis do woofedcrm${1:+_$1}_app
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+  woofedcrm${1:+_$1}_agent:
+    image: douglara/woofedcrm:latest ## Mesma versão da aplicação
+    command: sh -c "cd /app/ai-agent && uv run main.py"
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+    ## 🌐 Chama o CRM em FRONTEND_URL/mcp
+      - FRONTEND_URL=https://$url_woofed
+
+    ## 🐘 Dados do Postgres
+      - WOOFED_AI_DATABASE_URL=postgresql+psycopg://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/woofed_ai_production
+
+    ## 🔐 Token de acesso à API do agente
+      - OS_SECURITY_KEY=$os_security_key_woofed
+
+    ## ⚙️ Configurações gerais
+      - TZ=America/Sao_Paulo
+      - PYTHONUNBUFFERED=1
+      - UV_NO_SYNC=1
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+  woofedcrm${1:+_$1}_postgres:
+    image: pgvector/pgvector:pg16 ## Postgres 16 com pgvector
+
+    volumes:
+      - woofedcrm${1:+_$1}_postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+    ## 🐘 Dados do Postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=$senha_postgres_woofed
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - TZ=America/Sao_Paulo
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
   woofedcrm${1:+_$1}_redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+
+    volumes:
+      - woofedcrm${1:+_$1}_redis_data:/data
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+
+## --------------------------- ORION --------------------------- ##
+
+volumes:
+  woofedcrm${1:+_$1}_postgres_data:
     external: true
-    name: woofedcrm${1:+_$1}_redis
+    name: woofedcrm${1:+_$1}_postgres_data
+  woofedcrm${1:+_$1}_redis_data:
+    external: true
+    name: woofedcrm${1:+_$1}_redis_data
+  woofedcrm${1:+_$1}_storage_data:
+    external: true
+    name: woofedcrm${1:+_$1}_storage_data
 
 networks:
-  $nome_rede_interna:
+  $nome_rede_interna: ## Nome da rede interna
+    name: $nome_rede_interna ## Nome da rede interna
     external: true
-    name: $nome_rede_interna
 EOL
 if [ $? -eq 0 ]; then
     echo "1/10 - [ OK ] - Criando Stack"
@@ -13223,69 +13216,24 @@ stack_editavel # > /dev/null 2>&1
 #fi
 
 ## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[4/6]\e[0m"
+echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[3/4]\e[0m"
 wait_30_sec
 echo ""
 sleep 1
 
 ## Baixando imagens:
-pull douglara/woofedcrm:latest
+pull douglara/woofedcrm:latest pgvector/pgvector:pg16 redis:7-alpine
 
 ## Usa o serviço wait_stack "woofedcrm" para verificar se o serviço esta online
-wait_stack woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_web woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_sidekiq woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_job
+## (o db:migrate roda no boot do app, por isso não existe mais passo manual de migração)
+wait_stack woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_app woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_sidekiq woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_goodjob woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_agent woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_postgres woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_redis
 
 telemetria WoofedCRM finalizado
 
-
 ## Mensagem de Passo
-echo -e "\e[97m• CONFIGURANDO E MIGRANDO BANCO DE DADOS \e[33m[5/6]\e[0m"
+echo -e "\e[97m• FINALIZANDO A INSTALAÇÃO \e[33m[4/4]\e[0m"
 echo ""
 sleep 1
-
-#MIGRANDO BANCO DE DADOS DO WOOFED CRM
-container_name="woofedcrm${1:+_$1}_web"
-
-max_wait_time=1200
-
-wait_interval=60
-
-elapsed_time=0
-
-while [ $elapsed_time -lt $max_wait_time ]; do
-  CONTAINER_ID=$(docker ps -q --filter "name=$container_name")
-  if [ -n "$CONTAINER_ID" ]; then
-    break
-  fi
-  sleep $wait_interval
-  elapsed_time=$((elapsed_time + wait_interval))
-done
-
-if [ -z "$CONTAINER_ID" ]; then
-  echo "O contêiner não foi encontrado após $max_wait_time segundos."
-  exit 1
-fi
-
-docker exec -it "$CONTAINER_ID" bundle exec rails db:create > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo "1/2 - [ OK ] - Executando: bundle exec rails db:create"
-else
-    echo "1/2- [ OFF ] - Executando: bundle exec rails db:create"
-fi
-docker exec -it "$CONTAINER_ID" bundle exec rails db:migrate > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  echo "2/2 - [ OK ] - Executando: bundle exec rails db:migrate"
-else
-    echo "2/2- [ OFF ] - Executando: bundle exec rails db:migrate"
-fi
-echo ""
-
-## Mensagem de Passo
-echo -e "\e[97m• VERIFICANDO SERVIÇO \e[33m[6/6]\e[0m"
-echo ""
-sleep 1
-
-## Usa o serviço wait_stack "woofedcrm" para verificar se o serviço esta online
-wait_stack woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_web woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_sidekiq woofedcrm${1:+_$1}_woofedcrm${1:+_$1}_job
 
 cd dados_vps
 
@@ -13298,11 +13246,19 @@ Email: Precisa criar dentro do WoofedCRM
 
 Senha: Precisa criar dentro do WoofedCRM
 
-Acesso ao Motor: https://$url_woofed/motor_admin
+Painel GoodJob: https://$url_woofed/good_job
 
-Usuario do Motor: $email_admin_woofed
+Painel Sidekiq: https://$url_woofed/sidekiq
 
-Senha do Motor: $senha_email_woofed
+Usuario dos Paineis: $email_admin_woofed
+
+Senha dos Paineis: $senha_email_woofed
+
+Senha do Postgres: $senha_postgres_woofed
+
+SECRET_KEY_BASE (nao troque depois do 1o deploy): $encryption_key_woofed
+
+OS_SECURITY_KEY: $os_security_key_woofed
 EOL
 
 cd
@@ -13330,13 +13286,16 @@ echo ""
 echo -e "\e[97mSenha:\e[33m Precisa criar dentro do WoofedCRM\e[0m"
 echo ""
 
-echo -e "\e[97mURL MOTOR:\e[33m https://$url_woofed/motor_admin\e[0m"
+echo -e "\e[97mPainel GoodJob:\e[33m https://$url_woofed/good_job\e[0m"
 echo ""
 
-echo -e "\e[97mUser MOTOR:\e[33m $email_admin_woofed\e[0m"
+echo -e "\e[97mPainel Sidekiq:\e[33m https://$url_woofed/sidekiq\e[0m"
 echo ""
 
-echo -e "\e[97mSenha MOTOR:\e[33m $senha_email_woofed\e[0m"
+echo -e "\e[97mUser Paineis:\e[33m $email_admin_woofed\e[0m"
+echo ""
+
+echo -e "\e[97mSenha Paineis:\e[33m $senha_email_woofed\e[0m"
 
 ## Creditos do instalador
 creditos_msg
