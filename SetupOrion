@@ -12927,6 +12927,9 @@ os_security_key_woofed=$(openssl rand -hex 32)
 ## Criando a senha do Postgres (somente letras e números, pois vai dentro de URLs)
 senha_postgres_woofed=$(openssl rand -hex 16)
 
+## Prefixo dos hostnames internos (alias sem "_", pois o Ruby rejeita "_" em URL)
+host_woofed="woofedcrm${1:+-${1//_/-}}"
+
 ## Procura o arquivo da stack da Evolution API (v2, lite ou v1) para reaproveitar URL e API Key
 arquivo_evolution=""
 for arq in /root/evolution.yaml /root/evolution_v2.yaml /root/evolution_lite.yaml /root/evolution_v1.yaml; do
@@ -12964,11 +12967,11 @@ services:
 
     environment: &woofed_env
     ## 🐘 Dados do Postgres (o Rails cria woofed_crm_production e woofed_ai_production)
-      - DATABASE_URL=postgres://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/
-      - AI_AGENT_DATABASE_URL=postgres://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/
+      - DATABASE_URL=postgres://postgres:$senha_postgres_woofed@${host_woofed}-postgres:5432/
+      - AI_AGENT_DATABASE_URL=postgres://postgres:$senha_postgres_woofed@${host_woofed}-postgres:5432/
 
     ## 🧠 Redis
-      - REDIS_URL=redis://woofedcrm${1:+_$1}_redis:6379/0
+      - REDIS_URL=redis://${host_woofed}-redis:6379/0
 
     ## ⚙️ Configurações gerais
       - RAILS_ENV=production
@@ -12988,8 +12991,8 @@ services:
       - SECRET_KEY_BASE=$encryption_key_woofed
 
     ## 🤖 Agente de IA
-      - WOOFED_AI_DATABASE_URL=postgresql+psycopg://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/woofed_ai_production
-      - WOOFED_AI_URL=http://woofedcrm${1:+_$1}_agent:7777
+      - WOOFED_AI_DATABASE_URL=postgresql+psycopg://postgres:$senha_postgres_woofed@${host_woofed}-postgres:5432/woofed_ai_production
+      - WOOFED_AI_URL=http://${host_woofed}-agent:7777
       - OS_SECURITY_KEY=$os_security_key_woofed
 
     ## 🛠️ Painéis /good_job e /sidekiq
@@ -13096,17 +13099,19 @@ services:
 
   woofedcrm${1:+_$1}_agent:
     image: douglara/woofedcrm:latest ## Mesma versão da aplicação
-    command: sh -c "cd /app/ai-agent && uv run main.py"
+    command: sh -c "cd /app/ai-agent && uv run uvicorn main:app --host 0.0.0.0 --port 7777" ## main.py serve() escuta só em localhost
 
     networks:
-      - $nome_rede_interna ## Nome da rede interna
+      $nome_rede_interna: ## Nome da rede interna
+        aliases:
+          - ${host_woofed}-agent ## Hostname sem "_" (o Ruby rejeita "_" em URL)
 
     environment:
     ## 🌐 Chama o CRM em FRONTEND_URL/mcp
       - FRONTEND_URL=https://$url_woofed
 
     ## 🐘 Dados do Postgres
-      - WOOFED_AI_DATABASE_URL=postgresql+psycopg://postgres:$senha_postgres_woofed@woofedcrm${1:+_$1}_postgres:5432/woofed_ai_production
+      - WOOFED_AI_DATABASE_URL=postgresql+psycopg://postgres:$senha_postgres_woofed@${host_woofed}-postgres:5432/woofed_ai_production
 
     ## 🔐 Token de acesso à API do agente
       - OS_SECURITY_KEY=$os_security_key_woofed
@@ -13136,7 +13141,9 @@ services:
       - woofedcrm${1:+_$1}_postgres_data:/var/lib/postgresql/data
 
     networks:
-      - $nome_rede_interna ## Nome da rede interna
+      $nome_rede_interna: ## Nome da rede interna
+        aliases:
+          - ${host_woofed}-postgres ## Hostname sem "_" (o Ruby rejeita "_" em URL)
 
     environment:
     ## 🐘 Dados do Postgres
@@ -13166,7 +13173,9 @@ services:
       - woofedcrm${1:+_$1}_redis_data:/data
 
     networks:
-      - $nome_rede_interna ## Nome da rede interna
+      $nome_rede_interna: ## Nome da rede interna
+        aliases:
+          - ${host_woofed}-redis ## Hostname sem "_" (o Ruby rejeita "_" em URL)
 
     deploy:
       mode: replicated
