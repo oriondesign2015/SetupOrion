@@ -2392,17 +2392,15 @@ recursos() {
     ram_requerido=$2
 
     # Obtendo a quantidade de vCPUs e GB de RAM disponíveis
-    if command -v neofetch >/dev/null 2>&1; then
-        # Debian 11
-        vcpu_disponivel=$(neofetch --stdout | grep "CPU" | grep -oP '\(\d+\)' | tr -d '()')
-        ram_disponivel=$(neofetch --stdout | grep "Memory" | awk '{print $4}' | tr -d 'MiB' | awk '{print int($1/1024 + 0.5)}')
-    elif command -v fastfetch >/dev/null 2>&1; then
-        # Debian 13 (usa saída JSON do fastfetch)
-        vcpu_disponivel=$(fastfetch --json | jq '.cpu.cores')
-        ram_disponivel=$(fastfetch --json | jq '.memory.total / 1024 / 1024' | awk '{print int($1+0.5)}')
-    else
-        echo "Erro: nem neofetch nem fastfetch encontrados. Instale um deles para continuar."
-        return 1
+    # Lê direto do sistema (funciona em qualquer Debian/Ubuntu, sem depender de neofetch/fastfetch,
+    # que foram removidos/mudaram de formato no Debian 13 e Ubuntu 25.10+)
+    vcpu_disponivel=$(nproc 2>/dev/null || grep -c '^processor' /proc/cpuinfo)
+    ram_disponivel=$(awk '/^MemTotal:/ {print int($2/1024/1024 + 0.5)}' /proc/meminfo)
+
+    # Se não conseguiu ler os recursos, não bloqueia a instalação
+    if ! [[ "$vcpu_disponivel" =~ ^[0-9]+$ && "$ram_disponivel" =~ ^[0-9]+$ ]]; then
+        clear
+        return 0
     fi
 
     # Comparando os recursos
