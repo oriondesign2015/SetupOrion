@@ -46,9 +46,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Traefik</b></td>
@@ -131,9 +131,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>MongoDB</b></td>
@@ -216,9 +216,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Chatwoot</b></td>
@@ -281,9 +281,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Woofed CRM</b></td>
@@ -346,9 +346,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>N8N</b></td>
@@ -431,9 +431,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Appsmith</b></td>
@@ -466,9 +466,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Mattermost</b></td>
@@ -556,9 +556,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Docuseal</b></td>
@@ -596,9 +596,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>VaultWarden</b></td>
@@ -626,9 +626,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Yourls</b></td>
@@ -663,9 +663,9 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="22%" align="left">Ferramenta</th>
-    <th width="68%" align="left">Descrição</th>
-    <th width="10%" align="center">Link</th>
+    <th width="190" align="left">Ferramenta</th>
+    <th width="570" align="left">Descrição</th>
+    <th width="70" align="center">Link</th>
   </tr>
   <tr>
     <td><b>Postgres</b><br><code>postgres</code></td>
@@ -725,8 +725,8 @@ bash <(curl -sSL get.setuporion.sh)
 
 <table width="100%">
   <tr>
-    <th width="30%" align="left">Comando</th>
-    <th width="70%" align="left">Descrição</th>
+    <th width="250" align="left">Comando</th>
+    <th width="580" align="left">Descrição</th>
   </tr>
   <tr>
     <td><code>portainer.restart</code></td>
