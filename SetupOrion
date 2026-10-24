@@ -4074,7 +4074,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   traefik:
-    image: traefik:v3.5.3
+    image: traefik:v3.7.16
     command:
       - "--api.dashboard=true"
       - "--providers.swarm=true"
@@ -4091,11 +4091,13 @@ services:
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
-      - "--log.level=DEBUG"
+      - "--log.level=INFO"
       - "--log.format=common"
       - "--log.filePath=/var/log/traefik/traefik.log"
       - "--accesslog=true"
       - "--accesslog.filepath=/var/log/traefik/access-log"
+      - "--entrypoints.web.http.aliasHeadersStrategy=delete"
+      - "--entrypoints.websecure.http.aliasHeadersStrategy=delete"
 
     volumes:
       - "vol_certificates:/etc/traefik/letsencrypt"
@@ -4163,9 +4165,9 @@ echo ""
 sleep 1
 
 ## Em teste contra Rate Limit do Docker Hub
-pull ghcr.io/traefik/traefik:v3.5.3
+pull ghcr.io/traefik/traefik:v3.7.16
 
-docker tag ghcr.io/traefik/traefik:v3.5.3 traefik/traefik:v3.5.3
+docker tag ghcr.io/traefik/traefik:v3.7.16 traefik/traefik:v3.7.16
 
 ## Usa o serviço wait_stack "traefik" para verificar se o serviço esta online
 wait_stack "traefik"
@@ -43467,7 +43469,7 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   traefik:
-    image: traefik:v3.5.3
+    image: traefik:v3.7.16
     command:
       - "--api.dashboard=true"
       - "--providers.swarm=true"
@@ -43484,11 +43486,13 @@ services:
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
-      - "--log.level=DEBUG"
+      - "--log.level=INFO"
       - "--log.format=common"
       - "--log.filePath=/var/log/traefik/traefik.log"
       - "--accesslog=true"
       - "--accesslog.filepath=/var/log/traefik/access-log"
+      - "--entrypoints.web.http.aliasHeadersStrategy=delete"
+      - "--entrypoints.websecure.http.aliasHeadersStrategy=delete"
 
     volumes:
       - "vol_certificates:/etc/traefik/letsencrypt"
@@ -43651,7 +43655,7 @@ services:
   ## --------------------------- ORION --------------------------- ##
 
   traefik:
-    image: traefik:v3.5.3
+    image: traefik:v3.7.16
     command:
       - "--api.dashboard=true"
       - "--providers.swarm=true"
@@ -43669,11 +43673,13 @@ services:
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
-      - "--log.level=DEBUG"
+      - "--log.level=INFO"
       - "--log.format=common"
       - "--log.filePath=/var/log/traefik/traefik.log"
       - "--accesslog=true"
       - "--accesslog.filepath=/var/log/traefik/access-log"
+      - "--entrypoints.web.http.aliasHeadersStrategy=delete"
+      - "--entrypoints.websecure.http.aliasHeadersStrategy=delete"
 
     volumes:
       - "vol_certificates:/etc/traefik/letsencrypt"
