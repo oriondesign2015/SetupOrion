@@ -8697,6 +8697,77 @@ sleep 1
 ## Criando key Aleatória
 encryption_key=$(openssl rand -hex 16)
 
+## Criando token de autenticação dos Task Runners
+runners_auth_token=$(openssl rand -hex 32)
+
+## Criando o arquivo de configuração dos Task Runners
+cat > n8n${1:+_$1}-task-runners.json <<'EOL'
+{
+  "task-runners": [
+    {
+      "runner-type": "javascript",
+      "workdir": "/home/runner",
+      "command": "/usr/local/bin/node",
+      "args": [
+        "--disallow-code-generation-from-strings",
+        "--disable-proto=delete",
+        "--no-experimental-webstorage",
+        "/opt/runners/task-runner-javascript/dist/start.js"
+      ],
+      "health-check-server-port": "5681",
+      "allowed-env": [
+        "PATH",
+        "GENERIC_TIMEZONE",
+        "NODE_OPTIONS",
+        "NODE_PATH",
+        "N8N_RUNNERS_AUTO_SHUTDOWN_TIMEOUT",
+        "N8N_RUNNERS_GRACEFUL_SHUTDOWN_TIMEOUT",
+        "N8N_RUNNERS_SHUTDOWN_FORCE_KILL_MARGIN",
+        "N8N_RUNNERS_TASK_TIMEOUT",
+        "N8N_RUNNERS_MAX_CONCURRENCY",
+        "N8N_SENTRY_DSN",
+        "N8N_VERSION",
+        "ENVIRONMENT",
+        "DEPLOYMENT_NAME",
+        "HOME"
+      ],
+      "env-overrides": {
+        "NODE_FUNCTION_ALLOW_BUILTIN": "crypto",
+        "NODE_FUNCTION_ALLOW_EXTERNAL": "moment",
+        "N8N_RUNNERS_HEALTH_CHECK_SERVER_HOST": "0.0.0.0"
+      }
+    },
+    {
+      "runner-type": "python",
+      "workdir": "/home/runner",
+      "command": "/opt/runners/task-runner-python/.venv/bin/python",
+      "args": ["-I", "-B", "-X", "disable_remote_debug", "-m", "src.main"],
+      "health-check-server-port": "5682",
+      "allowed-env": [
+        "PATH",
+        "N8N_RUNNERS_LAUNCHER_LOG_LEVEL",
+        "N8N_RUNNERS_AUTO_SHUTDOWN_TIMEOUT",
+        "N8N_RUNNERS_GRACEFUL_SHUTDOWN_TIMEOUT",
+        "N8N_RUNNERS_TASK_TIMEOUT",
+        "N8N_RUNNERS_MAX_CONCURRENCY",
+        "N8N_SENTRY_DSN",
+        "N8N_VERSION",
+        "ENVIRONMENT",
+        "DEPLOYMENT_NAME"
+      ],
+      "env-overrides": {
+        "N8N_RUNNERS_STDLIB_ALLOW": "",
+        "N8N_RUNNERS_EXTERNAL_ALLOW": ""
+      }
+    }
+  ]
+}
+EOL
+
+## Cria o docker config dos Task Runners (o deploy via Portainer envia só o yaml, então o config precisa existir antes)
+docker config rm n8n${1:+_$1}_runners_config_v1 > /dev/null 2>&1
+docker config create n8n${1:+_$1}_runners_config_v1 n8n${1:+_$1}-task-runners.json > /dev/null 2>&1
+
 ## Criando a stack n8n.yaml
 cat > n8n${1:+_$1}.yaml <<EOL
 version: "3.7"
@@ -8713,7 +8784,6 @@ services:
 
     environment:
     ## 🗄️ Banco de Dados (PostgreSQL)
-      - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -8724,15 +8794,12 @@ services:
     ## 🔐 Criptografia
       - N8N_ENCRYPTION_KEY=$encryption_key
 
-      ## 🌐 URLs e Configurações de Acesso
+    ## 🌐 URLs e Configurações de Acesso
       - N8N_HOST=$url_editorn8n
-      - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
-      - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
+      - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
+      - N8N_WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROXY_HOPS=1
-      - N8N_ONBOARDING_FLOW_DISABLED=true
-      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
-      - N8N_SKIP_AUTH_ON_OAUTH_CALLBACK=false
 
     ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
@@ -8740,18 +8807,20 @@ services:
       - EXECUTIONS_TIMEOUT=3600
       - EXECUTIONS_TIMEOUT_MAX=7200
       - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
-      - N8N_RUNNERS_ENABLED=true
-      - N8N_RUNNERS_MODE=internal
-      - N8N_RESTRICT_FILE_ACCESS_TO="~/.n8n-files"
-      - NODES_EXCLUDE="[]"
+      - N8N_DISABLE_PRODUCTION_MAIN_PROCESS=true
+      - N8N_RUNNERS_MODE=external
+      - N8N_RUNNERS_TASK_TIMEOUT=300
+      - N8N_GRACEFUL_SHUTDOWN_TIMEOUT=120
+      - NODES_EXCLUDE=[]
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
 
     ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
-      - N8N_NODE_PATH=/home/node/.n8n/nodes
+      - N8N_UNVERIFIED_PACKAGES_ENABLED=true
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
-    ## 📧 SMTP (Envio de E-mails)
+    ## 📧 SMTP (Envio de E-mails) - somente o editor envia e-mails
       - N8N_SMTP_SENDER=$email_smtp_n8n
       - N8N_SMTP_USER=$usuario_smtp_n8n
       - N8N_SMTP_PASS=$senha_smtp_n8n
@@ -8764,7 +8833,7 @@ services:
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=1
 
-    ## 📊 Métricas
+    ## 📊 Métricas (/metrics bloqueado no Traefik)
       - N8N_METRICS=true
 
     ## ⏱️ Execuções e Limpeza
@@ -8773,17 +8842,10 @@ services:
 
     ## 🧠 Recursos de IA
       - N8N_AI_ENABLED=false
-      - N8N_AI_PROVIDER=openai
-      - N8N_AI_OPENAI_API_KEY=
-
-    ## 🧰 Permissões em Funções Personalizadas
-      - NODE_FUNCTION_ALLOW_BUILTIN=*
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
 
     ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
-      #- N8N_DEFAULT_LOCALE=pt-BR
 
     deploy:
       mode: replicated
@@ -8797,11 +8859,16 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.n8n${1:+_$1}_editor.rule=Host(\`$url_editorn8n\`) ## Url do Editor do N8N
+        - traefik.http.routers.n8n${1:+_$1}_editor.rule=Host(\`$url_editorn8n\`) && !PathPrefix(\`/metrics\`) ## Url do Editor do N8N
         - traefik.http.routers.n8n${1:+_$1}_editor.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_editor.priority=10
         - traefik.http.routers.n8n${1:+_$1}_editor.tls.certresolver=letsencryptresolver
         - traefik.http.routers.n8n${1:+_$1}_editor.service=n8n${1:+_$1}_editor
+        - traefik.http.routers.n8n${1:+_$1}_webhook_test.rule=Host(\`$url_webhookn8n\`) && (PathPrefix(\`/webhook-test\`) || PathPrefix(\`/form-test\`) || PathPrefix(\`/mcp-test\`))
+        - traefik.http.routers.n8n${1:+_$1}_webhook_test.entrypoints=websecure
+        - traefik.http.routers.n8n${1:+_$1}_webhook_test.priority=20
+        - traefik.http.routers.n8n${1:+_$1}_webhook_test.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.n8n${1:+_$1}_webhook_test.service=n8n${1:+_$1}_editor
         - traefik.http.services.n8n${1:+_$1}_editor.loadbalancer.server.port=5678
         - traefik.http.services.n8n${1:+_$1}_editor.loadbalancer.passHostHeader=1
 
@@ -8816,7 +8883,6 @@ services:
 
     environment:
     ## 🗄️ Banco de Dados (PostgreSQL)
-      - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -8827,15 +8893,12 @@ services:
     ## 🔐 Criptografia
       - N8N_ENCRYPTION_KEY=$encryption_key
 
-      ## 🌐 URLs e Configurações de Acesso
+    ## 🌐 URLs e Configurações de Acesso
       - N8N_HOST=$url_editorn8n
-      - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
-      - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
+      - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
+      - N8N_WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROXY_HOPS=1
-      - N8N_ONBOARDING_FLOW_DISABLED=true
-      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
-      - N8N_SKIP_AUTH_ON_OAUTH_CALLBACK=false
 
     ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
@@ -8843,31 +8906,24 @@ services:
       - EXECUTIONS_TIMEOUT=3600
       - EXECUTIONS_TIMEOUT_MAX=7200
       - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
-      - N8N_RUNNERS_ENABLED=true
-      - N8N_RUNNERS_MODE=internal
-      - N8N_RESTRICT_FILE_ACCESS_TO="~/.n8n-files"
-      - NODES_EXCLUDE="[]"
+      - N8N_RUNNERS_MODE=external
+      - N8N_RUNNERS_TASK_TIMEOUT=300
+      - N8N_GRACEFUL_SHUTDOWN_TIMEOUT=120
+      - NODES_EXCLUDE=[]
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
 
     ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
-      - N8N_NODE_PATH=/home/node/.n8n/nodes
+      - N8N_UNVERIFIED_PACKAGES_ENABLED=true
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-
-    ## 📧 SMTP (Envio de E-mails)
-      - N8N_SMTP_SENDER=$email_smtp_n8n
-      - N8N_SMTP_USER=$usuario_smtp_n8n
-      - N8N_SMTP_PASS=$senha_smtp_n8n
-      - N8N_SMTP_HOST=$host_smtp_n8n
-      - N8N_SMTP_PORT=$porta_smtp_n8n
-      - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
     ## 🔁 Redis (Fila de Execução)
       - QUEUE_BULL_REDIS_HOST=n8n${1:+_$1}_redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=1
 
-    ## 📊 Métricas
+    ## 📊 Métricas (/metrics bloqueado no Traefik)
       - N8N_METRICS=true
 
     ## ⏱️ Execuções e Limpeza
@@ -8876,18 +8932,11 @@ services:
 
     ## 🧠 Recursos de IA
       - N8N_AI_ENABLED=false
-      - N8N_AI_PROVIDER=openai
-      - N8N_AI_OPENAI_API_KEY=
-
-    ## 🧰 Permissões em Funções Personalizadas
-      - NODE_FUNCTION_ALLOW_BUILTIN=*
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
 
     ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
-      #- N8N_DEFAULT_LOCALE=pt-BR
-      
+
     deploy:
       mode: replicated
       replicas: 1
@@ -8900,7 +8949,7 @@ services:
           memory: 1024M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=Host(\`$url_webhookn8n\`) ## Url do Webhook do N8N
+        - traefik.http.routers.n8n${1:+_$1}_webhook.rule=Host(\`$url_webhookn8n\`) && !PathPrefix(\`/metrics\`) ## Url do Webhook do N8N
         - traefik.http.routers.n8n${1:+_$1}_webhook.entrypoints=websecure
         - traefik.http.routers.n8n${1:+_$1}_webhook.priority=5
         - traefik.http.routers.n8n${1:+_$1}_webhook.tls.certresolver=letsencryptresolver
@@ -8919,7 +8968,6 @@ services:
 
     environment:
     ## 🗄️ Banco de Dados (PostgreSQL)
-      - N8N_FIX_MIGRATIONS=true 
       - DB_TYPE=postgresdb
       - DB_POSTGRESDB_DATABASE=n8n_queue${1:+_$1}
       - DB_POSTGRESDB_HOST=postgres
@@ -8930,15 +8978,12 @@ services:
     ## 🔐 Criptografia
       - N8N_ENCRYPTION_KEY=$encryption_key
 
-      ## 🌐 URLs e Configurações de Acesso
+    ## 🌐 URLs e Configurações de Acesso
       - N8N_HOST=$url_editorn8n
-      - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
-      - WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROTOCOL=https
+      - N8N_EDITOR_BASE_URL=https://$url_editorn8n/
+      - N8N_WEBHOOK_URL=https://$url_webhookn8n/
       - N8N_PROXY_HOPS=1
-      - N8N_ONBOARDING_FLOW_DISABLED=true
-      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
-      - N8N_SKIP_AUTH_ON_OAUTH_CALLBACK=false
 
     ## ⚙️ Ambiente de Execução
       - NODE_ENV=production
@@ -8946,29 +8991,26 @@ services:
       - EXECUTIONS_TIMEOUT=3600
       - EXECUTIONS_TIMEOUT_MAX=7200
       - OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS=true
-      - N8N_RUNNERS_ENABLED=true
-      - N8N_RUNNERS_MODE=internal
-      - N8N_RESTRICT_FILE_ACCESS_TO="~/.n8n-files"
-      - NODES_EXCLUDE="[]"
+      - N8N_RUNNERS_MODE=external
+      - N8N_RUNNERS_TASK_TIMEOUT=300
+      - N8N_GRACEFUL_SHUTDOWN_TIMEOUT=120
+      - NODES_EXCLUDE=[]
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
 
     ## 📦 Pacotes e Nós Comunitários
       - N8N_REINSTALL_MISSING_PACKAGES=true
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
-      - N8N_NODE_PATH=/home/node/.n8n/nodes
+      - N8N_UNVERIFIED_PACKAGES_ENABLED=true
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
-
-    ## 📧 SMTP (Envio de E-mails)
-      - N8N_SMTP_SENDER=$email_smtp_n8n
-      - N8N_SMTP_USER=$usuario_smtp_n8n
-      - N8N_SMTP_PASS=$senha_smtp_n8n
-      - N8N_SMTP_HOST=$host_smtp_n8n
-      - N8N_SMTP_PORT=$porta_smtp_n8n
-      - N8N_SMTP_SSL=$smtp_secure_smtp_n8n
 
     ## 🔁 Redis (Fila de Execução)
       - QUEUE_BULL_REDIS_HOST=n8n${1:+_$1}_redis
       - QUEUE_BULL_REDIS_PORT=6379
       - QUEUE_BULL_REDIS_DB=1
+
+    ## 🏃 Task Runners externos
+      - N8N_RUNNERS_AUTH_TOKEN=$runners_auth_token
+      - N8N_RUNNERS_BROKER_LISTEN_ADDRESS=0.0.0.0
 
     ## 📊 Métricas
       - N8N_METRICS=true
@@ -8979,18 +9021,47 @@ services:
 
     ## 🧠 Recursos de IA
       - N8N_AI_ENABLED=false
-      - N8N_AI_PROVIDER=openai
-      - N8N_AI_OPENAI_API_KEY=
-
-    ## 🧰 Permissões em Funções Personalizadas
-      - NODE_FUNCTION_ALLOW_BUILTIN=*
-      - NODE_FUNCTION_ALLOW_EXTERNAL=moment,lodash
 
     ## 🕒 Fuso Horário
       - GENERIC_TIMEZONE=America/Sao_Paulo
       - TZ=America/Sao_Paulo
-      #- N8N_DEFAULT_LOCALE=pt-BR
-      
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
+
+## --------------------------- ORION --------------------------- ##
+
+  n8n${1:+_$1}_runner:
+    image: n8nio/runners:latest ## Versão do Runners (use a MESMA versão do N8N)
+
+    networks:
+      - $nome_rede_interna ## Nome da rede interna
+
+    environment:
+    ## 🔌 Conexão com o broker do worker
+      - N8N_RUNNERS_TASK_BROKER_URI=http://n8n${1:+_$1}_worker:5679
+      - N8N_RUNNERS_AUTH_TOKEN=$runners_auth_token
+
+    ## ⏱️ Execução
+      - N8N_RUNNERS_TASK_TIMEOUT=300
+      - N8N_RUNNERS_MAX_CONCURRENCY=10
+      - N8N_RUNNERS_AUTO_SHUTDOWN_TIMEOUT=15 ## Runner ocioso encerra e sobe sob demanda
+
+    ## 🕒 Fuso Horário
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+
+
+    configs:
+      - source: n8n${1:+_$1}_runners_config_v1
+        target: /etc/n8n-task-runners.json
     deploy:
       mode: replicated
       replicas: 1
@@ -9005,11 +9076,13 @@ services:
 ## --------------------------- ORION --------------------------- ##
 
   n8n${1:+_$1}_redis:
-    image: redis:latest  ## Versão do Redis
+    image: redis:7-alpine  ## Versão do Redis
     command: [
         "redis-server",
         "--appendonly",
         "yes",
+        "--maxmemory-policy",
+        "noeviction",
         "--port",
         "6379"
       ]
@@ -9019,6 +9092,12 @@ services:
 
     networks:
       - $nome_rede_interna ## Nome da rede interna
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
     ## Descomente as linhas abaixo para uso externo
     #ports:
@@ -9034,6 +9113,11 @@ services:
           memory: 1024M
 
 ## --------------------------- ORION --------------------------- ##
+
+configs:
+  n8n${1:+_$1}_runners_config_v1:
+    external: true ## Criado com docker config create antes do deploy
+    name: n8n${1:+_$1}_runners_config_v1
 
 volumes:
   n8n${1:+_$1}_redis:
@@ -9067,10 +9151,10 @@ echo ""
 sleep 1
 
 ## Baixando imagens:
-pull redis:latest n8nio/n8n:latest
+pull redis:7-alpine n8nio/n8n:latest n8nio/runners:latest
 
 ## Usa o serviço wait_n8n para verificar se o serviço esta online
-wait_stack n8n${1:+_$1}_n8n${1:+_$1}_redis n8n${1:+_$1}_n8n${1:+_$1}_editor n8n${1:+_$1}_n8n${1:+_$1}_webhook n8n${1:+_$1}_n8n${1:+_$1}_worker
+wait_stack n8n${1:+_$1}_n8n${1:+_$1}_redis n8n${1:+_$1}_n8n${1:+_$1}_editor n8n${1:+_$1}_n8n${1:+_$1}_webhook n8n${1:+_$1}_n8n${1:+_$1}_worker n8n${1:+_$1}_n8n${1:+_$1}_runner
 
 telemetria N8N finalizado
 
