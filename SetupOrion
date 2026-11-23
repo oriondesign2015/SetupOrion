@@ -4078,26 +4078,26 @@ services:
     command:
       - "--api.dashboard=true"
       - "--providers.swarm=true"
-      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=$nome_rede_interna" ## Nome da rede interna
+      - "--providers.swarm.endpoint=unix:///var/run/docker.sock"
+      - "--providers.swarm.exposedbydefault=false" ## Só expõe serviços com traefik.enable=true
+      - "--providers.swarm.network=$nome_rede_interna" ## Nome da rede interna
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.web.transport.respondingTimeouts.idleTimeout=3600"
+      - "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=600" ## Uploads grandes (padrão 60s)
+      - "--entrypoints.websecure.transport.respondingTimeouts.idleTimeout=3600"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
       - "--log.level=INFO"
       - "--log.format=common"
-      - "--log.filePath=/var/log/traefik/traefik.log"
-      - "--accesslog=true"
-      - "--accesslog.filepath=/var/log/traefik/access-log"
-      - "--entrypoints.web.http.aliasHeadersStrategy=delete"
-      - "--entrypoints.websecure.http.aliasHeadersStrategy=delete"
+      - "--accesslog=true" ## Logs vão para o stdout (docker service logs traefik_traefik)
+      ## keep: repassa headers com underscore (ex: api_access_token do Chatwoot). Com delete a API do Chatwoot responde 401
+      - "--entrypoints.web.http.aliasHeadersStrategy=keep"
+      - "--entrypoints.websecure.http.aliasHeadersStrategy=keep"
 
     volumes:
       - "vol_certificates:/etc/traefik/letsencrypt"
@@ -4118,21 +4118,16 @@ services:
       placement:
         constraints:
           - node.role == manager
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
-        - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
-        - "traefik.http.routers.http-catchall.rule=Host(\`{host:.+}\`)"
-        - "traefik.http.routers.http-catchall.entrypoints=web"
-        - "traefik.http.routers.http-catchall.middlewares=redirect-https@docker"
-        - "traefik.http.routers.http-catchall.priority=1"
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  vol_shared:
-    external: true
-    name: volume_swarm_shared
   vol_certificates:
     external: true
     name: volume_swarm_certificates
@@ -43566,26 +43561,26 @@ services:
     command:
       - "--api.dashboard=true"
       - "--providers.swarm=true"
-      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=$nome_rede_interna" ## Nome da rede interna
+      - "--providers.swarm.endpoint=unix:///var/run/docker.sock"
+      - "--providers.swarm.exposedbydefault=false" ## Só expõe serviços com traefik.enable=true
+      - "--providers.swarm.network=$nome_rede_interna" ## Nome da rede interna
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.websecure.address=:443"
-      - "--entrypoints.web.transport.respondingTimeouts.idleTimeout=3600"
+      - "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=600" ## Uploads grandes (padrão 60s)
+      - "--entrypoints.websecure.transport.respondingTimeouts.idleTimeout=3600"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
       - "--log.level=INFO"
       - "--log.format=common"
-      - "--log.filePath=/var/log/traefik/traefik.log"
-      - "--accesslog=true"
-      - "--accesslog.filepath=/var/log/traefik/access-log"
-      - "--entrypoints.web.http.aliasHeadersStrategy=delete"
-      - "--entrypoints.websecure.http.aliasHeadersStrategy=delete"
+      - "--accesslog=true" ## Logs vão para o stdout (docker service logs traefik_traefik)
+      ## keep: repassa headers com underscore (ex: api_access_token do Chatwoot). Com delete a API do Chatwoot responde 401
+      - "--entrypoints.web.http.aliasHeadersStrategy=keep"
+      - "--entrypoints.websecure.http.aliasHeadersStrategy=keep"
 
     volumes:
       - "vol_certificates:/etc/traefik/letsencrypt"
@@ -43606,21 +43601,16 @@ services:
       placement:
         constraints:
           - node.role == manager
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
-        - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
-        - "traefik.http.routers.http-catchall.rule=Host(\`{host:.+}\`)"
-        - "traefik.http.routers.http-catchall.entrypoints=web"
-        - "traefik.http.routers.http-catchall.middlewares=redirect-https@docker"
-        - "traefik.http.routers.http-catchall.priority=1"
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  vol_shared:
-    external: true
-    name: volume_swarm_shared
   vol_certificates:
     external: true
     name: volume_swarm_certificates
@@ -43752,27 +43742,27 @@ services:
     command:
       - "--api.dashboard=true"
       - "--providers.swarm=true"
-      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=$nome_rede_interna" ## Nome da rede interna
+      - "--providers.swarm.endpoint=unix:///var/run/docker.sock"
+      - "--providers.swarm.exposedbydefault=false" ## Só expõe serviços com traefik.enable=true
+      - "--providers.swarm.network=$nome_rede_interna" ## Nome da rede interna
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--entrypoints.websecure.address=:443"
       - "--api.insecure=true"
-      - "--entrypoints.web.transport.respondingTimeouts.idleTimeout=3600"
+      - "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=600" ## Uploads grandes (padrão 60s)
+      - "--entrypoints.websecure.transport.respondingTimeouts.idleTimeout=3600"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/etc/traefik/letsencrypt/acme.json"
       - "--certificatesresolvers.letsencryptresolver.acme.email=$email_ssl" ## Email para receber as notificações
       - "--log.level=INFO"
       - "--log.format=common"
-      - "--log.filePath=/var/log/traefik/traefik.log"
-      - "--accesslog=true"
-      - "--accesslog.filepath=/var/log/traefik/access-log"
-      - "--entrypoints.web.http.aliasHeadersStrategy=delete"
-      - "--entrypoints.websecure.http.aliasHeadersStrategy=delete"
+      - "--accesslog=true" ## Logs vão para o stdout (docker service logs traefik_traefik)
+      ## keep: repassa headers com underscore (ex: api_access_token do Chatwoot). Com delete a API do Chatwoot responde 401
+      - "--entrypoints.web.http.aliasHeadersStrategy=keep"
+      - "--entrypoints.websecure.http.aliasHeadersStrategy=keep"
 
     volumes:
       - "vol_certificates:/etc/traefik/letsencrypt"
@@ -43795,12 +43785,6 @@ services:
           - node.role == manager
       labels:
         - "traefik.enable=true"
-        - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
-        - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
-        - "traefik.http.routers.http-catchall.rule=Host(\`{host:.+}\`)"
-        - "traefik.http.routers.http-catchall.entrypoints=web"
-        - "traefik.http.routers.http-catchall.middlewares=redirect-https@docker"
-        - "traefik.http.routers.http-catchall.priority=1"
 
         ## Dashboard Traefik
         - "traefik.http.routers.traefik.rule=Host(\`$traefik_url_dashboard\`)" ## Dominio do traefik
@@ -43812,12 +43796,15 @@ services:
         - "traefik.http.routers.traefik.middlewares=authtraefik"
         - "traefik.http.middlewares.authtraefik.basicauth.users=$basicauth"
 
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 ## --------------------------- ORION --------------------------- ##
 
 volumes:
-  vol_shared:
-    external: true
-    name: volume_swarm_shared
   vol_certificates:
     external: true
     name: volume_swarm_certificates
