@@ -5587,7 +5587,7 @@ while true; do
     
     
     ## Verifica se a porta é 465, se sim deixa o ssl true, se não, deixa false 
-    if [ "$porta_smtp_chatwoot" -eq 465 ]; then
+    if [ "$porta_smtp_chatwoot" = "465" ]; then
      sobre_ssl=true
     else
      sobre_ssl=false
@@ -5722,7 +5722,8 @@ services:
   chatwoot${1:+_$1}_app:
     image: chatwoot/chatwoot:latest ## Versão do Chatwoot
     command: >
-     sh -c "echo 'Rails.application.config.active_storage.variant_processor = :mini_magick' > /app/config/initializers/active_storage.rb && bundle exec rails db:chatwoot_prepare && bundle exec rails s -p 3000 -b 0.0.0.0"
+      sh -c "POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare
+      && exec bundle exec rails s -p 3000 -b 0.0.0.0"
     entrypoint: docker/entrypoints/rails.sh    
 
     volumes:
@@ -5793,7 +5794,7 @@ services:
       - SMTP_AUTHENTICATION=login
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
-      - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+      - MAILER_INBOUND_EMAIL_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
 
     ## ⚙️ Melhorias
       - SIDEKIQ_CONCURRENCY=10
@@ -5906,7 +5907,7 @@ services:
       - SMTP_AUTHENTICATION=login
       - SMTP_ENABLE_STARTTLS_AUTO=true
       - SMTP_OPENSSL_VERIFY_MODE=peer
-      - MAILER_INBOUND_EMAIL_DOMAIN=$email_admin_chatwoot ## Email SMTP
+      - MAILER_INBOUND_EMAIL_DOMAIN=$dominio_smtp_chatwoot ## Dominio do email
 
     ## ⚙️ Melhorias
       - SIDEKIQ_CONCURRENCY=10
@@ -6047,10 +6048,10 @@ done
 
 if [ -z "$CONTAINER_ID" ]; then
   echo "O contêiner não foi encontrado após $max_wait_time segundos."
-  exit 1
+  return 1
 fi
 
-docker exec -it "$CONTAINER_ID" bundle exec rails db:chatwoot_prepare > /dev/null 2>&1
+docker exec -i "$CONTAINER_ID" bundle exec rails db:chatwoot_prepare > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     echo "1/2 - [ OK ] - Executando no container: bundle exec rails db:chatwoot_prepare"
 else
@@ -6078,12 +6079,11 @@ done
 
 if [ -z "$PG_CONTAINER_ID" ]; then
   echo "O contêiner do PostgreSQL não foi encontrado após $max_wait_time segundos."
-  exit 1
+  return 1
 fi
 
 # Executa os comandos SQL dentro do container
-docker exec -i "$PG_CONTAINER_ID" psql -U postgres <<'SQL' > /dev/null 2>&1
-ALTER SYSTEM SET timezone = 'UTC';
+docker exec -i "$PG_CONTAINER_ID" psql -v ON_ERROR_STOP=1 -U postgres <<SQL > /dev/null 2>&1
 SET timezone = 'UTC';
 ALTER DATABASE chatwoot${1:+_$1} SET timezone TO 'UTC';
 SHOW timezone;
