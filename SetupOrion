@@ -4183,6 +4183,9 @@ telemetria Portainer iniciado
 
 ## Depois vamos instalar o Portainer e verificar se esta tudo certo.
 
+## Segredo compartilhado entre o Portainer e o Agent
+agent_secret_portainer=$(openssl rand -hex 32)
+
 ## Criando a stack portainer.yaml
 cat > portainer.yaml <<EOL
 version: "3.7"
@@ -4200,16 +4203,27 @@ services:
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
+    environment:
+    ## 🔗 Descoberta dos outros agents do cluster
+      - AGENT_CLUSTER_ADDR=tasks.agent
+
+    ## 🔐 Segredo compartilhado com o Portainer
+      - AGENT_SECRET=$agent_secret_portainer
+
     deploy:
       mode: global
       placement:
         constraints: [node.platform.os == linux]
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
 
 ## --------------------------- ORION --------------------------- ##
 
   portainer:
     image: portainer/portainer-ce:latest ## Versão do Portainer
-    command: -H tcp://tasks.agent:9001 --tlsskipverify --no-setup-token
+    command: -H tcp://tasks.agent:9001 --tlsskipverify --no-setup-token --http-enabled
 
     volumes:
       - portainer_data:/data
@@ -4217,11 +4231,22 @@ services:
     networks:
       - $nome_rede_interna ## Nome da rede interna
 
+    environment:
+    ## 🔐 Segredo compartilhado com o Agent
+      - AGENT_SECRET=$agent_secret_portainer
+
+    ## ⚙️ Origem confiável (proteção CSRF atrás do Traefik)
+      - TRUSTED_ORIGINS=https://$url_portainer
+
     deploy:
       mode: replicated
       replicas: 1
       placement:
         constraints: [node.role == manager]
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1024M
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.portainer.rule=Host(\`$url_portainer\`)" ## Dominio do Portainer
